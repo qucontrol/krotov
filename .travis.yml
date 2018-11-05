@@ -1,0 +1,25 @@
+# Config file for automatic testing at travis-ci.org
+
+language: python
+python:
+  # We don't actually use the Travis Python, but this keeps it organized.
+  - 3.6
+  - 3.5
+install:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3.sh;
+  - bash miniconda3.sh -b -p $HOME/miniconda
+  - source $HOME/miniconda3/etc/profile.d/conda.sh
+  - conda activate
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda create -q -n test_env python=$TRAVIS_PYTHON_VERSION
+  - conda activate test_env
+  - conda config --append channels conda-forge
+  - conda install qutip
+  - pip install -e .[dev]
+  - pip install coveralls
+
+script:
+  - py.test --doctest-modules --cov=krotov src tests docs/*.rst
+after_success:
+  - coveralls
