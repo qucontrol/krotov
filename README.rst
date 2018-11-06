@@ -4,7 +4,9 @@ Krotov Python Package
 .. image:: https://img.shields.io/pypi/v/krotov.svg
    :alt: Krotov on the Python Package Index
    :target: https://pypi.python.org/pypi/krotov
-
+.. image:: https://badges.gitter.im/qucontrol_krotov/Lobby.svg
+   :alt: Join the chat at https://gitter.im/qucontrol_krotov/Lobby
+   :target: https://gitter.im/qucontrol_krotov/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 .. image:: https://img.shields.io/travis/qucontrol/krotov.svg
    :alt: Travis Continuous Integration
    :target: https://travis-ci.org/qucontrol/krotov
@@ -66,6 +68,3 @@ To use the ``krotov`` package in a Python project::
     import krotov
 
 
-.. image:: https://badges.gitter.im/qucontrol_krotov/Lobby.svg
-   :alt: Join the chat at https://gitter.im/qucontrol_krotov/Lobby
-   :target: https://gitter.im/qucontrol_krotov/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
