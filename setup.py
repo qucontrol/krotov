@@ -27,8 +27,8 @@ except OSError:
 requirements = ['attrs', 'numpy', 'scipy', 'qutip']
 
 dev_requirements = [
-    'jupyter', 'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'twine',
-    'pep8', 'flake8', 'wheel', 'sphinx', 'sphinx-autobuild',
+    'jupyter', 'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'nbval',
+    'twine', 'pep8', 'flake8', 'wheel', 'sphinx', 'sphinx-autobuild',
     'sphinx_rtd_theme', 'matplotlib']
 dev_requirements.append('better-apidoc')
 

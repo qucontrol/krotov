@@ -3,8 +3,8 @@
 CONDA_PACKAGES = qutip
 TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
-TESTOPTIONS = --doctest-modules --cov=krotov
-TESTS = src tests
+TESTOPTIONS = --doctest-modules --cov=krotov --nbval
+TESTS = src tests docs/notebooks/*.ipynb docs/*.rst
 
 
 define PRINT_HELP_PYSCRIPT
