@@ -10,7 +10,7 @@ Krotov Python Package
 .. image:: https://img.shields.io/travis/qucontrol/krotov.svg
    :alt: Travis Continuous Integration
    :target: https://travis-ci.org/qucontrol/krotov
-.. image:: https://coveralls.io/repos/github/qucontrol/krotov/badge.svg?branch=master:alt: Coveralls
+.. image:: https://coveralls.io/repos/github/qucontrol/krotov/badge.svg?branch=master&service=github:alt: Coveralls
    :target: https://coveralls.io/github/qucontrol/krotov?branch=master
 .. image:: https://readthedocs.org/projects/krotov/badge/?version=latest
    :alt: Documentation Status
@@ -26,11 +26,12 @@ The method is described in detail in `D. M. Reich, M. Ndong, and C. P. Koch, J. 
 
 This implementation is built on top of `QuTiP`_.
 
-Development of the ``krotov`` package happens on `Github`_.
+Development of the ``krotov`` package happens on `Github`_. You can read the full documentation at `ReadTheDocs`_.
 
 
 .. _QDYN Fortran library: https://www.qdyn-library.net
 .. _QuTiP: http://qutip.org
+.. _ReadTheDocs: https://krotov.readthedocs.io/en/latest/
 
 
 Installation
