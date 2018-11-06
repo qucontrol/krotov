@@ -1,5 +1,3 @@
-"""Top-level package for ``krotov``"""
-
 __version__ = '0.0.1'
 import time
 import numpy as np
