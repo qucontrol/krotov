@@ -64,3 +64,8 @@ Usage
 To use the ``krotov`` package in a Python project::
 
     import krotov
+
+
+.. image:: https://badges.gitter.im/qucontrol_krotov/Lobby.svg
+   :alt: Join the chat at https://gitter.im/qucontrol_krotov/Lobby
+   :target: https://gitter.im/qucontrol_krotov/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
