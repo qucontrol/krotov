@@ -1,6 +1,9 @@
 =====================
 Krotov Python Package
 =====================
+.. image:: https://img.shields.io/badge/on-github-blue.svg
+   :alt: Source code on Github
+   :target: https://github.com/qucontrol/krotov
 .. image:: https://img.shields.io/pypi/v/krotov.svg
    :alt: Krotov on the Python Package Index
    :target: https://pypi.python.org/pypi/krotov
