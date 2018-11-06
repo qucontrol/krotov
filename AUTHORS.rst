@@ -14,4 +14,4 @@ Development Team
 * Daniel Basilewitsch <basilewitsch@physik.uni-kassel.de>
 * Fernando Gago Encinas
 * Matthias Krauss
-* Christane Koch <christiane.koch@uni-kassel.de>
+* Christiane Koch <christiane.koch@uni-kassel.de>

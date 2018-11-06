@@ -31,7 +31,7 @@ class KrotovResult():
 
     Attributes:
         objectives (list): A copy of the control objectives. Each item is an
-            instance of :class:`KrotovObjective`, and we optimize for a single
+            instance of :class:`KrotovObjective`, and we obtain a single
             set of controls that optimizes the average of all objectives.
         tlist (numpy array): A copy of the time grid values
         control_tlist (numpy array): The time grid for the `controls`, i.e.
@@ -42,8 +42,8 @@ class KrotovResult():
         info_vals (list): For each iteration, the return value of `info_hook`,
             or None
         tau_vals (list of list): for each iteration, a list of complex overlaps
-            between the forward-propgated states and the target states for each
-            objective.
+            between the forward-propagated states and the target states for
+            each objective.
         controls (list of list): If the propagation was performed with
             ``store_all=True``, for each iteration, a list of optimized control
             fields (as an array). If ``store_all=False``, a list containing a
@@ -105,11 +105,11 @@ def krotov(
             end when `iter_stop` is reached.
         state_dependent_constraint (None or callable): Function that evaluates
             a state-dependent constraint. If None, optimize without any
-            state-dpendent constraint.
+            state-dependent constraint.
         info_hook (None or callable): Function that is called after each
             iteration of the optimization. Any value returned by `info_hook`
-            (e.g. an evaluated functional J_T) will be stored in
-            the for each iteration in the `info_vals` attribute of the returned
+            (e.g. an evaluated functional J_T) will be stored, for each
+            iteration, in the `info_vals` attribute of the returned
             :class:`KrotovResult`.
         store_all (bool): Whether or not to store the optimized control fields
             from *all* iterations in :class:`KrotovResult`. If False,
