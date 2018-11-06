@@ -9,6 +9,7 @@ Welcome to the Krotov packages's documentation!
    contributing
    authors
    history
+   examples
 
 
 API
