@@ -13,6 +13,9 @@ Krotov Python Package
 .. image:: https://img.shields.io/travis/qucontrol/krotov.svg
    :alt: Travis Continuous Integration
    :target: https://travis-ci.org/qucontrol/krotov
+.. image:: https://ci.appveyor.com/api/projects/status/1cbm24w04jmxjpjh?svg=true
+   :alt: AppVeyor Continuous Integration
+   :target: https://ci.appveyor.com/project/goerz/krotov
 .. image:: https://coveralls.io/repos/github/qucontrol/krotov/badge.svg?branch=master&service=github:alt: Coveralls
    :target: https://coveralls.io/github/qucontrol/krotov?branch=master
 .. image:: https://readthedocs.org/projects/krotov/badge/?version=latest
