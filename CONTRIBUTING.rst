@@ -34,6 +34,55 @@ Krotov could always use more documentation, whether as part of the
 official Krotov docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
+
+Contribute Examples
+~~~~~~~~~~~~~~~~~~~
+
+Examples should be contributed in the form of `Jupyter notebooks`_.
+
+.. _Jupyter notebooks: https://jupyter.readthedocs.io/en/latest/index.html
+
+Example notebooks are automatically rendered as part of the documentation, and
+they are also verified by the automated tests. For this to work properly, the
+following steps must be taken:
+
+* Put all imports near the top of the notebook, with ``# NBVAL_IGNORE_OUTPUT``
+  as the first line. Use the `watermark`_ package to print out the versions of
+  imported packages. For example::
+
+    # NBVAL_IGNORE_OUTPUT
+    %load_ext watermark
+    import qutip
+    import numpy as np
+    import scipy
+    import matplotlib
+    import matplotlib.pylab as plt
+    %watermark -v --iversions
+
+* Put the notebook in the folder ``docs/notebooks/``.
+
+* Before committing, re-evaluate all example notebooks in a well-defined
+  virtual environment by running
+
+    .. code-block:: console
+
+        make notebooks
+
+* Check that the examples can be verified across different Python version by running
+
+    .. code-block:: console
+
+        make test
+
+* You may also verify that the example is properly integrated in the documentation by running
+
+    .. code-block:: console
+
+        make docs
+
+.. _watermark: https://github.com/rasbt/watermark
+
+
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
@@ -51,7 +100,7 @@ Get Started!
 
 Ready to contribute? Follow `Aaron Meurer's Git Workflow Notes`_ (with ``qucontrol/krotov`` instead of ``sympy/sympy``)
 
-In short, *if you are not a member of the `qucontrol organization`_*,
+In short, if you are not a member of the `qucontrol organization`_,
 
 1. Clone the repository from ``git@github.com:qucontrol/krotov.git``
 2. Fork the repo on GitHub to your personal account.

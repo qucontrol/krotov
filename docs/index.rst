@@ -1,7 +1,7 @@
-Welcome to the Krotov packages's documentation!
-===============================================
+Welcome to the Krotov package's documentation!
+==============================================
 
-.. image:: https://img.shields.io/badge/on-github-blue.svg
+.. image:: https://img.shields.io/badge/github-qucontrol/krotov-blue.svg
    :alt: Source code on Github
    :target: https://github.com/qucontrol/krotov
 .. image:: https://img.shields.io/pypi/v/krotov.svg
