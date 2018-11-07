@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import os
 import sys
 import datetime
+import git
 
 
 import krotov
@@ -53,6 +54,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.todo',
     'dollarmath',
+    'nbsphinx',
     'sphinx.ext.inheritance_diagram',
 ]
 if os.getenv('SPELLCHECK'):
@@ -77,7 +79,10 @@ project = 'Krotov'
 year = str(datetime.datetime.now().year)
 author = 'Michael Goerz'
 copyright = '{0}, {1}'.format(year, "Christiane Koch")
-version = release = krotov.__version__
+version = krotov.__version__
+rootfolder = os.path.join(os.path.dirname(__file__), '..')
+last_commit = str(git.Repo(rootfolder).head.commit)[:7]
+release = last_commit
 
 pygments_style = 'sphinx'
 extlinks = {
@@ -236,6 +241,23 @@ html_show_sourcelink = False
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 #html_file_suffix = None
+
+# -- Options for nbsphinx -0---------------------------------------------------
+
+nbsphinx_prolog = r"""
+{% set docname = env.doc2path(env.docname, base='docs') %}
+
+.. only:: html
+
+    .. role:: raw-html(raw)
+        :format: html
+
+    :raw-html:`<a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/{{ env.config.release }}/{{ docname }}"><img alt="nbviwer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>`
+
+    __ https://github.com/qucontrol/krotov/blob/
+        {{ env.config.release }}/{{ docname }}
+"""
+
 
 # -----------------------------------------------------------------------------
 def setup(app):
