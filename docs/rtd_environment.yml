@@ -8,4 +8,5 @@ dependencies:
     - better-apidoc>=0.2.0
     - sphinx-rtd-theme<0.3
     - sphinx_autodoc_typehints
-
+    - nbsphinx
+    - gitpython
