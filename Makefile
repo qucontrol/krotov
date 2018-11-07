@@ -72,10 +72,19 @@ test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py36 $(CONDA_PACKAGES)
 	@.venv/py36/bin/pip install -e .[dev]
 
+
 test36: .venv/py36/bin/py.test ## run tests for Python 3.6
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
 
+
 .venv/py36/bin/sphinx-build: .venv/py36/bin/py.test
+
+.venv/py36/bin/jupyter: .venv/py36/bin/py.test
+
+
+notebooks: .venv/py36/bin/jupyter  ## re-evaluate the notebooks in docs/notebooks
+	for ipynbfile in docs/notebooks/*.ipynb ; do $< nbconvert --to notebook --execute --inplace --allow-errors --config=/dev/null $$ipynbfile; done
+
 
 docs: .venv/py36/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build clean

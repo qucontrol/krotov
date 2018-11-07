@@ -29,7 +29,7 @@ requirements = ['attrs', 'numpy', 'scipy', 'qutip']
 dev_requirements = [
     'jupyter', 'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'nbval',
     'twine', 'pep8', 'flake8', 'wheel', 'sphinx', 'sphinx-autobuild',
-    'sphinx_rtd_theme', 'nbsphinx', 'matplotlib', 'gitpython']
+    'sphinx_rtd_theme', 'nbsphinx', 'matplotlib', 'gitpython', 'watermark']
 dev_requirements.append('better-apidoc')
 
 
