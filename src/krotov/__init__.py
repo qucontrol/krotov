@@ -4,6 +4,10 @@ import numpy as np
 import attr
 import logging
 
+# expose submodules
+from . import shapes
+from . import pulse_conversion
+
 
 __all__ = ['Result', 'Objective', 'PulseOptions', 'optimize_pulses']
 
