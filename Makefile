@@ -22,6 +22,7 @@ help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 clean: clean-build clean-pyc clean-test clean-venvs ## remove all build, test, coverage, and Python artifacts, as well as environments
+	$(MAKE) -C docs clean
 
 clean-build: ## remove build artifacts
 	rm -fr build/
@@ -81,9 +82,18 @@ test36: .venv/py36/bin/py.test ## run tests for Python 3.6
 
 .venv/py36/bin/jupyter: .venv/py36/bin/py.test
 
+# How to execute notebook files
+%.ipynb.log: %.ipynb .venv/py36/bin/jupyter
+	@echo ""
+	@.venv/py36/bin/jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.kernel_name='python3' --config=/dev/null $< 2>&1 | tee $@
 
-notebooks: .venv/py36/bin/jupyter  ## re-evaluate the notebooks in docs/notebooks
-	for ipynbfile in docs/notebooks/*.ipynb ; do $< nbconvert --to notebook --execute --inplace --allow-errors --config=/dev/null $$ipynbfile; done
+NOTEBOOKFILES = $(shell find docs/notebooks/ -iname '*.ipynb'  -maxdepth 1)
+NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))
+
+notebooks: $(NOTEBOOKLOGS)  ## re-evaluate the notebooks in docs/notebooks
+	@echo ""
+	@echo "All notebook are now up to date; the were executed using the python3 kernel"
+	@.venv/py36/bin/jupyter kernelspec list | grep python3
 
 
 docs: .venv/py36/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
