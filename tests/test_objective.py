@@ -1,9 +1,9 @@
-"""Tests for KrotovObjective in isolation"""
+"""Tests for krotov.Objective in isolation"""
 import numpy as np
 import scipy
 import qutip
 
-from krotov import KrotovObjective
+import krotov
 
 import pytest
 
@@ -34,11 +34,11 @@ def transmon_ham_and_states(
 
 
 def test_krotov_objective_initialization(transmon_ham_and_states):
-    """Test basic instantiation of a KrotovObjective with qutip objects"""
+    """Test basic instantiation of a krotov.Objective with qutip objects"""
     H, psi0, psi1 = transmon_ham_and_states
-    target = KrotovObjective(H, psi0, psi1)
+    target = krotov.Objective(H, psi0, psi1)
     assert target.H == H
     assert target.initial_state == psi0
     assert target.target_state == psi1
-    assert target == KrotovObjective(
+    assert target == krotov.Objective(
         H=H, initial_state=psi0, target_state=psi1)

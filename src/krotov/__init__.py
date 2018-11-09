@@ -4,11 +4,11 @@ import numpy as np
 import attr
 
 
-__all__ = ['KrotovResult', 'KrotovObjective', 'krotov']
+__all__ = ['Result', 'Objective', 'optimize_pulse']
 
 
 @attr.s
-class KrotovObjective():
+class Objective():
     """A single objective for optimization with Krotov's method
 
     Attributes:
@@ -26,7 +26,7 @@ class KrotovObjective():
     c_ops = attr.ib(default=[])
 
 
-class KrotovResult():
+class Result():
     """Result object for a Krotov optimization
 
     Attributes:
@@ -75,7 +75,7 @@ class KrotovResult():
         self.control_tlist = np.array(control_tlist)
 
 
-def krotov(
+def optimize_pulse(
         objectives, controls, tlist, propagator, chi_constructor,
         sigma=None, iter_start=0, iter_stop=5000, check_convergence=None,
         state_dependent_constraint=None, info_hook=None, store_all=False):
@@ -119,5 +119,5 @@ def krotov(
     Returns:
         KrotovResult: The result of the optimization.
     """
-    result = KrotovResult(objectives, controls, tlist)
+    result = Result(objectives, controls, tlist)
     return result
