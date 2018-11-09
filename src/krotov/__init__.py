@@ -2,9 +2,10 @@ __version__ = '0.0.1'
 import time
 import numpy as np
 import attr
+import logging
 
 
-__all__ = ['Result', 'Objective', 'optimize_pulse']
+__all__ = ['Result', 'Objective', 'optimize_pulses']
 
 
 @attr.s
@@ -26,16 +27,39 @@ class Objective():
     c_ops = attr.ib(default=[])
 
 
+@attr.s
+class PulseOptions():
+    """Options for the optimization of a control pulse
+
+    Attributes:
+        lambda_a (float): Krotov step size. This governs the overall magnitude
+            of the pulse update. Large values result in small updates. Small
+            values may lead to sharp spikes and numerical instability.
+        shape (callable): Function S(t) in the range [0, 1] that scales the
+            pulse update for the pulse value at t. This can be used to ensure
+            boundary contitions (S(0) = S(T) = 0), and enforce smooth switch-on
+            and switch-off
+        filter (callable or None): A function that manipulates the pulse after
+            each OCT iteration, e.g. by applying a spectral filter.
+    """
+    lambda_a = attr.ib()
+    shape = attr.ib(default=lambda t: 1)
+    filter = attr.ib(default=None)
+
+
 class Result():
     """Result object for a Krotov optimization
 
     Attributes:
         objectives (list): A copy of the control objectives. Each item is an
-            instance of :class:`KrotovObjective`, and we obtain a single
+            instance of :class:`Objective`, and we obtain a single
             set of controls that optimizes the average of all objectives.
+        guess_controls (list): List of the original guess pulses
+        optimized_controls (list): List of the optimized pulses, in the order
+            corresponding to `guess_controls`
         tlist (numpy array): A copy of the time grid values
-        control_tlist (numpy array): The time grid for the `controls`, i.e.
-            the points centered between the time points in `tgrid`
+        tlist_midpoints (numpy array): points centered between the time points
+            in `tgrid`
         iters (list of int): Iteration numbers
         iter_seconds (list of int): for each iteration number, the number of
             seconds that were spent in the optimization
@@ -44,10 +68,11 @@ class Result():
         tau_vals (list of list): for each iteration, a list of complex overlaps
             between the forward-propagated states and the target states for
             each objective.
-        controls (list of list): If the propagation was performed with
-            ``store_all=True``, for each iteration, a list of optimized control
-            fields (as an array). If ``store_all=False``, a list containing a
-            single element, the list of final optimized control fields.
+        updates (list of list): If the optimization was performed with
+            ``store_updates=True``, for each iteration, a list of the updates
+            for all control fields (in the order corresponding to
+            `guess_controls`). These updates are defined at midpoints of the
+            `tlist` intervals. Empty list if ``store_updates=True``
         states (list): for each objective, a list of states
             (:class:`qutip.Qobj` instances) for each value in
             `tlist`, obtained from propagation under the final optimized
@@ -58,35 +83,62 @@ class Result():
             ended
     """
 
-    def __init__(self, objectives, controls, tlist):
+    def __init__(self, objectives, guess_controls, tlist):
         self.objective = None
         self.tlist = tlist.copy()
         self.iters = objectives.copy()
         self.iter_seconds = []
         self.info_vals = []
         self.tau_vals = []
-        self.controls = [controls.copy()]
+        self.guess_controls = guess_controls  # do not use copy
+        self.optimized_controls = []
+        self.updates = []
         self.states = [obj.target_state for obj in objectives]
         self.start_local_time = time.localtime()
         self.end_local_time = time.localtime()
-        control_tlist = []
+        tlist_midpoints = []
         for i in range(len(tlist) - 1):
-            control_tlist.append(0.5 * (tlist[i+1] + tlist[i]))
-        self.control_tlist = np.array(control_tlist)
+            tlist_midpoints.append(0.5 * (tlist[i+1] + tlist[i]))
+        self.tlist_midpoints = np.array(tlist_midpoints)
 
 
-def optimize_pulse(
-        objectives, controls, tlist, propagator, chi_constructor,
+def _extract_controls(objectives, pulse_options):
+    """Extract a list of controls from the objectives (in arbitrary order), and
+    check that all controls have proper options"""
+    logger = logging.getLogger(__name__)
+    controls = set()
+    for i_obj, objective in enumerate(objectives):
+        for i_ham, ham in enumerate(objective.H):
+            if isinstance(ham, list):
+                control = ham[1]
+                if control in pulse_options:
+                    controls.add(control)
+                else:
+                    raise ValueError(
+                        "The control %s in the component %d of the "
+                        "Hamiltonian of the objective %d does not have any"
+                        "associated pulse options" % (control, i_ham, i_obj))
+    if len(controls) != len(pulse_options):
+        logger.warning(
+            "pulse_options contains options for controls that are not in the "
+            "objectives")
+    return list(controls)
+
+
+def optimize_pulses(
+        objectives, pulse_options, tlist, propagator, chi_constructor,
         sigma=None, iter_start=0, iter_stop=5000, check_convergence=None,
-        state_dependent_constraint=None, info_hook=None, store_all=False):
-    """Use Krotov's method to optimize `controls` towards the given
-    `objectives`
+        state_dependent_constraint=None, info_hook=None, store_updates=False):
+    """Use Krotov's method to optimize towards the given `objectives`
+
+    Optimize all time-dependent controls found in the Hamiltonians of the given
+    `objectives`.
 
     Args:
         objectives (list): List of objectives
-        controls (list): List of time-dependent functions that appear in the
-            Hamiltonians of the `objectives` (see time-dependent operators for
-            :func:`~qutip.mesolve.mesolve`)
+        pulse_options (dict): Mapping of time-dependent controls found in the
+            Hamiltonians of the objectives to :class:`PulseOptions` instances.
+            There must be a mapping for each control.
         tlist (numpy array): Array of time grid values, cf.
             :func:`~qutip.mesolve.mesolve`
         propagator (callable): Function that propagates the state backward or
@@ -110,14 +162,14 @@ def optimize_pulse(
             iteration of the optimization. Any value returned by `info_hook`
             (e.g. an evaluated functional J_T) will be stored, for each
             iteration, in the `info_vals` attribute of the returned
-            :class:`KrotovResult`.
-        store_all (bool): Whether or not to store the optimized control fields
-            from *all* iterations in :class:`KrotovResult`. If False,
-            :class:`KrotovResult` will only include information from the final
-            iteration
+            :class:`Result`.
+        store_updates (bool): Whether or not to store the pulse updates
+            from *all* iterations in :class:`Result`. These could be used to
+            calculate the optimized pulses in each iteration.
 
     Returns:
-        KrotovResult: The result of the optimization.
+        Result: The result of the optimization.
     """
-    result = Result(objectives, controls, tlist)
+    guess_controls = _extract_controls(objectives, pulse_options)
+    result = Result(objectives, guess_controls, tlist)
     return result
