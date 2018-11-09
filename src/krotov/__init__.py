@@ -5,7 +5,7 @@ import attr
 import logging
 
 
-__all__ = ['Result', 'Objective', 'optimize_pulses']
+__all__ = ['Result', 'Objective', 'PulseOptions', 'optimize_pulses']
 
 
 @attr.s
@@ -116,7 +116,7 @@ def _extract_controls(objectives, pulse_options):
                 else:
                     raise ValueError(
                         "The control %s in the component %d of the "
-                        "Hamiltonian of the objective %d does not have any"
+                        "Hamiltonian of the objective %d does not have any "
                         "associated pulse options" % (control, i_ham, i_obj))
     if len(controls) != len(pulse_options):
         logger.warning(
