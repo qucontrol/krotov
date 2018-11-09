@@ -24,13 +24,19 @@ try:
 except OSError:
     history = ''
 
+# requirements for use
 requirements = ['attrs', 'numpy', 'scipy', 'qutip']
 
+# requirements for development (testing, generating docs)
 dev_requirements = [
     'jupyter', 'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'nbval',
     'twine', 'pep8', 'flake8', 'wheel', 'sphinx', 'sphinx-autobuild',
     'sphinx_rtd_theme', 'nbsphinx', 'matplotlib', 'gitpython', 'watermark']
 dev_requirements.append('better-apidoc')
+
+# some recommended packages that make development nicer
+dev_extras = [
+    'jupyterlab', 'pdbpp']
 
 
 version = get_version('./src/krotov/__init__.py')
@@ -50,6 +56,7 @@ setup(
     install_requires=requirements,
     extras_require={
         'dev': dev_requirements,
+        'extras': dev_extras,
     },
     license="BSD license",
     long_description=readme + '\n\n' + history,
