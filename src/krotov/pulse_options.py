@@ -3,6 +3,25 @@ import attr
 __all__ = ['PulseOptions']
 
 
+def zero_shape(t):
+    """Shape function 0 for all values of `t`"""
+    return 0
+
+
+def one_shape(t):
+    """Shape function 1 for all values of `t`"""
+    return 1
+
+
+def _shape_val_to_callable(val):
+    if val == 1:
+        return one_shape
+    elif val == 0:
+        return zero_shape
+    else:
+        return val
+
+
 @attr.s
 class PulseOptions():
     """Options for the optimization of a control pulse
@@ -14,10 +33,16 @@ class PulseOptions():
         shape (callable): Function S(t) in the range [0, 1] that scales the
             pulse update for the pulse value at t. This can be used to ensure
             boundary conditions (S(0) = S(T) = 0), and enforce smooth switch-on
-            and switch-off
+            and switch-off. You may also pass the shapes 1 or 0 for a constant
+            shape.
         filter (callable or None): A function that manipulates the pulse after
             each OCT iteration, e.g. by applying a spectral filter.
     """
     lambda_a = attr.ib()
-    shape = attr.ib(default=lambda t: 1)
+    shape = attr.ib(default=1, converter=_shape_val_to_callable)
     filter = attr.ib(default=None)
+
+    @shape.validator
+    def _check_shape(self, attribute, value):
+        if not callable(value):
+            raise ValueError("shape must be a callable function")
