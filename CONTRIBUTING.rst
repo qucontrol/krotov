@@ -66,19 +66,19 @@ following steps must be taken:
 
     .. code-block:: console
 
-        make notebooks
+        $ make notebooks
 
 * Check that the examples can be verified across different Python version by running
 
     .. code-block:: console
 
-        make test
+        $ make test
 
 * You may also verify that the example is properly integrated in the documentation by running
 
     .. code-block:: console
 
-        make docs
+        $ make docs
 
 .. _watermark: https://github.com/rasbt/watermark
 
