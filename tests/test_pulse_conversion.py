@@ -3,6 +3,7 @@ import numpy as np
 from functools import partial
 
 import krotov
+from krotov.shapes import qutip_callback
 
 
 def test_conversion_inverse():
@@ -14,7 +15,7 @@ def test_conversion_inverse():
         tlist_midpoints.append(0.5 * (tlist[i+1] + tlist[i]))
     tlist_midpoints = np.array(tlist_midpoints)
 
-    blackman = partial(krotov.shapes.blackman, t_start=0, t_stop=10)
+    blackman = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=10)
 
     pulse_orig = krotov.pulse_conversion.control_onto_interval(
         blackman, tlist, tlist_midpoints)

@@ -8,7 +8,7 @@ def control_onto_interval(control, tlist, tlist_midpoints):
 
     Args:
         control (callable or numpy array): values at `tlist`, either as a
-            function ``control(t)`` or an an array of the same length as
+            function ``control(t, args)`` or an an array of the same length as
             `tlist`
         tlist (numpy array): time grid point values
         tlist_midpoints (numpy array): midpoint values in `tlist_midpoints`.
@@ -27,7 +27,7 @@ def control_onto_interval(control, tlist, tlist_midpoints):
     """
     assert len(tlist_midpoints) == len(tlist) - 1
     if callable(control):
-        return np.array([control(t) for t in tlist_midpoints])
+        return np.array([control(t, None) for t in tlist_midpoints])
     elif isinstance(control, np.ndarray):
         assert len(control) == len(tlist)
         assert len(control.shape) == 1  # must be 1D array

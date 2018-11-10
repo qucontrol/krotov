@@ -1,9 +1,32 @@
 """Functions that may be used for the `shape` attribute of
 :class:`.PulseOptions`, or for generating guess pulses"""
 
+import functools
+
 import numpy as np
 
-__all__ = ['flattop', 'box', 'blackman']
+__all__ = ['qutip_callback', 'flattop', 'box', 'blackman']
+
+
+def qutip_callback(func, **kwargs):
+    """Convert `func` into the correct form of a QuTiP time-dependent control
+
+    QuTiP requires that "callback" functins that are used to express
+    time-dependent controls take a parameter `t` and `args`. This function
+    takes a function `func` that takes `t` as its first parameter and an
+    arbitrary number of other parameters. The given `kwargs` set values for
+    these other parameters. Parameters not contained in `kwargs` are set
+    *at runtime* from the `args` dict.
+    """
+
+    partial_func = functools.partial(func, **kwargs)
+
+    def callback(t, args):
+        if args is None:
+            args = {}
+        return partial_func(t, **args)
+
+    return callback
 
 
 def flattop(t, t_start, t_stop, t_rise, t_fall=None, func='blackman'):
@@ -26,9 +49,10 @@ def flattop(t, t_start, t_stop, t_rise, t_fall=None, func='blackman'):
 
     Note:
         You may use :class:`numpy.vectorize` to transform this into a shape
-        function for arrays, and :func:`functools.partial` to fix the function
+        function for arrays, :func:`functools.partial` to fix the function
         arguments other than `t`, creating a function suitable for the `shape`
-        attribute of :class:`.PulseOptions`.
+        attribute of :class:`.PulseOptions`, and :func:`qutip_callback` to
+        create a function suitable as a time-dependent control in QuTiP.
     """
     if t_fall is None:
         t_fall = t_rise
@@ -75,8 +99,8 @@ def box(t, t_start, t_stop):
         t_stop (float): Last value of `t` for which the box has value 1
 
     Note:
-        You may use :class:`numpy.vectorize` and :func:`functools.partial`, cf.
-        :func:`flattop`.
+        You may use :class:`numpy.vectorize`, :func:`functools.partial`, or
+        :func:`qutip_callback`, cf.  :func:`flattop`.
     """
     if t < t_start:
         return 0.0
