@@ -1,16 +1,8 @@
 import attr
 
+from .shapes import zero_shape, one_shape
+
 __all__ = ['PulseOptions']
-
-
-def zero_shape(t):
-    """Shape function 0 for all values of `t`"""
-    return 0
-
-
-def one_shape(t):
-    """Shape function 1 for all values of `t`"""
-    return 1
 
 
 def _shape_val_to_callable(val):

@@ -5,7 +5,8 @@ import functools
 
 import numpy as np
 
-__all__ = ['qutip_callback', 'flattop', 'box', 'blackman']
+__all__ = [
+    'qutip_callback', 'zero_shape', 'one_shape', 'flattop', 'box', 'blackman']
 
 
 def qutip_callback(func, **kwargs):
@@ -27,6 +28,16 @@ def qutip_callback(func, **kwargs):
         return partial_func(t, **args)
 
     return callback
+
+
+def zero_shape(t):
+    """Shape function 0 for all values of `t`"""
+    return 0
+
+
+def one_shape(t):
+    """Shape function 1 for all values of `t`"""
+    return 1
 
 
 def flattop(t, t_start, t_stop, t_rise, t_fall=None, func='blackman'):
