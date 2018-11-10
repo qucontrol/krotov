@@ -139,3 +139,13 @@ def test_extract_controls(caplog):
     assert len(controls) == 4
     for c in (f, g, h, d):
         assert c in controls
+
+
+def test_control_tlist_calculation():
+    """Test calculation of tlist_midpoints for non-equidistant time grid"""
+    tlist = np.array([0, 1.0, 2.0, 2.2])
+    midpoints = krotov.structural_conversions._tlist_midpoints(tlist)
+    assert len(midpoints) == len(tlist) - 1
+    assert midpoints[0] == 0.5
+    assert midpoints[1] == 1.5
+    assert midpoints[2] == 2.1
