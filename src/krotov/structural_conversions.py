@@ -2,9 +2,10 @@
 mesolve and Krotov"""
 import numpy as np
 import logging
-import copy
 
-__all__ = ['control_onto_interval', 'pulse_onto_tlist']
+__all__ = [
+    'control_onto_interval', 'pulse_onto_tlist', 'extract_controls',
+    'extract_controls_mapping', 'pulse_options_dict_to_list']
 
 
 def _tlist_midpoints(tlist):
@@ -33,32 +34,51 @@ def _find_in_list(val, list_to_search):
             return -1
 
 
-def extract_controls(objectives, pulse_options):
-    """Extract a list of controls from the `objectives`, modify the
-    Hamiltonians into an "extracted" form, and check that all controls have
-    proper options
+def extract_controls(objectives):
+    """Extract a list of (unique) controls from the `objectives`
+
+    Controls are unique if they are not the same object, cf.
+    `Python's is keyword`_.
+
+    .. _Python's is keyword: https://docs.python.org/3/reference/expressions.html#is
 
     Args:
-        objectives (list): List of :class:`Objective` instances
-        pulse_options (dict): Mapping of time-dependent controls found in the
-            Hamiltonians of the objectives to :class:`PulseOptions` instances.
-            There must be a mapping for each control.
+        objectives (list): List of :class:`.Objective` instances
 
     Returns:
-        tuple: A tuple of the following:
+        list of controls in `objectives`
 
-        - list of `controls` extracted from `objective`
-        - list of "pointers" for where each control occurs in the `objectives`.
-          Each element is a list of tuples (objective-index,
-          ham-component-index), where the objective-index gives the index of an
-          objective that contains the control, and ham-component-index gives
-          the index of a component of the Hamiltonian that is linear in the
-          control
-        - list of values from `pulse_options`, in the same order as `controls`
-        - modified copy of `objectives`, where for each Hamiltonian component
-          that contains a control, that control has been replaced with an
-          integer that specifies in index of the corresponding control in
-          `controls`.
+    See :func:`extract_controls_mapping` for an example.
+    """
+    controls = []
+    for i_obj, objective in enumerate(objectives):
+        for i_ham, ham in enumerate(objective.H):
+            if isinstance(ham, list):
+                assert len(ham) == 2
+                control = ham[1]
+                if _find_in_list(control, controls) < 0:
+                    controls.append(control)
+    return controls
+
+
+def _control_indices_in_nested_list(nested_list, control):
+    """Given a nested list (QuTiP Hamiltonian), find the indices that contain
+    `control` and return them as a list"""
+    result = []
+    for i, item in enumerate(nested_list):
+        if isinstance(item, list):
+            assert len(item) == 2
+            if item[1] is control:
+                result.append(i)
+    return result
+
+
+def extract_controls_mapping(objectives, controls):
+    """Extract a map of where `controls` are used in `objectives`
+
+    The result is a nested list where the first index relates to the
+    `objectives`, the second index relates to the Hamiltonian (0) or the
+    `c_ops` (1...), and the third index relates to the `controls`.
 
     Example:
 
@@ -68,59 +88,79 @@ def extract_controls(objectives, pulse_options):
         >>> u1, u2 = np.array([]), np.array([])                # dummy controls
         >>> psi0, psi_tgt = qutip.Qobj(), qutip.Qobj()         # dummy states
 
-        >>> H1 = [X, [Y, u1], [Z, u2]]  # ham for first objective
+        >>> H1 = [X, [Y, u1], [Z, u1]]  # ham for first objective
         >>> H2 = [X, [Y, u2]]           # ham for second objective
+        >>> c_ops = ([[X, u1]], [[Y, u2]])
         >>> objectives = [
-        ...     krotov.Objective(H1, psi0, psi_tgt),
-        ...     krotov.Objective(H2, psi0, psi_tgt)]
-        >>> pulse_options = {
-        ...     id(u1): krotov.PulseOptions(lambda_a=1.0),
-        ...     id(u2): krotov.PulseOptions(lambda_a=1.0)}
-
-        >>> controls, control_map, options, objectives = extract_controls(
-        ...     objectives, pulse_options)
+        ...     krotov.Objective(H1, psi0, psi_tgt, c_ops=c_ops),
+        ...     krotov.Objective(H2, psi0, psi_tgt, c_ops=c_ops)]
+        >>> controls = extract_controls(objectives)
         >>> assert controls == [u1, u2]
-        >>> assert objectives[0].H == [X, [Y, 0], [Z, 1]]
-        >>> assert objectives[1].H == [X, [Y, 1]]
-        >>> assert control_map[0] == [(0, 1)]          # where does u1 occur?
-        >>> assert control_map[1] == [(0, 2), (1, 1)]  # where does u2 occur?
-        >>> assert options[0] == pulse_options[id(u1)]
-        >>> assert options[1] == pulse_options[id(u2)]
+
+        >>> controls_mapping = extract_controls_mapping(objectives, controls)
+        >>> controls_mapping
+        [[[[1, 2], []], [[0], []], [[], [0]]], [[[], [1]], [[0], []], [[], [0]]]]
+
+        The structure should be read as follows:
+
+        * For the first objective (0), in the Hamiltonian (0), where is
+          the first pulse (0) used? (answer: in ``H1[1]`` and ``H1[2]``)
+
+            >>> controls_mapping[0][0][0]
+            [1, 2]
+
+        * For the second objective (1), in the second ``c_ops`` (2), where is
+          the second pulse (1) used? (answer: in ``c_ops[1][0]``)
+
+            >>> controls_mapping[1][2][1]
+            [0]
+
+        * For the second objective (1), in the Hamiltonian (0), where is the
+          first pulse (0) used? (answer: nowhere)
+
+            >>> controls_mapping[1][0][0]
+            []
+    """
+    controls_mapping = []
+    for objective in objectives:
+        controls_mapping.append([])
+        controls_mapping[-1].append([
+            _control_indices_in_nested_list(objective.H, control)
+            for control in controls])
+        for c_op in objective.c_ops:
+            controls_mapping[-1].append([
+                _control_indices_in_nested_list(c_op, control)
+                for control in controls])
+    return controls_mapping
+
+
+def pulse_options_dict_to_list(pulse_options, controls):
+    """Convert `pulse_options` into a list
+
+    Given a dict `pulse_options` that contains a :class:`.PulseOptions`
+    instance for every control in `controls`, return a list of the
+    :class:`.PulseOptions` in the same order as `controls`.
+
+    Raises:
+        ValueError: if `pulse_options` to not contain all of the `controls`
     """
     logger = logging.getLogger('krotov')
-    controls = []
-    controls_map = []
-    options_list = []
-    objectives = [copy.copy(o) for o in objectives]
-    for i_obj, objective in enumerate(objectives):
-        for i_ham, ham in enumerate(objective.H):
-            if isinstance(ham, list):
-                assert len(ham) == 2
-                control = ham[1]
-                i_control = _find_in_list(control, controls)
-                if i_control >= 0:
-                    controls_map[i_control].append((i_obj, i_ham))
-                else:  # this is a control we haven't seen before
-                    try:
-                        try:
-                            options_list.append(pulse_options[control])
-                        except TypeError:  # control is numpy array
-                            options_list.append(pulse_options[id(control)])
-                    except KeyError:
-                        raise ValueError(
-                            "The control %s in the component %d of the "
-                            "Hamiltonian of the objective %d does not have "
-                            "any associated pulse options"
-                            % (control, i_ham, i_obj))
-                    controls.append(control)
-                    controls_map.append([(i_obj, i_ham)])
-                    i_control = len(controls) - 1
-                ham[1] = i_control
-    if len(controls) != len(pulse_options):
+    if len(pulse_options) > len(controls):
         logger.warning(
-            "pulse_options contains options for controls that are not in the "
-            "objectives")
-    return controls, controls_map, options_list, objectives
+            "pulse_options contains extra elements that are not in `controls`")
+    pulse_options_list = []
+    for control in controls:
+        try:
+            try:
+                opts = pulse_options[control]
+            except TypeError:  # control is numpy array
+                opts = pulse_options[id(control)]
+            pulse_options_list.append(opts)
+        except KeyError:
+            raise ValueError(
+                "The control %s does not have any associated pulse options"
+                % str(control))
+    return pulse_options_list
 
 
 def control_onto_interval(control, tlist, tlist_midpoints):
@@ -128,7 +168,7 @@ def control_onto_interval(control, tlist, tlist_midpoints):
 
     Args:
         control (callable or numpy array): values at `tlist`, either as a
-            function ``control(t, args)`` or an an array of the same length as
+            function ``control(t, args)`` or an array of the same length as
             `tlist`
         tlist (numpy array): time grid point values
         tlist_midpoints (numpy array): midpoint values in `tlist_midpoints`.
@@ -171,8 +211,8 @@ def pulse_onto_tlist(pulse):
 
     Returns:
         numpy array: values of the control defined directly on the time grid
-            points. The size of the returned array is one greater than the size
-            of `pulse`.
+        points. The size of the returned array is one greater than the size
+        of `pulse`.
 
     Inverse of :func:`control_onto_interval`.
 

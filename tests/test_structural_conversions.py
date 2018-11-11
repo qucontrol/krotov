@@ -7,6 +7,8 @@ import logging
 
 import krotov
 from krotov.shapes import qutip_callback
+from krotov.structural_conversions import (
+    pulse_options_dict_to_list, extract_controls, extract_controls_mapping)
 
 
 def test_conversion_control_pulse_inverse():
@@ -46,23 +48,16 @@ def test_extract_controls_with_arrays():
     objectives = [
         krotov.Objective(H1, psi0, psi_tgt),
         krotov.Objective(H2, psi0, psi_tgt)]
-    pulse_options = {
-        id(u1): krotov.PulseOptions(lambda_a=1.0),
-        id(u2): krotov.PulseOptions(lambda_a=1.0)}
 
-    controls, control_map, opts, objectives \
-            = krotov.structural_conversions.extract_controls(
-                    objectives, pulse_options)
+    controls = extract_controls(objectives)
+    control_map = extract_controls_mapping(objectives, controls)
+
     assert controls == [u1, u2]
-    assert objectives[0].H == [X, [Y, 0], [Z, 1]]
-    assert objectives[1].H == [X, [Y, 1]]
-    assert control_map[0] == [(0, 1)]          # where does u1 occur?
-    assert control_map[1] == [(0, 2), (1, 1)]  # where does u2 occur?
-    assert len(opts) == 2
-    assert opts[0] == opts[1] == krotov.PulseOptions(lambda_a=1.0)
+    assert control_map[0] == [[[1], [2]]]
+    assert control_map[1] == [[[], [1]]]
 
 
-def test_extract_controls(caplog):
+def test_extract_controls():
     """Check that we can extract a list of controls from a list of
     objectives"""
 
@@ -88,57 +83,63 @@ def test_extract_controls(caplog):
     objectives = [
         krotov.Objective(H1, X, Y),
         krotov.Objective(H1, Y, X)]
-    pulse_options = {
-        f: krotov.PulseOptions(lambda_a=1.0),
-        g: krotov.PulseOptions(lambda_a=1.0),
-    }
-    controls, maps, opts, objs \
-        = krotov.structural_conversions.extract_controls(
-            objectives, pulse_options)
+    controls = extract_controls(objectives)
+    maps = extract_controls_mapping(objectives, controls)
     assert len(controls) == 2
     assert f in controls
     assert g in controls
-    assert len(maps) == len(controls)
-    assert len(opts) == len(controls)
-    assert len(objs) == 2
-
-    # check error for missing PulseOptions
-    pulse_options = {
-        f: krotov.PulseOptions(lambda_a=1.0)}
-    with pytest.raises(ValueError) as exc_info:
-        krotov.structural_conversions.extract_controls(
-            objectives, pulse_options)
-    assert 'does not have any associated pulse options' in str(exc_info.value)
-
-    # check warning message for extra PulseOptions
-    pulse_options = {
-        f: krotov.PulseOptions(lambda_a=1.0),
-        g: krotov.PulseOptions(lambda_a=1.0),
-        h: krotov.PulseOptions(lambda_a=1.0),
-    }
-    with caplog.at_level(logging.WARNING):
-        krotov.structural_conversions.extract_controls(
-            objectives, pulse_options)
-    assert 'options for controls that are not in the objectives' in caplog.text
-    assert len(controls) == 2
+    assert len(maps) == len(objectives)
+    assert maps == [[[[1], [2]]], [[[1], [2]]]]
 
     # check same control occuring in multiple Hamiltonians
     objectives = [
         krotov.Objective(H1, X, Y),
         krotov.Objective(H2, Y, X),
         krotov.Objective(H3, Y, X)]
-    pulse_options = {
-        f: krotov.PulseOptions(lambda_a=1.0),
-        g: krotov.PulseOptions(lambda_a=1.0),
-        h: krotov.PulseOptions(lambda_a=1.0),
-        d: krotov.PulseOptions(lambda_a=1.0),
-    }
-    controls, maps, opts, objs \
-        = krotov.structural_conversions.extract_controls(
-            objectives, pulse_options)
+    controls = extract_controls(objectives)
     assert len(controls) == 4
     for c in (f, g, h, d):
         assert c in controls
+    maps = extract_controls_mapping(objectives, controls)
+    assert maps[0] == [[[1], [2], [], []]]
+    assert maps[1] == [[[1], [], [2], []]]
+    assert maps[2] == [[[], [], [], [1]]]
+
+
+def test_pulse_options_dict_to_list(caplog):
+    """Test conversion of pulse_options"""
+
+    u1, u2, u3 = np.array([]), np.array([]), np.array([])  # dummy controls
+    controls = [u1, u2]
+
+    assert u1 is not u2
+    assert u2 is not u3
+
+    pulse_options = {
+        id(u1): krotov.PulseOptions(lambda_a=1.0),
+        id(u2): krotov.PulseOptions(lambda_a=2.0)}
+
+    pulse_options_list = pulse_options_dict_to_list(pulse_options, controls)
+    assert len(pulse_options_list) == 2
+    assert pulse_options_list[0] == pulse_options[id(u1)]
+    assert pulse_options_list[1] == pulse_options[id(u2)]
+
+    # check error for missing PulseOptions
+    pulse_options = {
+        id(u1): krotov.PulseOptions(lambda_a=1.0)}
+    with pytest.raises(ValueError) as exc_info:
+        pulse_options_dict_to_list(pulse_options, controls)
+    assert 'does not have any associated pulse options' in str(exc_info.value)
+
+    # check warning message for extra PulseOptions
+    pulse_options = {
+        id(u1): krotov.PulseOptions(lambda_a=1.0),
+        id(u2): krotov.PulseOptions(lambda_a=1.0),
+        id(u3): krotov.PulseOptions(lambda_a=1.0),
+    }
+    with caplog.at_level(logging.WARNING):
+        pulse_options_dict_to_list(pulse_options, controls)
+    assert 'extra elements' in caplog.text
 
 
 def test_control_tlist_calculation():

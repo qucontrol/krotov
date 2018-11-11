@@ -2,8 +2,8 @@ import time
 
 from .result import Result
 from .structural_conversions import (
-    extract_controls, control_onto_interval, pulse_onto_tlist,
-    _tlist_midpoints)
+    extract_controls, extract_controls_mapping, control_onto_interval,
+    pulse_options_dict_to_list, pulse_onto_tlist, _tlist_midpoints)
 
 __all__ = ['optimize_pulses']
 
@@ -60,9 +60,9 @@ def optimize_pulses(
     Returns:
         Result: The result of the optimization.
     """
-    (guess_controls, control_mappings,
-        options_list, objectives_in_extracted_form) = extract_controls(
-            objectives, pulse_options)
+    guess_controls = extract_controls(objectives)
+    control_mappings = extract_controls_mapping(objectives, guess_controls)
+    options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
     tlist_midpoints = _tlist_midpoints(tlist)
     guess_pulses = [  # defined on the tlist intervals
         control_onto_interval(control, tlist, tlist_midpoints)
@@ -74,7 +74,7 @@ def optimize_pulses(
     result.tlist = tlist
     result.tlist_midpoints = tlist_midpoints
     result.start_localtime = time.localtime()
-    result.objectives = objectives_in_extracted_form
+    result.objectives = objectives
     result.guess_controls = guess_controls
     result.control_mappings = control_mappings
     if store_all_pulses:
