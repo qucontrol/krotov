@@ -1,11 +1,20 @@
 """Routines for converting converting between structures good for QuTiP's
 mesolve and Krotov"""
-import numpy as np
+import copy
 import logging
+
+import numpy as np
 
 __all__ = [
     'control_onto_interval', 'pulse_onto_tlist', 'extract_controls',
     'extract_controls_mapping', 'pulse_options_dict_to_list']
+
+
+def _nested_list_shallow_copy(l):
+    if isinstance(l, list):
+        return [copy.copy(h) if isinstance(h, list) else h for h in l]
+    else:
+        return l
 
 
 def _tlist_midpoints(tlist):
@@ -161,6 +170,46 @@ def pulse_options_dict_to_list(pulse_options, controls):
                 "The control %s does not have any associated pulse options"
                 % str(control))
     return pulse_options_list
+
+
+def plug_in_pulse_values(H, pulses, mapping, time_index):
+    """Plug pulse values into H
+
+    Args:
+        H (list): nested list for a QuTiP-time-dependent operator
+        pulses (list): list of pulses in array format
+        mapping (list): nested list: for each pulse, a list of indices in `H`
+            where pulse value should be inserted
+        time_index: Index of the value of each pulse that should be plugged in
+
+    Returns:
+        list: a list with the same structure as `H` that contains the same
+        :class:`~qutip.Qobj` operators as `H`, but where every time dependency
+        is replaced by the value of the appropriate pulse at `time_index`.
+
+    Example:
+
+        >>> X, Y, Z = 'X', 'Y', 'Z' # dummy Hams, these would normally be Qobjs
+        >>> u1, u2 = np.array([0, 0.1, 0]), np.array([0, 0.2, 0])
+        >>> H = [X, [X, u1], [Y, u1], [Z, u2]]
+        >>> pulses = [u1, u2]
+        >>> mapping = [[1, 2], [3]]  # u1 is in H[1] and H[2], u2 is in H[3]
+        >>> plug_in_pulse_values(H, pulses, mapping, time_index=1)
+        ['X', ['X', 0.1], ['Y', 0.1], ['Z', 0.2]]
+
+    Note:
+        It is of no consequence whether `H` contains the `pulses`, as long as
+        it has the right structure::
+
+            >>> H = [X, [X, None], [Y, None], [Z, None]]
+            >>> plug_in_pulse_values(H, pulses, mapping, time_index=1)
+            ['X', ['X', 0.1], ['Y', 0.1], ['Z', 0.2]]
+    """
+    H = _nested_list_shallow_copy(H)
+    for (pulse, pulse_mapping) in zip(pulses, mapping):
+        for i in pulse_mapping:
+            H[i][1] = pulse[time_index]
+    return H
 
 
 def control_onto_interval(control, tlist, tlist_midpoints):

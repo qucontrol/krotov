@@ -2,6 +2,8 @@ import copy
 
 import attr
 
+from .structural_conversions import _nested_list_shallow_copy
+
 __all__ = ['Objective']
 
 
@@ -27,17 +29,9 @@ class Objective():
         # When we use copy.copy(objective), we want a
         # semi-deep copy where nested lists in the Hamiltonian and the c_ops
         # are re-created (copy by value), but non-list elements are copied by
-        # reference. The _extract_controls relies heavily on this exact
-        # behavior.
+        # reference.
         return Objective(
             H=_nested_list_shallow_copy(self.H),
             initial_state=self.initial_state,
             target_state=self.target_state,
             c_ops=[_nested_list_shallow_copy(c) for c in self.c_ops])
-
-
-def _nested_list_shallow_copy(l):
-    if isinstance(l, list):
-        return [copy.copy(h) if isinstance(h, list) else h for h in l]
-    else:
-        return l

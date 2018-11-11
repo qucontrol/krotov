@@ -23,9 +23,9 @@ class Result():
         guess_controls (list): List of the guess controls in array format
         optimized_controls (list): List of the optimized control fields, in the
             order corresponding to `guess_controls`
-        control_mappings (list): For each control in
-            `guess_controls`/`optimized_controls`, a list of index-tuples of
-            where the controls appear in the `objectives`
+        controls_mapping (list): A nested list that indicates where in
+            `objectives` the `guess_controls` and `optimized_controls` are used
+            (as returned by :func:`.extract_controls_mapping`)
         all_pulses (list of list): If the optimization was performed with
             ``store_all_pulses=True``, for each iteration, a list of the
             optimized pulses (in the order corresponding to `guess_controls`).
@@ -51,7 +51,7 @@ class Result():
         self.tau_vals = []
         self.guess_controls = []
         self.optimized_controls = []
-        self.control_mappings = []
+        self.controls_mapping = []
         self.all_pulses = []
         self.states = []
         self.start_local_time = None
