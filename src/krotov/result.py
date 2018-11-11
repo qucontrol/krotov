@@ -1,5 +1,6 @@
 import copy
 import time
+from textwrap import dedent
 
 __all__ = ['Result']
 
@@ -40,6 +41,7 @@ class Result():
         end_local_time (time.struct_time): Time stamp of when the optimization
             ended
     """
+    time_fmt = "%Y-%m-%d %H:%M:%S"
 
     def __init__(self):
         self.objectives = []
@@ -56,3 +58,37 @@ class Result():
         self.states = []
         self.start_local_time = None
         self.end_local_time = None
+
+    def __str__(self):
+        return dedent(r'''
+        Krotov Optimization Result
+        --------------------------
+        - Started at {start_local_time}
+        - Number of objectives: {n_objectives}
+        - Number of iterations: {n_iters}
+        - Ended at {end_local_time}
+        '''.format(
+            start_local_time=self.start_local_time_str,
+            n_objectives=len(self.objectives),
+            n_iters=len(self.iters)-1,  # do not count zero iteration
+            end_local_time=self.end_local_time_str,
+        )).strip()
+
+    def __repr__(self):
+        return self.__str__()
+
+    @property
+    def start_local_time_str(self):
+        """The `start_local_time` attribute formatted as a string"""
+        if self.start_local_time is not None:
+            return time.strftime(self.time_fmt, self.start_local_time)
+        else:
+            return 'n/a'
+
+    @property
+    def end_local_time_str(self):
+        """The `end_local_time` attribute formatted as a string"""
+        if self.end_local_time is not None:
+            return time.strftime(self.time_fmt, self.end_local_time)
+        else:
+            return 'n/a'

@@ -3,6 +3,8 @@ __version__ = '0.0.1'
 # expose submodules for easy inte
 from . import shapes
 from . import structural_conversions
+from . import propagators
+from . import functionals
 
 # expose primary classes/functions
 from .objective import Objective

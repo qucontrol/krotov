@@ -136,7 +136,7 @@ def optimize_pulses(
     result = Result()
     result.tlist = tlist
     result.tlist_midpoints = tlist_midpoints
-    result.start_localtime = time.localtime()
+    result.start_local_time = time.localtime()
     result.objectives = objectives
     result.guess_controls = guess_controls
     result.controls_mapping = controls_mapping
@@ -149,6 +149,7 @@ def optimize_pulses(
             storage))
     toc = time.clock()
     states_T = [states[-1] for states in forward_states]  # for each objective
+    result.states = states_T
     result.iters.append(0)
     result.iter_seconds.append(int(toc - tic))
     result.tau_vals.append([
@@ -158,7 +159,7 @@ def optimize_pulses(
 
     # Boundary condition for the backward propagation
     # -- this is where the functional enters the optimizaton
-    chi_states = chi_constructor(states_T, objectives)
+    chi_states = chi_constructor(states_T, objectives, result.tau_vals)
     chi_norms = [chi.norm() for chi in chi_states]
     chi_states = [chi_states[i]/chi_norms[i] for i in range(M)]
 
