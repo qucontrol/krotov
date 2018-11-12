@@ -16,7 +16,8 @@ Welcome to the Krotov package's documentation!
 .. image:: https://ci.appveyor.com/api/projects/status/1cbm24w04jmxjpjh?svg=true
    :alt: AppVeyor Continuous Integration
    :target: https://ci.appveyor.com/project/goerz/krotov
-.. image:: https://coveralls.io/repos/github/qucontrol/krotov/badge.svg?branch=master&service=github:alt: Coveralls
+.. image:: https://img.shields.io/coveralls/github/qucontrol/krotov/master.svg
+   :alt: Coveralls
    :target: https://coveralls.io/github/qucontrol/krotov?branch=master
 .. image:: https://readthedocs.org/projects/krotov/badge/?version=latest
    :alt: Documentation Status
