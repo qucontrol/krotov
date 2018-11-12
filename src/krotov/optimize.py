@@ -125,6 +125,7 @@ def optimize_pulses(
         for control in guess_controls]
     guess_controls = [  # convert guess controls to arrays, on tlist
         pulse_onto_tlist(pulse) for pulse in guess_pulses]
+    adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
         storage = partial(np.empty, dtype=object)
     if parallel_map is None:

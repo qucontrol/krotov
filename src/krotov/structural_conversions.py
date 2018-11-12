@@ -172,7 +172,7 @@ def pulse_options_dict_to_list(pulse_options, controls):
     return pulse_options_list
 
 
-def plug_in_pulse_values(H, pulses, mapping, time_index):
+def plug_in_pulse_values(H, pulses, mapping, time_index, conjugate=False):
     """Plug pulse values into H
 
     Args:
@@ -180,7 +180,9 @@ def plug_in_pulse_values(H, pulses, mapping, time_index):
         pulses (list): list of pulses in array format
         mapping (list): nested list: for each pulse, a list of indices in `H`
             where pulse value should be inserted
-        time_index: Index of the value of each pulse that should be plugged in
+        time_index (int): Index of the value of each pulse that should be
+            plugged in
+        conjugate (bool): If True, use conjugate complex pulse values
 
     Returns:
         list: a list with the same structure as `H` that contains the same
@@ -190,12 +192,12 @@ def plug_in_pulse_values(H, pulses, mapping, time_index):
     Example:
 
         >>> X, Y, Z = 'X', 'Y', 'Z' # dummy Hams, these would normally be Qobjs
-        >>> u1, u2 = np.array([0, 0.1, 0]), np.array([0, 0.2, 0])
+        >>> u1, u2 = np.array([0, 10, 0]), np.array([0, 20, 0])
         >>> H = [X, [X, u1], [Y, u1], [Z, u2]]
         >>> pulses = [u1, u2]
         >>> mapping = [[1, 2], [3]]  # u1 is in H[1] and H[2], u2 is in H[3]
         >>> plug_in_pulse_values(H, pulses, mapping, time_index=1)
-        ['X', ['X', 0.1], ['Y', 0.1], ['Z', 0.2]]
+        ['X', ['X', 10], ['Y', 10], ['Z', 20]]
 
     Note:
         It is of no consequence whether `H` contains the `pulses`, as long as
@@ -203,12 +205,15 @@ def plug_in_pulse_values(H, pulses, mapping, time_index):
 
             >>> H = [X, [X, None], [Y, None], [Z, None]]
             >>> plug_in_pulse_values(H, pulses, mapping, time_index=1)
-            ['X', ['X', 0.1], ['Y', 0.1], ['Z', 0.2]]
+            ['X', ['X', 10], ['Y', 10], ['Z', 20]]
     """
     H = _nested_list_shallow_copy(H)
     for (pulse, pulse_mapping) in zip(pulses, mapping):
         for i in pulse_mapping:
-            H[i][1] = pulse[time_index]
+            if conjugate:
+                H[i][1] = np.conjugate(pulse[time_index])
+            else:
+                H[i][1] = pulse[time_index]
     return H
 
 
