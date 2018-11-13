@@ -212,6 +212,8 @@ def optimize_pulses(
         logger.info("Finished Krotov iteration %d" % krotov_iteration)
 
     result.end_local_time = time.localtime()
+    for i, pulse in enumerate(optimized_pulses):
+        result.optimized_controls[i] = pulse_onto_tlist(pulse)
     return result
 
 

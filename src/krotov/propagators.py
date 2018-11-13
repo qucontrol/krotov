@@ -1,9 +1,9 @@
 """Routines that can be passed as `propagator` to :func:`.optimize_pulses`"""
 
-__all__ = ['propagator_expm']
+__all__ = ['expm']
 
 
-def propagator_expm(H, state, dt, c_ops, backwards=False):
+def expm(H, state, dt, c_ops, backwards=False):
     """Propagate using matrix exponentiation"""
     if len(c_ops) > 0:
         raise NotImplementedError("Liouville exponentiation not implemented")
