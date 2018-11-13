@@ -35,6 +35,10 @@ Welcome to the Krotov package's documentation!
    contributing
    authors
    history
+   krotovs_method
+   qutip_usage
+   grape_crab
+   propagation
    examples
 
 

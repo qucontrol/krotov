@@ -56,6 +56,7 @@ extensions = [
     'dollarmath',
     'nbsphinx',
     'sphinx.ext.inheritance_diagram',
+    'sphinxcontrib.bibtex',
 ]
 if os.getenv('SPELLCHECK'):
     extensions += 'sphinxcontrib.spelling',
