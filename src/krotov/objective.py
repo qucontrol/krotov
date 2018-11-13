@@ -17,7 +17,7 @@ def _adjoint(op):
                 assert len(item) == 2
                 adjoint_op.append([item[0].dag(), item[1]])
             else:
-                adjoint_op.append([item.dag()])
+                adjoint_op.append(item.dag())
         return adjoint_op
     else:
         return op.dag()

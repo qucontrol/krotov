@@ -5,6 +5,7 @@ from . import shapes
 from . import structural_conversions
 from . import propagators
 from . import functionals
+from . import parallelization
 
 # expose primary classes/functions
 from .objective import Objective

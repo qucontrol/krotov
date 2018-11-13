@@ -3,7 +3,7 @@
 __all__ = ['propagator_expm']
 
 
-def propagator_expm(H, state, dt, c_ops):
+def propagator_expm(H, state, dt, c_ops, backwards=False):
     """Propagate using matrix exponentiation"""
     if len(c_ops) > 0:
         raise NotImplementedError("Liouville exponentiation not implemented")

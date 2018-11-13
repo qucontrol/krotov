@@ -69,3 +69,19 @@ def test_objective_copy(transmon_ham_and_states):
     assert target1.c_ops[0] is not target2.c_ops[0]
     assert target1.c_ops[0][0] is target2.c_ops[0][0]
     assert target1.c_ops[0][1] is target2.c_ops[0][1]
+
+
+def test_adoint_objective(transmon_ham_and_states):
+    """Test taking the adjoint of an objective"""
+    H, psi0, psi1 = transmon_ham_and_states
+    target = krotov.Objective(H, psi0, psi1)
+    adjoint_target = target.adjoint
+    assert isinstance(adjoint_target.H, list)
+    assert isinstance(adjoint_target.H[0], qutip.Qobj)
+    assert isinstance(adjoint_target.H[1], list)
+    assert isinstance(adjoint_target.H[1][0], qutip.Qobj)
+    assert (adjoint_target.H[0] - target.H[0]).norm() < 1e-12
+    assert (adjoint_target.H[1][0] - target.H[1][0]).norm() < 1e-12
+    assert adjoint_target.H[1][1] == target.H[1][1]
+    assert adjoint_target.initial_state.isbra
+    assert adjoint_target.target_state.isbra
