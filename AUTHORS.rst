@@ -13,6 +13,6 @@ Development Team
 * Daniel Reich <daniel.reich@physik.uni-kassel.de>
 * Daniel Basilewitsch <basilewitsch@physik.uni-kassel.de>
 * Karl Horn <karlhorn@physik.uni-kassel.de>
-* Fernando Gago Encinas
+* Fernando Gago Encinas <fernando.gago@physik.uni-kassel.de>
 * Matthias Krauss
 * Christiane Koch <christiane.koch@uni-kassel.de>
