@@ -84,6 +84,7 @@ version = krotov.__version__
 rootfolder = os.path.join(os.path.dirname(__file__), '..')
 last_commit = str(git.Repo(rootfolder).head.commit)[:7]
 release = last_commit
+numfig = True
 
 pygments_style = 'sphinx'
 extlinks = {

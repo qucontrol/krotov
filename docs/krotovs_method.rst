@@ -252,13 +252,15 @@ For the standard functionals defined in Eq. :eq:`JTsm` and Eq. :eq:`JTre`, thi
 Discretization
 --------------
 
-.. figure:: krotovscheme
+.. _figkrotovscheme:
+.. figure:: krotovscheme.svg
    :alt: Sequential update scheme in Krotov’s method on a time grid.
+   :width: 100%
 
    Sequential update scheme in Krotov’s method on a time grid.
 
 Discretization to a time grid yields the numerical scheme shown in
-Fig. [fig:krotovscheme], and resolves the seeming contradiction that the
+:numref:`figkrotovscheme`, and resolves the seeming contradiction that the
 calculation of :math:`\epsilon^{(i+1)}(t)` requires knowledge of the
 states :math:`\ket{\Psi_k^{(i+1)}(t)}` propagated under
 :math:`\epsilon^{(i+1)}(t)`. The scheme starts with
