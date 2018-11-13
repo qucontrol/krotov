@@ -10,6 +10,8 @@ def propagator_expm(H, state, dt, c_ops, backwards=False):
     if not state.isket:
         raise NotImplementedError("Propagation of non-kets not implemented")
     assert isinstance(H, list) and len(H) > 0
+    if backwards:
+        dt = -dt
     if isinstance(H[0], list):
         A = (-1j * H[0][1]) * H[0][0]
     else:
