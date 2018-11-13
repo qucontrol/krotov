@@ -3,7 +3,6 @@ channels:
   - defaults
 dependencies:
   - python=3.6
-  - anaconda
   - pip:
     - better-apidoc>=0.2.0
     - sphinx-rtd-theme<0.3
