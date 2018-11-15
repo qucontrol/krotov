@@ -26,7 +26,7 @@ def optimize_pulses(
     `objectives`.
 
     Args:
-        objectives (list): List of objectives
+        objectives (list of Objective): List of objectives
         pulse_options (dict): Mapping of time-dependent controls found in the
             Hamiltonians of the objectives to :class:`PulseOptions` instances.
             There must be a mapping for each control. As numpy arrays are
@@ -261,6 +261,7 @@ def _backward_propagation(
     storage_array[-1] = state
     mapping = pulses_mapping[i_state]
     for time_index in range(len(tlist)-2, -1, -1):  # index bw over intervals
+        # TODO: use conjugate pulse value
         H = plug_in_pulse_values(obj.H, pulses, mapping[0], time_index)
         c_ops = [
             plug_in_pulse_values(c_op, pulses, mapping[ic+1], time_index)

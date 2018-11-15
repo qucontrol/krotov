@@ -1,3 +1,5 @@
+.. _krotov-example-notebooks:
+
 ========
 Examples
 ========

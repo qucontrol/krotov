@@ -34,12 +34,15 @@ Welcome to the Krotov package's documentation!
    readme
    contributing
    authors
+   features
    history
    krotovs_method
    qutip_usage
    grape_crab
    propagation
    examples
+   howto
+   zzzbibliography
 
 
 API
