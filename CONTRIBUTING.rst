@@ -240,6 +240,13 @@ some local virtual environments that development relies on).
     Simply put e.g. ``#14`` anywhere in your commit message, and Github will
     automatically link to your commit on the page for issue number 14.
 
+    You may also use something like ``Closes #14`` as the last line of your
+    commit message to automatically close the issue.
+    See `Closing issues using keywords`_ for details.
+
+    Also note the general `Commit Message Guidelines`_.
+
+
 * **How to run a subset of tests**
 
     To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
@@ -282,6 +289,8 @@ some local virtual environments that development relies on).
     You may also see the `pytest documentation on automatic debugging`_.
 
 
+.. _Closing issues using keywords: https://help.github.com/articles/closing-issues-using-keywords/
+.. _Commit Message Guidelines: https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53
 .. _pytest test selection docs: https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests
 .. _pytest documentation on markers: https://docs.pytest.org/en/latest/example/markers.html
 .. _pytest documentation on automatic debugging: https://docs.pytest.org/en/latest/usage.html#dropping-to-pdb-python-debugger-on-failures
