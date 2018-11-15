@@ -235,6 +235,11 @@ The following assumes your current working directory is a checkout of
 ``krotov``, and that you have successfully run ``make test`` (which creates
 some local virtual environments that development relies on).
 
+* **How to reference a Github issue in a commit message**
+
+    Simply put e.g. ``#14`` anywhere in your commit message, and Github will
+    automatically link to your commit on the page for issue number 14.
+
 * **How to run a subset of tests**
 
     To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
