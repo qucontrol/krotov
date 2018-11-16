@@ -266,6 +266,19 @@ some local virtual environments that development relies on).
 
         $ make jupter-lab
 
+* **How to convert an example notebook to a script for easier debugging**
+
+    Interactive debugging in notebooks is difficult. It becomes much easier if
+    you convert the notebook to a script first.  To convert a notebook to an
+    (I)Python script and run it with automatic debugging, execute e.g.::
+
+        $ ./.venv/py36/bin/jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
+        $ ./.venv/py36/bin/ipython --pdb debug.py
+
+    You can then also set a manual breakpoint by inserting the following line anywhere in the code::
+
+        from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
+
 * **How to run a subset of tests**
 
     To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
