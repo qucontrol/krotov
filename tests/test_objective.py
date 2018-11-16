@@ -1,4 +1,5 @@
 """Tests for krotov.Objective in isolation"""
+import os
 import copy
 
 import numpy as np
@@ -12,7 +13,7 @@ import pytest
 
 @pytest.fixture
 def transmon_ham_and_states(
-        Ec=0.386, EjEc=45, nstates=8, ng=0.0, T=10.0):
+        Ec=0.386, EjEc=45, nstates=2, ng=0.0, T=10.0):
     """Transmon Hamiltonian"""
     Ej = EjEc * Ec
     n = np.arange(-nstates, nstates+1)
@@ -85,3 +86,48 @@ def test_adoint_objective(transmon_ham_and_states):
     assert adjoint_target.H[1][1] == target.H[1][1]
     assert adjoint_target.initial_state.isbra
     assert adjoint_target.target_state.isbra
+
+
+@pytest.fixture
+def tlist_control(request):
+    testdir = os.path.splitext(request.module.__file__)[0]
+    tlist, control = np.genfromtxt(
+        os.path.join(testdir, 'pulse.dat'), unpack=True)
+    return tlist, control
+
+
+def test_objective_mesolve_propagate(transmon_ham_and_states, tlist_control):
+    """Test propagation method of objective"""
+    tlist, control = tlist_control
+    H, psi0, psi1 = transmon_ham_and_states
+    H = copy.deepcopy(H)
+    T = tlist[-1]
+    nt = len(tlist)
+    H[1][1] = lambda t, args: (
+        0 if (t > float(T)) else
+        control[int(round(float(nt-1) * (t/float(T))))])
+    target = krotov.Objective(H, psi0, psi1)
+
+    assert len(tlist) == len(control) > 0
+
+    res1 = target.mesolve(tlist)
+    res2 = target.propagate(tlist, propagator=krotov.propagators.expm)
+    assert len(res1.states) == len(res2.states) == len(tlist)
+    assert (1 - np.abs(res1.states[-1].overlap(res2.states[-1]))) < 1e-4
+
+    P0 = psi0 * psi0.dag()
+    P1 = psi1 * psi1.dag()
+    e_ops = [P0, P1]
+
+    res1 = target.mesolve(tlist, e_ops=e_ops)
+    res2 = target.propagate(
+        tlist, e_ops=e_ops, propagator=krotov.propagators.expm)
+
+    assert len(res1.states) == len(res2.states) == 0
+    assert len(res1.expect) == len(res2.expect) == 2
+    assert len(res1.expect[0]) == len(res2.expect[0]) == len(tlist)
+    assert len(res1.expect[1]) == len(res2.expect[1]) == len(tlist)
+    assert abs(res1.expect[0][-1] - res2.expect[0][-1]) < 1e-2
+    assert abs(res1.expect[1][-1] - res2.expect[1][-1]) < 1e-2
+    assert abs(res1.expect[0][-1] - 0.1925542) < 1e-7
+    assert abs(res1.expect[1][-1] - 0.7595435) < 1e-7
