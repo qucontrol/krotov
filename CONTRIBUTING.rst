@@ -246,6 +246,25 @@ some local virtual environments that development relies on).
 
     Also note the general `Commit Message Guidelines`_.
 
+* **How to run a jupyter notebook server for working on the example notebooks**
+
+    A notebook server that is isolated to the proper testing environment can be started via the Makefile::
+
+        $ make jupter-notebook
+
+    This is equivalent to::
+
+        $ .venv/py36/bin/jupyter notebook --config=/dev/null
+
+    You may run this with your own options, if you prefer. The
+    ``--config=/dev/null`` guarantees that the notebook server is completely
+    isolated. Otherwise, configuration files from your home directly (see
+    `Jupyter’s Common Configuration system`_)  may influence the server. Of
+    course, if you know what you're doing, you may want this.
+
+    If you prefer, you may also use the newer jupyterlab::
+
+        $ make jupter-lab
 
 * **How to run a subset of tests**
 
@@ -289,6 +308,7 @@ some local virtual environments that development relies on).
     You may also see the `pytest documentation on automatic debugging`_.
 
 
+.. _Jupyter’s Common Configuration system: https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html#jupyter-s-common-configuration-system
 .. _Closing issues using keywords: https://help.github.com/articles/closing-issues-using-keywords/
 .. _Commit Message Guidelines: https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53
 .. _pytest test selection docs: https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests

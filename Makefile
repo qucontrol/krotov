@@ -132,3 +132,10 @@ develop-docs: develop  ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	@echo "open docs/_build/html/index.html"
+
+jupyter-notebook: .venv/py36/bin/jupyter  ## run a notebook server for editing the examples
+	.venv/py36/bin/jupyter notebook --config=/dev/null
+
+jupyter-lab: .venv/py36/bin/jupyter  ## run a jupyterlab server for editing the examples
+	@.venv/py35/bin/pip install -e .[extras]
+	.venv/py36/bin/jupyter lab --config=/dev/null
