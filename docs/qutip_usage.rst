@@ -27,21 +27,22 @@ include a list `c_ops` of collapse (Lindblad) operators, where each Lindblad
 operator is a :class:`~qutip.Qobj` operator directly, or, for time-dependent
 Lindblad operators, a nested list.
 
+In order to simulate the dynamics of the guess pulse, you can use
+:meth:`.Objective.mesolve`.
+
 The optimization routine will automatically extract all controls that it can
 find in the objectives (in any of the Hamiltonians, or any of the collapse
 operators), and iteratively calculate updates to all controls in order to meet
 all `objectives` simultaneously. The result of the optimization will be in the
 returned :class:`.Result` object, with a list of the optimized controls in the
-`optimized_controls` attribute. Note that the Hamiltonians or collapse
-operators stored in the `objectives` are not automatically updated to contain the
-optimized controls.
-
-**TODO**: objectives should have a property to get the Hamiltonian with the optimized pulses plugged in.
+`optimized_controls` attribute.
+The :attr:`.Result.optimized_objectives` property contains a copy of the
+objectives with the `optimized_controls` plugged into the Hamiltonian and
+collapse operators. The dynamics under the optimized controls can then again be
+simulated through :meth:`.Objective.mesolve`.
 
 While the guess controls that are in the `objectives` on input may be functions
-or a list of pulse values on the time grid (in fact, functions are preferred),
-the output `optimized_controls` will always be a list of pulse values.
-
-**TODO**: talk about the subtleties resulting from the fact that (internally only), control pulses are defined on the interval of the time grid.
+or an array of pulse values on the time grid, the output `optimized_controls`
+will always be an array of pulse values.
 
 .. _QuTiP: http://qutip.org

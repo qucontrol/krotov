@@ -118,9 +118,9 @@ class Objective():
         is not given, the `initial_state` will be propagated. This is similar
         to the :meth:`mesolve` method, but instead of using
         :func:`qutip.mesolve.mesolve`, the `propagate` function is used to go
-        between time steps. This function is the same as what is passed to
-        :func:`.optimize_pulses`. The crucial difference between this and
-        :meth:`mesolve` is in the time discretization convention. While
+        between points on the time grid. This function is the same as what is
+        passed to :func:`.optimize_pulses`. The crucial difference between this
+        and :meth:`mesolve` is in the time discretization convention. While
         :meth:`mesolve` uses piecewise-constant controls centered around the
         values in `tlist` (the control field switches in the middle between two
         points in `tlist`), :meth:`propagate` uses piecewise-constant controls

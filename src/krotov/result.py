@@ -1,6 +1,9 @@
-import copy
 import time
 from textwrap import dedent
+
+from .objective import Objective
+from .structural_conversions import (
+    _nested_list_shallow_copy)
 
 __all__ = ['Result']
 
@@ -9,7 +12,7 @@ class Result():
     """Result object for a Krotov optimization
 
     Attributes:
-        objectives (list): The control objectives, with "extracted" controls.
+        objectives (list): The control objectives
         tlist (numpy array): The time grid values
         tlist_midpoints (numpy array): Points centered between the time points
             in `tlist`
@@ -92,3 +95,32 @@ class Result():
             return time.strftime(self.time_fmt, self.end_local_time)
         else:
             return 'n/a'
+
+    @property
+    def optimized_objectives(self):
+        """A copy of the objectives with the `optimized_controls` plugged in"""
+        objectives = []
+        for (i, obj) in enumerate(self.objectives):
+            H = _plug_in_optimized_controls(
+                obj.H, self.optimized_controls, self.controls_mapping[i][0])
+            c_ops = [
+                _plug_in_optimized_controls(
+                    c_op, self.optimized_controls,
+                    self.controls_mapping[i][j+1])
+                for (j, c_op) in enumerate(obj.c_ops)]
+            objectives.append(
+                Objective(
+                    H=H,
+                    initial_state=obj.initial_state,
+                    target_state=obj.target_state,
+                    c_ops=c_ops))
+        return objectives
+
+
+def _plug_in_optimized_controls(H, controls, mapping):
+    """Auxilliary routine to :attr:`Result.optimized_objectives`"""
+    H = _nested_list_shallow_copy(H)
+    for (control, control_mapping) in zip(controls, mapping):
+        for i in control_mapping:
+            H[i][1] = control
+    return H
