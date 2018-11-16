@@ -131,3 +131,39 @@ def test_objective_mesolve_propagate(transmon_ham_and_states, tlist_control):
     assert abs(res1.expect[1][-1] - res2.expect[1][-1]) < 1e-2
     assert abs(res1.expect[0][-1] - 0.1925542) < 1e-7
     assert abs(res1.expect[1][-1] - 0.7595435) < 1e-7
+
+
+def test_plug_in_array_controls_as_func():
+    """Test _plug_in_array_controls_as_func, specifically that it generates a
+    function that switches between the points in tlist"""
+    nt = 4
+    T = 5.0
+    u1 = np.random.random(nt)
+    u2 = np.random.random(nt)
+    H = ['H0', ['H1', u1], ['H2', u2]]
+    controls = [u1, u2]
+    mapping = [
+        [1, ],  # u1
+        [2, ],  # u2
+    ]
+    tlist = np.linspace(0, T, nt)
+    H_with_funcs = krotov.objective._plug_in_array_controls_as_func(
+        H, controls, mapping, tlist)
+    assert callable(H_with_funcs[1][1])
+    assert callable(H_with_funcs[2][1])
+
+    u1_func = H_with_funcs[1][1]
+    assert u1_func(T + 0.1, None) == 0
+    assert u1_func(T, None) == u1[-1]
+    assert u1_func(0, None) == u1[0]
+    dt = tlist[1] - tlist[0]
+    assert u1_func(tlist[2] + 0.4 * dt, None) == u1[2]
+    assert u1_func(tlist[2] + 0.6 * dt, None) == u1[3]
+
+    u2_func = H_with_funcs[2][1]
+    assert u2_func(T + 0.1, None) == 0
+    assert u2_func(T, None) == u2[-1]
+    assert u2_func(0, None) == u2[0]
+    dt = tlist[1] - tlist[0]
+    assert u2_func(tlist[2] + 0.4 * dt, None) == u2[2]
+    assert u2_func(tlist[2] + 0.6 * dt, None) == u2[3]
