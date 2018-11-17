@@ -40,6 +40,7 @@ Welcome to the Krotov package's documentation!
    qutip_usage
    grape_crab
    propagation
+   time_discretization.ipynb
    examples
    howto
    zzzbibliography

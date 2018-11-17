@@ -10,4 +10,6 @@ def pytest_collectstart(collector):
     https://nbval.readthedocs.io/en/latest/#Skipping-certain-output-types
     """
     if collector.__class__.__name__ == 'IPyNbFile':
-        collector.skip_compare += 'application/javascript', 'stderr',
+        collector.skip_compare += (
+            'application/javascript', 'stderr',
+            'application/vnd.jupyter.widget-view+json')

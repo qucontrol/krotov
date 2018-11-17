@@ -30,7 +30,8 @@ clean:
 	@-rm -rf $(BUILDDIR)/*
 	@-rm -rf API/*.rst
 	@-rm -f notebooks/*.log
-	@rm -f krotovscheme.aux krotovscheme.log
+	@-rm -f *.log
+	@-rm -f krotovscheme.aux krotovscheme.log
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

@@ -21,4 +21,4 @@ install:
 build: off
 
 test_script:
-  - ps: pytest --doctest-modules --cov=krotov --nbval src tests (get-item docs\*.rst).FullName (get-item docs\notebooks\*.ipynb).FullName
+  - ps: pytest --doctest-modules --cov=krotov --nbval --sanitize-with docs\nbval_sanitize.cfg src tests (get-item docs\*.rst).FullName (get-item docs\notebooks\*.ipynb).FullName (get-item docs\*.ipynb).FullName
