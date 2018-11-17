@@ -16,6 +16,7 @@ install:
   - conda config --append channels conda-forge
   - conda install qutip
   - pip install .[dev]
+  - pip freeze
 
 build: off
 
