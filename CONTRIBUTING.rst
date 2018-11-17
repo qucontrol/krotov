@@ -235,6 +235,40 @@ The following assumes your current working directory is a checkout of
 ``krotov``, and that you have successfully run ``make test`` (which creates
 some local virtual environments that development relies on).
 
+How to work on a topic branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When working on an non-trivial issue, it is recommended to create a topic
+branch, instead of pushing to ``master``.
+
+To create a branch named ``issue18``::
+
+    $ git branch issue18
+    $ git checkout issue18
+
+You can then make commits, and push them to Github to trigger Continuous Integration testing::
+
+    $ git push origin issue18
+
+It is ok to force-push on an issue branch
+
+When you are done (the issue has been fixed), finish up by merging the topic
+branch back into ``master``::
+
+    $ git checkout master
+    $ git merge --no-ff issue18
+
+The ``--no-ff`` option is critical, so that an explicit merge commit is created.
+Summarize the changes of the branch relative to ``master`` in the commit
+message.
+
+Then, you can push master and delete the topic branch both locally and on Github::
+
+    $ git push origin master
+    $ git push --delete origin issue18
+    $ git branch -D issue18
+
+
 How to reference a Github issue in a commit message
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
