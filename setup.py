@@ -39,6 +39,11 @@ dev_requirements.append('better-apidoc')
 dev_extras = [
     'jupyterlab', 'pdbpp']
 
+# requirements for binder
+binder = [
+    'matplotlib', 'watermark'
+]
+
 
 version = get_version('./src/krotov/__init__.py')
 
@@ -58,6 +63,7 @@ setup(
     extras_require={
         'dev': dev_requirements,
         'extras': dev_extras,
+        'binder': binder,
     },
     license="BSD license",
     long_description=readme + '\n\n' + history,

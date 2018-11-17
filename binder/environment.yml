@@ -4,11 +4,6 @@ channels:
   - conda-forge
 dependencies:
   - python=3.6.7
-  - pip=18.1
-  - numpy=1.15.4
-  - scipy=1.1.0
-  - matplotlib=3.0.1
   - qutip=4.3.1
   - pip:
-    - watermark==1.7.0
-    - git+https://github.com/qucontrol/krotov.git@master#egg=krotov
+    - git+https://github.com/qucontrol/krotov.git@master#egg=krotov[binder]
