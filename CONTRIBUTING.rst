@@ -228,97 +228,104 @@ tests. For this to work properly, the following steps must be taken:
 
 
 
-Developers' How-tos
+Developers' How-Tos
 -------------------
 
 The following assumes your current working directory is a checkout of
 ``krotov``, and that you have successfully run ``make test`` (which creates
 some local virtual environments that development relies on).
 
-* **How to reference a Github issue in a commit message**
+How to reference a Github issue in a commit message
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Simply put e.g. ``#14`` anywhere in your commit message, and Github will
-    automatically link to your commit on the page for issue number 14.
+Simply put e.g. ``#14`` anywhere in your commit message, and Github will
+automatically link to your commit on the page for issue number 14.
 
-    You may also use something like ``Closes #14`` as the last line of your
-    commit message to automatically close the issue.
-    See `Closing issues using keywords`_ for details.
+You may also use something like ``Closes #14`` as the last line of your
+commit message to automatically close the issue.
+See `Closing issues using keywords`_ for details.
 
-    Also note the general `Commit Message Guidelines`_.
+Also note the general `Commit Message Guidelines`_.
 
-* **How to run a jupyter notebook server for working on the example notebooks**
+How to run a jupyter notebook server for working on the example notebooks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    A notebook server that is isolated to the proper testing environment can be started via the Makefile::
+A notebook server that is isolated to the proper testing environment can be started via the Makefile::
 
-        $ make jupter-notebook
+    $ make jupter-notebook
 
-    This is equivalent to::
+This is equivalent to::
 
-        $ .venv/py36/bin/jupyter notebook --config=/dev/null
+    $ .venv/py36/bin/jupyter notebook --config=/dev/null
 
-    You may run this with your own options, if you prefer. The
-    ``--config=/dev/null`` guarantees that the notebook server is completely
-    isolated. Otherwise, configuration files from your home directly (see
-    `Jupyter’s Common Configuration system`_)  may influence the server. Of
-    course, if you know what you're doing, you may want this.
+You may run this with your own options, if you prefer. The
+``--config=/dev/null`` guarantees that the notebook server is completely
+isolated. Otherwise, configuration files from your home directly (see
+`Jupyter’s Common Configuration system`_)  may influence the server. Of
+course, if you know what you're doing, you may want this.
 
-    If you prefer, you may also use the newer jupyterlab::
+If you prefer, you may also use the newer jupyterlab::
 
-        $ make jupter-lab
+    $ make jupter-lab
 
-* **How to convert an example notebook to a script for easier debugging**
+How to convert an example notebook to a script for easier debugging
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Interactive debugging in notebooks is difficult. It becomes much easier if
-    you convert the notebook to a script first.  To convert a notebook to an
-    (I)Python script and run it with automatic debugging, execute e.g.::
+Interactive debugging in notebooks is difficult. It becomes much easier if
+you convert the notebook to a script first.  To convert a notebook to an
+(I)Python script and run it with automatic debugging, execute e.g.::
 
-        $ ./.venv/py36/bin/jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
-        $ ./.venv/py36/bin/ipython --pdb debug.py
+    $ ./.venv/py36/bin/jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
+    $ ./.venv/py36/bin/ipython --pdb debug.py
 
-    You can then also set a manual breakpoint by inserting the following line anywhere in the code::
+You can then also set a manual breakpoint by inserting the following line anywhere in the code::
 
-        from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
+    from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
 
-* **How to run a subset of tests**
+How to run a subset of tests
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
+To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
 
-        $ ./.venv/py36/bin/pytest tests/test_krotov.py
+    $ ./.venv/py36/bin/pytest tests/test_krotov.py
 
-    See the `pytest test selection docs`_ for details.
+See the `pytest test selection docs`_ for details.
 
-* **How to run only as single test**
+How to run only as single test
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Decorate the test with e.g. ``@pytest.mark.xxx``, and then run, e.g::
+Decorate the test with e.g. ``@pytest.mark.xxx``, and then run, e.g::
 
-        $ ./.venv/py36/bin/pytest -m xxx tests/
+    $ ./.venv/py36/bin/pytest -m xxx tests/
 
-    See the `pytest documentation on markers`_ for details.
+See the `pytest documentation on markers`_ for details.
 
-* **How to run only the doctests**
+How to run only the doctests
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Run the following::
+Run the following::
 
-    $ ./.venv/py36/bin/pytest --doctest-modules src
+$ ./.venv/py36/bin/pytest --doctest-modules src
 
-* **How to go into an interactive debugger.**
+How to go into an interactive debugger
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Optionally, install the `pdbpp` package into the testing environment, for a
-    better experience::
+Optionally, install the `pdbpp` package into the testing environment, for a
+better experience::
 
-        $ ./.venv/py36/bin/python -m pip install pdbpp
+    $ ./.venv/py36/bin/python -m pip install pdbpp
 
-    Then:
+Then:
 
-    - before the line where you went to enter the debugger, insert a line::
+- before the line where you went to enter the debugger, insert a line::
 
-        from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
+    from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
 
-    - Run ``pytest`` with the option ``-s``, e.g.::
+- Run ``pytest`` with the option ``-s``, e.g.::
 
-        $ ./.venv/py36/bin/pytest -m xxx -s tests/
+    $ ./.venv/py36/bin/pytest -m xxx -s tests/
 
-    You may also see the `pytest documentation on automatic debugging`_.
+You may also see the `pytest documentation on automatic debugging`_.
 
 
 .. _Jupyter’s Common Configuration system: https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html#jupyter-s-common-configuration-system
