@@ -74,7 +74,7 @@ following possibilities :cite:`PalaoPRA2003`:
 * Optimize for simultaneous state-to-state transitions, with arbitrary phases in each transition
 
 .. math::
-    :label: JTsm
+    :label: JTss
 
     J_{T,\text{ss}} = 1- \frac{1}{N} \sum_{k=1}^{N} \Abs{\tau_k}^2
 

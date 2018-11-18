@@ -7,16 +7,17 @@ system must be "propagated" once forwards in time, and once backwards in time.
 
 The implementation of this time propagation must be inside the user-supplied
 routine `propagator` that is passed to :func:`.optimize_pulses` and calculates
-the propagation over a single time step. In particular, :func:`qutip.mesolve`
-is not automatically used for simulating any dynamics within the optimization.
-The signature for this function must be as follows::
+the propagation over a single time step. In particular,
+:func:`qutip.mesolve.mesolve` is not automatically used for simulating any
+dynamics within the optimization.  The signature for this function must be as
+follows::
 
     propagator(H, state, dt, c_ops, backwards=False)
 
 It receives four positional arguments:
 
 * `H` is the system Hamiltonian, in a nested-list format similar to that used
-  by :func:`qutip.mesolve`, e.g. for a Hamiltonian
+  by :func:`qutip.mesolve.mesolve`, e.g. for a Hamiltonian
   $\Op{H} = \Op{H}_0 + c \Op{H}_1$, where $c$ is the value of a control field
   at a particular point in time, `propagator` would receive a list ``[H0, [H1,
   c]]`` where ``H0`` and ``H1`` are :class:`qutip.Qobj` operators.

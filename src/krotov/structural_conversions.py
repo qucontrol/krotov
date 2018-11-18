@@ -28,8 +28,8 @@ def _tlist_midpoints(tlist):
 def _find_in_list(val, list_to_search):
     """Return index of `val` in `list_to_search`, or -1
 
-    Works even if `val` is a numpy array. In this case, comparison is by object
-    identity.
+    Works even if `val` is a `numpy.ndarray`. In this case, comparison is by
+    object identity.
     """
     if isinstance(val, np.ndarray):
         for i, v in enumerate(list_to_search):
@@ -52,7 +52,7 @@ def discretize(control, tlist):
     `tlist`
 
     Returns:
-        numpy array: Discretized array of `control` values, same length as
+        numpy.ndarray: Discretized array of `control` values, same length as
         `tlist`
 
     Raises:
@@ -251,14 +251,14 @@ def control_onto_interval(control, tlist, tlist_midpoints):
     """Convert control on `tlist` to `tlist` intervals (`tlist_midpoints`)
 
     Args:
-        control (callable or numpy array): values at `tlist`, either as a
+        control (callable or numpy.ndarray): values at `tlist`, either as a
             function ``control(t, args)`` or an array of the same length as
             `tlist`
-        tlist (numpy array): time grid point values
-        tlist_midpoints (numpy array): midpoint values in `tlist_midpoints`.
+        tlist (numpy.ndarray): time grid point values
+        tlist_midpoints (numpy.ndarray): midpoint values in `tlist_midpoints`.
 
     Returns:
-        numpy array: pulse defined on the intervals to `tlist`, that is the
+        numpy.ndarray: pulse defined on the intervals to `tlist`, that is the
         `tlist_midpoints`.
 
     The value for the first and last interval will be identical to the values
@@ -291,10 +291,10 @@ def pulse_onto_tlist(pulse):
     """Convert `pulse` from time-grid intervals to time-grid points
 
     Args:
-        pulse (numpy array): values defined on the interval of a time grid
+        pulse (numpy.ndarray): values defined on the interval of a time grid
 
     Returns:
-        numpy array: values of the control defined directly on the time grid
+        numpy.ndarray: values of the control defined directly on the time grid
         points. The size of the returned array is one greater than the size
         of `pulse`.
 

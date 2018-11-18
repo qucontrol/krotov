@@ -15,14 +15,14 @@ the subtleties.
 GRAPE is included in QuTiP, see the `section on Quantum Optimal Control in the QuTiP docs`_.
 It is used via the :func:`qutip.control.pulseoptim.optimize_pulse` function.
 
-This function has some limitations compared to the :func:`.optimized_pulses`
+This function has some limitations compared to the :func:`.optimize_pulses`
 provided by the Krotov package. Most importantly:
 
-* QuTiP's GRAPE implementation only allows for a single control field (hence *"pulse"*, instead of *"pulses"* in :func:`.optimized_pulses`)
+* QuTiP's GRAPE implementation only allows for a single control field (hence *"pulse"*, instead of *"pulses"* in :func:`.optimize_pulses`)
 * The optimization for multiple simultaneous objectives in GRAPE is limited to optimizing a quantum gate. Other uses of parallel objectives, such as optimizing for robustness, is not available.
 * The GRAPE implementation does not allow for an arbitrary guess-pulse. Guess pulses can only be chosen from a specific set of options (including "random")
 * There are only fixed number of choices for choosing a method for time-propagation. Supplying a problem-specific propagator is not possible.
-* The optimized pulses are defined on the intervals of the time grid, which does not fit in with other parts of QuTiP, specifically :func:`qutip.mesolve`.
+* The optimized pulses are defined on the intervals of the time grid, which does not fit in with other parts of QuTiP, specifically :func:`qutip.mesolve.mesolve`.
 
 All of these are restrictions of the implementation, not of the underlying method.
 
@@ -45,7 +45,7 @@ objectives in each iteration. They are also easy to realize, by following two si
 * Write a function that takes an array of the optimization parameters as input,
   and evaluates a figure of merit. This function would e.g. construct a
   numerical control pulse from the control parameters, simulate the dynamics
-  using :func:`qutip.mesolve`, and compare to a target state.
+  using :func:`qutip.mesolve.mesolve`, and compare to a target state.
 * Pass the function to :func:`scipy.optimize.minimize` for gradient-free optimization.
 
 The implementation in :func:`scipy.optimize.minimize` allows to choose between

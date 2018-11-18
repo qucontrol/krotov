@@ -131,12 +131,12 @@ def blackman(t, t_start, t_stop, a=0.16):
     are often preferable to Gaussians.
 
     Args:
-        t (float or numpy array): Time point or time grid
+        t (float or numpy.ndarray): Time point or time grid
         t_start (float): Starting point of Blackman shape
         t_stop (float): End point of Blackman shape
 
     Returns:
-        float or numpy array: If `t` is a float, return the value of the
+        float or numpy.ndarray: If `t` is a float, return the value of the
         Blackman shape at `t`.  If `t` is an array, return an array of same
         size as `t`, containing the values for the Blackman shape (zero before
         `t_start` and after `t_stop`)

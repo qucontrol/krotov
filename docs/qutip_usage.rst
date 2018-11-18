@@ -7,15 +7,15 @@ The ``krotov`` package is designed around `QuTiP`_, a very powerful "Quantum
 Toolbox" in Python. This means that all operators and states are expressed as
 :class:`qutip.Qobj` quantum objects. The :func:`.optimize_pulses` interface
 for Krotov's optimization method is closely linked to the interface of QuTiP's
-central :func:`~qutip.mesolve` routine for simulating the system dynamics of a
-closed or open quantum system. In particular, when setting up an optimization,
-the system Hamiltonian should be represented by a nested list. This is, a
-Hamiltonian of the form :math:`\Op{H} = \Op{H}_0 + \epsilon(t) \Op{H}_1` is
-represented as ``H = [H0, [H1, eps]]`` where ``H0`` and ``H1`` are
+central :func:`~qutip.mesolve.mesolve` routine for simulating the system
+dynamics of a closed or open quantum system. In particular, when setting up an
+optimization, the system Hamiltonian should be represented by a nested list.
+This is, a Hamiltonian of the form :math:`\Op{H} = \Op{H}_0 + \epsilon(t)
+\Op{H}_1` is represented as ``H = [H0, [H1, eps]]`` where ``H0`` and ``H1`` are
 :class:`~qutip.Qobj` operators, and ``eps`` is a function with signature
 ``eps(t, args)``, or an array of pulse values of the length the time grid
-(`tlist` parameter in :func:`~qutip.mesolve`). The operator can depend on
-multiple controls, resulting in ``H = [H0, [H1, eps1], [H2, eps2], ...]``.
+(`tlist` parameter in :func:`~qutip.mesolve.mesolve`). The operator can depend
+on multiple controls, resulting in ``H = [H0, [H1, eps1], [H2, eps2], ...]``.
 
 The central routine provided by the ``krotov`` package is
 :func:`.optimize_pulses`. It takes as input a list of objectives, which are

@@ -26,14 +26,14 @@ def optimize_pulses(
     `objectives`.
 
     Args:
-        objectives (list of Objective): List of objectives
+        objectives (list[Objective]): List of objectives
         pulse_options (dict): Mapping of time-dependent controls found in the
-            Hamiltonians of the objectives to :class:`PulseOptions` instances.
+            Hamiltonians of the objectives to :class:`.PulseOptions` instances.
             There must be a mapping for each control. As numpy arrays are
             unhashable and thus cannot be used as dict keys, the options for a
             ``control`` that is an array must set using
             ``pulse_options[id(control)] = ...``
-        tlist (numpy array): Array of time grid values, cf.
+        tlist (numpy.ndarray): Array of time grid values, cf.
             :func:`~qutip.mesolve.mesolve`
         propagator (callable): Function that propagates the state backward or
             forwards in time by a single time step, between two points in
@@ -56,7 +56,7 @@ def optimize_pulses(
             iteration of the optimization. Any value returned by `info_hook`
             (e.g. an evaluated functional J_T) will be stored, for each
             iteration, in the `info_vals` attribute of the returned
-            :class:`Result`.
+            :class:`.Result`.
         storage (callable): Storage constructor for the storage of
             propagated states. Must accept an integer parameter `N` and return
             an empty array of length `N`. The default value 'array' is
@@ -67,7 +67,7 @@ def optimize_pulses(
             :func:`qutip.parallel.parallel_map` or
             :func:`qutip.ipynbtools.parallel_map`.
         store_all_pulses (bool): Whether or not to store the optimized pulses
-            from *all* iterations in :class:`Result`.
+            from *all* iterations in :class:`.Result`.
 
     Returns:
         Result: The result of the optimization.

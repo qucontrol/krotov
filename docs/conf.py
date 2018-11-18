@@ -40,6 +40,9 @@ def run_apidoc(_):
 
 # Report broken links as warnings
 nitpicky = True
+nitpick_ignore = [
+    ('py:class', 'callable'),
+]
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -66,6 +69,7 @@ if os.getenv('SPELLCHECK'):
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3.7', None),
     'sympy': ('https://docs.sympy.org/latest/', None),
+    'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
     'numpy': ('https://docs.scipy.org/doc/numpy/', None),
     'matplotlib': ('https://matplotlib.org/', None),
     'qutip': ('http://qutip.org/docs/latest/', None),
