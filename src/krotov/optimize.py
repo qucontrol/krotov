@@ -76,20 +76,16 @@ def optimize_pulses(
 
     # Initialization
     logger.info("Initializing optimization with Krotov's method")
-    guess_controls = extract_controls(objectives)
-    pulses_mapping = extract_controls_mapping(objectives, guess_controls)
-    options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
-    tlist_midpoints = _tlist_midpoints(tlist)
-    guess_pulses = [  # defined on the tlist intervals
-        control_onto_interval(control, tlist, tlist_midpoints)
-        for control in guess_controls]
-    guess_controls = [  # convert guess controls to arrays, on tlist
-        pulse_onto_tlist(pulse) for pulse in guess_pulses]
+
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
         storage = partial(np.empty, dtype=object)
     if parallel_map is None:
         parallel_map = serial_map
+
+    (guess_controls, guess_pulses, pulses_mapping, options_list) = (
+        _initialize_krotov_controls(objectives, pulse_options, tlist))
+    tlist_midpoints = _tlist_midpoints(tlist)
 
     result = Result()
     result.tlist = tlist
@@ -215,6 +211,21 @@ def optimize_pulses(
     for i, pulse in enumerate(optimized_pulses):
         result.optimized_controls[i] = pulse_onto_tlist(pulse)
     return result
+
+
+def _initialize_krotov_controls(objectives, pulse_options, tlist):
+    """Extract discretized guess controls and pulses from `objectives`, and
+    return them with the associated mapping and option data"""
+    guess_controls = extract_controls(objectives)
+    pulses_mapping = extract_controls_mapping(objectives, guess_controls)
+    options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
+    tlist_midpoints = _tlist_midpoints(tlist)
+    guess_pulses = [  # defined on the tlist intervals
+        control_onto_interval(control, tlist, tlist_midpoints)
+        for control in guess_controls]
+    guess_controls = [  # convert guess controls to arrays, on tlist
+        pulse_onto_tlist(pulse) for pulse in guess_pulses]
+    return (guess_controls, guess_pulses, pulses_mapping, options_list)
 
 
 def _forward_propagation(

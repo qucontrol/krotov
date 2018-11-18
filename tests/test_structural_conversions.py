@@ -32,6 +32,45 @@ def test_conversion_control_pulse_inverse():
     assert np.max(np.abs(pulse - pulse_orig)) < 1e-14
 
 
+@pytest.mark.xfail
+def test_initialize_krotov_controls():
+    """Check that pulses and controls are initialized while preserving the
+    correct boundary conditions.
+
+    This is the point that the section "Time Discretization Schemes" in the
+    documentation is making.
+
+    Tests the resolution of #20.
+    """
+
+    T = 10
+    blackman = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=T)
+    H = ['H0', ['H1', blackman]]
+    tlist = np.linspace(0, T, 10)
+    pulse_options = {blackman: krotov.PulseOptions(lambda_a=1.0)}
+
+    objectives = [
+        krotov.Objective(H, None, None),
+    ]
+
+    assert abs(blackman(0, None)) < 1e-15
+    assert abs(blackman(T, None)) < 1e-15
+
+    guess_controls, guess_pulses, pulses_mapping, options_list = (
+        krotov.optimize._initialize_krotov_controls(
+            objectives, pulse_options, tlist))
+
+    assert isinstance(guess_controls[0], np.ndarray)
+    assert len(guess_controls[0]) == len(tlist)
+    assert abs(guess_controls[0][0]) < 1e-15
+    assert abs(guess_controls[0][-1]) < 1e-15
+
+    assert isinstance(guess_pulses[0], np.ndarray)
+    assert len(guess_pulses[0]) == len(tlist) - 1
+    assert abs(guess_pulses[0][0]) < 1e-15
+    assert abs(guess_pulses[0][-1]) < 1e-15
+
+
 def test_extract_controls_with_arrays():
     """Test extract_controls for controls that are numpy arrays"""
     X, Y, Z = qutip.Qobj(), qutip.Qobj(), qutip.Qobj()  # dummy Hamiltonians
