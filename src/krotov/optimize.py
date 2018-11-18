@@ -9,7 +9,7 @@ from .result import Result
 from .structural_conversions import (
     extract_controls, extract_controls_mapping, control_onto_interval,
     pulse_options_dict_to_list, pulse_onto_tlist, _tlist_midpoints,
-    plug_in_pulse_values)
+    plug_in_pulse_values, discretize)
 from .parallelization import serial_map
 
 __all__ = ['optimize_pulses']
@@ -219,12 +219,11 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     guess_controls = extract_controls(objectives)
     pulses_mapping = extract_controls_mapping(objectives, guess_controls)
     options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
+    guess_controls = [discretize(control, tlist) for control in guess_controls]
     tlist_midpoints = _tlist_midpoints(tlist)
     guess_pulses = [  # defined on the tlist intervals
         control_onto_interval(control, tlist, tlist_midpoints)
         for control in guess_controls]
-    guess_controls = [  # convert guess controls to arrays, on tlist
-        pulse_onto_tlist(pulse) for pulse in guess_pulses]
     return (guess_controls, guess_pulses, pulses_mapping, options_list)
 
 

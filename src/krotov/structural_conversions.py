@@ -7,7 +7,7 @@ import numpy as np
 
 __all__ = [
     'control_onto_interval', 'pulse_onto_tlist', 'extract_controls',
-    'extract_controls_mapping', 'pulse_options_dict_to_list']
+    'extract_controls_mapping', 'pulse_options_dict_to_list', 'discretize']
 
 
 def _nested_list_shallow_copy(l):
@@ -41,6 +41,36 @@ def _find_in_list(val, list_to_search):
             return list_to_search.index(val)
         except ValueError:
             return -1
+
+
+def discretize(control, tlist):
+    """Discretize the given `control` onto the `tlist` time grid
+
+    If `control` is a callable that takes `t` and None as arguments, return
+    array of values for `control` evaluated at all points in `tlist`.
+    If `control` is already discretized, check that the discretization matches
+    `tlist`
+
+    Returns:
+        numpy array: Discretized array of `control` values, same length as
+        `tlist`
+
+    Raises:
+        TypeError: If `control` is not a function that takes two arguments
+            (`t`, None), or a numpy array
+        ValueError: If `control` is numpy array of incorrect size.
+    """
+    if callable(control):
+        return np.array([control(t, None) for t in tlist])
+    elif isinstance(control, np.ndarray):
+        if len(control) != len(tlist):
+            raise ValueError(
+                "If control is an array, it must of the same length as tlist")
+        else:
+            return control
+    else:
+        raise TypeError(
+            "control must be either a callable func(t, args) or a numpy array")
 
 
 def extract_controls(objectives):

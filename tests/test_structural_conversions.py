@@ -1,14 +1,17 @@
 """Test of structural conversions"""
+import logging
+from functools import partial
+
 import numpy as np
 
 import qutip
 import pytest
-import logging
 
 import krotov
 from krotov.shapes import qutip_callback
 from krotov.structural_conversions import (
-    pulse_options_dict_to_list, extract_controls, extract_controls_mapping)
+    pulse_options_dict_to_list, extract_controls, extract_controls_mapping,
+    discretize)
 
 
 def test_conversion_control_pulse_inverse():
@@ -32,7 +35,34 @@ def test_conversion_control_pulse_inverse():
     assert np.max(np.abs(pulse - pulse_orig)) < 1e-14
 
 
-@pytest.mark.xfail
+def test_discretize():
+    """Test the `discretize` routine"""
+    tlist = np.linspace(0, 10, 20)
+
+    control = partial(krotov.shapes.blackman, t_start=0, t_stop=10)
+    with pytest.raises(TypeError):
+        discretize(control, tlist)
+
+    with pytest.raises(TypeError):
+        discretize('sin(t)', tlist)
+
+    control = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=10)
+
+    with pytest.raises(ValueError):
+        discretize(np.array([control(t, None) for t in tlist[:-1]]), tlist)
+
+    control_array = discretize(control, tlist)
+    assert len(control_array) == len(tlist)
+    assert abs(control_array[0]) < 1e-15
+    assert abs(control_array[-1]) < 1e-15
+
+    control = np.array([control(t, None) for t in tlist])
+    assert np.max(np.abs((control - control_array))) < 1e-15
+
+    control_array2 = discretize(control, tlist)
+    assert np.max(np.abs((control_array2 - control_array))) < 1e-15
+
+
 def test_initialize_krotov_controls():
     """Check that pulses and controls are initialized while preserving the
     correct boundary conditions.
@@ -69,6 +99,14 @@ def test_initialize_krotov_controls():
     assert len(guess_pulses[0]) == len(tlist) - 1
     assert abs(guess_pulses[0][0]) < 1e-15
     assert abs(guess_pulses[0][-1]) < 1e-15
+
+    assert len(pulse_options) == 1
+
+    assert len(pulses_mapping) == 1
+    assert len(pulses_mapping[0]) == 1
+    assert len(pulses_mapping[0][0]) == 1
+    assert len(pulses_mapping[0][0][0]) == 1
+    assert pulses_mapping[0][0][0][0] == 1
 
 
 def test_extract_controls_with_arrays():
