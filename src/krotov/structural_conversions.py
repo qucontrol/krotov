@@ -43,13 +43,24 @@ def _find_in_list(val, list_to_search):
             return -1
 
 
-def discretize(control, tlist):
+def discretize(control, tlist, args=(None, ), kwargs=None):
     """Discretize the given `control` onto the `tlist` time grid
 
-    If `control` is a callable that takes `t` and None as arguments, return
-    array of values for `control` evaluated at all points in `tlist`.
-    If `control` is already discretized, check that the discretization matches
-    `tlist`
+    If `control` is a callable, return array of values for `control` evaluated
+    at all points in `tlist`.  If `control` is already discretized, check that
+    the discretization matches `tlist`
+
+    Args:
+        control (callable or numpy.ndarray): control to be discretized. If
+            callable, must take time value `t` as its first argument.
+        tlist (numpy.ndarray): time grid to discretize one
+        args (tuple or list): If `control` is a callable, further positional
+            arguments to pass to `control`. The default passes a single value
+            None, to match the requirements for a callable control function in
+            QuTiP.
+        kwargs (None or dict): If `control` is callable, furhter keyword
+            arguments to pass to `control`. If None, no keyword arguments will
+            be passed.
 
     Returns:
         numpy.ndarray: Discretized array of `control` values, same length as
@@ -61,7 +72,9 @@ def discretize(control, tlist):
         ValueError: If `control` is numpy array of incorrect size.
     """
     if callable(control):
-        return np.array([control(t, None) for t in tlist])
+        if kwargs is None:
+            kwargs = {}
+        return np.array([control(t, *args, **kwargs) for t in tlist])
     elif isinstance(control, np.ndarray):
         if len(control) != len(tlist):
             raise ValueError(
@@ -247,33 +260,28 @@ def plug_in_pulse_values(H, pulses, mapping, time_index, conjugate=False):
     return H
 
 
-def control_onto_interval(control, tlist, tlist_midpoints):
-    """Convert control on `tlist` to `tlist` intervals (`tlist_midpoints`)
+def control_onto_interval(control):
+    """Convert control on time grid to control on time grid intervals
 
     Args:
-        control (callable or numpy.ndarray): values at `tlist`, either as a
-            function ``control(t, args)`` or an array of the same length as
-            `tlist`
-        tlist (numpy.ndarray): time grid point values
-        tlist_midpoints (numpy.ndarray): midpoint values in `tlist_midpoints`.
+        control (numpy.ndarray): values of controls on time grid
 
     Returns:
-        numpy.ndarray: pulse defined on the intervals to `tlist`, that is the
-        `tlist_midpoints`.
+        numpy.ndarray: pulse defined on the intervals of the time grid
 
     The value for the first and last interval will be identical to the values
-    at ``tlist[0]`` and ``tlist[-1]`` to ensure proper boundary conditions. All
-    other intervals are calculated such that the original values on `tlist` are
-    the average of the interval-values before and after that point in time.
+    at ``control[0]`` and ``control[-1]`` to ensure proper boundary conditions.
+    All other intervals are calculated such that the original values in
+    `control` are the average of the interval-values before and after that
+    point in time.
 
     The :func:`pulse_onto_tlist` function calculates the inverse to this
     transformation.
+
+    Note:
+        For a callable `control`, call :func:`discretize` first.
     """
-    assert len(tlist_midpoints) == len(tlist) - 1
-    if callable(control):
-        return np.array([control(t, None) for t in tlist_midpoints])
-    elif isinstance(control, np.ndarray):
-        assert len(control) == len(tlist)
+    if isinstance(control, np.ndarray):
         assert len(control.shape) == 1  # must be 1D array
         pulse = np.zeros(len(control)-1, dtype=control.dtype.type)
         pulse[0] = control[0]

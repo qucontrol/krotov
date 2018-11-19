@@ -18,19 +18,14 @@ def test_conversion_control_pulse_inverse():
     """Test that `controls_onto_interval` and `pulses_onto_tlist` are
     inverses"""
     tlist = np.linspace(0, 10, 20)
-    tlist_midpoints = []
-    for i in range(len(tlist) - 1):
-        tlist_midpoints.append(0.5 * (tlist[i+1] + tlist[i]))
-    tlist_midpoints = np.array(tlist_midpoints)
 
     blackman = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=10)
 
     pulse_orig = krotov.structural_conversions.control_onto_interval(
-        blackman, tlist, tlist_midpoints)
+        discretize(blackman, tlist))
 
     control = krotov.structural_conversions.pulse_onto_tlist(pulse_orig)
-    pulse = krotov.structural_conversions.control_onto_interval(
-        control, tlist, tlist_midpoints)
+    pulse = krotov.structural_conversions.control_onto_interval(control)
 
     assert np.max(np.abs(pulse - pulse_orig)) < 1e-14
 
@@ -86,7 +81,8 @@ def test_initialize_krotov_controls():
     assert abs(blackman(0, None)) < 1e-15
     assert abs(blackman(T, None)) < 1e-15
 
-    guess_controls, guess_pulses, pulses_mapping, options_list = (
+    (guess_controls, guess_pulses, pulses_mapping, lambda_vals,
+     shape_arrays) = (
         krotov.optimize._initialize_krotov_controls(
             objectives, pulse_options, tlist))
 
@@ -107,6 +103,13 @@ def test_initialize_krotov_controls():
     assert len(pulses_mapping[0][0]) == 1
     assert len(pulses_mapping[0][0][0]) == 1
     assert pulses_mapping[0][0][0][0] == 1
+
+    assert len(lambda_vals) == 1
+    assert lambda_vals[0] == 1.0
+
+    assert len(shape_arrays) == 1
+    assert isinstance(shape_arrays[0], np.ndarray)
+    assert len(shape_arrays[0]) == len(tlist) - 1
 
 
 def test_extract_controls_with_arrays():

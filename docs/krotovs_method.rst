@@ -10,7 +10,7 @@ Krotov's method :cite:`KonnovARC99`, adapted to quantum control,
 considers one or more quantum systems, with a set of Hamiltonians :math:`\{\Op{H}_k(\{\epsilon_l(t)\})\}`
 where each Hamiltonian depends on a set of time-continuous controls
 :math:`\epsilon_l(t)`. It now seeks it find control fields that optimally
-steer a set of states :math:`\{\ket{phi_k}\}` in some desired way. To this end, in
+steer a set of states :math:`\{\ket{\phi_k}\}` in some desired way. To this end, in
 each iteration :math:`i`, it minimizes a functional of the form
 
 .. math::

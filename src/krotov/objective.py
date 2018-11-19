@@ -9,7 +9,7 @@ import numpy as np
 
 from .structural_conversions import (
     _nested_list_shallow_copy, extract_controls, extract_controls_mapping,
-    _tlist_midpoints, plug_in_pulse_values, control_onto_interval)
+    plug_in_pulse_values, control_onto_interval, discretize)
 
 __all__ = ['Objective']
 
@@ -157,9 +157,8 @@ class Objective():
         controls = extract_controls([self])
         pulses_mapping = extract_controls_mapping([self], controls)
         mapping = pulses_mapping[0]  # "first objective" (dummy structure)
-        tlist_midpoints = _tlist_midpoints(tlist)
         pulses = [  # defined on the tlist intervals
-            control_onto_interval(control, tlist, tlist_midpoints)
+            control_onto_interval(discretize(control, tlist))
             for control in controls]
         for time_index in range(len(tlist)-1):  # index over intervals
             H = plug_in_pulse_values(self.H, pulses, mapping[0], time_index)

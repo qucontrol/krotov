@@ -83,13 +83,12 @@ def optimize_pulses(
     if parallel_map is None:
         parallel_map = serial_map
 
-    (guess_controls, guess_pulses, pulses_mapping, options_list) = (
+    (guess_controls, guess_pulses, pulses_mapping,
+     lambda_vals, shape_arrays) = (
         _initialize_krotov_controls(objectives, pulse_options, tlist))
-    tlist_midpoints = _tlist_midpoints(tlist)
 
     result = Result()
     result.tlist = tlist
-    result.tlist_midpoints = tlist_midpoints
     result.start_local_time = time.localtime()
     result.objectives = objectives
     result.guess_controls = guess_controls
@@ -111,6 +110,7 @@ def optimize_pulses(
     info = info_hook(
         objectives=objectives, adjoint_objectives=adjoint_objectives,
         backward_states=None, forward_states=forward_states,
+        lambda_vals=lambda_vals, shape_arrays=shape_arrays,
         fw_states_T=fw_states_T, tau_vals=tau_vals, start_time=tic,
         stop_time=toc, iteration=0)
 
@@ -148,10 +148,10 @@ def optimize_pulses(
             forward_states[i_obj][0] = (
                 objectives[i_obj].initial_state)
         delta_eps = [
-            np.zeros(len(tlist_midpoints), dtype=np.complex128)
+            np.zeros(len(tlist)-1, dtype=np.complex128)
             for _ in guess_pulses]
         optimized_pulses = copy.deepcopy(guess_pulses)
-        for (time_index, t) in enumerate(tlist_midpoints):
+        for time_index in range(len(tlist) - 1):  # iterate over time intervals
             # pulse update
             for (i_pulse, guess_pulse) in enumerate(guess_pulses):
                 for (i_obj, objective) in enumerate(objectives):
@@ -163,9 +163,9 @@ def optimize_pulses(
                     update = χ.overlap(μ * Ψ)
                     update *= chi_norms[i_obj]
                     delta_eps[i_pulse][time_index] += update
-                λa = options_list[i_pulse].lambda_a
-                S = options_list[i_pulse].shape(t)
-                Δeps = (S / λa) * delta_eps[i_pulse][time_index].imag
+                λa = lambda_vals[i_pulse]
+                S_t = shape_arrays[i_pulse][time_index]
+                Δeps = (S_t / λa) * delta_eps[i_pulse][time_index].imag
                 optimized_pulses[i_pulse][time_index] += Δeps
             # forward propagation
             fw_states = parallel_map(
@@ -191,7 +191,8 @@ def optimize_pulses(
             info = info_hook(
                 objectives=objectives, adjoint_objectives=adjoint_objectives,
                 backward_states=backward_states, forward_states=forward_states,
-                fw_states_T=fw_states_T, tau_vals=tau_vals, start_time=tic,
+                fw_states_T=fw_states_T, lambda_vals=lambda_vals,
+                shape_arrays=shape_arrays, tau_vals=tau_vals, start_time=tic,
                 stop_time=toc, iteration=krotov_iteration)
         result.iters.append(krotov_iteration)
         result.iter_seconds.append(int(toc-tic))
@@ -220,11 +221,17 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     pulses_mapping = extract_controls_mapping(objectives, guess_controls)
     options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
     guess_controls = [discretize(control, tlist) for control in guess_controls]
-    tlist_midpoints = _tlist_midpoints(tlist)
     guess_pulses = [  # defined on the tlist intervals
-        control_onto_interval(control, tlist, tlist_midpoints)
+        control_onto_interval(control)
         for control in guess_controls]
-    return (guess_controls, guess_pulses, pulses_mapping, options_list)
+    lambda_vals = [options.lambda_a for options in options_list]
+    shape_arrays = []
+    for options in options_list:
+        S = discretize(options.shape, tlist, args=())
+        shape_arrays.append(control_onto_interval(S))
+    return (
+        guess_controls, guess_pulses, pulses_mapping, lambda_vals,
+        shape_arrays)
 
 
 def _forward_propagation(

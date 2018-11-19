@@ -14,8 +14,6 @@ class Result():
     Attributes:
         objectives (list): The control objectives
         tlist (numpy array): The time grid values
-        tlist_midpoints (numpy array): Points centered between the time points
-            in `tlist`
         iters (list of int): Iteration numbers, starting at 0.
         iter_seconds (list of int): for each iteration number, the number of
             seconds that were spent in the optimization
@@ -49,7 +47,6 @@ class Result():
     def __init__(self):
         self.objectives = []
         self.tlist = []
-        self.tlist_midpoints = []
         self.iters = []
         self.iter_seconds = []
         self.info_vals = []
