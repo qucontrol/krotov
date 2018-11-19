@@ -125,6 +125,8 @@ the `nbval plugin`_.
 .. _nbval plugin: https://nbval.readthedocs.io/en/latest/
 
 
+.. _write-documentation:
+
 Write Documentation
 -------------------
 
@@ -148,14 +150,21 @@ you are strongly encouraged to use. These include:
 
 * ``\bra``, e.g. ``$\bra{\Psi}$`` for :math:`\bra{\Psi}` (or ``\\Bra{}`` for auto-resizing).
   Do not use ``\langle``/``\rangle``/``\vert`` manually!
-* ``\ket``, e.g. ``$\ket{\Psi}$`` for :math:`\ket{\Psi}` (or ``\Ket{}`` for auto-resizing)
+* ``\ket``, e.g. ``$\ket{\Psi}$`` for :math:`\ket{\Psi}` (or ``\Ket{}`` for auto-resizing).
 * ``\Braket``, e.g. ``$\Braket{\Phi}{\Psi}$`` for :math:`\Braket{\Phi}{\Psi}`.
 * ``\Op`` for for quantum operators, e.g. ``$\Op{H}$`` for :math:`\Op{H}`.
 * ``\Abs`` for absolute values, e.g. ``$\Abs{x}$`` for :math:`\Abs{x}`.
-* ``\AbsSq``  for the absolute-square, e.g. ``$\AbsSq{\Braket{\Phi}{\Psi}}$`` for :math:`\AbsSq{\Braket{\Phi}{\Psi}}`
-* ``\Norm`` for the norm, e.g. ``$\Norm{\ket{\Psi}}$`` for :math:`\Norm{\ket{\Psi}}`
-* ``\identity`` for the identity operator, :math:`\identity`
-* ``\Liouville`` for the Liouvillian symbol, :math:`\Liouville`
+* ``\AbsSq``  for the absolute-square, e.g. ``$\AbsSq{\Braket{\Phi}{\Psi}}$`` for :math:`\AbsSq{\Braket{\Phi}{\Psi}}`.
+* ``\avg`` for the expectation values, e.g. ``$\avg{\Op{H}}$`` for :math:`\avg{\Op{H}}` (or ``\Avg{}`` for auto-resizing).
+* ``\Norm`` for the norm, e.g. ``$\Norm{\ket{\Psi}}$`` for :math:`\Norm{\ket{\Psi}}`.
+* ``\identity`` for the identity operator, :math:`\identity`.
+* ``\Liouville`` for the Liouvillian symbol, :math:`\Liouville`.
+* ``\DynMap`` for the symbolic dynamical map, :math:`\DynMap`.
+* ``\dd`` for the differential, e.g. ``$\int f(x) \dd x$`` for :math:`\int f(x) \dd x`.
+* Function names / mathematical operators ``\tr``, ``\diag``, ``\abs``, ``\pop``.
+* Text labels ``\aux``, ``\opt``, ``\tgt``, ``\init``, ``\lab``, ``\rwa``.
+
+Also see :ref:`math-in-example-notebooks`.
 
 You may use the BibTeX_ plugin for citations.
 
@@ -224,8 +233,52 @@ tests. For this to work properly, the following steps must be taken:
 
         $ make docs
 
-.. _watermark: https://github.com/rasbt/watermark
 
+.. _math-in-example-notebooks:
+
+Math in Example Notebooks
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You may use the same tex macros described in the :ref:`write-documentation` section.
+However, for the macros to work when viewing the notebook by itself, they must
+be redefined locally. To this end, add a markdown cell underneath the top cell
+that contains the imported packages (see above). The cell must contain the following:
+
+.. code-block:: tex
+
+    $\newcommand{tr}[0]{\operatorname{tr}}
+    \newcommand{diag}[0]{\operatorname{diag}}
+    \newcommand{abs}[0]{\operatorname{abs}}
+    \newcommand{pop}[0]{\operatorname{pop}}
+    \newcommand{aux}[0]{\text{aux}}
+    \newcommand{opt}[0]{\text{opt}}
+    \newcommand{tgt}[0]{\text{tgt}}
+    \newcommand{init}[0]{\text{init}}
+    \newcommand{lab}[0]{\text{lab}}
+    \newcommand{rwa}[0]{\text{rwa}}
+    \newcommand{bra}[1]{\langle#1\vert}
+    \newcommand{ket}[1]{\vert#1\rangle}
+    \newcommand{Bra}[1]{\left\langle#1\right\vert}
+    \newcommand{Ket}[1]{\left\vert#1\right\rangle}
+    \newcommand{Braket}[2]{\left\langle #1\vphantom{#2} \mid #2\vphantom{#1}\right\rangle}
+    \newcommand{op}[1]{\hat{#1}}
+    \newcommand{Op}[1]{\hat{#1}}
+    \newcommand{dd}[0]{\,\text{d}}
+    \newcommand{Liouville}[0]{\mathcal{L}}
+    \newcommand{DynMap}[0]{\mathcal{E}}
+    \newcommand{identity}[0]{\mathbf{1}}
+    \newcommand{Norm}[1]{\lVert#1\rVert}
+    \newcommand{Abs}[1]{\left\vert#1\right\vert}
+    \newcommand{avg}[1]{\langle#1\rangle}
+    \newcommand{Avg}[1]{\left\langle#1\right\rangle}
+    \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2}
+    \newcommand{Re}[0]{\operatorname{Re}}
+    \newcommand{Im}[0]{\operatorname{Im}}$
+
+Upon executing the cell, the definitions will be hidden, but the defined macros
+will be available in any cell in the rest of the notebook.
+
+.. _watermark: https://github.com/rasbt/watermark
 
 
 Developers' How-Tos
@@ -360,6 +413,12 @@ Then:
     $ ./.venv/py36/bin/pytest -m xxx -s tests/
 
 You may also see the `pytest documentation on automatic debugging`_.
+
+
+How to use quantum mechanical tex macros
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For docstrings or rst files, see :ref:`write-documentation`. For notebooks, see :ref:`math-in-example-notebooks`.
 
 
 .. _Jupyter’s Common Configuration system: https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html#jupyter-s-common-configuration-system
