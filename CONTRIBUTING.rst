@@ -288,6 +288,8 @@ The following assumes your current working directory is a checkout of
 ``krotov``, and that you have successfully run ``make test`` (which creates
 some local virtual environments that development relies on).
 
+.. _how-to-work-on-a-topic-branch:
+
 How to work on a topic branch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -369,6 +371,37 @@ You can then also set a manual breakpoint by inserting the following line anywhe
 
     from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
 
+
+How to commit failing tests or example notebooks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The test-suite on the ``master`` branch should always pass without error. If you
+would like to commit any example notebooks or tests that currently fail, as a
+form of `test-driven development`_, you have two options:
+
+*   Push onto a topic branch (which are allowed to have failing tests), see
+    :ref:`how-to-work-on-a-topic-branch`. The failing tests can then be fixed by
+    adding commits to the same branch.
+
+*   Mark the test as failing. For normal tests, add a decorator::
+
+        @pytest.mark.xfail
+
+    See the `pytest documentation on skip and xfail`_ for details.
+
+    For notebooks, the equivalent to the decorator is to add a comment to the
+    first line of the failing cell, either::
+
+        # NBVAL_RAISES_EXCEPTION
+
+    (preferably), or::
+
+        # NBVAL_SKIP
+
+    (this may affect subsequent cells, as the marked cell is not executed at all).
+    See the `documentation of the nbval pluging on skipping and exceptions`_ for details.
+
+
 How to run a subset of tests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -427,3 +460,6 @@ For docstrings or rst files, see :ref:`write-documentation`. For notebooks, see 
 .. _pytest test selection docs: https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests
 .. _pytest documentation on markers: https://docs.pytest.org/en/latest/example/markers.html
 .. _pytest documentation on automatic debugging: https://docs.pytest.org/en/latest/usage.html#dropping-to-pdb-python-debugger-on-failures
+.. _test-driven development: https://en.wikipedia.org/wiki/Test-driven_development
+.. _pytest documentation on skip and xfail: https://docs.pytest.org/en/latest/skipping.html
+.. _documentation of the nbval pluging on skipping and exceptions: https://nbval.readthedocs.io/en/latest/#Skipping-specific-cells
