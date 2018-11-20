@@ -280,8 +280,8 @@ def _backward_propagation(
     storage_array[-1] = state
     mapping = pulses_mapping[i_state]
     for time_index in range(len(tlist)-2, -1, -1):  # index bw over intervals
-        # TODO: use conjugate pulse value
-        H = plug_in_pulse_values(obj.H, pulses, mapping[0], time_index)
+        H = plug_in_pulse_values(
+            obj.H, pulses, mapping[0], time_index, conjugate=True)
         c_ops = [
             plug_in_pulse_values(c_op, pulses, mapping[ic+1], time_index)
             for (ic, c_op) in enumerate(obj.c_ops)]
