@@ -75,7 +75,7 @@ def test_initialize_krotov_controls():
     pulse_options = {blackman: krotov.PulseOptions(lambda_a=1.0)}
 
     objectives = [
-        krotov.Objective(H, None, None),
+        krotov.Objective(None, None, H=H, ),
     ]
 
     assert abs(blackman(0, None)) < 1e-15
@@ -126,8 +126,8 @@ def test_extract_controls_with_arrays():
     H1 = [X, [Y, u1], [Z, u2]]  # ham for first objective
     H2 = [X, [Y, u2]]           # ham for second objective
     objectives = [
-        krotov.Objective(H1, psi0, psi_tgt),
-        krotov.Objective(H2, psi0, psi_tgt)]
+        krotov.Objective(psi0, psi_tgt, H=H1),
+        krotov.Objective(psi0, psi_tgt, H=H2)]
 
     controls = extract_controls(objectives)
     control_map = extract_controls_mapping(objectives, controls)
@@ -161,8 +161,8 @@ def test_extract_controls():
 
     # check same Hamiltonian occuring in multiple objectives
     objectives = [
-        krotov.Objective(H1, X, Y),
-        krotov.Objective(H1, Y, X)]
+        krotov.Objective(X, Y, H=H1),
+        krotov.Objective(Y, X, H=H1)]
     controls = extract_controls(objectives)
     maps = extract_controls_mapping(objectives, controls)
     assert len(controls) == 2
@@ -173,9 +173,9 @@ def test_extract_controls():
 
     # check same control occuring in multiple Hamiltonians
     objectives = [
-        krotov.Objective(H1, X, Y),
-        krotov.Objective(H2, Y, X),
-        krotov.Objective(H3, Y, X)]
+        krotov.Objective(X, Y, H=H1),
+        krotov.Objective(Y, X, H=H2),
+        krotov.Objective(Y, X, H=H3)]
     controls = extract_controls(objectives)
     assert len(controls) == 4
     for c in (f, g, h, d):

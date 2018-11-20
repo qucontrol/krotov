@@ -56,7 +56,8 @@ def optimize_pulses(
             iteration of the optimization. Any value returned by `info_hook`
             (e.g. an evaluated functional J_T) will be stored, for each
             iteration, in the `info_vals` attribute of the returned
-            :class:`.Result`.
+            :class:`.Result`. The `info_hook` must have the same signature as
+            :func:`krotov.info_hooks.print_debug_information`.
         storage (callable): Storage constructor for the storage of
             propagated states. Must accept an integer parameter `N` and return
             an empty array of length `N`. The default value 'array' is
@@ -95,12 +96,12 @@ def optimize_pulses(
     result.controls_mapping = pulses_mapping
 
     # Initial forward-propagation
-    tic = time.clock()
+    tic = time.time()
     forward_states = parallel_map(
         _forward_propagation, list(range(len(objectives))), (
             objectives, guess_pulses, pulses_mapping, tlist, propagator,
             storage))
-    toc = time.clock()
+    toc = time.time()
 
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = [
@@ -110,9 +111,9 @@ def optimize_pulses(
     info = info_hook(
         objectives=objectives, adjoint_objectives=adjoint_objectives,
         backward_states=None, forward_states=forward_states,
-        lambda_vals=lambda_vals, shape_arrays=shape_arrays,
-        fw_states_T=fw_states_T, tau_vals=tau_vals, start_time=tic,
-        stop_time=toc, iteration=0)
+        optimized_pulses=guess_pulses, lambda_vals=lambda_vals,
+        shape_arrays=shape_arrays, fw_states_T=fw_states_T, tau_vals=tau_vals,
+        start_time=tic, stop_time=toc, iteration=0)
 
     result.iters.append(0)
     result.iter_seconds.append(int(toc-tic))
@@ -126,7 +127,7 @@ def optimize_pulses(
     for krotov_iteration in range(iter_start+1, iter_stop+1):
 
         logger.info("Started Krotov iteration %d" % krotov_iteration)
-        tic = time.clock()
+        tic = time.time()
 
         # Boundary condition for the backward propagation
         # -- this is where the functional enters the optimizaton
@@ -182,7 +183,7 @@ def optimize_pulses(
             fw_state_T.overlap(obj.target_state)
             for (fw_state_T, obj) in zip(fw_states_T, objectives)]
 
-        toc = time.clock()
+        toc = time.time()
 
         # Update optimization `result` with info from finished iteration
         if info_hook is None:
@@ -191,9 +192,10 @@ def optimize_pulses(
             info = info_hook(
                 objectives=objectives, adjoint_objectives=adjoint_objectives,
                 backward_states=backward_states, forward_states=forward_states,
-                fw_states_T=fw_states_T, lambda_vals=lambda_vals,
-                shape_arrays=shape_arrays, tau_vals=tau_vals, start_time=tic,
-                stop_time=toc, iteration=krotov_iteration)
+                fw_states_T=fw_states_T, optimized_pulses=optimized_pulses,
+                lambda_vals=lambda_vals, shape_arrays=shape_arrays,
+                tau_vals=tau_vals, start_time=tic, stop_time=toc,
+                iteration=krotov_iteration)
         result.iters.append(krotov_iteration)
         result.iter_seconds.append(int(toc-tic))
         result.info_vals.append(info)

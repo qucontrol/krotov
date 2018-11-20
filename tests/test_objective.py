@@ -39,7 +39,7 @@ def transmon_ham_and_states(
 def test_krotov_objective_initialization(transmon_ham_and_states):
     """Test basic instantiation of a krotov.Objective with qutip objects"""
     H, psi0, psi1 = transmon_ham_and_states
-    target = krotov.Objective(H, psi0, psi1)
+    target = krotov.Objective(psi0, psi1, H=H)
     assert target.H == H
     assert target.initial_state == psi0
     assert target.target_state == psi1
@@ -56,7 +56,7 @@ def test_objective_copy(transmon_ham_and_states):
     assert c1 == c2      # equal by value
     assert c1 is not c2  # not equal by reference
 
-    target1 = krotov.Objective(H, psi0, psi1, c_ops=[c1, c2])
+    target1 = krotov.Objective(psi0, psi1, H=H, c_ops=[c1, c2])
     target2 = copy.copy(target1)
     assert target1 == target2
     assert target1 is not target2
@@ -75,7 +75,7 @@ def test_objective_copy(transmon_ham_and_states):
 def test_adoint_objective(transmon_ham_and_states):
     """Test taking the adjoint of an objective"""
     H, psi0, psi1 = transmon_ham_and_states
-    target = krotov.Objective(H, psi0, psi1)
+    target = krotov.Objective(psi0, psi1, H=H)
     adjoint_target = target.adjoint
     assert isinstance(adjoint_target.H, list)
     assert isinstance(adjoint_target.H[0], qutip.Qobj)
@@ -106,7 +106,7 @@ def test_objective_mesolve_propagate(transmon_ham_and_states, tlist_control):
     H[1][1] = lambda t, args: (
         0 if (t > float(T)) else
         control[int(round(float(nt-1) * (t/float(T))))])
-    target = krotov.Objective(H, psi0, psi1)
+    target = krotov.Objective(psi0, psi1, H=H)
 
     assert len(tlist) == len(control) > 0
 

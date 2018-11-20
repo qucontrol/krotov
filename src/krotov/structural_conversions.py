@@ -144,8 +144,8 @@ def extract_controls_mapping(objectives, controls):
         >>> H2 = [X, [Y, u2]]           # ham for second objective
         >>> c_ops = ([[X, u1]], [[Y, u2]])
         >>> objectives = [
-        ...     krotov.Objective(H1, psi0, psi_tgt, c_ops=c_ops),
-        ...     krotov.Objective(H2, psi0, psi_tgt, c_ops=c_ops)]
+        ...     krotov.Objective(psi0, psi_tgt, H1, c_ops=c_ops),
+        ...     krotov.Objective(psi0, psi_tgt, H2, c_ops=c_ops)]
         >>> controls = extract_controls(objectives)
         >>> assert controls == [u1, u2]
 
