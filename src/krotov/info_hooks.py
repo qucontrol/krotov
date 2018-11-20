@@ -7,7 +7,15 @@ __all__ = ['chain', 'print_debug_information']
 
 
 def chain(*hooks):
-    """Chain multiple `info_hook` callables together"""
+    """Chain multiple `info_hook` callables together
+
+    Example:
+
+        >>> def print_fidelity(**args):
+        ...     F_re = np.average(np.array(args['tau_vals']).real)
+        ...     print("    F = %f" % F_re)
+        >>> info_hook = chain(print_debug_information, print_fidelity)
+    """
 
     def info_hook(**kwargs):
         result = []
@@ -81,8 +89,47 @@ def print_debug_information(
             out.write("        %d:%s\n" % (i+1, obj))
         out.write("    λₐ: %s\n" % (
             ", ".join(["%.2e" % λ for λ in lambda_vals])))
+        out.write("    S(t) (ranges): %s\n" % (", ".join([
+            "[%f, %f]" % (np.min(S), np.max(S)) for S in shape_arrays
+            ])))
     out.write("    duration: %.1f secs (started at %s)\n" % (
         (stop_time-start_time),
         time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time))))
+    out.write("    optimized pulses (ranges): %s\n" % (", ".join([
+        _pulse_range(pulse) for pulse in optimized_pulses])))
+    if backward_states is None:
+        out.write("    backward states: None\n")
+    else:
+        n = len(backward_states)
+        out.write("    backward states: [%d * %s(%d)]\n" % (
+            n, backward_states[0].__class__.__name__, len(backward_states[0])))
+    if forward_states is None:
+        out.write("    forward states: None\n")
+    else:
+        n = len(forward_states)
+        out.write("    forward states: [%d * %s(%d)]\n" % (
+            n, forward_states[0].__class__.__name__, len(forward_states[0])))
+    out.write("    fw_states_T norm: %s\n" % (", ".join([
+        "%f" % state.norm() for state in fw_states_T])))
     out.write("    τ: %s\n" % (", ".join([
         "(%.2e:%.2fπ)" % (abs(z), np.angle(z)/np.pi) for z in tau_vals])))
+
+
+def _pulse_range(pulse):
+    """Return the range information about the given pulse value array
+
+    Example:
+
+        >>> _pulse_range(np.array([-1, 1, 5]))
+        '[-1.00, 5.00]'
+        >>> _pulse_range(np.array([-1, 1+5j, 5]))
+        '[(r:-1.00, i:0.00), (r:5.00, i:5.00)]'
+    """
+    if np.iscomplexobj(pulse):
+        pulse_real = pulse.real
+        pulse_imag = pulse.imag
+        r0, r1 = np.min(pulse_real), np.max(pulse_real)
+        i0, i1 = np.min(pulse_imag), np.max(pulse_imag)
+        return "[(r:%.2f, i:%.2f), (r:%.2f, i:%.2f)]" % (r0, i0, r1, i1)
+    else:
+        return "[%.2f, %.2f]" % (np.min(pulse), np.max(pulse))
