@@ -72,6 +72,14 @@ def optimize_pulses(
 
     Returns:
         Result: The result of the optimization.
+
+    Raises:
+        ValueError: If any controls are not real-valued, or if any update
+            shape is not a real-valued function in the range [0, 1].
+
+    Note:
+        In order to optimize complex controls, split the control into and
+        independent real and imaginary part.
     """
     logger = logging.getLogger('krotov')
 
@@ -223,6 +231,12 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     pulses_mapping = extract_controls_mapping(objectives, guess_controls)
     options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
     guess_controls = [discretize(control, tlist) for control in guess_controls]
+    for control in guess_controls:
+        if np.iscomplexobj(control):
+            raise ValueError(
+                "All controls must be real-valued. Complex controls must be "
+                "split into and independent real and imaginary part in the "
+                "objectives before passing them to the optimization")
     guess_pulses = [  # defined on the tlist intervals
         control_onto_interval(control)
         for control in guess_controls]
@@ -231,6 +245,18 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     for options in options_list:
         S = discretize(options.shape, tlist, args=())
         shape_arrays.append(control_onto_interval(S))
+    for shape_array in shape_arrays:
+        if np.iscomplexobj(shape_array):
+            raise ValueError(
+                "Update shapes (shape attribute in PulseOptions) must be "
+                "real-valued")
+        if np.min(shape_array) < 0 or np.max(shape_array) > 1.01:
+            # 1.01 accounts for rounding errors: In principle, shapes > 1 are
+            # not a problem, but then it cancels with λₐ, which makes things
+            # unnecessarily confusing.
+            raise ValueError(
+                "Update shapes (shape attribute in PulseOptions) must have "
+                "values in the range [0, 1]")
     return (
         guess_controls, guess_pulses, pulses_mapping, lambda_vals,
         shape_arrays)

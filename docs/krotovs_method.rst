@@ -408,11 +408,22 @@ of the forward propagation :math:`\ket{\phi_k(T)}` from the rotating
 frame to the lab frame, then construct :math:`\ket{\chi_k(T)}` for the
 next OCT iteration, and transform :math:`\ket{\chi_k(T)}` back to the
 rotating frame, before starting the backward-propagation for the next
-OCT iteration. When the RWA is used, the control-pulses are
+OCT iteration. When the RWA is used, the control fields are
 complex-valued. In this case, the Krotov update equation is valid for
-both the real and the imaginary part independently. That is, in the
-update for the real part of the pulse, all derivatives are also taken
-with respect to only the real part, and likewise for the imaginary part.
+both the real and the imaginary part independently. The most straightforward
+implementation of the method is for real controls only, requiring that any
+complex control Hamiltonian is rewritten as two indpendent control
+Hamiltonians, one for the real part and one for the imaginary part of the
+control field. For example,
+
+.. math::
+
+    \epsilon^*(t) \Op{a} + \epsilon(t) \Op{a}^\dagger
+    =  \epsilon_{\text{re}}(t) (\Op{a} + \Op{a}^\dagger) + \epsilon_{\text{im}}(t) (i \Op{a} - i \Op{a}^\dagger)
+
+with two independend control fields :math:`\epsilon_{\text{re}}(t)= \Re[\epsilon(t)]` and
+:math:`\epsilon_{\text{im}}(t) = \Im[\epsilon(t)]`.
+
 
 
 Optimization in Liouville space
