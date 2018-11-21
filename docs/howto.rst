@@ -9,6 +9,9 @@ set one :class:`.Objective` for state in the logical basis, with the basis
 state :math:`\ket{\Psi_k}` as the `initial_state` and :math:`\Op{O}
 \ket{\Psi_k}` as the `target_state`.
 
+You may use :func:`krotov.gate_objectives() <krotov.objectives.gate_objectives>`
+to construct the appropriate list of objectives.
+
 
 How to optimize complex control fields
 --------------------------------------
@@ -34,7 +37,8 @@ How to exclude a control from the optimization
 ----------------------------------------------
 
 In order to force the optimization to leave any particular control field
-unchanged, set its update shape to :func:`.zero_shape`::
+unchanged, set its update shape to
+:func:`zero_shape <krotov.shapes.zero_shape>`::
 
     krotov.PulseOptions(lambda_a=1, shape=krotov.shapes.zero_shape)
 

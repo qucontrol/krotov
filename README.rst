@@ -123,7 +123,7 @@ Then,
 
 * define the necessary quantum operators and states using `QuTiP`_.
 * create a list of objectives, as instances of
-  :class:`krotov.Objective <krotov.objective.Objective>`
+  :class:`krotov.Objective <krotov.objectives.Objective>`
 * call :func:`krotov.optimize_pulses <krotov.optimize.optimize_pulses>` to
   perform an optimization of an arbitrary number of control fields over all the
   objectives.

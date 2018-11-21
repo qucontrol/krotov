@@ -1,7 +1,7 @@
 import time
 from textwrap import dedent
 
-from .objective import Objective
+from .objectives import Objective
 from .structural_conversions import (
     _nested_list_shallow_copy)
 

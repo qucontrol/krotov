@@ -147,7 +147,7 @@ def test_plug_in_array_controls_as_func():
         [2, ],  # u2
     ]
     tlist = np.linspace(0, T, nt)
-    H_with_funcs = krotov.objective._plug_in_array_controls_as_func(
+    H_with_funcs = krotov.objectives._plug_in_array_controls_as_func(
         H, controls, mapping, tlist)
     assert callable(H_with_funcs[1][1])
     assert callable(H_with_funcs[2][1])
@@ -167,3 +167,16 @@ def test_plug_in_array_controls_as_func():
     dt = tlist[1] - tlist[0]
     assert u2_func(tlist[2] + 0.4 * dt, None) == u2[2]
     assert u2_func(tlist[2] + 0.6 * dt, None) == u2[3]
+
+
+def test_gate_objectives_shape_error():
+    """Test that trying to construct gate objectives with a gate whose shape
+    mismatches the basis throws an exception"""
+    basis = [qutip.ket([0]), qutip.ket([1])]
+    gate = qutip.tensor(qutip.operators.sigmay(), qutip.identity(2))
+    H = [
+        qutip.operators.sigmaz(),
+        [qutip.operators.sigmax(), lambda t, args: 1.0]]
+    with pytest.raises(ValueError) as exc_info:
+        krotov.objectives.gate_objectives(basis, gate, H)
+    assert "same dimension as the number of basis" in str(exc_info.value)

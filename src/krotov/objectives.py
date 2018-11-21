@@ -10,7 +10,7 @@ from .structural_conversions import (
     _nested_list_shallow_copy, extract_controls, extract_controls_mapping,
     plug_in_pulse_values, control_onto_interval, discretize)
 
-__all__ = ['Objective', 'summarize_qobj', 'CtrlCounter']
+__all__ = ['Objective', 'summarize_qobj', 'CtrlCounter', 'gate_objectives']
 
 
 #: Workaround for `QuTiP issue 932`_.
@@ -375,3 +375,43 @@ def _summarize_qobj_nested_list(lst, ctrl_counter):
         '[' +
         ", ".join([summarize_qobj(obj, ctrl_counter) for obj in lst]) +
         ']')
+
+
+def gate_objectives(basis_states, gate, H, c_ops=None):
+    r"""Construct a list of objectives for optimizing towards a quantum gate
+
+    Args:
+        basis_states (list[qutip.Qobj]): A list of size $n$ of basis states
+        gate: The gate to optimize for, as a $n \times n$ matrix-like object
+            (must have a `shape` attribute, and be indexable by two indices)
+        H (list or qutip.Qobj): The Hamiltonian for the time evolution
+        c_ops (list or None): A list of collapse (Lindblad) operators, or None
+            for unitary dynamics
+
+    Returns:
+        list: the objectives that define the optimization towards the gate
+
+    Examples:
+
+        * A single-qubit gate::
+
+            >>> basis = [qutip.ket([0]), qutip.ket([1])]
+            >>> gate = qutip.operators.sigmay()
+            >>> H = [
+            ...     qutip.operators.sigmaz(),
+            ...     [qutip.operators.sigmax(), lambda t, args: 1.0]]
+            >>> objectives = gate_objectives(basis, gate, H)
+            >>> assert objectives == [
+            ...     Objective(basis[0], -1j * basis[1], H=H),
+            ...     Objective(basis[1], 1j * basis[0], H=H)]
+    """
+    if not gate.shape[0] == gate.shape[1] == len(basis_states):
+        raise ValueError(
+            "gate must be a matrix of the same dimension as the number of "
+            "basis states")
+    target_states = [
+        sum([gate[i, j] * basis_states[j] for j in range(gate.shape[1])])
+        for i in range(gate.shape[0])]
+    return [
+        Objective(initial_state, target_state, H, c_ops)
+        for (initial_state, target_state) in zip(basis_states, target_states)]
