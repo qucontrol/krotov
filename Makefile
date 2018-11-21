@@ -101,6 +101,10 @@ docs: .venv/py36/bin/sphinx-build ## generate Sphinx HTML documentation, includi
 	$(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build html
 	@echo "open docs/_build/html/index.html"
 
+spellcheck: .venv/py36/bin/sphinx-build ## check spelling in docs
+	@.venv/py36/bin/pip install sphinxcontrib-spelling
+	SPELLCHECK=en_US $(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build spelling
+
 coverage: test36  ## generate coverage report in ./htmlcov
 	.venv/py36/bin/coverage html
 	@echo "open htmlcov/index.html"
@@ -137,5 +141,5 @@ jupyter-notebook: .venv/py36/bin/jupyter  ## run a notebook server for editing t
 	.venv/py36/bin/jupyter notebook --config=/dev/null
 
 jupyter-lab: .venv/py36/bin/jupyter  ## run a jupyterlab server for editing the examples
-	@.venv/py35/bin/pip install -e .[extras]
+	@.venv/py36/bin/pip install -e .[extras]
 	.venv/py36/bin/jupyter lab --config=/dev/null
