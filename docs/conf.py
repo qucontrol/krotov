@@ -88,8 +88,11 @@ author = 'Michael Goerz'
 copyright = '{0}, {1}'.format(year, "Michael Goerz et al.")
 version = krotov.__version__
 rootfolder = os.path.join(os.path.dirname(__file__), '..')
-last_commit = str(git.Repo(rootfolder).head.commit)[:7]
-release = last_commit
+try:
+    last_commit = str(git.Repo(rootfolder).head.commit)[:7]
+    release = last_commit
+except git.exc.InvalidGitRepositoryError:
+    release = version
 numfig = True
 
 pygments_style = 'sphinx'
