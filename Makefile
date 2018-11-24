@@ -85,7 +85,7 @@ test36: .venv/py36/bin/py.test ## run tests for Python 3.6
 # How to execute notebook files
 %.ipynb.log: %.ipynb .venv/py36/bin/jupyter
 	@echo ""
-	@.venv/py36/bin/jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.kernel_name='python3' --config=/dev/null $< 2>&1 | tee $@
+	@.venv/py36/bin/jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.timeout=180 --ExecutePreprocessor.kernel_name='python3' --config=/dev/null $< 2>&1 | tee $@
 
 NOTEBOOKFILES = $(shell find docs/notebooks/ -iname '*.ipynb'  -maxdepth 1) docs/time_discretization.ipynb
 NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))

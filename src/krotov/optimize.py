@@ -11,8 +11,20 @@ from .structural_conversions import (
     pulse_options_dict_to_list, pulse_onto_tlist, _tlist_midpoints,
     plug_in_pulse_values, discretize)
 from .parallelization import serial_map
+from .propagators import _apply
 
 __all__ = ['optimize_pulses']
+
+
+def _overlap(a, b) -> complex:
+    """Complex overlap of two quantum objects.
+
+    Workaround for https://github.com/qutip/qutip/issues/940
+    """
+    if a.type == b.type == 'oper':
+        return complex((a.dag() * b).tr())
+    else:
+        return a.overlap(b)
 
 
 def optimize_pulses(
@@ -113,7 +125,7 @@ def optimize_pulses(
 
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = [
-        state_T.overlap(obj.target_state)
+        _overlap(state_T, obj.target_state)
         for (state_T, obj) in zip(fw_states_T, objectives)]
 
     info = info_hook(
@@ -169,7 +181,7 @@ def optimize_pulses(
                         objective, guess_pulses,
                         pulses_mapping[i_obj], i_pulse)
                     Ψ = forward_states[i_obj][time_index]
-                    update = χ.overlap(μ * Ψ)
+                    update = _overlap(χ, _apply(μ, Ψ))
                     update *= chi_norms[i_obj]
                     delta_eps[i_pulse][time_index] += update
                 λa = lambda_vals[i_pulse]
@@ -188,7 +200,7 @@ def optimize_pulses(
         logger.info("Finished forward propagation/pulse update")
         fw_states_T = fw_states
         tau_vals = [
-            fw_state_T.overlap(obj.target_state)
+            _overlap(fw_state_T, obj.target_state)
             for (fw_state_T, obj) in zip(fw_states_T, objectives)]
 
         toc = time.time()
