@@ -6,11 +6,11 @@ __all__ = ['expm']
 
 
 def _apply(A, b):
-    """Apply (super-) operator to state
-
-    Workaround for https://github.com/qutip/qutip/issues/939
-    """
-    if A.type == 'super' and b.type == 'oper':
+    """Apply abstract operator `A` to state `b`."""
+    if not(isinstance(A, qutip.Qobj)) and callable(A):
+        return A(b)
+    elif A.type == 'super' and b.type == 'oper':
+        # Workaround for https://github.com/qutip/qutip/issues/939
         return qutip.vector_to_operator(A * qutip.operator_to_vector(b))
     else:
         return A * b

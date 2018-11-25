@@ -8,6 +8,7 @@ from . import functionals
 from . import parallelization
 from . import info_hooks
 from . import objectives
+from . import mu
 
 # expose primary classes/functions
 from .objectives import Objective, gate_objectives

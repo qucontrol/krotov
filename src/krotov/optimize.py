@@ -12,6 +12,7 @@ from .structural_conversions import (
     plug_in_pulse_values, discretize)
 from .parallelization import serial_map
 from .propagators import _apply
+from .mu import derivative_wrt_pulse
 
 __all__ = ['optimize_pulses']
 
@@ -29,10 +30,11 @@ def _overlap(a, b) -> complex:
 
 def optimize_pulses(
         objectives, pulse_options, tlist, propagator, chi_constructor,
-        sigma=None, iter_start=0, iter_stop=5000, check_convergence=None,
-        state_dependent_constraint=None, info_hook=None, storage='array',
-        parallel_map=None, store_all_pulses=False):
-    """Use Krotov's method to optimize towards the given `objectives`
+        mu=None, sigma=None, iter_start=0, iter_stop=5000,
+        check_convergence=None, state_dependent_constraint=None,
+        info_hook=None, storage='array', parallel_map=None,
+        store_all_pulses=False):
+    r"""Use Krotov's method to optimize towards the given `objectives`
 
     Optimize all time-dependent controls found in the Hamiltonians of the given
     `objectives`.
@@ -51,7 +53,15 @@ def optimize_pulses(
             forwards in time by a single time step, between two points in
             `tlist`
         chi_constructor (callable): Function that calculates the boundary
-            condition for the backward propagation.
+            condition for the backward propagation. This is where the
+            final-time functional (indirectly) enters the optimization.
+        mu (None or callable): Function that calculates the derivative
+            $\frac{\partial H}{\partial\epsilon}$ for an equation of motion
+            $\dot{\phi}(t) = -i H[\phi(t)]$ of an abstract operator $H$ and an
+            abstract state $\phi$. If None, defaults to
+            :func:`krotov.mu.derivative_wrt_pulse`. See :mod:`krotov.mu` for a
+            full explanation of the role of `mu` in the optimization, and the
+            required function signature.
         sigma (None or callable): Function that calculates the second-order
             Krotov term. If None, the first-order Krotov method is used.
         iter_start (int): The formal iteration number at which to start the
@@ -97,6 +107,8 @@ def optimize_pulses(
 
     # Initialization
     logger.info("Initializing optimization with Krotov's method")
+    if mu is None:
+        mu = derivative_wrt_pulse
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
@@ -177,9 +189,8 @@ def optimize_pulses(
             for (i_pulse, guess_pulse) in enumerate(guess_pulses):
                 for (i_obj, objective) in enumerate(objectives):
                     χ = backward_states[i_obj][time_index]
-                    μ = _derivative_wrt_pulse(
-                        objective, guess_pulses,
-                        pulses_mapping[i_obj], i_pulse)
+                    μ = mu(objective, guess_pulses, pulses_mapping[i_obj],
+                           i_pulse)
                     Ψ = forward_states[i_obj][time_index]
                     update = _overlap(χ, _apply(μ, Ψ))
                     update *= chi_norms[i_obj]
@@ -247,7 +258,7 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
         if np.iscomplexobj(control):
             raise ValueError(
                 "All controls must be real-valued. Complex controls must be "
-                "split into and independent real and imaginary part in the "
+                "split into an independent real and imaginary part in the "
                 "objectives before passing them to the optimization")
     guess_pulses = [  # defined on the tlist intervals
         control_onto_interval(control)
@@ -344,19 +355,3 @@ def _forward_propagation_step(
         for (ic, c_op) in enumerate(obj.c_ops)]
     dt = tlist[time_index+1] - tlist[time_index]
     return propagator(H, state, dt, c_ops)
-
-
-def _derivative_wrt_pulse(objective, pulses, mapping, i_pulse):
-    """Calculate the operator $\frac{\partial H}{\partial \epsilon}$"""
-    ham_mapping = mapping[0][i_pulse]
-    if len(ham_mapping) == 0:
-        return 0
-    else:
-        mu = objective.H[ham_mapping[0]][0]
-        for i in ham_mapping[1:]:
-            mu += objective.H[ham_mapping[i]][0]
-    for i_c_op in range(len(objective.c_ops)):
-        if len(mapping[i_c_op+1][i_pulse]) != 0:
-            raise NotImplementedError(
-                "Time-dependent collapse operators not implemented")
-    return mu
