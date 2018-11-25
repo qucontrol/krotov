@@ -59,7 +59,8 @@ def optimize_pulses(
             $\frac{\partial H}{\partial\epsilon}$ for an equation of motion
             $\dot{\phi}(t) = -i H[\phi(t)]$ of an abstract operator $H$ and an
             abstract state $\phi$. If None, defaults to
-            :func:`krotov.mu.derivative_wrt_pulse`. See :mod:`krotov.mu` for a
+            :func:`krotov.mu.derivative_wrt_pulse`, which covers the standard
+            Schrödinger and master equation. See :mod:`krotov.mu` for a
             full explanation of the role of `mu` in the optimization, and the
             required function signature.
         sigma (None or callable): Function that calculates the second-order
@@ -189,8 +190,8 @@ def optimize_pulses(
             for (i_pulse, guess_pulse) in enumerate(guess_pulses):
                 for (i_obj, objective) in enumerate(objectives):
                     χ = backward_states[i_obj][time_index]
-                    μ = mu(objective, guess_pulses, pulses_mapping[i_obj],
-                           i_pulse)
+                    μ = mu(objectives, i_obj, guess_pulses,
+                           pulses_mapping, i_pulse, time_index)
                     Ψ = forward_states[i_obj][time_index]
                     update = _overlap(χ, _apply(μ, Ψ))
                     update *= chi_norms[i_obj]
