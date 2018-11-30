@@ -91,7 +91,7 @@ You may also do
 
     $ pip install krotov[dev,extras]
 
-to install additional development dependencies.
+to install additional development dependencies, including packages required to run the example notebooks.
 
 **Note: the latest released version is a placeholder release that is non-functional**
 
