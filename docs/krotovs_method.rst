@@ -66,7 +66,7 @@ in Hilbert space, or
 .. math::
 
    \label{eq:tau_liouville}
-     \tau_k = \Tr\left[\Op{\rho}_k^{\tgt\,\dagger} \Op{\rho}_k(T) \right]
+     \tau_k = \tr\left[\Op{\rho}_k^{\tgt\,\dagger} \Op{\rho}_k(T) \right]
 
 in Liouville space. Since the functional $J_T$ must be real, we have to
 following possibilities :cite:`PalaoPRA2003`:
