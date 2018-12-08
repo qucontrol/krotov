@@ -116,16 +116,18 @@ html_short_title = '%s-%s' % (project, version)
 # Mathjax settings
 mathjax_path = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js'
 mathjax_config = {
-    'extensions': [
-        'tex2jax.js', 'AMSmath.js', 'AMSsymbols.js', 'noErrors.js',
-        'noUndefined.js'],
+    'extensions': ['tex2jax.js'],
     'jax': ['input/TeX', 'output/SVG'],
     'TeX': {
+        'extensions': [
+            "AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"],
         'Macros': {
             'tr': ['{\\operatorname{tr}}', 0],
             'diag': ['{\\operatorname{diag}}', 0],
             'abs': ['{\\operatorname{abs}}', 0],
             'pop': ['{\\operatorname{pop}}', 0],
+            'ee': ['{\\text{e}}', 0],
+            'ii': ['{\\text{i}}', 0],
             'aux': ['{\\text{aux}}', 0],
             'opt': ['{\\text{opt}}', 0],
             'tgt': ['{\\text{tgt}}', 0],
@@ -153,6 +155,9 @@ mathjax_config = {
             'AbsSq': ['{\\left\\vert#1\\right\\vert^2}', 1],
             'Re': ['{\\operatorname{Re}}', 0],
             'Im': ['{\\operatorname{Im}}', 0],
+            'Real': ['{\\mathbb{R}}', 0],
+            'Complex': ['{\\mathbb{C}}', 0],
+            'Integer': ['{\\mathbb{N}}', 0],
         }
     }
 }
