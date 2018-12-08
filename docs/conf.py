@@ -95,7 +95,7 @@ except git.exc.InvalidGitRepositoryError:
     release = version
 numfig = True
 
-pygments_style = 'sphinx'
+pygments_style = 'friendly'
 extlinks = {
     'issue': ('https://github.com/qucontrol/krotov/issues/%s', '#'),
     'pr': ('https://github.com/agkoch/krotov/pull/%s', 'PR #'),
