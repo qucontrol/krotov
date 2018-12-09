@@ -5,7 +5,6 @@ from . import shapes
 from . import structural_conversions
 from . import propagators
 from . import functionals
-from . import parallelization
 from . import info_hooks
 from . import objectives
 from . import mu

@@ -5,12 +5,13 @@ from functools import partial
 
 import numpy as np
 
+from qutip.parallel import serial_map
+
 from .result import Result
 from .structural_conversions import (
     extract_controls, extract_controls_mapping, control_onto_interval,
-    pulse_options_dict_to_list, pulse_onto_tlist, _tlist_midpoints,
+    pulse_options_dict_to_list, pulse_onto_tlist,
     plug_in_pulse_values, discretize)
-from .parallelization import serial_map
 from .propagators import _apply
 from .mu import derivative_wrt_pulse
 
@@ -86,7 +87,8 @@ def optimize_pulses(
             an empty array of length `N`. The default value 'array' is
             equivalent to ``functools.partial(numpy.empty, dtype=object)``.
         parallel_map (callable or None): Parallel function evaluator. The
-            argument must have the same specification as :func:`.serial_map`,
+            argument must have the same specification as
+            :func:`qutip.parallel.serial_map`,
             which is used when None is passed. Alternatives are
             :func:`qutip.parallel.parallel_map` or
             :func:`qutip.ipynbtools.parallel_map`.
