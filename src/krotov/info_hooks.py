@@ -22,9 +22,12 @@ def chain(*hooks):
         for hook in hooks:
             res = hook(**kwargs)
             if res is not None:
-                result.append(result)
+                result.append(res)
         if len(result) > 0:
-            return tuple(result)
+            if len(result) == 1:
+                return result[0]
+            else:
+                return tuple(result)
         else:
             return None
 
