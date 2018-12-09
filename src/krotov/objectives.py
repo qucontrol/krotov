@@ -282,6 +282,40 @@ class Objective():
     def __repr__(self):
         return "%s[%s]" % (self.__class__.__name__, self.summarize())
 
+    def __getstate__(self):
+        """Return data for the pickle serialization of an objective"""
+        state = copy.copy(self.__dict__)
+        # Remove the unpicklable entries.
+        state['H'] = _remove_functions_from_nested_list(state['H'])
+        state['c_ops'] = _remove_functions_from_nested_list(state['c_ops'])
+        return state
+
+
+class _ControlPlaceholder():
+    """Placeholder for a control function, for pickling"""
+
+    def __init__(self, id):
+        self.id = id
+
+    def __str__(self):
+        return "u%s" % self.id
+
+    def __repr__(self):
+        return "%s(%s)" % (self.__class__.__name__, self.id)
+
+    def __eq__(self, other):
+        return (self.__class__ == other.__class__) and (self.id == other.id)
+
+
+def _remove_functions_from_nested_list(lst):
+    if isinstance(lst, list):
+        return [_remove_functions_from_nested_list(v) for v in lst]
+    else:
+        if callable(lst) and not isinstance(lst, qutip.Qobj):
+            return _ControlPlaceholder(id(lst))
+        else:
+            return lst
+
 
 def _plug_in_array_controls_as_func(H, controls, mapping, tlist):
     """Convert array controls to piece-wise constant functions
@@ -343,6 +377,8 @@ def summarize_qobj(obj, ctrl_counter=None):
         return 'u%d(t)' % ctrl_counter(obj)
     elif isinstance(obj, np.ndarray):
         return 'u%d[%s]' % (ctrl_counter(obj), obj.dtype.name)
+    elif isinstance(obj, _ControlPlaceholder):
+        return str(obj)
     elif not isinstance(obj, qutip.Qobj):
         raise TypeError("obj must be a Qobj, not %s" % obj.__class__.__name__)
     if obj.type == 'ket':

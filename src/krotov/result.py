@@ -41,7 +41,16 @@ class Result():
             optimization started
         end_local_time (time.struct_time): Time stamp of when the optimization
             ended
+
+    .. Note::
+
+        A :class:`Result` object can be serialized via :func:`pickle.dump`,
+        but the controls in the `objectives` may not be preserved in the
+        serialization. After unpickling, the `objectives` should be overwritten
+        with an appropriate list.
     """
+    #: Format used in :attr:`start_local_time_str` and
+    #: :attr:`end_local_time_str`
     time_fmt = "%Y-%m-%d %H:%M:%S"
 
     def __init__(self):
