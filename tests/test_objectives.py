@@ -180,3 +180,23 @@ def test_gate_objectives_shape_error():
     with pytest.raises(ValueError) as exc_info:
         krotov.objectives.gate_objectives(basis, gate, H)
     assert "same dimension as the number of basis" in str(exc_info.value)
+
+
+def test_ensemble_objectives(transmon_ham_and_states):
+    """Test creation of ensemble objectives"""
+    H, psi0, psi1 = transmon_ham_and_states
+    objectives = [
+        krotov.Objective(psi0, psi1, H=H),
+        krotov.Objective(psi1, psi0, H=H),
+    ]
+    (H0, (H1, eps)) = H
+    Hs = [
+        [H0, [mu * H1, eps]]
+        for mu in [0.95, 0.99, 1.01, 1.05]
+    ]
+    ensemble_objectives = krotov.ensemble_objectives(objectives, Hs)
+    assert len(ensemble_objectives) == 10
+    assert ensemble_objectives[0] == objectives[0]
+    assert ensemble_objectives[1] == objectives[1]
+    assert (ensemble_objectives[2].H[1][0] - (0.95 * H1)).norm() < 1e-15
+    assert (ensemble_objectives[9].H[1][0] - (1.05 * H1)).norm() < 1e-15

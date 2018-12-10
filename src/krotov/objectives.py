@@ -10,7 +10,9 @@ from .structural_conversions import (
     _nested_list_shallow_copy, extract_controls, extract_controls_mapping,
     plug_in_pulse_values, control_onto_interval, discretize)
 
-__all__ = ['Objective', 'summarize_qobj', 'CtrlCounter', 'gate_objectives']
+__all__ = [
+    'Objective', 'summarize_qobj', 'CtrlCounter', 'gate_objectives',
+    'ensemble_objectives']
 
 
 FIX_QUTIP_932 = True
@@ -465,3 +467,38 @@ def gate_objectives(basis_states, gate, H, c_ops=None):
     return [
         Objective(initial_state, target_state, H, c_ops)
         for (initial_state, target_state) in zip(basis_states, target_states)]
+
+
+def ensemble_objectives(objectives, Hs):
+    """Extend `objectives` for an "ensemble optimization"
+
+    This creates a list of objectives for an optimization for robustness with
+    respect to variations in some parameter of the Hamiltonian. The trick is to
+    simply optimize over the average of multiple copies of the system
+    (the `Hs`) sampling that variation. See
+    Goerz, Halperin, Aytac, Koch, Whaley. Phys. Rev. A 90, 032329 (2014)
+    for details.
+
+    Args:
+        objectives (list[Objective]): The $n$ original objectives
+        Hs (list): List of $m$ variations of the original
+            Hamiltonian/Liouvillian
+
+    Returns:
+        list[Objective]: List of $n (m+1)$ new objectives that consists of the
+        original objectives, plus one copy of the original objectives per
+        element of `Hs` where the `H` attribute of each objectives is
+        replaced by that element.
+    """
+    new_objectives = copy.copy(objectives)
+    for H in Hs:
+        for obj in objectives:
+            new_objectives.append(
+                Objective(
+                    H=H,
+                    initial_state=obj.initial_state,
+                    target_state=obj.target_state,
+                    c_ops=obj.c_ops,
+                )
+            )
+    return new_objectives
