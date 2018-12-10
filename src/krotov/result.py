@@ -11,47 +11,50 @@ __all__ = ['Result']
 class Result():
     """Result object for a Krotov optimization
 
+    .. Note::
+
+        A :class:`Result` object can be serialized via :func:`pickle.dump`,
+        but the controls in the :attr:`objectives` may not be preserved in the
+        serialization. After unpickling, the :attr:`objectives` should be
+        overwritten with an appropriate list.
+
     Attributes:
-        objectives (list): The control objectives
-        tlist (numpy array): The time grid values
-        iters (list of int): Iteration numbers, starting at 0.
-        iter_seconds (list of int): for each iteration number, the number of
+        objectives (list[Objective]): The control objectives
+        tlist (numpy.ndarray): The time grid values
+        iters (list[int]): Iteration numbers, starting at 0.
+        iter_seconds (list[int]): for each iteration number, the number of
             seconds that were spent in the optimization
         info_vals (list): For each iteration, the return value of `info_hook`,
             or None
-        tau_vals (list of list): for each iteration, a list of complex overlaps
-            between the forward-propagated state and the target state for
-            each objective.
-        guess_controls (list): List of the guess controls in array format
-        optimized_controls (list): List of the optimized control fields, in the
-            order corresponding to `guess_controls`
+        tau_vals (list[list[complex]): for each iteration, a list of complex
+            overlaps between the forward-propagated state and the target state
+            for each objective.
+        guess_controls (list[numpy.ndarray]): List of the guess controls in
+            array format
+        optimized_controls (list[numpy.ndarray]): List of the optimized control
+            fields, in the order corresponding to :attr:`guess_controls`
         controls_mapping (list): A nested list that indicates where in
-            `objectives` the `guess_controls` and `optimized_controls` are used
-            (as returned by :func:`.extract_controls_mapping`)
-        all_pulses (list of list): If the optimization was performed with
+            :attr:`objectives` the :attr:`guess_controls` and
+            :attr:`optimized_controls` are used (as returned by
+            :func:`.extract_controls_mapping`)
+        all_pulses (list): If the optimization was performed with
             ``store_all_pulses=True``, for each iteration, a list of the
-            optimized pulses (in the order corresponding to `guess_controls`).
+            optimized pulses (in the order corresponding to
+            :attr:`guess_controls`).
             These pulses are defined at midpoints of the `tlist` intervals.
             Empty list if ``store_all_pulses=False``
-        states (list): for each objective, a list of states
-            (:class:`qutip.Qobj` instances) for each value in
-            `tlist`, obtained from propagation under the final optimized
-            control fields.
+        states (list[list[qutip.Qobj]]): for each objective, a list of states
+            for each value in `tlist`, obtained from propagation under the
+            final optimized control fields.
         start_local_time (time.struct_time): Time stamp of when the
             optimization started
         end_local_time (time.struct_time): Time stamp of when the optimization
             ended
-
-    .. Note::
-
-        A :class:`Result` object can be serialized via :func:`pickle.dump`,
-        but the controls in the `objectives` may not be preserved in the
-        serialization. After unpickling, the `objectives` should be overwritten
-        with an appropriate list.
     """
-    #: Format used in :attr:`start_local_time_str` and
-    #: :attr:`end_local_time_str`
     time_fmt = "%Y-%m-%d %H:%M:%S"
+    """Format used in :attr:`start_local_time_str` and
+    :attr:`end_local_time_str`
+    """
 
     def __init__(self):
         self.objectives = []
@@ -88,7 +91,7 @@ class Result():
 
     @property
     def start_local_time_str(self):
-        """The `start_local_time` attribute formatted as a string"""
+        """The :attr:`start_local_time` attribute formatted as a string"""
         if self.start_local_time is not None:
             return time.strftime(self.time_fmt, self.start_local_time)
         else:
@@ -96,7 +99,7 @@ class Result():
 
     @property
     def end_local_time_str(self):
-        """The `end_local_time` attribute formatted as a string"""
+        """The :attr:`end_local_time` attribute formatted as a string"""
         if self.end_local_time is not None:
             return time.strftime(self.time_fmt, self.end_local_time)
         else:
@@ -104,7 +107,8 @@ class Result():
 
     @property
     def optimized_objectives(self):
-        """A copy of the objectives with the `optimized_controls` plugged in"""
+        """list[Objective]: A copy of the :attr:`objectives` with the
+        :attr:`optimized_controls` plugged in"""
         objectives = []
         for (i, obj) in enumerate(self.objectives):
             H = _plug_in_optimized_controls(

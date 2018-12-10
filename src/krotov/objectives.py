@@ -13,13 +13,15 @@ from .structural_conversions import (
 __all__ = ['Objective', 'summarize_qobj', 'CtrlCounter', 'gate_objectives']
 
 
-#: Workaround for `QuTiP issue 932`_.
-#: If True, and only when running on macOS, in :meth:`Objective.mesolve`,
-#: replace any array controls with an equivalent function. This results in a
-#: signficant slowdown of the propagation, as it circumvents the use of Cython.
-#:
-#: .. _QuTiP issue 932: https://github.com/qutip/qutip/issues/932
 FIX_QUTIP_932 = True
+"""Workaround for `QuTiP issue 932`_.
+
+If True, and only when running on macOS, in :meth:`Objective.mesolve`,
+replace any array controls with an equivalent function. This results in a
+signficant slowdown of the propagation, as it circumvents the use of Cython.
+
+.. _QuTiP issue 932: https://github.com/qutip/qutip/issues/932
+"""
 
 
 def _adjoint(op):
@@ -83,13 +85,19 @@ _CTRL_COUNTER = CtrlCounter()  #: internal counter for controls
 class Objective():
     """A single objective for optimization with Krotov's method
 
+    Args:
+        initial_state (qutip.Qobj): value for :attr:`initial_state`
+        target_state (qutip.Qobj): value for :attr:`target_state`
+        H (qutip.Qobj or list): value for :attr:`H`
+        c_ops (list or None): value for :attr:`c_ops`
+
     Attributes:
-        initial_state (qutip.Qobj): The initial state
-        target_state (qutip.Qobj): The desired target state
-        H (list): The time-dependent Hamiltonian,
+        H (qutip.Qobj or list): The (time-dependent) Hamiltonian,
             cf. :func:`qutip.mesolve.mesolve`. This includes the control
             fields.
-        c_ops (list):  List of collapse operators,
+        initial_state (qutip.Qobj): The initial state
+        target_state (qutip.Qobj): The desired target state
+        c_ops (list or None): List of collapse operators,
             cf. :func:`~qutip.mesolve.mesolve`.
     """
 
@@ -132,7 +140,8 @@ class Objective():
     def adjoint(self):
         """The :class:`Objective` containing the adjoint of all components.
 
-        This does not affect the controls in the `H` attribute.
+        This does not affect the controls in :attr:`H`: these are
+        assumed to be real-valued.
         """
         return Objective(
             H=_adjoint(self.H),
@@ -143,9 +152,10 @@ class Objective():
     def mesolve(self, tlist, rho0=None, e_ops=None, **kwargs):
         """Run :func:`qutip.mesolve.mesolve` on the system of the objective
 
-        Solve the dynamics for the `H` and `c_ops` of the objective. If `rho0`
-        is not given, the `initial_state` will be propagated. All other
-        arguments will be passed to :func:`qutip.mesolve.mesolve`.
+        Solve the dynamics for the :attr:`H` and :attr:`c_ops` of the
+        objective. If `rho0` is not given, the :attr:`initial_state` will be
+        propagated. All other arguments will be passed to
+        :func:`qutip.mesolve.mesolve`.
 
         Returns:
             qutip.solver.Result: Result of the propagation, see
@@ -283,7 +293,11 @@ class Objective():
         return "%s[%s]" % (self.__class__.__name__, self.summarize())
 
     def __getstate__(self):
-        """Return data for the pickle serialization of an objective"""
+        """Return data for the pickle serialization of an objective.
+
+        This may not preserve time-dependent controls, and is only to enable
+        the serialization of :class:`.Result` objects.
+        """
         state = copy.copy(self.__dict__)
         # Remove the unpicklable entries.
         state['H'] = _remove_functions_from_nested_list(state['H'])
