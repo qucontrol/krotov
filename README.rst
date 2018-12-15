@@ -29,7 +29,7 @@ Krotov Python Package
 Python implementation of Krotov's method for quantum optimal control.
 
 This implementation follows the original implementation in the `QDYN Fortran library`_.
-The method is described in detail in `D. M. Reich, M. Ndong, and C. P. Koch, J. Chem. Phys. 136, 104103 (2012) <https://doi.org/10.1063/1.3691827>`_ (`arXiv:1008.5126 <http://arxiv.org/abs/1008.5126>`_) :cite:`ReichJCP12`
+The method is described in detail in `D. M. Reich, M. Ndong, and C. P. Koch, J. Chem. Phys. 136, 104103 (2012) <https://doi.org/10.1063/1.3691827>`_ (`arXiv:1008.5126 <http://arxiv.org/abs/1008.5126>`_)
 
 The ``krotov`` package is built on top of `QuTiP`_.
 
@@ -123,11 +123,16 @@ Then,
 
 * define the necessary quantum operators and states using `QuTiP`_.
 * create a list of objectives, as instances of
-  :class:`krotov.Objective <krotov.objectives.Objective>`
-* call :func:`krotov.optimize_pulses <krotov.optimize.optimize_pulses>` to
-  perform an optimization of an arbitrary number of control fields over all the
-  objectives.
+  |krotov.Objective|_
+* call |krotov.optimize_pulses|_ to perform an optimization of an arbitrary
+  number of control fields over all the objectives.
 
-See :ref:`using-krotov-with-qutip` and :ref:`krotov-example-notebooks` for details.
+.. |krotov.Objective| replace:: ``krotov.Objective``
+.. _krotov.Objective: https://krotov.readthedocs.io/en/latest/API/krotov.objectives.html#krotov.objectives.Objective
+
+.. |krotov.optimize_pulses| replace:: ``krotov.optimize_pulses``
+.. _krotov.optimize_pulses: https://krotov.readthedocs.io/en/latest/API/krotov.optimize.html#krotov.optimize.optimize_pulses
+
+See `Using Krotov with QuTiP <https://krotov.readthedocs.io/en/latest/qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://krotov.readthedocs.io/en/latest/examples.html#krotov-example-notebooks>`_ for details.
 
 .. _Jupyter notebook: http://jupyter.org
