@@ -141,6 +141,7 @@ def optimize_pulses(
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = [
         _overlap(state_T, obj.target_state)
+        if obj.target_state is not None else None
         for (state_T, obj) in zip(fw_states_T, objectives)]
 
     info = info_hook(
@@ -215,6 +216,7 @@ def optimize_pulses(
         fw_states_T = fw_states
         tau_vals = [
             _overlap(fw_state_T, obj.target_state)
+            if obj.target_state is not None else None
             for (fw_state_T, obj) in zip(fw_states_T, objectives)]
 
         toc = time.time()

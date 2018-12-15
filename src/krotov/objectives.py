@@ -38,6 +38,8 @@ def _adjoint(op):
             else:
                 adjoint_op.append(item.dag())
         return adjoint_op
+    elif op is None:
+        return None
     else:
         return op.dag()
 
@@ -89,8 +91,8 @@ class Objective():
 
     Args:
         initial_state (qutip.Qobj): value for :attr:`initial_state`
-        target_state (qutip.Qobj): value for :attr:`target_state`
         H (qutip.Qobj or list): value for :attr:`H`
+        target_state (qutip.Qobj or None): value for :attr:`target_state`
         c_ops (list or None): value for :attr:`c_ops`
 
     Attributes:
@@ -98,17 +100,43 @@ class Objective():
             cf. :func:`qutip.mesolve.mesolve`. This includes the control
             fields.
         initial_state (qutip.Qobj): The initial state
-        target_state (qutip.Qobj): The desired target state
+        target_state (qutip.Qobj or None): The desired target state. May be
+            None if :attr:`initial_state` evolving into :attr:`target_state`
+            under the dynamics represented by :attr:`H` and :attr:`c_ops`
+            does not reflect the control objective.
         c_ops (list or None): List of collapse operators,
             cf. :func:`~qutip.mesolve.mesolve`.
+
+    Raises:
+        ValueError: If any arguments have an invalid type
     """
 
-    def __init__(self, initial_state, target_state, H, c_ops=None):
+    def __init__(self, *, initial_state, H, target_state, c_ops=None):
         if c_ops is None:
             c_ops = []
+        if not isinstance(H, (qutip.Qobj, list)):
+            raise ValueError(
+                "Invalid H, must be a Qobj, or a nested list, not %s"
+                % H.__class__.__name__
+            )
         self.H = H
+        if not isinstance(initial_state, qutip.Qobj):
+            raise ValueError(
+                "Invalid initial_state: must be Qobj, not %s"
+                % initial_state.__class__.__name__
+            )
         self.initial_state = initial_state
+        if not (isinstance(target_state, qutip.Qobj) or target_state is None):
+            raise ValueError(
+                "Invalid target_state: must be Qobj or None, not %s"
+                % initial_state.__class__.__name__
+            )
         self.target_state = target_state
+        if not isinstance(c_ops, list):
+            raise ValueError(
+                "Invalid c_ops: must be a list, not %s"
+                % c_ops.__class__.__name__
+            )
         self.c_ops = c_ops
 
     def __copy__(self):
@@ -265,28 +293,40 @@ class Objective():
             >>> C2 = [tensor(sigmap(), identity(2)), a2]
             >>> ket00 = qutip.ket((0,0))
             >>> ket11 = qutip.ket((1,1))
-            >>> obj = Objective(ket00, ket11, H=H)
+            >>> obj = Objective(
+            ...     initial_state=ket00,
+            ...     target_state=ket11,
+            ...     H=H
+            ... )
             >>> obj.summarize()
             '|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩'
-            >>> obj = Objective(ket00, ket11, H=H, c_ops=[C1, C2])
+            >>> obj = Objective(
+            ...     initial_state=ket00,
+            ...     target_state=ket11,
+            ...     H=H,
+            ...     c_ops=[C1, C2]
+            ... )
             >>> obj.summarize()
             '|(2⊗2)⟩ - {H:[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]], c_ops:([NonHerm[2⊗2,2⊗2], u3[complex128]],[NonHerm[2⊗2,2⊗2], u4[complex128]])} - |(2⊗2)⟩'
         """
         if ctrl_counter is None:
             ctrl_counter = _CTRL_COUNTER
         if len(self.c_ops) == 0:
-            return "%s - {%s} - %s" % (
+            res = "%s - {%s}" % (
                 summarize_qobj(self.initial_state, ctrl_counter),
                 summarize_qobj(self.H, ctrl_counter),
-                summarize_qobj(self.target_state, ctrl_counter))
+            )
         else:
-            return "%s - {H:%s, c_ops:(%s)} - %s" % (
+            res = "%s - {H:%s, c_ops:(%s)}" % (
                 summarize_qobj(self.initial_state, ctrl_counter),
                 summarize_qobj(self.H, ctrl_counter),
-                ",".join([
-                    summarize_qobj(c_op, ctrl_counter)
-                    for c_op in self.c_ops]),
-                summarize_qobj(self.target_state, ctrl_counter))
+                ",".join(
+                    [summarize_qobj(c_op, ctrl_counter) for c_op in self.c_ops]
+                ),
+            )
+        if self.target_state is not None:
+            res += " - %s" % (summarize_qobj(self.target_state, ctrl_counter))
+        return res
 
     def __str__(self):
         return self.summarize()
@@ -451,22 +491,40 @@ def gate_objectives(basis_states, gate, H, c_ops=None):
             >>> gate = qutip.operators.sigmay()
             >>> H = [
             ...     qutip.operators.sigmaz(),
-            ...     [qutip.operators.sigmax(), lambda t, args: 1.0]]
+            ...     [qutip.operators.sigmax(), lambda t, args: 1.0]
+            ... ]
             >>> objectives = gate_objectives(basis, gate, H)
             >>> assert objectives == [
-            ...     Objective(basis[0], -1j * basis[1], H=H),
-            ...     Objective(basis[1], 1j * basis[0], H=H)]
+            ...     Objective(
+            ...         initial_state=basis[0],
+            ...         target_state=(-1j * basis[1]),
+            ...         H=H
+            ...     ),
+            ...     Objective(
+            ...         initial_state=basis[1],
+            ...         target_state=(1j * basis[0]),
+            ...         H=H
+            ...     )
+            ... ]
     """
     if not gate.shape[0] == gate.shape[1] == len(basis_states):
         raise ValueError(
             "gate must be a matrix of the same dimension as the number of "
-            "basis states")
+            "basis states"
+        )
     target_states = [
         sum([gate[i, j] * basis_states[j] for j in range(gate.shape[1])])
-        for i in range(gate.shape[0])]
+        for i in range(gate.shape[0])
+    ]
     return [
-        Objective(initial_state, target_state, H, c_ops)
-        for (initial_state, target_state) in zip(basis_states, target_states)]
+        Objective(
+            initial_state=initial_state,
+            target_state=target_state,
+            H=H,
+            c_ops=c_ops,
+        )
+        for (initial_state, target_state) in zip(basis_states, target_states)
+    ]
 
 
 def ensemble_objectives(objectives, Hs):
