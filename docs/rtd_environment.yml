@@ -10,5 +10,5 @@ dependencies:
     - sphinx-rtd-theme<0.3
     - sphinx_autodoc_typehints
     - sphinxcontrib-bibtex
-    - nbsphinx
+    - nbsphinx<0.4
     - gitpython
