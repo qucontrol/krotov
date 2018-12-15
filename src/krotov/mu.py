@@ -91,18 +91,21 @@ def derivative_wrt_pulse(
 
     Returns:
         qutip.Qobj: The quantum operator or super-operator that
-        represents ∂H/∂ϵ.
+        represents ∂H/∂ϵ. In general, the return type can be any callable `mu`
+        so that ``mu(state)`` calculates the result of applying ∂H/∂ϵ to
+        `state`. A :class:`~qutip.Qobj` is just the most convenient example of
+        an appropriate callable.
 
     This function covers the following cases:
 
-    * the `H` attribute of the objective contains a Hamiltonian, there are no
-      `c_ops` (Schrödinger equation: the abstract H in ∂H/∂ϵ is the Hamiltonian
-      directly)
+    * the :attr:`~.Objective.H` attribute of the objective contains a
+      Hamiltonian, there are no :attr:`~.Objective.c_ops` (Schrödinger
+      equation: the abstract H in ∂H/∂ϵ is the Hamiltonian directly)
 
-    * the `H` attribute of the objective contains a Hamiltonian $\Op{H}$, and
-      there are Lindblad operators $\Op{L}_i$ in `c_ops` (master equation in
-      Lindblad form). The abstract  H is $i \Liouville$ for the Liouvillian
-      defined as
+    * the :attr:`~.Objective.H` attribute of the objective contains a
+      Hamiltonian $\Op{H}$, and there are Lindblad operators $\Op{L}_i$ in
+      :attr:`~.Objective.c_ops` (master equation in Lindblad form). The
+      abstract H is $i \Liouville$ for the Liouvillian defined as
 
       .. math::
 
@@ -112,9 +115,9 @@ def derivative_wrt_pulse(
             \frac{1}{2} \left\{
                 \Op{L}_i^\dagger \Op{L}_i, \Op{\rho}\right\} \right)
 
-    * the `H` attribute of the objective contains a super-operator
-      $\Liouville$, there are no `c_ops` (general master equation). The
-      abstract H is again $i \Liouville$.
+    * the :attr:`~.Objective.H` attribute of the objective contains a
+      super-operator $\Liouville$, there are no :attr:`~.Objective.c_ops`
+      (general master equation). The abstract H is again $i \Liouville$.
     """
     objective = objectives[i_objective]
     ham_mapping = pulses_mapping[i_objective][0][i_pulse]
