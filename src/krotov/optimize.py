@@ -111,6 +111,8 @@ def optimize_pulses(
     logger.info("Initializing optimization with Krotov's method")
     if mu is None:
         mu = derivative_wrt_pulse
+    if check_convergence is not None:  # pragma: nocover
+        raise NotImplementedError('check_convergence')
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
