@@ -6,7 +6,6 @@ Features
 * Real or complex control fields (e.g. for systems under the rotating wave approximation)
 
 
-Not yet implemented
--------------------
+**Not yet implemented:**
 
 * non-linear Hamiltonians

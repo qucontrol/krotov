@@ -32,18 +32,18 @@ Welcome to the Krotov package's documentation!
    :caption: Contents:
 
    readme
-   contributing
-   authors
-   features
-   history
-   krotovs_method
-   qutip_usage
-   grape_crab
-   propagation
-   time_discretization.ipynb
-   examples
-   howto
-   zzzbibliography
+   02_contributing
+   03_authors
+   04_features
+   05_history
+   06_krotovs_method
+   07_qutip_usage
+   08_grape_crab
+   09_propagation
+   10_time_discretization.ipynb
+   11_examples
+   12_howto
+   99_bibliography
 
 
 API
