@@ -96,7 +96,10 @@ notebooks: $(NOTEBOOKLOGS)  ## re-evaluate the notebooks in docs/notebooks
 	@.venv/py36/bin/jupyter kernelspec list | grep python3
 
 
-docs: .venv/py36/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
+./docs/readme.rst: ./README.rst ./docs/readme.patch
+	patch $< ./docs/readme.patch -o $@
+
+docs: .venv/py36/bin/sphinx-build ./docs/readme.rst ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build clean
 	$(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build html
 	@echo "open docs/_build/html/index.html"

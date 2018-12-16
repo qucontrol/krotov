@@ -31,6 +31,7 @@ clean:
 	@-rm -rf API/*.rst
 	@-rm -f notebooks/*.log
 	@-rm -f *.log
+	@-rm -f readme.rst
 	@-rm -f krotovscheme.aux krotovscheme.log
 
 # Catch-all target: route all unknown targets to Sphinx using the new
