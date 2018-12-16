@@ -3,7 +3,9 @@ from __future__ import unicode_literals
 
 import os
 import sys
+import shutil
 import datetime
+import subprocess
 import git
 
 
@@ -36,6 +38,15 @@ def run_apidoc(_):
         os.path.join('.', 'API'),
         os.path.join('..', 'src', 'krotov'),
     ])
+
+
+# -- Generate patched README documentation ------------------------------------
+def generate_patched_readme(_):
+    if not os.path.isfile('readme.rst'):
+        shutil.copyfile(os.path.join('..', 'README.rst'), 'readme.rst')
+        cmd = ['patch', 'readme.rst', './readme.patch']
+        subprocess.run(cmd, check=True)
+    assert os.path.isfile('readme.rst')
 
 
 # -- General configuration -----------------------------------------------------
@@ -293,3 +304,4 @@ nbsphinx_prolog = r"""
 # -----------------------------------------------------------------------------
 def setup(app):
     app.connect('builder-inited', run_apidoc)
+    app.connect('builder-inited', generate_patched_readme)
