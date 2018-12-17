@@ -71,7 +71,8 @@ def optimize_pulses(
             optimization, whether or not convergence has been reached
         check_convergence (None or callable): Function that determines whether
             the optimization has converged. If None, the optimization will only
-            end when `iter_stop` is reached.
+            end when `iter_stop` is reached. See :mod:`krotov.convergence` for
+            details.
         state_dependent_constraint (None or callable): Function that evaluates
             a state-dependent constraint. If None, optimize without any
             state-dependent constraint.
@@ -111,8 +112,6 @@ def optimize_pulses(
     logger.info("Initializing optimization with Krotov's method")
     if mu is None:
         mu = derivative_wrt_pulse
-    if check_convergence is not None:  # pragma: nocover
-        raise NotImplementedError('check_convergence')
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
@@ -242,10 +241,23 @@ def optimize_pulses(
             result.all_pulses.append(optimized_pulses)
         result.states = fw_states_T
 
-        # prepare for next iteration
-        guess_pulses = optimized_pulses
-
         logger.info("Finished Krotov iteration %d" % krotov_iteration)
+
+        msg = None
+        if check_convergence is not None:
+            msg = check_convergence(result)
+        if bool(msg) is True:   # this is not an anti-pattern!
+            result.message = "Reached convergence"
+            if isinstance(msg, str):
+                result.message += ": " + msg
+            break
+        else:
+            # prepare for next iteration
+            guess_pulses = optimized_pulses
+
+    else:  # optimization finished without `check_convergence` break
+
+        result.message = "Reached %d iterations" % iter_stop
 
     result.end_local_time = time.localtime()
     for i, pulse in enumerate(optimized_pulses):

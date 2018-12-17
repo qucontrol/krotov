@@ -9,6 +9,7 @@ from . import info_hooks
 from . import objectives
 from . import mu
 from . import result
+from . import convergence
 
 # expose primary classes/functions
 from .objectives import Objective, gate_objectives, ensemble_objectives

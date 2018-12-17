@@ -50,6 +50,9 @@ class Result():
             optimization started
         end_local_time (time.struct_time): Time stamp of when the optimization
             ended
+        message (str): Description of why :func:`.optimize_pulses` completed,
+            E.g, "Reached 1000 iterations"
+
     """
     time_fmt = "%Y-%m-%d %H:%M:%S"
     """Format used in :attr:`start_local_time_str` and
@@ -70,6 +73,7 @@ class Result():
         self.states = []
         self.start_local_time = None
         self.end_local_time = None
+        self.message = ''
 
     def __str__(self):
         return dedent(r'''
@@ -78,12 +82,14 @@ class Result():
         - Started at {start_local_time}
         - Number of objectives: {n_objectives}
         - Number of iterations: {n_iters}
+        - Reason for termination: {message}
         - Ended at {end_local_time}
         '''.format(
             start_local_time=self.start_local_time_str,
             n_objectives=len(self.objectives),
             n_iters=len(self.iters)-1,  # do not count zero iteration
             end_local_time=self.end_local_time_str,
+            message=self.message,
         )).strip()
 
     def __repr__(self):

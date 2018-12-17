@@ -25,7 +25,7 @@ except OSError:
     history = ''
 
 # requirements for use
-requirements = ['attrs', 'numpy', 'scipy', 'qutip']
+requirements = ['attrs', 'glom', 'numpy', 'scipy', 'qutip']
 
 # requirements for development (testing, generating docs)
 dev_requirements = [

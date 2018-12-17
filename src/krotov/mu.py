@@ -1,4 +1,4 @@
-r"""Routines for `mu` in :func:`krotov.optimize.optimize_pulses`.
+r"""Routines for `mu` in :func:`krotov.optimize.optimize_pulses`
 
 The first-order Krotov update equation is usually written as
 
