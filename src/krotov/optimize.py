@@ -81,7 +81,10 @@ def optimize_pulses(
             (e.g. an evaluated functional J_T) will be stored, for each
             iteration, in the `info_vals` attribute of the returned
             :class:`.Result`. The `info_hook` must have the same signature as
-            :func:`krotov.info_hooks.print_debug_information`.
+            :func:`krotov.info_hooks.print_debug_information`. The `info_hook`
+            may modify its arguments for certain advanced use cases, such as
+            dynamically adjusting `lambda_vals`, or applying spectral filters
+            to the `optimized_pulses`.
         storage (callable): Storage constructor for the storage of
             propagated states. Must accept an integer parameter `N` and return
             an empty array of length `N`. The default value 'array' is

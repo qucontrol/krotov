@@ -27,14 +27,11 @@ class PulseOptions():
             boundary conditions (S(0) = S(T) = 0), and enforce smooth switch-on
             and switch-off. You may also pass the shapes 1 or 0 for a constant
             shape.
-        filter (callable or None): A function that manipulates the pulse after
-            each OCT iteration, e.g. by applying a spectral filter.
     """
     lambda_a = attr.ib()
     shape = attr.ib(default=1, converter=_shape_val_to_callable)
-    filter = attr.ib(default=None)
 
     @shape.validator
     def _check_shape(self, attribute, value):
         if not callable(value):
-            raise ValueError("shape must be a callable function")
+            raise ValueError("shape must be a callable")
