@@ -159,7 +159,7 @@ class Objective():
         else:
             return NotImplemented
 
-    def __ne__(self, other):
+    def __ne__(self, other):  # pragma: nocover
         result = self.__eq__(other)
         if result is NotImplemented:
             return NotImplemented
@@ -279,7 +279,7 @@ class Objective():
 
         Example:
 
-            >>> from qutip import tensor, sigmaz, sigmax, sigmap, identity
+            >>> from qutip import ket, tensor, sigmaz, sigmax, sigmap, identity
             >>> u1 = lambda t, args: 1.0
             >>> u2 = lambda t, args: 1.0
             >>> a1 = np.random.random(100) + 1j*np.random.random(100)
@@ -291,8 +291,8 @@ class Objective():
             ...     [tensor(identity(2), sigmax()), u2]]
             >>> C1 = [tensor(identity(2), sigmap()), a1]
             >>> C2 = [tensor(sigmap(), identity(2)), a2]
-            >>> ket00 = qutip.ket((0,0))
-            >>> ket11 = qutip.ket((1,1))
+            >>> ket00 = ket((0,0))
+            >>> ket11 = ket((1,1))
             >>> obj = Objective(
             ...     initial_state=ket00,
             ...     target_state=ket11,
@@ -469,52 +469,130 @@ def _summarize_qobj_nested_list(lst, ctrl_counter):
         ']')
 
 
-def gate_objectives(basis_states, gate, H, c_ops=None):
+def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
     r"""Construct a list of objectives for optimizing towards a quantum gate
 
     Args:
-        basis_states (list[qutip.Qobj]): A list of size $n$ of basis states
+        basis_states (list[qutip.Qobj]): A list of $n$ canonical basis states
         gate: The gate to optimize for, as a $n \times n$ matrix-like object
-            (must have a `shape` attribute, and be indexable by two indices)
+            (must have a `shape` attribute, and be indexable by two indices).
+            Alternatively, `gate` may be the string 'perfect_entangler' or
+            'PE', to indicate the optimization for an arbitrary two-qubit
+            perfect entangler.
         H (list or qutip.Qobj): The Hamiltonian for the time evolution
         c_ops (list or None): A list of collapse (Lindblad) operators, or None
             for unitary dynamics
+        local_invariants (bool): If True, initialize the objectives for an
+            optimization towards a two-qubit gate that is "locally equivalent"
+            to `gate`. That is, the result of the optimization should implement
+            `gate` up to single-qubit operations.
 
     Returns:
-        list: the objectives that define the optimization towards the gate
+        list[Objective]: The objectives that define the optimization towards
+        the gate. For a "normal" gate with a basis in Hilbert space, the
+        objectives will have the `basis_states` as each
+        :attr:`~.Objective.initial_state` and the result of applying `gate`
+        to the `basis_states` as each :attr:`~.Objective.target_state`.
+
+        For an optimization towards a perfect-entangler, or for the
+        `local_invariants` of the given `gate`, each
+        :attr:`~.Objective.initial_state` will be the Bell basis state
+        described in "Theorem 1" in Y. Makhlin, Quantum Inf. Process. 1, 243
+        (2002), derived from the canonical `basis_states`, and each
+        :attr:`~.Objective.target_state` will be None.
+
+    Raises:
+        ValueError: If `gate`, `basis_states`, and `local_invariants` are
+            incompatible, or `gate` is invalid (not a recognized string)
+
+    .. Note::
+
+        The dimension of the `basis_states` is not required to be the dimension
+        of the `gate`; the `basis_states` may define a logical subspace in a
+        larger Hilbert space.
 
     Examples:
 
         * A single-qubit gate::
 
-            >>> basis = [qutip.ket([0]), qutip.ket([1])]
-            >>> gate = qutip.operators.sigmay()
-            >>> H = [
-            ...     qutip.operators.sigmaz(),
-            ...     [qutip.operators.sigmax(), lambda t, args: 1.0]
-            ... ]
+            >>> from qutip import ket, tensor, sigmaz, sigmax, sigmay, identity
+            >>> basis = [ket([0]), ket([1])]
+            >>> gate = sigmay()
+            >>> gate
+            Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True
+            Qobj data =
+            [[0.+0.j 0.-1.j]
+             [0.+1.j 0.+0.j]]
+            >>> H = [sigmaz(),[sigmax(), lambda t, args: 1.0]]
             >>> objectives = gate_objectives(basis, gate, H)
             >>> assert objectives == [
             ...     Objective(
             ...         initial_state=basis[0],
-            ...         target_state=(-1j * basis[1]),
+            ...         target_state=(1j * basis[1]),
             ...         H=H
             ...     ),
             ...     Objective(
             ...         initial_state=basis[1],
-            ...         target_state=(1j * basis[0]),
+            ...         target_state=(-1j * basis[0]),
             ...         H=H
             ...     )
             ... ]
+
+        * An arbitrary two-qubit perfect entangler:
+
+            >>> basis = [ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
+            >>> H = [
+            ...     tensor(sigmaz(), identity(2)) +
+            ...     tensor(identity(2), sigmaz()),
+            ...     [tensor(sigmax(), identity(2)), lambda t, args: 1.0],
+            ...     [tensor(identity(2), sigmax()), lambda t, args: 1.0]]
+            >>> objectives = gate_objectives(basis, 'PE', H)
+            >>> from weylchamber import bell_basis
+            >>> for i in range(4):
+            ...     assert objectives[i] == Objective(
+            ...        initial_state=bell_basis(basis)[i],
+            ...        target_state=None,
+            ...        H=H
+            ...     )
+
+        Note that we get the same objectives for *any* local-invariants
+        optimization:
+
+            >>> gate_objectives(
+            ...     basis, qutip.gates.cnot(), H, local_invariants=True
+            ... ) == objectives
+            True
+
+        For a local-invariants optimization, the information about the target
+        target gate is contained in the `chi_constructor` routine that is
+        passed to :func:`.optimize_pulses`.
     """
+    if isinstance(gate, str):
+        if gate.lower().replace(' ', '_') in ['pe', 'perfect_entangler']:
+            return _gate_objectives_li_pe(basis_states, H, c_ops)
+        else:
+            raise ValueError(
+                "gate must be either a square matrix, or one of the strings "
+                "'PE' or 'perfect_entangler', not '" + gate + "'"
+            )
+    elif local_invariants:
+        if not gate.shape == (4, 4):
+            raise ValueError(
+                "If local_invariants is True, gate must be a 4 × 4 matrix, "
+                "not " + str(gate.shape)
+            )
+        return _gate_objectives_li_pe(basis_states, H, c_ops)
+
+    # "Normal" gate:
+
     if not gate.shape[0] == gate.shape[1] == len(basis_states):
         raise ValueError(
             "gate must be a matrix of the same dimension as the number of "
             "basis states"
         )
     target_states = [
-        sum([gate[i, j] * basis_states[j] for j in range(gate.shape[1])])
-        for i in range(gate.shape[0])
+        sum([gate[i, j] * basis_states[i] for i in range(gate.shape[0])])
+        for j in range(gate.shape[1])
     ]
     return [
         Objective(
@@ -524,6 +602,25 @@ def gate_objectives(basis_states, gate, H, c_ops=None):
             c_ops=c_ops,
         )
         for (initial_state, target_state) in zip(basis_states, target_states)
+    ]
+
+
+def _gate_objectives_li_pe(basis_states, H, c_ops):
+    """Objectives for two-qubit local-invariants or perfect-entangler
+    optimizaton"""
+    if len(basis_states) != 4:
+        raise ValueError(
+            "Optimization towards a two-qubit gate requires 4 basis_states"
+        )
+    # Bell states as in "Theorem 1" in
+    # Y. Makhlin, Quantum Inf. Process. 1, 243 (2002)
+    psi1 = (basis_states[0] + basis_states[3]) / np.sqrt(2)
+    psi2 = (1j * basis_states[1] + 1j * basis_states[2]) / np.sqrt(2)
+    psi3 = (basis_states[1] - basis_states[2]) / np.sqrt(2)
+    psi4 = (1j * basis_states[0] - 1j * basis_states[3]) / np.sqrt(2)
+    return [
+        Objective(initial_state=psi, target_state=None, H=H, c_ops=c_ops)
+        for psi in [psi1, psi2, psi3, psi4]
     ]
 
 

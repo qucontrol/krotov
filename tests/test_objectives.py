@@ -241,3 +241,27 @@ def test_ensemble_objectives(transmon_ham_and_states):
     assert ensemble_objectives[1] == objectives[1]
     assert (ensemble_objectives[2].H[1][0] - (0.95 * H1)).norm() < 1e-15
     assert (ensemble_objectives[9].H[1][0] - (1.05 * H1)).norm() < 1e-15
+
+
+def test_gate_objectives_pe():
+    """Test gate objectives for a PE optimization"""
+    from qutip import ket, tensor, sigmaz, sigmax, identity
+    from weylchamber import bell_basis
+
+    basis = [ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
+    H = [
+        tensor(sigmaz(), identity(2)) + tensor(identity(2), sigmaz()),
+        [tensor(sigmax(), identity(2)), lambda t, args: 1.0],
+        [tensor(identity(2), sigmax()), lambda t, args: 1.0],
+    ]
+    objectives = krotov.gate_objectives(basis, 'PE', H)
+    assert len(objectives) == 4
+    for i in range(4):
+        assert objectives[i] == krotov.Objective(
+            initial_state=bell_basis(basis)[i], target_state=None, H=H
+        )
+    assert krotov.gate_objectives(basis, 'perfect_entangler', H) == objectives
+    assert krotov.gate_objectives(basis, 'perfect entangler', H) == objectives
+    assert krotov.gate_objectives(basis, 'Perfect Entangler', H) == objectives
+    with pytest.raises(ValueError):
+        krotov.gate_objectives(basis, 'prefect(!) entanglers', H)
