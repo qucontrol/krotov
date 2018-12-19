@@ -2,13 +2,12 @@ import time
 from textwrap import dedent
 
 from .objectives import Objective
-from .structural_conversions import (
-    _nested_list_shallow_copy)
+from .structural_conversions import _nested_list_shallow_copy
 
 __all__ = ['Result']
 
 
-class Result():
+class Result:
     """Result object for a Krotov optimization
 
     .. Note::
@@ -54,6 +53,7 @@ class Result():
             E.g, "Reached 1000 iterations"
 
     """
+
     time_fmt = "%Y-%m-%d %H:%M:%S"
     """Format used in :attr:`start_local_time_str` and
     :attr:`end_local_time_str`
@@ -76,7 +76,8 @@ class Result():
         self.message = ''
 
     def __str__(self):
-        return dedent(r'''
+        return dedent(
+            r'''
         Krotov Optimization Result
         --------------------------
         - Started at {start_local_time}
@@ -85,12 +86,13 @@ class Result():
         - Reason for termination: {message}
         - Ended at {end_local_time}
         '''.format(
-            start_local_time=self.start_local_time_str,
-            n_objectives=len(self.objectives),
-            n_iters=len(self.iters)-1,  # do not count zero iteration
-            end_local_time=self.end_local_time_str,
-            message=self.message,
-        )).strip()
+                start_local_time=self.start_local_time_str,
+                n_objectives=len(self.objectives),
+                n_iters=len(self.iters) - 1,  # do not count zero iteration
+                end_local_time=self.end_local_time_str,
+                message=self.message,
+            )
+        ).strip()
 
     def __repr__(self):
         return self.__str__()
@@ -118,18 +120,24 @@ class Result():
         objectives = []
         for (i, obj) in enumerate(self.objectives):
             H = _plug_in_optimized_controls(
-                obj.H, self.optimized_controls, self.controls_mapping[i][0])
+                obj.H, self.optimized_controls, self.controls_mapping[i][0]
+            )
             c_ops = [
                 _plug_in_optimized_controls(
-                    c_op, self.optimized_controls,
-                    self.controls_mapping[i][j+1])
-                for (j, c_op) in enumerate(obj.c_ops)]
+                    c_op,
+                    self.optimized_controls,
+                    self.controls_mapping[i][j + 1],
+                )
+                for (j, c_op) in enumerate(obj.c_ops)
+            ]
             objectives.append(
                 Objective(
                     H=H,
                     initial_state=obj.initial_state,
                     target_state=obj.target_state,
-                    c_ops=c_ops))
+                    c_ops=c_ops,
+                )
+            )
         return objectives
 
 
