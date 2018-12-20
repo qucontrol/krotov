@@ -96,7 +96,7 @@ def optimize_pulses(
             details.
         state_dependent_constraint (None or callable): Function that evaluates
             a state-dependent constraint. If None, optimize without any
-            state-dependent constraint.
+            state-dependent constraint. Currently not implemented.
         info_hook (None or callable): Function that is called after each
             iteration of the optimization, for the purpose of analysis. Any
             value returned by `info_hook` (e.g. an evaluated functional J_T)
@@ -149,6 +149,8 @@ def optimize_pulses(
             info_hook = modify_params_after_iter
         else:
             info_hook = chain(modify_params_after_iter, info_hook)
+    if state_dependent_constraint is not None:
+        raise NotImplementedError("state_dependent_constraint")
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
