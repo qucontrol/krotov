@@ -7,7 +7,8 @@ __all__ = ['chain', 'print_debug_information']
 
 
 def chain(*hooks):
-    """Chain multiple `info_hook` callables together
+    """Chain multiple `info_hook` or `modify_params_after_iter` callables
+    together.
 
     Example:
 
@@ -15,6 +16,12 @@ def chain(*hooks):
         ...     F_re = np.average(np.array(kwargs['tau_vals']).real)
         ...     print("    F = %f" % F_re)
         >>> info_hook = chain(print_debug_information, print_fidelity)
+
+    Note:
+
+        Functions that are connected via :func:`chain` may use the
+        `shared_data` share the same `shared_data` argument, which they can use
+        to communicate down the chain.
     """
 
     def info_hook(**kwargs):
@@ -48,6 +55,7 @@ def print_debug_information(
     start_time,
     stop_time,
     iteration,
+    shared_data,
     out=sys.stdout
 ):
     """Print full debug information about the current Krotov iteration
@@ -78,6 +86,9 @@ def print_debug_information(
             seconds
         iteration (int): The current iteration number. For the initial
             propagation of the guess controls, 0.
+        shared_data (dict): Dict of data shared between any
+            `modify_params_after_iter` and any `info_hook` functions chained
+            together via :func:`chain`.
         out: An open file handle where to write the information. This parameter
             is not part of the `info_hook` interface. Use
             :func:`functools.partial` to pass a different value.

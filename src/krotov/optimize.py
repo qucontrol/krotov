@@ -15,6 +15,7 @@ from .structural_conversions import (
     pulse_options_dict_to_list, pulse_onto_tlist,
     plug_in_pulse_values, discretize)
 from .mu import derivative_wrt_pulse
+from .info_hooks import chain
 
 __all__ = ['optimize_pulses']
 
@@ -39,6 +40,7 @@ def optimize_pulses(
     objectives,
     pulse_options,
     tlist,
+    *,
     propagator,
     chi_constructor,
     mu=None,
@@ -48,9 +50,10 @@ def optimize_pulses(
     check_convergence=None,
     state_dependent_constraint=None,
     info_hook=None,
+    modify_params_after_iter=None,
     storage='array',
     parallel_map=None,
-    store_all_pulses=False,
+    store_all_pulses=False
 ):
     r"""Use Krotov's method to optimize towards the given `objectives`
 
@@ -95,14 +98,21 @@ def optimize_pulses(
             a state-dependent constraint. If None, optimize without any
             state-dependent constraint.
         info_hook (None or callable): Function that is called after each
-            iteration of the optimization. Any value returned by `info_hook`
-            (e.g. an evaluated functional J_T) will be stored, for each
-            iteration, in the `info_vals` attribute of the returned
-            :class:`.Result`. The `info_hook` must have the same signature as
-            :func:`krotov.info_hooks.print_debug_information`. The `info_hook`
-            may modify its arguments for certain advanced use cases, such as
-            dynamically adjusting `lambda_vals`, or applying spectral filters
-            to the `optimized_pulses`.
+            iteration of the optimization, for the purpose of analysis. Any
+            value returned by `info_hook` (e.g. an evaluated functional J_T)
+            will be stored, for each iteration, in the `info_vals` attribute of
+            the returned :class:`.Result`. The `info_hook` must have the same
+            signature as :func:`krotov.info_hooks.print_debug_information`. It
+            should not modify its arguments except for `shared_data` in any
+            way.
+        modify_params_after_iter (None or callable): Function that is called
+            after each iteration, which may modify its arguments for certain
+            advanced use cases, such as dynamically adjusting `lambda_vals`, or
+            applying spectral filters to the `optimized_pulses`. It has the
+            same interface as `info_hook` but should not return anything. The
+            `modify_params_after_iter` function is called immediately before
+            `info_hook`, and can transfer arbitrary data to any subsequent
+            `info_hook` via the `shared_data` argument.
         storage (callable): Storage constructor for the storage of
             propagated states. Must accept an integer parameter `N` and return
             an empty array of length `N`. The default value 'array' is
@@ -122,10 +132,6 @@ def optimize_pulses(
     Raises:
         ValueError: If any controls are not real-valued, or if any update
             shape is not a real-valued function in the range [0, 1].
-
-    Note:
-        In order to optimize complex controls, split the control into and
-        independent real and imaginary part.
     """
     logger = logging.getLogger('krotov')
 
@@ -135,6 +141,14 @@ def optimize_pulses(
         mu = derivative_wrt_pulse
     if sigma is not None:
         raise NotImplementedError("Second order")
+    if modify_params_after_iter is not None:
+        # From a technical perspective, the `modify_params_after_iter` is
+        # really just another info_hook, the only difference is the
+        # convention that info_hooks shouldn't modify the parameters.
+        if info_hook is None:
+            info_hook = modify_params_after_iter
+        else:
+            info_hook = chain(modify_params_after_iter, info_hook)
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
@@ -181,6 +195,7 @@ def optimize_pulses(
         start_time=tic,
         stop_time=toc,
         iteration=0,
+        shared_data={},
     )
 
     # Initialize result
@@ -204,6 +219,8 @@ def optimize_pulses(
         # -- this is where the functional enters the optimizaton
         chi_states = chi_constructor(fw_states_T, objectives, result.tau_vals)
         chi_norms = [chi.norm() for chi in chi_states]
+        # normalizing χ improves numerical stability; the norm then has to be
+        # taken into account when calculating Δϵ
         chi_states = [chi / nrm for (chi, nrm) in zip(chi_states, chi_norms)]
 
         # Backward propagation
@@ -245,13 +262,13 @@ def optimize_pulses(
                         time_index,
                     )
                     Ψ = forward_states[i_obj][time_index]
-                    update = _overlap(χ, μ(Ψ))
+                    update = _overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩
                     update *= chi_norms[i_obj]
                     delta_eps[i_pulse][time_index] += update
-                λa = lambda_vals[i_pulse]
+                λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
-                Δeps = (S_t / λa) * delta_eps[i_pulse][time_index].imag
-                optimized_pulses[i_pulse][time_index] += Δeps
+                Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag
+                optimized_pulses[i_pulse][time_index] += Δϵ
             # forward propagation
             fw_states = parallel_map(
                 _forward_propagation_step,
@@ -294,6 +311,7 @@ def optimize_pulses(
                 tau_vals=tau_vals,
                 start_time=tic,
                 stop_time=toc,
+                shared_data={},
                 iteration=krotov_iteration,
             )
         # Update optimization `result` with info from finished iteration
