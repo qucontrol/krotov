@@ -1,5 +1,6 @@
 """Test that we can serialize a Resuls object"""
 
+import logging
 import os
 import pickle
 
@@ -8,14 +9,15 @@ import numpy as np
 from krotov.result import Result
 
 
-def test_serialization_roundtrip(request, tmpdir):
+def test_serialization_roundtrip(request, tmpdir, caplog):
+    """Test load/dump of Result"""
     testdir = os.path.splitext(request.module.__file__)[0]
-    with open(os.path.join(testdir, 'oct_result.dump'), 'rb') as dump_fh:
-        result = pickle.load(dump_fh)
-        assert isinstance(result, Result)
+    with caplog.at_level(logging.WARNING):
+        result = Result.load(os.path.join(testdir, 'oct_result.dump'))
+    assert 'Result.objectives contains control placeholders' in caplog.text
+    assert isinstance(result, Result)
     dumpfile = str(tmpdir.join('oct_result.dump'))
-    with open(dumpfile, 'wb') as dump_fh:
-        pickle.dump(result, dump_fh)
+    result.dump(dumpfile)
     with open(dumpfile, 'rb') as dump_fh:
         result2 = pickle.load(dump_fh)
     for name in result.__dict__:

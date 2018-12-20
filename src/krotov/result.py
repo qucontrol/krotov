@@ -1,7 +1,9 @@
 import time
+import pickle
+import logging
 from textwrap import dedent
 
-from .objectives import Objective
+from .objectives import Objective, _ControlPlaceholder
 from .structural_conversions import _nested_list_shallow_copy
 
 __all__ = ['Result']
@@ -9,13 +11,6 @@ __all__ = ['Result']
 
 class Result:
     """Result object for a Krotov optimization
-
-    .. Note::
-
-        A :class:`Result` object can be serialized via :func:`pickle.dump`,
-        but the controls in the :attr:`objectives` may not be preserved in the
-        serialization. After unpickling, the :attr:`objectives` should be
-        overwritten with an appropriate list.
 
     Attributes:
         objectives (list[Objective]): The control objectives
@@ -140,6 +135,60 @@ class Result:
                 )
             )
         return objectives
+
+    @classmethod
+    def load(cls, filename, objectives=None):
+        """Construct :class:`Result` object from a :meth:`dump` file
+
+        Args:
+            filename (str): The file from which to load the :class:`Result`.
+                Must be in the format created by :meth:`dump`.
+            objectives (None or list[Objective]): If given, after loading
+                :class:`Result` from the given `filename`, overwrite
+                :attr:`objectives` with the given `objectives`. This is
+                necessary because :meth:`dump` does not preserve time-dependent
+                controls that are Python functions.
+
+        Returns:
+            Result: The :class:`Result` instance loaded from `filename`
+        """
+        with open(filename, 'rb') as dump_fh:
+            result = pickle.load(dump_fh)
+        if objectives is None:
+            for obj in result.objectives:
+                if _contains_control_placeholders(obj.H) or any(
+                    [_contains_control_placeholders(lst) for lst in obj.c_ops]
+                ):
+                    logger = logging.getLogger('krotov')
+                    logger.warning(
+                        "Result.objectives contains control placeholders. "
+                        "You should overwrite it."
+                    )
+                    break
+        else:
+            result.objectives = objectives
+        return result
+
+    def dump(self, filename):
+        """Dump the :class:`Result` to a binary :mod:`pickle` file.
+
+        The original :class:`Result` object can be restored from the resulting
+        file using :meth:`load`. However, time-dependent control fields that
+        are callables/functions will not be preserved, as they are not
+        "pickleable".
+
+        Args:
+            filename (str): Name of file to which to dump the :class:`Result`.
+        """
+        with open(filename, 'wb') as dump_fh:
+            pickle.dump(self, dump_fh)
+
+
+def _contains_control_placeholders(lst):
+    if isinstance(lst, list):
+        return any([_contains_control_placeholders(v) for v in lst])
+    else:
+        return isinstance(lst, _ControlPlaceholder)
 
 
 def _plug_in_optimized_controls(H, controls, mapping):
