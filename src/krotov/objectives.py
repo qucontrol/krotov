@@ -128,11 +128,6 @@ class Objective:
                 % initial_state.__class__.__name__
             )
         self.initial_state = initial_state
-        if not (isinstance(target, qutip.Qobj) or target is None):
-            raise ValueError(
-                "Invalid target: must be Qobj or None, not %s"
-                % initial_state.__class__.__name__
-            )
         self.target = target
         if not isinstance(c_ops, list):
             raise ValueError(
@@ -516,8 +511,10 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
         `local_invariants` of the given `gate`, each
         :attr:`~.Objective.initial_state` will be the Bell basis state
         described in "Theorem 1" in Y. Makhlin, Quantum Inf. Process. 1, 243
-        (2002), derived from the canonical `basis_states`, and each
-        :attr:`~.Objective.target` will be None.
+        (2002), derived from the canonical `basis_states`. The
+        :attr:`~.Objective.target` will be the string 'PE' for a
+        perfect-entanglers optimization, and `gate` for the local-invariants
+        optimization.
 
     Raises:
         ValueError: If `gate`, `basis_states`, and `local_invariants` are
@@ -569,25 +566,25 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
             >>> for i in range(4):
             ...     assert objectives[i] == Objective(
             ...        initial_state=bell_basis(basis)[i],
-            ...        target=None,
+            ...        target='PE',
             ...        H=H
             ...     )
 
-        Note that we get the same objectives for *any* local-invariants
-        optimization:
+        * A two-qubit gate, up to single-qubit operation ("local invariants"):
 
-            >>> gate_objectives(
+            >>> objectives = gate_objectives(
             ...     basis, qutip.gates.cnot(), H, local_invariants=True
-            ... ) == objectives
-            True
-
-        For a local-invariants optimization, the information about the target
-        gate is contained in the `chi_constructor` routine that is
-        passed to :func:`.optimize_pulses`.
+            ... )
+            >>> for i in range(4):
+            ...     assert objectives[i] == Objective(
+            ...        initial_state=bell_basis(basis)[i],
+            ...        target=qutip.gates.cnot(),
+            ...        H=H
+            ...     )
     """
     if isinstance(gate, str):
         if gate.lower().replace(' ', '_') in ['pe', 'perfect_entangler']:
-            return _gate_objectives_li_pe(basis_states, H, c_ops)
+            return _gate_objectives_li_pe(basis_states, 'PE', H, c_ops)
         else:
             raise ValueError(
                 "gate must be either a square matrix, or one of the strings "
@@ -599,7 +596,7 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
                 "If local_invariants is True, gate must be a 4 × 4 matrix, "
                 "not " + str(gate.shape)
             )
-        return _gate_objectives_li_pe(basis_states, H, c_ops)
+        return _gate_objectives_li_pe(basis_states, gate, H, c_ops)
 
     # "Normal" gate:
 
@@ -623,7 +620,7 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
     ]
 
 
-def _gate_objectives_li_pe(basis_states, H, c_ops):
+def _gate_objectives_li_pe(basis_states, gate, H, c_ops):
     """Objectives for two-qubit local-invariants or perfect-entangler
     optimizaton"""
     if len(basis_states) != 4:
@@ -637,7 +634,7 @@ def _gate_objectives_li_pe(basis_states, H, c_ops):
     psi3 = (basis_states[1] - basis_states[2]) / np.sqrt(2)
     psi4 = (1j * basis_states[0] - 1j * basis_states[3]) / np.sqrt(2)
     return [
-        Objective(initial_state=psi, target=None, H=H, c_ops=c_ops)
+        Objective(initial_state=psi, target=gate, H=H, c_ops=c_ops)
         for psi in [psi1, psi2, psi3, psi4]
     ]
 

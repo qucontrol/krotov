@@ -110,9 +110,6 @@ def test_invalid_objective(transmon_ham_and_states):
         krotov.Objective(initial_state=None, target=psi1, H=H)
     assert "Invalid initial_state" in str(exc_info.value)
     with pytest.raises(ValueError) as exc_info:
-        krotov.Objective(initial_state=psi0, target=psi1.full, H=H)
-    assert "Invalid target" in str(exc_info.value)
-    with pytest.raises(ValueError) as exc_info:
         krotov.Objective(initial_state=psi0, target=psi1, H=tuple(H))
     assert "Invalid H" in str(exc_info.value)
     with pytest.raises(ValueError) as exc_info:
@@ -257,7 +254,7 @@ def test_gate_objectives_pe():
     assert len(objectives) == 4
     for i in range(4):
         assert objectives[i] == krotov.Objective(
-            initial_state=bell_basis(basis)[i], target=None, H=H
+            initial_state=bell_basis(basis)[i], target='PE', H=H
         )
     assert krotov.gate_objectives(basis, 'perfect_entangler', H) == objectives
     assert krotov.gate_objectives(basis, 'perfect entangler', H) == objectives
