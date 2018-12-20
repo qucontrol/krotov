@@ -86,13 +86,13 @@ def CtrlCounter():
 _CTRL_COUNTER = CtrlCounter()  #: internal counter for controls
 
 
-class Objective():
+class Objective:
     """A single objective for optimization with Krotov's method
 
     Args:
         initial_state (qutip.Qobj): value for :attr:`initial_state`
         H (qutip.Qobj or list): value for :attr:`H`
-        target_state (qutip.Qobj or None): value for :attr:`target_state`
+        target (qutip.Qobj or None): value for :attr:`target`
         c_ops (list or None): value for :attr:`c_ops`
 
     Attributes:
@@ -100,10 +100,12 @@ class Objective():
             cf. :func:`qutip.mesolve.mesolve`. This includes the control
             fields.
         initial_state (qutip.Qobj): The initial state
-        target_state (qutip.Qobj or None): The desired target state. May be
-            None if :attr:`initial_state` evolving into :attr:`target_state`
-            under the dynamics represented by :attr:`H` and :attr:`c_ops`
-            does not reflect the control objective.
+        target: An object describing the "target" of the optimization, for the
+            dynamics starting from :attr:`initial_state`. Usually, this will be
+            the target state (the state into which :attr:`initial_state` should
+            evolve). More generally, it can be an arbitrary object meeting the
+            requirements of a specific `chi_constructor` function that will be
+            passed to :func:`.optimize_pulses`.
         c_ops (list or None): List of collapse operators,
             cf. :func:`~qutip.mesolve.mesolve`.
 
@@ -111,7 +113,7 @@ class Objective():
         ValueError: If any arguments have an invalid type
     """
 
-    def __init__(self, *, initial_state, H, target_state, c_ops=None):
+    def __init__(self, *, initial_state, H, target, c_ops=None):
         if c_ops is None:
             c_ops = []
         if not isinstance(H, (qutip.Qobj, list)):
@@ -126,12 +128,12 @@ class Objective():
                 % initial_state.__class__.__name__
             )
         self.initial_state = initial_state
-        if not (isinstance(target_state, qutip.Qobj) or target_state is None):
+        if not (isinstance(target, qutip.Qobj) or target is None):
             raise ValueError(
-                "Invalid target_state: must be Qobj or None, not %s"
+                "Invalid target: must be Qobj or None, not %s"
                 % initial_state.__class__.__name__
             )
-        self.target_state = target_state
+        self.target = target
         if not isinstance(c_ops, list):
             raise ValueError(
                 "Invalid c_ops: must be a list, not %s"
@@ -147,14 +149,17 @@ class Objective():
         return Objective(
             H=_nested_list_shallow_copy(self.H),
             initial_state=self.initial_state,
-            target_state=self.target_state,
-            c_ops=[_nested_list_shallow_copy(c) for c in self.c_ops])
+            target=self.target,
+            c_ops=[_nested_list_shallow_copy(c) for c in self.c_ops],
+        )
 
     def __eq__(self, other):
         if other.__class__ is self.__class__:
-            return (
-                (self.H, self.initial_state, self.target_state, self.c_ops) ==
-                (other.H, other.initial_state, other.target_state, other.c_ops)
+            return (self.H, self.initial_state, self.target, self.c_ops) == (
+                other.H,
+                other.initial_state,
+                other.target,
+                other.c_ops,
             )
         else:
             return NotImplemented
@@ -171,13 +176,19 @@ class Objective():
         """The :class:`Objective` containing the adjoint of all components.
 
         This does not affect the controls in :attr:`H`: these are
-        assumed to be real-valued.
+        assumed to be real-valued. Also, :attr:`.Objective.target` will be left
+        unchanged if it is not a :class:`qutip.Qobj`.
         """
         return Objective(
             H=_adjoint(self.H),
             initial_state=_adjoint(self.initial_state),
-            target_state=_adjoint(self.target_state),
-            c_ops=[_adjoint(op) for op in self.c_ops])
+            target=(
+                _adjoint(self.target)
+                if isinstance(self.target, qutip.Qobj)
+                else self.target
+            ),
+            c_ops=[_adjoint(op) for op in self.c_ops],
+        )
 
     def mesolve(self, tlist, rho0=None, e_ops=None, **kwargs):
         """Run :func:`qutip.mesolve.mesolve` on the system of the objective
@@ -205,11 +216,13 @@ class Objective():
             H = _plug_in_array_controls_as_func(H, controls, mapping[0], tlist)
             c_ops = [
                 _plug_in_array_controls_as_func(
-                    c_op, controls, mapping[ic+1], tlist)
-                for (ic, c_op) in enumerate(self.c_ops)]
+                    c_op, controls, mapping[ic + 1], tlist
+                )
+                for (ic, c_op) in enumerate(self.c_ops)
+            ]
         return qutip.mesolve(
-            H=H, rho0=rho0, tlist=tlist, c_ops=c_ops, e_ops=e_ops,
-            **kwargs)
+            H=H, rho0=rho0, tlist=tlist, c_ops=c_ops, e_ops=e_ops, **kwargs
+        )
 
     def propagate(self, tlist, *, propagator, rho0=None, e_ops=None):
         """Propagates the system of the objective over the entire time grid
@@ -259,13 +272,15 @@ class Objective():
         mapping = pulses_mapping[0]  # "first objective" (dummy structure)
         pulses = [  # defined on the tlist intervals
             control_onto_interval(discretize(control, tlist))
-            for control in controls]
-        for time_index in range(len(tlist)-1):  # index over intervals
+            for control in controls
+        ]
+        for time_index in range(len(tlist) - 1):  # index over intervals
             H = plug_in_pulse_values(self.H, pulses, mapping[0], time_index)
             c_ops = [
-                plug_in_pulse_values(c_op, pulses, mapping[ic+1], time_index)
-                for (ic, c_op) in enumerate(self.c_ops)]
-            dt = tlist[time_index+1] - tlist[time_index]
+                plug_in_pulse_values(c_op, pulses, mapping[ic + 1], time_index)
+                for (ic, c_op) in enumerate(self.c_ops)
+            ]
+            dt = tlist[time_index + 1] - tlist[time_index]
             state = propagator(H, state, dt, c_ops)
             if len(e_ops) == 0:
                 result.states.append(state)
@@ -295,14 +310,14 @@ class Objective():
             >>> ket11 = ket((1,1))
             >>> obj = Objective(
             ...     initial_state=ket00,
-            ...     target_state=ket11,
+            ...     target=ket11,
             ...     H=H
             ... )
             >>> obj.summarize()
             '|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩'
             >>> obj = Objective(
             ...     initial_state=ket00,
-            ...     target_state=ket11,
+            ...     target=ket11,
             ...     H=H,
             ...     c_ops=[C1, C2]
             ... )
@@ -324,8 +339,11 @@ class Objective():
                     [summarize_qobj(c_op, ctrl_counter) for c_op in self.c_ops]
                 ),
             )
-        if self.target_state is not None:
-            res += " - %s" % (summarize_qobj(self.target_state, ctrl_counter))
+        if self.target is not None:
+            if isinstance(self.target, qutip.Qobj):
+                res += " - %s" % (summarize_qobj(self.target, ctrl_counter))
+            else:
+                res += " - %r" % self.target
         return res
 
     def __str__(self):
@@ -492,14 +510,14 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
         the gate. For a "normal" gate with a basis in Hilbert space, the
         objectives will have the `basis_states` as each
         :attr:`~.Objective.initial_state` and the result of applying `gate`
-        to the `basis_states` as each :attr:`~.Objective.target_state`.
+        to the `basis_states` as each :attr:`~.Objective.target`.
 
         For an optimization towards a perfect-entangler, or for the
         `local_invariants` of the given `gate`, each
         :attr:`~.Objective.initial_state` will be the Bell basis state
         described in "Theorem 1" in Y. Makhlin, Quantum Inf. Process. 1, 243
         (2002), derived from the canonical `basis_states`, and each
-        :attr:`~.Objective.target_state` will be None.
+        :attr:`~.Objective.target` will be None.
 
     Raises:
         ValueError: If `gate`, `basis_states`, and `local_invariants` are
@@ -528,12 +546,12 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
             >>> assert objectives == [
             ...     Objective(
             ...         initial_state=basis[0],
-            ...         target_state=(1j * basis[1]),
+            ...         target=(1j * basis[1]),
             ...         H=H
             ...     ),
             ...     Objective(
             ...         initial_state=basis[1],
-            ...         target_state=(-1j * basis[0]),
+            ...         target=(-1j * basis[0]),
             ...         H=H
             ...     )
             ... ]
@@ -551,7 +569,7 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
             >>> for i in range(4):
             ...     assert objectives[i] == Objective(
             ...        initial_state=bell_basis(basis)[i],
-            ...        target_state=None,
+            ...        target=None,
             ...        H=H
             ...     )
 
@@ -564,7 +582,7 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
             True
 
         For a local-invariants optimization, the information about the target
-        target gate is contained in the `chi_constructor` routine that is
+        gate is contained in the `chi_constructor` routine that is
         passed to :func:`.optimize_pulses`.
     """
     if isinstance(gate, str):
@@ -597,7 +615,7 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
     return [
         Objective(
             initial_state=initial_state,
-            target_state=target_state,
+            target=target_state,
             H=H,
             c_ops=c_ops,
         )
@@ -619,7 +637,7 @@ def _gate_objectives_li_pe(basis_states, H, c_ops):
     psi3 = (basis_states[1] - basis_states[2]) / np.sqrt(2)
     psi4 = (1j * basis_states[0] - 1j * basis_states[3]) / np.sqrt(2)
     return [
-        Objective(initial_state=psi, target_state=None, H=H, c_ops=c_ops)
+        Objective(initial_state=psi, target=None, H=H, c_ops=c_ops)
         for psi in [psi1, psi2, psi3, psi4]
     ]
 
@@ -652,7 +670,7 @@ def ensemble_objectives(objectives, Hs):
                 Objective(
                     H=H,
                     initial_state=obj.initial_state,
-                    target_state=obj.target_state,
+                    target=obj.target,
                     c_ops=obj.c_ops,
                 )
             )

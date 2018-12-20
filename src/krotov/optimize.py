@@ -2,9 +2,11 @@ import logging
 import time
 import copy
 from functools import partial
+from typing import Optional
 
 import numpy as np
 
+from qutip import Qobj
 from qutip.parallel import serial_map
 
 from .result import Result
@@ -17,15 +19,20 @@ from .mu import derivative_wrt_pulse
 __all__ = ['optimize_pulses']
 
 
-def _overlap(a, b) -> complex:
+def _overlap(a, b) -> Optional[complex]:
     """Complex overlap of two quantum objects.
 
-    Workaround for https://github.com/qutip/qutip/issues/940
+    If `a`, `b` are not quantum objects or are not compatible, return None.
     """
-    if a.type == b.type == 'oper':
-        return complex((a.dag() * b).tr())
+    if isinstance(a, Qobj) and isinstance(b, Qobj):
+        if a.dims != b.dims:
+            return None
+        if a.type == b.type == 'oper':
+            return complex((a.dag() * b).tr())
+        else:
+            return a.overlap(b)
     else:
-        return a.overlap(b)
+        return None
 
 
 def optimize_pulses(
@@ -157,9 +164,7 @@ def optimize_pulses(
 
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = [
-        _overlap(state_T, obj.target_state)
-        if obj.target_state is not None
-        else None
+        _overlap(state_T, obj.target)
         for (state_T, obj) in zip(fw_states_T, objectives)
     ]
 
@@ -267,9 +272,7 @@ def optimize_pulses(
         logger.info("Finished forward propagation/pulse update")
         fw_states_T = fw_states
         tau_vals = [
-            _overlap(fw_state_T, obj.target_state)
-            if obj.target_state is not None
-            else None
+            _overlap(fw_state_T, obj.target)
             for (fw_state_T, obj) in zip(fw_states_T, objectives)
         ]
 

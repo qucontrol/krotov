@@ -33,7 +33,7 @@ def test_complex_control_rejection():
     H = [H0, [H1, eps0]]
 
     objectives = [
-        krotov.Objective(initial_state=psi0, target_state=psi1, H=H)
+        krotov.Objective(initial_state=psi0, target=psi1, H=H)
     ]
 
     pulse_options = {
@@ -69,7 +69,7 @@ def test_reject_invalid_shapes():
     H = [H0, [H1, eps0]]
 
     objectives = [
-        krotov.Objective(initial_state=psi0, target_state=psi1, H=H)]
+        krotov.Objective(initial_state=psi0, target=psi1, H=H)]
 
     tlist = np.linspace(0, 5, 500)
 

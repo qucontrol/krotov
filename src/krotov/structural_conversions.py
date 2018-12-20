@@ -146,13 +146,13 @@ def extract_controls_mapping(objectives, controls):
         >>> objectives = [
         ...     krotov.Objective(
         ...         initial_state=psi0,
-        ...         target_state=psi_tgt,
+        ...         target=psi_tgt,
         ...         H=H1,
         ...         c_ops=c_ops
         ...     ),
         ...     krotov.Objective(
         ...         initial_state=psi0,
-        ...         target_state=psi_tgt,
+        ...         target=psi_tgt,
         ...         H=H2,
         ...         c_ops=c_ops
         ...     )

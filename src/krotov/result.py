@@ -27,7 +27,8 @@ class Result:
             or None
         tau_vals (list[list[complex]): for each iteration, a list of complex
             overlaps between the forward-propagated state and the target state
-            for each objective.
+            for each objective, assuming :attr:`.Objective.target` contains the
+            target state.
         guess_controls (list[numpy.ndarray]): List of the guess controls in
             array format
         optimized_controls (list[numpy.ndarray]): List of the optimized control
@@ -134,7 +135,7 @@ class Result:
                 Objective(
                     H=H,
                     initial_state=obj.initial_state,
-                    target_state=obj.target_state,
+                    target=obj.target,
                     c_ops=c_ops,
                 )
             )

@@ -75,7 +75,7 @@ def test_initialize_krotov_controls():
     pulse_options = {blackman: krotov.PulseOptions(lambda_a=1.0)}
 
     objectives = [
-        krotov.Objective(initial_state=qutip.Qobj(), target_state=None, H=H, ),
+        krotov.Objective(initial_state=qutip.Qobj(), target=None, H=H, ),
     ]
 
     assert abs(blackman(0, None)) < 1e-15
@@ -126,8 +126,8 @@ def test_extract_controls_with_arrays():
     H1 = [X, [Y, u1], [Z, u2]]  # ham for first objective
     H2 = [X, [Y, u2]]           # ham for second objective
     objectives = [
-        krotov.Objective(initial_state=psi0, target_state=psi_tgt, H=H1),
-        krotov.Objective(initial_state=psi0, target_state=psi_tgt, H=H2)]
+        krotov.Objective(initial_state=psi0, target=psi_tgt, H=H1),
+        krotov.Objective(initial_state=psi0, target=psi_tgt, H=H2)]
 
     controls = extract_controls(objectives)
     control_map = extract_controls_mapping(objectives, controls)
@@ -161,8 +161,8 @@ def test_extract_controls():
 
     # check same Hamiltonian occuring in multiple objectives
     objectives = [
-        krotov.Objective(initial_state=X, target_state=Y, H=H1),
-        krotov.Objective(initial_state=Y, target_state=X, H=H1)]
+        krotov.Objective(initial_state=X, target=Y, H=H1),
+        krotov.Objective(initial_state=Y, target=X, H=H1)]
     controls = extract_controls(objectives)
     maps = extract_controls_mapping(objectives, controls)
     assert len(controls) == 2
@@ -173,9 +173,9 @@ def test_extract_controls():
 
     # check same control occuring in multiple Hamiltonians
     objectives = [
-        krotov.Objective(initial_state=X, target_state=Y, H=H1),
-        krotov.Objective(initial_state=Y, target_state=X, H=H2),
-        krotov.Objective(initial_state=Y, target_state=X, H=H3)]
+        krotov.Objective(initial_state=X, target=Y, H=H1),
+        krotov.Objective(initial_state=Y, target=X, H=H2),
+        krotov.Objective(initial_state=Y, target=X, H=H3)]
     controls = extract_controls(objectives)
     assert len(controls) == 4
     for c in (f, g, h, d):

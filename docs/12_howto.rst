@@ -6,8 +6,8 @@ How to optimize towards a quantum gate
 
 To optimize towards a quantum gate :math:`\Op{O}` in a *closed* quantum system,
 set one :class:`.Objective` for state in the logical basis, with the basis
-state :math:`\ket{\Psi_k}` as the `initial_state` and :math:`\Op{O}
-\ket{\Psi_k}` as the `target_state`.
+state :math:`\ket{\Psi_k}` as the :attr:`~.Objective.initial_state` and
+:math:`\Op{O} \ket{\Psi_k}` as the :attr:`~.Objective.target`.
 
 You may use :func:`krotov.gate_objectives() <krotov.objectives.gate_objectives>`
 to construct the appropriate list of objectives.
