@@ -78,6 +78,8 @@ test36: .venv/py36/bin/py.test ## run tests for Python 3.6
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
 
 
+.venv/py36/bin/python: .venv/py36/bin/py.test
+
 .venv/py36/bin/sphinx-build: .venv/py36/bin/py.test
 
 .venv/py36/bin/jupyter: .venv/py36/bin/py.test
@@ -109,20 +111,25 @@ coverage: test36  ## generate coverage report in ./htmlcov
 	.venv/py36/bin/coverage html
 	@echo "open htmlcov/index.html"
 
-test-release: clean-build clean-pyc dist ## package and upload a release to test.pypi.org
-	twine check dist/*
-	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+test-upload: .venv/py36/bin/python clean-build clean-pyc dist ## package and upload a release to test.pypi.org
+	.venv/py36/bin/twine check dist/*
+	.venv/py36/bin/twine upload dist/*
 
-release: clean-build clean-pyc dist ## package and upload a release
-	twine check dist/*
-	twine upload dist/*
+upload: .venv/py36/bin/python clean-build clean-pyc dist ## package and upload a release to pypi.org
+	.venv/py36/bin/twine check dist/*
+	.venv/py36/bin/twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+release: clean .venv/py36/bin/python ## Create a new version, package and upload it
+	.venv/py36/bin/python ./scripts/release.py krotov
 
 
-dist: clean-build clean-pyc ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
-	twine check dist/*
+dist: .venv/py36/bin/python clean-build clean-pyc ## builds source and wheel package
+	@$< setup.py sdist
+	@$< setup.py bdist_wheel
 	ls -l dist
+
+dist-check: .venv/py36/bin/python  ## Check all dist files for correctness
+	.venv/py36/bin/twine check dist/*
 
 install: clean-build clean-pyc ## install the package to the active Python's site-packages
 	pip install .
