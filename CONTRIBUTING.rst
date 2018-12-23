@@ -280,6 +280,38 @@ will be available in any cell in the rest of the notebook.
 
 .. _watermark: https://github.com/rasbt/watermark
 
+Versioning
+----------
+
+Releases should follow `Semantic Versioning`_, and version numbers should be compatible with :pep:`440`.
+
+In short, versions number follow the pattern `major.minor.patch`, e.g.
+``1.0.0`` for the first stable release. If necessary, pre-release versions might
+be published as e.g:
+
+.. code-block:: none
+
+    1.0.0-dev1  # developer's preview 1 for release 1.0.0
+    1.0.0-rc1   # release candidate 1 for 1.0.0
+
+
+The current version is available through the ``__version__`` attribute of the
+:mod:`krotov` package:
+
+.. code-block:: python
+
+    >>> import krotov
+    >>> krotov.__version__   # doctest: +SKIP
+
+Between releases, ``__version__`` on the master branch should either be the
+version number of the last release, with "+dev" appended (as a
+`"local version identifier"`_), or the version number of the next planned
+release, with "-dev" appended ("pre-release identifier").
+
+
+.. _Semantic Versioning: https://semver.org
+.. _"local version identifier": https://www.python.org/dev/peps/pep-0440/#local-version-identifiers
+
 
 Developers' How-Tos
 -------------------
