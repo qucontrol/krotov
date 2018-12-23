@@ -113,33 +113,3 @@ pass to :func:`.optimize_pulses`.
 
 .. |weylchamber package| replace:: ``weylchamber`` package
 .. _weylchamber package: https://github.com/qucontrol/weylchamber
-
-
-How to optimize in a dissipative system
----------------------------------------
-
-TODO
-
-
-How to optimize for robust pulses
----------------------------------
-
-TODO
-
-
-How to parallelize the optimization
------------------------------------
-
-TODO
-
-
-How to maximize numerical efficiency
-------------------------------------
-
-TODO
-
-
-How to deal with the optimization running out of memory
--------------------------------------------------------
-
-TODO
