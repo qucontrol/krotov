@@ -93,8 +93,6 @@ You may also do
 
 to install additional development dependencies, including packages required to run the example notebooks.
 
-**Note: the latest released version is a placeholder release that is non-functional**
-
 If you don't have `pip`_ installed, this `Python installation guide`_, respectively the `Python Packaging User Guide`_ can guide
 you through the process.
 
