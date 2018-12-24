@@ -105,14 +105,11 @@ def ask_for_release_version(package_name):
     proposed_version = current_version.base_version
     if parse_version(proposed_version) <= parse_version(pypi_version):
         proposed_version = ''
-    new_version = click.prompt(
-        "What version > %s would you like to release?" % pypi_version,
-        default=proposed_version,
-    )
-    if parse_version(new_version) <= parse_version(pypi_version):
-        raise ReleaseError(
-            "Version %s must be greater than the latest version %s on PyPI"
-            % (new_version, pypi_version)
+    new_version = '0.0'
+    while parse_version(new_version) <= parse_version(pypi_version):
+        new_version = click.prompt(
+            "What version > %s would you like to release?" % pypi_version,
+            default=proposed_version,
         )
     click.confirm("Confirm version %s?" % new_version, abort=True)
     return str(new_version)
@@ -190,9 +187,6 @@ def make_release_commit(version):
 
 def make_upload(test=True):
     """Upload to PyPI or test.pypi"""
-    click.confirm(
-        "Ready to upload release to test.pypi?", default=True, abort=True
-    )
     if test:
         cmd = ['make', 'test-upload']
         url = 'https://test.pypi.org'
@@ -210,18 +204,16 @@ def make_upload(test=True):
             click.confirm(
                 "Failed to upload: %s. Try again?" % str(exc_info),
                 default=True,
-                abort=True,
+                abort=(not test),
             )
             success = False
         else:
             success = True
             click.confirm(
-                "Please check release on https://test.pypi.org. Continue?",
+                "Please check release on %s. Continue?" % url,
                 default=True,
                 abort=True,
             )
-    else:
-        run(['make', 'upload'], check=True)
 
 
 def push_release_commit():

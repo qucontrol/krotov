@@ -113,11 +113,11 @@ coverage: test36  ## generate coverage report in ./htmlcov
 
 test-upload: .venv/py36/bin/python clean-build clean-pyc dist ## package and upload a release to test.pypi.org
 	.venv/py36/bin/twine check dist/*
-	.venv/py36/bin/twine upload dist/*
+	.venv/py36/bin/twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 upload: .venv/py36/bin/python clean-build clean-pyc dist ## package and upload a release to pypi.org
 	.venv/py36/bin/twine check dist/*
-	.venv/py36/bin/twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+	.venv/py36/bin/twine upload dist/*
 
 release: clean .venv/py36/bin/python ## Create a new version, package and upload it
 	.venv/py36/bin/python ./scripts/release.py krotov
