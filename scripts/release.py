@@ -35,7 +35,7 @@ def make_release(package_name):
     push_release_commit()
     make_upload(test=False)
     make_and_push_tag(new_version)
-    next_dev_version = parse_version(new_version).base_version + '+dev'
+    next_dev_version = get_next_dev_version(new_version)
     set_version(
         join('.', 'src', package_name, '__init__.py'), next_dev_version
     )
@@ -234,6 +234,15 @@ def make_and_push_tag(version):
     )
     run(['git', 'tag', "v%s" % version], check=True)
     run(['git', 'push', '--tags', 'origin'], check=True)
+
+
+def get_next_dev_version(released_version):
+    """Ask for the post-release version number"""
+    released_version = parse_version(str(released_version))
+    if released_version.is_prerelease:
+        return str(released_version.base_version) + "-dev"
+    else:
+        return str(released_version.base_version) + "+dev"
 
 
 def make_next_dev_version_commit(version):
