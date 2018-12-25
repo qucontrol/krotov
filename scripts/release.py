@@ -35,7 +35,7 @@ def make_release(package_name):
     push_release_commit()
     make_upload(test=False)
     make_and_push_tag(new_version)
-    next_dev_version = new_version + '+dev'
+    next_dev_version = parse_version(new_version).base_version + '+dev'
     set_version(
         join('.', 'src', package_name, '__init__.py'), next_dev_version
     )
@@ -232,7 +232,7 @@ def make_and_push_tag(version):
     click.confirm(
         "Push tag '%s' to origin?" % version, default=True, abort=True
     )
-    run(['git', 'tag', version], check=True)
+    run(['git', 'tag', "v%s" % version], check=True)
     run(['git', 'push', '--tags', 'origin'], check=True)
 
 
