@@ -120,7 +120,7 @@ upload: .venv/py36/bin/python clean-build clean-pyc dist ## package and upload a
 	.venv/py36/bin/twine upload dist/*
 
 release: clean .venv/py36/bin/python ## Create a new version, package and upload it
-	.venv/py36/bin/python ./scripts/release.py krotov
+	.venv/py36/bin/python ./scripts/release.py
 
 
 dist: .venv/py36/bin/python clean-build clean-pyc ## builds source and wheel package
