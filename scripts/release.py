@@ -105,8 +105,6 @@ def edit(filename):
 def check_git_clean():
     """Ensure that a given git.Repo is clean"""
     repo = git.Repo(os.getcwd())
-    if repo.active_branch.name != 'master':
-        raise ReleaseError("Repository must be on the master branch")
     if repo.is_dirty():
         run(['git', 'status'])
         raise ReleaseError("Repository must be in a clean state")
