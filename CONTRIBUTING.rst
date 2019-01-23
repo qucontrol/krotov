@@ -280,6 +280,72 @@ will be available in any cell in the rest of the notebook.
 
 .. _watermark: https://github.com/rasbt/watermark
 
+Versioning
+----------
+
+Releases should follow `Semantic Versioning`_, and version numbers published to
+PyPI_ must be compatible with :pep:`440`.
+
+In short, versions number follow the pattern `major.minor.patch`, e.g.
+``0.1.0`` for the first release, and ``1.0.0`` for the first *stable* release.
+If necessary, pre-release versions might be published as e.g:
+
+.. code-block:: none
+
+    1.0.0-dev1  # developer's preview 1 for release 1.0.0
+    1.0.0-rc1   # release candidate 1 for 1.0.0
+
+Errors in the release metadata or documentation only may be fixed in a
+post-release, e.g.:
+
+.. code-block:: none
+
+    1.0.0.post1  # first post-release after 1.0.0
+
+Post-releases should be used sparingly, but they are acceptable even though
+they are not supported by the `Semantic Versioning`_ specification.
+
+The current version is available through the ``__version__`` attribute of the
+:mod:`krotov` package:
+
+.. code-block:: python
+
+    >>> import krotov
+    >>> krotov.__version__   # doctest: +SKIP
+
+Between releases, ``__version__`` on the master branch should either be the
+version number of the last release, with "+dev" appended (as a
+`"local version identifier"`_), or the version number of the next planned
+release, with "-dev" appended (`"pre-release identifier"`_ with extra dash).
+The version string "1.0.0-dev1+dev" is a valid value after the "1.0.0-dev1"
+pre-release. The "+dev" suffix must never be included in a release to PyPI_.
+
+Note that twine_ applies normalization_ to the above recommended forms to
+make them strictly compatible with :pep:`440`, before uploading to PyPI_. Users
+installing the package through pip_ may use the original version specification
+as well as the normalized one (or any other variation that normalizes to the
+same result).
+
+When making a release via
+
+.. code-block:: shell
+
+    $ make release
+
+the above versioning conventions will be taken into account automatically.
+
+Releases must be tagged in git, using the version string prefixed by "v",
+e.g. ``v1.0.0-dev1`` and ``v1.0.0``. This makes them available at
+https://github.com/qucontrol/krotov/releases.
+
+.. _Semantic Versioning: https://semver.org
+.. _"local version identifier": https://www.python.org/dev/peps/pep-0440/#local-version-identifiers
+.. _"pre-release identifier": https://www.python.org/dev/peps/pep-0440/#pre-releases
+.. _normalization: https://legacy.python.org/dev/peps/pep-0440/#id29
+.. _PyPI: http://pypi.org
+.. _twine: https://twine.readthedocs.io/en/latest/
+.. _pip: https://pip.readthedocs.io/en/stable/
+
 
 Developers' How-Tos
 -------------------
@@ -370,6 +436,15 @@ you convert the notebook to a script first.  To convert a notebook to an
 You can then also set a manual breakpoint by inserting the following line anywhere in the code::
 
     from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
+
+
+How to make ``git diff`` work for notebooks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Install nbdime_ and run ``nbdime config-git --enable --global`` to `enable the git integration`_.
+
+.. _nbdime: https://nbdime.readthedocs.io/en/latest/index.html
+.. _enable the git integration: https://nbdime.readthedocs.io/en/latest/index.html#git-integration-quickstart
 
 
 How to commit failing tests or example notebooks
