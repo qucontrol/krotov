@@ -2,7 +2,6 @@ import logging
 import time
 import copy
 from functools import partial
-from typing import Optional
 
 import numpy as np
 
@@ -11,29 +10,19 @@ from qutip.parallel import serial_map
 
 from .result import Result
 from .structural_conversions import (
-    extract_controls, extract_controls_mapping, control_onto_interval,
-    pulse_options_dict_to_list, pulse_onto_tlist,
-    plug_in_pulse_values, discretize)
+    extract_controls,
+    extract_controls_mapping,
+    control_onto_interval,
+    pulse_options_dict_to_list,
+    pulse_onto_tlist,
+    plug_in_pulse_values,
+    discretize,
+)
 from .mu import derivative_wrt_pulse
 from .info_hooks import chain
+from .second_order import _overlap
 
 __all__ = ['optimize_pulses']
-
-
-def _overlap(a, b) -> Optional[complex]:
-    """Complex overlap of two quantum objects.
-
-    If `a`, `b` are not quantum objects or are not compatible, return None.
-    """
-    if isinstance(a, Qobj) and isinstance(b, Qobj):
-        if a.dims != b.dims:
-            return None
-        if a.type == b.type == 'oper':
-            return complex((a.dag() * b).tr())
-        else:
-            return a.overlap(b)
-    else:
-        return None
 
 
 def optimize_pulses(
@@ -89,21 +78,10 @@ def optimize_pulses(
             Schrödinger and master equations. See :mod:`krotov.mu` for a
             full explanation of the role of `mu` in the optimization, and the
             required function signature.
-        sigma (None or callable): Function that calculates the second-order
-            contribution. If None, the first-order Krotov method is used.
-        JT (None or callable): Function that calculates the final-time
-            functional $J_T$. It must be given if the parameters $A, B, C$ for
-            second-order Krotov should be dynamically calculated in each
-            iteration step.
-        A (float): Initial $A$ parameter for contribution of second-order
-            Krotov.
-        B (float): Initial $B$ parameter for contribution of second-order
-            Krotov.
-        C (float): Initial $C$ parameter for contribution of second-order
-            Krotov.
-        dyn_ABC (logical): If given as true, it determines whether the
-            parameters $A$, $B$, $C$ of the second-order contribution should be
-            dynamically recalculated within each iteration
+        sigma (None or krotov.second_order.Sigma): Function (instance of a
+            :class:`.Sigma` subclass) that calculates the
+            second-order contribution. If None, the first-order Krotov method
+            is used.
         iter_start (int): The formal iteration number at which to start the
             optimization
         iter_stop (int): The iteration number after which to end the
@@ -157,12 +135,7 @@ def optimize_pulses(
     logger.info("Initializing optimization with Krotov's method")
     if mu is None:
         mu = derivative_wrt_pulse
-    if sigma is None:
-        second_order = False
-    else:
-        second_order = True
-        if dyn_ABC and JT is None:
-            raise ValueError("`JT` must be given, if `dyn_ABC` is true")
+    second_order = (sigma is not None)
     if modify_params_after_iter is not None:
         # From a technical perspective, the `modify_params_after_iter` is
         # really just another info_hook, the only difference is the
@@ -200,12 +173,8 @@ def optimize_pulses(
     )
     toc = time.time()
 
-    # Store the initial forward-propagated states for the calculation of the
-    # second-order contribution. For the very first iteration the
-    # forward-propagated states under the old and new pulses are in fact
-    # identical, since there was no pulse update so far
     if second_order:
-        forward_states_old = forward_states.copy()
+        forward_states0 = forward_states  # ∀t: Δϕ=0, for iteration 0
 
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = [
@@ -273,10 +242,12 @@ def optimize_pulses(
         logger.info("Started forward propagation/pulse update")
         forward_states = [storage(len(tlist)) for _ in range(len(objectives))]
         if second_order:
-            # Create empty data structuer for state differences as necessary
-            # for the second-order contribution
-            delta_phis = [Qobj(np.zeros(shape=chi_states[i].shape)) for i in
-                    range(len(objectives))]
+            # In the update for the pulses in the first time interval, we use
+            # the states at t=0. Hence, Δϕ(t=0) = 0
+            delta_phis = [
+                Qobj(np.zeros(shape=chi_states[k].shape))
+                for k in range(len(objectives))
+            ]
         for i_obj in range(len(objectives)):
             forward_states[i_obj][0] = objectives[i_obj].initial_state
         delta_eps = [
@@ -285,10 +256,8 @@ def optimize_pulses(
         optimized_pulses = copy.deepcopy(guess_pulses)
         for time_index in range(len(tlist) - 1):  # iterate over time intervals
             if second_order:
-                # Calculate the sigma function for the second-order
-                # contribution
-                sigma_val = sigma(tlist[-1]-tlist[0], tlist[time_index+1], A,
-                        B, C)
+                dt = tlist[time_index + 1] - tlist[time_index]
+                σ = sigma(tlist[time_index] + 0.5 * dt)
             # pulse update
             for (i_pulse, guess_pulse) in enumerate(guess_pulses):
                 for (i_obj, objective) in enumerate(objectives):
@@ -305,9 +274,9 @@ def optimize_pulses(
                     update = _overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩
                     update *= chi_norms[i_obj]
                     if second_order:
-                        # second-order contribution to pulse update
-                        update += 0.5*sigma_val * _overlap(delta_phis[i_obj],
-                                μ(Ψ))
+                        update += (
+                            0.5 * σ * _overlap(delta_phis[i_obj], μ(Ψ))
+                        )
                     delta_eps[i_pulse][time_index] += update
                 λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
@@ -328,14 +297,11 @@ def optimize_pulses(
                 ),
             )
             if second_order:
-                # Calculate state differences at the current time between the
-                # forward-propagated states using the current (already updated
-                # pulses) and the very same states but under the pulses from
-                # the last iteration
+                # Δϕ(t + dt), to be used for the update in the next interval
                 delta_phis = [
-                        fw_states[i] - forward_states_old[i][time_index+1]
-                        for i in range(len(objectives))
-                        ]
+                    fw_states[k] - forward_states0[k][time_index + 1]
+                    for k in range(len(objectives))
+                ]
             # storage
             for i_obj in range(len(objectives)):
                 forward_states[i_obj][time_index + 1] = fw_states[i_obj]
@@ -347,18 +313,6 @@ def optimize_pulses(
         ]
 
         toc = time.time()
-
-        if second_order:
-            if dyn_ABC:
-                # recalculate A
-                A = _recalculate_A(
-                        len(tlist)-1, JT, forward_states, forward_states_old,
-                        chi_states, chi_norms, objectives
-                        )
-            # Store all forward-propagated states of the current iteration for
-            # the next one where they are necessary for the calculation of the
-            # second-order contribution
-            forward_states_old = forward_states.copy()
 
         # Display information about iteration
         if info_hook is None:
@@ -404,6 +358,19 @@ def optimize_pulses(
             # prepare for next iteration
             guess_pulses = optimized_pulses
 
+        if second_order:
+            sigma.refresh(
+                forward_states=forward_states,
+                forward_states0=forward_states0,
+                chi_states=chi_states,
+                chi_norms=chi_norms,
+                optimized_pulses=optimized_pulses,
+                guess_pulses=guess_pulses,
+                objectives=objectives,
+                result=result,
+            )
+            forward_states0 = forward_states
+
     else:  # optimization finished without `check_convergence` break
 
         result.message = "Reached %d iterations" % iter_stop
@@ -427,10 +394,11 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
             raise ValueError(
                 "All controls must be real-valued. Complex controls must be "
                 "split into an independent real and imaginary part in the "
-                "objectives before passing them to the optimization")
+                "objectives before passing them to the optimization"
+            )
     guess_pulses = [  # defined on the tlist intervals
-        control_onto_interval(control)
-        for control in guess_controls]
+        control_onto_interval(control) for control in guess_controls
+    ]
     lambda_vals = [options.lambda_a for options in options_list]
     shape_arrays = []
     for options in options_list:
@@ -440,17 +408,23 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
         if np.iscomplexobj(shape_array):
             raise ValueError(
                 "Update shapes (shape attribute in PulseOptions) must be "
-                "real-valued")
+                "real-valued"
+            )
         if np.min(shape_array) < 0 or np.max(shape_array) > 1.01:
             # 1.01 accounts for rounding errors: In principle, shapes > 1 are
             # not a problem, but then it cancels with λₐ, which makes things
             # unnecessarily confusing.
             raise ValueError(
                 "Update shapes (shape attribute in PulseOptions) must have "
-                "values in the range [0, 1]")
+                "values in the range [0, 1]"
+            )
     return (
-        guess_controls, guess_pulses, pulses_mapping, lambda_vals,
-        shape_arrays)
+        guess_controls,
+        guess_pulses,
+        pulses_mapping,
+        lambda_vals,
+        shape_arrays,
+    )
 
 
 def _forward_propagation(
@@ -548,54 +522,3 @@ def _forward_propagation_step(
     ]
     dt = tlist[time_index + 1] - tlist[time_index]
     return propagator(H, state, dt, c_ops)
-
-
-def _recalculate_A(
-    time_i,
-    JT,
-    fw_states1,
-    fw_states0,
-    chis,
-    chis_norm,
-    objectives
-):
-    """Recalculate the A parameter for the second-order contribution"""
-    n = len(fw_states0)
-    delta_psis = [
-            fw_states1[i][time_i] - fw_states0[i][time_i]
-            for i in range(n)
-            ]
-    delta_psi_sq_norm_s = [
-            _overlap(delta_psis[i], delta_psis[i]).real
-            for i in range(n)
-            ]
-    sum_delta_psi_sq_norm_s = sum(delta_psi_sq_norm_s)
-    if sum_delta_psi_sq_norm_s > 1.0e-30:
-        A = 0
-        delta_J =   JT([fw_states1[i][time_i] for i in range(n)], objectives) \
-                  - JT([fw_states0[i][time_i] for i in range(n)], objectives)
-        for i in range(n):
-            A += (2.0 * _overlap(chis[i]*chis_norm[i],delta_psis[i]).real)    \
-                 / sum_delta_psi_sq_norm_s
-        A += delta_J / sum_delta_psi_sq_norm_s
-    return A
-
-
-def sigma_local(
-    Tf,
-    t,
-    A,
-    B,
-    C
-):
-    """Second-order function $\sigma(t)$ calculated from A, B, C"""
-    epsA = 0
-    epsB = 0
-    epsC = 0
-    barA = max(epsA, 2*A + epsA)
-    barB = 2 * B + epsB
-    barC = min(-epsC, 2*C - epsC)
-    if barB == 0.0:
-        return barC*(Tf-t) - barA
-    else:
-        return np.exp(barB*(Tf-t)) * (barC/barB - barA) - barC/barB
