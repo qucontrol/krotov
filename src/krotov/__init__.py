@@ -10,6 +10,7 @@ from . import objectives
 from . import mu
 from . import result
 from . import convergence
+from . import second_order
 
 # expose primary classes/functions
 from .objectives import Objective, gate_objectives, ensemble_objectives
