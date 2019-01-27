@@ -1,5 +1,6 @@
-"""Functions that may be used for the `shape` attribute of
-:class:`.PulseOptions`, or for generating guess pulses"""
+"""Functions that may be used for the `shape` value in the options-dict for
+each control (`pulse_options` parameter in :func:`.optimize_pulses`), or for
+generating guess pulses"""
 
 import functools
 
@@ -62,7 +63,7 @@ def flattop(t, t_start, t_stop, t_rise, t_fall=None, func='blackman'):
         You may use :class:`numpy.vectorize` to transform this into a shape
         function for arrays, :func:`functools.partial` to fix the function
         arguments other than `t`, creating a function suitable for the `shape`
-        attribute of :class:`.PulseOptions`, and :func:`qutip_callback` to
+        value of `pulse_options`, and :func:`qutip_callback` to
         create a function suitable as a time-dependent control in QuTiP.
     """
     if t_fall is None:

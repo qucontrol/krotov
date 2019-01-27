@@ -21,6 +21,7 @@ from .structural_conversions import (
 from .mu import derivative_wrt_pulse
 from .info_hooks import chain
 from .second_order import _overlap
+from .shapes import zero_shape, one_shape
 
 __all__ = ['optimize_pulses']
 
@@ -34,11 +35,6 @@ def optimize_pulses(
     chi_constructor,
     mu=None,
     sigma=None,
-    JT=None,
-    A=0.0,
-    B=0.0,
-    C=0.0,
-    dyn_ABC=True,
     iter_start=0,
     iter_stop=5000,
     check_convergence=None,
@@ -57,11 +53,43 @@ def optimize_pulses(
     Args:
         objectives (list[Objective]): List of objectives
         pulse_options (dict): Mapping of time-dependent controls found in the
-            Hamiltonians of the objectives to :class:`.PulseOptions` instances.
-            There must be a mapping for each control. As numpy arrays are
-            unhashable and thus cannot be used as dict keys, the options for a
-            ``control`` that is an array must set using
-            ``pulse_options[id(control)] = ...``
+            Hamiltonians of the objectives to a dictionary of options for that
+            control. There must be an otions-dict for each control. As numpy
+            arrays are unhashable and thus cannot be used as dict keys, the
+            options for a control that is an array must set using the key
+            ``pulse_options[id(control)] = ...``. The options-dict of any
+            particular control must contain the following keys:
+
+            * ``'lambda_a'``: the Krotov step size (float value). This governs
+              the overall magnitude of the pulse update. Large values result in
+              small updates. Small values may lead to sharp spikes and
+              numerical instability.
+
+            * ``'shape'`` : Function S(t) in the range [0, 1] that scales the
+              pulse update for the pulse value at t. This can be used to ensure
+              boundary conditions (S(0) = S(T) = 0), and enforce smooth
+              switch-on and switch-off. This can be a callable that takes a
+              single argument `t`; or the values 1 or 0 for a constant
+              update-shape. The value 0 disables the optimization of that
+              particular control.
+
+            For example, for `objectives` that contain a Hamiltonian of the
+            form ``[H0, [H1, u], [H2, g]]``, where ``H0``, ``H1``, and ``H2``
+            are :class:`~qutip.Qobj` instances, ``u`` is a numpy array of
+            control values, and ``g`` is a control function (a callable), a
+            possible value for `pulse_options` would look like this::
+
+                from krotov.shapes import flattop
+                from functools import partial
+                pulse_options = {
+                    id(u): {'lambda_a': 1.0, 'shape': 1},
+                    g: dict(
+                        lambda_a=1.0,
+                        shape=partial(
+                            flattop, t_start=0, t_stop=10, t_rise=1.5
+                        )
+                    )
+                }
         tlist (numpy.ndarray): Array of time grid values, cf.
             :func:`~qutip.mesolve.mesolve`
         propagator (callable): Function that propagates the state backward or
@@ -95,12 +123,12 @@ def optimize_pulses(
             state-dependent constraint. Currently not implemented.
         info_hook (None or callable): Function that is called after each
             iteration of the optimization, for the purpose of analysis. Any
-            value returned by `info_hook` (e.g. an evaluated functional $J_T$)
-            will be stored, for each iteration, in the `info_vals` attribute of
-            the returned :class:`.Result`. The `info_hook` must have the same
-            signature as :func:`krotov.info_hooks.print_debug_information`. It
-            should not modify its arguments except for `shared_data` in any
-            way.
+            value returned by `info_hook` (e.g. an evaluated functional
+            :math:`J_T`) will be stored, for each iteration, in the `info_vals`
+            attribute of the returned :class:`.Result`. The `info_hook` must
+            have the same signature as
+            :func:`krotov.info_hooks.print_debug_information`. It should not
+            modify its arguments in any way, except for `shared_data`.
         modify_params_after_iter (None or callable): Function that is called
             after each iteration, which may modify its arguments for certain
             advanced use cases, such as dynamically adjusting `lambda_vals`, or
@@ -111,8 +139,9 @@ def optimize_pulses(
             `info_hook` via the `shared_data` argument.
         storage (callable): Storage constructor for the storage of
             propagated states. Must accept an integer parameter `N` and return
-            an empty array of length `N`. The default value 'array' is
-            equivalent to ``functools.partial(numpy.empty, dtype=object)``.
+            an empty array-like container of length `N`. The default value
+            'array' is equivalent to
+            ``functools.partial(numpy.empty, dtype=object)``.
         parallel_map (callable or None): Parallel function evaluator. The
             argument must have the same specification as
             :func:`qutip.parallel.serial_map`,
@@ -135,7 +164,7 @@ def optimize_pulses(
     logger.info("Initializing optimization with Krotov's method")
     if mu is None:
         mu = derivative_wrt_pulse
-    second_order = (sigma is not None)
+    second_order = sigma is not None
     if modify_params_after_iter is not None:
         # From a technical perspective, the `modify_params_after_iter` is
         # really just another info_hook, the only difference is the
@@ -274,9 +303,7 @@ def optimize_pulses(
                     update = _overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩
                     update *= chi_norms[i_obj]
                     if second_order:
-                        update += (
-                            0.5 * σ * _overlap(delta_phis[i_obj], μ(Ψ))
-                        )
+                        update += 0.5 * σ * _overlap(delta_phis[i_obj], μ(Ψ))
                     delta_eps[i_pulse][time_index] += update
                 λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
@@ -382,6 +409,18 @@ def optimize_pulses(
     return result
 
 
+def _shape_val_to_callable(val):
+    if val == 1:
+        return one_shape
+    elif val == 0:
+        return zero_shape
+    else:
+        if callable(val):
+            return val
+        else:
+            raise ValueError("shape must be a callable")
+
+
 def _initialize_krotov_controls(objectives, pulse_options, tlist):
     """Extract discretized guess controls and pulses from `objectives`, and
     return them with the associated mapping and option data"""
@@ -399,15 +438,29 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     guess_pulses = [  # defined on the tlist intervals
         control_onto_interval(control) for control in guess_controls
     ]
-    lambda_vals = [options.lambda_a for options in options_list]
+    try:
+        lambda_vals = [float(options['lambda_a']) for options in options_list]
+    except KeyError:
+        raise ValueError(
+            "Each value in pulse_options must be a dict that contains "
+            "the key 'lambda_a'."
+        )
     shape_arrays = []
     for options in options_list:
-        S = discretize(options.shape, tlist, args=())
+        try:
+            S = discretize(
+                _shape_val_to_callable(options['shape']), tlist, args=()
+            )
+        except KeyError:
+            raise ValueError(
+                "Each value in pulse_options must be a dict that contains "
+                "the key 'shape'."
+            )
         shape_arrays.append(control_onto_interval(S))
     for shape_array in shape_arrays:
         if np.iscomplexobj(shape_array):
             raise ValueError(
-                "Update shapes (shape attribute in PulseOptions) must be "
+                "Update shapes ('shape' in pulse options-dict) must be "
                 "real-valued"
             )
         if np.min(shape_array) < 0 or np.max(shape_array) > 1.01:
@@ -415,7 +468,7 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
             # not a problem, but then it cancels with λₐ, which makes things
             # unnecessarily confusing.
             raise ValueError(
-                "Update shapes (shape attribute in PulseOptions) must have "
+                "Update shapes ('shape' in pulse options-dict) must have "
                 "values in the range [0, 1]"
             )
     return (

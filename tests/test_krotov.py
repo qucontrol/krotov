@@ -37,7 +37,7 @@ def test_complex_control_rejection():
     ]
 
     pulse_options = {
-        H[1][1]: krotov.PulseOptions(lambda_a=5, shape=S)
+        H[1][1]: dict(lambda_a=5, shape=S)
     }
 
     tlist = np.linspace(0, 5, 500)
@@ -90,7 +90,7 @@ def test_reject_invalid_shapes():
 
     with pytest.raises(ValueError) as exc_info:
         pulse_options = {
-            H[1][1]: krotov.PulseOptions(lambda_a=5, shape=S_complex)}
+            H[1][1]: dict(lambda_a=5, shape=S_complex)}
         krotov.optimize_pulses(
             objectives, pulse_options, tlist,
             propagator=krotov.propagators.expm,
@@ -99,7 +99,7 @@ def test_reject_invalid_shapes():
 
     with pytest.raises(ValueError) as exc_info:
         pulse_options = {
-            H[1][1]: krotov.PulseOptions(lambda_a=5, shape=S_negative)}
+            H[1][1]: dict(lambda_a=5, shape=S_negative)}
         krotov.optimize_pulses(
             objectives, pulse_options, tlist,
             propagator=krotov.propagators.expm,
@@ -108,7 +108,7 @@ def test_reject_invalid_shapes():
 
     with pytest.raises(ValueError) as exc_info:
         pulse_options = {
-            H[1][1]: krotov.PulseOptions(lambda_a=5, shape=S_large)}
+            H[1][1]: dict(lambda_a=5, shape=S_large)}
         krotov.optimize_pulses(
             objectives, pulse_options, tlist,
             propagator=krotov.propagators.expm,

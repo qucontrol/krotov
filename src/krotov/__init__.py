@@ -14,12 +14,10 @@ from . import second_order
 
 # expose primary classes/functions
 from .objectives import Objective, gate_objectives, ensemble_objectives
-from .pulse_options import PulseOptions
 from .optimize import optimize_pulses
 
 __all__ = [
     'Objective',
-    'PulseOptions',
     'gate_objectives',
     'ensemble_objectives',
     'optimize_pulses',
