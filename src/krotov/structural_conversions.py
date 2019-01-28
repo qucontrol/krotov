@@ -200,9 +200,9 @@ def extract_controls_mapping(objectives, controls):
 def pulse_options_dict_to_list(pulse_options, controls):
     """Convert `pulse_options` into a list
 
-    Given a dict `pulse_options` that contains a :class:`.PulseOptions`
-    instance for every control in `controls`, return a list of the
-    :class:`.PulseOptions` in the same order as `controls`.
+    Given a dict `pulse_options` that contains an options-dict
+    for every control in `controls` (cf. :func:`.optimize_pulses`), return a
+    list of the options-dicts in the same order as `controls`.
 
     Raises:
         ValueError: if `pulse_options` to not contain all of the `controls`

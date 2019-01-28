@@ -72,7 +72,7 @@ def test_initialize_krotov_controls():
     blackman = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=T)
     H = ['H0', ['H1', blackman]]
     tlist = np.linspace(0, T, 10)
-    pulse_options = {blackman: krotov.PulseOptions(lambda_a=1.0)}
+    pulse_options = {blackman: dict(lambda_a=1.0, shape=1)}
 
     objectives = [
         krotov.Objective(initial_state=qutip.Qobj(), target=None, H=H, ),
@@ -196,26 +196,26 @@ def test_pulse_options_dict_to_list(caplog):
     assert u2 is not u3
 
     pulse_options = {
-        id(u1): krotov.PulseOptions(lambda_a=1.0),
-        id(u2): krotov.PulseOptions(lambda_a=2.0)}
+        id(u1): dict(lambda_a=1.0, shape=1),
+        id(u2): dict(lambda_a=2.0, shape=1)}
 
     pulse_options_list = pulse_options_dict_to_list(pulse_options, controls)
     assert len(pulse_options_list) == 2
     assert pulse_options_list[0] == pulse_options[id(u1)]
     assert pulse_options_list[1] == pulse_options[id(u2)]
 
-    # check error for missing PulseOptions
+    # check error for missing pulse options
     pulse_options = {
-        id(u1): krotov.PulseOptions(lambda_a=1.0)}
+        id(u1): dict(lambda_a=1.0, shape=1)}
     with pytest.raises(ValueError) as exc_info:
         pulse_options_dict_to_list(pulse_options, controls)
     assert 'does not have any associated pulse options' in str(exc_info.value)
 
-    # check warning message for extra PulseOptions
+    # check warning message for extra pulse options
     pulse_options = {
-        id(u1): krotov.PulseOptions(lambda_a=1.0),
-        id(u2): krotov.PulseOptions(lambda_a=1.0),
-        id(u3): krotov.PulseOptions(lambda_a=1.0),
+        id(u1): dict(lambda_a=1.0, shape=1),
+        id(u2): dict(lambda_a=1.0, shape=1),
+        id(u3): dict(lambda_a=1.0, shape=1),
     }
     with caplog.at_level(logging.WARNING):
         pulse_options_dict_to_list(pulse_options, controls)

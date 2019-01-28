@@ -39,10 +39,9 @@ improvement between iterations. The :func:`delta_below` function generates a
 
 While Krotov's method is guaranteed to monotonically converge in the continuous
 limit, this no longer strictly holds when time is discretized (in particular if
-:attr:`~.PulseOptions.lambda_a` is too small). You can use
-:func:`check_monotonic_error` or :func:`check_monotonic_fidelity` as a
-`check_convergence` function that stops the optimization when monotonic
-convergence is lost.
+λₐ is too small). You can use :func:`check_monotonic_error` or
+:func:`check_monotonic_fidelity` as a `check_convergence` function that stops
+the optimization when monotonic convergence is lost.
 """
 from operator import xor
 import glom
