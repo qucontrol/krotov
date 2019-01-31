@@ -8,18 +8,18 @@ from setuptools import setup, find_packages
 
 def get_version(filename):
     """Extract the package version"""
-    with open(filename) as in_fh:
+    with open(filename, encoding='utf8') as in_fh:
         for line in in_fh:
             if line.startswith('__version__'):
                 return line.split('=')[1].strip()[1:-1]
     raise ValueError("Cannot extract version from %s" % filename)
 
 
-with open('README.rst') as readme_file:
+with open('README.rst', encoding='utf8') as readme_file:
     readme = readme_file.read()
 
 try:
-    with open('HISTORY.rst') as history_file:
+    with open('HISTORY.rst', encoding='utf8') as history_file:
         history = history_file.read()
 except OSError:
     history = ''
