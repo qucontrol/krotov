@@ -142,12 +142,18 @@ def optimize_pulses(
             an empty array-like container of length `N`. The default value
             'array' is equivalent to
             ``functools.partial(numpy.empty, dtype=object)``.
-        parallel_map (callable or None): Parallel function evaluator. The
-            argument must have the same specification as
-            :func:`qutip.parallel.serial_map`,
-            which is used when None is passed. Alternatives are
-            :func:`qutip.parallel.parallel_map` or
-            :func:`qutip.ipynbtools.parallel_map`.
+        parallel_map (callable or tuple or None): Parallel function evaluator.
+            If given as a callable, the argument must have the same
+            specification as :func:`qutip.parallel.serial_map`.
+            A value of None is the same as passing
+            :func:`qutip.parallel.serial_map`. If given as a tuple, that tuple
+            must contain three callables, each of which has the same
+            specification as :func:`qutip.parallel.serial_map`. These three
+            callables are used to parallelize (1) the initial
+            forward-propagation, (2) the backward-propagation under the guess
+            pulses, and (3) the forward-propagation by a single time step under
+            the optimized pulses. See :mod:`krotov.parallelization` for
+            details.
         store_all_pulses (bool): Whether or not to store the optimized pulses
             from *all* iterations in :class:`.Result`.
 
@@ -181,6 +187,8 @@ def optimize_pulses(
         storage = partial(np.empty, dtype=object)
     if parallel_map is None:
         parallel_map = serial_map
+    if not isinstance(parallel_map, (tuple, list)):
+        parallel_map = (parallel_map, parallel_map, parallel_map)
 
     (
         guess_controls,
@@ -195,7 +203,7 @@ def optimize_pulses(
 
     # Initial forward-propagation
     tic = time.time()
-    forward_states = parallel_map(
+    forward_states = parallel_map[0](
         _forward_propagation,
         list(range(len(objectives))),
         (objectives, guess_pulses, pulses_mapping, tlist, propagator, storage),
@@ -253,7 +261,7 @@ def optimize_pulses(
         chi_states = [chi / nrm for (chi, nrm) in zip(chi_states, chi_norms)]
 
         # Backward propagation
-        backward_states = parallel_map(
+        backward_states = parallel_map[1](
             _backward_propagation,
             list(range(len(objectives))),
             (
@@ -310,7 +318,7 @@ def optimize_pulses(
                 Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag
                 optimized_pulses[i_pulse][time_index] += Δϵ
             # forward propagation
-            fw_states = parallel_map(
+            fw_states = parallel_map[2](
                 _forward_propagation_step,
                 list(range(len(objectives))),
                 (

@@ -448,6 +448,8 @@ def summarize_qobj(obj, ctrl_counter=None):
         return 'u%d[%s]' % (ctrl_counter(obj), obj.dtype.name)
     elif isinstance(obj, _ControlPlaceholder):
         return str(obj)
+    elif isinstance(obj, (float, complex)):
+        return str(obj)
     elif not isinstance(obj, qutip.Qobj):
         raise TypeError("obj must be a Qobj, not %s" % obj.__class__.__name__)
     if obj.type == 'ket':
