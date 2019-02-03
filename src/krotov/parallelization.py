@@ -34,7 +34,7 @@ However, this function is only a good choice for the propagation (1) and (2):
 these run in parallel over the entire time grid without any communication, and
 thus minimal overhead.  However, this is not true for the propagation (3),
 which must synchronize after each time step. In that case, the "naive" use of
-:func:`qutip.parallel.parallel_map` results in a communication overhead the
+:func:`qutip.parallel.parallel_map` results in a communication overhead that
 completely dominates the propagation, and actually makes the optimization
 slower (potentially by more than an order of magnitude).
 
@@ -43,7 +43,9 @@ appropriate alternative implementation that uses long-running processes,
 internal caching, and minimal inter-process communication to eliminate the
 communication overhead as much as possible. However, the internal caching is
 valid only under the assumption that the `propagate` function does not have
-side effects. In general,
+side effects.
+
+In general,
 
 .. code-block:: python
 
@@ -154,7 +156,7 @@ class FwPropStepTask:
             pulses_mapping,
             tlist,
             _,  # time_index
-            propagator,
+            propagators,
         ) = data
         # the data is passed by the Consumer, and is cached locally inside of
         # each process. Thus, it does not contribute to the IPC communication
@@ -176,7 +178,9 @@ class FwPropStepTask:
             for (ic, c_op) in enumerate(obj.c_ops)
         ]
         dt = tlist[time_index + 1] - tlist[time_index]
-        states[i_state][time_index + 1] = propagator(H, state, dt, c_ops)
+        states[i_state][time_index + 1] = propagators[i_state](
+            H, state, dt, c_ops
+        )
         # While there is no significant IPC-communication overhead associated
         # with the *input* of the task, the resulting state returned here still
         # must go through the `result_queue` of the Consumer. This is the main
@@ -205,9 +209,10 @@ def parallel_map_fw_prop_step(shared, values, task_args):
             5. The list of time grid points
             6. The index of the interval on the time grid over which to
                propagate
-            7. The `propagate` callable, as passed to :func:`.optimize_pulses`.
-               The routine must not have side-effects in order for
-               :func:`parallel_map_fw_prop_step` to work correctly.
+            7. A list of `propagate` callables, as passed to
+               :func:`.optimize_pulses`.  The propagators must not have
+               side-effects in order for :func:`parallel_map_fw_prop_step` to
+               work correctly.
     """
     # `shared` is the original task function, but here we abuse it
     # as a shared namespace, between calls to `my_map`, by setting custom

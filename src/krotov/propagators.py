@@ -1,9 +1,10 @@
 """Routines that can be passed as `propagator` to :func:`.optimize_pulses`"""
+from abc import ABC, abstractmethod
 
-__all__ = ['expm']
+__all__ = ['expm', 'Propagator']
 
 
-def expm(H, state, dt, c_ops, backwards=False):
+def expm(H, state, dt, c_ops, backwards=False, initialize=False):
     """Propagate using matrix exponentiation"""
     if len(c_ops) > 0:
         raise NotImplementedError("Liouville exponentiation not implemented")
@@ -36,3 +37,13 @@ def expm(H, state, dt, c_ops, backwards=False):
             "Cannot handle argument types A:%s, state:%s"
             % (A.type, state.type)
         )
+
+
+class Propagator(ABC):
+    """Base class for stateful propagators"""
+
+    @abstractmethod
+    def __call__(
+        self, H, state, dt, c_ops=None, backwards=False, initialize=False
+    ):
+        pass
