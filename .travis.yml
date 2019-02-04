@@ -21,6 +21,6 @@ install:
   - pip freeze
 
 script:
-  - py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg src tests docs/notebooks/*.ipynb docs/*.rst docs/*.ipynb
+  - py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 src tests docs/notebooks/*.ipynb docs/*.rst docs/*.ipynb
 after_success:
   - coveralls
