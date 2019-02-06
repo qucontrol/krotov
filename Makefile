@@ -3,7 +3,7 @@
 CONDA_PACKAGES = qutip
 TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
-TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg
+TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10
 TESTS = src tests docs/notebooks/*.ipynb docs/*.rst docs/*.ipynb
 
 

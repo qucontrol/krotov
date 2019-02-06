@@ -92,9 +92,12 @@ def optimize_pulses(
                 }
         tlist (numpy.ndarray): Array of time grid values, cf.
             :func:`~qutip.mesolve.mesolve`
-        propagator (callable): Function that propagates the state backward or
-            forwards in time by a single time step, between two points in
-            `tlist`
+        propagator (callable or list[callable]): Function that propagates the
+            state backward or forwards in time by a single time step, between
+            two points in `tlist`. Alternatively, a list of functions, one for
+            each objective. If the propagator is stateful, it should be an
+            instance of :class:`krotov.propagators.Propagator`. See
+            :mod:`krotov.propagators` for details.
         chi_constructor (callable): Function that calculates the boundary
             condition for the backward propagation. This is where the
             final-time functional (indirectly) enters the optimization.
@@ -142,12 +145,18 @@ def optimize_pulses(
             an empty array-like container of length `N`. The default value
             'array' is equivalent to
             ``functools.partial(numpy.empty, dtype=object)``.
-        parallel_map (callable or None): Parallel function evaluator. The
-            argument must have the same specification as
-            :func:`qutip.parallel.serial_map`,
-            which is used when None is passed. Alternatives are
-            :func:`qutip.parallel.parallel_map` or
-            :func:`qutip.ipynbtools.parallel_map`.
+        parallel_map (callable or tuple or None): Parallel function evaluator.
+            If given as a callable, the argument must have the same
+            specification as :func:`qutip.parallel.serial_map`.
+            A value of None is the same as passing
+            :func:`qutip.parallel.serial_map`. If given as a tuple, that tuple
+            must contain three callables, each of which has the same
+            specification as :func:`qutip.parallel.serial_map`. These three
+            callables are used to parallelize (1) the initial
+            forward-propagation, (2) the backward-propagation under the guess
+            pulses, and (3) the forward-propagation by a single time step under
+            the optimized pulses. See :mod:`krotov.parallelization` for
+            details.
         store_all_pulses (bool): Whether or not to store the optimized pulses
             from *all* iterations in :class:`.Result`.
 
@@ -175,12 +184,21 @@ def optimize_pulses(
             info_hook = chain(modify_params_after_iter, info_hook)
     if state_dependent_constraint is not None:
         raise NotImplementedError("state_dependent_constraint")
+    if isinstance(propagator, list):
+        propagators = propagator
+        assert len(propagators) == len(objectives)
+    else:
+        propagators = [copy.deepcopy(propagator) for _ in objectives]
+        # copy.deepcopy will only do someting on Propagator objects. For
+        # functions (even with closures), it just returns the same function.
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
         storage = partial(np.empty, dtype=object)
     if parallel_map is None:
         parallel_map = serial_map
+    if not isinstance(parallel_map, (tuple, list)):
+        parallel_map = (parallel_map, parallel_map, parallel_map)
 
     (
         guess_controls,
@@ -195,10 +213,17 @@ def optimize_pulses(
 
     # Initial forward-propagation
     tic = time.time()
-    forward_states = parallel_map(
+    forward_states = parallel_map[0](
         _forward_propagation,
         list(range(len(objectives))),
-        (objectives, guess_pulses, pulses_mapping, tlist, propagator, storage),
+        (
+            objectives,
+            guess_pulses,
+            pulses_mapping,
+            tlist,
+            propagators,
+            storage,
+        ),
     )
     toc = time.time()
 
@@ -253,7 +278,7 @@ def optimize_pulses(
         chi_states = [chi / nrm for (chi, nrm) in zip(chi_states, chi_norms)]
 
         # Backward propagation
-        backward_states = parallel_map(
+        backward_states = parallel_map[1](
             _backward_propagation,
             list(range(len(objectives))),
             (
@@ -262,7 +287,7 @@ def optimize_pulses(
                 guess_pulses,
                 pulses_mapping,
                 tlist,
-                propagator,
+                propagators,
                 storage,
             ),
         )
@@ -310,7 +335,7 @@ def optimize_pulses(
                 Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag
                 optimized_pulses[i_pulse][time_index] += Δϵ
             # forward propagation
-            fw_states = parallel_map(
+            fw_states = parallel_map[2](
                 _forward_propagation_step,
                 list(range(len(objectives))),
                 (
@@ -320,7 +345,7 @@ def optimize_pulses(
                     pulses_mapping,
                     tlist,
                     time_index,
-                    propagator,
+                    propagators,
                 ),
             )
             if second_order:
@@ -486,7 +511,7 @@ def _forward_propagation(
     pulses,
     pulses_mapping,
     tlist,
-    propagator,
+    propagators,
     storage,
     store_all=True,
 ):
@@ -509,7 +534,9 @@ def _forward_propagation(
             for (ic, c_op) in enumerate(obj.c_ops)
         ]
         dt = tlist[time_index + 1] - tlist[time_index]
-        state = propagator(H, state, dt, c_ops)
+        state = propagators[i_objective](
+            H, state, dt, c_ops, initialize=(time_index == 0)
+        )
         if store_all:
             storage_array[time_index + 1] = state
     logger.info(
@@ -528,7 +555,7 @@ def _backward_propagation(
     pulses,
     pulses_mapping,
     tlist,
-    propagator,
+    propagators,
     storage,
 ):
     """Backward propagation of chi_states[i_state] over the entire `tlist`"""
@@ -548,7 +575,14 @@ def _backward_propagation(
             for (ic, c_op) in enumerate(obj.c_ops)
         ]
         dt = tlist[time_index + 1] - tlist[time_index]
-        state = propagator(H, state, dt, c_ops, backwards=True)
+        state = propagators[i_state](
+            H,
+            state,
+            dt,
+            c_ops,
+            backwards=True,
+            initialize=(time_index == len(tlist) - 2),
+        )
         storage_array[time_index] = state
     logger.info("Finished backward propagation of state %d", i_state)
     return storage_array
@@ -562,7 +596,7 @@ def _forward_propagation_step(
     pulses_mapping,
     tlist,
     time_index,
-    propagator,
+    propagators,
 ):
     """Forward-propagate states[i_state] by a single time step"""
     state = states[i_state][time_index]
@@ -574,4 +608,6 @@ def _forward_propagation_step(
         for (ic, c_op) in enumerate(obj.c_ops)
     ]
     dt = tlist[time_index + 1] - tlist[time_index]
-    return propagator(H, state, dt, c_ops)
+    return propagators[i_state](
+        H, state, dt, c_ops, initialize=(time_index == 0)
+    )

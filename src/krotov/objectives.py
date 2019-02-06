@@ -7,12 +7,21 @@ from qutip.solver import Result as QutipSolverResult
 import numpy as np
 
 from .structural_conversions import (
-    _nested_list_shallow_copy, extract_controls, extract_controls_mapping,
-    plug_in_pulse_values, control_onto_interval, discretize)
+    _nested_list_shallow_copy,
+    extract_controls,
+    extract_controls_mapping,
+    plug_in_pulse_values,
+    control_onto_interval,
+    discretize,
+)
 
 __all__ = [
-    'Objective', 'summarize_qobj', 'CtrlCounter', 'gate_objectives',
-    'ensemble_objectives']
+    'Objective',
+    'summarize_qobj',
+    'CtrlCounter',
+    'gate_objectives',
+    'ensemble_objectives',
+]
 
 
 FIX_QUTIP_932 = True
@@ -246,7 +255,13 @@ class Objective:
         if e_ops is None:
             e_ops = []
         result = QutipSolverResult()
-        result.solver = propagator.__name__
+        try:
+            result.solver = propagator.__name__
+        except AttributeError:
+            try:
+                result.solver = propagator.__class__.__name__
+            except AttributeError:
+                result.solver = 'n/a'
         result.times = copy.copy(tlist)
         result.states = []
         result.expect = []
@@ -276,7 +291,9 @@ class Objective:
                 for (ic, c_op) in enumerate(self.c_ops)
             ]
             dt = tlist[time_index + 1] - tlist[time_index]
-            state = propagator(H, state, dt, c_ops)
+            state = propagator(
+                H, state, dt, c_ops, initialize=True#initialize=(time_index == 0)
+            )
             if len(e_ops) == 0:
                 result.states.append(state)
             else:
@@ -360,7 +377,7 @@ class Objective:
         return state
 
 
-class _ControlPlaceholder():
+class _ControlPlaceholder:
     """Placeholder for a control function, for pickling"""
 
     def __init__(self, id):
@@ -410,8 +427,10 @@ def _plug_in_array_controls_as_func(H, controls, mapping, tlist):
 
 def _array_as_func(t, args, array, T, nt):
     return (
-        0 if (t > float(T)) else
-        array[int(round(float(nt-1) * (t/float(T))))])
+        0
+        if (t > float(T))
+        else array[int(round(float(nt - 1) * (t / float(T))))]
+    )
 
 
 def summarize_qobj(obj, ctrl_counter=None):
@@ -448,6 +467,8 @@ def summarize_qobj(obj, ctrl_counter=None):
         return 'u%d[%s]' % (ctrl_counter(obj), obj.dtype.name)
     elif isinstance(obj, _ControlPlaceholder):
         return str(obj)
+    elif isinstance(obj, (float, complex)):
+        return str(obj)
     elif not isinstance(obj, qutip.Qobj):
         raise TypeError("obj must be a Qobj, not %s" % obj.__class__.__name__)
     if obj.type == 'ket':
@@ -477,9 +498,10 @@ def summarize_qobj(obj, ctrl_counter=None):
 def _summarize_qobj_nested_list(lst, ctrl_counter):
     """Summarize a nested-list time-dependent quantum object"""
     return (
-        '[' +
-        ", ".join([summarize_qobj(obj, ctrl_counter) for obj in lst]) +
-        ']')
+        '['
+        + ", ".join([summarize_qobj(obj, ctrl_counter) for obj in lst])
+        + ']'
+    )
 
 
 def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
@@ -611,10 +633,7 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
     ]
     return [
         Objective(
-            initial_state=initial_state,
-            target=target_state,
-            H=H,
-            c_ops=c_ops,
+            initial_state=initial_state, target=target_state, H=H, c_ops=c_ops
         )
         for (initial_state, target_state) in zip(basis_states, target_states)
     ]

@@ -73,14 +73,15 @@ def _overlap(a, b) -> Optional[complex]:
 
     If `a`, `b` are not quantum objects or are not compatible, return None.
     """
-    if isinstance(a, Qobj) and isinstance(b, Qobj):
-        if a.dims != b.dims:
-            return None
+    try:
         if a.type == b.type == 'oper':
-            return complex((a.dag() * b).tr())
+            return complex((a * b).tr())
+            # the "correct" formula would be `complex((a.dag() * b).tr())`
+            # but we can assume that a and b are density matrices; doing
+            # the unnecessary dag() has measureable impact on performance
         else:
             return a.overlap(b)
-    else:
+    except AttributeError:
         return None
 
 
