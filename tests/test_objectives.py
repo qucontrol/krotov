@@ -5,6 +5,7 @@ import copy
 import numpy as np
 import scipy
 import qutip
+from qutip import tensor, sigmaz, sigmax, sigmam, identity
 
 import krotov
 
@@ -12,27 +13,26 @@ import pytest
 
 
 @pytest.fixture
-def transmon_ham_and_states(
-        Ec=0.386, EjEc=45, nstates=2, ng=0.0, T=10.0):
+def transmon_ham_and_states(Ec=0.386, EjEc=45, nstates=2, ng=0.0, T=10.0):
     """Transmon Hamiltonian"""
     Ej = EjEc * Ec
-    n = np.arange(-nstates, nstates+1)
-    up = np.diag(np.ones(2*nstates), k=-1)
+    n = np.arange(-nstates, nstates + 1)
+    up = np.diag(np.ones(2 * nstates), k=-1)
     do = up.T
-    H0 = qutip.Qobj(np.diag(4*Ec*(n - ng)**2) - Ej*(up+do)/2.0)
-    H1 = qutip.Qobj(-2*np.diag(n))
+    H0 = qutip.Qobj(np.diag(4 * Ec * (n - ng) ** 2) - Ej * (up + do) / 2.0)
+    H1 = qutip.Qobj(-2 * np.diag(n))
 
     eigenvals, eigenvecs = scipy.linalg.eig(H0.full())
     ndx = np.argsort(eigenvals.real)
     E = eigenvals[ndx].real
     V = eigenvecs[:, ndx]
-    w01 = E[1]-E[0]  # Transition energy between states
+    w01 = E[1] - E[0]  # Transition energy between states
 
     psi0 = qutip.Qobj(V[:, 0])
     psi1 = qutip.Qobj(V[:, 1])
 
-    profile = lambda t: np.exp(-40.0*(t/T - 0.5)**2)
-    eps0 = lambda t, args: 0.5 * profile(t) * np.cos(8*np.pi*w01*t)
+    profile = lambda t: np.exp(-40.0 * (t / T - 0.5) ** 2)
+    eps0 = lambda t, args: 0.5 * profile(t) * np.cos(8 * np.pi * w01 * t)
     return ([H0, [H1, eps0]], psi0, psi1)
 
 
@@ -52,11 +52,12 @@ def test_objective_copy(transmon_ham_and_states):
     H, psi0, psi1 = transmon_ham_and_states
     c1 = H[1].copy()  # we just need something structurally sound ...
     c2 = H[1].copy()  # ... It doesn't need to make sense physically
-    assert c1 == c2      # equal by value
+    assert c1 == c2  # equal by value
     assert c1 is not c2  # not equal by reference
 
     target1 = krotov.Objective(
-        initial_state=psi0, target=psi1, H=H, c_ops=[c1, c2])
+        initial_state=psi0, target=psi1, H=H, c_ops=[c1, c2]
+    )
     target2 = copy.copy(target1)
     assert target1 == target2
     assert target1 is not target2
@@ -119,9 +120,7 @@ def test_invalid_objective(transmon_ham_and_states):
         krotov.Objective(initial_state=psi0, target=psi1, H=H[0].full)
     assert "Invalid H" in str(exc_info.value)
     with pytest.raises(ValueError) as exc_info:
-        krotov.Objective(
-            initial_state=psi0, target=psi1, H=H, c_ops=H[0]
-        )
+        krotov.Objective(initial_state=psi0, target=psi1, H=H, c_ops=H[0])
     assert "Invalid c_ops" in str(exc_info.value)
 
 
@@ -129,7 +128,8 @@ def test_invalid_objective(transmon_ham_and_states):
 def tlist_control(request):
     testdir = os.path.splitext(request.module.__file__)[0]
     tlist, control = np.genfromtxt(
-        os.path.join(testdir, 'pulse.dat'), unpack=True)
+        os.path.join(testdir, 'pulse.dat'), unpack=True
+    )
     return tlist, control
 
 
@@ -141,8 +141,10 @@ def test_objective_mesolve_propagate(transmon_ham_and_states, tlist_control):
     T = tlist[-1]
     nt = len(tlist)
     H[1][1] = lambda t, args: (
-        0 if (t > float(T)) else
-        control[int(round(float(nt-1) * (t/float(T))))])
+        0
+        if (t > float(T))
+        else control[int(round(float(nt - 1) * (t / float(T))))]
+    )
     target = krotov.Objective(initial_state=psi0, target=psi1, H=H)
 
     assert len(tlist) == len(control) > 0
@@ -158,7 +160,8 @@ def test_objective_mesolve_propagate(transmon_ham_and_states, tlist_control):
 
     res1 = target.mesolve(tlist, e_ops=e_ops)
     res2 = target.propagate(
-        tlist, e_ops=e_ops, propagator=krotov.propagators.expm)
+        tlist, e_ops=e_ops, propagator=krotov.propagators.expm
+    )
 
     assert len(res1.states) == len(res2.states) == 0
     assert len(res1.expect) == len(res2.expect) == 2
@@ -179,13 +182,11 @@ def test_plug_in_array_controls_as_func():
     u2 = np.random.random(nt)
     H = ['H0', ['H1', u1], ['H2', u2]]
     controls = [u1, u2]
-    mapping = [
-        [1, ],  # u1
-        [2, ],  # u2
-    ]
+    mapping = [[1], [2]]  # u1  # u2
     tlist = np.linspace(0, T, nt)
     H_with_funcs = krotov.objectives._plug_in_array_controls_as_func(
-        H, controls, mapping, tlist)
+        H, controls, mapping, tlist
+    )
     assert callable(H_with_funcs[1][1])
     assert callable(H_with_funcs[2][1])
 
@@ -213,7 +214,8 @@ def test_gate_objectives_shape_error():
     gate = qutip.tensor(qutip.operators.sigmay(), qutip.identity(2))
     H = [
         qutip.operators.sigmaz(),
-        [qutip.operators.sigmax(), lambda t, args: 1.0]]
+        [qutip.operators.sigmax(), lambda t, args: 1.0],
+    ]
     with pytest.raises(ValueError) as exc_info:
         krotov.objectives.gate_objectives(basis, gate, H)
     assert "same dimension as the number of basis" in str(exc_info.value)
@@ -227,10 +229,7 @@ def test_ensemble_objectives(transmon_ham_and_states):
         krotov.Objective(initial_state=psi1, target=psi0, H=H),
     ]
     (H0, (H1, eps)) = H
-    Hs = [
-        [H0, [mu * H1, eps]]
-        for mu in [0.95, 0.99, 1.01, 1.05]
-    ]
+    Hs = [[H0, [mu * H1, eps]] for mu in [0.95, 0.99, 1.01, 1.05]]
     ensemble_objectives = krotov.ensemble_objectives(objectives, Hs)
     assert len(ensemble_objectives) == 10
     assert ensemble_objectives[0] == objectives[0]
@@ -261,3 +260,170 @@ def test_gate_objectives_pe():
     assert krotov.gate_objectives(basis, 'Perfect Entangler', H) == objectives
     with pytest.raises(ValueError):
         krotov.gate_objectives(basis, 'prefect(!) entanglers', H)
+
+
+def test_liouvillian():
+    """Test conversion of Hamiltonian/Lindblad operators into a Liouvillian"""
+    H = [
+        tensor(sigmaz(), identity(2)) + tensor(identity(2), sigmaz()),
+        [tensor(sigmax(), identity(2)), lambda t, args: 1.0],
+        [tensor(identity(2), sigmax()), lambda t, args: 1.0],
+    ]
+    c_ops = [tensor(sigmam(), identity(2)), tensor(identity(2), sigmam())]
+
+    assert (
+        krotov.objectives.liouvillian(H[0], c_ops)
+        - qutip.liouvillian(H[0], c_ops)
+    ).norm('max') < 1e-15
+
+    L = krotov.objectives.liouvillian(H, c_ops)
+    assert isinstance(L, list)
+    assert len(L) == 3
+    assert (L[0] - qutip.liouvillian(H[0], c_ops)).norm('max') < 1e-15
+    assert (L[1][0] - qutip.liouvillian(H[1][0])).norm('max') < 1e-15
+    assert (L[2][0] - qutip.liouvillian(H[2][0])).norm('max') < 1e-15
+    assert L[1][1] is H[1][1]
+    assert L[2][1] is H[2][1]
+
+    with pytest.raises(ValueError):
+        krotov.objectives.liouvillian(tuple(H), c_ops)
+
+
+@pytest.fixture
+def two_qubit_liouvillian():
+    H = [
+        tensor(sigmaz(), identity(2)) + tensor(identity(2), sigmaz()),
+        [tensor(sigmax(), identity(2)), lambda t, args: 1.0],
+        [tensor(identity(2), sigmax()), lambda t, args: 1.0],
+    ]
+    c_ops = [tensor(sigmam(), identity(2)), tensor(identity(2), sigmam())]
+    return krotov.objectives.liouvillian(H, c_ops)
+
+
+def test_gate_objectives_3states(two_qubit_liouvillian):
+    """Test the initialization of the "3states" objectives"""
+    L = two_qubit_liouvillian
+    basis = [qutip.ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
+    CNOT = qutip.gates.cnot()
+    objectives = krotov.objectives.gate_objectives(
+        basis, CNOT, L, liouville_states_set='3states'
+    )
+
+    assert len(objectives) == 3
+
+    dims = [[2, 2], [2, 2]]
+    rho_1 = qutip.Qobj(np.diag([(0.1 * (4 - i)) for i in range(4)]), dims=dims)
+    rho_2 = qutip.Qobj(np.full((4, 4), 1/4), dims=dims)
+    rho_3 = qutip.Qobj(np.diag([1/4, 1/4, 1/4, 1/4]), dims=dims)
+
+    tgt_1 = CNOT * rho_1 * CNOT.dag()
+    tgt_2 = CNOT * rho_2 * CNOT.dag()
+    tgt_3 = CNOT * rho_3 * CNOT.dag()
+
+    assert (objectives[0].initial_state - rho_1).norm('max') < 1e-14
+    assert (objectives[1].initial_state - rho_2).norm('max') < 1e-14
+    assert (objectives[2].initial_state - rho_3).norm('max') < 1e-14
+
+    assert (objectives[0].target - tgt_1).norm('max') < 1e-14
+    assert (objectives[1].target - tgt_2).norm('max') < 1e-14
+    assert (objectives[2].target - tgt_3).norm('max') < 1e-14
+
+    for obj in objectives:
+        assert not hasattr(obj, 'weight')
+
+    objectives = krotov.objectives.gate_objectives(
+        basis, CNOT, L, liouville_states_set='3states', weights=[1, 0, 2]
+    )
+    assert len(objectives) == 2
+    assert (objectives[0].initial_state - rho_1).norm('max') < 1e-14
+    assert (objectives[1].initial_state - rho_3).norm('max') < 1e-14
+    for obj in objectives:
+        assert isinstance(obj.weight, float)
+    assert objectives[0].weight == 1
+    assert objectives[1].weight == 2
+
+    with pytest.raises(ValueError):
+        krotov.objectives.gate_objectives(
+            basis, CNOT, L, liouville_states_set='3states', weights=[1, 2]
+        )
+    with pytest.raises(ValueError):
+        krotov.objectives.gate_objectives(
+            basis, CNOT, L, liouville_states_set='3states', weights=[1, 1, -1]
+        )
+
+
+def test_gate_objectives_5states(two_qubit_liouvillian):
+    """Test the initialization of the "d + 1" objectives"""
+    L = two_qubit_liouvillian
+    basis = [qutip.ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
+    CNOT = qutip.gates.cnot()
+    objectives = krotov.objectives.gate_objectives(
+        basis, CNOT, L, liouville_states_set='d+1'
+    )
+
+    assert len(objectives) == 5
+
+    rho_1 = basis[0] * basis[0].dag()
+    rho_2 = basis[1] * basis[1].dag()
+    rho_3 = basis[2] * basis[2].dag()
+    rho_4 = basis[3] * basis[3].dag()
+    rho_5 = qutip.Qobj(np.full((4, 4), 1/4), dims=[[2, 2], [2, 2]])
+
+    tgt_1 = CNOT * rho_1 * CNOT.dag()
+    tgt_2 = CNOT * rho_2 * CNOT.dag()
+    tgt_3 = CNOT * rho_3 * CNOT.dag()
+    tgt_4 = CNOT * rho_4 * CNOT.dag()
+    tgt_5 = CNOT * rho_5 * CNOT.dag()
+
+    assert (objectives[0].initial_state - rho_1).norm('max') < 1e-14
+    assert (objectives[1].initial_state - rho_2).norm('max') < 1e-14
+    assert (objectives[2].initial_state - rho_3).norm('max') < 1e-14
+    assert (objectives[3].initial_state - rho_4).norm('max') < 1e-14
+    assert (objectives[4].initial_state - rho_5).norm('max') < 1e-14
+
+    assert (objectives[0].target - tgt_1).norm('max') < 1e-14
+    assert (objectives[1].target - tgt_2).norm('max') < 1e-14
+    assert (objectives[2].target - tgt_3).norm('max') < 1e-14
+    assert (objectives[3].target - tgt_4).norm('max') < 1e-14
+    assert (objectives[4].target - tgt_5).norm('max') < 1e-14
+
+
+def test_gate_objectives_16states(two_qubit_liouvillian):
+    """Test the initialization of the "full" objectives"""
+    L = two_qubit_liouvillian
+    basis = [qutip.ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
+    CNOT = qutip.gates.cnot()
+    objectives = krotov.objectives.gate_objectives(
+        basis, CNOT, L, liouville_states_set='full'
+    )
+
+    assert len(objectives) == 16
+
+    initial_states = [
+        basis[0] * basis[0].dag(),
+        basis[0] * basis[1].dag(),
+        basis[0] * basis[2].dag(),
+        basis[0] * basis[3].dag(),
+        basis[1] * basis[0].dag(),
+        basis[1] * basis[1].dag(),
+        basis[1] * basis[2].dag(),
+        basis[1] * basis[3].dag(),
+        basis[2] * basis[0].dag(),
+        basis[2] * basis[1].dag(),
+        basis[2] * basis[2].dag(),
+        basis[2] * basis[3].dag(),
+        basis[3] * basis[0].dag(),
+        basis[3] * basis[1].dag(),
+        basis[3] * basis[2].dag(),
+        basis[3] * basis[3].dag(),
+    ]
+
+    target_states = [
+        CNOT * rho * CNOT.dag() for rho in initial_states
+    ]
+
+    for (i, obj) in enumerate(objectives):
+        assert (obj.initial_state - initial_states[i]).norm('max') < 1e-14
+
+    for (i, obj) in enumerate(objectives):
+        assert (obj.target - target_states[i]).norm('max') < 1e-14

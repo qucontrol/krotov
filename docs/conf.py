@@ -152,6 +152,7 @@ mathjax_config = {
             'ket': ['{\\vert#1\\rangle}', 1],
             'Bra': ['{\\left\\langle#1\\right\\vert}', 1],
             'Braket': ['{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}', 2],
+            'ketbra': ['{\\vert#1\\rangle\\!\\langle#2\\vert}', 2],
             'Ket': ['{\\left\\vert#1\\right\\rangle}', 1],
             'mat': ['{\\mathbf{#1}}', 1],
             'op': ['{\\hat{#1}}', 1],
