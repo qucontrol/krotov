@@ -201,11 +201,11 @@ def optimize_pulses(
         parallel_map = (parallel_map, parallel_map, parallel_map)
 
     (
-        guess_controls,
-        guess_pulses,
-        pulses_mapping,
-        lambda_vals,
-        shape_arrays,
+        guess_controls,  # "controls": sampled on the time grid
+        guess_pulses,    # "pulses": sampled on the time grid intervals
+        pulses_mapping,  # keep track of where to plug in pulse values
+        lambda_vals,     # Krotov step width λₐ, for each control
+        shape_arrays,    # update shape S(t), per control, sampled on intervals
     ) = _initialize_krotov_controls(objectives, pulse_options, tlist)
 
     result = Result()
