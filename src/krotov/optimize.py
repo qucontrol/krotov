@@ -202,10 +202,10 @@ def optimize_pulses(
 
     (
         guess_controls,  # "controls": sampled on the time grid
-        guess_pulses,    # "pulses": sampled on the time grid intervals
+        guess_pulses,  # "pulses": sampled on the time grid intervals
         pulses_mapping,  # keep track of where to plug in pulse values
-        lambda_vals,     # Krotov step width λₐ, for each control
-        shape_arrays,    # update shape S(t), per control, sampled on intervals
+        lambda_vals,  # Krotov step width λₐ, for each control
+        shape_arrays,  # update shape S(t), per control, sampled on intervals
     ) = _initialize_krotov_controls(objectives, pulse_options, tlist)
 
     result = Result()
@@ -236,28 +236,31 @@ def optimize_pulses(
         for (state_T, obj) in zip(fw_states_T, objectives)
     ]
 
-    info = info_hook(
-        objectives=objectives,
-        adjoint_objectives=adjoint_objectives,
-        backward_states=None,
-        forward_states=forward_states,
-        optimized_pulses=guess_pulses,
-        lambda_vals=lambda_vals,
-        shape_arrays=shape_arrays,
-        fw_states_T=fw_states_T,
-        tau_vals=tau_vals,
-        start_time=tic,
-        stop_time=toc,
-        iteration=0,
-        shared_data={},
-    )
+    info = None
+    if info_hook is not None:
+        info = info_hook(
+            objectives=objectives,
+            adjoint_objectives=adjoint_objectives,
+            backward_states=None,
+            forward_states=forward_states,
+            optimized_pulses=guess_pulses,
+            lambda_vals=lambda_vals,
+            shape_arrays=shape_arrays,
+            fw_states_T=fw_states_T,
+            tau_vals=tau_vals,
+            start_time=tic,
+            stop_time=toc,
+            iteration=0,
+            shared_data={},
+        )
 
     # Initialize result
     result.tlist = tlist
     result.objectives = objectives
     result.guess_controls = guess_controls
     result.controls_mapping = pulses_mapping
-    result.info_vals.append(info)
+    if info is not None:
+        result.info_vals.append(info)
     result.iters.append(0)
     result.tau_vals.append(tau_vals)
     if store_all_pulses:
