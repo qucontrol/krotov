@@ -449,6 +449,28 @@ def _shape_val_to_callable(val):
             raise ValueError("shape must be a callable")
 
 
+def _enforce_shape_array_range(shape_array):
+    """Enforce values ∈ [0, 1] in shape array, with some room for
+    rounding errors that will be clipped away.
+    """
+    if np.iscomplexobj(shape_array):
+        raise ValueError(
+            "Update shapes ('shape' in pulse options-dict) must be "
+            "real-valued"
+        )
+    # the rounding errors can be introduced by control_onto_interval, and
+    # result in values slightly below 0 or above 1. We allow a generous margin
+    # of ±0.01; if something nonsensical is passed as a shape, we can be pretty
+    # sure that it will deviate by a significantly larger error.
+    if np.min(shape_array) < -0.01 or np.max(shape_array) > 1.01:
+        raise ValueError(
+            "Update shapes ('shape' in pulse options-dict) must have "
+            "values in the range [0, 1], not [%s, %s]"
+            % (np.min(shape_array), np.max(shape_array))
+        )
+    return np.clip(shape_array, a_min=0.0, a_max=1.0)
+
+
 def _initialize_krotov_controls(objectives, pulse_options, tlist):
     """Extract discretized guess controls and pulses from `objectives`, and
     return them with the associated mapping and option data"""
@@ -484,21 +506,9 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
                 "Each value in pulse_options must be a dict that contains "
                 "the key 'shape'."
             )
-        shape_arrays.append(control_onto_interval(S))
-    for shape_array in shape_arrays:
-        if np.iscomplexobj(shape_array):
-            raise ValueError(
-                "Update shapes ('shape' in pulse options-dict) must be "
-                "real-valued"
-            )
-        if np.min(shape_array) < 0 or np.max(shape_array) > 1.01:
-            # 1.01 accounts for rounding errors: In principle, shapes > 1 are
-            # not a problem, but then it cancels with λₐ, which makes things
-            # unnecessarily confusing.
-            raise ValueError(
-                "Update shapes ('shape' in pulse options-dict) must have "
-                "values in the range [0, 1]"
-            )
+        shape_arrays.append(
+            _enforce_shape_array_range(control_onto_interval(S))
+        )
     return (
         guess_controls,
         guess_pulses,
