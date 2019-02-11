@@ -41,6 +41,46 @@ Development happens on `Github`_. You can read the full documentation at `ReadTh
 .. _ReadTheDocs: https://krotov.readthedocs.io/en/latest/
 
 
+Purpose
+-------
+
+Optimal control is one of the cornerstones of quantum technology. It asks the
+question how to make a manipulate the dynamics of a quantum system behave some
+desired way. See `Glaser et al. Eur. Phys. J. D 69, 279 (2015)`_ for an
+overview of the research field.
+
+Krotov's method is one of the two leading gradient-based optimization
+algorithms used in quantum optimal control. To date, there has not been an open
+source implementation of the method. This package provides this missing
+implementation.
+
+The choice of Python as an implementation language is due to Python's easy to learn
+syntax, expressiveness, and immense popularity in the scientific community.
+Moreover, the `QuTiP`_ library exists to provide the foundations of
+numerically describing quantum systems, and already includes basic versions of
+some of the other popular algorithms in quantum control, the gradient-based
+GRAPE and the gradient-free CRAB. The availability of the `Jupyter notebook`_
+system provides an ideal platform for demonstrating the use of the method.
+
+
+The Krotov package is targeted both towards students wishing to enter
+the field of quantum control, and researchers in the field. By providing a rich
+set of examples of how the package can be used to reproduce the solutions of
+control problems from recent publications, we enable users of our package to
+explore how to formulate typical control problems, and how to use Krotov's
+method to solve them.
+
+The choice of Python implies that for large-scale control problems, performance may
+become a significant issue. In this case, it may be necessary to implement
+Krotov's method in a more efficient (compiled) language. While the method as
+such is relatively straightforward, there are some subtleties involved, which
+are explained both in the package documentation and in the source code. Thus,
+the Krotov package serves as a reference implementation, leveraging Python's
+reputation as "executable pseudocode", and as a foundation against which to test.
+
+.. _Glaser et al. Eur. Phys. J. D 69, 279 (2015): https://link.springer.com/article/10.1140%2Fepjd%2Fe2015-60464-1
+
+
 Prerequisites
 -------------
 
