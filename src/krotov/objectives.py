@@ -1,5 +1,6 @@
 import sys
 import copy
+import itertools
 from functools import partial
 
 import qutip
@@ -21,6 +22,7 @@ __all__ = [
     'CtrlCounter',
     'gate_objectives',
     'ensemble_objectives',
+    'liouvillian',
 ]
 
 
@@ -292,7 +294,11 @@ class Objective:
             ]
             dt = tlist[time_index + 1] - tlist[time_index]
             state = propagator(
-                H, state, dt, c_ops, initialize=True#initialize=(time_index == 0)
+                H,
+                state,
+                dt,
+                c_ops,
+                initialize=True,  # initialize=(time_index == 0)
             )
             if len(e_ops) == 0:
                 result.states.append(state)
@@ -504,7 +510,51 @@ def _summarize_qobj_nested_list(lst, ctrl_counter):
     )
 
 
-def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
+def _reversed_enumerate(collection):
+    # better than `reversed(list(enumerate(collection)))`, because it doesn't
+    # create copies, via `list`
+    return zip(reversed(range(len(collection))), reversed(collection))
+
+
+def _rho1(basis_states):
+    """State ρ₁ from the "3states" functional"""
+    d = len(basis_states)  # dimension of logical subspace
+    return sum(
+        [
+            (2 * (d - i) / (d * (d + 1))) * psi * psi.dag()
+            for (i, psi) in enumerate(basis_states)
+            # note that i is 0-based, unlike in the paper
+        ]
+    )
+
+
+def _rho2(basis_states):
+    """State ρ₂ from the "3states" functional"""
+    d = len(basis_states)  # dimension of logical subspace
+    return (1.0 / d) * sum(
+        [
+            psi_i * psi_j.dag()
+            for (psi_i, psi_j) in itertools.product(basis_states, repeat=2)
+        ]
+    )
+
+
+def _rho3(basis_states):
+    """State ρ₃ from the "3states" functional"""
+    d = len(basis_states)  # dimension of logical subspace
+    return (1.0 / d) * sum([psi * psi.dag() for psi in basis_states])
+
+
+def gate_objectives(
+    basis_states,
+    gate,
+    H,
+    c_ops=None,
+    local_invariants=False,
+    liouville_states_set=None,
+    weights=None,
+    normalize_weights=True,
+):
     r"""Construct a list of objectives for optimizing towards a quantum gate
 
     Args:
@@ -514,13 +564,30 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
             Alternatively, `gate` may be the string 'perfect_entangler' or
             'PE', to indicate the optimization for an arbitrary two-qubit
             perfect entangler.
-        H (list or qutip.Qobj): The Hamiltonian for the time evolution
+        H (list or qutip.Qobj): The Hamiltonian (or Liouvillian) for the time
+            evolution, in nested-list format.
         c_ops (list or None): A list of collapse (Lindblad) operators, or None
-            for unitary dynamics
+            for unitary dynamics or if `H` is a Liouvillian (preferred!)
         local_invariants (bool): If True, initialize the objectives for an
             optimization towards a two-qubit gate that is "locally equivalent"
             to `gate`. That is, the result of the optimization should implement
             `gate` up to single-qubit operations.
+        liouville_states_set (None or str): If not None, one of "full",
+            "3states", "d+1". This sets the objectives for a gate
+            optimization in Liouville space, using the states defined in
+            Goerz et al. New J. Phys. 16, 055012 (2014). See Examples for
+            details.
+        weights (None or list): If given as a list, weights for the different
+            objectives. These will be added as a custom attribute to the
+            respective :class:`.Objective`, and may be used by a particular
+            functional (`chi_constructor`). The intended use case is for the
+            `liouville_states_set` values '3states', and 'd+1', where the
+            different objectives have clear physical interpretations that might
+            be given differing importance. A weight of 0 will completely drop
+            the corresponding objective.
+        normalize_weights (bool): If True, and if `weights` is given as a list
+            of values, normalize the weights so that they sum to $N$, the
+            number of objectives. IF False, the weights will be used unchanged.
 
     Returns:
         list[Objective]: The objectives that define the optimization towards
@@ -552,14 +619,10 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
 
         * A single-qubit gate::
 
-            >>> from qutip import ket, tensor, sigmaz, sigmax, sigmay, identity
+            >>> from qutip import ket, bra, tensor
+            >>> from qutip import sigmaz, sigmax, sigmay, sigmam, identity
             >>> basis = [ket([0]), ket([1])]
-            >>> gate = sigmay()
-            >>> gate
-            Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True
-            Qobj data =
-            [[0.+0.j 0.-1.j]
-             [0.+1.j 0.+0.j]]
+            >>> gate = sigmay()  # = -i|0⟩⟨1| + i|1⟩⟨0|
             >>> H = [sigmaz(),[sigmax(), lambda t, args: 1.0]]
             >>> objectives = gate_objectives(basis, gate, H)
             >>> assert objectives == [
@@ -603,6 +666,102 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
             ...        target=qutip.gates.cnot(),
             ...        H=H
             ...     )
+
+        * A two-qubit gate in a dissipative system tracked by 3 density
+          matrices::
+
+            >>> L = krotov.objectives.liouvillian(H, c_ops=[
+            ...     tensor(sigmam(), identity(2)),
+            ...     tensor(identity(2), sigmam())])
+            >>> objectives = gate_objectives(
+            ...     basis, qutip.gates.cnot(), L,
+            ...     liouville_states_set='3states',
+            ...     weights=[20, 1, 1]
+            ... )
+
+          The three states, for a system with a logical subspace of dimension
+          $d$ with a basis $\{\ket{i}\}$, $i \in [1, d]$ are:
+
+          .. math::
+
+            \Op{\rho}_1 &= \sum_{i=1}^{d}
+                \frac{2 (d-i+1)}{d (d+1)} \ketbra{i}{i} \\
+            \Op{\rho}_2 &= \sum_{i,j=1}^{d}
+                \frac{1}{d} \ketbra{i}{j} \\
+            \Op{\rho}_3 &= \sum_{i=1}^{d}
+                \frac{1}{d} \ketbra{i}{i}
+
+          The explicit form of the three states in this example is::
+
+            >>> assert np.allclose(objectives[0].initial_state.full(),
+            ...     np.diag([0.4, 0.3, 0.2, 0.1]))
+
+            >>> assert np.allclose(objectives[1].initial_state.full(),
+            ...     np.full((4, 4), 1/4))
+
+            >>> assert np.allclose(objectives[2].initial_state.full(),
+            ...     np.diag([1/4, 1/4, 1/4, 1/4]))
+
+          The objectives in this example are weighted (20/1/1)::
+
+            >>> "%.5f" % objectives[0].weight
+            '2.72727'
+            >>> "%.5f" % objectives[1].weight
+            '0.13636'
+            >>> "%.5f" % objectives[2].weight
+            '0.13636'
+            >>> sum_of_weights = sum([obj.weight for obj in objectives])
+            >>> "%.1f" % sum_of_weights
+            '3.0'
+
+        * A two-qubit gate in a dissipative system tracked by $d + 1 = 5$
+          pure-state density matrices::
+
+            >>> objectives = gate_objectives(
+            ...     basis, qutip.gates.cnot(), L,
+            ...     liouville_states_set='d+1'
+            ... )
+
+          The first four `initial_states` are the pure states corresponding to
+          the Hilbert space basis
+
+            >>> assert objectives[0].initial_state == qutip.ket2dm(ket('00'))
+            >>> assert objectives[1].initial_state == qutip.ket2dm(ket('01'))
+            >>> assert objectives[2].initial_state == qutip.ket2dm(ket('10'))
+            >>> assert objectives[3].initial_state == qutip.ket2dm(ket('11'))
+
+          The fifth state is $\Op{\rho}_2$ from '3states'::
+
+            >>> assert np.allclose(objectives[4].initial_state.full(),
+            ...     np.full((4, 4), 1/4))
+
+        * A two-qubit gate in a dissipative system tracked by the full
+          Liouville space basis::
+
+            >>> objectives = gate_objectives(
+            ...     basis, qutip.gates.cnot(), L,
+            ...     liouville_states_set='full'
+            ... )
+
+          The Liouville space basis states are all the possible dyadic products
+          of the Hilbert space basis::
+
+            >>> assert objectives[0].initial_state == ket('00') * bra('00')
+            >>> assert objectives[1].initial_state == ket('00') * bra('01')
+            >>> assert objectives[2].initial_state == ket('00') * bra('10')
+            >>> assert objectives[3].initial_state == ket('00') * bra('11')
+            >>> assert objectives[4].initial_state == ket('01') * bra('00')
+            >>> assert objectives[5].initial_state == ket('01') * bra('01')
+            >>> assert objectives[6].initial_state == ket('01') * bra('10')
+            >>> assert objectives[7].initial_state == ket('01') * bra('11')
+            >>> assert objectives[8].initial_state == ket('10') * bra('00')
+            >>> assert objectives[9].initial_state == ket('10') * bra('01')
+            >>> assert objectives[10].initial_state == ket('10') * bra('10')
+            >>> assert objectives[11].initial_state == ket('10') * bra('11')
+            >>> assert objectives[12].initial_state == ket('11') * bra('00')
+            >>> assert objectives[13].initial_state == ket('11') * bra('01')
+            >>> assert objectives[14].initial_state == ket('11') * bra('10')
+            >>> assert objectives[15].initial_state == ket('11') * bra('11')
     """
     if isinstance(gate, str):
         if gate.lower().replace(' ', '_') in ['pe', 'perfect_entangler']:
@@ -627,16 +786,76 @@ def gate_objectives(basis_states, gate, H, c_ops=None, local_invariants=False):
             "gate must be a matrix of the same dimension as the number of "
             "basis states"
         )
-    target_states = [
+    mapped_basis_states = [
         sum([gate[i, j] * basis_states[i] for i in range(gate.shape[0])])
         for j in range(gate.shape[1])
     ]
-    return [
+    if liouville_states_set is None:
+        # standard gate in Hilbert space
+        initial_states = basis_states
+        target_states = mapped_basis_states
+    elif liouville_states_set.lower() == 'full':
+        initial_states = [
+            psi_i * psi_j.dag()
+            for (psi_i, psi_j) in itertools.product(basis_states, repeat=2)
+        ]
+        target_states = [
+            psi_i * psi_j.dag()
+            for (psi_i, psi_j) in itertools.product(
+                mapped_basis_states, repeat=2
+            )
+        ]
+    elif liouville_states_set.replace(" ", "").lower() == '3states':
+        d = len(basis_states)  # dimension of logical subspace
+        initial_states = [
+            _rho1(basis_states),
+            _rho2(basis_states),
+            _rho3(basis_states),
+        ]
+        target_states = [
+            _rho1(mapped_basis_states),
+            _rho2(mapped_basis_states),
+            _rho3(mapped_basis_states),
+        ]
+    elif liouville_states_set.replace(" ", "").lower() == 'd+1':
+        d = len(basis_states)
+        initial_states = [
+            basis_states[i] * basis_states[i].dag() for i in range(d)
+        ]
+        initial_states.append(_rho2(basis_states))
+        target_states = [
+            mapped_basis_states[i] * mapped_basis_states[i].dag()
+            for i in range(d)
+        ]
+        target_states.append(_rho2(mapped_basis_states))
+    else:
+        raise ValueError(
+            "Invalid `liouville_states_set`: %s" % liouville_states_set
+        )
+    objectives = [
         Objective(
             initial_state=initial_state, target=target_state, H=H, c_ops=c_ops
         )
-        for (initial_state, target_state) in zip(basis_states, target_states)
+        for (initial_state, target_state) in zip(initial_states, target_states)
     ]
+    # apply weights
+    if weights is not None:
+        if len(weights) != len(objectives):
+            raise ValueError(
+                "If weight are given, there must be a weight for each "
+                "objective"
+            )
+        if normalize_weights:
+            N = len(objectives)
+            weights = N * np.array(weights) / np.sum(weights)
+        for (i, weight) in _reversed_enumerate(weights):
+            weight = float(weight)
+            if weight < 0:
+                raise ValueError("weights must be greater than zero")
+            objectives[i].weight = weight
+            if weight == 0:
+                del objectives[i]
+    return objectives
 
 
 def _gate_objectives_li_pe(basis_states, gate, H, c_ops):
@@ -691,3 +910,30 @@ def ensemble_objectives(objectives, Hs):
                 )
             )
     return new_objectives
+
+
+def liouvillian(H, c_ops):
+    """Convert Hamiltonian and Lindblad operators into a Liouvillian.
+
+    This is like :func:`qutip.superoperator.liouvillian`, but `H` may be a
+    time-dependent Hamiltonian in nested-list format. `H` is assumed to contain
+    a drift Hamiltonian, and the Lindblad operators in `c_ops` cannot be
+    time-dependent.
+    """
+    if isinstance(H, qutip.Qobj):
+        return qutip.liouvillian(H, c_ops)
+    elif isinstance(H, list):
+        res = []
+        for spec in H:
+            if isinstance(spec, qutip.Qobj):
+                res.append(qutip.liouvillian(spec, c_ops))
+                c_ops = []
+            else:
+                res.append([qutip.liouvillian(spec[0]), spec[1]])
+        assert len(c_ops) == 0, "No drift Hamiltonian"
+        return res
+    else:
+        raise ValueError(
+            "H must either be a Qobj, or a time-dependent Hamiltonian in "
+            "nested-list format"
+        )

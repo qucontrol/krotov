@@ -201,11 +201,11 @@ def optimize_pulses(
         parallel_map = (parallel_map, parallel_map, parallel_map)
 
     (
-        guess_controls,
-        guess_pulses,
-        pulses_mapping,
-        lambda_vals,
-        shape_arrays,
+        guess_controls,  # "controls": sampled on the time grid
+        guess_pulses,  # "pulses": sampled on the time grid intervals
+        pulses_mapping,  # keep track of where to plug in pulse values
+        lambda_vals,  # Krotov step width λₐ, for each control
+        shape_arrays,  # update shape S(t), per control, sampled on intervals
     ) = _initialize_krotov_controls(objectives, pulse_options, tlist)
 
     result = Result()
@@ -236,28 +236,31 @@ def optimize_pulses(
         for (state_T, obj) in zip(fw_states_T, objectives)
     ]
 
-    info = info_hook(
-        objectives=objectives,
-        adjoint_objectives=adjoint_objectives,
-        backward_states=None,
-        forward_states=forward_states,
-        optimized_pulses=guess_pulses,
-        lambda_vals=lambda_vals,
-        shape_arrays=shape_arrays,
-        fw_states_T=fw_states_T,
-        tau_vals=tau_vals,
-        start_time=tic,
-        stop_time=toc,
-        iteration=0,
-        shared_data={},
-    )
+    info = None
+    if info_hook is not None:
+        info = info_hook(
+            objectives=objectives,
+            adjoint_objectives=adjoint_objectives,
+            backward_states=None,
+            forward_states=forward_states,
+            optimized_pulses=guess_pulses,
+            lambda_vals=lambda_vals,
+            shape_arrays=shape_arrays,
+            fw_states_T=fw_states_T,
+            tau_vals=tau_vals,
+            start_time=tic,
+            stop_time=toc,
+            iteration=0,
+            shared_data={},
+        )
 
     # Initialize result
     result.tlist = tlist
     result.objectives = objectives
     result.guess_controls = guess_controls
     result.controls_mapping = pulses_mapping
-    result.info_vals.append(info)
+    if info is not None:
+        result.info_vals.append(info)
     result.iters.append(0)
     result.tau_vals.append(tau_vals)
     if store_all_pulses:
@@ -446,6 +449,28 @@ def _shape_val_to_callable(val):
             raise ValueError("shape must be a callable")
 
 
+def _enforce_shape_array_range(shape_array):
+    """Enforce values ∈ [0, 1] in shape array, with some room for
+    rounding errors that will be clipped away.
+    """
+    if np.iscomplexobj(shape_array):
+        raise ValueError(
+            "Update shapes ('shape' in pulse options-dict) must be "
+            "real-valued"
+        )
+    # the rounding errors can be introduced by control_onto_interval, and
+    # result in values slightly below 0 or above 1. We allow a generous margin
+    # of ±0.01; if something nonsensical is passed as a shape, we can be pretty
+    # sure that it will deviate by a significantly larger error.
+    if np.min(shape_array) < -0.01 or np.max(shape_array) > 1.01:
+        raise ValueError(
+            "Update shapes ('shape' in pulse options-dict) must have "
+            "values in the range [0, 1], not [%s, %s]"
+            % (np.min(shape_array), np.max(shape_array))
+        )
+    return np.clip(shape_array, a_min=0.0, a_max=1.0)
+
+
 def _initialize_krotov_controls(objectives, pulse_options, tlist):
     """Extract discretized guess controls and pulses from `objectives`, and
     return them with the associated mapping and option data"""
@@ -481,21 +506,9 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
                 "Each value in pulse_options must be a dict that contains "
                 "the key 'shape'."
             )
-        shape_arrays.append(control_onto_interval(S))
-    for shape_array in shape_arrays:
-        if np.iscomplexobj(shape_array):
-            raise ValueError(
-                "Update shapes ('shape' in pulse options-dict) must be "
-                "real-valued"
-            )
-        if np.min(shape_array) < 0 or np.max(shape_array) > 1.01:
-            # 1.01 accounts for rounding errors: In principle, shapes > 1 are
-            # not a problem, but then it cancels with λₐ, which makes things
-            # unnecessarily confusing.
-            raise ValueError(
-                "Update shapes ('shape' in pulse options-dict) must have "
-                "values in the range [0, 1]"
-            )
+        shape_arrays.append(
+            _enforce_shape_array_range(control_onto_interval(S))
+        )
     return (
         guess_controls,
         guess_pulses,

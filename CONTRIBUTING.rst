@@ -62,12 +62,12 @@ In short, if you are not a member of the `qucontrol organization`_,
 2. Fork the repo on GitHub to your personal account.
 3. Add your fork as a remote.
 4. Pull in the latest changes from the master branch.
-5. Create a topic branch
-6. Make your changes and commit them (testing locally)
-7. Push changes to the topic branch on *your* remote
+5. Create a topic branch.
+6. Make your changes and commit them (testing locally).
+7. Push changes to the topic branch on *your* remote.
 8. Make a pull request against the base master branch through the Github website of your fork.
 
-The project contains a ``Makefile`` to help with development tasts. In your checked-out clone, do
+The project contains a ``Makefile`` to help with development tasks. In your checked-out clone, do
 
 .. code-block:: console
 
@@ -76,7 +76,7 @@ The project contains a ``Makefile`` to help with development tasts. In your chec
 to see the available make targets.
 
 If you are a member of the `qucontrol organization`_, there is no need to fork
-``krotov``: you can directly pull and push to ``git@github.com:qucontrol/krotov.git``.
+``krotov`` - you can directly pull and push to ``git@github.com:qucontrol/krotov.git``.
 
 It is strongly recommended that you use the conda_ package manager. The
 ``Makefile`` relies on conda to create local testing and documentation building
@@ -137,7 +137,7 @@ articles, and such.
 The package documentation is generated with Sphinx_, the
 documentation (and docstrings) are formatted using the
 `Restructured Text markup language`_ (file extension ``rst``).
-See also the `Matplotlib Sphinx Sheet sheet`_ for some helpful tips.
+See also the `Matplotlib Sphinx cheat sheet`_ for some helpful tips.
 
 Each function or class must have a docstring_; this docstring must
 be written in the `"Google Style" format`_ (as implemented by
@@ -185,7 +185,7 @@ to generate the documentation locally.
 .. _mathematical formulas in LaTeX syntax: http://www.sphinx-doc.org/en/1.6/ext/math.html
 .. _mathjax: http://www.sphinx-doc.org/en/master/usage/extensions/math.html#module-sphinx.ext.mathjax
 .. _BibTeX: https://sphinxcontrib-bibtex.readthedocs.io/en/latest/
-.. _Matplotlib Sphinx Sheet sheet: https://matplotlib.org/sampledoc/cheatsheet.html
+.. _Matplotlib Sphinx cheat sheet: https://matplotlib.org/sampledoc/cheatsheet.html
 
 
 Contribute Examples
@@ -275,7 +275,7 @@ that contains the imported packages (see above). The cell must contain the follo
     \newcommand{Re}[0]{\operatorname{Re}}
     \newcommand{Im}[0]{\operatorname{Im}}$
 
-Upon executing the cell, the definitions will be hidden, but the defined macros
+Upon executing the cell the definitions will be hidden, but the defined macros
 will be available in any cell in the rest of the notebook.
 
 .. _watermark: https://github.com/rasbt/watermark
@@ -407,7 +407,7 @@ How to run a jupyter notebook server for working on the example notebooks
 
 A notebook server that is isolated to the proper testing environment can be started via the Makefile::
 
-    $ make jupter-notebook
+    $ make jupyter-notebook
 
 This is equivalent to::
 
@@ -421,7 +421,7 @@ course, if you know what you're doing, you may want this.
 
 If you prefer, you may also use the newer jupyterlab::
 
-    $ make jupter-lab
+    $ make jupyter-lab
 
 How to convert an example notebook to a script for easier debugging
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -526,7 +526,7 @@ You may also see the `pytest documentation on automatic debugging`_.
 How to use quantum mechanical tex macros
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For docstrings or rst files, see :ref:`write-documentation`. For notebooks, see :ref:`math-in-example-notebooks`.
+For docstrings or ``*.rst`` files, see :ref:`write-documentation`. For notebooks, see :ref:`math-in-example-notebooks`.
 
 
 .. _Jupyter’s Common Configuration system: https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html#jupyter-s-common-configuration-system

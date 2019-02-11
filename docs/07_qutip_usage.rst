@@ -13,9 +13,10 @@ optimization, the system Hamiltonian should be represented by a nested list.
 This is, a Hamiltonian of the form :math:`\Op{H} = \Op{H}_0 + \epsilon(t)
 \Op{H}_1` is represented as ``H = [H0, [H1, eps]]`` where ``H0`` and ``H1`` are
 :class:`~qutip.Qobj` operators, and ``eps`` is a function with signature
-``eps(t, args)``, or an array of pulse values of the length the time grid
+``eps(t, args)``, or an array of pulse values with the length of the time grid
 (`tlist` parameter in :func:`~qutip.mesolve.mesolve`). The operator can depend
-on multiple controls, resulting in ``H = [H0, [H1, eps1], [H2, eps2], ...]``.
+on multiple controls, resulting in expressions of the form
+``H = [H0, [H1, eps1], [H2, eps2], ...]``.
 
 The central routine provided by the ``krotov`` package is
 :func:`.optimize_pulses`. It takes as input a list of objectives, which are
@@ -23,9 +24,9 @@ custom tuples of type :class:`.Objective`. Each objective has an
 `initial_state`, which is a :class:`qutip.Qobj` representing a Hilbert space
 state or density matrix, an `output_state`, and a Hamiltonian `H` in the
 nested-list format described above. For dissipative dynamics, it may also
-include a list `c_ops` of collapse (Lindblad) operators, where each Lindblad
-operator is a :class:`~qutip.Qobj` operator directly, or, for time-dependent
-Lindblad operators, a nested list.
+include a list `c_ops` of collapse operators (usually Lindblad operators), 
+where each collapse operator is a :class:`~qutip.Qobj` operator directly,
+or, for time-dependent collapse operators, a nested list.
 
 In order to simulate the dynamics of the guess pulse, you can use
 :meth:`.Objective.mesolve`.
