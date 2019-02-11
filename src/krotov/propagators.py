@@ -219,3 +219,120 @@ class DensityMatrixODEPropagator(Propagator):
         r.set_f_params(self._L_list)
         self._r = r
         self._t = 0.0
+
+
+import pdb
+
+class StateHamODEPropagator(Propagator):
+    """Propagator for state under a Hamiltonian 
+
+    See :class:`qutip.solver.Options` for arguments.
+    """
+
+    def __init__(
+        self,
+        method='adams',
+        order=12,
+        atol=1e-8,
+        rtol=1e-6,
+        nsteps=1000,
+        first_step=0,
+        min_step=0,
+        max_step=0,
+    ):
+        self.method = method
+        self.order = order
+        self.atol = atol
+        self.rtol = rtol
+        self.nsteps = nsteps
+        self.first_step = first_step
+        self.min_step = min_step
+        self.max_step = max_step
+        self._H_list = None  # cached Hamiltonian data
+        self._control_indices = None  # which indices in `H` have a control val
+        self._r = None  # the integrator
+        self._t = 0.0  # time up to which we've integrated
+
+    def __call__(
+        self, H, psi, dt, c_ops=None, backwards=False, initialize=False
+    ):
+        """Evaluation of a single propagation step
+
+        Args:
+            H (list): ...
+            psi (qutip.Qobj): ...
+            dt (float): The time step over which to propagate
+            backwards (bool): ...
+            initialize (bool): Whether to (re-)initialize for a new
+                propagation. This caches `H` (except for the control values)
+                and `psi` internally.
+        """
+        if initialize:
+            self._initialize(H, psi, dt, c_ops, backwards)
+        else:
+            # only update the control values
+            for i in self._control_indices:
+                self._H_list[i][1] = H[i][1]
+        self._t += dt
+        self._r.integrate(self._t)
+        return qutip.Qobj(self._r.y, dims=psi.dims)
+
+    def _initialize(self, H, psi, dt, c_ops, backwards):
+        H_list = []
+        control_indices = []
+        if not (c_ops is None or len(c_ops) == 0):
+            # in principle, we could convert c_ops to a Lindbladian, here
+            raise NotImplementedError("c_ops not implemented")
+        for (i, spec) in enumerate(H):
+            if isinstance(spec, qutip.Qobj):
+                h_op = spec
+                h_coeff = 1
+            elif isinstance(spec, list) and isinstance(spec[0], qutip.Qobj):
+                h_op = spec[0]
+                h_coeff = spec[1]
+                control_indices.append(i)
+            else:
+                raise ValueError(
+                    "Incorrect specification of time-dependent Hamiltonian"
+                )
+            if h_op.type == 'oper':
+                H_list.append([h_op.data, h_coeff, False])
+            else:
+                raise ValueError(
+                    "Incorrect specification of time-dependent Hamiltonian"
+                )
+        self._H_list = H_list
+        self._control_indices = control_indices
+        if psi.type == 'ket':
+            initial_vector = psi
+        else:
+            raise ValueError("psi must be a state")
+        def _rhs(t, psi, H_list):
+            out = np.zeros(psi.shape[0], dtype=complex)
+            H = H_list[0][0]
+            H_coeff = (-1)**(int(backwards))*-1j*H_list[0][1]
+            spmvpy_csr(H.data, H.indices, H.indptr, psi, H_coeff, out)
+            for n in range(1, len(H_list)):
+                H = H_list[n][0]
+                H_coeff = (-1)**(int(backwards))*-1j*H_list[n][1]
+                spmvpy_csr(H.data, H.indices, H.indptr, psi, H_coeff, out)
+            return out
+
+        # set up the integrator
+        r = scipy.integrate.ode(_rhs)
+        r.set_integrator(
+            'zvode',
+            method=self.method,
+            order=self.order,
+            atol=self.atol,
+            rtol=self.rtol,
+            nsteps=self.nsteps,
+            first_step=self.first_step,
+            min_step=self.min_step,
+            max_step=self.max_step,
+        )
+        r.set_initial_value(initial_vector)
+        r.set_f_params(self._H_list)
+        self._r = r
+        self._t = 0.0
+
