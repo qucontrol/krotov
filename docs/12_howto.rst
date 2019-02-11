@@ -113,3 +113,97 @@ pass to :func:`.optimize_pulses`.
 
 .. |weylchamber package| replace:: ``weylchamber`` package
 .. _weylchamber package: https://github.com/qucontrol/weylchamber
+
+
+How to optimize in a dissipative system
+---------------------------------------
+
+To optimize a dissipative system, it is sufficient to set a :class:`.Objective`
+with a density matrix for the :attr:`~.Objective.initial_state` and
+:attr:`~.Objective.target`, and a Liouvillian in :attr:`.Objective.H`.
+
+Instead of a Liouvillian, it is also possible to set :attr:`.Objective.H` to
+the system Hamiltonian, and :attr:`.Objective.c_ops` to the appropriate
+Lindblad operators. However, it is generally much more efficient to use
+:func:`krotov.objectives.liouvillian` to convert a time-dependent Hamiltonian
+and a list of Lindblad operators into a time-dependent Liouvillian. In either
+case, the `propagate` routine passed to :func:`~krotov.optimize.optimize_pulses`
+must implement the correct dynamics in Liouville space, using the Liouvillian,
+or the combination of a Hamiltonian and Lindblad operators.
+
+Specifically for gate optimization, the routine
+:func:`~krotov.objectives.gate_objectives`
+can be used to automatically set appropriate objectives for an optimization in
+Liouville space. The parameter `liouville_states_set` indicates that the system
+dynamics are in Liouville space, sets an appropriate choice of matrices that
+track the optimization, according to Ref. :cite:`GoerzNJP2014`.
+
+For weak dissipation, it may also be possible to avoid the use of density
+matrices, and instead to use a non-Hermitian Hamiltonian. For example, you may
+use the effective Hamiltonian from the MCWF method :cite:`PlenioRMP1998`:
+
+.. math::
+
+   \Op{H}_{\text{eff}} = \Op{H} - \frac{i}{2} \sum_k \Op{L}_k^\dagger \Op{L}_k
+
+for the Hermitian Hamiltonian $\Op{H}$ and the Lindblad operators $\Op{L}_k$.
+Propagating $\Op{H}_{\text{eff}}$ (without quantum jumps) will lead to a decay
+in the norm of the state corresponding to how much dissipation the state is
+subjected to. Numerically, this will usually increase the value of the
+optimization functional. Thus the optimization can be pushed towards avoiding
+decoherence, without doing the optimization in Liouville space.
+
+
+How to optimize for robust pulses
+---------------------------------
+
+Control pulses can be made robust with respect to variations in the system by
+doing an ensemble optimization, as proposed in Ref. :cite:`GoerzPRA2014`. The
+idea if to sample a representative selection of possible system Hamiltonians,
+and to optimize over an *average* of the entire ensemble.
+
+An appropriate set of objectives can be generated with the
+:func:`~krotov.objectives.ensemble_objectives` function.
+
+
+How to parallelize the optimization
+-----------------------------------
+
+See :mod:`krotov.parallelization`.
+
+
+How to maximize numerical efficiency
+------------------------------------
+
+For systems of a non-trivial size, the main numerical effort should be in the
+simulation of the system dynamics. Every iteration of Krotov's method requires
+a full backward- and forward-propagation of the states associated with each
+objective. Therefore, the best numerical efficiency of the achieved by
+optimizing the performance of the `propagator` that is passed to
+:func:`~krotov.optimize.optimize_pulses`.
+
+One possibility is to implement problem-specific stateful propagators, such as
+:class:`krotov.propagators.DensityMatrixODEPropagator`. Going further, you
+might consider implementing the propagator in a compile language, e.g. in
+Cython_.
+
+.. _Cython: https://cython.org
+
+
+How to deal with the optimization running out of memory
+-------------------------------------------------------
+
+Krotov's method requires the storage of at least one set of propagated state
+over the entire time grid, for each objective. For the second-order update
+equation, up to three sets of stored states per objective may be required. In
+particular for larger systems and dynamics in Liouville space, the memory
+required for storing these states may be prohibitively expensive.
+
+The :func:`~krotov.optimize.optimize_pulses` accepts an `storage` parameter
+that can be passed a constructor for an array-like container where the
+propagated states will be stored. It is possible to pass custom out-of-memory
+storage objects, such as Dask_ arrays. This may carry a significant penalty in
+runtime, however, as states will have to be read from disk, or across the
+network.
+
+.. _Dask: http://docs.dask.org/en/latest/
