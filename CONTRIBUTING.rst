@@ -137,7 +137,7 @@ articles, and such.
 The package documentation is generated with Sphinx_, the
 documentation (and docstrings) are formatted using the
 `Restructured Text markup language`_ (file extension ``rst``).
-See also the `Matplotlib Sphinx Cheat sheet`_ for some helpful tips.
+See also the `Matplotlib Sphinx Sheet sheet`_ for some helpful tips.
 
 Each function or class must have a docstring_; this docstring must
 be written in the `"Google Style" format`_ (as implemented by
