@@ -6,6 +6,7 @@ import numpy as np
 import scipy
 import qutip
 from qutip import tensor, sigmaz, sigmax, sigmam, identity
+from itertools import product
 
 import krotov
 
@@ -313,8 +314,8 @@ def test_gate_objectives_3states(two_qubit_liouvillian):
 
     dims = [[2, 2], [2, 2]]
     rho_1 = qutip.Qobj(np.diag([(0.1 * (4 - i)) for i in range(4)]), dims=dims)
-    rho_2 = qutip.Qobj(np.full((4, 4), 1/4), dims=dims)
-    rho_3 = qutip.Qobj(np.diag([1/4, 1/4, 1/4, 1/4]), dims=dims)
+    rho_2 = qutip.Qobj(np.full((4, 4), 1 / 4), dims=dims)
+    rho_3 = qutip.Qobj(np.diag([1 / 4, 1 / 4, 1 / 4, 1 / 4]), dims=dims)
 
     tgt_1 = CNOT * rho_1 * CNOT.dag()
     tgt_2 = CNOT * rho_2 * CNOT.dag()
@@ -367,7 +368,7 @@ def test_gate_objectives_5states(two_qubit_liouvillian):
     rho_2 = basis[1] * basis[1].dag()
     rho_3 = basis[2] * basis[2].dag()
     rho_4 = basis[3] * basis[3].dag()
-    rho_5 = qutip.Qobj(np.full((4, 4), 1/4), dims=[[2, 2], [2, 2]])
+    rho_5 = qutip.Qobj(np.full((4, 4), 1 / 4), dims=[[2, 2], [2, 2]])
 
     tgt_1 = CNOT * rho_1 * CNOT.dag()
     tgt_2 = CNOT * rho_2 * CNOT.dag()
@@ -418,12 +419,60 @@ def test_gate_objectives_16states(two_qubit_liouvillian):
         basis[3] * basis[3].dag(),
     ]
 
-    target_states = [
-        CNOT * rho * CNOT.dag() for rho in initial_states
-    ]
+    target_states = [CNOT * rho * CNOT.dag() for rho in initial_states]
 
     for (i, obj) in enumerate(objectives):
         assert (obj.initial_state - initial_states[i]).norm('max') < 1e-14
 
     for (i, obj) in enumerate(objectives):
         assert (obj.target - target_states[i]).norm('max') < 1e-14
+
+
+def test_transmon_3states_objectives():
+    L = qutip.Qobj()  # dummy Liouvillian (won't be used)
+    n_qubit = 3
+    ket00 = qutip.ket((0, 0), dim=(n_qubit, n_qubit))
+    ket01 = qutip.ket((0, 1), dim=(n_qubit, n_qubit))
+    ket10 = qutip.ket((1, 0), dim=(n_qubit, n_qubit))
+    ket11 = qutip.ket((1, 1), dim=(n_qubit, n_qubit))
+    basis = [ket00, ket01, ket10, ket11]
+    weights = [20, 1, 1]
+    objectives = krotov.gate_objectives(
+        basis,
+        qutip.gates.sqrtiswap(),
+        L,
+        liouville_states_set='3states',
+        weights=weights,
+    )
+
+    rho1_tgt = (
+        0.4 * ket00 * ket00.dag()
+        + (0.5 / 2) * ket01 * ket01.dag()
+        - (0.1j / 2) * ket01 * ket10.dag()
+        + (0.1j / 2) * ket10 * ket01.dag()
+        + (0.5 / 2) * ket10 * ket10.dag()
+        + 0.1 * ket11 * ket11.dag()
+    )
+
+    ket00_tgt = ket00
+    ket01_tgt = (ket01 + 1j * ket10) / np.sqrt(2)
+    ket10_tgt = (1j * ket01 + ket10) / np.sqrt(2)
+    ket11_tgt = ket11
+    target_basis = [ket00_tgt, ket01_tgt, ket10_tgt, ket11_tgt]
+    rho2_tgt = 0.25 * sum(
+        [psi * phi.dag() for (psi, phi) in product(target_basis, target_basis)]
+    )
+
+    rho3_tgt = 0.25 * (
+        ket00 * ket00.dag()
+        + ket01 * ket01.dag()
+        + ket10 * ket10.dag()
+        + ket11 * ket11.dag()
+    )
+    assert (objectives[0].target - rho1_tgt).norm('max') < 1e-14
+    assert (objectives[1].target - rho2_tgt).norm('max') < 1e-14
+    assert (objectives[2].target - rho3_tgt).norm('max') < 1e-14
+
+    assert objectives[0].weight == 60.0 / 22.0
+    assert objectives[1].weight == 3.0 / 22.0
+    assert objectives[2].weight == 3.0 / 22.0

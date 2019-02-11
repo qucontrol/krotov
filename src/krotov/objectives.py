@@ -553,6 +553,7 @@ def gate_objectives(
     local_invariants=False,
     liouville_states_set=None,
     weights=None,
+    normalize_weights=True,
 ):
     r"""Construct a list of objectives for optimizing towards a quantum gate
 
@@ -582,9 +583,11 @@ def gate_objectives(
             functional (`chi_constructor`). The intended use case is for the
             `liouville_states_set` values '3states', and 'd+1', where the
             different objectives have clear physical interpretations that might
-            be given differing importance. No normalization is applied to the
-            weights. A weight of 0 will completely drop the corresponding
-            objective.
+            be given differing importance. A weight of 0 will completely drop
+            the corresponding objective.
+        normalize_weights (bool): If True, and if `weights` is given as a list
+            of values, normalize the weights so that they sum to $N$, the
+            number of objectives. IF False, the weights will be used unchanged.
 
     Returns:
         list[Objective]: The objectives that define the optimization towards
@@ -672,7 +675,8 @@ def gate_objectives(
             ...     tensor(identity(2), sigmam())])
             >>> objectives = gate_objectives(
             ...     basis, qutip.gates.cnot(), L,
-            ...     liouville_states_set='3states'
+            ...     liouville_states_set='3states',
+            ...     weights=[20, 1, 1]
             ... )
 
           The three states, for a system with a logical subspace of dimension
@@ -697,6 +701,18 @@ def gate_objectives(
 
             >>> assert np.allclose(objectives[2].initial_state.full(),
             ...     np.diag([1/4, 1/4, 1/4, 1/4]))
+
+          The objectives in this example are weighted (20/1/1)::
+
+            >>> "%.5f" % objectives[0].weight
+            '2.72727'
+            >>> "%.5f" % objectives[1].weight
+            '0.13636'
+            >>> "%.5f" % objectives[2].weight
+            '0.13636'
+            >>> sum_of_weights = sum([obj.weight for obj in objectives])
+            >>> "%.1f" % sum_of_weights
+            '3.0'
 
         * A two-qubit gate in a dissipative system tracked by $d + 1 = 5$
           pure-state density matrices::
@@ -826,8 +842,12 @@ def gate_objectives(
     if weights is not None:
         if len(weights) != len(objectives):
             raise ValueError(
-                "If weight are given, the must be a weight for each objective"
+                "If weight are given, there must be a weight for each "
+                "objective"
             )
+        if normalize_weights:
+            N = len(objectives)
+            weights = N * np.array(weights) / np.sum(weights)
         for (i, weight) in _reversed_enumerate(weights):
             weight = float(weight)
             if weight < 0:
