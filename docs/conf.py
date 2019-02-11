@@ -134,7 +134,7 @@ mathjax_config = {
     'jax': ['input/TeX', 'output/SVG'],
     'TeX': {
         'extensions': [
-            "AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"],
+            "AMSmath.js", "AMSsymbols.js"],
         'Macros': {
             'tr': ['{\\operatorname{tr}}', 0],
             'diag': ['{\\operatorname{diag}}', 0],
