@@ -28,7 +28,7 @@ where :math:`\ket{\phi_k^{(i)}(T)}` are the time-evolved states initial states
 The functional consists of three parts:
 
 * A final time functional $J_T$. This is the "main" part of the functional, and
-  we can usually think of $J$ as being an auxilliary functional in the
+  we can usually think of $J$ as being an auxiliary functional in the
   optimization of $J_T$.
 
 * A running cost on the control fields $g_b$. As we will see below, specific forms of
@@ -66,6 +66,8 @@ in Hilbert space, or
    \label{eq:tau_liouville}
      \tau_k = \tr\left[\Op{\rho}_k^{\tgt\,\dagger} \Op{\rho}_k(T) \right]
 
+in Liouville space.
+
 The following functionals $J_T$ can be formed from these complex overlaps, taking
 into account that any optimization functional $J_T$ must be real. They differ by the way
 they treat the phases $\varphi_k$ in the physical optimization goal
@@ -88,17 +90,17 @@ $\ket{\phi_k(T)} \overset{!}{=} e^{i\varphi_k}\ket{\phi_k^{\tgt}}$ :cite:`PalaoP
             = 1- \frac{1}{N^2} \sum_{k=1}^{N} \sum_{k'=1}^{N} \tau_{k'}^* \tau_{k}\,,
 
 * Optimize for simultaneous state-to-state transitions, with a global phase of zero, i.e.,
-  $\varphi_k = 0$ for all $k$ 
+  $\varphi_k = 0$ for all $k$
 
 .. math::
     :label: JTre
 
     J_{T,\text{re}} = 1-\frac{1}{N} \Re \left[\, \sum_{k=1}^{N} \tau_k \,\right]
             = 1-\frac{1}{N} \sum_{k=1}^{N} \frac{1}{2} \left( \tau_k + \tau_k^* \right)
-            
+
 Note that in state-to-state optimizations in Liouville space the phases $\varphi_k$ do not appear
 at all. This is reflected by the fact that the overlaps $\tau_k$ are always real-valued.
-Thus the three functionals above conincide when density matrices are employed.
+Thus the three functionals above coincide when density matrices are employed.
 
 
 Conditions for the update equation
@@ -162,7 +164,7 @@ Assuming the equation of motion for the forward propagation of
      = -\frac{\mathrm{i}}{\hbar} \Op{H}^{(i+1)} \Ket{\phi_k^{(i+1)}(t)}\,,
 
 the co-states :math:`\Ket{\chi_k}` are propagated backwards under the
-old pulse, i.e. the pulse from the previous iteration, as
+old pulse, i.e., the pulse from the previous iteration, as
 
 .. math::
    :label: bw_eqm
@@ -221,7 +223,7 @@ field :math:`\epsilon^{(i)}` from the previous iteration this yields
      \Delta\epsilon(t) \equiv \epsilon^{(i+1)}(t) - \epsilon^{(i)}(t)\,,
 
 and for :math:`\sigma(t) \equiv 0`, the first-order Krotov
-update equation is reobtained :cite:`PalaoPRA2003,SklarzPRA2002`,
+update equation is re-obtained :cite:`PalaoPRA2003,SklarzPRA2002`,
 
 .. math::
    :label: krotov_first_order_update
@@ -243,7 +245,7 @@ update equation is reobtained :cite:`PalaoPRA2003,SklarzPRA2002`,
 
 If :math:`S(t) \in [0,1]` is chosen as a function that smoothly goes to
 zero at :math:`t=0` and :math:`t=T`, then the update will be suppressed
-near the edges of the optimisation time interval. Thus, a smooth switch-on 
+near the edges of the optimization time interval. Thus, a smooth switch-on
 and switch-off can be maintained. The
 scaling factor :math:`\lambda_a` controls the overall magnitude of the
 pulse update thereby taking the role of an "inverse Krotov step width".
@@ -337,8 +339,8 @@ Time discretization
    Sequential update scheme in Krotov’s method on a time grid.
 
 
-The derivation of Krotov's method assumes time-continuos control fields. In
-this case, it mathematically gurantees monotonic convergence. However, for
+The derivation of Krotov's method assumes time-continuous control fields. In
+this case, it mathematically guarantees monotonic convergence. However, for
 practical numerical applications, we have to consider controls on a discrete
 time grid.
 
@@ -387,7 +389,7 @@ yields
      \Norm{\frac{\partial \Op{H}}{\partial \epsilon}}_{\infty}
      \stackrel{!}{\le}
      \Norm{\epsilon^{(i)}(t)}_{\infty}\,,
-     
+
 where $\Norm{\frac{\partial \Op{H}}{\partial \epsilon}}_{\infty}$ denotes
 the supremum norm of the operator norms of the operator
 $\frac{\partial \Op{H}}{\partial \epsilon}$ obtained at time $t$.
@@ -426,7 +428,7 @@ OCT iteration. When the RWA is used, the control fields are
 complex-valued. In this case, the Krotov update equation is valid for
 both the real and the imaginary part independently. The most straightforward
 implementation of the method is for real controls only, requiring that any
-complex control Hamiltonian is rewritten as two indpendent control
+complex control Hamiltonian is rewritten as two independent control
 Hamiltonians, one for the real part and one for the imaginary part of the
 control field. For example,
 
@@ -435,7 +437,7 @@ control field. For example,
     \epsilon^*(t) \Op{a} + \epsilon(t) \Op{a}^\dagger
     =  \epsilon_{\text{re}}(t) (\Op{a} + \Op{a}^\dagger) + \epsilon_{\text{im}}(t) (i \Op{a}^\dagger - i \Op{a})
 
-with two independend control fields :math:`\epsilon_{\text{re}}(t)= \Re[\epsilon(t)]` and
+with two independent control fields :math:`\epsilon_{\text{re}}(t)= \Re[\epsilon(t)]` and
 :math:`\epsilon_{\text{im}}(t) = \Im[\epsilon(t)]`.
 
 
