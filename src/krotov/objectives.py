@@ -264,7 +264,7 @@ class Objective:
                 result.solver = propagator.__class__.__name__
             except AttributeError:
                 result.solver = 'n/a'
-        result.times = copy.copy(tlist)
+        result.times = np.array(tlist)
         result.states = []
         result.expect = []
         result.num_expect = len(e_ops)
@@ -305,6 +305,7 @@ class Objective:
             else:
                 for (i, oper) in enumerate(e_ops):
                     result.expect[i].append(qutip.expect(oper, state))
+        result.expect = [np.array(a) for a in result.expect]
         return result
 
     def summarize(self, ctrl_counter=None):
