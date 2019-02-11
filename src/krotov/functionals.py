@@ -327,7 +327,7 @@ def _F_avg_rho(states_T, basis_states, gate, mapped_basis_states):
             ρ_ij = states_T[i * N + j]
             Oϕ_i = mapped_basis_states[i]
             F += _overlap(Oϕ_i, ρ_ij(Oϕ_j)) + _overlap(Oϕ_i, ρ_jj(Oϕ_i))
-    assert abs(F.imag) < 1e-14
+    assert abs(F.imag) < 1e-10, F.imag
     return F.real / (N * (N + 1))
 
 
@@ -336,7 +336,7 @@ def _F_avg_psi(states_T, basis_states, O):
     N = len(basis_states)
     U = gate(basis_states, states_T)
     F = abs((O.dag() * U).tr()) ** 2 + (O.dag() * U * U.dag() * O).tr()
-    assert abs(F.imag) < 1e-14
+    assert abs(F.imag) < 1e-10, F.imag
     return F.real / (N * (N + 1))
 
 
