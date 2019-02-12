@@ -1,5 +1,5 @@
-Krotov vs GRAPE and CRAB
-========================
+Other Optimization Methods
+==========================
 
 Gradient-based optimization
 ---------------------------

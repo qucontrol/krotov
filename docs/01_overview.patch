@@ -1,6 +1,6 @@
---- README.rst	2018-12-15 16:57:39.000000000 -0500
-+++ readme.rst	2018-12-15 17:14:14.000000000 -0500
-@@ -123,16 +123,11 @@
+--- README.rst	2019-02-12 17:26:25.000000000 -0500
++++ 01_overview.rst	2019-02-12 17:17:50.000000000 -0500
+@@ -161,16 +161,11 @@
  
  * define the necessary quantum operators and states using `QuTiP`_.
  * create a list of objectives, as instances of
