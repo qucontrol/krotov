@@ -208,6 +208,12 @@ def optimize_pulses(
         shape_arrays,  # update shape S(t), per control, sampled on intervals
     ) = _initialize_krotov_controls(objectives, pulse_options, tlist)
 
+    g_a_integrals = np.zeros(len(guess_pulses))
+    # ∫gₐ(t)dt is a very useful measure of whether λₐ is too small (large
+    # ∫gₐ(t)dt, relative to the pulse amplitude), and whether we're approaching
+    # convergence ("speeding up" for increasing values, "slowing down" for
+    # decreasing values)
+
     result = Result()
     result.start_local_time = time.localtime()
 
@@ -231,10 +237,12 @@ def optimize_pulses(
         forward_states0 = forward_states  # ∀t: Δϕ=0, for iteration 0
 
     fw_states_T = [states[-1] for states in forward_states]
-    tau_vals = [
-        _overlap(state_T, obj.target)
-        for (state_T, obj) in zip(fw_states_T, objectives)
-    ]
+    tau_vals = np.array(
+        [
+            _overlap(state_T, obj.target)
+            for (state_T, obj) in zip(fw_states_T, objectives)
+        ]
+    )
 
     info = None
     if info_hook is not None:
@@ -243,14 +251,18 @@ def optimize_pulses(
             adjoint_objectives=adjoint_objectives,
             backward_states=None,
             forward_states=forward_states,
+            guess_pulses=guess_pulses,
             optimized_pulses=guess_pulses,
+            g_a_integrals=g_a_integrals,
             lambda_vals=lambda_vals,
             shape_arrays=shape_arrays,
             fw_states_T=fw_states_T,
+            tlist=tlist,
             tau_vals=tau_vals,
             start_time=tic,
             stop_time=toc,
             iteration=0,
+            info_vals=[],
             shared_data={},
         )
 
@@ -298,6 +310,7 @@ def optimize_pulses(
         # Forward propagation and pulse update
         logger.info("Started forward propagation/pulse update")
         forward_states = [storage(len(tlist)) for _ in range(len(objectives))]
+        g_a_integrals[:] = 0.0
         if second_order:
             # In the update for the pulses in the first time interval, we use
             # the states at t=0. Hence, Δϕ(t=0) = 0
@@ -312,8 +325,8 @@ def optimize_pulses(
         ]
         optimized_pulses = copy.deepcopy(guess_pulses)
         for time_index in range(len(tlist) - 1):  # iterate over time intervals
+            dt = tlist[time_index + 1] - tlist[time_index]
             if second_order:
-                dt = tlist[time_index + 1] - tlist[time_index]
                 σ = sigma(tlist[time_index] + 0.5 * dt)
             # pulse update
             for (i_pulse, guess_pulse) in enumerate(guess_pulses):
@@ -336,6 +349,7 @@ def optimize_pulses(
                 λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
                 Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag
+                g_a_integrals[i_pulse] += abs(Δϵ) ** 2 * dt  # dt may vary!
                 optimized_pulses[i_pulse][time_index] += Δϵ
             # forward propagation
             fw_states = parallel_map[2](
@@ -362,36 +376,41 @@ def optimize_pulses(
                 forward_states[i_obj][time_index + 1] = fw_states[i_obj]
         logger.info("Finished forward propagation/pulse update")
         fw_states_T = fw_states
-        tau_vals = [
-            _overlap(fw_state_T, obj.target)
-            for (fw_state_T, obj) in zip(fw_states_T, objectives)
-        ]
+        tau_vals = np.array(
+            [
+                _overlap(fw_state_T, obj.target)
+                for (fw_state_T, obj) in zip(fw_states_T, objectives)
+            ]
+        )
 
         toc = time.time()
 
         # Display information about iteration
-        if info_hook is None:
-            info = None
-        else:
+        if info_hook is not None:
             info = info_hook(
                 objectives=objectives,
                 adjoint_objectives=adjoint_objectives,
                 backward_states=backward_states,
                 forward_states=forward_states,
                 fw_states_T=fw_states_T,
+                tlist=tlist,
+                guess_pulses=guess_pulses,
                 optimized_pulses=optimized_pulses,
+                g_a_integrals=g_a_integrals,
                 lambda_vals=lambda_vals,
                 shape_arrays=shape_arrays,
                 tau_vals=tau_vals,
                 start_time=tic,
                 stop_time=toc,
+                info_vals=result.info_vals,
                 shared_data={},
                 iteration=krotov_iteration,
             )
         # Update optimization `result` with info from finished iteration
         result.iters.append(krotov_iteration)
         result.iter_seconds.append(int(toc - tic))
-        result.info_vals.append(info)
+        if info is not None:
+            result.info_vals.append(info)
         result.tau_vals.append(tau_vals)
         result.optimized_controls = optimized_pulses
         if store_all_pulses:
@@ -489,7 +508,9 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
         control_onto_interval(control) for control in guess_controls
     ]
     try:
-        lambda_vals = [float(options['lambda_a']) for options in options_list]
+        lambda_vals = np.array(
+            [float(options['lambda_a']) for options in options_list]
+        )
     except KeyError:
         raise ValueError(
             "Each value in pulse_options must be a dict that contains "

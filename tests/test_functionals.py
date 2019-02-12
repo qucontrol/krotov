@@ -107,11 +107,11 @@ def test_J_T_hs_unitary(
     assert abs(J_hs - J_re) < 1e-14
 
     # unitary density matrices should give the same result
-    states_T = [
+    fw_states_T = [
         psi * phi.dag()
         for (psi, phi) in product(sqrt_SWAP_basis, sqrt_SWAP_basis)
     ]
-    J_hs = krotov.functionals.J_T_hs(states_T, cphase_lv_full_objectives)
+    J_hs = krotov.functionals.J_T_hs(fw_states_T, cphase_lv_full_objectives)
     assert abs(J_hs - J_re) < 1e-14
 
 
@@ -130,8 +130,8 @@ def test_chi_hs_transmon(transmon_3states_objectives):
     )
     assert (ρ_mixed * ρ_mixed).tr() == 0.25
     assert (ρ_mixed - objectives[2].target).norm('max') < 1e-14
-    states_T = [ρ_mixed, ρ_mixed, ρ_mixed]
-    χs = krotov.functionals.chis_hs(states_T, objectives, None)
+    fw_states_T = [ρ_mixed, ρ_mixed, ρ_mixed]
+    χs = krotov.functionals.chis_hs(fw_states_T, objectives, None)
     χ1 = (1 / 6.0) * (60.0 / 22.0) * (objectives[0].target - ρ_mixed)
     χ2 = (1 / 6.0) * (3.0 / 22.0) * (objectives[1].target - ρ_mixed)
     χ3 = 0.0 * ρ_mixed
@@ -143,7 +143,7 @@ def test_chi_hs_transmon(transmon_3states_objectives):
     objectives = copy.deepcopy(objectives)
     for obj in objectives:
         del obj.weight
-    χs = krotov.functionals.chis_hs(states_T, objectives, None)
+    χs = krotov.functionals.chis_hs(fw_states_T, objectives, None)
     χ1 = (1 / 6.0) * (objectives[0].target - ρ_mixed)
     χ2 = (1 / 6.0) * (objectives[1].target - ρ_mixed)
     χ3 = 0.0 * ρ_mixed
@@ -154,7 +154,7 @@ def test_chi_hs_transmon(transmon_3states_objectives):
 
 def test_F_avg_psi(sqrt_SWAP_basis, canonical_basis):
     F = krotov.functionals.F_avg(
-        states_T=sqrt_SWAP_basis,
+        fw_states_T=sqrt_SWAP_basis,
         basis_states=canonical_basis,
         gate=qutip.gates.cphase(np.pi),
     )
@@ -162,12 +162,12 @@ def test_F_avg_psi(sqrt_SWAP_basis, canonical_basis):
 
 
 def test_F_avg_rho(sqrt_SWAP_basis, canonical_basis):
-    states_T = [
+    fw_states_T = [
         psi * phi.dag()
         for (psi, phi) in product(sqrt_SWAP_basis, sqrt_SWAP_basis)
     ]
     F = krotov.functionals.F_avg(
-        states_T=states_T,
+        fw_states_T=fw_states_T,
         basis_states=canonical_basis,
         gate=qutip.gates.cphase(np.pi),
     )

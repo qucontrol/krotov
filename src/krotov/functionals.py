@@ -17,7 +17,7 @@ __all__ = [
 ]
 
 
-def f_tau(states_T, objectives, tau_vals=None):
+def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Average of the complex overlaps with the target states
 
     That is,
@@ -39,7 +39,7 @@ def f_tau(states_T, objectives, tau_vals=None):
         \tau_i = \tr\left[\Op{\rho}_i(T)\Op{\rho}_i^{\tgt}\right]
 
     in Liouville space, where $\ket{\Psi_i}$ or $\Op{\rho}_i$ are the elements
-    of `states_T`, and $\ket{\Psi_i^{\tgt}}$ or $\Op{\rho}^{\tgt}$ are the
+    of `fw_states_T`, and $\ket{\Psi_i^{\tgt}}$ or $\Op{\rho}^{\tgt}$ are the
     target states from the :attr:`~.Objective.target` attribute of the
     objectives. If `tau_vals` are None, they will be calculated internally.
 
@@ -49,11 +49,14 @@ def f_tau(states_T, objectives, tau_vals=None):
     present, are not automatically normalized, they are assumed to have values
     such that the resulting $f_{\tau}$ lies in the unit circle of the complex
     plane. Usually, this means that the weights should sum to $N$.
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
     """
     if tau_vals is None:
         tau_vals = [
             _overlap(psi, obj.target)
-            for (psi, obj) in zip(states_T, objectives)
+            for (psi, obj) in zip(fw_states_T, objectives)
         ]
     res = 0j
     for (obj, τ) in zip(objectives, tau_vals):
@@ -64,32 +67,38 @@ def f_tau(states_T, objectives, tau_vals=None):
     return res / len(objectives)
 
 
-def F_re(states_T, objectives, tau_vals=None):
+def F_re(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Real-part fidelity
 
     .. math::
 
         F_{\text{re}} = \Re[f_{\tau}] \quad\in [-1, 1]
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
     """
-    return f_tau(states_T, objectives, tau_vals).real
+    return f_tau(fw_states_T, objectives, tau_vals).real
 
 
-def J_T_re(states_T, objectives, tau_vals=None):
+def J_T_re(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Real-part functional
 
     .. math::
 
         J_{T,\text{re}} = 1 - F_{\text{re}} \quad\in [0, 2]
 
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
+
     Note:
-        If the `states_T` or the target states are mixed states, it is
+        If the `fw_states_T` or the target states are mixed states, it is
         preferable to use :func:`J_T_hs`, as $J_{T,\text{re}}$ may take
         negative values for mixed states.
     """
-    return 1 - F_re(states_T, objectives, tau_vals)
+    return 1 - F_re(fw_states_T, objectives, tau_vals)
 
 
-def chis_re(states_T, objectives, tau_vals):
+def chis_re(fw_states_T, objectives, tau_vals):
     r"""States $\ket{\chi}$ for functional $J_{T,\text{re}}$
 
     .. math::
@@ -101,7 +110,8 @@ def chis_re(states_T, objectives, tau_vals):
     with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
     given, the weights should generally sum to $N$.
 
-    Note: `tau_vals` are ignored.
+    Note: `tau_vals` are ignored, but are present to satisfy the requirments of
+    the `chi_constructor` interface.
     """
     c = 1.0 / (2 * len(objectives))
     res = []
@@ -115,7 +125,7 @@ def chis_re(states_T, objectives, tau_vals):
     return res
 
 
-def J_T_hs(states_T, objectives, tau_vals=None):
+def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Hilbert-Schmidt distance measure functional
 
     .. math::
@@ -138,7 +148,7 @@ def J_T_hs(states_T, objectives, tau_vals=None):
                 - 2 \Re[\tau_i]
             \right)
 
-    where the $\Op{\rho}_i$ are the elements of `states_T`,
+    where the $\Op{\rho}_i$ are the elements of `fw_states_T`,
     the $\Op{\rho}_i^{\tgt}$ are the target states from the
     :attr:`~.Objective.target` attribute of the objectives,
     and the $\tau_i$ are the elements of `tau_vals` (which
@@ -146,6 +156,9 @@ def J_T_hs(states_T, objectives, tau_vals=None):
 
     The $w_i$ are optional weights, cf. :func:`f_tau`. If
     given, the weights should generally sum to $N$.
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
 
 
     Note:
@@ -157,13 +170,13 @@ def J_T_hs(states_T, objectives, tau_vals=None):
     if tau_vals is None:
         tau_vals = [
             _overlap(psi, obj.target)
-            for (psi, obj) in zip(states_T, objectives)
+            for (psi, obj) in zip(fw_states_T, objectives)
         ]
     res = 0.0
     hs = 'l2'  # qutip's name for HS-norm for state vectors
-    if states_T[0].type == 'oper':
+    if fw_states_T[0].type == 'oper':
         hs = 'fro'  # qutip's name for HS-norm for density matrices
-    for (obj, ρ, τ) in zip(objectives, states_T, tau_vals):
+    for (obj, ρ, τ) in zip(objectives, fw_states_T, tau_vals):
         ρ_tgt = obj.target
         if hasattr(obj, 'weight'):
             res += obj.weight * (
@@ -174,7 +187,7 @@ def J_T_hs(states_T, objectives, tau_vals=None):
     return res / (2 * len(objectives))
 
 
-def chis_hs(states_T, objectives, tau_vals):
+def chis_hs(fw_states_T, objectives, tau_vals):
     r"""States $\Op{\chi}$ for functional $J_{T,\text{hs}}$
 
     .. math::
@@ -210,11 +223,12 @@ def chis_hs(states_T, objectives, tau_vals):
             }_{=\Norm{\Op{\rho}^{\tgt}}_{\text{hs}}^2}
         \big).
 
-    Note that `tau_vals` is ignored.
+    Note: `tau_vals` are ignored, but are present to satisfy the requirments of
+    the `chi_constructor` interface.
     """
     c = 1.0 / (2 * len(objectives))
     res = []
-    for (obj, ρ) in zip(objectives, states_T):
+    for (obj, ρ) in zip(objectives, fw_states_T):
         ρ_tgt = obj.target
         if hasattr(obj, 'weight'):
             w = obj.weight
@@ -224,7 +238,7 @@ def chis_hs(states_T, objectives, tau_vals):
     return res
 
 
-def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
+def F_avg(fw_states_T, basis_states, gate, mapped_basis_states=None):
     r"""Average gate fidelity
 
     .. math::
@@ -257,7 +271,7 @@ def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
 
     where :math:`\ket{\phi_i}` is the :math:`i`'th element of `basis_states`,
     and :math:`\Op{\rho}_{ij}` is the :math:`(i-1) N + j`'th element of
-    `states_T`, that is, :math:`\Op{\rho}_{ij} =
+    `fw_states_T`, that is, :math:`\Op{\rho}_{ij} =
     \DynMap[\ketbra{\phi_i}{\phi_j}]`, with :math:`N` the dimension of the
     Hilbert space.
 
@@ -271,10 +285,10 @@ def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
             \right),
 
     where $\Op{U}$ the gate that maps `basis_states` to the result of a forward
-    propagation of those basis states, stored in `states_T`.
+    propagation of those basis states, stored in `fw_states_T`.
 
     Args:
-        states_T (list[qutip.Qobj]): The forward propagated states. For
+        fw_states_T (list[qutip.Qobj]): The forward propagated states. For
             dissipative dynamics, this must be the forward propagation of the
             full basis of Liouville space, that is, all $N^2$ dyadic
             combinations of the Hilbert space logical basis states.
@@ -289,74 +303,77 @@ def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
             to pass pre-calculated `mapped_basis_states` when evaluating
             $F_{\text{avg}}$ repeatedly for the same target.
     """
+    # F_avg is not something you can optimize directly: Nobody has calculated
+    # ∂(1-F_avg)/∂⟨ϕ|. This is why there is no J_T_avg, and why F_avg does not
+    # follow the info_hook interface.
     N = len(basis_states)
     if gate.shape != (N, N):
         raise ValueError(
             "Shape of gate is incompatible with number of basis states"
         )
-    if states_T[0].type == 'oper':
-        if len(states_T) != N * N:
+    if fw_states_T[0].type == 'oper':
+        if len(fw_states_T) != N * N:
             raise ValueError(
                 "Evaluating F_avg for density matrices requires %d states "
                 "(forward-propagation of all dyadic combinations of "
-                "%d basis states), not %d" % (N * N, N, len(states_T))
+                "%d basis states), not %d" % (N * N, N, len(fw_states_T))
             )
-        return _F_avg_rho(states_T, basis_states, gate, mapped_basis_states)
-    elif states_T[0].type == 'ket':
-        if len(states_T) != N:
+        return _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states)
+    elif fw_states_T[0].type == 'ket':
+        if len(fw_states_T) != N:
             raise ValueError(
                 "Evaluating F_avg for hilbert space states requires %d states "
                 "(forward-propagation of all basis states), not %d"
-                % (N, len(states_T))
+                % (N, len(fw_states_T))
             )
-        return _F_avg_psi(states_T, basis_states, gate)
+        return _F_avg_psi(fw_states_T, basis_states, gate)
     else:
-        raise ValueError("Invalid type of state: %s" % states_T[0].type)
+        raise ValueError("Invalid type of state: %s" % fw_states_T[0].type)
 
 
-def _F_avg_rho(states_T, basis_states, gate, mapped_basis_states):
+def _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states):
     """Implementation of F_avg in Liouville space"""
     if mapped_basis_states is None:
         mapped_basis_states = mapped_basis(gate, basis_states)
     N = len(basis_states)
     F = 0
     for j in range(N):
-        ρ_jj = states_T[j * N + j]
+        ρ_jj = fw_states_T[j * N + j]
         Oϕ_j = mapped_basis_states[j]
         for i in range(N):
-            ρ_ij = states_T[i * N + j]
+            ρ_ij = fw_states_T[i * N + j]
             Oϕ_i = mapped_basis_states[i]
             F += _overlap(Oϕ_i, ρ_ij(Oϕ_j)) + _overlap(Oϕ_i, ρ_jj(Oϕ_i))
     assert abs(F.imag) < 1e-10, F.imag
     return F.real / (N * (N + 1))
 
 
-def _F_avg_psi(states_T, basis_states, O):
+def _F_avg_psi(fw_states_T, basis_states, O):
     """Implementation of F_avg in Hilbert space"""
     N = len(basis_states)
-    U = gate(basis_states, states_T)
+    U = gate(basis_states, fw_states_T)
     F = abs((O.dag() * U).tr()) ** 2 + (O.dag() * U * U.dag() * O).tr()
     assert abs(F.imag) < 1e-10, F.imag
     return F.real / (N * (N + 1))
 
 
-def gate(basis_states, states_T):
-    """Gate that maps `basis_states` to `states_T`
+def gate(basis_states, fw_states_T):
+    """Gate that maps `basis_states` to `fw_states_T`
 
     Example:
 
         >>> from qutip import ket
         >>> basis = [ket(nums) for nums in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-        >>> states_T = mapped_basis(qutip.gates.cnot(), basis)
-        >>> U = gate(basis, states_T)
+        >>> fw_states_T = mapped_basis(qutip.gates.cnot(), basis)
+        >>> U = gate(basis, fw_states_T)
         >>> assert (U - qutip.gates.cnot()).norm() < 1e-15
     """
     N = len(basis_states)
     U = np.zeros((N, N), dtype=np.complex128)
     for j in range(N):
         for i in range(N):
-            U[i, j] = basis_states[i].overlap(states_T[j])
-    dims = [basis_states[0].dims[0], states_T[0].dims[0]]
+            U[i, j] = basis_states[i].overlap(fw_states_T[j])
+    dims = [basis_states[0].dims[0], fw_states_T[0].dims[0]]
     return qutip.Qobj(U, dims=dims)
 
 
