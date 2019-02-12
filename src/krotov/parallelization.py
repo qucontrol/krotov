@@ -169,7 +169,7 @@ class FwPropStepTask:
 
         for (pulse, pulse_val) in zip(pulses, pulse_vals):
             pulse[time_index] = pulse_val
-        state = states[i_state][time_index]
+        state = states[i_state]
         mapping = pulses_mapping[i_state]
         obj = objectives[i_state]
         H = plug_in_pulse_values(obj.H, pulses, mapping[0], time_index)
@@ -178,14 +178,14 @@ class FwPropStepTask:
             for (ic, c_op) in enumerate(obj.c_ops)
         ]
         dt = tlist[time_index + 1] - tlist[time_index]
-        states[i_state][time_index + 1] = propagators[i_state](
+        states[i_state] = propagators[i_state](
             H, state, dt, c_ops
         )
         # While there is no significant IPC-communication overhead associated
         # with the *input* of the task, the resulting state returned here still
         # must go through the `result_queue` of the Consumer. This is the main
         # bottleneck of this implementation.
-        return states[i_state][time_index + 1]
+        return states[i_state]
 
 
 def parallel_map_fw_prop_step(shared, values, task_args):
@@ -202,7 +202,7 @@ def parallel_map_fw_prop_step(shared, values, task_args):
         values (list): a list 0..(N-1) where N is the number of objectives
         task_args (tuple): A tuple of 7 components:
 
-            1. An array-like storage container for the propagated states
+            1. A list of states to propagate, one for each objective.
             2. The list of objectives
             3. The list of optimized pulses (updated up to `time_index`)
             4. The "pulses mapping", cf :func:`.extract_controls_mapping`

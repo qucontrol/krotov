@@ -7,6 +7,18 @@ from uniseg.graphemecluster import grapheme_clusters
 __all__ = ['chain', 'print_debug_information', 'print_table']
 
 
+def _qobj_nbytes(qobj):
+    """Return an estimate for the number of bytes of memory required to store a
+    Qobj"""
+    return (
+        qobj.data.data.nbytes
+        + qobj.data.indptr.nbytes
+        + qobj.data.indices.nbytes
+        + sys.getsizeof(qobj)
+        + sum(sys.getsizeof(attr) for attr in qobj.__dict__)
+    )
+
+
 def chain(*hooks):
     """Chain multiple `info_hook` or `modify_params_after_iter` callables
     together.
@@ -48,6 +60,7 @@ def print_debug_information(
     adjoint_objectives,
     backward_states,
     forward_states,
+    forward_states0,
     guess_pulses,
     optimized_pulses,
     g_a_integrals,
@@ -74,9 +87,12 @@ def print_debug_information(
         adjoint_objectives (list[Objective]): list of the adjoint objectives
         backward_states (list): If available, for each objective, an array-like
             object containing the states of the Krotov backward propagation.
-        forward_states: If available, for each objective, an array-like object
-            containing the forward-propagated states under the optimized
-            pulses.
+        forward_states: If available (second order only), for each objective,
+            an array-like object containing the forward-propagated states under
+            the optimized pulses. None otherwise.
+        forward_states0: If available (second order only), for each objective,
+            an array-like object containing the forward-propagated states under
+            the guess pulses. None otherwise.
         guess_pulses (list[numpy.ndarray]): list of guess pulses
         optimized_pulses (list[numpy.ndarray]): list of optimized pulses
         g_a_integrals (numpy.ndarray): array of values
@@ -101,7 +117,8 @@ def print_debug_information(
         tlist (numpy.ndarray): array of time grid values on which the states
             are defined
         tau_vals (numpy.ndarray): for each objective, the complex overlap for
-            the forward-propagated state with the target state
+            the forward-propagated state with the target state, or None if no
+            target state is defined.
         start_time (float): The time at which the iteration started, in epoch
             seconds
         stop_time (float): The time at which the iteration started, in epoch
@@ -139,9 +156,6 @@ def print_debug_information(
         for (i, obj) in enumerate(adjoint_objectives):
             out.write("        %d:%s\n" % (i + 1, obj))
         out.write(
-            "    λₐ: %s\n" % (", ".join(["%.2e" % λ for λ in lambda_vals]))
-        )
-        out.write(
             "    S(t) (ranges): %s\n"
             % (
                 ", ".join(
@@ -163,41 +177,68 @@ def print_debug_information(
     out.write(
         "    ∫gₐ(t)dt: %s\n" % (", ".join(["%.2e" % v for v in g_a_integrals]))
     )
+    out.write(
+        "    λₐ: %s\n" % (", ".join(["%.2e" % λ for λ in lambda_vals]))
+    )
+    MB_per_timeslot = (
+        sum(_qobj_nbytes(state) for state in fw_states_T) / (1024 ** 2)
+    )
+    out.write("    storage (bw, fw, fw0): ")
     if backward_states is None:
-        out.write("    backward states: None\n")
+        out.write("None, ")
     else:
         n = len(backward_states)
         out.write(
-            "    backward states: [%d * %s(%d)]\n"
+            "[%d * %s(%d)] (%.1f MB), "
             % (
                 n,
                 backward_states[0].__class__.__name__,
                 len(backward_states[0]),
+                len(backward_states[0]) * MB_per_timeslot,
             )
         )
     if forward_states is None:
-        out.write("    forward states: None\n")
+        out.write("None, ")
     else:
         n = len(forward_states)
         out.write(
-            "    forward states: [%d * %s(%d)]\n"
-            % (n, forward_states[0].__class__.__name__, len(forward_states[0]))
+            "[%d * %s(%d)] (%.1f MB), "
+            % (
+                n,
+                forward_states[0].__class__.__name__,
+                len(forward_states[0]),
+                len(forward_states[0]) * MB_per_timeslot,
+            )
+        )
+    if forward_states0 is None:
+        out.write("None\n")
+    else:
+        n = len(forward_states0)
+        out.write(
+            "[%d * %s(%d)] (%.1f MB)\n"
+            % (
+                n,
+                forward_states0[0].__class__.__name__,
+                len(forward_states0[0]),
+                len(forward_states0[0]) * MB_per_timeslot,
+            )
         )
     out.write(
         "    fw_states_T norm: %s\n"
         % (", ".join(["%f" % state.norm() for state in fw_states_T]))
     )
-    out.write(
-        "    τ: %s\n"
-        % (
-            ", ".join(
-                [
-                    "(%.2e:%.2fπ)" % (abs(z), np.angle(z) / np.pi)
-                    for z in tau_vals
-                ]
+    if not np.any(tau_vals == None):  # noqa
+        out.write(
+            "    τ: %s\n"
+            % (
+                ", ".join(
+                    [
+                        "(%.2e:%.2fπ)" % (abs(z), np.angle(z) / np.pi)
+                        for z in tau_vals
+                    ]
+                )
             )
         )
-    )
 
 
 def _grapheme_len(text):

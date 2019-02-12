@@ -233,9 +233,6 @@ def optimize_pulses(
     )
     toc = time.time()
 
-    if second_order:
-        forward_states0 = forward_states  # ∀t: Δϕ=0, for iteration 0
-
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = np.array(
         [
@@ -244,6 +241,13 @@ def optimize_pulses(
         ]
     )
 
+    if second_order:
+        forward_states0 = forward_states  # ∀t: Δϕ=0, for iteration 0
+    else:
+        # the forward-propagated states only need to be stored for the second
+        # order update
+        forward_states0 = forward_states = None
+
     info = None
     if info_hook is not None:
         info = info_hook(
@@ -251,6 +255,7 @@ def optimize_pulses(
             adjoint_objectives=adjoint_objectives,
             backward_states=None,
             forward_states=forward_states,
+            forward_states0=forward_states0,
             guess_pulses=guess_pulses,
             optimized_pulses=guess_pulses,
             g_a_integrals=g_a_integrals,
@@ -309,7 +314,10 @@ def optimize_pulses(
 
         # Forward propagation and pulse update
         logger.info("Started forward propagation/pulse update")
-        forward_states = [storage(len(tlist)) for _ in range(len(objectives))]
+        if second_order:
+            forward_states = [
+                storage(len(tlist)) for _ in range(len(objectives))
+            ]
         g_a_integrals[:] = 0.0
         if second_order:
             # In the update for the pulses in the first time interval, we use
@@ -318,12 +326,14 @@ def optimize_pulses(
                 Qobj(np.zeros(shape=chi_states[k].shape))
                 for k in range(len(objectives))
             ]
-        for i_obj in range(len(objectives)):
-            forward_states[i_obj][0] = objectives[i_obj].initial_state
+        if second_order:
+            for i_obj in range(len(objectives)):
+                forward_states[i_obj][0] = objectives[i_obj].initial_state
         delta_eps = [
             np.zeros(len(tlist) - 1, dtype=np.complex128) for _ in guess_pulses
         ]
         optimized_pulses = copy.deepcopy(guess_pulses)
+        fw_states = [obj.initial_state for obj in objectives]
         for time_index in range(len(tlist) - 1):  # iterate over time intervals
             dt = tlist[time_index + 1] - tlist[time_index]
             if second_order:
@@ -340,7 +350,7 @@ def optimize_pulses(
                         i_pulse,
                         time_index,
                     )
-                    Ψ = forward_states[i_obj][time_index]
+                    Ψ = fw_states[i_obj]
                     update = _overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩
                     update *= chi_norms[i_obj]
                     if second_order:
@@ -356,7 +366,7 @@ def optimize_pulses(
                 _forward_propagation_step,
                 list(range(len(objectives))),
                 (
-                    forward_states,
+                    fw_states,
                     objectives,
                     optimized_pulses,
                     pulses_mapping,
@@ -371,9 +381,9 @@ def optimize_pulses(
                     fw_states[k] - forward_states0[k][time_index + 1]
                     for k in range(len(objectives))
                 ]
-            # storage
-            for i_obj in range(len(objectives)):
-                forward_states[i_obj][time_index + 1] = fw_states[i_obj]
+                # storage
+                for i_obj in range(len(objectives)):
+                    forward_states[i_obj][time_index + 1] = fw_states[i_obj]
         logger.info("Finished forward propagation/pulse update")
         fw_states_T = fw_states
         tau_vals = np.array(
@@ -392,6 +402,7 @@ def optimize_pulses(
                 adjoint_objectives=adjoint_objectives,
                 backward_states=backward_states,
                 forward_states=forward_states,
+                forward_states0=forward_states0,
                 fw_states_T=fw_states_T,
                 tlist=tlist,
                 guess_pulses=guess_pulses,
@@ -633,7 +644,7 @@ def _forward_propagation_step(
     propagators,
 ):
     """Forward-propagate states[i_state] by a single time step"""
-    state = states[i_state][time_index]
+    state = states[i_state]
     obj = objectives[i_state]
     mapping = pulses_mapping[i_state]
     H = plug_in_pulse_values(obj.H, pulses, mapping[0], time_index)
