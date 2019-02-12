@@ -3,8 +3,8 @@
 CONDA_PACKAGES = qutip
 TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
-TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10
-TESTS = src tests docs/notebooks/*.ipynb docs/*.rst docs/*.ipynb
+TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 -x -s
+TESTS = src tests docs/notebooks/*.ipynb docs/*.rst
 
 
 define PRINT_HELP_PYSCRIPT
@@ -89,7 +89,7 @@ test36: .venv/py36/bin/py.test ## run tests for Python 3.6
 	@echo ""
 	@.venv/py36/bin/jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.timeout=180 --ExecutePreprocessor.kernel_name='python3' --config=/dev/null $< 2>&1 | tee $@
 
-NOTEBOOKFILES = $(shell find docs/notebooks/ -iname '*.ipynb'  -maxdepth 1) docs/10_time_discretization.ipynb
+NOTEBOOKFILES = $(shell find docs/notebooks/ -iname '*.ipynb'  -maxdepth 1)
 NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))
 
 notebooks: $(NOTEBOOKLOGS)  ## re-evaluate the notebooks in docs/notebooks
