@@ -30,28 +30,28 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
 
     .. math::
 
-        f_{\tau} = \frac{1}{N} \sum_{i=1}^{N} w_i \tau_i
+        f_{\tau} = \frac{1}{N} \sum_{k=1}^{N} w_k \tau_k
 
-    where $\tau_i$ are the elements of `tau_vals`, assumed to be
+    where $\tau_k$ are the elements of `tau_vals`, assumed to be
 
     .. math::
 
-        \tau_i = \Braket{\Psi_i(T)}{\Psi_i^{\tgt}},
+        \tau_k = \Braket{\Psi_k(T)}{\Psi_k^{\tgt}},
 
     in Hilbert space, or
 
     .. math::
 
-        \tau_i = \tr\left[\Op{\rho}_i(T)\Op{\rho}_i^{\tgt}\right]
+        \tau_k = \tr\left[\Op{\rho}_k(T)\Op{\rho}_k^{\tgt}\right]
 
-    in Liouville space, where $\ket{\Psi_i}$ or $\Op{\rho}_i$ are the elements
-    of `fw_states_T`, and $\ket{\Psi_i^{\tgt}}$ or $\Op{\rho}^{\tgt}$ are the
+    in Liouville space, where $\ket{\Psi_k}$ or $\Op{\rho}_k$ are the elements
+    of `fw_states_T`, and $\ket{\Psi_k^{\tgt}}$ or $\Op{\rho}^{\tgt}$ are the
     target states from the :attr:`~.Objective.target` attribute of the
     objectives. If `tau_vals` are None, they will be calculated internally.
 
-    $N$ is the number of objectives, and $w_i$ is an optional weight for each
+    $N$ is the number of objectives, and $w_k$ is an optional weight for each
     objective. For any objective that has a (custom) `weight` attribute, the
-    $w_i$ is taken from that attribute; otherwise, $w_i = 1$. The weights, if
+    $w_k$ is taken from that attribute; otherwise, $w_k = 1$. The weights, if
     present, are not automatically normalized, they are assumed to have values
     such that the resulting $f_{\tau}$ lies in the unit circle of the complex
     plane. Usually, this means that the weights should sum to $N$. The
@@ -81,10 +81,10 @@ def F_ss(states_T, objectives, tau_vals=None, **kwargs):
 
     .. math::
 
-        F_{\text{ss}} = \frac{1}{N} \sum_{i=1}^{N} w_i \Abs{\tau_i}^2
+        F_{\text{ss}} = \frac{1}{N} \sum_{k=1}^{N} w_k \Abs{\tau_k}^2
         \quad\in [0, 1]
 
-    with $N$, $w_i$ and $\tau_i$ as in :func:`f_tau`.
+    with $N$, $w_k$ and $\tau_k$ as in :func:`f_tau`.
 
     The `kwargs` are ignored, allowing the function to be used in an
     `info_hook`.
@@ -113,15 +113,15 @@ def J_T_ss(states_T, objectives, tau_vals=None, **kwargs):
 
 
 def chis_ss(states_T, objectives, tau_vals):
-    r"""States $\ket{\chi_i}$ for functional $J_{T,\text{ss}}$
+    r"""States $\ket{\chi_k}$ for functional $J_{T,\text{ss}}$
 
     .. math::
 
-        \Ket{\chi_i}
-        = -\frac{\partial J_{T,\text{ss}}}{\partial \bra{\Psi_i(T)}}
-        = \frac{1}{N} w_i \tau_i \Ket{\Psi^{\tgt}_i}
+        \Ket{\chi_k}
+        = -\frac{\partial J_{T,\text{ss}}}{\partial \bra{\Psi_k(T)}}
+        = \frac{1}{N} w_k \tau_k \Ket{\Psi^{\tgt}_k}
 
-    with $\tau_i$ and $w_i$ as defined in :func:`f_tau`.
+    with $\tau_k$ and $w_k$ as defined in :func:`f_tau`.
     """
     N = len(objectives)
     res = []
@@ -161,15 +161,15 @@ def J_T_sm(states_T, objectives, tau_vals=None, **kwargs):
 
 
 def chis_sm(states_T, objectives, tau_vals):
-    r"""States $\ket{\chi_i}$ for functional $J_{T,\text{sm}}$
+    r"""States $\ket{\chi_k}$ for functional $J_{T,\text{sm}}$
 
     .. math::
 
-        \Ket{\chi_i}
-        = -\frac{\partial J_{T,\text{sm}}}{\partial \bra{\Psi_i(T)}}
-        = \frac{1}{N^2} w_i \sum_{j}^{N} w_j\tau_j\Ket{\Psi^{\tgt}_i}
+        \Ket{\chi_k}
+        = -\frac{\partial J_{T,\text{sm}}}{\partial \bra{\Psi_k(T)}}
+        = \frac{1}{N^2} w_k \sum_{j}^{N} w_j\tau_j\Ket{\Psi^{\tgt}_k}
 
-    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
+    with optional weights $w_k$, cf. :func:`f_tau` (default: :math:`w_k=1`). If
     given, the weights should generally sum to $N$.
     """
     sum_of_w_tau = 0
@@ -228,15 +228,15 @@ def J_T_re(fw_states_T, objectives, tau_vals=None, **kwargs):
 
 
 def chis_re(fw_states_T, objectives, tau_vals):
-    r"""States $\ket{\chi_i}$ for functional $J_{T,\text{re}}$
+    r"""States $\ket{\chi_k}$ for functional $J_{T,\text{re}}$
 
     .. math::
 
-        \Ket{\chi_i}
-        = -\frac{\partial J_{T,\text{re}}}{\partial \bra{\Psi_i(T)}}
-        = \frac{1}{2N} w_i \Ket{\Psi^{\tgt}_i}
+        \Ket{\chi_k}
+        = -\frac{\partial J_{T,\text{re}}}{\partial \bra{\Psi_k(T)}}
+        = \frac{1}{2N} w_k \Ket{\Psi^{\tgt}_k}
 
-    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
+    with optional weights $w_k$, cf. :func:`f_tau` (default: :math:`w_k=1`). If
     given, the weights should generally sum to $N$.
 
     Note: `tau_vals` are ignored, but are present to satisfy the requirments of
@@ -260,33 +260,33 @@ def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
     .. math::
 
         J_{T,\text{hs}}
-            = \frac{1}{2N} \sum_{i=1}^{N}
-                w_i \Norm{\Op{\rho}_i(T) - \Op{\rho}_i^{\tgt}}_{\text{hs}}^2
+            = \frac{1}{2N} \sum_{k=1}^{N}
+                w_k \Norm{\Op{\rho}_k(T) - \Op{\rho}_k^{\tgt}}_{\text{hs}}^2
         \quad \in \begin{cases}
             [0, 2] & \text{in Hilbert space} \\
             [0, 1] & \text{in Liouville space}
         \end{cases}
 
     in Liouville space (using the Hilbert-Schmidt norm), or equivalently with
-    $\ket{\Psi_i(T)}$ and $\ket{\Psi_i^{tgt}}$ in Hilbert space. The functional
+    $\ket{\Psi_k(T)}$ and $\ket{\Psi_k^{tgt}}$ in Hilbert space. The functional
     is evaluated as
 
     .. math::
 
         J_{T,\text{hs}}
-            = \frac{1}{2N} \sum_{i=1}^{N} w_i \left(
-                \Norm{\Op{\rho}_i(T)}_{\text{hs}}^2
+            = \frac{1}{2N} \sum_{k=1}^{N} w_k \left(
+                \Norm{\Op{\rho}_k(T)}_{\text{hs}}^2
                 + \Norm{\Op{\rho}^{\tgt}}_{\text{hs}}^2
-                - 2 \Re[\tau_i]
+                - 2 \Re[\tau_k]
             \right)
 
-    where the $\Op{\rho}_i$ are the elements of `fw_states_T`,
-    the $\Op{\rho}_i^{\tgt}$ are the target states from the
+    where the $\Op{\rho}_k$ are the elements of `fw_states_T`,
+    the $\Op{\rho}_k^{\tgt}$ are the target states from the
     :attr:`~.Objective.target` attribute of the objectives,
-    and the $\tau_i$ are the elements of `tau_vals` (which
+    and the $\tau_k$ are the elements of `tau_vals` (which
     will be calculated internally if passed as None).
 
-    The $w_i$ are optional weights, cf. :func:`f_tau`. If
+    The $w_k$ are optional weights, cf. :func:`f_tau`. If
     given, the weights should generally sum to $N$.
 
     The `kwargs` are ignored, allowing the function to be used in an
@@ -296,7 +296,7 @@ def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
     Note:
         For pure states (or Hilbert space states), $J_{T,\text{hs}}$ is
         equivalent to $J_{T,\text{re}}$, cf. :func:`J_T_re`. However, the
-        backward-propagated states $\chi_i$ obtained from the two functionals
+        backward-propagated states $\chi_k$ obtained from the two functionals
         (:func:`chis_re` and :func:`chis_hs`) are *not* equivalent.
     """
     if tau_vals is None:
@@ -320,17 +320,17 @@ def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
 
 
 def chis_hs(fw_states_T, objectives, tau_vals):
-    r"""States $\Op{\chi}_i$ for functional $J_{T,\text{hs}}$
+    r"""States $\Op{\chi}_k$ for functional $J_{T,\text{hs}}$
 
     .. math::
 
-        \Op{\chi}_i
+        \Op{\chi}_k
         = -\frac{\partial J_{T,\text{sm}}}
-                {\partial \langle\!\langle \Op{\rho}_i(T)\vert}
-        = \frac{1}{2N} w_i
-          \left(\Op{\rho}^{\tgt}_i - \Op{\rho}_i(T)\right)
+                {\partial \langle\!\langle \Op{\rho}_k(T)\vert}
+        = \frac{1}{2N} w_k
+          \left(\Op{\rho}^{\tgt}_k - \Op{\rho}_k(T)\right)
 
-    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`).
+    with optional weights $w_k$, cf. :func:`f_tau` (default: :math:`w_k=1`).
 
     This is derived from $J_{T,\text{hs}}$ rewritten in the abstract
     Hilbert-Schmidt notation :math:`\langle\!\langle a \vert b \rangle\!\rangle
@@ -338,20 +338,20 @@ def chis_hs(fw_states_T, objectives, tau_vals):
 
     .. math::
 
-        J_{T,\text{hs}} = \frac{-1}{2N} \sum_{i=1}^{N}  w_i \big(
+        J_{T,\text{hs}} = \frac{-1}{2N} \sum_{k=1}^{N}  w_k \big(
             \underbrace{
-            \langle\!\langle \Op{\rho}_i(T) \vert
-                \Op{\rho}_i^{\tgt} \rangle\!\rangle
-            + \langle\!\langle \Op{\rho}_i^{\tgt}\vert
-                 \Op{\rho}_i(T) \rangle\!\rangle
-            }_{=2\Re[\tau_i]}
+            \langle\!\langle \Op{\rho}_k(T) \vert
+                \Op{\rho}_k^{\tgt} \rangle\!\rangle
+            + \langle\!\langle \Op{\rho}_k^{\tgt}\vert
+                 \Op{\rho}_k(T) \rangle\!\rangle
+            }_{=2\Re[\tau_k]}
             - \underbrace{
-              \langle\!\langle \Op{\rho}_i(T) \vert
-                \Op{\rho}_i(T) \rangle\!\rangle
-            }_{=\Norm{\Op{\rho}_i(T)}_{\text{hs}}^2}
+              \langle\!\langle \Op{\rho}_k(T) \vert
+                \Op{\rho}_k(T) \rangle\!\rangle
+            }_{=\Norm{\Op{\rho}_k(T)}_{\text{hs}}^2}
             - \underbrace{
-              \langle\!\langle \Op{\rho}_i^{\tgt} \vert
-                \Op{\rho}_i^{\tgt} \rangle\!\rangle
+              \langle\!\langle \Op{\rho}_k^{\tgt} \vert
+                \Op{\rho}_k^{\tgt} \rangle\!\rangle
             }_{=\Norm{\Op{\rho}^{\tgt}}_{\text{hs}}^2}
         \big).
 
