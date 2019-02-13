@@ -523,6 +523,36 @@ Then:
 You may also see the `pytest documentation on automatic debugging`_.
 
 
+How to see the debug logger output in the example notebooks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The :func:`.optimize_pulses` routine generates some logger messages for
+debugging purposes. To see these messages, set the level of "krotov" logger to
+INFO or DEBUG:
+
+.. code-block:: python
+
+   import logging
+   logger = logging.getLogger('krotov')
+   logger.setLevel(logging.DEBUG)
+
+
+You can also configure the logger with custom formatters, e.g. to show the
+messages with time stamps:
+
+.. code-block:: python
+
+   ch = logging.StreamHandler()
+   ch.setLevel(logging.INFO)
+   formatter = logging.Formatter("%(asctime)s:%(message)s")
+   ch.setFormatter(formatter)
+   logger.addHandler(ch)
+   logging.getLogger().handlers = [] # disable root handlers
+
+
+See the `Configure Logging`_ section of the Python documentation for more details.
+
+
 How to use quantum mechanical tex macros
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -538,3 +568,4 @@ For docstrings or ``*.rst`` files, see :ref:`write-documentation`. For notebooks
 .. _test-driven development: https://en.wikipedia.org/wiki/Test-driven_development
 .. _pytest documentation on skip and xfail: https://docs.pytest.org/en/latest/skipping.html
 .. _documentation of the nbval pluging on skipping and exceptions: https://nbval.readthedocs.io/en/latest/#Skipping-specific-cells
+.. _Configure Logging: https://docs.python.org/3/howto/logging.html#configuring-logging
