@@ -115,7 +115,7 @@ whose name start with ``test_``, which contain functions whose names also start
 with ``test_``. Any such functions in any such files are picked up by `pytest`_
 for testing. In addition, doctests_ from any docstring or any documentation
 file (``*.rst``) are picked up (by the `pytest doctest plugin`_). Lastly, all
-`example notebooks <Contribute Examples>`_ are validated as a test, through
+:ref:`example notebooks <ContributeExamples>` are validated as a test, through
 the `nbval plugin`_.
 
 .. _test coverage: https://coveralls.io/github/qucontrol/krotov?branch=master
@@ -187,6 +187,7 @@ to generate the documentation locally.
 .. _BibTeX: https://sphinxcontrib-bibtex.readthedocs.io/en/latest/
 .. _Matplotlib Sphinx cheat sheet: https://matplotlib.org/sampledoc/cheatsheet.html
 
+.. _ContributeExamples:
 
 Contribute Examples
 -------------------
