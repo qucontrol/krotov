@@ -67,6 +67,122 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
     return res / len(objectives)
 
 
+def F_ss(states_T, objectives, tau_vals=None, **kwargs):
+    r"""Summed absolute-square fidelity
+
+    .. math::
+
+        F_{\text{ss}} = f_{\Abs{\tau}^2} \quad\in [0, 1]
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
+    """
+    if tau_vals is None:
+        # get the absolute square, analogously to the f_tau function above
+        tau_vals = [
+            abs(_overlap(psi, obj.target))**2
+            for (psi, obj) in zip(states_T, objectives)
+        ]
+    else:
+        tau_vals = [abs(tau)**2 for tau in tau_vals]
+    return f_tau(states_T, objectives, tau_vals)
+
+
+def J_T_ss(states_T, objectives, tau_vals=None, **kwargs):
+    r"""Summed absolute-squared functional
+
+    .. math::
+
+        J_{T,\text{ss}} = 1 - F_{\text{ss}} \quad\in [0, 1]
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
+    """
+    return 1 - F_ss(states_T, objectives, tau_vals)
+
+
+def chis_ss(states_T, objectives, tau_vals):
+    r"""States $\ket{\chi}$ for functional $J_{T,\text{ss}}$
+
+    .. math::
+
+        \Ket{\chi_i}
+        = -\frac{\partial J_{T,\text{ss}}}{\partial \bra{\Psi_i(T)}}
+        = \frac{1}{N} w_i \tau_i \Ket{\Psi^{\tgt}_i}
+
+
+    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
+    given, the weights should generally sum to $N$.
+    """
+    c = 1.0 / (len(objectives))
+    res = []
+    for (obj, τ) in zip(objectives, tau_vals):
+        # `obj.target` is assumed to be the "target state" (gate applied to
+        # `initial_state`)
+        if hasattr(obj, 'weight'):
+            res.append(c * τ * obj.weight * obj.target)
+        else:
+            res.append(c * τ * obj.target)
+    return res
+
+
+def F_sm(states_T, objectives, tau_vals=None, **kwargs):
+    r"""Absolute-squared fidelity
+
+    .. math::
+
+        F_{\text{sm}} = \Abs{f_{\tau}}^2 \quad\in [0, 1]
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
+    """
+    return abs(f_tau(states_T, objectives, tau_vals))**2
+
+
+def J_T_sm(states_T, objectives, tau_vals=None, **kwargs):
+    r"""Absolute-squared functional
+
+    .. math::
+
+        J_{T,\text{sm}} = 1 - F_{\text{sm}} \quad\in [0, 1]
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
+    """
+    return 1 - F_sm(states_T, objectives, tau_vals)
+
+
+def chis_sm(states_T, objectives, tau_vals):
+    r"""States $\ket{\chi}$ for functional $J_{T,\text{sm}}$
+
+    .. math::
+
+        \Ket{\chi_i}
+        = -\frac{\partial J_{T,\text{sm}}}{\partial \bra{\Psi_i(T)}}
+        = \frac{1}{N**2} w_i \sum_{j}^{w_j\tau_j}\Ket{\Psi^{\tgt}_i}
+
+    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
+    given, the weights should generally sum to $N$.
+    """
+    sum_of_w_tau = 0
+    for (obj, τ) in zip(objectives, tau_vals):
+        if hasattr(obj, 'weight'):
+            sum_of_w_tau += obj.weight * τ
+        else:
+            sum_of_w_tau += τ
+
+    c = 1.0 / (len(objectives))**2
+    res = []
+    for obj in objectives:
+        # `obj.target` is assumed to be the "target state" (gate applied to
+        # `initial_state`)
+        if hasattr(obj, 'weight'):
+            res.append(c * obj.weight * obj.target * sum_of_w_tau)
+        else:
+            res.append(c * obj.target * sum_of_w_tau)
+    return res
+
+
 def F_re(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Real-part fidelity
 
