@@ -39,9 +39,9 @@ The functional consists of three parts:
   .. math::
 
       g_a[\epsilon(t)]
-          = \frac{\lambda_a}{S(t)} \Abs{\Delta\epsilon(t)}^2\,,
+          = \frac{\lambda_a}{S(t)} \Abs{\Delta\epsilon(t)}^2\,.
 
-  we introduce two parameters, the "inverse Krotov step width" $\lambda_a$ and the
+  We introduce two parameters, the "inverse Krotov step width" $\lambda_a$ and the
   shape function $S(t)$ which can be used to influence desired properties of
   the optimized controls. $\Delta\epsilon(t)$ is the update of the control in
   a single iteration of the optimization algorithm. It is best to think of

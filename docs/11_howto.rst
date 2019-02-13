@@ -104,7 +104,7 @@ good way to realize this.
 How to optimize towards an arbitrary perfect entangler
 ------------------------------------------------------
 
-Use :func:`krotov.objectives.gate_objectives` with ``gate=PE`` in
+Use :func:`krotov.objectives.gate_objectives` with ``gate='PE'`` in
 order to construct a list of objectives suitable for an optimization using a
 "perfect entanglers" functional :cite:`WattsPRA2015,GoerzPRA2015`.
 

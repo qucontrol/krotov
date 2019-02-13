@@ -6,7 +6,7 @@ Gradient-based optimization
 
 At its core, Krotov's method is a gradient-based optimization method, and
 most directly compares to
-GRAdient-based-Pulse-Engineering (GRAPE), another gradient-based method
+GRadient Ascent Pulse Engineering (GRAPE), another gradient-based method
 widely used in quantum control :cite:`KhanejaJMR05`. Historically, Krotov's
 method has been widely used in the control of atomic and molecular dynamics,
 whereas GRAPE has its origin in NMR. Generally, both methods can be used

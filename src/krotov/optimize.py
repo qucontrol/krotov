@@ -54,7 +54,7 @@ def optimize_pulses(
         objectives (list[Objective]): List of objectives
         pulse_options (dict): Mapping of time-dependent controls found in the
             Hamiltonians of the objectives to a dictionary of options for that
-            control. There must be an otions-dict for each control. As numpy
+            control. There must be an options-dict for each control. As numpy
             arrays are unhashable and thus cannot be used as dict keys, the
             options for a control that is an array must set using the key
             ``pulse_options[id(control)] = ...``. The options-dict of any
