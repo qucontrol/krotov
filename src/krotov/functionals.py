@@ -6,6 +6,12 @@ from .second_order import _overlap
 
 __all__ = [
     'f_tau',
+    'F_ss',
+    'J_T_ss',
+    'chis_ss',
+    'F_sm',
+    'J_T_sm',
+    'chis_sm',
     'F_re',
     'J_T_re',
     'chis_re',
@@ -48,7 +54,10 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
     $w_i$ is taken from that attribute; otherwise, $w_i = 1$. The weights, if
     present, are not automatically normalized, they are assumed to have values
     such that the resulting $f_{\tau}$ lies in the unit circle of the complex
-    plane. Usually, this means that the weights should sum to $N$.
+    plane. Usually, this means that the weights should sum to $N$. The
+    exception would be for mixed target states, where the weights should
+    compensate for the non-unit purity. The problem is circumvented by using
+    :func:`J_T_hs` for mixed target states.
 
     The `kwargs` are ignored, allowing the function to be used in an
     `info_hook`.
@@ -68,11 +77,14 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
 
 
 def F_ss(states_T, objectives, tau_vals=None, **kwargs):
-    r"""Summed absolute-square fidelity
+    r"""State-to-state phase-insensitive fidelity
 
     .. math::
 
-        F_{\text{ss}} = f_{\Abs{\tau}^2} \quad\in [0, 1]
+        F_{\text{ss}} = \frac{1}{N} \sum_{i=1}^{N} w_i \Abs{\tau_i}^2
+        \quad\in [0, 1]
+
+    with $N$, $w_i$ and $\tau_i$ as in :func:`f_tau`.
 
     The `kwargs` are ignored, allowing the function to be used in an
     `info_hook`.
@@ -89,20 +101,19 @@ def F_ss(states_T, objectives, tau_vals=None, **kwargs):
 
 
 def J_T_ss(states_T, objectives, tau_vals=None, **kwargs):
-    r"""Summed absolute-squared functional
+    r"""State-to-state phase-insensitive functional  $J_{T,\text{ss}}$
 
     .. math::
 
-        J_{T,\text{ss}} = 1 - F_{\text{ss}} \quad\in [0, 1]
+        J_{T,\text{ss}} = 1 - F_{\text{ss}} \quad\in [0, 1].
 
-    The `kwargs` are ignored, allowing the function to be used in an
-    `info_hook`.
+    All arguments are passed to :func:`F_ss`.
     """
     return 1 - F_ss(states_T, objectives, tau_vals)
 
 
 def chis_ss(states_T, objectives, tau_vals):
-    r"""States $\ket{\chi}$ for functional $J_{T,\text{ss}}$
+    r"""States $\ket{\chi_i}$ for functional $J_{T,\text{ss}}$
 
     .. math::
 
@@ -110,56 +121,53 @@ def chis_ss(states_T, objectives, tau_vals):
         = -\frac{\partial J_{T,\text{ss}}}{\partial \bra{\Psi_i(T)}}
         = \frac{1}{N} w_i \tau_i \Ket{\Psi^{\tgt}_i}
 
-
-    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
-    given, the weights should generally sum to $N$.
+    with $\tau_i$ and $w_i$ as defined in :func:`f_tau`.
     """
-    c = 1.0 / (len(objectives))
+    N = len(objectives)
     res = []
     for (obj, τ) in zip(objectives, tau_vals):
         # `obj.target` is assumed to be the "target state" (gate applied to
         # `initial_state`)
         if hasattr(obj, 'weight'):
-            res.append(c * τ * obj.weight * obj.target)
+            res.append((τ / N) * obj.weight * obj.target)
         else:
-            res.append(c * τ * obj.target)
+            res.append((τ / N) * obj.target)
     return res
 
 
 def F_sm(states_T, objectives, tau_vals=None, **kwargs):
-    r"""Absolute-squared fidelity
+    r"""Square-modulus fidelity
 
     .. math::
 
-        F_{\text{sm}} = \Abs{f_{\tau}}^2 \quad\in [0, 1]
+        F_{\text{sm}} = \Abs{f_{\tau}}^2 \quad\in [0, 1].
 
-    The `kwargs` are ignored, allowing the function to be used in an
-    `info_hook`.
+    All arguments are passed to :func:`f_tau` to evaluate $f_{\tau}$.
     """
     return abs(f_tau(states_T, objectives, tau_vals))**2
 
 
 def J_T_sm(states_T, objectives, tau_vals=None, **kwargs):
-    r"""Absolute-squared functional
+    r"""Square-modulus functional  $J_{T,\text{sm}}$
 
     .. math::
 
         J_{T,\text{sm}} = 1 - F_{\text{sm}} \quad\in [0, 1]
 
-    The `kwargs` are ignored, allowing the function to be used in an
-    `info_hook`.
+    All arguments are passed to :func:`f_tau` while evaluating $F_{\text{sm}}$
+    in :func:`F_sm`.
     """
     return 1 - F_sm(states_T, objectives, tau_vals)
 
 
 def chis_sm(states_T, objectives, tau_vals):
-    r"""States $\ket{\chi}$ for functional $J_{T,\text{sm}}$
+    r"""States $\ket{\chi_i}$ for functional $J_{T,\text{sm}}$
 
     .. math::
 
         \Ket{\chi_i}
         = -\frac{\partial J_{T,\text{sm}}}{\partial \bra{\Psi_i(T)}}
-        = \frac{1}{N**2} w_i \sum_{j}^{w_j\tau_j}\Ket{\Psi^{\tgt}_i}
+        = \frac{1}{N^2} w_i \sum_{j}^{N} w_j\tau_j\Ket{\Psi^{\tgt}_i}
 
     with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
     given, the weights should generally sum to $N$.
@@ -188,23 +196,28 @@ def F_re(fw_states_T, objectives, tau_vals=None, **kwargs):
 
     .. math::
 
-        F_{\text{re}} = \Re[f_{\tau}] \quad\in [-1, 1]
+        F_{\text{re}} = \Re[f_{\tau}] \quad\in \begin{cases}
+            [-1, 1] & \text{in Hilbert space} \\
+            [0, 1] & \text{in Liouville space.}
+        \end{cases}
 
-    The `kwargs` are ignored, allowing the function to be used in an
-    `info_hook`.
+    All arguments are passed to :func:`f_tau` to evaluate $f_{\tau}$.
     """
     return f_tau(fw_states_T, objectives, tau_vals).real
 
 
 def J_T_re(fw_states_T, objectives, tau_vals=None, **kwargs):
-    r"""Real-part functional
+    r"""Real-part functional $J_{T,\text{re}}$
 
     .. math::
 
-        J_{T,\text{re}} = 1 - F_{\text{re}} \quad\in [0, 2]
+        J_{T,\text{re}} = 1 - F_{\text{re}} \quad\in \begin{cases}
+            [0, 2] & \text{in Hilbert space} \\
+            [0, 1] & \text{in Liouville space.}
+        \end{cases}
 
-    The `kwargs` are ignored, allowing the function to be used in an
-    `info_hook`.
+    All arguments are passed to :func:`f_tau` while evaluating $F_{\text{re}}$
+    in :func:`F_re`.
 
     Note:
         If the `fw_states_T` or the target states are mixed states, it is
@@ -215,7 +228,7 @@ def J_T_re(fw_states_T, objectives, tau_vals=None, **kwargs):
 
 
 def chis_re(fw_states_T, objectives, tau_vals):
-    r"""States $\ket{\chi}$ for functional $J_{T,\text{re}}$
+    r"""States $\ket{\chi_i}$ for functional $J_{T,\text{re}}$
 
     .. math::
 
@@ -242,14 +255,17 @@ def chis_re(fw_states_T, objectives, tau_vals):
 
 
 def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
-    r"""Hilbert-Schmidt distance measure functional
+    r"""Hilbert-Schmidt distance measure functional $J_{T,\text{hs}}$
 
     .. math::
 
         J_{T,\text{hs}}
             = \frac{1}{2N} \sum_{i=1}^{N}
                 w_i \Norm{\Op{\rho}_i(T) - \Op{\rho}_i^{\tgt}}_{\text{hs}}^2
-        \quad \in [0, 2]
+        \quad \in \begin{cases}
+            [0, 2] & \text{in Hilbert space} \\
+            [0, 1] & \text{in Liouville space}
+        \end{cases}
 
     in Liouville space (using the Hilbert-Schmidt norm), or equivalently with
     $\ket{\Psi_i(T)}$ and $\ket{\Psi_i^{tgt}}$ in Hilbert space. The functional
@@ -304,7 +320,7 @@ def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
 
 
 def chis_hs(fw_states_T, objectives, tau_vals):
-    r"""States $\Op{\chi}$ for functional $J_{T,\text{hs}}$
+    r"""States $\Op{\chi}_i$ for functional $J_{T,\text{hs}}$
 
     .. math::
 
@@ -454,10 +470,10 @@ def _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states):
     N = len(basis_states)
     F = 0
     for j in range(N):
-        ρ_jj = fw_states_T[j * N + j]
+        ρ_jj = fw_states_T[j * N + j]  # zero-based indices!
         Oϕ_j = mapped_basis_states[j]
         for i in range(N):
-            ρ_ij = fw_states_T[i * N + j]
+            ρ_ij = fw_states_T[i * N + j]  # zero-based indices!
             Oϕ_i = mapped_basis_states[i]
             F += _overlap(Oϕ_i, ρ_ij(Oϕ_j)) + _overlap(Oϕ_i, ρ_jj(Oϕ_i))
     assert abs(F.imag) < 1e-10, F.imag
