@@ -372,11 +372,10 @@ class Objective:
         return "%s[%s]" % (self.__class__.__name__, self.summarize())
 
     def __getstate__(self):
-        """Return data for the pickle serialization of an objective.
-
-        This may not preserve time-dependent controls, and is only to enable
-        the serialization of :class:`.Result` objects.
-        """
+        # Return data for the pickle serialization of an objective.
+        #
+        # This may not preserve time-dependent controls, and is only to enable
+        # the serialization of :class:`.Result` objects.
         state = copy.copy(self.__dict__)
         # Remove the unpicklable entries.
         state['H'] = _remove_functions_from_nested_list(state['H'])
