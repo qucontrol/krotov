@@ -15,6 +15,7 @@ History
 * Added: Support for the second-order pulse update
 * Changed: The options for the controls (λₐ, update-shape) are now passed through a simplified ``dict`` interface, instead of a custom ``PulseOptions`` class.
 
+
 0.1.0 (2018-12-24)
 ------------------
 
