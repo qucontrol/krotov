@@ -3,6 +3,12 @@ History
 =======
 
 
+(next release)
+--------------
+
+* Added: function ``above_value`` for convergence check (#35)
+
+
 0.2.0 (2019-02-14)
 ------------------
 
