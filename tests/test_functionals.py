@@ -21,8 +21,12 @@ def sqrt_SWAP_basis(canonical_basis):
 
 
 @pytest.fixture
-def cphase_basis():
-    return [ket('00'), ket('01'), ket('01'), -ket('11')]
+def cphase_objectives_weighted(canonical_basis):
+    H = qutip.Qobj()  # dummy Hamiltonian (won't be used)
+    return krotov.objectives.gate_objectives(
+        canonical_basis, gate=qutip.gates.cphase(np.pi), H=H,
+        weights=[1,2,3,4]
+    )
 
 
 @pytest.fixture
@@ -45,6 +49,17 @@ def cphase_lv_full_objectives(canonical_basis):
 
 
 @pytest.fixture
+def iswap_state_objectives(canonical_basis):
+    H = qutip.Qobj()  # dummy Hamiltonian (won't be used)
+    objectives = krotov.gate_objectives(
+                                            canonical_basis,
+                                            qutip.gates.sqrtiswap(),
+                                            H
+                                       )
+    return objectives
+
+
+@pytest.fixture
 def transmon_3states_objectives():
     # see also test_objectives:test_transmon_3states_objectives
     L = qutip.Qobj()  # dummy Liouvillian (won't be used)
@@ -63,6 +78,7 @@ def transmon_3states_objectives():
         weights=weights,
     )
     return objectives
+
 
 
 def test_f_tau_with_weights(sqrt_SWAP_basis, cphase_objectives):
@@ -92,14 +108,38 @@ def test_f_tau_with_weights(sqrt_SWAP_basis, cphase_objectives):
         assert not hasattr(obj, 'weight')
 
 
-def test_J_T_re(sqrt_SWAP_basis, cphase_basis, cphase_objectives):
+def test_J_T_ss(sqrt_SWAP_basis, cphase_objectives):
+    J = krotov.functionals.J_T_ss(sqrt_SWAP_basis, cphase_objectives)
+    assert abs(J - 0.25) < 1e-14
+
+
+def test_J_T_sm(sqrt_SWAP_basis, cphase_objectives):
+    J = krotov.functionals.J_T_sm(sqrt_SWAP_basis, cphase_objectives)
+    assert abs(J - 0.875) < 1e-14
+
+
+def test_J_T_re(sqrt_SWAP_basis, cphase_objectives):
     J = krotov.functionals.J_T_re(sqrt_SWAP_basis, cphase_objectives)
     assert abs(J - 0.75) < 1e-14
-    # J_T_sm: 1 - 1/8
+
+
+def test_J_T_ss_with_weights(sqrt_SWAP_basis, cphase_objectives):
+    objectives = copy.deepcopy(cphase_objectives)
+
+    # objectives[0].weight = 1.0
+    objectives[1].weight = 2.0
+    objectives[2].weight = 0.5
+    objectives[3].weight = 0
+
+    J = krotov.functionals.J_T_ss(sqrt_SWAP_basis, objectives)
+    assert abs(J - 1.75/4) < 1e-14
+
+    for obj in cphase_objectives:
+        assert not hasattr(obj, 'weight')
 
 
 def test_J_T_hs_unitary(
-    sqrt_SWAP_basis, cphase_basis, cphase_objectives, cphase_lv_full_objectives
+    sqrt_SWAP_basis, cphase_objectives, cphase_lv_full_objectives
 ):
     """Test that for a unitary evolution, J_T_hs is equivalent to J_T_re"""
     J_hs = krotov.functionals.J_T_hs(sqrt_SWAP_basis, cphase_objectives)

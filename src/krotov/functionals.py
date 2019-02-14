@@ -76,7 +76,7 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
     return res / len(objectives)
 
 
-def F_ss(states_T, objectives, tau_vals=None, **kwargs):
+def F_ss(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""State-to-state phase-insensitive fidelity
 
     .. math::
@@ -93,14 +93,16 @@ def F_ss(states_T, objectives, tau_vals=None, **kwargs):
         # get the absolute square, analogously to the f_tau function above
         tau_vals = [
             abs(_overlap(psi, obj.target))**2
-            for (psi, obj) in zip(states_T, objectives)
+            for (psi, obj) in zip(fw_states_T, objectives)
         ]
     else:
         tau_vals = [abs(tau)**2 for tau in tau_vals]
-    return f_tau(states_T, objectives, tau_vals)
+    F = f_tau(fw_states_T, objectives, tau_vals)
+    assert abs(F.imag) < 1e-10, F.imag
+    return f_tau(fw_states_T, objectives, tau_vals).real
 
 
-def J_T_ss(states_T, objectives, tau_vals=None, **kwargs):
+def J_T_ss(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""State-to-state phase-insensitive functional  $J_{T,\text{ss}}$
 
     .. math::
@@ -109,10 +111,10 @@ def J_T_ss(states_T, objectives, tau_vals=None, **kwargs):
 
     All arguments are passed to :func:`F_ss`.
     """
-    return 1 - F_ss(states_T, objectives, tau_vals)
+    return 1 - F_ss(fw_states_T, objectives, tau_vals)
 
 
-def chis_ss(states_T, objectives, tau_vals):
+def chis_ss(fw_states_T, objectives, tau_vals):
     r"""States $\ket{\chi_k}$ for functional $J_{T,\text{ss}}$
 
     .. math::
@@ -125,7 +127,7 @@ def chis_ss(states_T, objectives, tau_vals):
     """
     N = len(objectives)
     res = []
-    for (obj, τ) in zip(objectives, tau_vals):
+    for (obj, τ) in zip(objectives, tau_vals[-1]):
         # `obj.target` is assumed to be the "target state" (gate applied to
         # `initial_state`)
         if hasattr(obj, 'weight'):
@@ -135,7 +137,7 @@ def chis_ss(states_T, objectives, tau_vals):
     return res
 
 
-def F_sm(states_T, objectives, tau_vals=None, **kwargs):
+def F_sm(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Square-modulus fidelity
 
     .. math::
@@ -144,10 +146,10 @@ def F_sm(states_T, objectives, tau_vals=None, **kwargs):
 
     All arguments are passed to :func:`f_tau` to evaluate $f_{\tau}$.
     """
-    return abs(f_tau(states_T, objectives, tau_vals))**2
+    return abs(f_tau(fw_states_T, objectives, tau_vals))**2
 
 
-def J_T_sm(states_T, objectives, tau_vals=None, **kwargs):
+def J_T_sm(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Square-modulus functional  $J_{T,\text{sm}}$
 
     .. math::
@@ -157,10 +159,10 @@ def J_T_sm(states_T, objectives, tau_vals=None, **kwargs):
     All arguments are passed to :func:`f_tau` while evaluating $F_{\text{sm}}$
     in :func:`F_sm`.
     """
-    return 1 - F_sm(states_T, objectives, tau_vals)
+    return 1 - F_sm(fw_states_T, objectives, tau_vals)
 
 
-def chis_sm(states_T, objectives, tau_vals):
+def chis_sm(fw_states_T, objectives, tau_vals):
     r"""States $\ket{\chi_k}$ for functional $J_{T,\text{sm}}$
 
     .. math::
@@ -173,7 +175,7 @@ def chis_sm(states_T, objectives, tau_vals):
     given, the weights should generally sum to $N$.
     """
     sum_of_w_tau = 0
-    for (obj, τ) in zip(objectives, tau_vals):
+    for (obj, τ) in zip(objectives, tau_vals[-1]):
         if hasattr(obj, 'weight'):
             sum_of_w_tau += obj.weight * τ
         else:
