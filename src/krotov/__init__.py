@@ -1,4 +1,4 @@
-__version__ = '0.2.0'
+__version__ = '0.2.0+dev'
 
 # expose submodules for easy import
 from . import shapes
