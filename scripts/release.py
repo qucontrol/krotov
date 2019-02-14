@@ -242,18 +242,21 @@ def set_version(filename, version):
     shutil.copyfile(filename, filename + '.bak')
     click.echo("Modifying %s to set version %s" % (filename, version))
     with open(filename + '.bak') as in_fh, open(filename, 'w') as out_fh:
+        found_version_line = False
         for line in in_fh:
             if line.startswith('__version__'):
+                found_version_line = True
                 line = line.split('=')[0].rstrip() + " = '" + version + "'\n"
             out_fh.write(line)
-    if get_version(filename) == parse_version(version):
+    if get_version(filename) == version:
         os.remove(filename + ".bak")
     else:
         # roll back
         shutil.copyfile(filename + ".bak", filename)
-        raise ReleaseError(
-            "Failed to set version in %s (restored original)" % filename
-        )
+        msg = "Failed to set version in %s (restored original)" % filename
+        if not found_version_line:
+            msg += ". Does not contain a line starting with '__version__'."
+        raise ReleaseError(msg)
 
 
 def edit_history(version):
@@ -354,7 +357,7 @@ def make_and_push_tag(version):
     click.confirm(
         "Push tag '%s' to origin?" % version, default=True, abort=True
     )
-    run(['git', 'tag', "v%s" % version], check=True)
+    run(['git', 'tag', "-s", "v%s" % version], check=True)
     run(['git', 'push', '--tags', 'origin'], check=True)
 
 
