@@ -47,8 +47,8 @@ def optimize_pulses(
 ):
     r"""Use Krotov's method to optimize towards the given `objectives`
 
-    Optimize all time-dependent controls found in the Hamiltonians of the given
-    `objectives`.
+    Optimize all time-dependent controls found in the Hamiltonians or
+    Liouvillians of the given `objectives`.
 
     Args:
         objectives (list[Objective]): List of objectives
@@ -56,7 +56,7 @@ def optimize_pulses(
             Hamiltonians of the objectives to a dictionary of options for that
             control. There must be an options-dict for each control. As numpy
             arrays are unhashable and thus cannot be used as dict keys, the
-            options for a control that is an array must set using the key
+            options for a control that is an array must be set using the key
             ``pulse_options[id(control)] = ...``. The options-dict of any
             particular control must contain the following keys:
 
@@ -79,17 +79,20 @@ def optimize_pulses(
             control values, and ``g`` is a control function (a callable), a
             possible value for `pulse_options` would look like this::
 
-                from krotov.shapes import flattop
-                from functools import partial
-                pulse_options = {
-                    id(u): {'lambda_a': 1.0, 'shape': 1},
-                    g: dict(
-                        lambda_a=1.0,
-                        shape=partial(
-                            flattop, t_start=0, t_stop=10, t_rise=1.5
-                        )
-                    )
-                }
+                >>> from krotov.shapes import flattop
+                >>> from functools import partial
+                >>> u = numpy.zeros(1000)
+                >>> g = lambda t, args: 0.0
+                >>> pulse_options = {
+                ...     id(u): {'lambda_a': 1.0, 'shape': 1},
+                ...     g: dict(
+                ...         lambda_a=1.0,
+                ...         shape=partial(
+                ...             flattop, t_start=0, t_stop=10, t_rise=1.5
+                ...         )
+                ...     )
+                ... }
+
         tlist (numpy.ndarray): Array of time grid values, cf.
             :func:`~qutip.mesolve.mesolve`
         propagator (callable or list[callable]): Function that propagates the
