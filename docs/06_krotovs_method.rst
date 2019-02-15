@@ -420,15 +420,15 @@ it is important to remember that the target
 transformation :math:`\Op{O}` is usually defined in the lab frame, not
 in the rotating frame. This is relevant for the construction of
 :math:`\ket{\chi_k(T)}`. When doing a simple optimization, such as a state-to-state or a gate optimization,
-the  easiest approach is to transform the target or targets to the rotating frame before setting 
-them as the objectives. This is both straightforward and numerically efficient. 
+the  easiest approach is to transform the target or targets to the rotating frame before setting
+them as the objectives. This is both straightforward and numerically efficient.
 
 Another, more sophisticated solution would be transforming the result
 of the forward propagation :math:`\ket{\phi_k(T)}` from the rotating
 frame to the lab frame, then constructing :math:`\ket{\chi_k(T)}` for the
 next OCT iteration, and transforming :math:`\ket{\chi_k(T)}` back to the
 rotating frame, before starting the backward-propagation for the next
-OCT iteration. 
+OCT iteration.
 
 When the RWA is used, the control fields are
 complex-valued. In this case, the Krotov update equation is valid for

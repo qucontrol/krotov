@@ -6,6 +6,7 @@ History
 (next release)
 --------------
 
+* Bugfix: Interface for pasing `tau_vals` to `chi_constructor` (#36)
 * Added: function ``above_value`` for convergence check (#35)
 
 

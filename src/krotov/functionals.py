@@ -1,4 +1,54 @@
-"""Functionals and `chi_constructor` routines"""
+r"""Functionals and `chi_constructor` routines.
+
+Any `chi_constructor` routine passed to :func:`.optimize_pulses` must take the
+following keyword-arguments:
+
+    * `fw_states_T` (:class:`list` of :class:`~qutip.Qobj`): The list of
+      states resulting from the forward-propagation of each
+      :attr:`.Objective.initial_state` under the guess pulses of the current
+      iteration (the optimized pulses of the previous iteration)
+
+    * `objectives` (:class:`list` of :class:`.Objective`): A list of the
+      optimization objectives.
+
+    * `tau_vals` (:class:`list` of :class:`complex` or :obj:`None`): The
+      overlaps of the `fw_states_T` and the corresponding
+      :attr:`.Objective.target`, assuming :attr:`.Objective.target` contains a
+      quantum state. If the objective defines no target state, a list of Nones
+
+Krotov's method does not have an explicit dependence on the optimization
+functional. It only enters through the `chi_constructor` which calculates the
+boundary condition for the backward propagation, that is, the states
+
+
+.. math::
+
+   \Ket{\chi_k^{(i)}(T)}
+      = - \left.\frac{\partial J_T}
+        {\partial \Bra{\phi_k}}
+        \right\vert_{\phi^{(i)}(T)}
+
+for functionals defined in Hilbert space, or
+
+.. math::
+
+   \Op{\chi}_k^{(i)}(T)
+      = - \left.\frac{\partial J_T}
+        {\partial \langle\!\langle\Op{\rho}_k\vert}
+        \right\vert_{\rho^{(i)}(T)}
+
+in Liouville space, using the abstract
+Hilbert-Schmidt notation :math:`\langle\!\langle a \vert b \rangle\!\rangle
+\equiv \tr[a^\dagger b]`.
+Passing a specific `chi_constructor` results in the minimization of the final
+time functional from which that `chi_constructor` was derived.
+
+The functions in this module that evaluate functionals are intended for use
+inside a function that is passed as an `info_hook` to :func:`.optimize_pulses`.
+Thus, they calculate $J_T$ from the same keyword arguments as the `info_hook`.
+The values for $J_T$ may be used in a convergence analysis, see
+:mod:`krotov.convergence`.
+"""
 import qutip
 import numpy as np
 
@@ -92,11 +142,11 @@ def F_ss(fw_states_T, objectives, tau_vals=None, **kwargs):
     if tau_vals is None:
         # get the absolute square, analogously to the f_tau function above
         tau_vals = [
-            abs(_overlap(psi, obj.target))**2
+            abs(_overlap(psi, obj.target)) ** 2
             for (psi, obj) in zip(fw_states_T, objectives)
         ]
     else:
-        tau_vals = [abs(tau)**2 for tau in tau_vals]
+        tau_vals = [abs(tau) ** 2 for tau in tau_vals]
     F = f_tau(fw_states_T, objectives, tau_vals)
     assert abs(F.imag) < 1e-10, F.imag
     return f_tau(fw_states_T, objectives, tau_vals).real
@@ -127,7 +177,7 @@ def chis_ss(fw_states_T, objectives, tau_vals):
     """
     N = len(objectives)
     res = []
-    for (obj, τ) in zip(objectives, tau_vals[-1]):
+    for (obj, τ) in zip(objectives, tau_vals):
         # `obj.target` is assumed to be the "target state" (gate applied to
         # `initial_state`)
         if hasattr(obj, 'weight'):
@@ -146,7 +196,7 @@ def F_sm(fw_states_T, objectives, tau_vals=None, **kwargs):
 
     All arguments are passed to :func:`f_tau` to evaluate $f_{\tau}$.
     """
-    return abs(f_tau(fw_states_T, objectives, tau_vals))**2
+    return abs(f_tau(fw_states_T, objectives, tau_vals)) ** 2
 
 
 def J_T_sm(fw_states_T, objectives, tau_vals=None, **kwargs):
@@ -175,13 +225,13 @@ def chis_sm(fw_states_T, objectives, tau_vals):
     given, the weights should generally sum to $N$.
     """
     sum_of_w_tau = 0
-    for (obj, τ) in zip(objectives, tau_vals[-1]):
+    for (obj, τ) in zip(objectives, tau_vals):
         if hasattr(obj, 'weight'):
             sum_of_w_tau += obj.weight * τ
         else:
             sum_of_w_tau += τ
 
-    c = 1.0 / (len(objectives))**2
+    c = 1.0 / (len(objectives)) ** 2
     res = []
     for obj in objectives:
         # `obj.target` is assumed to be the "target state" (gate applied to

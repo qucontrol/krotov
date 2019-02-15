@@ -43,10 +43,8 @@ def cphase_lv_full_objectives(canonical_basis):
 def iswap_state_objectives(canonical_basis):
     H = qutip.Qobj()  # dummy Hamiltonian (won't be used)
     objectives = krotov.gate_objectives(
-                                            canonical_basis,
-                                            qutip.gates.sqrtiswap(),
-                                            H
-                                       )
+        canonical_basis, qutip.gates.sqrtiswap(), H
+    )
     return objectives
 
 
@@ -69,7 +67,6 @@ def transmon_3states_objectives():
         weights=weights,
     )
     return objectives
-
 
 
 def test_f_tau_with_weights(sqrt_SWAP_basis, cphase_objectives):
@@ -123,7 +120,7 @@ def test_J_T_ss_with_weights(sqrt_SWAP_basis, cphase_objectives):
     objectives[3].weight = 0
 
     J = krotov.functionals.J_T_ss(sqrt_SWAP_basis, objectives)
-    assert abs(J - 1.75/4) < 1e-14
+    assert abs(J - 1.75 / 4) < 1e-14
 
     for obj in cphase_objectives:
         assert not hasattr(obj, 'weight')
@@ -185,32 +182,32 @@ def test_chi_hs_transmon(transmon_3states_objectives):
 
 def test_chi_ss(iswap_state_objectives, canonical_basis):
     χs = krotov.functionals.chis_ss(
-                                        canonical_basis,
-                                        iswap_state_objectives,
-                                        [[1,.5*(1+1j),.5*(1+1j),1]]
-                                    )
-    χ1 = (1/4) * (1.0) * iswap_state_objectives[0].target
-    χ2 = (1/4) * (.5*(1+1j)) * iswap_state_objectives[1].target
-    χ3 = (1/4) * (.5*(1+1j)) * iswap_state_objectives[2].target
-    χ4 = (1/4) * (1.0) * iswap_state_objectives[3].target
+        fw_states_T=canonical_basis,
+        objectives=iswap_state_objectives,
+        tau_vals=[1, 0.5 * (1 + 1j), 0.5 * (1 + 1j), 1],
+    )
+    χ1 = (1 / 4) * (1.0) * iswap_state_objectives[0].target
+    χ2 = (1 / 4) * (0.5 * (1 + 1j)) * iswap_state_objectives[1].target
+    χ3 = (1 / 4) * (0.5 * (1 + 1j)) * iswap_state_objectives[2].target
+    χ4 = (1 / 4) * (1.0) * iswap_state_objectives[3].target
     assert (χs[0] - χ1).norm('max') < 1e-14
     assert (χs[1] - χ2).norm('max') < 1e-14
     assert (χs[2] - χ3).norm('max') < 1e-14
     assert (χs[3] - χ4).norm('max') < 1e-14
 
-    #iswap_state_objectives[0].weight = 1.0
+    # iswap_state_objectives[0].weight = 1.0
     iswap_state_objectives[1].weight = 2.0
     iswap_state_objectives[2].weight = 0.5
     iswap_state_objectives[3].weight = 0
     χs = krotov.functionals.chis_ss(
-                                        canonical_basis,
-                                        iswap_state_objectives,
-                                        [[1,.5*(1+1j),.5*(1+1j),1]] 
-                                    )
-    χ1 = (1/4) * 1. * (1.0) * iswap_state_objectives[0].target         
-    χ2 = (1/4) * 2. * (.5*(1+1j)) * iswap_state_objectives[1].target   
-    χ3 = (1/4) * .5 * (.5*(1+1j)) * iswap_state_objectives[2].target 
-    χ4 = (1/4) * 0. * (1.0) * iswap_state_objectives[3].target         
+        fw_states_T=canonical_basis,
+        objectives=iswap_state_objectives,
+        tau_vals=[1, 0.5 * (1 + 1j), 0.5 * (1 + 1j), 1],
+    )
+    χ1 = (1 / 4) * 1.0 * (1.0) * iswap_state_objectives[0].target
+    χ2 = (1 / 4) * 2.0 * (0.5 * (1 + 1j)) * iswap_state_objectives[1].target
+    χ3 = (1 / 4) * 0.5 * (0.5 * (1 + 1j)) * iswap_state_objectives[2].target
+    χ4 = (1 / 4) * 0.0 * (1.0) * iswap_state_objectives[3].target
     assert (χs[0] - χ1).norm('max') < 1e-14
     assert (χs[1] - χ2).norm('max') < 1e-14
     assert (χs[2] - χ3).norm('max') < 1e-14
@@ -219,32 +216,32 @@ def test_chi_ss(iswap_state_objectives, canonical_basis):
 
 def test_chi_sm(iswap_state_objectives, canonical_basis):
     χs = krotov.functionals.chis_sm(
-                                        canonical_basis,
-                                        iswap_state_objectives,
-                                        [[1,.5*(1+1j),.5*(1+1j),1]]
-                                    )
-    χ1 = ((3+1j)/16) *  iswap_state_objectives[0].target
-    χ2 = ((3+1j)/16) *  iswap_state_objectives[1].target
-    χ3 = ((3+1j)/16) *  iswap_state_objectives[2].target
-    χ4 = ((3+1j)/16) *  iswap_state_objectives[3].target
+        fw_states_T=canonical_basis,
+        objectives=iswap_state_objectives,
+        tau_vals=[1, 0.5 * (1 + 1j), 0.5 * (1 + 1j), 1],
+    )
+    χ1 = ((3 + 1j) / 16) * iswap_state_objectives[0].target
+    χ2 = ((3 + 1j) / 16) * iswap_state_objectives[1].target
+    χ3 = ((3 + 1j) / 16) * iswap_state_objectives[2].target
+    χ4 = ((3 + 1j) / 16) * iswap_state_objectives[3].target
     assert (χs[0] - χ1).norm('max') < 1e-14
     assert (χs[1] - χ2).norm('max') < 1e-14
     assert (χs[2] - χ3).norm('max') < 1e-14
     assert (χs[3] - χ4).norm('max') < 1e-14
 
-    #iswap_state_objectives[0].weight = 1.0
+    # iswap_state_objectives[0].weight = 1.0
     iswap_state_objectives[1].weight = 2.0
     iswap_state_objectives[2].weight = 0.5
     iswap_state_objectives[3].weight = 0
     χs = krotov.functionals.chis_sm(
-                                        canonical_basis,
-                                        iswap_state_objectives,
-                                        [[1,.5*(1+1j),.5*(1+1j),1]] 
-                                    )
-    χ1 = ((2.25+1.25j)/16) * 1. * iswap_state_objectives[0].target         
-    χ2 = ((2.25+1.25j)/16) * 2. * iswap_state_objectives[1].target   
-    χ3 = ((2.25+1.25j)/16) * .5 * iswap_state_objectives[2].target 
-    χ4 = ((2.25+1.25j)/16) * 0. * iswap_state_objectives[3].target         
+        fw_states_T=canonical_basis,
+        objectives=iswap_state_objectives,
+        tau_vals=[1, 0.5 * (1 + 1j), 0.5 * (1 + 1j), 1],
+    )
+    χ1 = ((2.25 + 1.25j) / 16) * 1.0 * iswap_state_objectives[0].target
+    χ2 = ((2.25 + 1.25j) / 16) * 2.0 * iswap_state_objectives[1].target
+    χ3 = ((2.25 + 1.25j) / 16) * 0.5 * iswap_state_objectives[2].target
+    χ4 = ((2.25 + 1.25j) / 16) * 0.0 * iswap_state_objectives[3].target
     assert (χs[0] - χ1).norm('max') < 1e-14
     assert (χs[1] - χ2).norm('max') < 1e-14
     assert (χs[2] - χ3).norm('max') < 1e-14
@@ -253,32 +250,28 @@ def test_chi_sm(iswap_state_objectives, canonical_basis):
 
 def test_chi_re(iswap_state_objectives, canonical_basis):
     χs = krotov.functionals.chis_re(
-                                        canonical_basis,
-                                        iswap_state_objectives,
-                                        None
-                                    )
-    χ1 = (1/8) * iswap_state_objectives[0].target
-    χ2 = (1/8) * iswap_state_objectives[1].target
-    χ3 = (1/8) * iswap_state_objectives[2].target
-    χ4 = (1/8) * iswap_state_objectives[3].target
+        canonical_basis, iswap_state_objectives, None
+    )
+    χ1 = (1 / 8) * iswap_state_objectives[0].target
+    χ2 = (1 / 8) * iswap_state_objectives[1].target
+    χ3 = (1 / 8) * iswap_state_objectives[2].target
+    χ4 = (1 / 8) * iswap_state_objectives[3].target
     assert (χs[0] - χ1).norm('max') < 1e-14
     assert (χs[1] - χ2).norm('max') < 1e-14
     assert (χs[2] - χ3).norm('max') < 1e-14
     assert (χs[3] - χ4).norm('max') < 1e-14
 
-    #iswap_state_objectives[0].weight = 1.0
+    # iswap_state_objectives[0].weight = 1.0
     iswap_state_objectives[1].weight = 2.0
     iswap_state_objectives[2].weight = 0.5
     iswap_state_objectives[3].weight = 0
     χs = krotov.functionals.chis_re(
-                                        canonical_basis,
-                                        iswap_state_objectives,
-                                        None
-                                    )
-    χ1 = (1/8) * 1. * iswap_state_objectives[0].target
-    χ2 = (1/8) * 2. * iswap_state_objectives[1].target
-    χ3 = (1/8) * .5 * iswap_state_objectives[2].target
-    χ4 = (1/8) * 0. * iswap_state_objectives[3].target
+        canonical_basis, iswap_state_objectives, None
+    )
+    χ1 = (1 / 8) * 1.0 * iswap_state_objectives[0].target
+    χ2 = (1 / 8) * 2.0 * iswap_state_objectives[1].target
+    χ3 = (1 / 8) * 0.5 * iswap_state_objectives[2].target
+    χ4 = (1 / 8) * 0.0 * iswap_state_objectives[3].target
     assert (χs[0] - χ1).norm('max') < 1e-14
     assert (χs[1] - χ2).norm('max') < 1e-14
     assert (χs[2] - χ3).norm('max') < 1e-14

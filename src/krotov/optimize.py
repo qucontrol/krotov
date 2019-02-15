@@ -104,6 +104,7 @@ def optimize_pulses(
         chi_constructor (callable): Function that calculates the boundary
             condition for the backward propagation. This is where the
             final-time functional (indirectly) enters the optimization.
+            See :mod:`krotov.functionals` for details.
         mu (None or callable): Function that calculates the derivative
             $\frac{\partial H}{\partial\epsilon}$ for an equation of motion
             $\dot{\phi}(t) = -i H[\phi(t)]$ of an abstract operator $H$ and an
@@ -282,7 +283,8 @@ def optimize_pulses(
     if info is not None:
         result.info_vals.append(info)
     result.iters.append(0)
-    result.tau_vals.append(tau_vals)
+    if not np.all(tau_vals == None):  # noqa
+        result.tau_vals.append(tau_vals)
     if store_all_pulses:
         result.all_pulses.append(guess_pulses)
     result.states = fw_states_T
@@ -293,8 +295,14 @@ def optimize_pulses(
         tic = time.time()
 
         # Boundary condition for the backward propagation
-        # -- this is where the functional enters the optimizaton
-        chi_states = chi_constructor(fw_states_T, objectives, result.tau_vals)
+        # -- this is where the functional enters the optimizaton.
+        # `fw_states_T` are the states forward-propagated under the guess pulse
+        # of the current iteration, which is the optimized pulse of the
+        # previous iteration. This is how we get the `fw_states_T` here: they
+        # are left over from the forward-propagation in the previous iteration.
+        chi_states = chi_constructor(
+            fw_states_T=fw_states_T, objectives=objectives, tau_vals=tau_vals
+        )
         chi_norms = [chi.norm() for chi in chi_states]
         # normalizing χ improves numerical stability; the norm then has to be
         # taken into account when calculating Δϵ
@@ -425,7 +433,8 @@ def optimize_pulses(
         result.iter_seconds.append(int(toc - tic))
         if info is not None:
             result.info_vals.append(info)
-        result.tau_vals.append(tau_vals)
+        if not np.all(tau_vals == None):  # noqa
+            result.tau_vals.append(tau_vals)
         result.optimized_controls = optimized_pulses
         if store_all_pulses:
             result.all_pulses.append(optimized_pulses)

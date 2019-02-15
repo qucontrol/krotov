@@ -32,7 +32,7 @@ dev_requirements = [
     'jupyter', 'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'nbval',
     'twine', 'pep8', 'flake8', 'wheel', 'sphinx', 'sphinx-autobuild',
     'sphinx_rtd_theme', 'nbsphinx', 'matplotlib', 'gitpython', 'watermark',
-    'sphinxcontrib-bibtex', 'weylchamber', 'click']
+    'sphinxcontrib-bibtex', 'weylchamber>=0.3.1', 'click']
 dev_requirements.append('better-apidoc')
 
 # some recommended packages that make development nicer
