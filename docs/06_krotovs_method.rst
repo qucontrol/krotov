@@ -419,12 +419,18 @@ When using the rotating wave approximation (RWA),
 it is important to remember that the target
 transformation :math:`\Op{O}` is usually defined in the lab frame, not
 in the rotating frame. This is relevant for the construction of
-:math:`\ket{\chi_k(T)}`. The easiest approach is to transform the result
+:math:`\ket{\chi_k(T)}`. When doing a simple optimization, such as a state-to-state or a gate optimization,
+the  easiest approach is to transform the target or targets to the rotating frame before setting 
+them as the objectives. This is both straightforward and numerically efficient. 
+
+Another, more sophisticated solution would be transforming the result
 of the forward propagation :math:`\ket{\phi_k(T)}` from the rotating
-frame to the lab frame, then construct :math:`\ket{\chi_k(T)}` for the
-next OCT iteration, and transform :math:`\ket{\chi_k(T)}` back to the
+frame to the lab frame, then constructing :math:`\ket{\chi_k(T)}` for the
+next OCT iteration, and transforming :math:`\ket{\chi_k(T)}` back to the
 rotating frame, before starting the backward-propagation for the next
-OCT iteration. When the RWA is used, the control fields are
+OCT iteration. 
+
+When the RWA is used, the control fields are
 complex-valued. In this case, the Krotov update equation is valid for
 both the real and the imaginary part independently. The most straightforward
 implementation of the method is for real controls only, requiring that any
@@ -440,7 +446,8 @@ control field. For example,
 with two independent control fields :math:`\epsilon_{\text{re}}(t)= \Re[\epsilon(t)]` and
 :math:`\epsilon_{\text{im}}(t) = \Im[\epsilon(t)]`.
 
-
+See the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for an
+example.
 
 Optimization in Liouville space
 -------------------------------
