@@ -37,7 +37,7 @@ The functional consists of three parts:
 * A running cost on the control fields, $g_a$. As we will see below, specific
   forms of running costs are required to obtain a closed-form update equation.
   The typical form, and the only one we consider here (and that is realized in
-  the ``krotov`` package) is
+  the :mod:`krotov` package) is
 
   .. math::
 

@@ -3,7 +3,7 @@
 Using Krotov with QuTiP
 =======================
 
-The ``krotov`` package is designed around `QuTiP`_, a very powerful "Quantum
+The :mod:`krotov` package is designed around `QuTiP`_, a very powerful "Quantum
 Toolbox" in Python. This means that all operators and states are expressed as
 :class:`qutip.Qobj` quantum objects. The :func:`.optimize_pulses` interface
 for Krotov's optimization method is closely linked to the interface of QuTiP's
@@ -18,7 +18,7 @@ time grid (`tlist` parameter in :func:`~qutip.mesolve.mesolve`). The operator
 can depend on multiple controls, resulting in expressions of the form ``H =
 [H0, [H1, eps1], [H2, eps2], ...]``.
 
-The central routine provided by the ``krotov`` package is
+The central routine provided by the :mod:`krotov` package is
 :func:`.optimize_pulses`. It takes as input a list of objectives, each of which
 is an instance of :class:`.Objective`. Each objective has an
 :attr:`~.Objective.initial_state`, which is a :class:`qutip.Qobj` representing
