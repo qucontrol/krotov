@@ -1,6 +1,7 @@
 import logging
 import time
 import copy
+import inspect
 from functools import partial
 
 import numpy as np
@@ -22,6 +23,7 @@ from .mu import derivative_wrt_pulse
 from .info_hooks import chain
 from .second_order import _overlap
 from .shapes import zero_shape, one_shape
+from .propagators import expm
 
 __all__ = ['optimize_pulses']
 
@@ -195,6 +197,12 @@ def optimize_pulses(
         propagators = [copy.deepcopy(propagator) for _ in objectives]
         # copy.deepcopy will only do someting on Propagator objects. For
         # functions (even with closures), it just returns the same function.
+    for func in propagators:
+        if inspect.getfullargspec(func) != inspect.getfullargspec(expm):
+            logger.warning(
+                "the propagator does not have the same interface as "
+                "krotov.propagator.expm"
+            )
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':

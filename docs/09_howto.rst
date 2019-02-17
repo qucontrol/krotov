@@ -208,9 +208,9 @@ How to maximize numerical efficiency
 For systems of non-trivial size, the main numerical effort should be in the
 simulation of the system dynamics. Every iteration of Krotov's method requires
 a full backward propagation and a full forward propagation of the states associated with each
-objective. Therefore, the best numerical efficiency can be achieved by
-optimizing the performance of the `propagator` that is passed to
-:func:`~krotov.optimize.optimize_pulses`.
+objective, see :mod:`krotov.propagators`. Therefore, the best numerical
+efficiency can be achieved by optimizing the performance of the `propagator`
+that is passed to :func:`~krotov.optimize.optimize_pulses`.
 
 One possibility is to implement problem-specific propagators, such as
 :class:`krotov.propagators.DensityMatrixODEPropagator`. Going further, you

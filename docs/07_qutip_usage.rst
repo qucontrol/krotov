@@ -40,7 +40,7 @@ collapse operators into account explicitly, such as in the Monte-Carlo
 In order to simulate the dynamics of the guess control, you can use
 :meth:`.Objective.mesolve`, which delegates to :func:`qutip.mesolve.mesolve`.
 There is also a related method :meth:`.Objective.propagate` that uses a
-different sampling of the control values, see :ref:`TimePropagation`.
+different sampling of the control values, see :mod:`krotov.propagators`.
 
 The optimization routine will automatically extract all controls that it can
 find in the objectives, and iteratively calculate updates to all controls in

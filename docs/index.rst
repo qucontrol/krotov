@@ -38,10 +38,9 @@ Welcome to the Krotov package's documentation!
    05_history
    06_krotovs_method
    07_qutip_usage
-   09_propagation
-   10_examples
-   11_howto
-   12_other_methods
+   08_examples
+   09_howto
+   10_other_methods
    99_bibliography
 
 
