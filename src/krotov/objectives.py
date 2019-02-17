@@ -65,21 +65,39 @@ class Objective:
         c_ops (list or None): value for :attr:`c_ops`
 
     Attributes:
-        H (qutip.Qobj or list): The (time-dependent) Hamiltonian,
-            cf. :func:`qutip.mesolve.mesolve`. This includes the control
-            fields.
-        initial_state (qutip.Qobj): The initial state
+        H (qutip.Qobj or list): The (time-dependent) Hamiltonian or
+            Liouvillian in nested-list format, cf.
+            :func:`qutip.mesolve.mesolve`. This includes the control fields.
+        initial_state (qutip.Qobj): The initial state, as a Hilbert space
+            state, or a density matrix.
         target: An object describing the "target" of the optimization, for the
             dynamics starting from :attr:`initial_state`. Usually, this will be
             the target state (the state into which :attr:`initial_state` should
             evolve). More generally, it can be an arbitrary object meeting the
-            requirements of a specific `chi_constructor` function that will be
+            conventions of a specific `chi_constructor` function that will be
             passed to :func:`.optimize_pulses`.
-        c_ops (list or None): List of collapse operators,
-            cf. :func:`~qutip.mesolve.mesolve`.
+        c_ops (list or None): List of collapse operators, cf.
+            :func:`~qutip.mesolve.mesolve`, in lieu of :attr:`H` being a
+                Liouvillian.
+    Example:
+
+        >>> H0 = - 0.5 * qutip.operators.sigmaz()
+        >>> H1 = qutip.operators.sigmax()
+        >>> eps = lambda t, args: ampl0
+        >>> H = [H0, [H1, eps]]
+        >>> krotov.Objective(
+        ...     initial_state=qutip.ket('0'), target=qutip.ket('1'), H=H
+        ... )
+        Objective[|(2)⟩ - {[Herm[2,2], [Herm[2,2], u1(t)]]} - |(2)⟩]
 
     Raises:
-        ValueError: If any arguments have an invalid type
+        ValueError: If any arguments have an invalid type or structure
+
+    Note:
+        Giving collapse operators via :attr:`c_ops` only makes sense if the
+        `propagator` passed to :func:`.optimize_pulses` takes them into account
+        explicitly. It is strongly recommended to set :attr:`H` as a Lindblad
+        operator instead, see :func:`liouvillian`.
     """
 
     def __init__(self, *, initial_state, H, target, c_ops=None):
@@ -141,7 +159,7 @@ class Objective:
 
         This does not affect the controls in :attr:`H`: these are
         assumed to be real-valued. Also, :attr:`.Objective.target` will be left
-        unchanged if it is not a :class:`qutip.Qobj`.
+        unchanged if it is not a :class:`qutip.Qobj` (a target state).
         """
         return Objective(
             H=_adjoint(self.H),
@@ -290,7 +308,7 @@ class Objective:
             ...     target=ket11,
             ...     H=H
             ... )
-            >>> obj.summarize()
+            >>> obj.summarize(ctrl_counter=CtrlCounter())
             '|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩'
             >>> obj = Objective(
             ...     initial_state=ket00,
@@ -298,7 +316,7 @@ class Objective:
             ...     H=H,
             ...     c_ops=[C1, C2]
             ... )
-            >>> obj.summarize()
+            >>> obj.summarize(ctrl_counter=CtrlCounter())
             '|(2⊗2)⟩ - {H:[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]], c_ops:([NonHerm[2⊗2,2⊗2], u3[complex128]],[NonHerm[2⊗2,2⊗2], u4[complex128]])} - |(2⊗2)⟩'
         """
         if ctrl_counter is None:

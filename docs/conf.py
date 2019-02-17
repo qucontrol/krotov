@@ -89,6 +89,7 @@ intersphinx_mapping = {
     'matplotlib': ('https://matplotlib.org/', None),
     'qutip': ('http://qutip.org/docs/latest/', None),
     'glom': ('https://glom.readthedocs.io/en/latest/', None),
+    'weylchamber': ('https://weylchamber.readthedocs.io/en/latest/', None),
 }
 
 # Add any paths that contain templates here, relative to this directory.

@@ -1,3 +1,5 @@
+.. _TimePropagation:
+
 Time Propagation
 ================
 
@@ -30,7 +32,7 @@ It receives four positional arguments:
 The function also receives one keyword argument, `backwards`. If passed as
 `True`, the `propagator` should propagate backwards in time, which usually
 means using -`dt` instead of `dt`. In the context of Krotov's method, the
-backward propagation uses the conjugate Hamiltonian, respectively Liouvillian. 
+backward propagation uses the conjugate Hamiltonian, respectively Liouvillian.
 However, the `propagator` routine does not need to be aware of this fact: it will
 receive the appropriate `H` and `c_ops`. Thus, it should not do any complex
 conjugation of operators or pulse values internally.
