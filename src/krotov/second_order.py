@@ -75,10 +75,10 @@ def _overlap(a, b) -> Optional[complex]:
     """
     try:
         if a.type == b.type == 'oper':
-            return complex((a * b).tr())
-            # the "correct" formula would be `complex((a.dag() * b).tr())`
-            # but we can assume that a and b are density matrices; doing
-            # the unnecessary dag() has measureable impact on performance
+            if a.isherm:
+                return complex((a * b).tr())
+            else:
+                return complex((a.dag() * b).tr())
         else:
             return a.overlap(b)
     except AttributeError:

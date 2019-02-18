@@ -134,13 +134,17 @@ def test_J_T_hs_unitary(
     J_re = krotov.functionals.J_T_re(sqrt_SWAP_basis, cphase_objectives)
     assert abs(J_hs - J_re) < 1e-14
 
-    # unitary density matrices should give the same result
+    # unitary density matrices should also give matching results (but not the
+    # same numbers as in Hilbert space)
+    J_re_1 = J_re
     fw_states_T = [
         psi * phi.dag()
         for (psi, phi) in product(sqrt_SWAP_basis, sqrt_SWAP_basis)
     ]
     J_hs = krotov.functionals.J_T_hs(fw_states_T, cphase_lv_full_objectives)
+    J_re = krotov.functionals.J_T_re(fw_states_T, cphase_lv_full_objectives)
     assert abs(J_hs - J_re) < 1e-14
+    assert J_re != J_re_1
 
 
 def test_chi_hs_transmon(transmon_3states_objectives):

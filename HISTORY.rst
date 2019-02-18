@@ -6,7 +6,8 @@ History
 (next release)
 --------------
 
-* Bugfix: Interface for pasing `tau_vals` to `chi_constructor` (#36)
+* Bugfix: Fix overlap for non-Hermitian operators (#39)
+* Bugfix: Interface for passing `tau_vals` to `chi_constructor` (#36)
 * Added: function ``above_value`` for convergence check (#35)
 
 
@@ -17,7 +18,7 @@ History
 * Added: The ``info_hook`` receives additional information, including ∫gₐ(t)dt (#32)
 * Added: Initialization of objectives for gate optimization in Liouville space
 * Added: A new propagator ``DensityMatrixODEPropagator`` for faster density matrix propagation
-* Added: Support for "stateful" propagators by sublassing from ``krotov.propagators.Propagator``
+* Added: Support for "stateful" propagators by subclassing from ``krotov.propagators.Propagator``
 * Changed: more flexibility for parallelization (#29)
 * Added: Support for the second-order pulse update
 * Changed: The options for the controls (λₐ, update-shape) are now passed through a simplified ``dict`` interface, instead of a custom ``PulseOptions`` class.
