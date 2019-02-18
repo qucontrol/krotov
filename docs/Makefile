@@ -44,7 +44,7 @@ clean:
 	@-rm -rf API/*.rst
 	@-rm -f notebooks/*.log
 	@-rm -f *.log
-	@-rm -f 01_overview.rst
+	@-rm -f _README.rst
 	@-rm -f krotovscheme.aux krotovscheme.log
 	@-rm -f oct_decision_tree.aux oct_decision_tree.log
 

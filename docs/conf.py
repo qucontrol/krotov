@@ -42,11 +42,11 @@ def run_apidoc(_):
 
 # -- Generate patched README documentation ------------------------------------
 def generate_patched_readme(_):
-    if not os.path.isfile('./01_overview.rst'):
-        shutil.copyfile(os.path.join('..', 'README.rst'), '01_overview.rst')
-        cmd = ['patch', '01_overview.rst', './01_overview.patch']
+    if not os.path.isfile('./_README.rst'):
+        shutil.copyfile(os.path.join('..', 'README.rst'), '_README.rst')
+        cmd = ['patch', '_README.rst', './_README.patch']
         subprocess.run(cmd, check=True)
-    assert os.path.isfile('./01_overview.rst')
+    assert os.path.isfile('./_README.rst')
 
 
 # -- General configuration -----------------------------------------------------

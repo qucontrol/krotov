@@ -44,6 +44,14 @@ Welcome to the Krotov package's documentation!
    99_bibliography
 
 
+.. Note: the filenames of the rst files linked above are numbered 01, 02, etc
+   because we have a single bibliography file for the entire documentation.
+   Unfortunately, the citation numbers are assigned in the order that Sphinx
+   processes the files. This is in alphabetical order, not in the order they
+   appear in the toctree. Thus, numbering the files is necessary to make the
+   citation number appear in the desired order.
+
+
 API
 ===
 

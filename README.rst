@@ -44,14 +44,25 @@ Development happens on `Github`_. You can read the full documentation at `ReadTh
 Purpose
 -------
 
-Optimal control is one of the cornerstones of quantum technology. It asks the
-question how to make a manipulate the dynamics of a quantum system behave some
-desired way. See `Glaser et al. Eur. Phys. J. D 69, 279 (2015)`_ for an
-overview of the research field.
+Optimal control is a cornerstones of quantum technology: relying not
+just on a passive understanding of quantum mechanics, but on the *active*
+utilization of the quantum properties of matter. Quantum optimal control asks
+how to manipulate the dynamics of a quantum system to behave in some desired
+way. This is essential for the realization of quantum computers, and
+related technologies such as quantum sensing.  See e.g. `Glaser et al. Eur.
+Phys. J. D 69, 279 (2015)`_ for an overview of methods, applications, and
+current research directions. Quantum technology and thus quantum control are
+the focus of several large-scale national and super-national research
+endeavors, such as the U.S. $1 billion `National Quantum Initiative Act`_ and
+the €1 billion `European Quantum Flagship program`_.
 
 Krotov's method is one of the two leading gradient-based optimization
-algorithms used in quantum optimal control. To date, there has not been an open
-source implementation of the method. This package provides this missing
+algorithms used in numerical quantum optimal control. It simulates the dynamics
+of a quantum system under a set of initial controls, and evaluates the
+result with respect to an optimization functional to be minimized. It then
+iteratively modifies the controls to guarantee a monotonically decreasing value
+in the optimization functional. To date, there has not been an open source
+implementation of the method. This package provides that missing
 implementation.
 
 The choice of Python as an implementation language is due to Python's easy to learn
@@ -60,25 +71,31 @@ Moreover, the `QuTiP`_ library exists to provide the foundations of
 numerically describing quantum systems, and already includes basic versions of
 some of the other popular algorithms in quantum control, the gradient-based
 GRAPE and the gradient-free CRAB. The availability of the `Jupyter notebook`_
-system provides an ideal platform for demonstrating the use of the method.
+framework provides an ideal platform for showing the use of the method.
 
+The Krotov package targets both students wishing to enter
+the field of quantum control, and researchers in the field. By providing a
+comprehensive set of examples, we enable users of our package to
+explore the formulation of typical control problems, and to understand how
+Krotov's method can solve them. These examples are inspired by
+recent publications, and thus show the use of the method at the cutting edge of
+research. Optimal control is also increasingly important in the design of
+experiments, and we hope that the availability of an easy to use implementation
+of Krotov's will facilitate this further.
 
-The Krotov package is targeted both towards students wishing to enter
-the field of quantum control, and researchers in the field. By providing a rich
-set of examples of how the package can be used to reproduce the solutions of
-control problems from recent publications, we enable users of our package to
-explore how to formulate typical control problems, and how to use Krotov's
-method to solve them.
-
-The choice of Python implies that for large-scale control problems, performance may
-become a significant issue. In this case, it may be necessary to implement
+The use of Python implies that for large-scale control problems, performance
+may become a significant issue. In this case, it may be necessary to implement
 Krotov's method in a more efficient (compiled) language. While the method as
-such is relatively straightforward, there are some subtleties involved, which
-are explained both in the package documentation and in the source code. Thus,
-the Krotov package serves as a reference implementation, leveraging Python's
-reputation as "executable pseudocode", and as a foundation against which to test.
+such is relatively straightforward, there are some subtleties involved. Our
+implementation puts an emphasis on clarity, and the documentation provides
+detailed explanations of all necessary concepts.  Thus, the Krotov package can
+serve as a reference implementation, leveraging Python's reputation as
+"executable pseudocode", and as a foundation against which to test other
+implementations.
 
 .. _Glaser et al. Eur. Phys. J. D 69, 279 (2015): https://link.springer.com/article/10.1140%2Fepjd%2Fe2015-60464-1
+.. _European Quantum Flagship program: https://qt.eu/about/
+.. _National Quantum Initiative Act: https://www.forbes.com/sites/alexknapp/2018/12/20/congress-just-passed-a-bill-to-accelerate-quantum-computing-heres-what-it-does/#20b5d2c22ef8
 
 
 Prerequisites
@@ -133,7 +150,7 @@ You may also do
 
 to install additional development dependencies, including packages required to run the example notebooks.
 
-If you don't have `pip`_ installed, this `Python installation guide`_, respectively the `Python Packaging User Guide`_ can guide
+If you don't have `pip`_ installed, the `Python installation guide`_, respectively the `Python Packaging User Guide`_ can guide
 you through the process.
 
 .. _pip: https://pip.pypa.io
