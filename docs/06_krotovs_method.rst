@@ -66,6 +66,7 @@ terms of the complex overlaps of the final-time states with the target states
 under the given control. Thus,
 
 .. math::
+   :label: tauk
 
      \tau_k = \Braket{\phi_k(T)}{\phi_k^\tgt}
 
@@ -73,7 +74,6 @@ in Hilbert space, or
 
 .. math::
 
-   \label{eq:tau_liouville}
      \tau_k
      = \langle\!\langle \Op{\rho}_k(T) \vert \Op{\rho}^{\tgt} \rangle\!\rangle
      \equiv \tr\left[\Op{\rho}^{\dagger}_k(T) \Op{\rho}_k^{\tgt} \right]

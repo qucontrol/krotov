@@ -107,5 +107,9 @@ ENV/
 # ctags
 tags
 
+# Latex
+.aux
+
 # Extra
 /docs/01_overview.rst
+
