@@ -51,7 +51,7 @@ The functional consists of three parts:
   algorithm. It is best to think of this running cost as a technical
   requirement, and not to assign physical meaning to it. Note that as the
   optimization converges, $\Delta \epsilon_l(t) \rightarrow 0$, so that the
-  minimization of $J$ is equivalent to the minimizatin of $J_T$ (for :math:`g_b
+  minimization of $J$ is equivalent to the minimization of $J_T$ (for :math:`g_b
   \equiv 0`).
 
 * An optional state-dependent running cost, $g_b$, e.g., to penalize population
@@ -253,7 +253,7 @@ Eq. :eq:`krotov_first_order_update`, we
 approximate :math:`\epsilon^{(i+1)}(t) \approx \epsilon^{(i)}(t)` on the right
 hand side, in other words, we assume
 :math:`\Abs{\Delta \epsilon(t)} \ll \Abs{\epsilon(t)}`.
-This can can be ensured by choosing a sufficiently large value for $\lambda_a$.
+This can be ensured by choosing a sufficiently large value for $\lambda_a$.
 
 The functional :math:`J_T` enters the update equation only implicitly in the
 boundary condition for the backward propagated co-state,
