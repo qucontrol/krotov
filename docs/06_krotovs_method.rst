@@ -118,8 +118,8 @@ they treat the phases $\varphi_k$ in the physical optimization goal
   cf. :func:`.J_T_re`.
 
 
-Conditions for monotonic convergence
-------------------------------------
+Conditions to ensure monotonic convergence
+------------------------------------------
 
 Krotov's method is based on a rigorously examination of the conditions for
 constructing updated fields :math:`\epsilon_l^{(i+1)}(t)` such that
@@ -131,7 +131,7 @@ this by introducing an auxiliary functional :math:`L[\{\ket{\phi_k^{(i)}(t)}\},
 \{\epsilon_l^{(i)}(t)\}, \Phi]` that is equivalent to
 :math:`J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}]`, but includes an
 arbitrary scalar potential $\Phi$. The freedom in this scalar potential is then
-used to formulate a condition for monotonic convergence,
+used to formulate a condition to ensure monotonic convergence,
 
 .. math::
    :label: krotov_proto_update
@@ -159,7 +159,7 @@ assuming the equation of motion for the forward propagation of
      = -\frac{\mathrm{i}}{\hbar} \Op{H}^{(i+1)} \Ket{\phi_k^{(i+1)}(t)}\,.
 
 The co-states :math:`\Ket{\chi_k^{(i)}(t)}` are propagated backwards under the
-guess controls of iteration (i), i.e., the optimized controls from the previous
+guess controls of iteration :math:`(i)`, i.e., the optimized controls from the previous
 iteration, as
 
 .. math::
@@ -181,13 +181,13 @@ Note that the backward propagation uses the adjoint Hamiltonian, which becomes
 relevant for non-Hermitian Hamiltonians or dissipative dynamics in Liouville
 space.  In Hilbert space, and without any state-dependent constraints
 (:math:`g_b \equiv 0`), this is still the standard Schrödinger equation running
-backwards in time (:math:`\dd t \rightarrow -\dd t`). The equations in
+backwards in time (:math:`\dd t \rightarrow -\dd t`). A state-dependent constraint
+introduces an inhomogeneity in Eq. :eq:`bw_eqm`. The equations in
 Liouville space follow an analogous structure, with :math:`\Op{H} \rightarrow i
-\Liouville`, see :mod:`krotov.mu` for details. A state-dependent constraint
-introduces an inhomogeneity. For details on the derivation of the above
-equations, see Ref. :cite:`ReichJCP12`.  Here, and in the following, we have
-dropped the index :math:`l` of the controls and the associated $\lambda_{a,l}$
-and $S_l(t)$; all equations are valid for each individual control.
+\Liouville`, see :mod:`krotov.mu` for details. For details on the derivation of
+the above equations, see Ref. :cite:`ReichJCP12`.  Here, and in the following,
+we have dropped the index :math:`l` of the controls and the associated
+$\lambda_{a,l}$ and $S_l(t)$; all equations are valid for each individual control.
 
 
 First order update equation
@@ -205,8 +205,8 @@ takes the form
 
 with a scaling parameter :math:`\lambda_a` and a shape function
 :math:`S(t) \in [0,1]`. When :math:`\epsilon^{\text{ref}}(t)` is set to the guess
-pulse :math:`\epsilon^{(i)}(t)` of the iteration :math:`(i)` (the optimized
-pulse from the previous iteration), this yields
+pulse :math:`\epsilon^{(i)}(t)` of the iteration :math:`(i)` -- the optimized
+pulse from the previous iteration -- this yields
 
 .. math::
 
@@ -244,15 +244,16 @@ pulse update thereby taking the role of an (inverse) "step width".
 Values that are too large will change
 :math:`\epsilon^{(i)}(t)` by only a small amount in every iteration, causing slow
 convergence. Values that are too small will cause sharp spikes in the optimized
-control, and numerical instabilities (including a loss of monotonic convergence).
+control and numerical instabilities (including a loss of monotonic convergence).
 
 We have assumed that the Hamiltonian is linear in the controls. If this is not
 the case, :math:`\epsilon^{(i+1)}(t)` will still show up on the right hand side of
-Eq. :eq:`krotov_first_order_update`. In order for
-Eq. :eq:`krotov_first_order_update` to remain a valid update equation, we
+Eq. :eq:`krotov_first_order_update`. In order to remove the implicit nature of
+Eq. :eq:`krotov_first_order_update`, we
 approximate :math:`\epsilon^{(i+1)}(t) \approx \epsilon^{(i)}(t)` on the right
-hand side, that is, :math:`\Abs{\Delta \epsilon(t)} \ll \Abs{\epsilon(t)}`.
-This can can be ensured by a sufficiently large value for $\lambda_a$.
+hand side, in other words, we assume
+:math:`\Abs{\Delta \epsilon(t)} \ll \Abs{\epsilon(t)}`.
+This can can be ensured by choosing a sufficiently large value for $\lambda_a$.
 
 The functional :math:`J_T` enters the update equation only implicitly in the
 boundary condition for the backward propagated co-state,
@@ -266,7 +267,7 @@ Eq. :eq:`JTsm` and Eq. :eq:`JTre` yield
     &= \left( \frac{1}{N^2} \sum_{l=1}^N \tau_l \right) \Ket{\phi_k^\tgt}\,,
     \\
      - \left.\frac{\partial J_{T,\text{re}}}{\partial \Bra{\phi_k}}\right\vert_{\phi_k^{(i)}(T)}
-    &= \frac{1}{2N} \Op{O} \Ket{\phi_k^\tgt}\,,
+    &= \frac{1}{2N} \Ket{\phi_k^\tgt}\,,
     \end{aligned}
 
 cf. :func:`.chis_sm`, :func:`.chis_re`.
@@ -287,8 +288,8 @@ some types of state-dependent constraints, the first-order expansion is sufficie
 specifically for keeping the population in an allowed
 subspace :cite:`PalaoPRA2008`.
 
-When these conditions are not fulfilled, it is still possible to derive
-conditions for monotonic convergence via an expansion of $\Phi$ to second order
+When these conditions are not fulfilled, it is still possible to derive conditions
+to ensure monotonic convergence via an expansion of $\Phi$ to second order
 in the states, resulting in a second term in Eq. :eq:`krotov_proto_update`,
 
 .. math::
@@ -367,8 +368,8 @@ See the :ref:`/notebooks/07_example_PE.ipynb` for an example.
    Even when the second order update equation is mathematically required to
    guarantee monotonic convergence, very often an optimization with the
    first-order update equation :eq:`krotov_first_order_update` will give
-   converging results. Since the second order update requires significantly
-   more numerical resources (the calculation of the states
+   converging results. Since the second order update requires
+   more numerical resources (calculation and storage of the states
    :math:`\ket{\Delta\phi_k(t)}`), you should always try the optimization with
    the first-order update equation first.
 
@@ -400,18 +401,18 @@ The scheme proceeds as follows:
    pulse in the current iteration.
 
 2. Perform a backward-propagation using Eq. :eq:`bw_eqm` as the equation of
-   motion, over the entire time grid. The resulting state at each point in the
+   motion over the entire time grid. The resulting state at each point in the
    time grid must be stored in memory.
 
 3. Starting from the known initial state :math:`\ket{\phi_k(t=0)}`, calculate the
    pulse update for the first time step according to
-   Eq. :eq:`krotov_first_order_update`, with $t=\dd t/2$ on the left hand side
+   Eq. :eq:`krotov_first_order_update`, with $t=\dd t/2$ on the left-hand side
    (representing the first *interval* in the time grid, on which the control
    pulse is defined), and $t=0$ on the right-hand side (representing the first
    *point* on the time grid). This approximation of :math:`t \approx t + \dd t
    /2` is what constitutes the "time discretization" mathematically, and what
    resolves the seeming contradiction in the time-continuous
-   Eq. :eq:`krotov_first_order_update` that the calculation of
+   Eq. :eq:`krotov_first_order_update`, i.e., that the calculation of
    :math:`\epsilon^{(i+1)}(t)` requires knowledge of the states
    :math:`\ket{\phi_k^{(i+1)}(t)}` propagated under
    :math:`\epsilon^{(i+1)}(t)`.
@@ -428,12 +429,12 @@ The scheme proceeds as follows:
 
       \ket{\phi_k^{\text{bw}}(T)} = \frac{1}{\Norm{\ket{\chi_k}}} \ket{\chi_{k}(T)}
 
-   and use those in the backward propagation, and then later multiply again
+   for use in the backward propagation, and then later multiply again
    with :math:`\Norm{\ket{\chi_k}}` when calculating the pulse update.
 
 
-Note that for multiple objectives, the scheme can run in parallel, and each
-objectives contributes a term to the update, which are then summed. This is the
+Note that for multiple objectives the scheme can run in parallel and each
+objective contributes a term to the update. Summation of these terms yields the
 sum in :eq:`krotov_first_order_update`. See :mod:`krotov.parallelization` for
 details. For a second-order update, the forward propagated states from step 4,
 both for the current iteration and the previous iteration, must be stored in
@@ -451,9 +452,9 @@ the inverse step width :math:`\lambda_a`, slowing down convergence. Generally,
 choosing :math:`\lambda_a` too small will lead to numerical instabilities and
 unphysical features in the optimized pulse. A lower limit for :math:`\lambda_a`
 can be determined from the requirement that the change
-:math:`\Delta\epsilon(t)` should be at most on the same order of magnitude as
+:math:`\Delta\epsilon(t)` should be at most of the same order of magnitude as
 the guess pulse :math:`\epsilon^{(i)}(t)` for that iteration. The
-Cauchy-Schwarz inequality applied to the update equation  yields
+Cauchy-Schwarz inequality applied to the update equation yields
 
 .. math::
 
@@ -466,8 +467,8 @@ Cauchy-Schwarz inequality applied to the update equation  yields
      \Norm{\epsilon^{(i)}(t)}_{\infty}\,,
 
 where :math:`\norm{\partial \Op{H}/\partial \epsilon}_{\infty}` denotes
-the supremum norm of the operator norms of the operator
-:math:`\partial \Op{H}/\partial \epsilon` obtained at time $t$.
+the supremum norm (with respect to time) of the operator norms of the
+operators :math:`\partial \Op{H}/\partial \epsilon` obtained at time $t$.
 Since :math:`S(t) \in [0,1]` and :math:`\ket{\phi_k}` is normalized,
 the condition for :math:`\lambda_a` becomes
 
@@ -482,7 +483,7 @@ From a practical point of view, the best strategy is to start the
 optimization with a comparatively large value of :math:`\lambda_a`, and
 after a few iterations lower :math:`\lambda_a` as far as possible
 without introducing numerical instabilities. The value of
-:math:`\lambda_a` may be adjusted dynamically with the rate of
+:math:`\lambda_a` may be adjusted dynamically with respect to the rate of
 convergence. Generally, the optimal choice of :math:`\lambda_a` requires
 some trial and error.
 
@@ -501,11 +502,12 @@ efficient.
 
 Another solution would be to transform the result of the forward propagation
 :math:`\ket{\phi_k(T)}` from the rotating frame to the lab frame, then
-constructing :math:`\ket{\chi_k(T)}`, and transforming :math:`\ket{\chi_k(T)}`
-back to the rotating frame, before starting the backward-propagation.
+constructing :math:`\ket{\chi_k(T)}`, and finally to transform
+:math:`\ket{\chi_k(T)}` back to the rotating frame, before starting the
+backward propagation.
 
-When the RWA is used, the control fields are
-complex-valued. In this case, the Krotov update equation is valid for
+When the RWA is used the control fields are
+complex-valued. In this case the Krotov update equation is valid for
 both the real and the imaginary part independently. The most straightforward
 implementation of the method is for real controls only, requiring that any
 complex control Hamiltonian is rewritten as two independent control
@@ -531,7 +533,7 @@ space. However, they are equally valid for a gate optimization in
 Liouville space, by replacing Hilbert space states with density matrices,
 :math:`\Op{H}` with :math:`i \Liouville` (cf. :mod:`krotov.mu`), and inner
 products with Hilbert-Schmidt products, :math:`\langle  \cdot \vert \cdot
-\rangle \rightarrow \langle\!\langle \cdot  \vert \cdot \rangle\!\rangle`, cf.
-e.g. Ref :cite:`GoerzNJP2014`.
+\rangle \rightarrow \langle\!\langle \cdot  \vert \cdot \rangle\!\rangle`,
+cf., e.g., Ref. :cite:`GoerzNJP2014`.
 
 See the :ref:`/notebooks/04_example_dissipative_qubit_reset.ipynb` for an example.
