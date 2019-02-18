@@ -157,7 +157,8 @@ or any other software package for the simulation of quantum dynamics:
 The implementation in :func:`scipy.optimize.minimize` allows to choose between
 different optimization methods, with "Nelder-Mead simplex" being the default.
 There exist also more advanced methods such as Subplex_ in NLopt_ that may be
-worth exploring.
+worth exploring for improvements in numerical efficiency, and additional
+functionality such as support for non-linear constraints.
 
 .. _Subplex: https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#sbplx-based-on-subplex
 .. _NLopt: https://nlopt.readthedocs.io/
