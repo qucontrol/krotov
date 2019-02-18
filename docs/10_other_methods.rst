@@ -46,11 +46,11 @@ standard functionals are based. The relevant term in the gradient is then
    \end{split}
 
 with the time evolution operator :math:`\Op{U}^{(i)}_j` for the time interval
-$j$, using the guess controls in iteration :math:`(i)` of the optimization. We
-end up with backward-propagated states :math:`\ket{\chi_k(t_{j+1})}` and
-forward-propagated states :math:`\ket{\phi_k(t_j)}`. Compare this with the
-first-order update equation :eq:`krotov_first_order_update` for Krotov's
-method.
+:math:`j`, using the guess controls in iteration :math:`(i)` of the
+optimization. We end up with backward-propagated states
+:math:`\ket{\chi_k(t_{j+1})}` and forward-propagated states
+:math:`\ket{\phi_k(t_j)}`. Compare this with the first-order update equation
+:eq:`krotov_first_order_update` for Krotov's method.
 
 In this example of (discretized) time-continuous controls, both GRAPE and
 Krotov's method can generally be used interchangeably.
@@ -61,13 +61,13 @@ Two benefits of Krotov's method compared to GRAPE are:
 
 * Krotov's method mathematically guarantees monotonic convergence in the
   continuous limit.
-* Using different functionals $J_T$ in Krotov's method is only reflected in the
-  boundary condition for the backward-propagated states,
+* Using different functionals :math:`J_T` in Krotov's method is only reflected
+  in the boundary condition for the backward-propagated states,
   Eq. :eq:`chi_boundary`, while the update equation stays the same otherwise.
   In contrast, for functionals that do not depend trivially on the overlaps
-  $\tau_k$, the evaluation of the gradient in GRAPE may look very different
-  from the above scheme, requiring a problem-specific implementation from
-  scratch.
+  :math:`\tau_k`, the evaluation of the gradient in GRAPE may look very
+  different from the above scheme, requiring a problem-specific implementation
+  from scratch.
 
 GRAPE has a significant advantage if the controls are not time-continuous, but
 are *physically* piecewise constant ("bang-bang control"). The calculation of
@@ -125,7 +125,7 @@ becomes feasible.
 
 Gradient-free optimization does not require backward propagation, but only a
 forward-propagation of the initial states and the evaluation of an arbitrary
-functional $J_T$. Thus, it is more efficient *per iteration* than the
+functional :math:`J_T`. Thus, it is more efficient *per iteration* than the
 gradient-based methods, and does not require the storage of states. However,
 the number of iterations can grow extremely large, especially with an
 increasing number of control parameters. Thus, an optimization with a

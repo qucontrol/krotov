@@ -30,14 +30,14 @@ of the :math:`i`'th iteration.
 
 The functional consists of three parts:
 
-* A final time functional $J_T$. This is the "main" part of the functional, and
-  we can usually think of $J$ as being an auxiliary functional in the
-  optimization of $J_T$.
+* A final time functional :math:`J_T`. This is the "main" part of the
+  functional, and we can usually think of :math:`J` as being an auxiliary
+  functional in the optimization of :math:`J_T`.
 
-* A running cost on the control fields, $g_a$. As we will see below, specific
-  forms of running costs are required to obtain a closed-form update equation.
-  The typical form, and the only one we consider here (and that is realized in
-  the :mod:`krotov` package) is
+* A running cost on the control fields, :math:`g_a`. As we will see below,
+  specific forms of running costs are required to obtain a closed-form update
+  equation.  The typical form, and the only one we consider here (and that is
+  realized in the :mod:`krotov` package) is
 
   .. math::
 
@@ -45,19 +45,19 @@ The functional consists of three parts:
           = \frac{\lambda_{a, l}}{S_l(t)} \Delta\epsilon_l^2(t)\,.
 
   We introduce two parameters, the (inverse) Krotov "step width"
-  $\lambda_{a,l}$ and the shape function $S_l(t)$ which can be used to
-  influence desired properties of the optimized controls. $\Delta\epsilon_l(t)$
-  is the update of the control in a single iteration of the optimization
-  algorithm. It is best to think of this running cost as a technical
-  requirement, and not to assign physical meaning to it. Note that as the
-  optimization converges, $\Delta \epsilon_l(t) \rightarrow 0$, so that the
-  minimization of $J$ is equivalent to the minimization of $J_T$ (for :math:`g_b
-  \equiv 0`).
+  :math:`\lambda_{a,l}` and the shape function :math:`S_l(t)` which can be used
+  to influence desired properties of the optimized controls.
+  :math:`\Delta\epsilon_l(t)` is the update of the control in a single iteration of
+  the optimization algorithm. It is best to think of this running cost as a
+  technical requirement, and not to assign physical meaning to it. Note that as
+  the optimization converges, :math:`\Delta \epsilon_l(t) \rightarrow 0`, so that the
+  minimization of :math:`J` is equivalent to the minimization of :math:`J_T`
+  (for :math:`g_b \equiv 0`).
 
-* An optional state-dependent running cost, $g_b$, e.g., to penalize population
-  in a subspace. This is rarely used, as there are other methods to achieve the
-  same effect, like placing artificially high dissipation on a "forbidden"
-  subspace.
+* An optional state-dependent running cost, :math:`g_b`, e.g., to penalize
+  population in a subspace. This is rarely used, as there are other methods to
+  achieve the same effect, like placing artificially high dissipation on a
+  "forbidden" subspace.
 
 The most commonly used functionals (cf. :mod:`krotov.functionals`) optimize for
 a set of initial states :math:`\{\ket{\phi_k}\}` to evolve to a set of target
@@ -80,13 +80,14 @@ in Hilbert space, or
 
 in Liouville space.
 
-The following functionals $J_T$ can be formed from these complex overlaps, taking
-into account that any optimization functional $J_T$ must be real. They differ by the way
-they treat the phases $\varphi_k$ in the physical optimization goal
-:math:`\ket{\phi_k(T)} \overset{!}{=} e^{i\varphi_k}\ket{\phi_k^{\tgt}}`
-:cite:`PalaoPRA2003`:
+The following functionals :math:`J_T` can be formed from these complex
+overlaps, taking into account that any optimization functional :math:`J_T` must
+be real. They differ by the way they treat the phases :math:`\varphi_k` in the
+physical optimization goal :math:`\ket{\phi_k(T)} \overset{!}{=}
+e^{i\varphi_k}\ket{\phi_k^{\tgt}}` :cite:`PalaoPRA2003`:
 
-* Optimize for simultaneous state-to-state transitions, with completely arbitrary phases $\varphi_k$,
+* Optimize for simultaneous state-to-state transitions, with completely
+  arbitrary phases :math:`\varphi_k`,
 
   .. math::
       :label: JTss
@@ -95,8 +96,9 @@ they treat the phases $\varphi_k$ in the physical optimization goal
 
   cf. :func:`.J_T_ss`.
 
-* Optimize for simultaneous state-to-state transitions, with an arbitrary *global* phase, i.e.,
-  $\varphi_k = \varphi_{\text{global}}$ for all $k$ with arbitrary $\varphi_{\text{global}}$,
+* Optimize for simultaneous state-to-state transitions, with an arbitrary
+  *global* phase, i.e., :math:`\varphi_k = \varphi_{\text{global}}` for all
+  :math:`k` with arbitrary :math:`\varphi_{\text{global}}`,
 
   .. math::
       :label: JTsm
@@ -107,7 +109,7 @@ they treat the phases $\varphi_k$ in the physical optimization goal
   cf. :func:`.J_T_sm`.
 
 * Optimize for simultaneous state-to-state transitions, with a global phase of zero, i.e.,
-  $\varphi_k = 0$ for all $k$,
+  :math:`\varphi_k = 0` for all :math:`k`,
 
   .. math::
       :label: JTre
@@ -130,7 +132,7 @@ interdependence of the states and the field. Krotov tackles
 this by introducing an auxiliary functional :math:`L[\{\ket{\phi_k^{(i)}(t)}\},
 \{\epsilon_l^{(i)}(t)\}, \Phi]` that is equivalent to
 :math:`J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}]`, but includes an
-arbitrary scalar potential $\Phi$. The freedom in this scalar potential is then
+arbitrary scalar potential :math:`\Phi`. The freedom in this scalar potential is then
 used to formulate a condition to ensure monotonic convergence,
 
 .. math::
@@ -181,32 +183,32 @@ Note that the backward propagation uses the adjoint Hamiltonian, which becomes
 relevant for non-Hermitian Hamiltonians or dissipative dynamics in Liouville
 space.  In Hilbert space, and without any state-dependent constraints
 (:math:`g_b \equiv 0`), this is still the standard Schrödinger equation running
-backwards in time (:math:`\dd t \rightarrow -\dd t`). A state-dependent constraint
-introduces an inhomogeneity in Eq. :eq:`bw_eqm`. The equations in
+backwards in time (:math:`\dd t \rightarrow -\dd t`). A state-dependent
+constraint introduces an inhomogeneity in Eq. :eq:`bw_eqm`. The equations in
 Liouville space follow an analogous structure, with :math:`\Op{H} \rightarrow i
 \Liouville`, see :mod:`krotov.mu` for details. For details on the derivation of
 the above equations, see Ref. :cite:`ReichJCP12`.  Here, and in the following,
 we have dropped the index :math:`l` of the controls and the associated
-$\lambda_{a,l}$ and $S_l(t)$; all equations are valid for each individual control.
+:math:`\lambda_{a,l}` and :math:`S_l(t)`; all equations are valid for each
+individual control.
 
 
 First order update equation
 ---------------------------
 
-In order to obtain an explicit equation for :math:`\epsilon^{(i+1)}(t)` --
-the optimized pulse in iteration :math:`(i)` -- a running cost
-:math:`g_a(\epsilon^{(i+1)}(t))` must be specified. It usually
-takes the form
+In order to obtain an explicit equation for :math:`\epsilon^{(i+1)}(t)` -- the
+optimized pulse in iteration :math:`(i)` -- a running cost
+:math:`g_a(\epsilon^{(i+1)}(t))` must be specified. It usually takes the form
 
 .. math::
 
    g_a(\epsilon^{(i+1)}(t))
      = \frac{\lambda_a}{S(t)} (\epsilon^{(i+1)}(t) - \epsilon^{\text{ref}}(t))^2\,,
 
-with a scaling parameter :math:`\lambda_a` and a shape function
-:math:`S(t) \in [0,1]`. When :math:`\epsilon^{\text{ref}}(t)` is set to the guess
-pulse :math:`\epsilon^{(i)}(t)` of the iteration :math:`(i)` -- the optimized
-pulse from the previous iteration -- this yields
+with a scaling parameter :math:`\lambda_a` and a shape function :math:`S(t) \in
+[0,1]`. When :math:`\epsilon^{\text{ref}}(t)` is set to the guess pulse
+:math:`\epsilon^{(i)}(t)` of the iteration :math:`(i)` -- the optimized pulse
+from the previous iteration -- this yields
 
 .. math::
 
@@ -235,25 +237,24 @@ Thus, we obtain the first-order Krotov update equation as :cite:`PalaoPRA2003,S
        \Bigg\rangle
      \right]\,.
 
-If :math:`S(t) \in [0,1]` is chosen as a function that smoothly goes to
-zero at :math:`t=0` and :math:`t=T`, then the update will be suppressed
-near the edges of the optimization time interval. Thus, a smooth switch-on
-and switch-off can be maintained. The
-scaling factor :math:`\lambda_a` controls the overall magnitude of the
-pulse update thereby taking the role of an (inverse) "step width".
-Values that are too large will change
-:math:`\epsilon^{(i)}(t)` by only a small amount in every iteration, causing slow
-convergence. Values that are too small will cause sharp spikes in the optimized
-control and numerical instabilities (including a loss of monotonic convergence).
+If :math:`S(t) \in [0,1]` is chosen as a function that smoothly goes to zero at
+:math:`t=0` and :math:`t=T`, then the update will be suppressed near the edges
+of the optimization time interval. Thus, a smooth switch-on and switch-off can
+be maintained. The scaling factor :math:`\lambda_a` controls the overall
+magnitude of the pulse update thereby taking the role of an (inverse) "step
+width".  Values that are too large will change :math:`\epsilon^{(i)}(t)` by
+only a small amount in every iteration, causing slow convergence. Values that
+are too small will cause sharp spikes in the optimized control and numerical
+instabilities (including a loss of monotonic convergence).
 
 We have assumed that the Hamiltonian is linear in the controls. If this is not
-the case, :math:`\epsilon^{(i+1)}(t)` will still show up on the right hand side of
-Eq. :eq:`krotov_first_order_update`. In order to remove the implicit nature of
-Eq. :eq:`krotov_first_order_update`, we
-approximate :math:`\epsilon^{(i+1)}(t) \approx \epsilon^{(i)}(t)` on the right
-hand side, in other words, we assume
-:math:`\Abs{\Delta \epsilon(t)} \ll \Abs{\epsilon(t)}`.
-This can be ensured by choosing a sufficiently large value for $\lambda_a$.
+the case, :math:`\epsilon^{(i+1)}(t)` will still show up on the right hand side
+of Eq. :eq:`krotov_first_order_update`. In order to remove the implicit nature
+of Eq. :eq:`krotov_first_order_update`, we approximate
+:math:`\epsilon^{(i+1)}(t) \approx \epsilon^{(i)}(t)` on the right hand side,
+in other words, we assume :math:`\Abs{\Delta \epsilon(t)} \ll
+\Abs{\epsilon(t)}`.  This can be ensured by choosing a sufficiently large value
+for :math:`\lambda_a`.
 
 The functional :math:`J_T` enters the update equation only implicitly in the
 boundary condition for the backward propagated co-state,
@@ -278,18 +279,17 @@ Second order update equation
 
 The condition :eq:`krotov_proto_update` and the update
 Eq. :eq:`krotov_first_order_update` are based on a first-order expansion of the
-auxiliary potential $\Phi$ with respect to the states, see
-Ref. :cite:`ReichJCP12` for details. This is sufficient in
-most cases, in particular if the equation of
-motion is linear (:math:`\Op{H}` does not depend on the states
-:math:`\ket{\phi_k(t)}`), the functional :math:`J_T` is convex, and no
-state-dependent constraints are used (:math:`g_b\equiv 0`). Even for
-some types of state-dependent constraints, the first-order expansion is sufficient,
-specifically for keeping the population in an allowed
+auxiliary potential :math:`\Phi` with respect to the states, see
+Ref. :cite:`ReichJCP12` for details. This is sufficient in most cases, in
+particular if the equation of motion is linear (:math:`\Op{H}` does not depend
+on the states :math:`\ket{\phi_k(t)}`), the functional :math:`J_T` is convex,
+and no state-dependent constraints are used (:math:`g_b\equiv 0`). Even for
+some types of state-dependent constraints, the first-order expansion is
+sufficient, specifically for keeping the population in an allowed
 subspace :cite:`PalaoPRA2008`.
 
 When these conditions are not fulfilled, it is still possible to derive conditions
-to ensure monotonic convergence via an expansion of $\Phi$ to second order
+to ensure monotonic convergence via an expansion of :math:`\Phi` to second order
 in the states, resulting in a second term in Eq. :eq:`krotov_proto_update`,
 
 .. math::
@@ -327,24 +327,24 @@ with
 
 .. math:: \ket{\Delta \phi_k(t)} \equiv \ket{\phi_k^{(i+1)}(t)} - \ket{\phi_k^{(i)}(t)}\,.
 
-In Eq. :eq:`krotov_proto_update2`, :math:`\sigma(t)` is a scalar function that must be properly
-chosen to ensure monotonic convergence.
+In Eq. :eq:`krotov_proto_update2`, :math:`\sigma(t)` is a scalar function that
+must be properly chosen to ensure monotonic convergence.
 
 As shown in Ref. :cite:`ReichJCP12`, it is possible to numerically approximate
 :math:`\sigma(t)`. In Refs :cite:`WattsPRA2015,GoerzPRA2015`, non-convex
-final-time functionals that depend higher than
-quadratically on the states are considered, for a standard equation of motion
-given by a linear Schrödinger equation. In this case,
+final-time functionals that depend higher than quadratically on the states are
+considered, for a standard equation of motion given by a linear Schrödinger
+equation. In this case,
 
 .. math::
 
    \sigma(t) \equiv -\max\left(\varepsilon_A,2A+\varepsilon_A\right)\,,
      \label{eq:sigma_A}
 
-where :math:`\varepsilon_A` is a small non-negative number that can be
-used to enforce strict inequality in the second order optimality
-condition. The optimal value for :math:`A` in each iteration can be
-approximated numerically as :cite:`ReichJCP12`
+where :math:`\varepsilon_A` is a small non-negative number that can be used to
+enforce strict inequality in the second order optimality condition. The optimal
+value for :math:`A` in each iteration can be approximated numerically
+as :cite:`ReichJCP12`
 
 .. math::
 
@@ -388,12 +388,12 @@ Time discretization
 The derivation of Krotov's method assumes time-continuous control fields. In
 this case, it mathematically guarantees monotonic convergence. However, for
 practical numerical applications, we have to consider controls on a discrete
-time grid with $nt$ points running from :math:`t=0` to :math:`t=T`, with a time
-step $\dd t$ . The states are defined on the points of the time grid, while the
-controls are assumed to be constant on the intervals of the time grid. See the
-notebook `Time Discretization in Quantum Optimal Control`_ for details. This
-discretization yields the numerical scheme shown in :numref:`figkrotovscheme`.
-The scheme proceeds as follows:
+time grid with :math:`nt` points running from :math:`t=0` to :math:`t=T`, with
+a time step :math:`\dd t` . The states are defined on the points of the time
+grid, while the controls are assumed to be constant on the intervals of the
+time grid. See the notebook `Time Discretization in Quantum Optimal Control`_
+for details. This discretization yields the numerical scheme shown in
+:numref:`figkrotovscheme`.  The scheme proceeds as follows:
 
 1. Construct the states :math:`\ket{\chi_k(T)}` according to
    Eq. :eq:`chi_boundary`. This may depend on the states forward-propagated
@@ -404,16 +404,16 @@ The scheme proceeds as follows:
    motion over the entire time grid. The resulting state at each point in the
    time grid must be stored in memory.
 
-3. Starting from the known initial state :math:`\ket{\phi_k(t=0)}`, calculate the
-   pulse update for the first time step according to
-   Eq. :eq:`krotov_first_order_update`, with $t=\dd t/2$ on the left-hand side
-   (representing the first *interval* in the time grid, on which the control
-   pulse is defined), and $t=0$ on the right-hand side (representing the first
-   *point* on the time grid). This approximation of :math:`t \approx t + \dd t
-   /2` is what constitutes the "time discretization" mathematically, and what
-   resolves the seeming contradiction in the time-continuous
-   Eq. :eq:`krotov_first_order_update`, i.e., that the calculation of
-   :math:`\epsilon^{(i+1)}(t)` requires knowledge of the states
+3. Starting from the known initial state :math:`\ket{\phi_k(t=0)}`, calculate
+   the pulse update for the first time step according to
+   Eq. :eq:`krotov_first_order_update`, with :math:`t=\dd t/2` on the left-hand
+   side (representing the first *interval* in the time grid, on which the
+   control pulse is defined), and :math:`t=0` on the right-hand side
+   (representing the first *point* on the time grid). This approximation of
+   :math:`t \approx t + \dd t /2` is what constitutes the "time discretization"
+   mathematically, and what resolves the seeming contradiction in the
+   time-continuous Eq. :eq:`krotov_first_order_update`, i.e., that the
+   calculation of :math:`\epsilon^{(i+1)}(t)` requires knowledge of the states
    :math:`\ket{\phi_k^{(i+1)}(t)}` propagated under
    :math:`\epsilon^{(i+1)}(t)`.
 
@@ -466,11 +466,11 @@ Cauchy-Schwarz inequality applied to the update equation yields
      \stackrel{!}{\le}
      \Norm{\epsilon^{(i)}(t)}_{\infty}\,,
 
-where :math:`\norm{\partial \Op{H}/\partial \epsilon}_{\infty}` denotes
-the supremum norm (with respect to time) of the operator norms of the
-operators :math:`\partial \Op{H}/\partial \epsilon` obtained at time $t$.
-Since :math:`S(t) \in [0,1]` and :math:`\ket{\phi_k}` is normalized,
-the condition for :math:`\lambda_a` becomes
+where :math:`\norm{\partial \Op{H}/\partial \epsilon}_{\infty}` denotes the
+supremum norm (with respect to time) of the operator norms of the operators
+:math:`\partial \Op{H}/\partial \epsilon` obtained at time :math:`t`.  Since
+:math:`S(t) \in [0,1]` and :math:`\ket{\phi_k}` is normalized, the condition
+for :math:`\lambda_a` becomes
 
 .. math::
 
@@ -528,12 +528,13 @@ example.
 Optimization in Liouville space
 -------------------------------
 
-The control equations have been written in the notation of Hilbert
-space. However, they are equally valid for a gate optimization in
-Liouville space, by replacing Hilbert space states with density matrices,
-:math:`\Op{H}` with :math:`i \Liouville` (cf. :mod:`krotov.mu`), and inner
-products with Hilbert-Schmidt products, :math:`\langle  \cdot \vert \cdot
-\rangle \rightarrow \langle\!\langle \cdot  \vert \cdot \rangle\!\rangle`,
-cf., e.g., Ref. :cite:`GoerzNJP2014`.
+The control equations have been written in the notation of Hilbert space.
+However, they are equally valid for a gate optimization in Liouville space, by
+replacing Hilbert space states with density matrices, :math:`\Op{H}` with
+:math:`i \Liouville` (cf. :mod:`krotov.mu`), and inner products with
+Hilbert-Schmidt products, :math:`\langle  \cdot \vert \cdot \rangle \rightarrow
+\langle\!\langle \cdot  \vert \cdot \rangle\!\rangle`, cf., e.g.,
+Ref. :cite:`GoerzNJP2014`.
 
-See the :ref:`/notebooks/04_example_dissipative_qubit_reset.ipynb` for an example.
+See the :ref:`/notebooks/04_example_dissipative_qubit_reset.ipynb` for an
+example.

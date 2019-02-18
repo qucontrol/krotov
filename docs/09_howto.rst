@@ -65,13 +65,12 @@ In order to define a new optimization functional :math:`J_T`:
 
         \ket{\chi_k(T)} \equiv - \left. \frac{\partial J_T}{\partial \bra{\phi_k(T)}} \right\vert_{\ket{\phi_k(T)}}\,,
 
-  or the equivalent experession in Liouville space. This function should calculate the
-  states :math:`\ket{\chi_k}` based  on the forward-propagated states
-  $\ket{\phi_k(T)}$ and the list of objectives. For convenience, when
-  :attr:`~.Objective.target` contains a target state, `chi_constructor` will
-  also receive `tau_vals` containing the overlaps
-  :math:`\tau_k = \Braket{\phi_k(T)}{\phi_k^{\tgt}}`. See :func:`.chis_re` for
-  an example.
+  or the equivalent experession in Liouville space. This function should
+  calculate the states :math:`\ket{\chi_k}` based  on the forward-propagated
+  states :math:`\ket{\phi_k(T)}` and the list of objectives. For convenience,
+  when :attr:`~.Objective.target` contains a target state, `chi_constructor`
+  will also receive `tau_vals` containing the overlaps :math:`\tau_k =
+  \Braket{\phi_k(T)}{\phi_k^{\tgt}}`. See :func:`.chis_re` for an example.
 
 * Optionally, define a function that can be used as an `info_hook`
   in :func:`.optimize_pulses` which returns the value
@@ -169,13 +168,13 @@ use the effective Hamiltonian from the MCWF method :cite:`PlenioRMP1998`,
 
    \Op{H}_{\text{eff}} = \Op{H} - \frac{i}{2} \sum_k \Op{L}_k^\dagger \Op{L}_k\,,
 
-for the Hermitian Hamiltonian $\Op{H}$ and the Lindblad operators $\Op{L}_k$.
-Propagating $\Op{H}_{\text{eff}}$ (without quantum jumps) will lead to a decay
-in the norm of the state corresponding to how much dissipation the state is
-subjected to. Numerically, this will usually increase the value of the
-optimization functional (that is, the error). Thus the optimization can be
-pushed towards avoiding decoherence, without explicitly performing the
-optimization in Liouville space. See the
+for the Hermitian Hamiltonian :math:`\Op{H}` and the Lindblad operators
+:math:`\Op{L}_k`.  Propagating :math:`\Op{H}_{\text{eff}}` (without quantum
+jumps) will lead to a decay in the norm of the state corresponding to how much
+dissipation the state is subjected to. Numerically, this will usually increase
+the value of the optimization functional (that is, the error). Thus the
+optimization can be pushed towards avoiding decoherence, without explicitly
+performing the optimization in Liouville space. See the
 :ref:`/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb` for an
 example.
 
