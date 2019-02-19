@@ -1,4 +1,4 @@
-"""Routines for converting converting between structures good for QuTiP's
+"""Routines for converting between structures good for QuTiP's
 mesolve and Krotov"""
 import copy
 import logging

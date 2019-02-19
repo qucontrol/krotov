@@ -1,0 +1,57 @@
+\documentclass[border=10pt,multi,tikz]{standalone}
+\usepackage[edges]{forest}
+\usetikzlibrary{arrows.meta}% arrows is deprecated
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[none]{hyphenat} % no hyphenation
+
+\begin{document}
+\tikzset{% \tikzstyle is deprecated
+  block/.style={rectangle, draw, fill=white!20, text width=10em, text centered, rounded corners, minimum height=4em},
+  line/.style={draw, very thick, color=black!50, -Stealth},
+}
+\begin{forest}
+  arrow to/.style n args=2{%
+    delay={%
+      tikz+={%
+        \draw [every edge, line] () -- (!#1) node [above, midway] {#2};
+      },
+    },
+    !u.s sep+=30pt,
+  },
+  before typesetting nodes={%
+    where n=1{%
+      edge label/.wrap value={%
+        node [left,pos=.75, anchor=mid east] {#1}
+      },
+    }{%
+      edge label/.wrap value={%
+        node [right,pos=.75, anchor=mid west] {#1}
+      },
+    },
+  },
+  for tree={%
+    parent anchor=children,
+    child anchor=parent,
+    block,
+    edge={line},
+    l sep+=15pt,
+  },
+  forked edges
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  [Can the controls be parametrized with less than 20 parameters?
+    [Is the choice of control parameters obvious?, edge label=yes
+      [Use e.g. Nelder-Mead directly, edge label=yes]
+      [Use CRAB, edge label=no]
+    ]
+    [Are the controls approximately time-continuous?, edge label=no
+      [Is $\frac{\partial J_T}{\partial \langle \phi_k\vert}$ known?, edge label=yes, arrow to={s}{no}
+        [Use Krotov's method, edge label=yes]
+      ]
+      [Is  $\frac{\partial J_T}{\partial \epsilon(t)}$ known?, edge label=no
+        [Use GRAPE, edge label=yes]
+      ]
+    ]
+  ]
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{forest}
+\end{document}

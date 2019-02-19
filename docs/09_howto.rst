@@ -10,7 +10,11 @@ state :math:`\ket{\Psi_k}` as the :attr:`~.Objective.initial_state` and
 :math:`\Op{O} \ket{\Psi_k}` as the :attr:`~.Objective.target`.
 
 You may use :func:`krotov.gate_objectives() <krotov.objectives.gate_objectives>`
-to construct the appropriate list of objectives.
+to construct the appropriate list of objectives. See the
+:ref:`/notebooks/05_example_transmon_xgate.ipynb` for an example. For more
+advanced gate optimizations, also see :ref:`HowtoLIOptimization`,
+:ref:`HowtoPEOptimization`, :ref:`HowtoDissipativeOptimization`, and
+:ref:`HowtoRobustOptimization`.
 
 
 How to optimize complex control fields
@@ -32,15 +36,15 @@ where :math:`\epsilon_{\text{re}}(t)= \Re[\epsilon(t)]` and
 :math:`\epsilon_{\text{im}}(t) = \Im[\epsilon(t)]` are considered as two
 independent (real-valued) controls.
 
+See the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for an example.
+
 
 How to exclude a control from the optimization
 ----------------------------------------------
 
 In order to force the optimization to leave any particular control field
-unchanged, set its update shape to
-:func:`zero_shape <krotov.shapes.zero_shape>`::
-
-    krotov.PulseOptions(lambda_a=1, shape=krotov.shapes.zero_shape)
+unchanged, set its update shape to :func:`krotov.shapes.zero_shape`
+in the `pulse_options` that you pass to :func:`.optimize_pulses`.
 
 
 How to define a new optimization functional
@@ -61,13 +65,12 @@ In order to define a new optimization functional :math:`J_T`:
 
         \ket{\chi_k(T)} \equiv - \left. \frac{\partial J_T}{\partial \bra{\phi_k(T)}} \right\vert_{\ket{\phi_k(T)}}\,,
 
-  or the equivalent experession in Liouville space. This function should calculate the
-  states :math:`\ket{\chi_k}` based  on the forward-propagated states
-  $\ket{\phi_k(T)}$ and the list of objectives. For convenience, when
-  :attr:`~.Objective.target` contains a target state, `chi_constructor` will
-  also receive `tau_vals` containing the overlaps
-  :math:`\tau_k = \Braket{\phi_k(T)}{\phi_k^{\tgt}}`. See :func:`.chis_re` for
-  an example.
+  or the equivalent experession in Liouville space. This function should
+  calculate the states :math:`\ket{\chi_k}` based  on the forward-propagated
+  states :math:`\ket{\phi_k(T)}` and the list of objectives. For convenience,
+  when :attr:`~.Objective.target` contains a target state, `chi_constructor`
+  will also receive `tau_vals` containing the overlaps :math:`\tau_k =
+  \Braket{\phi_k(T)}{\phi_k^{\tgt}}`. See :func:`.chis_re` for an example.
 
 * Optionally, define a function that can be used as an `info_hook`
   in :func:`.optimize_pulses` which returns the value
@@ -76,17 +79,8 @@ In order to define a new optimization functional :math:`J_T`:
   the value of the functional is useful for convergence analysis
   (`check_convergence` in :func:`.optimize_pulses`)
 
-
-How to optimize towards a two-qubit gate up to single-qubit corrections
------------------------------------------------------------------------
-
-Use :func:`krotov.objectives.gate_objectives` with ``local_invariants=True`` in
-order to construct a list of objectives suitable for an optimization using a
-"local-invariant functional" :cite:`MullerPRA11`.
-
-The |weylchamber package|_ contains the suitable `chi_constructor` routines to
-pass to :func:`.optimize_pulses`.
-
+See :mod:`krotov.functionals` for some standard functionals. An example for a
+more advanced functional is the :ref:`/notebooks/07_example_PE.ipynb`.
 
 
 How to penalize population in a forbidden subspace
@@ -98,22 +92,48 @@ equation of motion, which is currently not implemented.
 
 The recommended "workaround" is to place artificially high dissipation on the
 levels in the forbidden subspace. A non-Hermitian Hamiltonian is usually a
-good way to realize this.
+good way to realize this. See the
+:ref:`/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb`
+for an example.
 
 
-How to optimize towards an arbitrary perfect entangler
-------------------------------------------------------
+.. _HowtoLIOptimization:
 
-Use :func:`krotov.objectives.gate_objectives` with ``gate=PE`` in
+How to optimize towards a two-qubit gate up to single-qubit corrections
+-----------------------------------------------------------------------
+
+Use :func:`krotov.objectives.gate_objectives` with ``local_invariants=True`` in
 order to construct a list of objectives suitable for an optimization using a
-"perfect entanglers" functional :cite:`WattsPRA2015,GoerzPRA2015`.
+"local-invariant functional" :cite:`MullerPRA11`. This optimizes towards a
+point in the `Weyl chamber`_.
 
 The |weylchamber package|_ contains the suitable `chi_constructor` routines to
 pass to :func:`.optimize_pulses`.
 
+
+.. _HowtoPEOptimization:
+
+How to optimize towards an arbitrary perfect entangler
+------------------------------------------------------
+
+Closely releated to an optimization towards a point in the Weyl chamber is the
+optimizatin towards an arbitrary perfectly entangling two-qubit gate.
+Geometrically, this means optimizing towards the polyhedron of perfect
+entanglers in the `Weyl chamber`_.
+
+Use :func:`krotov.objectives.gate_objectives` with ``gate='PE'`` in
+order to construct a list of objectives suitable for an optimization using a
+"perfect entanglers" functional :cite:`WattsPRA2015,GoerzPRA2015`.
+This is illustrated in the :ref:`/notebooks/07_example_PE.ipynb`.
+
+Again, the `chi_constructor` is available in the |weylchamber package|_.
+
 .. |weylchamber package| replace:: ``weylchamber`` package
 .. _weylchamber package: https://github.com/qucontrol/weylchamber
+.. _Weyl chamber: https://weylchamber.readthedocs.io/en/latest/tutorial.html
 
+
+.. _HowtoDissipativeOptimization:
 
 How to optimize in a dissipative system
 ---------------------------------------
@@ -121,6 +141,8 @@ How to optimize in a dissipative system
 To optimize a dissipative system, it is sufficient to set an :class:`.Objective`
 with a density matrix for the :attr:`~.Objective.initial_state` and
 :attr:`~.Objective.target`, and a Liouvillian in :attr:`.Objective.H`.
+See the :ref:`/notebooks/04_example_dissipative_qubit_reset.ipynb` for an
+example.
 
 Instead of a Liouvillian, it is also possible to set :attr:`.Objective.H` to
 the system Hamiltonian, and :attr:`.Objective.c_ops` to the appropriate
@@ -128,8 +150,7 @@ Lindblad operators. However, it is generally much more efficient to use
 :func:`krotov.objectives.liouvillian` to convert a time-dependent Hamiltonian
 and a list of Lindblad operators into a time-dependent Liouvillian. In either
 case, the `propagate` routine passed to :func:`~krotov.optimize.optimize_pulses`
-must implement the correct dynamics in Liouville space, using the Liouvillian,
-or the combination of a Hamiltonian and Lindblad operators.
+must be aware of and compatible with the convention for the objectives.
 
 Specifically for gate optimization, the routine
 :func:`~krotov.objectives.gate_objectives`
@@ -137,6 +158,7 @@ can be used to automatically set appropriate objectives for an optimization in
 Liouville space. The parameter `liouville_states_set` indicates that the system
 dynamics are in Liouville space and sets an appropriate choice of matrices that
 track the optimization according to Ref. :cite:`GoerzNJP2014`.
+See the :ref:`/notebooks/06_example_3states.ipynb` for an example.
 
 For weak dissipation, it may also be possible to avoid the use of density
 matrices altogether, and to instead use a non-Hermitian Hamiltonian. For example, you may
@@ -146,13 +168,18 @@ use the effective Hamiltonian from the MCWF method :cite:`PlenioRMP1998`,
 
    \Op{H}_{\text{eff}} = \Op{H} - \frac{i}{2} \sum_k \Op{L}_k^\dagger \Op{L}_k\,,
 
-for the Hermitian Hamiltonian $\Op{H}$ and the Lindblad operators $\Op{L}_k$.
-Propagating $\Op{H}_{\text{eff}}$ (without quantum jumps) will lead to a decay
-in the norm of the state corresponding to how much dissipation the state is
-subjected to. Numerically, this will usually increase the value of the
-optimization functional. Thus the optimization can be pushed towards avoiding
-decoherence, without explicitly performing the optimization in Liouville space.
+for the Hermitian Hamiltonian :math:`\Op{H}` and the Lindblad operators
+:math:`\Op{L}_k`.  Propagating :math:`\Op{H}_{\text{eff}}` (without quantum
+jumps) will lead to a decay in the norm of the state corresponding to how much
+dissipation the state is subjected to. Numerically, this will usually increase
+the value of the optimization functional (that is, the error). Thus the
+optimization can be pushed towards avoiding decoherence, without explicitly
+performing the optimization in Liouville space. See the
+:ref:`/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb` for an
+example.
 
+
+.. _HowtoRobustOptimization:
 
 How to optimize for robust pulses
 ---------------------------------
@@ -169,7 +196,9 @@ An appropriate set of objectives can be generated with the
 How to parallelize the optimization
 -----------------------------------
 
-See :mod:`krotov.parallelization`.
+Krotov's method is inherently parallel accross different objectives. See
+:mod:`krotov.parallelization`, and the
+:ref:`/notebooks/05_example_transmon_xgate.ipynb` for an example.
 
 
 How to maximize numerical efficiency
@@ -178,9 +207,9 @@ How to maximize numerical efficiency
 For systems of non-trivial size, the main numerical effort should be in the
 simulation of the system dynamics. Every iteration of Krotov's method requires
 a full backward propagation and a full forward propagation of the states associated with each
-objective. Therefore, the best numerical efficiency can be achieved by
-optimizing the performance of the `propagator` that is passed to
-:func:`~krotov.optimize.optimize_pulses`.
+objective, see :mod:`krotov.propagators`. Therefore, the best numerical
+efficiency can be achieved by optimizing the performance of the `propagator`
+that is passed to :func:`~krotov.optimize.optimize_pulses`.
 
 One possibility is to implement problem-specific propagators, such as
 :class:`krotov.propagators.DensityMatrixODEPropagator`. Going further, you
@@ -207,7 +236,3 @@ runtime, however, as states will have to be read from disk, or across the
 network.
 
 .. _Dask: http://docs.dask.org/en/latest/
-
-.. .. bibliography:: refs.bib
-   :cited:
-   :style: unsrt

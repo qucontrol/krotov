@@ -42,11 +42,11 @@ def run_apidoc(_):
 
 # -- Generate patched README documentation ------------------------------------
 def generate_patched_readme(_):
-    if not os.path.isfile('readme.rst'):
-        shutil.copyfile(os.path.join('..', 'README.rst'), 'readme.rst')
-        cmd = ['patch', 'readme.rst', './readme.patch']
+    if not os.path.isfile('./_README.rst'):
+        shutil.copyfile(os.path.join('..', 'README.rst'), '_README.rst')
+        cmd = ['patch', '_README.rst', './_README.patch']
         subprocess.run(cmd, check=True)
-    assert os.path.isfile('readme.rst')
+    assert os.path.isfile('./_README.rst')
 
 
 # -- General configuration -----------------------------------------------------
@@ -89,6 +89,7 @@ intersphinx_mapping = {
     'matplotlib': ('https://matplotlib.org/', None),
     'qutip': ('http://qutip.org/docs/latest/', None),
     'glom': ('https://glom.readthedocs.io/en/latest/', None),
+    'weylchamber': ('https://weylchamber.readthedocs.io/en/latest/', None),
 }
 
 # Add any paths that contain templates here, relative to this directory.
@@ -134,7 +135,7 @@ mathjax_config = {
     'jax': ['input/TeX', 'output/SVG'],
     'TeX': {
         'extensions': [
-            "AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"],
+            "AMSmath.js", "AMSsymbols.js"],
         'Macros': {
             'tr': ['{\\operatorname{tr}}', 0],
             'diag': ['{\\operatorname{diag}}', 0],
@@ -163,7 +164,8 @@ mathjax_config = {
             'Liouville': ['{\\mathcal{L}}', 0],
             'DynMap': ['{\\mathcal{E}}', 0],
             'identity': ['{\\mathbf{1}}', 0],
-            'Norm': ['{\\lVert#1\\rVert}', 1],
+            'Norm': ['{\\left\\lVert#1\\right\\rVert}', 1],
+            'norm': ['{\\lVert#1\\rVert}', 1],
             'Abs': ['{\\left\\vert#1\\right\\vert}', 1],
             'avg': ['{\\langle#1\\rangle}', 1],
             'Avg': ['{\\left\langle#1\\right\\rangle}', 1],

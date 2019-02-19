@@ -31,19 +31,25 @@ Welcome to the Krotov package's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   readme
+   01_overview
    02_contributing
    03_authors
    04_features
    05_history
    06_krotovs_method
    07_qutip_usage
-   08_grape_crab
-   09_propagation
-   10_time_discretization.ipynb
-   11_examples
-   12_howto
+   08_examples
+   09_howto
+   10_other_methods
    99_bibliography
+
+
+.. Note: the filenames of the rst files linked above are numbered 01, 02, etc
+   because we have a single bibliography file for the entire documentation.
+   Unfortunately, the citation numbers are assigned in the order that Sphinx
+   processes the files. This is in alphabetical order, not in the order they
+   appear in the toctree. Thus, numbering the files is necessary to make the
+   citation number appear in the desired order.
 
 
 API

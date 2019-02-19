@@ -1,4 +1,66 @@
-"""Routines that can be passed as `propagator` to :func:`.optimize_pulses`"""
+"""Routines that can be passed as `propagator` to :func:`.optimize_pulses`
+
+The numerical effort involved in the optimization is almost entirely within the
+simulation of the system dynamics. In every iteration and for every objective,
+the system must be "propagated" once forwards in time and once backwards in
+time, see also :mod:`krotov.parallelization`.
+
+The implementation of this time propagation must be inside the user-supplied
+routine `propagator` that is passed to :func:`.optimize_pulses` and must
+calculate the propagation over a single time step. In particular,
+:func:`qutip.mesolve.mesolve` is not automatically used for simulating any
+dynamics within the optimization.  The signature for any `propagator`
+must be the same as the "reference" :func:`expm` propagator:
+
+    >>> inspect.formatargspec(*inspect.getfullargspec(krotov.propagators.expm))
+    '(H, state, dt, c_ops=None, backwards=False, initialize=False)'
+
+The arguments are as follows (cf. :class:`Propagator`):
+
+* `H` is the system Hamiltonian or Liouvillian, in a nested-list format similar
+  to that used by :func:`qutip.mesolve.mesolve`, e.g., for a Hamiltonian
+  $\Op{H} = \Op{H}_0 + c \Op{H}_1$, where $c$ is the value of a control field
+  at a particular point in time, `propagator` would receive a list ``[H0, [H1,
+  c]]`` where ``H0`` and ``H1`` are :class:`qutip.Qobj` operators.
+  The nested-list for `H` used here, with scalar values for the controls, is
+  obtained internally from the format used by :func:`~qutip.mesolve.mesolve`,
+  with time-dependent controls over the entire time grid, via
+  :func:`krotov.structural_conversions.plug_in_pulse_values`.
+* `state` is the :class:`qutip.Qobj` state that should be propagated, either a
+  Hilbert space state, or a density matrix.
+* `dt` is the time step (a float). It is always positive, even for
+  ``backwards=True``.
+* `c_ops` is None, or a list of collapse (Lindblad) operators, where each list
+  element is a :class:`qutip.Qobj` instance (or possibly a nested list, for
+  time-dependent Lindblad operators. Note that is generally preferred for `H`
+  to be a Liouvillian, for dissipative dynamics.
+* `backwards` (:class:`bool`): If passed as `True`, the `propagator` should
+  propagate backwards in time. In Hilbert space, this means using -`dt` instead
+  of `dt`. In Liouville space, there is no difference between forward and
+  backward propagation. In the context of Krotov's method, the backward
+  propagation uses the conjugate Hamiltonian, respectively Liouvillian.
+  However, the `propagator` routine does not need to be aware of this fact: it
+  will receive the appropriate `H` and `c_ops`.
+* `initialize` (:class:`bool`): A flag to indicate the beginning of a
+  propagation over a time grid. If False in subsequent calls, the `propagator`
+  may assume that the input `state` is the result of the previous call to
+  `propagator`.
+
+The routines in this module are provided with no guarantee to be either
+general or efficient. The :func:`expm` propagator is exact to machine
+precision, but generally extremely slow.  For "production use", it is
+recommended to supply a problem-specific `propagator` that is highly optimized
+for speed. You might consider the use of Cython_. This is key to minimize the
+runtime of the optimization.
+
+The `initialize` flag enables "stateful" propagators that cache data between
+calls. This can significantly improve numerical efficiency.
+:class:`DensityMatrixODEPropagator` is an example for such a propagator. In
+general, any stateful `propagator` should be an instance of
+:class:`Propagator`.
+
+.. _Cython: https://cython.org
+"""
 from abc import ABC, abstractmethod
 
 import numpy as np
@@ -11,8 +73,16 @@ from qutip.cy.spconvert import dense2D_to_fastcsr_fmode
 __all__ = ['expm', 'Propagator', 'DensityMatrixODEPropagator']
 
 
-def expm(H, state, dt, c_ops, backwards=False, initialize=False):
-    """Propagate using matrix exponentiation"""
+def expm(H, state, dt, c_ops=None, backwards=False, initialize=False):
+    """Propagate using matrix exponentiation
+
+    This supports `H` being a Hamiltonian (for a Hilbert space `state`) or a
+    Liouvillian (for `state` being a density matrix) in nested-list format.
+    Collapse operators `c_ops` are not supported. The propagator is not
+    stateful, thus `initialize` is ignored.
+    """
+    if c_ops is None:
+        c_ops = []
     if len(c_ops) > 0:
         raise NotImplementedError("Liouville exponentiation not implemented")
     assert isinstance(H, list) and len(H) > 0
@@ -62,7 +132,7 @@ class Propagator(ABC):
                 a control Hamiltonian ``H1``, and a scalar value ``u`` that is
                 a time-dependent control evaluated for a particular point in
                 time.
-            state (qutip.Qobj): The state to propagation
+            state (qutip.Qobj): The state to propagate
             dt (float): The time step over which to propagate
             c_ops (list or None): A list of Lindblad operators. Using explicit
                 Lindblad operators should be avoided: it is usually more

@@ -19,10 +19,10 @@ from .structural_conversions import (
 __all__ = [
     'Objective',
     'summarize_qobj',
-    'CtrlCounter',
     'gate_objectives',
     'ensemble_objectives',
     'liouvillian',
+    'CtrlCounter',
 ]
 
 
@@ -55,48 +55,6 @@ def _adjoint(op):
         return op.dag()
 
 
-def CtrlCounter():
-    """Constructor for a counter of controls.
-
-    Returns a callable that returns a unique integer (starting at 1) for every
-    distinct control that is passed to it. This is intended for use with
-    :func:`summarize_qobj`.
-
-    Example:
-
-        >>> ctrl_counter = CtrlCounter()
-        >>> ctrl1 = np.zeros(10)
-        >>> ctrl_counter(ctrl1)
-        1
-        >>> ctrl2 = np.zeros(10)
-        >>> assert ctrl2 is not ctrl1
-        >>> ctrl_counter(ctrl2)
-        2
-        >>> ctrl_counter(ctrl1)
-        1
-        >>> ctrl3 = lambda t, args: 0.0
-        >>> ctrl_counter(ctrl3)
-        3
-    """
-
-    counter = 0
-    registry = {}
-
-    def ctrl_counter(ctrl):
-        nonlocal counter
-        if isinstance(ctrl, np.ndarray):
-            ctrl = id(ctrl)
-        if ctrl not in registry:
-            counter += 1
-            registry[ctrl] = counter
-        return registry[ctrl]
-
-    return ctrl_counter
-
-
-_CTRL_COUNTER = CtrlCounter()  #: internal counter for controls
-
-
 class Objective:
     """A single objective for optimization with Krotov's method
 
@@ -107,21 +65,39 @@ class Objective:
         c_ops (list or None): value for :attr:`c_ops`
 
     Attributes:
-        H (qutip.Qobj or list): The (time-dependent) Hamiltonian,
-            cf. :func:`qutip.mesolve.mesolve`. This includes the control
-            fields.
-        initial_state (qutip.Qobj): The initial state
+        H (qutip.Qobj or list): The (time-dependent) Hamiltonian or
+            Liouvillian in nested-list format, cf.
+            :func:`qutip.mesolve.mesolve`. This includes the control fields.
+        initial_state (qutip.Qobj): The initial state, as a Hilbert space
+            state, or a density matrix.
         target: An object describing the "target" of the optimization, for the
             dynamics starting from :attr:`initial_state`. Usually, this will be
             the target state (the state into which :attr:`initial_state` should
             evolve). More generally, it can be an arbitrary object meeting the
-            requirements of a specific `chi_constructor` function that will be
+            conventions of a specific `chi_constructor` function that will be
             passed to :func:`.optimize_pulses`.
-        c_ops (list or None): List of collapse operators,
-            cf. :func:`~qutip.mesolve.mesolve`.
+        c_ops (list or None): List of collapse operators, cf.
+            :func:`~qutip.mesolve.mesolve`, in lieu of :attr:`H` being a
+                Liouvillian.
+    Example:
+
+        >>> H0 = - 0.5 * qutip.operators.sigmaz()
+        >>> H1 = qutip.operators.sigmax()
+        >>> eps = lambda t, args: ampl0
+        >>> H = [H0, [H1, eps]]
+        >>> krotov.Objective(
+        ...     initial_state=qutip.ket('0'), target=qutip.ket('1'), H=H
+        ... )
+        Objective[|(2)⟩ - {[Herm[2,2], [Herm[2,2], u1(t)]]} - |(2)⟩]
 
     Raises:
-        ValueError: If any arguments have an invalid type
+        ValueError: If any arguments have an invalid type or structure
+
+    Note:
+        Giving collapse operators via :attr:`c_ops` only makes sense if the
+        `propagator` passed to :func:`.optimize_pulses` takes them into account
+        explicitly. It is strongly recommended to set :attr:`H` as a Lindblad
+        operator instead, see :func:`liouvillian`.
     """
 
     def __init__(self, *, initial_state, H, target, c_ops=None):
@@ -183,7 +159,7 @@ class Objective:
 
         This does not affect the controls in :attr:`H`: these are
         assumed to be real-valued. Also, :attr:`.Objective.target` will be left
-        unchanged if it is not a :class:`qutip.Qobj`.
+        unchanged if it is not a :class:`qutip.Qobj` (a target state).
         """
         return Objective(
             H=_adjoint(self.H),
@@ -264,7 +240,7 @@ class Objective:
                 result.solver = propagator.__class__.__name__
             except AttributeError:
                 result.solver = 'n/a'
-        result.times = copy.copy(tlist)
+        result.times = np.array(tlist)
         result.states = []
         result.expect = []
         result.num_expect = len(e_ops)
@@ -305,6 +281,7 @@ class Objective:
             else:
                 for (i, oper) in enumerate(e_ops):
                     result.expect[i].append(qutip.expect(oper, state))
+        result.expect = [np.array(a) for a in result.expect]
         return result
 
     def summarize(self, ctrl_counter=None):
@@ -331,7 +308,7 @@ class Objective:
             ...     target=ket11,
             ...     H=H
             ... )
-            >>> obj.summarize()
+            >>> obj.summarize(ctrl_counter=CtrlCounter())
             '|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩'
             >>> obj = Objective(
             ...     initial_state=ket00,
@@ -339,7 +316,7 @@ class Objective:
             ...     H=H,
             ...     c_ops=[C1, C2]
             ... )
-            >>> obj.summarize()
+            >>> obj.summarize(ctrl_counter=CtrlCounter())
             '|(2⊗2)⟩ - {H:[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]], c_ops:([NonHerm[2⊗2,2⊗2], u3[complex128]],[NonHerm[2⊗2,2⊗2], u4[complex128]])} - |(2⊗2)⟩'
         """
         if ctrl_counter is None:
@@ -371,11 +348,10 @@ class Objective:
         return "%s[%s]" % (self.__class__.__name__, self.summarize())
 
     def __getstate__(self):
-        """Return data for the pickle serialization of an objective.
-
-        This may not preserve time-dependent controls, and is only to enable
-        the serialization of :class:`.Result` objects.
-        """
+        # Return data for the pickle serialization of an objective.
+        #
+        # This may not preserve time-dependent controls, and is only to enable
+        # the serialization of :class:`.Result` objects.
         state = copy.copy(self.__dict__)
         # Remove the unpicklable entries.
         state['H'] = _remove_functions_from_nested_list(state['H'])
@@ -436,77 +412,6 @@ def _array_as_func(t, args, array, T, nt):
         0
         if (t > float(T))
         else array[int(round(float(nt - 1) * (t / float(T))))]
-    )
-
-
-def summarize_qobj(obj, ctrl_counter=None):
-    """Summarize a quantum object
-
-    A counter created by :func:`CtrlCounter` may be passed to distinguish
-    control fields.
-
-    Example:
-
-        >>> ket = qutip.ket([1, 0, 1])
-        >>> summarize_qobj(ket)
-        '|(2⊗2⊗2)⟩'
-        >>> bra = ket.dag()
-        >>> summarize_qobj(bra)
-        '⟨(2⊗2⊗2)|'
-        >>> rho = ket * bra
-        >>> summarize_qobj(rho)
-        'Herm[2⊗2⊗2,2⊗2⊗2]'
-        >>> a = qutip.create(10)
-        >>> summarize_qobj(a)
-        'NonHerm[10,10]'
-        >>> S = qutip.to_super(a)
-        >>> summarize_qobj(S)
-        '[[10,10],[10,10]]'
-    """
-    if ctrl_counter is None:
-        ctrl_counter = _CTRL_COUNTER
-    if isinstance(obj, list):
-        return _summarize_qobj_nested_list(obj, ctrl_counter)
-    elif callable(obj) and not isinstance(obj, qutip.Qobj):
-        return 'u%d(t)' % ctrl_counter(obj)
-    elif isinstance(obj, np.ndarray):
-        return 'u%d[%s]' % (ctrl_counter(obj), obj.dtype.name)
-    elif isinstance(obj, _ControlPlaceholder):
-        return str(obj)
-    elif isinstance(obj, (float, complex)):
-        return str(obj)
-    elif not isinstance(obj, qutip.Qobj):
-        raise TypeError("obj must be a Qobj, not %s" % obj.__class__.__name__)
-    if obj.type == 'ket':
-        dims = "⊗".join(["%d" % d for d in obj.dims[0]])
-        return '|(%s)⟩' % dims
-    elif obj.type == 'bra':
-        dims = "⊗".join(["%d" % d for d in obj.dims[1]])
-        return '⟨(%s)|' % dims
-    elif obj.type == 'oper':
-        dim1 = "⊗".join(["%d" % d for d in obj.dims[0]])
-        dim2 = "⊗".join(["%d" % d for d in obj.dims[1]])
-        if obj.isherm:
-            return 'Herm[%s,%s]' % (dim1, dim2)
-        else:
-            return 'NonHerm[%s,%s]' % (dim1, dim2)
-    elif obj.type == 'super':
-        dims = []
-        for dim in obj.dims:
-            dim1 = "⊗".join(["%d" % d for d in dim[0]])
-            dim2 = "⊗".join(["%d" % d for d in dim[1]])
-            dims.append('[%s,%s]' % (dim1, dim2))
-        return '[' + ",".join(dims) + ']'
-    else:
-        raise NotImplementedError("Unknown qobj type: %s" % obj.type)
-
-
-def _summarize_qobj_nested_list(lst, ctrl_counter):
-    """Summarize a nested-list time-dependent quantum object"""
-    return (
-        '['
-        + ", ".join([summarize_qobj(obj, ctrl_counter) for obj in lst])
-        + ']'
     )
 
 
@@ -937,3 +842,119 @@ def liouvillian(H, c_ops):
             "H must either be a Qobj, or a time-dependent Hamiltonian in "
             "nested-list format"
         )
+
+
+def summarize_qobj(obj, ctrl_counter=None):
+    """Summarize a quantum object
+
+    A counter created by :func:`CtrlCounter` may be passed to distinguish
+    control fields. If None, an automatic internal counter will be used.
+
+    Example:
+
+        >>> ket = qutip.ket([1, 0, 1])
+        >>> summarize_qobj(ket)
+        '|(2⊗2⊗2)⟩'
+        >>> bra = ket.dag()
+        >>> summarize_qobj(bra)
+        '⟨(2⊗2⊗2)|'
+        >>> rho = ket * bra
+        >>> summarize_qobj(rho)
+        'Herm[2⊗2⊗2,2⊗2⊗2]'
+        >>> a = qutip.create(10)
+        >>> summarize_qobj(a)
+        'NonHerm[10,10]'
+        >>> S = qutip.to_super(a)
+        >>> summarize_qobj(S)
+        '[[10,10],[10,10]]'
+    """
+    if ctrl_counter is None:
+        ctrl_counter = _CTRL_COUNTER
+    if isinstance(obj, list):
+        return _summarize_qobj_nested_list(obj, ctrl_counter)
+    elif callable(obj) and not isinstance(obj, qutip.Qobj):
+        return 'u%d(t)' % ctrl_counter(obj)
+    elif isinstance(obj, np.ndarray):
+        return 'u%d[%s]' % (ctrl_counter(obj), obj.dtype.name)
+    elif isinstance(obj, _ControlPlaceholder):
+        return str(obj)
+    elif isinstance(obj, (float, complex)):
+        return str(obj)
+    elif not isinstance(obj, qutip.Qobj):
+        raise TypeError("obj must be a Qobj, not %s" % obj.__class__.__name__)
+    if obj.type == 'ket':
+        dims = "⊗".join(["%d" % d for d in obj.dims[0]])
+        return '|(%s)⟩' % dims
+    elif obj.type == 'bra':
+        dims = "⊗".join(["%d" % d for d in obj.dims[1]])
+        return '⟨(%s)|' % dims
+    elif obj.type == 'oper':
+        dim1 = "⊗".join(["%d" % d for d in obj.dims[0]])
+        dim2 = "⊗".join(["%d" % d for d in obj.dims[1]])
+        if obj.isherm:
+            return 'Herm[%s,%s]' % (dim1, dim2)
+        else:
+            return 'NonHerm[%s,%s]' % (dim1, dim2)
+    elif obj.type == 'super':
+        dims = []
+        for dim in obj.dims:
+            dim1 = "⊗".join(["%d" % d for d in dim[0]])
+            dim2 = "⊗".join(["%d" % d for d in dim[1]])
+            dims.append('[%s,%s]' % (dim1, dim2))
+        return '[' + ",".join(dims) + ']'
+    else:
+        raise NotImplementedError("Unknown qobj type: %s" % obj.type)
+
+
+def _summarize_qobj_nested_list(lst, ctrl_counter):
+    """Summarize a nested-list time-dependent quantum object"""
+    return (
+        '['
+        + ", ".join([summarize_qobj(obj, ctrl_counter) for obj in lst])
+        + ']'
+    )
+
+
+def CtrlCounter():
+    """Constructor for a counter of controls.
+
+    Returns a callable that returns a unique integer (starting at 1) for every
+    distinct control that is passed to it. This is intended for use with
+    :func:`summarize_qobj`.
+
+    Example:
+
+        >>> ctrl_counter = CtrlCounter()
+        >>> ctrl1 = np.zeros(10)
+        >>> ctrl_counter(ctrl1)
+        1
+        >>> ctrl2 = np.zeros(10)
+        >>> assert ctrl2 is not ctrl1
+        >>> ctrl_counter(ctrl2)
+        2
+        >>> ctrl_counter(ctrl1)
+        1
+        >>> ctrl3 = lambda t, args: 0.0
+        >>> ctrl_counter(ctrl3)
+        3
+    """
+    # This will probably be used very rarely, if ever, but there's a *chance*
+    # that a user might want to pass a specific counter to summarize_qobj, so
+    # this still has to be public.
+
+    counter = 0
+    registry = {}
+
+    def ctrl_counter(ctrl):
+        nonlocal counter
+        if isinstance(ctrl, np.ndarray):
+            ctrl = id(ctrl)
+        if ctrl not in registry:
+            counter += 1
+            registry[ctrl] = counter
+        return registry[ctrl]
+
+    return ctrl_counter
+
+
+_CTRL_COUNTER = CtrlCounter()  #: internal counter for controls

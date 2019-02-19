@@ -7,6 +7,8 @@
 \newcommand{\Ket}[1]{\left\vert #1 \right\rangle}
 \newcommand{\Op}[1]{\ensuremath{\boldsymbol{\mathsf{\hat{#1}}}}}
 
+\renewcommand{\familydefault}{\sfdefault}
+
 \usepackage{tikz}
 
 \usepackage[psfixbb,graphics,tightpage,active]{preview}
@@ -25,10 +27,12 @@
 
 %%% propagation boxes
 % lower
-\draw[color=gray!20, fill=gray!20,rounded corners=10] (2,2.6) rectangle (16,4.40);
+\draw[color=gray!20, fill=gray!20,rounded corners=10] (2,2.1) rectangle (16,4.40);
+\node[align=center] at (9, 2.3){\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {2}}} forward-propagation with updated control};
 %\draw[color=gray!20, fill=gray!20,rounded corners=10] (14,2.8) rectangle (16,4.75);
 % upper
-\draw[color=gray!20, fill=gray!20,rounded corners=10] (2,5.60) rectangle (16,7.4);
+\draw[color=gray!20, fill=gray!20,rounded corners=10] (2,5.60) rectangle (16,7.9);
+  \node[align=center] at (9, 7.7){\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {1}}} backward-propagation and storage with guess control};
 %\draw[color=gray!20, fill=gray!20,rounded corners=10] (14,5.25) rectangle (16,7.2);
 
 %%% forward propagation
@@ -36,14 +40,14 @@
 \node (psifw1) at (3,4) {%
   \begin{tikzpicture}
     \draw (0,0)--(0.5,-0.25)--(1,0);
-    \node at (0.5,0.25) {$\Psi_k(0)$};
+    \node at (0.5,0.25) {$\phi_k(0)$};
   \end{tikzpicture}
 };
 
 \node (psifw2) at (6,4) {%
   \begin{tikzpicture}
     \draw (0,0)--(0.5,-0.25)--(1,0);
-    \node at (0.5,0.25) {$\Psi_k(t_1)$};
+    \node at (0.5,0.25) {$\phi_k(t_1)$};
   \end{tikzpicture}
 };
 \draw[->] (psifw1) .. controls +(1,-1) and +(-1,-1) .. node(epsn1)[fill=gray!20]{$\epsilon^{(i+1)}_1$} (psifw2);
@@ -51,7 +55,7 @@
 \node (psifw3) at (9,4) {%
   \begin{tikzpicture}
     \draw[color=gray!20] (0,0)--(0.5,-0.25)--(1,0);
-    \node[color=gray!20] at (0.5,0.25) {$\Psi_k(t)$};
+    \node[color=gray!20] at (0.5,0.25) {$\phi_k(t)$};
     \node at (0.5,0.25) {\dots};
   \end{tikzpicture}
 };
@@ -60,7 +64,7 @@
 \node (psifw4) at (12,4) {%
   \begin{tikzpicture}
     \draw (0,0)--(0.5,-0.25)--(1,0);
-    \node at (0.5,0.25) {$\Psi_k(t_{nt-1})$};
+    \node at (0.5,0.25) {$\phi_k(t_{nt-1})$};
   \end{tikzpicture}
 };
 \draw[->] (psifw3) .. controls +(1,-1) and +(-1,-1) .. node(epsn3)[fill=gray!20]{$\epsilon^{(i+1)}_{nt-2}$} (psifw4);
@@ -68,7 +72,7 @@
 \node (psifw5) at (15,4) {%
   \begin{tikzpicture}
     %\draw[color=gray!20](0,0)--(0.5,-0.25)--(1,0);
-    \node at (0.5,0.25) {$\Psi_k(T)$};
+    \node at (0.5,0.25) {$\phi_k(T)$};
   \end{tikzpicture}
 };
 \draw[->] (psifw4) .. controls +(1,-1) and +(-1,-1) .. node(epsn4)[fill=gray!20]{$\epsilon^{(i+1)}_{nt-1}$} (psifw5);
@@ -119,7 +123,7 @@
 \node (mu1) at (3,5) {%
   \begin{tikzpicture}
     \draw (-0.5,0.4)--(0.5,0.4);
-    \node at (0,0) {$\frac{\partial \Op{H}}{\partial \epsilon}$};
+    \node at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
     \draw (-0.5,-0.4)--(0.5,-0.4);
   \end{tikzpicture}
 };
@@ -128,7 +132,7 @@
 \node (mu2) at (6,5) {%
   \begin{tikzpicture}
     \draw (-0.5,0.4)--(0.5,0.4);
-    \node at (0,0) {$\frac{\partial \Op{H}}{\partial \epsilon}$};
+    \node at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
     \draw (-0.5,-0.4)--(0.5,-0.4);
   \end{tikzpicture}
 };
@@ -137,7 +141,7 @@
 \node (mu3) at (9,5) {%
   \begin{tikzpicture}
     \draw[color=white] (-0.5,0.4)--(0.5,0.4);
-    \node[color=white] at (0,0) {$\frac{\partial \Op{H}}{\partial \epsilon}$};
+    \node[color=white] at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
     \node at (0,0) {\dots};
     \draw[color=white] (-0.5,-0.4)--(0.5,-0.4);
   \end{tikzpicture}
@@ -147,7 +151,7 @@
 \node (mu4) at (12,5) {%
   \begin{tikzpicture}
     \draw (-0.5,0.4)--(0.5,0.4);
-    \node at (0,0) {$\frac{\partial \Op{H}}{\partial \epsilon}$};
+    \node at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
     \draw (-0.5,-0.4)--(0.5,-0.4);
   \end{tikzpicture}
 };

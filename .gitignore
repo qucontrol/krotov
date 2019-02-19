@@ -107,5 +107,9 @@ ENV/
 # ctags
 tags
 
+# Latex
+.aux
+
 # Extra
-/docs/readme.rst
+/docs/_README.rst
+

@@ -1,4 +1,54 @@
-"""Functionals and `chi_constructor` routines"""
+r"""Functionals and `chi_constructor` routines.
+
+Any `chi_constructor` routine passed to :func:`.optimize_pulses` must take the
+following keyword-arguments:
+
+    * `fw_states_T` (:class:`list` of :class:`~qutip.Qobj`): The list of
+      states resulting from the forward-propagation of each
+      :attr:`.Objective.initial_state` under the guess pulses of the current
+      iteration (the optimized pulses of the previous iteration)
+
+    * `objectives` (:class:`list` of :class:`.Objective`): A list of the
+      optimization objectives.
+
+    * `tau_vals` (:class:`list` of :class:`complex` or :obj:`None`): The
+      overlaps of the `fw_states_T` and the corresponding
+      :attr:`.Objective.target`, assuming :attr:`.Objective.target` contains a
+      quantum state. If the objective defines no target state, a list of Nones
+
+Krotov's method does not have an explicit dependence on the optimization
+functional. It only enters through the `chi_constructor` which calculates the
+boundary condition for the backward propagation, that is, the states
+
+
+.. math::
+
+   \Ket{\chi_k^{(i)}(T)}
+      = - \left.\frac{\partial J_T}
+        {\partial \Bra{\phi_k}}
+        \right\vert_{\phi^{(i)}(T)}
+
+for functionals defined in Hilbert space, or
+
+.. math::
+
+   \Op{\chi}_k^{(i)}(T)
+      = - \left.\frac{\partial J_T}
+        {\partial \langle\!\langle\Op{\rho}_k\vert}
+        \right\vert_{\rho^{(i)}(T)}
+
+in Liouville space, using the abstract
+Hilbert-Schmidt notation :math:`\langle\!\langle a \vert b \rangle\!\rangle
+\equiv \tr[a^\dagger b]`.
+Passing a specific `chi_constructor` results in the minimization of the final
+time functional from which that `chi_constructor` was derived.
+
+The functions in this module that evaluate functionals are intended for use
+inside a function that is passed as an `info_hook` to :func:`.optimize_pulses`.
+Thus, they calculate $J_T$ from the same keyword arguments as the `info_hook`.
+The values for $J_T$ may be used in a convergence analysis, see
+:mod:`krotov.convergence`.
+"""
 import qutip
 import numpy as np
 
@@ -6,6 +56,12 @@ from .second_order import _overlap
 
 __all__ = [
     'f_tau',
+    'F_ss',
+    'J_T_ss',
+    'chis_ss',
+    'F_sm',
+    'J_T_sm',
+    'chis_sm',
     'F_re',
     'J_T_re',
     'chis_re',
@@ -17,43 +73,49 @@ __all__ = [
 ]
 
 
-def f_tau(states_T, objectives, tau_vals=None):
+def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Average of the complex overlaps with the target states
 
     That is,
 
     .. math::
 
-        f_{\tau} = \frac{1}{N} \sum_{i=1}^{N} w_i \tau_i
+        f_{\tau} = \frac{1}{N} \sum_{k=1}^{N} w_k \tau_k
 
-    where $\tau_i$ are the elements of `tau_vals`, assumed to be
+    where $\tau_k$ are the elements of `tau_vals`, assumed to be
 
     .. math::
 
-        \tau_i = \Braket{\Psi_i(T)}{\Psi_i^{\tgt}},
+        \tau_k = \Braket{\Psi_k(T)}{\Psi_k^{\tgt}},
 
     in Hilbert space, or
 
     .. math::
 
-        \tau_i = \tr\left[\Op{\rho}_i(T)\Op{\rho}_i^{\tgt}\right]
+        \tau_k = \tr\left[\Op{\rho}_k(T)\Op{\rho}_k^{\tgt}\right]
 
-    in Liouville space, where $\ket{\Psi_i}$ or $\Op{\rho}_i$ are the elements
-    of `states_T`, and $\ket{\Psi_i^{\tgt}}$ or $\Op{\rho}^{\tgt}$ are the
+    in Liouville space, where $\ket{\Psi_k}$ or $\Op{\rho}_k$ are the elements
+    of `fw_states_T`, and $\ket{\Psi_k^{\tgt}}$ or $\Op{\rho}^{\tgt}$ are the
     target states from the :attr:`~.Objective.target` attribute of the
     objectives. If `tau_vals` are None, they will be calculated internally.
 
-    $N$ is the number of objectives, and $w_i$ is an optional weight for each
+    $N$ is the number of objectives, and $w_k$ is an optional weight for each
     objective. For any objective that has a (custom) `weight` attribute, the
-    $w_i$ is taken from that attribute; otherwise, $w_i = 1$. The weights, if
+    $w_k$ is taken from that attribute; otherwise, $w_k = 1$. The weights, if
     present, are not automatically normalized, they are assumed to have values
     such that the resulting $f_{\tau}$ lies in the unit circle of the complex
-    plane. Usually, this means that the weights should sum to $N$.
+    plane. Usually, this means that the weights should sum to $N$. The
+    exception would be for mixed target states, where the weights should
+    compensate for the non-unit purity. The problem is circumvented by using
+    :func:`J_T_hs` for mixed target states.
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
     """
     if tau_vals is None:
         tau_vals = [
             _overlap(psi, obj.target)
-            for (psi, obj) in zip(states_T, objectives)
+            for (psi, obj) in zip(fw_states_T, objectives)
         ]
     res = 0j
     for (obj, τ) in zip(objectives, tau_vals):
@@ -64,44 +126,173 @@ def f_tau(states_T, objectives, tau_vals=None):
     return res / len(objectives)
 
 
-def F_re(states_T, objectives, tau_vals=None):
+def F_ss(fw_states_T, objectives, tau_vals=None, **kwargs):
+    r"""State-to-state phase-insensitive fidelity
+
+    .. math::
+
+        F_{\text{ss}} = \frac{1}{N} \sum_{k=1}^{N} w_k \Abs{\tau_k}^2
+        \quad\in [0, 1]
+
+    with $N$, $w_k$ and $\tau_k$ as in :func:`f_tau`.
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
+    """
+    if tau_vals is None:
+        # get the absolute square, analogously to the f_tau function above
+        tau_vals = [
+            abs(_overlap(psi, obj.target)) ** 2
+            for (psi, obj) in zip(fw_states_T, objectives)
+        ]
+    else:
+        tau_vals = [abs(tau) ** 2 for tau in tau_vals]
+    F = f_tau(fw_states_T, objectives, tau_vals)
+    assert abs(F.imag) < 1e-10, F.imag
+    return f_tau(fw_states_T, objectives, tau_vals).real
+
+
+def J_T_ss(fw_states_T, objectives, tau_vals=None, **kwargs):
+    r"""State-to-state phase-insensitive functional  $J_{T,\text{ss}}$
+
+    .. math::
+
+        J_{T,\text{ss}} = 1 - F_{\text{ss}} \quad\in [0, 1].
+
+    All arguments are passed to :func:`F_ss`.
+    """
+    return 1 - F_ss(fw_states_T, objectives, tau_vals)
+
+
+def chis_ss(fw_states_T, objectives, tau_vals):
+    r"""States $\ket{\chi_k}$ for functional $J_{T,\text{ss}}$
+
+    .. math::
+
+        \Ket{\chi_k}
+        = -\frac{\partial J_{T,\text{ss}}}{\partial \bra{\Psi_k(T)}}
+        = \frac{1}{N} w_k \tau_k \Ket{\Psi^{\tgt}_k}
+
+    with $\tau_k$ and $w_k$ as defined in :func:`f_tau`.
+    """
+    N = len(objectives)
+    res = []
+    for (obj, τ) in zip(objectives, tau_vals):
+        # `obj.target` is assumed to be the "target state" (gate applied to
+        # `initial_state`)
+        if hasattr(obj, 'weight'):
+            res.append((τ / N) * obj.weight * obj.target)
+        else:
+            res.append((τ / N) * obj.target)
+    return res
+
+
+def F_sm(fw_states_T, objectives, tau_vals=None, **kwargs):
+    r"""Square-modulus fidelity
+
+    .. math::
+
+        F_{\text{sm}} = \Abs{f_{\tau}}^2 \quad\in [0, 1].
+
+    All arguments are passed to :func:`f_tau` to evaluate $f_{\tau}$.
+    """
+    return abs(f_tau(fw_states_T, objectives, tau_vals)) ** 2
+
+
+def J_T_sm(fw_states_T, objectives, tau_vals=None, **kwargs):
+    r"""Square-modulus functional  $J_{T,\text{sm}}$
+
+    .. math::
+
+        J_{T,\text{sm}} = 1 - F_{\text{sm}} \quad\in [0, 1]
+
+    All arguments are passed to :func:`f_tau` while evaluating $F_{\text{sm}}$
+    in :func:`F_sm`.
+    """
+    return 1 - F_sm(fw_states_T, objectives, tau_vals)
+
+
+def chis_sm(fw_states_T, objectives, tau_vals):
+    r"""States $\ket{\chi_k}$ for functional $J_{T,\text{sm}}$
+
+    .. math::
+
+        \Ket{\chi_k}
+        = -\frac{\partial J_{T,\text{sm}}}{\partial \bra{\Psi_k(T)}}
+        = \frac{1}{N^2} w_k \sum_{j}^{N} w_j\tau_j\Ket{\Psi^{\tgt}_k}
+
+    with optional weights $w_k$, cf. :func:`f_tau` (default: :math:`w_k=1`). If
+    given, the weights should generally sum to $N$.
+    """
+    sum_of_w_tau = 0
+    for (obj, τ) in zip(objectives, tau_vals):
+        if hasattr(obj, 'weight'):
+            sum_of_w_tau += obj.weight * τ
+        else:
+            sum_of_w_tau += τ
+
+    c = 1.0 / (len(objectives)) ** 2
+    res = []
+    for obj in objectives:
+        # `obj.target` is assumed to be the "target state" (gate applied to
+        # `initial_state`)
+        if hasattr(obj, 'weight'):
+            res.append(c * obj.weight * obj.target * sum_of_w_tau)
+        else:
+            res.append(c * obj.target * sum_of_w_tau)
+    return res
+
+
+def F_re(fw_states_T, objectives, tau_vals=None, **kwargs):
     r"""Real-part fidelity
 
     .. math::
 
-        F_{\text{re}} = \Re[f_{\tau}] \quad\in [-1, 1]
+        F_{\text{re}} = \Re[f_{\tau}] \quad\in \begin{cases}
+            [-1, 1] & \text{in Hilbert space} \\
+            [0, 1] & \text{in Liouville space.}
+        \end{cases}
+
+    All arguments are passed to :func:`f_tau` to evaluate $f_{\tau}$.
     """
-    return f_tau(states_T, objectives, tau_vals).real
+    return f_tau(fw_states_T, objectives, tau_vals).real
 
 
-def J_T_re(states_T, objectives, tau_vals=None):
-    r"""Real-part functional
+def J_T_re(fw_states_T, objectives, tau_vals=None, **kwargs):
+    r"""Real-part functional $J_{T,\text{re}}$
 
     .. math::
 
-        J_{T,\text{re}} = 1 - F_{\text{re}} \quad\in [0, 2]
+        J_{T,\text{re}} = 1 - F_{\text{re}} \quad\in \begin{cases}
+            [0, 2] & \text{in Hilbert space} \\
+            [0, 1] & \text{in Liouville space.}
+        \end{cases}
+
+    All arguments are passed to :func:`f_tau` while evaluating $F_{\text{re}}$
+    in :func:`F_re`.
 
     Note:
-        If the `states_T` or the target states are mixed states, it is
+        If the `fw_states_T` or the target states are mixed states, it is
         preferable to use :func:`J_T_hs`, as $J_{T,\text{re}}$ may take
         negative values for mixed states.
     """
-    return 1 - F_re(states_T, objectives, tau_vals)
+    return 1 - F_re(fw_states_T, objectives, tau_vals)
 
 
-def chis_re(states_T, objectives, tau_vals):
-    r"""States $\ket{\chi}$ for functional $J_{T,\text{re}}$
+def chis_re(fw_states_T, objectives, tau_vals):
+    r"""States $\ket{\chi_k}$ for functional $J_{T,\text{re}}$
 
     .. math::
 
-        \Ket{\chi_i}
-        = -\frac{\partial J_{T,\text{re}}}{\partial \bra{\Psi_i(T)}}
-        = \frac{1}{2N} w_i \Ket{\Psi^{\tgt}_i}
+        \Ket{\chi_k}
+        = -\frac{\partial J_{T,\text{re}}}{\partial \bra{\Psi_k(T)}}
+        = \frac{1}{2N} w_k \Ket{\Psi^{\tgt}_k}
 
-    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`). If
+    with optional weights $w_k$, cf. :func:`f_tau` (default: :math:`w_k=1`). If
     given, the weights should generally sum to $N$.
 
-    Note: `tau_vals` are ignored.
+    Note: `tau_vals` are ignored, but are present to satisfy the requirments of
+    the `chi_constructor` interface.
     """
     c = 1.0 / (2 * len(objectives))
     res = []
@@ -115,55 +306,61 @@ def chis_re(states_T, objectives, tau_vals):
     return res
 
 
-def J_T_hs(states_T, objectives, tau_vals=None):
-    r"""Hilbert-Schmidt distance measure functional
+def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
+    r"""Hilbert-Schmidt distance measure functional $J_{T,\text{hs}}$
 
     .. math::
 
         J_{T,\text{hs}}
-            = \frac{1}{2N} \sum_{i=1}^{N}
-                w_i \Norm{\Op{\rho}_i(T) - \Op{\rho}_i^{\tgt}}_{\text{hs}}^2
-        \quad \in [0, 2]
+            = \frac{1}{2N} \sum_{k=1}^{N}
+                w_k \Norm{\Op{\rho}_k(T) - \Op{\rho}_k^{\tgt}}_{\text{hs}}^2
+        \quad \in \begin{cases}
+            [0, 2] & \text{in Hilbert space} \\
+            [0, 1] & \text{in Liouville space}
+        \end{cases}
 
     in Liouville space (using the Hilbert-Schmidt norm), or equivalently with
-    $\ket{\Psi_i(T)}$ and $\ket{\Psi_i^{tgt}}$ in Hilbert space. The functional
+    $\ket{\Psi_k(T)}$ and $\ket{\Psi_k^{tgt}}$ in Hilbert space. The functional
     is evaluated as
 
     .. math::
 
         J_{T,\text{hs}}
-            = \frac{1}{2N} \sum_{i=1}^{N} w_i \left(
-                \Norm{\Op{\rho}_i(T)}_{\text{hs}}^2
+            = \frac{1}{2N} \sum_{k=1}^{N} w_k \left(
+                \Norm{\Op{\rho}_k(T)}_{\text{hs}}^2
                 + \Norm{\Op{\rho}^{\tgt}}_{\text{hs}}^2
-                - 2 \Re[\tau_i]
+                - 2 \Re[\tau_k]
             \right)
 
-    where the $\Op{\rho}_i$ are the elements of `states_T`,
-    the $\Op{\rho}_i^{\tgt}$ are the target states from the
+    where the $\Op{\rho}_k$ are the elements of `fw_states_T`,
+    the $\Op{\rho}_k^{\tgt}$ are the target states from the
     :attr:`~.Objective.target` attribute of the objectives,
-    and the $\tau_i$ are the elements of `tau_vals` (which
+    and the $\tau_k$ are the elements of `tau_vals` (which
     will be calculated internally if passed as None).
 
-    The $w_i$ are optional weights, cf. :func:`f_tau`. If
+    The $w_k$ are optional weights, cf. :func:`f_tau`. If
     given, the weights should generally sum to $N$.
+
+    The `kwargs` are ignored, allowing the function to be used in an
+    `info_hook`.
 
 
     Note:
         For pure states (or Hilbert space states), $J_{T,\text{hs}}$ is
         equivalent to $J_{T,\text{re}}$, cf. :func:`J_T_re`. However, the
-        backward-propagated states $\chi_i$ obtained from the two functionals
+        backward-propagated states $\chi_k$ obtained from the two functionals
         (:func:`chis_re` and :func:`chis_hs`) are *not* equivalent.
     """
     if tau_vals is None:
         tau_vals = [
             _overlap(psi, obj.target)
-            for (psi, obj) in zip(states_T, objectives)
+            for (psi, obj) in zip(fw_states_T, objectives)
         ]
     res = 0.0
     hs = 'l2'  # qutip's name for HS-norm for state vectors
-    if states_T[0].type == 'oper':
+    if fw_states_T[0].type == 'oper':
         hs = 'fro'  # qutip's name for HS-norm for density matrices
-    for (obj, ρ, τ) in zip(objectives, states_T, tau_vals):
+    for (obj, ρ, τ) in zip(objectives, fw_states_T, tau_vals):
         ρ_tgt = obj.target
         if hasattr(obj, 'weight'):
             res += obj.weight * (
@@ -174,18 +371,18 @@ def J_T_hs(states_T, objectives, tau_vals=None):
     return res / (2 * len(objectives))
 
 
-def chis_hs(states_T, objectives, tau_vals):
-    r"""States $\Op{\chi}$ for functional $J_{T,\text{hs}}$
+def chis_hs(fw_states_T, objectives, tau_vals):
+    r"""States $\Op{\chi}_k$ for functional $J_{T,\text{hs}}$
 
     .. math::
 
-        \Op{\chi}_i
+        \Op{\chi}_k
         = -\frac{\partial J_{T,\text{sm}}}
-                {\partial \langle\!\langle \Op{\rho}_i(T)\vert}
-        = \frac{1}{2N} w_i
-          \left(\Op{\rho}^{\tgt}_i - \Op{\rho}_i(T)\right)
+                {\partial \langle\!\langle \Op{\rho}_k(T)\vert}
+        = \frac{1}{2N} w_k
+          \left(\Op{\rho}^{\tgt}_k - \Op{\rho}_k(T)\right)
 
-    with optional weights $w_i$, cf. :func:`f_tau` (default: :math:`w_i=1`).
+    with optional weights $w_k$, cf. :func:`f_tau` (default: :math:`w_k=1`).
 
     This is derived from $J_{T,\text{hs}}$ rewritten in the abstract
     Hilbert-Schmidt notation :math:`\langle\!\langle a \vert b \rangle\!\rangle
@@ -193,28 +390,29 @@ def chis_hs(states_T, objectives, tau_vals):
 
     .. math::
 
-        J_{T,\text{hs}} = \frac{-1}{2N} \sum_{i=1}^{N}  w_i \big(
+        J_{T,\text{hs}} = \frac{-1}{2N} \sum_{k=1}^{N}  w_k \big(
             \underbrace{
-            \langle\!\langle \Op{\rho}_i(T) \vert
-                \Op{\rho}_i^{\tgt} \rangle\!\rangle
-            + \langle\!\langle \Op{\rho}_i^{\tgt}\vert
-                 \Op{\rho}_i(T) \rangle\!\rangle
-            }_{=2\Re[\tau_i]}
+            \langle\!\langle \Op{\rho}_k(T) \vert
+                \Op{\rho}_k^{\tgt} \rangle\!\rangle
+            + \langle\!\langle \Op{\rho}_k^{\tgt}\vert
+                 \Op{\rho}_k(T) \rangle\!\rangle
+            }_{=2\Re[\tau_k]}
             - \underbrace{
-              \langle\!\langle \Op{\rho}_i(T) \vert
-                \Op{\rho}_i(T) \rangle\!\rangle
-            }_{=\Norm{\Op{\rho}_i(T)}_{\text{hs}}^2}
+              \langle\!\langle \Op{\rho}_k(T) \vert
+                \Op{\rho}_k(T) \rangle\!\rangle
+            }_{=\Norm{\Op{\rho}_k(T)}_{\text{hs}}^2}
             - \underbrace{
-              \langle\!\langle \Op{\rho}_i^{\tgt} \vert
-                \Op{\rho}_i^{\tgt} \rangle\!\rangle
+              \langle\!\langle \Op{\rho}_k^{\tgt} \vert
+                \Op{\rho}_k^{\tgt} \rangle\!\rangle
             }_{=\Norm{\Op{\rho}^{\tgt}}_{\text{hs}}^2}
         \big).
 
-    Note that `tau_vals` is ignored.
+    Note: `tau_vals` are ignored, but are present to satisfy the requirments of
+    the `chi_constructor` interface.
     """
     c = 1.0 / (2 * len(objectives))
     res = []
-    for (obj, ρ) in zip(objectives, states_T):
+    for (obj, ρ) in zip(objectives, fw_states_T):
         ρ_tgt = obj.target
         if hasattr(obj, 'weight'):
             w = obj.weight
@@ -224,7 +422,7 @@ def chis_hs(states_T, objectives, tau_vals):
     return res
 
 
-def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
+def F_avg(fw_states_T, basis_states, gate, mapped_basis_states=None):
     r"""Average gate fidelity
 
     .. math::
@@ -257,7 +455,7 @@ def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
 
     where :math:`\ket{\phi_i}` is the :math:`i`'th element of `basis_states`,
     and :math:`\Op{\rho}_{ij}` is the :math:`(i-1) N + j`'th element of
-    `states_T`, that is, :math:`\Op{\rho}_{ij} =
+    `fw_states_T`, that is, :math:`\Op{\rho}_{ij} =
     \DynMap[\ketbra{\phi_i}{\phi_j}]`, with :math:`N` the dimension of the
     Hilbert space.
 
@@ -271,10 +469,10 @@ def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
             \right),
 
     where $\Op{U}$ the gate that maps `basis_states` to the result of a forward
-    propagation of those basis states, stored in `states_T`.
+    propagation of those basis states, stored in `fw_states_T`.
 
     Args:
-        states_T (list[qutip.Qobj]): The forward propagated states. For
+        fw_states_T (list[qutip.Qobj]): The forward propagated states. For
             dissipative dynamics, this must be the forward propagation of the
             full basis of Liouville space, that is, all $N^2$ dyadic
             combinations of the Hilbert space logical basis states.
@@ -289,74 +487,77 @@ def F_avg(states_T, basis_states, gate, mapped_basis_states=None):
             to pass pre-calculated `mapped_basis_states` when evaluating
             $F_{\text{avg}}$ repeatedly for the same target.
     """
+    # F_avg is not something you can optimize directly: Nobody has calculated
+    # ∂(1-F_avg)/∂⟨ϕ|. This is why there is no J_T_avg, and why F_avg does not
+    # follow the info_hook interface.
     N = len(basis_states)
     if gate.shape != (N, N):
         raise ValueError(
             "Shape of gate is incompatible with number of basis states"
         )
-    if states_T[0].type == 'oper':
-        if len(states_T) != N * N:
+    if fw_states_T[0].type == 'oper':
+        if len(fw_states_T) != N * N:
             raise ValueError(
                 "Evaluating F_avg for density matrices requires %d states "
                 "(forward-propagation of all dyadic combinations of "
-                "%d basis states), not %d" % (N * N, N, len(states_T))
+                "%d basis states), not %d" % (N * N, N, len(fw_states_T))
             )
-        return _F_avg_rho(states_T, basis_states, gate, mapped_basis_states)
-    elif states_T[0].type == 'ket':
-        if len(states_T) != N:
+        return _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states)
+    elif fw_states_T[0].type == 'ket':
+        if len(fw_states_T) != N:
             raise ValueError(
                 "Evaluating F_avg for hilbert space states requires %d states "
                 "(forward-propagation of all basis states), not %d"
-                % (N, len(states_T))
+                % (N, len(fw_states_T))
             )
-        return _F_avg_psi(states_T, basis_states, gate)
+        return _F_avg_psi(fw_states_T, basis_states, gate)
     else:
-        raise ValueError("Invalid type of state: %s" % states_T[0].type)
+        raise ValueError("Invalid type of state: %s" % fw_states_T[0].type)
 
 
-def _F_avg_rho(states_T, basis_states, gate, mapped_basis_states):
+def _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states):
     """Implementation of F_avg in Liouville space"""
     if mapped_basis_states is None:
         mapped_basis_states = mapped_basis(gate, basis_states)
     N = len(basis_states)
     F = 0
     for j in range(N):
-        ρ_jj = states_T[j * N + j]
+        ρ_jj = fw_states_T[j * N + j]  # zero-based indices!
         Oϕ_j = mapped_basis_states[j]
         for i in range(N):
-            ρ_ij = states_T[i * N + j]
+            ρ_ij = fw_states_T[i * N + j]  # zero-based indices!
             Oϕ_i = mapped_basis_states[i]
             F += _overlap(Oϕ_i, ρ_ij(Oϕ_j)) + _overlap(Oϕ_i, ρ_jj(Oϕ_i))
     assert abs(F.imag) < 1e-10, F.imag
     return F.real / (N * (N + 1))
 
 
-def _F_avg_psi(states_T, basis_states, O):
+def _F_avg_psi(fw_states_T, basis_states, O):
     """Implementation of F_avg in Hilbert space"""
     N = len(basis_states)
-    U = gate(basis_states, states_T)
+    U = gate(basis_states, fw_states_T)
     F = abs((O.dag() * U).tr()) ** 2 + (O.dag() * U * U.dag() * O).tr()
     assert abs(F.imag) < 1e-10, F.imag
     return F.real / (N * (N + 1))
 
 
-def gate(basis_states, states_T):
-    """Gate that maps `basis_states` to `states_T`
+def gate(basis_states, fw_states_T):
+    """Gate that maps `basis_states` to `fw_states_T`
 
     Example:
 
         >>> from qutip import ket
         >>> basis = [ket(nums) for nums in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-        >>> states_T = mapped_basis(qutip.gates.cnot(), basis)
-        >>> U = gate(basis, states_T)
+        >>> fw_states_T = mapped_basis(qutip.gates.cnot(), basis)
+        >>> U = gate(basis, fw_states_T)
         >>> assert (U - qutip.gates.cnot()).norm() < 1e-15
     """
     N = len(basis_states)
     U = np.zeros((N, N), dtype=np.complex128)
     for j in range(N):
         for i in range(N):
-            U[i, j] = basis_states[i].overlap(states_T[j])
-    dims = [basis_states[0].dims[0], states_T[0].dims[0]]
+            U[i, j] = basis_states[i].overlap(fw_states_T[j])
+    dims = [basis_states[0].dims[0], fw_states_T[0].dims[0]]
     return qutip.Qobj(U, dims=dims)
 
 

@@ -13,7 +13,7 @@ __all__ = [
 def qutip_callback(func, **kwargs):
     """Convert `func` into the correct form of a QuTiP time-dependent control
 
-    QuTiP requires that "callback" functins that are used to express
+    QuTiP requires that "callback" functions that are used to express
     time-dependent controls take a parameter `t` and `args`. This function
     takes a function `func` that takes `t` as its first parameter and an
     arbitrary number of other parameters. The given `kwargs` set values for
