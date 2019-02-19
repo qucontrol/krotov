@@ -5,9 +5,9 @@ How to optimize towards a quantum gate
 --------------------------------------
 
 To optimize towards a quantum gate :math:`\Op{O}` in a *closed* quantum system,
-set one :class:`.Objective` for the states in the logical basis, with the basis
-state :math:`\ket{\Psi_k}` as the :attr:`~.Objective.initial_state` and
-:math:`\Op{O} \ket{\Psi_k}` as the :attr:`~.Objective.target`.
+set one :class:`.Objective` for each state in the logical basis, with the basis
+state :math:`\ket{\phi_k}` as the :attr:`~.Objective.initial_state` and
+:math:`\Op{O} \ket{\phi_k}` as the :attr:`~.Objective.target`.
 
 You may use :func:`krotov.gate_objectives() <krotov.objectives.gate_objectives>`
 to construct the appropriate list of objectives. See the
@@ -116,8 +116,8 @@ pass to :func:`.optimize_pulses`.
 How to optimize towards an arbitrary perfect entangler
 ------------------------------------------------------
 
-Closely releated to an optimization towards a point in the Weyl chamber is the
-optimizatin towards an arbitrary perfectly entangling two-qubit gate.
+Closely related to an optimization towards a point in the Weyl chamber is the
+optimization towards an arbitrary perfectly entangling two-qubit gate.
 Geometrically, this means optimizing towards the polyhedron of perfect
 entanglers in the `Weyl chamber`_.
 
@@ -196,7 +196,7 @@ An appropriate set of objectives can be generated with the
 How to parallelize the optimization
 -----------------------------------
 
-Krotov's method is inherently parallel accross different objectives. See
+Krotov's method is inherently parallel across different objectives. See
 :mod:`krotov.parallelization`, and the
 :ref:`/notebooks/05_example_transmon_xgate.ipynb` for an example.
 
