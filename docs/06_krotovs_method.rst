@@ -24,7 +24,7 @@ functional of the form
          + \int_0^T g_b(\{\phi^{(i)}_k(t)\}) \dd t\,.
    \end{split}
 
-where :math:`\ket{\phi_k^{(i)}(T)}` are the time-evolved states initial states
+where :math:`\ket{\phi_k^{(i)}(T)}` are the time-evolved initial states
 :math:`\ket{\phi_k}` under the (guess) controls :math:`\{\epsilon^{(i)}_l(t)\}`
 of the :math:`i`'th iteration.
 
@@ -325,7 +325,9 @@ in the states, resulting in a second term in Eq. :eq:`krotov_proto_update`,
 
 with
 
-.. math:: \ket{\Delta \phi_k(t)} \equiv \ket{\phi_k^{(i+1)}(t)} - \ket{\phi_k^{(i)}(t)}\,.
+.. math::
+
+   \ket{\Delta \phi_k(t)} \equiv \ket{\phi_k^{(i+1)}(t)} - \ket{\phi_k^{(i)}(t)}\,.
 
 In Eq. :eq:`krotov_proto_update2`, :math:`\sigma(t)` is a scalar function that
 must be properly chosen to ensure monotonic convergence.
@@ -435,7 +437,7 @@ for details. This discretization yields the numerical scheme shown in
 
 Note that for multiple objectives the scheme can run in parallel and each
 objective contributes a term to the update. Summation of these terms yields the
-sum in :eq:`krotov_first_order_update`. See :mod:`krotov.parallelization` for
+sum in Eq. :eq:`krotov_first_order_update`. See :mod:`krotov.parallelization` for
 details. For a second-order update, the forward propagated states from step 4,
 both for the current iteration and the previous iteration, must be stored in
 memory over the entire time grid.
