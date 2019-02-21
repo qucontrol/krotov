@@ -4,10 +4,16 @@ import copy
 import logging
 
 import numpy as np
+import warnings
 
 __all__ = [
-    'control_onto_interval', 'pulse_onto_tlist', 'extract_controls',
-    'extract_controls_mapping', 'pulse_options_dict_to_list', 'discretize']
+    'control_onto_interval',
+    'pulse_onto_tlist',
+    'extract_controls',
+    'extract_controls_mapping',
+    'pulse_options_dict_to_list',
+    'discretize',
+]
 
 
 def _nested_list_shallow_copy(l):
@@ -21,7 +27,7 @@ def _tlist_midpoints(tlist):
     """Calculate array of midpoints in `tlist`"""
     tlist_midpoints = []
     for i in range(len(tlist) - 1):
-        tlist_midpoints.append(0.5 * (tlist[i+1] + tlist[i]))
+        tlist_midpoints.append(0.5 * (tlist[i + 1] + tlist[i]))
     return np.array(tlist_midpoints)
 
 
@@ -43,7 +49,7 @@ def _find_in_list(val, list_to_search):
             return -1
 
 
-def discretize(control, tlist, args=(None, ), kwargs=None):
+def discretize(control, tlist, args=(None,), kwargs=None):
     """Discretize the given `control` onto the `tlist` time grid
 
     If `control` is a callable, return array of values for `control` evaluated
@@ -58,32 +64,41 @@ def discretize(control, tlist, args=(None, ), kwargs=None):
             arguments to pass to `control`. The default passes a single value
             None, to match the requirements for a callable control function in
             QuTiP.
-        kwargs (None or dict): If `control` is callable, furhter keyword
+        kwargs (None or dict): If `control` is callable, further keyword
             arguments to pass to `control`. If None, no keyword arguments will
             be passed.
 
     Returns:
-        numpy.ndarray: Discretized array of `control` values, same length as
-        `tlist`
+        numpy.ndarray: Discretized array of real `control` values, same length
+            as `tlist`
 
     Raises:
         TypeError: If `control` is not a function that takes two arguments
             (`t`, None), or a numpy array
         ValueError: If `control` is numpy array of incorrect size.
     """
+    warnings.filterwarnings(action="error", category=np.ComplexWarning)
+    # see https://stackoverflow.com/q/54814133/152544
     if callable(control):
         if kwargs is None:
             kwargs = {}
-        return np.array([control(t, *args, **kwargs) for t in tlist])
-    elif isinstance(control, np.ndarray):
+        # relies on np.ComplexWarning being thrown as an error
+        return np.array(
+            [float(control(t, *args, **kwargs)) for t in tlist],
+            dtype=np.float64,
+        )
+    elif isinstance(control, (np.ndarray, list)):
+        # relies on np.ComplexWarning being thrown as an error
+        control = np.array([float(v) for v in control], dtype=np.float64)
         if len(control) != len(tlist):
             raise ValueError(
-                "If control is an array, it must of the same length as tlist")
-        else:
-            return control
+                "If control is an array, it must of the same length as tlist"
+            )
+        return control
     else:
         raise TypeError(
-            "control must be either a callable func(t, args) or a numpy array")
+            "control must be either a callable func(t, args) or a numpy array"
+        )
 
 
 def extract_controls(objectives):
@@ -187,13 +202,19 @@ def extract_controls_mapping(objectives, controls):
     controls_mapping = []
     for objective in objectives:
         controls_mapping.append([])
-        controls_mapping[-1].append([
-            _control_indices_in_nested_list(objective.H, control)
-            for control in controls])
+        controls_mapping[-1].append(
+            [
+                _control_indices_in_nested_list(objective.H, control)
+                for control in controls
+            ]
+        )
         for c_op in objective.c_ops:
-            controls_mapping[-1].append([
-                _control_indices_in_nested_list(c_op, control)
-                for control in controls])
+            controls_mapping[-1].append(
+                [
+                    _control_indices_in_nested_list(c_op, control)
+                    for control in controls
+                ]
+            )
     return controls_mapping
 
 
@@ -210,7 +231,8 @@ def pulse_options_dict_to_list(pulse_options, controls):
     logger = logging.getLogger('krotov')
     if len(pulse_options) > len(controls):
         logger.warning(
-            "pulse_options contains extra elements that are not in `controls`")
+            "pulse_options contains extra elements that are not in `controls`"
+        )
     pulse_options_list = []
     for control in controls:
         try:
@@ -222,7 +244,8 @@ def pulse_options_dict_to_list(pulse_options, controls):
         except KeyError:
             raise ValueError(
                 "The control %s does not have any associated pulse options"
-                % str(control))
+                % str(control)
+            )
     return pulse_options_list
 
 
@@ -294,16 +317,16 @@ def control_onto_interval(control):
     """
     if isinstance(control, np.ndarray):
         assert len(control.shape) == 1  # must be 1D array
-        pulse = np.zeros(len(control)-1, dtype=control.dtype.type)
+        pulse = np.zeros(len(control) - 1, dtype=control.dtype.type)
         pulse[0] = control[0]
-        for i in range(1, len(control)-1):
-            pulse[i] = 2.0 * control[i] - pulse[i-1]
+        for i in range(1, len(control) - 1):
+            pulse[i] = 2.0 * control[i] - pulse[i - 1]
         pulse[-1] = control[-1]
         return pulse
     else:
         raise ValueError(
-            "Not implemented: control type %s"
-            % control.__class__.__name__)
+            "Not implemented: control type %s" % control.__class__.__name__
+        )
 
 
 def pulse_onto_tlist(pulse):
@@ -323,9 +346,9 @@ def pulse_onto_tlist(pulse):
     control field. For all other points, the value is the average of the value
     of the input values before and after the point.
     """
-    control = np.zeros(len(pulse)+1, dtype=pulse.dtype.type)
+    control = np.zeros(len(pulse) + 1, dtype=pulse.dtype.type)
     control[0] = pulse[0]
-    for i in range(1, len(control)-1):
-        control[i] = 0.5 * (pulse[i-1] + pulse[i])
+    for i in range(1, len(control) - 1):
+        control[i] = 0.5 * (pulse[i - 1] + pulse[i])
     control[-1] = pulse[-1]
     return control

@@ -47,7 +47,7 @@ def test_complex_control_rejection():
             objectives, pulse_options, tlist,
             propagator=krotov.propagators.expm,
             chi_constructor=krotov.functionals.chis_re, iter_stop=0)
-    assert 'All controls must be real-valued' in str(exc_info.value)
+    assert 'all controls must be real-valued' in str(exc_info.value)
 
     def S2(t):
         """Shape function for the field update"""

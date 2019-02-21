@@ -503,11 +503,7 @@ def _enforce_shape_array_range(shape_array):
     """Enforce values ∈ [0, 1] in shape array, with some room for
     rounding errors that will be clipped away.
     """
-    if np.iscomplexobj(shape_array):
-        raise ValueError(
-            "Update shapes ('shape' in pulse options-dict) must be "
-            "real-valued"
-        )
+    assert not np.iscomplexobj(shape_array)  # `discretize` should catch this
     # the rounding errors can be introduced by control_onto_interval, and
     # result in values slightly below 0 or above 1. We allow a generous margin
     # of ±0.01; if something nonsensical is passed as a shape, we can be pretty
@@ -527,14 +523,18 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     guess_controls = extract_controls(objectives)
     pulses_mapping = extract_controls_mapping(objectives, guess_controls)
     options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
-    guess_controls = [discretize(control, tlist) for control in guess_controls]
-    for control in guess_controls:
-        if np.iscomplexobj(control):
-            raise ValueError(
-                "All controls must be real-valued. Complex controls must be "
-                "split into an independent real and imaginary part in the "
-                "objectives before passing them to the optimization"
-            )
+    try:
+        guess_controls = [
+            discretize(control, tlist) for control in guess_controls
+        ]
+    except (TypeError, np.ComplexWarning) as exc_info:
+        raise ValueError(
+            "Cannot discretize controls: %s. Note that"
+            "all controls must be real-valued. Complex controls must be "
+            "split into an independent real and imaginary part in the "
+            "objectives before passing them to the optimization"
+            % exc_info
+        )
     guess_pulses = [  # defined on the tlist intervals
         control_onto_interval(control) for control in guess_controls
     ]
@@ -557,6 +557,11 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
             raise ValueError(
                 "Each value in pulse_options must be a dict that contains "
                 "the key 'shape'."
+            )
+        except (TypeError, np.ComplexWarning) as exc_info:
+            raise ValueError(
+                "Update shapes ('shape' in pulse options-dict) must be "
+                "real-valued: %s" % exc_info
             )
         shape_arrays.append(
             _enforce_shape_array_range(control_onto_interval(S))

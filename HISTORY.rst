@@ -6,6 +6,7 @@ History
 (next release)
 --------------
 
+* Bugfix: Discretize controls to float values (`#41`_)
 * Bugfix: Fix overlap for non-Hermitian operators (`#39`_)
 * Bugfix: Interface for passing ``tau_vals`` to ``chi_constructor`` (`#36`_)
 * Added: function ``above_value`` for convergence check (`#35`_)
@@ -41,3 +42,4 @@ History
 .. _#35: https://github.com/qucontrol/krotov/issues/35
 .. _#36: https://github.com/qucontrol/krotov/issues/36
 .. _#39: https://github.com/qucontrol/krotov/issues/39
+.. _#41: https://github.com/qucontrol/krotov/issues/41

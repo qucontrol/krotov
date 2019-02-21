@@ -58,6 +58,32 @@ def test_discretize():
     assert np.max(np.abs((control_array2 - control_array))) < 1e-15
 
 
+def test_discretization_as_float():
+    """"Test that a control function that returns an int still gets discretized
+    as a float (#41)"""
+    H = [qutip.Qobj(), [qutip.Qobj(), lambda t, args: 0]]
+    u = H[1][1]
+    objectives = [
+        krotov.Objective(
+            initial_state=qutip.Qobj(),
+            target=None,
+            H=H,
+        )
+    ]
+    tlist = np.linspace(0, 10, 100)
+
+    res = krotov.optimize._initialize_krotov_controls(
+        objectives, {u: dict(lambda_a=1, shape=lambda t: 0)}, tlist
+    )
+
+    guess_controls = res[0]
+    assert guess_controls[0].dtype == np.float64
+    guess_pulses = res[1]
+    assert guess_pulses [0].dtype== np.float64
+    shape_arrays = res[4]
+    assert shape_arrays[0].dtype == np.float64
+
+
 def test_initialize_krotov_controls():
     """Check that pulses and controls are initialized while preserving the
     correct boundary conditions.
