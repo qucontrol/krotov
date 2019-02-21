@@ -32,11 +32,6 @@ History
 * Support for state-to-state and gate optimization, for both closed and open systems
 
 
-0.0.1 (2018-11-06)
-------------------
-
-* Non-functional placeholder release
-
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
 .. _#35: https://github.com/qucontrol/krotov/issues/35
