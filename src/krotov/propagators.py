@@ -156,7 +156,20 @@ class Propagator(ABC):
 class DensityMatrixODEPropagator(Propagator):
     """Propagator for density matrix evolution under a Lindbladian
 
-    See :class:`qutip.solver.Options` for arguments.
+    See :class:`qutip.solver.Options` for all arguments except `reentrant`.
+    Passing True for the `reentrant` re-initializes the propagator in every
+    time step.
+
+    Warning:
+        By default, the propagator is not "re-entrant". That is, you cannot use
+        more than one instance of :class:`DensityMatrixODEPropagator` in the
+        same process at the same time. This limitation is due to
+        :class:`scipy.integrate.ode` with the "zvode" integrator not being
+        re-entrant. Passing ``reentrant=True`` side-steps this problem by
+        re-initializating :class:`scipy.integrate.ode` in every time step. This
+        makes it possible to use :class:`DensityMatrixODEPropagator` in the
+        optimization of multiple objectives, but creates a significant
+        overhead.
     """
 
     def __init__(
@@ -169,6 +182,7 @@ class DensityMatrixODEPropagator(Propagator):
         first_step=0,
         min_step=0,
         max_step=0,
+        reentrant=False,
     ):
         self.method = method
         self.order = order
@@ -182,6 +196,8 @@ class DensityMatrixODEPropagator(Propagator):
         self._control_indices = None  # which indices in `L` have a control val
         self._r = None  # the integrator
         self._t = 0.0  # time up to which we've integrated
+        self._y = None # current vectorized state
+        self.reentrant = reentrant
 
     def __call__(
         self, L, rho, dt, c_ops=None, backwards=False, initialize=False
@@ -214,17 +230,20 @@ class DensityMatrixODEPropagator(Propagator):
                 propagation. This caches `L` (except for the control values)
                 and `rho` internally.
         """
-        if initialize:
+        if initialize or self.reentrant:
             self._initialize(L, rho, dt, c_ops, backwards)
         else:
+            if self.reentrant:
+                self._initialize_integrator(self._y)
             # only update the control values
             for i in self._control_indices:
                 self._L_list[i][1] = L[i][1]
         self._t += dt
         self._r.integrate(self._t)
+        self._y = self._r.y
         return qutip.Qobj(
             dense2D_to_fastcsr_fmode(
-                vec2mat(self._r.y), rho.shape[0], rho.shape[1]
+                vec2mat(self._y), rho.shape[0], rho.shape[1]
             ),
             dims=rho.dims,
             isherm=True,
@@ -245,6 +264,10 @@ class DensityMatrixODEPropagator(Propagator):
         return out
 
     def _initialize(self, L, rho, dt, c_ops, backwards):
+        self._initialize_data(L, rho, dt, c_ops, backwards)
+        self._initialize_integrator(self._y)
+
+    def _initialize_data(self, L, rho, dt, c_ops, backwards):
         L_list = []
         control_indices = []
         if not (c_ops is None or len(c_ops) == 0):
@@ -271,11 +294,11 @@ class DensityMatrixODEPropagator(Propagator):
         self._L_list = L_list
         self._control_indices = control_indices
         if rho.type == 'oper':
-            initial_vector = mat2vec(rho.full()).ravel('F')
+            self._y = mat2vec(rho.full()).ravel('F')  # initial state
         else:
             raise ValueError("rho must be a density matrix")
 
-        # set up the integrator
+    def _initialize_integrator(self, initial_vector):
         r = scipy.integrate.ode(self._rhs)
         r.set_integrator(
             'zvode',

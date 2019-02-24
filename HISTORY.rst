@@ -6,6 +6,7 @@ History
 (next release)
 --------------
 
+* Added: `re-entrant` option for ``DensityMatrixODEPropagator``
 * Bugfix: Discretize controls to float values (`#41`_)
 * Bugfix: Fix overlap for non-Hermitian operators (`#39`_)
 * Bugfix: Interface for passing ``tau_vals`` to ``chi_constructor`` (`#36`_)
