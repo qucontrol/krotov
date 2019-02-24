@@ -422,7 +422,9 @@ def chis_hs(fw_states_T, objectives, tau_vals):
     return res
 
 
-def F_avg(fw_states_T, basis_states, gate, mapped_basis_states=None):
+def F_avg(
+    fw_states_T, basis_states, gate, mapped_basis_states=None, prec=1e-5
+):
     r"""Average gate fidelity
 
     .. math::
@@ -486,6 +488,10 @@ def F_avg(fw_states_T, basis_states, gate, mapped_basis_states=None):
             calculated internally via :func:`mapped_basis`. It is recommended
             to pass pre-calculated `mapped_basis_states` when evaluating
             $F_{\text{avg}}$ repeatedly for the same target.
+        prec (float): assert that the fidelity is correct at least up to the
+            given precision. Mathematically, $F_{\text{avg}}$ is a real value.
+            However, errors in the `fw_states_T` can lead to a small non-zero
+            imaginary part. We assert that this imaginary part is below `prec`.
     """
     # F_avg is not something you can optimize directly: Nobody has calculated
     # ∂(1-F_avg)/∂⟨ϕ|. This is why there is no J_T_avg, and why F_avg does not
@@ -502,7 +508,13 @@ def F_avg(fw_states_T, basis_states, gate, mapped_basis_states=None):
                 "(forward-propagation of all dyadic combinations of "
                 "%d basis states), not %d" % (N * N, N, len(fw_states_T))
             )
-        return _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states)
+        return _F_avg_rho(
+            fw_states_T,
+            basis_states,
+            gate,
+            mapped_basis_states,
+            imag_limit=prec,
+        )
     elif fw_states_T[0].type == 'ket':
         if len(fw_states_T) != N:
             raise ValueError(
@@ -510,12 +522,14 @@ def F_avg(fw_states_T, basis_states, gate, mapped_basis_states=None):
                 "(forward-propagation of all basis states), not %d"
                 % (N, len(fw_states_T))
             )
-        return _F_avg_psi(fw_states_T, basis_states, gate)
+        return _F_avg_psi(fw_states_T, basis_states, gate, imag_limit=prec)
     else:
         raise ValueError("Invalid type of state: %s" % fw_states_T[0].type)
 
 
-def _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states):
+def _F_avg_rho(
+    fw_states_T, basis_states, gate, mapped_basis_states, imag_limit=1e-10
+):
     """Implementation of F_avg in Liouville space"""
     if mapped_basis_states is None:
         mapped_basis_states = mapped_basis(gate, basis_states)
@@ -528,16 +542,16 @@ def _F_avg_rho(fw_states_T, basis_states, gate, mapped_basis_states):
             ρ_ij = fw_states_T[i * N + j]  # zero-based indices!
             Oϕ_i = mapped_basis_states[i]
             F += _overlap(Oϕ_i, ρ_ij(Oϕ_j)) + _overlap(Oϕ_i, ρ_jj(Oϕ_i))
-    assert abs(F.imag) < 1e-10, F.imag
+    assert abs(F.imag) < imag_limit, "%.2e > %.2e" % (F.imag, imag_limit)
     return F.real / (N * (N + 1))
 
 
-def _F_avg_psi(fw_states_T, basis_states, O):
+def _F_avg_psi(fw_states_T, basis_states, O, imag_limit=1e-10):
     """Implementation of F_avg in Hilbert space"""
     N = len(basis_states)
     U = gate(basis_states, fw_states_T)
     F = abs((O.dag() * U).tr()) ** 2 + (O.dag() * U * U.dag() * O).tr()
-    assert abs(F.imag) < 1e-10, F.imag
+    assert abs(F.imag) < imag_limit, "%.2e > %.2e" % (F.imag, imag_limit)
     return F.real / (N * (N + 1))
 
 
