@@ -23,7 +23,7 @@ from .mu import derivative_wrt_pulse
 from .info_hooks import chain
 from .second_order import _overlap
 from .shapes import zero_shape, one_shape
-from .propagators import expm
+from .propagators import expm, Propagator
 
 __all__ = ['optimize_pulses']
 
@@ -197,12 +197,7 @@ def optimize_pulses(
         propagators = [copy.deepcopy(propagator) for _ in objectives]
         # copy.deepcopy will only do someting on Propagator objects. For
         # functions (even with closures), it just returns the same function.
-    for func in propagators:
-        if inspect.getfullargspec(func) != inspect.getfullargspec(expm):
-            logger.warning(
-                "the propagator does not have the same interface as "
-                "krotov.propagator.expm"
-            )
+    _check_propagators_interface(propagators, logger)
 
     adjoint_objectives = [obj.adjoint for obj in objectives]
     if storage == 'array':
@@ -517,6 +512,24 @@ def _enforce_shape_array_range(shape_array):
     return np.clip(shape_array, a_min=0.0, a_max=1.0)
 
 
+def _check_propagators_interface(propagators, logger):
+    """Warn if any of the propagators do not have the expected interface.
+
+    In order to pass muster, each propagator must either have the same
+    interface as :func:`krotov.propagators.expm`, or
+    :meth:`krotov.propagators.Propagator.__call__`
+    """
+    for propagator in propagators:
+        spec = inspect.getfullargspec(propagator)
+        spec_func = inspect.getfullargspec(expm)
+        spec_obj = inspect.getfullargspec(Propagator.__call__)
+        if spec != spec_func and spec != spec_obj:
+            logger.warning(
+                "The propagator %s does not have the expected interface.",
+                propagator
+            )
+
+
 def _initialize_krotov_controls(objectives, pulse_options, tlist):
     """Extract discretized guess controls and pulses from `objectives`, and
     return them with the associated mapping and option data"""
@@ -532,8 +545,7 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
             "Cannot discretize controls: %s. Note that"
             "all controls must be real-valued. Complex controls must be "
             "split into an independent real and imaginary part in the "
-            "objectives before passing them to the optimization"
-            % exc_info
+            "objectives before passing them to the optimization" % exc_info
         )
     guess_pulses = [  # defined on the tlist intervals
         control_onto_interval(control) for control in guess_controls

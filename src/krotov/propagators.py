@@ -196,27 +196,28 @@ class DensityMatrixODEPropagator(Propagator):
         self._control_indices = None  # which indices in `L` have a control val
         self._r = None  # the integrator
         self._t = 0.0  # time up to which we've integrated
-        self._y = None # current vectorized state
+        self._y = None  # current vectorized state
         self.reentrant = reentrant
 
     def __call__(
-        self, L, rho, dt, c_ops=None, backwards=False, initialize=False
+        self, H, state, dt, c_ops=None, backwards=False, initialize=False
     ):
         """Evaluation of a single propagation step
 
         Args:
-            L (list): A Liouvillian superoperator in qutip's nested-list
+            H (list): A Liouvillian superoperator in qutip's nested-list
                 format, with a scalar value in the place of a time-dependency.
                 For example, ``[L0, [L1, u]]`` for a drift Liouvillian ``L0``,
                 a control Liouvillian ``H1``, and a scalar value ``u`` that is
                 a time-dependent control evaluated for a particular point in
                 time. If `initialize` is False, only the control values are
                 taken into account; any operators are assumed to be identical
-                to the internally cached values of `L` during initialization.
-            rho (qutip.Qobj): The density matrix to propagate. The passed value
-                is ignored unless `initialize` is given as True. Otherwise, it
-                is assumed that `rho` matches the (internally stored) state
-                that was the result from the previous propagation step.
+                to the internally cached values of `H` during initialization.
+            state (qutip.Qobj): The density matrix to propagate. The passed
+                value is ignored unless `initialize` is given as True.
+                Otherwise, it is assumed that `state` matches the (internally
+                stored) state that was the result from the previous propagation
+                step.
             dt (float): The time step over which to propagate
             c_ops (list or None): An empty list, or None. Since this propagator
                 assumes a full Liouvillian, it cannot be combined with Lindblad
@@ -227,25 +228,28 @@ class DensityMatrixODEPropagator(Propagator):
                 parameter has no effect. Instead, for the backward propagation,
                 the conjugate Liouvillian must be passed for `L`.
             initialize (bool): Whether to (re-)initialize for a new
-                propagation. This caches `L` (except for the control values)
-                and `rho` internally.
+                propagation. This caches `H` (except for the control values)
+                and `state` internally.
         """
+        # H is really an L, but it's a very bad idea for a subclass not to
+        # follow the interface of the parent (including argument names).
+        # Internally, however, we'll use L instead of H
         if initialize or self.reentrant:
-            self._initialize(L, rho, dt, c_ops, backwards)
+            self._initialize(H, state, dt, c_ops, backwards)
         else:
             if self.reentrant:
                 self._initialize_integrator(self._y)
             # only update the control values
             for i in self._control_indices:
-                self._L_list[i][1] = L[i][1]
+                self._L_list[i][1] = H[i][1]
         self._t += dt
         self._r.integrate(self._t)
         self._y = self._r.y
         return qutip.Qobj(
             dense2D_to_fastcsr_fmode(
-                vec2mat(self._y), rho.shape[0], rho.shape[1]
+                vec2mat(self._y), state.shape[0], state.shape[1]
             ),
-            dims=rho.dims,
+            dims=state.dims,
             isherm=True,
         )
 
