@@ -6,6 +6,7 @@ History
 (next release)
 --------------
 
+* Added: Ability to dump optimization result every so many iterations (``dump_result`` check-convergence routine)
 * Added: `re-entrant` option for ``DensityMatrixODEPropagator``
 * Bugfix: Discretize controls to float values (`#41`_)
 * Bugfix: Fix overlap for non-Hermitian operators (`#39`_)

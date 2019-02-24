@@ -57,6 +57,13 @@ limit, this no longer strictly holds when time is discretized (in particular if
 λₐ is too small). You can use :func:`check_monotonic_error` or
 :func:`check_monotonic_fidelity` as a `check_convergence` function that stops
 the optimization when monotonic convergence is lost.
+
+The `check_convergence` routine may also be used to store the current state of
+the optimization to disk, as a side effect. This is achieved by the routine
+:func:`dump_result`, which can be chained with other convergence checks with
+:func:`Or`. Dumping the current state of the optimization at regular intervals
+protects against losing the results of a long running optimization in the event
+of a crash.
 """
 from operator import xor
 import glom
@@ -68,6 +75,7 @@ __all__ = [
     'delta_below',
     'check_monotonic_error',
     'check_monotonic_fidelity',
+    'dump_result',
 ]
 
 
@@ -355,3 +363,55 @@ def check_monotonic_fidelity(result):
         'Loss of monotonic convergence; fidelity increase < 0'
     """
     return _monotonic_fidelity(result)
+
+
+def dump_result(filename, every=10):
+    """Return a function for dumping the result every so many iterations
+
+    For long-running optimizations, it can be useful to dump the current state
+    of the optimization every once in a while, so that the result is not lost
+    in the event of a crash or unexpected shutdown. This function returns a
+    routine that can be passed as a `check_convergence` routine that does
+    nothing except to dump the current :class:`.Result` object to a file (cf.
+    :meth:`.Result.dump`). Failure to write the dump file stops the
+    optimization.
+
+    Args:
+        filename (str): Name of file to dump to. This may include a field
+            ``{iter}`` which will be formatted with the most recent iteration
+            number, via :meth:`str.format`. Existing files will be overwritten.
+        every (int): dump the :class:`.Result` every so many iterations.
+
+    Note:
+        Choose `every` so that dumping does not happen more than once every few
+        minutes, at most. Dumping after every single iteration may slow down
+        the optimization due to I/O overhead.
+
+    Examples:
+
+        * dump every 10 iterations to the same file `oct_result.dump`::
+
+            >>> check_convergence = dump_result('oct_result.dump')
+
+        * dump every 100 iterations to  files ``oct_result_000100.dump``,
+          ``oct_result_000200.dump``, etc.::
+
+            >>> check_convergence = dump_result(
+            ...     'oct_result_{iter:06d}.dump', every=100)
+    """
+
+    every = int(every)
+    if every <= 0:
+        raise ValueError("every must be > 0")
+
+    def _dump_result(result):
+        iteration = result.iters[-1]
+        if iteration % every == 0:
+            outfile = filename.format(iter=iteration)
+            try:
+                result.dump(outfile)
+            except IOError as exc_info:
+                return "Could not store %s: %s" % (outfile, exc_info)
+        return None
+
+    return _dump_result
