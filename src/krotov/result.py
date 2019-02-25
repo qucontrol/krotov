@@ -4,7 +4,7 @@ import logging
 from textwrap import dedent
 
 from .objectives import Objective, _ControlPlaceholder
-from .structural_conversions import _nested_list_shallow_copy
+from .structural_conversions import _nested_list_shallow_copy, pulse_onto_tlist
 
 __all__ = ['Result']
 
@@ -137,7 +137,7 @@ class Result:
         return objectives
 
     @classmethod
-    def load(cls, filename, objectives=None):
+    def load(cls, filename, objectives=None, finalize=False):
         """Construct :class:`Result` object from a :meth:`dump` file
 
         Args:
@@ -148,10 +148,16 @@ class Result:
                 :attr:`objectives` with the given `objectives`. This is
                 necessary because :meth:`dump` does not preserve time-dependent
                 controls that are Python functions.
+            finalize (bool): If given as True, make sure that the
+                :attr:`optimized_controls` are properly finalized. This allows
+                to load a :class:`Result` that was dumped before
+                :func:`.optimize_pulses` finished, e.g. by
+                :func:`.dump_result`.
 
         Returns:
             Result: The :class:`Result` instance loaded from `filename`
         """
+        logger = logging.getLogger('krotov')
         with open(filename, 'rb') as dump_fh:
             result = pickle.load(dump_fh)
         if objectives is None:
@@ -159,14 +165,32 @@ class Result:
                 if _contains_control_placeholders(obj.H) or any(
                     [_contains_control_placeholders(lst) for lst in obj.c_ops]
                 ):
-                    logger = logging.getLogger('krotov')
                     logger.warning(
                         "Result.objectives contains control placeholders. "
-                        "You should overwrite it."
+                        "You should overwrite it by passing `objectives`."
                     )
-                    break
+                    break  # only warn once
         else:
             result.objectives = objectives
+        nt = len(result.tlist)
+        for i, control in enumerate(result.optimized_controls):
+            if len(control) == nt:
+                pass  # all ok
+            elif len(control) == nt - 1:
+                if finalize:
+                    result.optimized_controls[i] = pulse_onto_tlist(control)
+                else:
+                    logger.warning(
+                        "Result.optimized_controls are not finalized. "
+                        "Consider loading with `finalize=True`."
+                    )
+                    break  # only warn once
+            else:
+                logger.error(
+                    "Result.optimized_controls are incongruent with "
+                    "Result.tlist"
+                )
+                break  # only warn once
         return result
 
     def dump(self, filename):

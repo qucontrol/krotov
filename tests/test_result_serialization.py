@@ -26,6 +26,26 @@ def test_serialization_roundtrip(request, tmpdir, caplog):
         _check_recursive_equality(val1, val2)
 
 
+def test_serialization_finalize(request, caplog):
+    testdir = os.path.splitext(request.module.__file__)[0]
+    dumpfile = os.path.join(testdir, 'oct_result_incomplete.dump')
+    with caplog.at_level(logging.WARNING):
+        result = Result.load(dumpfile)
+    assert "not finalized" in caplog.text
+    nt = len(result.tlist)
+    assert len(result.optimized_controls[0]) == nt - 1
+    result = Result.load(dumpfile, finalize=True)
+    assert len(result.optimized_controls[0]) == nt
+
+
+def test_serialization_broken(request, caplog):
+    testdir = os.path.splitext(request.module.__file__)[0]
+    dumpfile = os.path.join(testdir, 'oct_result_broken.dump')
+    with caplog.at_level(logging.ERROR):
+        Result.load(dumpfile)
+    assert "incongruent" in caplog.text
+
+
 def _check_recursive_equality(val1, val2):
     if isinstance(val1, list):
         for (v1, v2) in zip(val1, val2):
