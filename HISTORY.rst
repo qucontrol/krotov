@@ -6,6 +6,7 @@ History
 (next release)
 --------------
 
+* Added: Ability to continue from a previous optimization (`#26`_)
 * Added: Parameter ``out`` to ``print_table`` info-hook
 * Added: Parameter ``finalize`` to ``Result.load``
 * Added: Ability to dump optimization result every so many iterations (``dump_result`` check-convergence routine)
@@ -36,6 +37,7 @@ History
 * Support for state-to-state and gate optimization, for both closed and open systems
 
 
+.. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
 .. _#35: https://github.com/qucontrol/krotov/issues/35

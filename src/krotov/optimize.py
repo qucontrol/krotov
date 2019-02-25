@@ -45,7 +45,9 @@ def optimize_pulses(
     modify_params_after_iter=None,
     storage='array',
     parallel_map=None,
-    store_all_pulses=False
+    store_all_pulses=False,
+    continue_from=None,
+    skip_initial_forward_propagation=False
 ):
     r"""Use Krotov's method to optimize towards the given `objectives`
 
@@ -165,13 +167,23 @@ def optimize_pulses(
             details.
         store_all_pulses (bool): Whether or not to store the optimized pulses
             from *all* iterations in :class:`.Result`.
+        continue_from (None or Result): If given, continue an optimization from
+            a previous :class:`.Result`. The result must have identical
+            `objectives`.
+        skip_initial_forward_propagation (bool): If given as `True` together
+            with `continue_from`, skip the initial forward propagation ("zeroth
+            iteration"), and take the forward-propagated states from
+            :attr:`.Result.states` instead.
 
     Returns:
         Result: The result of the optimization.
 
     Raises:
         ValueError: If any controls are not real-valued, or if any update
-            shape is not a real-valued function in the range [0, 1].
+            shape is not a real-valued function in the range [0, 1]; if using
+            `continue_from` with a :class:`.Result` with differing
+            `objectives`; if there are any required keys missing in
+            `pulse_options`.
     """
     logger = logging.getLogger('krotov')
 
@@ -195,7 +207,7 @@ def optimize_pulses(
         assert len(propagators) == len(objectives)
     else:
         propagators = [copy.deepcopy(propagator) for _ in objectives]
-        # copy.deepcopy will only do someting on Propagator objects. For
+        # copy.deepcopy will only do something on Propagator objects. For
         # functions (even with closures), it just returns the same function.
     _check_propagators_interface(propagators, logger)
 
@@ -214,6 +226,10 @@ def optimize_pulses(
         lambda_vals,  # Krotov step width λₐ, for each control
         shape_arrays,  # update shape S(t), per control, sampled on intervals
     ) = _initialize_krotov_controls(objectives, pulse_options, tlist)
+    if continue_from is not None:
+        guess_controls, guess_pulses = _restore_from_previous_result(
+            continue_from, objectives, tlist, store_all_pulses
+        )
 
     g_a_integrals = np.zeros(len(guess_pulses))
     # ∫gₐ(t)dt is a very useful measure of whether λₐ is too small (large
@@ -221,23 +237,31 @@ def optimize_pulses(
     # convergence ("speeding up" for increasing values, "slowing down" for
     # decreasing values)
 
-    result = Result()
-    result.start_local_time = time.localtime()
+    if continue_from is None:
+        result = Result()
+        result.start_local_time = time.localtime()
+    else:
+        result = copy.deepcopy(continue_from)
 
     # Initial forward-propagation
     tic = time.time()
-    forward_states = parallel_map[0](
-        _forward_propagation,
-        list(range(len(objectives))),
-        (
-            objectives,
-            guess_pulses,
-            pulses_mapping,
-            tlist,
-            propagators,
-            storage,
-        ),
-    )
+    if skip_initial_forward_propagation:
+        forward_states = _skip_initial_forward_propagation(
+            objectives, continue_from, sigma, logger
+        )
+    else:
+        forward_states = parallel_map[0](
+            _forward_propagation,
+            list(range(len(objectives))),
+            (
+                objectives,
+                guess_pulses,
+                pulses_mapping,
+                tlist,
+                propagators,
+                storage,
+            ),
+        )
     toc = time.time()
 
     fw_states_T = [states[-1] for states in forward_states]
@@ -256,6 +280,7 @@ def optimize_pulses(
         forward_states0 = forward_states = None
 
     info = None
+    optimized_pulses = guess_pulses
     if info_hook is not None:
         info = info_hook(
             objectives=objectives,
@@ -264,7 +289,7 @@ def optimize_pulses(
             forward_states=forward_states,
             forward_states0=forward_states0,
             guess_pulses=guess_pulses,
-            optimized_pulses=guess_pulses,
+            optimized_pulses=optimized_pulses,
             g_a_integrals=g_a_integrals,
             lambda_vals=lambda_vals,
             shape_arrays=shape_arrays,
@@ -278,27 +303,38 @@ def optimize_pulses(
             shared_data={},
         )
 
-    # Initialize result
+    # Initialize Result object
     result.tlist = tlist
     result.objectives = objectives
     result.guess_controls = guess_controls
     result.controls_mapping = pulses_mapping
-    if info is not None:
-        result.info_vals.append(info)
-    result.iters.append(0)
-    if not np.all(tau_vals == None):  # noqa
-        result.tau_vals.append(tau_vals)
-    if store_all_pulses:
-        result.all_pulses.append(guess_pulses)
+    if continue_from is None:
+        # we only store information about the "0" iteration if we're starting a
+        # new optimization
+        if info is not None:
+            result.info_vals.append(info)
+        result.iters.append(0)
+        result.iter_seconds.append(int(toc - tic))
+        if not np.all(tau_vals == None):  # noqa
+            result.tau_vals.append(tau_vals)
+        if store_all_pulses:
+            result.all_pulses.append(guess_pulses)
+    else:
+        iter_start = continue_from.iters[-1]
+        logger.info(
+            "Continuing from previous result, with iteration %d",
+            iter_start + 1,
+        )
     result.states = fw_states_T
 
+    # Main optimization loop
     for krotov_iteration in range(iter_start + 1, iter_stop + 1):
 
         logger.info("Started Krotov iteration %d" % krotov_iteration)
         tic = time.time()
 
         # Boundary condition for the backward propagation
-        # -- this is where the functional enters the optimizaton.
+        # -- this is where the functional enters the optimization.
         # `fw_states_T` are the states forward-propagated under the guess pulse
         # of the current iteration, which is the optimized pulse of the
         # previous iteration. This is how we get the `fw_states_T` here: they
@@ -365,14 +401,14 @@ def optimize_pulses(
                         time_index,
                     )
                     Ψ = fw_states[i_obj]
-                    update = _overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩
+                    update = _overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩ ∈ ℂ
                     update *= chi_norms[i_obj]
                     if second_order:
                         update += 0.5 * σ * _overlap(delta_phis[i_obj], μ(Ψ))
                     delta_eps[i_pulse][time_index] += update
                 λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
-                Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag
+                Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag  # ∈ ℝ
                 g_a_integrals[i_pulse] += abs(Δϵ) ** 2 * dt  # dt may vary!
                 optimized_pulses[i_pulse][time_index] += Δϵ
             # forward propagation
@@ -473,7 +509,7 @@ def optimize_pulses(
 
     else:  # optimization finished without `check_convergence` break
 
-        result.message = "Reached %d iterations" % iter_stop
+        result.message = "Reached %d iterations" % max(iter_start, iter_stop)
 
     # Finalize
     result.end_local_time = time.localtime()
@@ -526,7 +562,7 @@ def _check_propagators_interface(propagators, logger):
         if spec != spec_func and spec != spec_obj:
             logger.warning(
                 "The propagator %s does not have the expected interface.",
-                propagator
+                propagator,
             )
 
 
@@ -585,6 +621,105 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
         lambda_vals,
         shape_arrays,
     )
+
+
+def _restore_from_previous_result(result, objectives, tlist, store_all_pulses):
+    """Load `guess_controls` and `guess_pulses` from the given Result object.
+
+    Raises:
+        ValueError: if `result` is incompatible with the given `objectives` and
+            `tlist`.
+    """
+    if not isinstance(result, Result):
+        raise ValueError("Continuation is only possible from a Result object")
+    if len(objectives) != len(result.objectives):
+        raise ValueError(
+            "When continuing from a previous Result, the number of "
+            "objectives must be the same"
+        )
+    for (a, b) in zip(objectives, result.objectives):
+        if a != b:
+            raise ValueError(
+                "When continuing from a previous Result, the objectives must "
+                "remain unchanged"
+            )
+    if store_all_pulses:
+        if len(result.all_pulses) == 0:
+            raise ValueError(
+                "The store_all_pulses parameter cannot be changed when "
+                "continuing from a previous Result. Pass it as False."
+            )
+    else:
+        if len(result.all_pulses) > 0:
+            raise ValueError(
+                "The store_all_pulses parameter cannot be changed when "
+                "continuing from a previous Result. Pass it as True."
+            )
+    try:
+        if np.max(np.abs(np.array(tlist) - np.array(result.tlist))) > 1e-5:
+            # we're ok with pretty significant rounding errors: if someone is
+            # doing something stupid (like changing physical units), the error
+            # should be large
+            raise ValueError("tlist does not match")
+    except ValueError:
+        # if the size of the tlist has changed, the "if" statement will already
+        # raise a ValueError
+        raise ValueError(
+            "When continuing from a previous Result, the controls must be "
+            "defined on the same time grid"
+        )
+    nt = len(tlist)
+    guess_controls = []
+    for control in result.optimized_controls:
+        if len(control) == nt - 1:
+            # the Result was dumped before the optimization was complete
+            # (see krotov.konvergence.dump_result), so that the
+            # `optimized_controls` are actually pulses (defined on the
+            # intervals)
+            guess_controls.append(pulse_onto_tlist(control))
+        elif len(control) == nt:
+            # the Result was dumped after the optimization was complete, so
+            # that the `optmized_controls` are in fact controls (defined on the
+            # points of tlist)
+            guess_controls.append(control)
+        else:
+            # this should never happen
+            raise ValueError(
+                "Invalid Result: optimized_controls and tlist are incongruent"
+            )
+    guess_pulses = [  # defined on the tlist intervals
+        control_onto_interval(control) for control in guess_controls
+    ]
+    return guess_controls, guess_pulses
+
+
+def _skip_initial_forward_propagation(objectives, result, sigma, logger):
+    """Extract forward_states from existing result"""
+    if sigma is not None:
+        raise ValueError(
+            "skip_initial_forward_propagation is incompatible with "
+            "second order Krotov (sigma is not None)"
+        )
+    if result is not None:
+        # forwards_states is normally a list of storage objects that store
+        # the *entire* forward propagation for each objective. The stored
+        # states are only needed for second order Krotov. When skipping the
+        # forward propagation, we'll use a fake "storage object" that
+        # contains only the final state. That'll be sufficient for setting
+        # fw_states_T and tau_vals below
+        forward_states = [[state] for state in result.states]
+    else:
+        logger.warning(
+            "You should not use `skip_initial_forward_propagation` unless "
+            "you are also passing `continue_from`"
+        )
+        # If the chi_constructor does not depend on the fw_states_T (like
+        # chis_re), and you're using first order Krotov, you don't actually
+        # have to do the initial forward propagation. It's not really worth
+        # it to skip that propagation, though, as we usually have to do
+        # hundreds of iterations. So, this is an undocumented feature.
+        forward_states = [[None] for _ in objectives]
+    return forward_states
 
 
 def _forward_propagation(

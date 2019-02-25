@@ -200,6 +200,50 @@ Krotov's method is inherently parallel across different objectives. See
 :mod:`krotov.parallelization`, and the
 :ref:`/notebooks/05_example_transmon_xgate.ipynb` for an example.
 
+.. _HowtoStoreResult:
+
+How to prevent losing an optimization result
+--------------------------------------------
+
+Optimizations usually take several hundred to several thousand iterations to
+fully converge. Thuse, the :func:`.optimize_pulses` routine  may require
+significant runtime (often multiple days for large problems). Once an
+optimization has completed, you are strongly encouraged to store the result to
+disk, using :meth:`.Result.dump`.  You may also consider using
+:func:`.dump_result` during the `check_convergence` step to dump the current
+state of the optimization to disk at regular intervals. This protects you from
+losing work if the optimization is interrupted in any way, like an unexpected
+crash.
+
+In order to continue after such a crash, you can restore a :class:`.Result`
+object containing the recent state of the optimization using
+:meth:`.Result.load` (with the original `objectives` and ``finalize=True`` if
+the dump file originates from :func:`.dump_result`). You may then call
+:func:`.optimize_pulses` and pass the loaded :class:`.Result` object as
+`continue_from`.  The new optimization will start from the most recent
+optimized controls as a guess, and continue to count iterations from the
+previous result. See :ref:`HowtoContinueOptimization` for further details.
+
+
+.. _HowtoContinueOptimization:
+
+How to continue from a previous optimization
+--------------------------------------------
+
+See :ref:`HowtoStoreResult` for how to continue from an optimization that ended
+(crashed) prematurely.  Even when an optimization has completed normally, you
+may still want to continue with further iterations -- either because you find
+that the original `iter_stop` was insufficient to reach full convergence, or
+because you would like to modify some parameters, like the λₐ values for
+each control. In this case, you can again call :func:`.optimize_pulses` and
+pass the :class:`.Result` object from the previous optimization as
+`continue_from`. Note that while you are free to change the `pulse_options`
+between the two optimization, the `objectives` must remain the same. The
+functional (`chi_constructor`) and the `info_hook` should also remain the same
+(otherwise, you may and up with inconsistencies in your :class:`.Result`). The
+:class:`.Result` object returned by the second optimization will include all
+the data from the first optimization.
+
 
 How to maximize numerical efficiency
 ------------------------------------
