@@ -6,6 +6,7 @@ History
 (next release)
 --------------
 
+* Added: Parameter ``out`` to ``print_table`` info-hook
 * Added: Parameter ``finalize`` to ``Result.load``
 * Added: Ability to dump optimization result every so many iterations (``dump_result`` check-convergence routine)
 * Added: `re-entrant` option for ``DensityMatrixODEPropagator``

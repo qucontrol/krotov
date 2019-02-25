@@ -177,11 +177,9 @@ def print_debug_information(
     out.write(
         "    ∫gₐ(t)dt: %s\n" % (", ".join(["%.2e" % v for v in g_a_integrals]))
     )
-    out.write(
-        "    λₐ: %s\n" % (", ".join(["%.2e" % λ for λ in lambda_vals]))
-    )
-    MB_per_timeslot = (
-        sum(_qobj_nbytes(state) for state in fw_states_T) / (1024 ** 2)
+    out.write("    λₐ: %s\n" % (", ".join(["%.2e" % λ for λ in lambda_vals])))
+    MB_per_timeslot = sum(_qobj_nbytes(state) for state in fw_states_T) / (
+        1024 ** 2
     )
     out.write("    storage (bw, fw, fw0): ")
     if backward_states is None:
@@ -270,7 +268,11 @@ def _rjust(text, width, fillchar=' '):
 
 
 def print_table(
-    J_T, show_g_a_int_per_pulse=False, J_T_prev=None, unicode=True
+    J_T,
+    show_g_a_int_per_pulse=False,
+    J_T_prev=None,
+    unicode=True,
+    out=sys.stdout,
 ):
     r"""Print a tabular overview of the functional values in the iteration
 
@@ -345,6 +347,7 @@ def print_table(
         unicode (bool): Whether to use unicode symbols for the column headers.
             Some systems have broken monospace fonts in the Jupyter notebook
             that cause the headers not to line up as intended.
+        out: An open file handle where to write the table. Defaults to stdout.
     """
 
     def get_J_T_prev(**kwargs):
@@ -360,34 +363,34 @@ def print_table(
         iteration = kwargs['iteration']
         n_pulses = len(kwargs['guess_pulses'])
         if iteration == 0:
-            print(_rjust("iter.", 7), end="")
-            print(_rjust("J_T", 11), end="")
+            out.write(_rjust("iter.", 7))
+            out.write(_rjust("J_T", 11))
             if n_pulses > 1:
                 if show_g_a_int_per_pulse:
                     for i in range(n_pulses):
                         if unicode:
-                            print(_rjust("∫gₐ(ϵ%d)dt" % (i + 1), 12), end="")
+                            out.write(_rjust("∫gₐ(ϵ%d)dt" % (i + 1), 12))
                         else:
-                            print(_rjust("g_a_int_%d" % (i + 1), 12), end="")
+                            out.write(_rjust("g_a_int_%d" % (i + 1), 12))
                 if unicode:
-                    print(_rjust("∑∫gₐ(t)dt", 12), end="")
+                    out.write(_rjust("∑∫gₐ(t)dt", 12))
                 else:
-                    print(_rjust("g_a_int", 12), end="")
+                    out.write(_rjust("g_a_int", 12))
             else:
                 if unicode:
-                    print(_rjust("∫gₐ(t)dt", 12), end="")
+                    out.write(_rjust("∫gₐ(t)dt", 12))
                 else:
-                    print(_rjust("g_a_int", 12), end="")
-            print(_rjust("J", 11), end="")
+                    out.write(_rjust("g_a_int", 12))
+            out.write(_rjust("J", 11))
             if unicode:
-                print(_rjust("ΔJ_T", 11), end="")
+                out.write(_rjust("ΔJ_T", 11))
             else:
-                print(_rjust("Delta_J_T", 11), end="")
+                out.write(_rjust("Delta_J_T", 11))
             if unicode:
-                print(_rjust("ΔJ", 11), end="")
+                out.write(_rjust("ΔJ", 11))
             else:
-                print(_rjust("Delta J", 11), end="")
-            print(_rjust("secs", 6))
+                out.write(_rjust("Delta J", 11))
+            out.write(_rjust("secs", 6) + "\n")
         J_T_val = J_T(**kwargs)
         Σgₐdt = np.sum(kwargs['g_a_integrals'])
         J = J_T_val + Σgₐdt
@@ -396,29 +399,29 @@ def print_table(
             ΔJ_T = J_T_val - J_T_prev_val
             ΔJ = ΔJ_T + Σgₐdt
         secs = int(kwargs['stop_time'] - kwargs['start_time'])
-        print("%7d" % iteration, end="")
-        print(" %10.2e" % J_T_val, end="")
+        out.write("%7d" % iteration)
+        out.write(" %10.2e" % J_T_val)
         if n_pulses > 1:
             if show_g_a_int_per_pulse:
                 for i in range(n_pulses):
-                    print(" %11.2e" % kwargs['g_a_integrals'][i], end="")
-        print(" %11.2e" % Σgₐdt, end="")
-        print(" %10.2e" % J, end="")
+                    out.write(" %11.2e" % kwargs['g_a_integrals'][i])
+        out.write(" %11.2e" % Σgₐdt)
+        out.write(" %10.2e" % J)
         if iteration == 0:
-            print(" %10s" % "n/a", end="")
-            print(" %10s" % "n/a", end="")
+            out.write(" %10s" % "n/a")
+            out.write(" %10s" % "n/a")
         else:
-            print(" %10.2e" % ΔJ_T, end="")
-            print(" %10.2e" % ΔJ, end="")
-        print(" %5d" % secs, end="")
+            out.write(" %10.2e" % ΔJ_T)
+            out.write(" %10.2e" % ΔJ)
+        out.write(" %5d" % secs)
         if iteration > 0:
             if (ΔJ_T > 0) or (ΔJ > 0):
-                print(" ", end="")
+                out.write(" ")
                 if ΔJ_T > 0:
-                    print("*", end="")
+                    out.write("*")
                 if ΔJ > 0:
-                    print("*", end="")
-        print("")
+                    out.write("*")
+        out.write("\n")
         return J_T_val
 
     return info_hook
