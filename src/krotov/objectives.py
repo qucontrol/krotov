@@ -1,3 +1,12 @@
+"""Routines for formulating objectives.
+
+Objectives, represented as an :class:`Objective` instance, describe the
+*physical* objective of an optimization, e.g. a state-to-state transformation,
+or a quantum gate. This is distinct from the *mathematical* formulation of an
+optimization functional (:mod:`krotov.functionals`). For the same physical
+objective, there are usually several different functionals whose minimization
+achieve that objective.
+"""
 import sys
 import copy
 import itertools
