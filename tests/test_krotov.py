@@ -176,7 +176,7 @@ def test_continue_optimization(
     testdir = os.path.splitext(request.module.__file__)[0]
     logfile_expected = os.path.join(testdir, 'oct.log')
 
-    with open(logfile, 'w') as log_fh:
+    with open(logfile, 'w', encoding='utf8') as log_fh:
 
         # initial optimization
         with caplog.at_level(logging.WARNING):
