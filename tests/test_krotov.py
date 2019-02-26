@@ -179,21 +179,28 @@ def test_continue_optimization(
     with open(logfile, 'w') as log_fh:
 
         # initial optimization
-        oct_result1 = krotov.optimize_pulses(
-            objectives,
-            pulse_options=pulse_options,
-            tlist=tlist,
-            propagator=krotov.propagators.expm,
-            chi_constructor=krotov.functionals.chis_re,
-            store_all_pulses=True,
-            info_hook=krotov.info_hooks.print_table(
-                J_T=krotov.functionals.J_T_re, out=log_fh
-            ),
-            check_convergence=krotov.convergence.Or(
-                krotov.convergence.check_monotonic_error,
-                krotov.convergence.dump_result(dumpfile, every=2),
-            ),
-            iter_stop=3,
+        with caplog.at_level(logging.WARNING):
+            oct_result1 = krotov.optimize_pulses(
+                objectives,
+                pulse_options=pulse_options,
+                tlist=tlist,
+                propagator=krotov.propagators.expm,
+                chi_constructor=krotov.functionals.chis_re,
+                store_all_pulses=True,
+                info_hook=krotov.info_hooks.print_table(
+                    J_T=krotov.functionals.J_T_re, out=log_fh
+                ),
+                check_convergence=krotov.convergence.Or(
+                    krotov.convergence.check_monotonic_error,
+                    krotov.convergence.dump_result(dumpfile, every=2),
+                ),
+                iter_stop=3,
+                skip_initial_forward_propagation=True,
+                # not officially supported, but should work in this case
+            )
+        assert (
+            "You should not use `skip_initial_forward_propagation`"
+            in caplog.text
         )
 
         assert len(oct_result1.iters) == 4  # 0 ... 3
@@ -308,9 +315,6 @@ def test_continue_optimization(
             propagator=krotov.propagators.expm,
             chi_constructor=krotov.functionals.chis_re,
             store_all_pulses=True,
-            info_hook=krotov.info_hooks.print_table(
-                J_T=krotov.functionals.J_T_re
-            ),
             check_convergence=krotov.convergence.Or(
                 krotov.convergence.check_monotonic_error,
                 krotov.convergence.dump_result(dumpfile, every=2),
@@ -331,7 +335,7 @@ def test_continue_optimization(
         propagator=krotov.propagators.expm,
         chi_constructor=krotov.functionals.chis_re,
         store_all_pulses=True,
-        info_hook=krotov.info_hooks.print_table(J_T=krotov.functionals.J_T_re),
+        info_hook=krotov.functionals.J_T_re,
         check_convergence=krotov.convergence.Or(
             krotov.convergence.check_monotonic_error,
             krotov.convergence.dump_result(dumpfile, every=2),

@@ -49,6 +49,7 @@ Thus, they calculate $J_T$ from the same keyword arguments as the `info_hook`.
 The values for $J_T$ may be used in a convergence analysis, see
 :mod:`krotov.convergence`.
 """
+import logging
 import qutip
 import numpy as np
 
@@ -119,6 +120,10 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
         ]
     res = 0j
     for (obj, τ) in zip(objectives, tau_vals):
+        if τ is None:
+            logger = logging.getLogger('krotov')
+            logger.warning("τ is None in f_tau")
+            continue
         if hasattr(obj, 'weight'):
             res += obj.weight * τ
         else:
