@@ -292,13 +292,15 @@ def test_continue_optimization(
 
         assert str(oct_result4) == str(oct_result3)
 
+    # fmt: off
     # check the combined log file
     if not os.path.isfile(logfile_expected):
         copyfile(logfile, logfile_expected)
-    with open(logfile) as fh1, open(logfile_expected) as fh2:
+    with open(logfile, encoding='utf8') as fh1, open(logfile_expected, encoding='utf8') as fh2:
         for line1 in fh1:
             line2 = next(fh2)
             assert line1[:65] == line2[:65]
+    # fmt: on
 
     # continue from an incomplete dump file
 
