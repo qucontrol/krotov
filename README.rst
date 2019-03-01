@@ -38,7 +38,7 @@ The ``krotov`` package is built on top of `QuTiP`_.
 
 Development happens on `Github`_. You can read the full documentation at `ReadTheDocs`_.
 
-If you use the ``krotov`` package in your research, please :ref:`cite it <CitingKrotov>`.
+If you use the ``krotov`` package in your research, please `cite it <https://krotov.readthedocs.io/en/latest/01_overview.html#citing-the-krotov-package>`_.
 
 .. _QDYN Fortran library: https://www.qdyn-library.net
 .. _QuTiP: http://qutip.org
@@ -195,35 +195,3 @@ Then,
 See `Using Krotov with QuTiP <https://krotov.readthedocs.io/en/latest/qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://krotov.readthedocs.io/en/latest/examples.html#krotov-example-notebooks>`_ for details.
 
 .. _Jupyter notebook: http://jupyter.org
-
-
-.. _CitingKrotov:
-
-Citing the Krotov Package
--------------------------
-
-
-.. attention::
-
-   Please cite the ``krotov`` package as
-
-   * \M. H. Goerz *et al*., *Krotov: A Python implementation of Krotov's method for quantum optimal control*, `arXiv:1902.11284 <https://arxiv.org/abs/1902.11284>`_ (2019)
-
-You can also print this from ``krotov.__citation__``:
-
-.. code-block:: python
-
-   >>> print(krotov.__citation__)
-   M. H. Goerz et al., Krotov: A Python implementation of Krotov's method for quantum optimal control, arXiv:1902.11284 (2019)
-
-The corresponding BibTeX entry is available in ``krotov.__bibtex__``:
-
-.. code-block:: python
-
-   >>> print(krotov.__bibtex__)
-   @article{arxiv1902.11284,
-       author = {Michael H. Goerz and Daniel Basilewitsch and Fernando Gago-Encinas and Matthias G. Krauss and Karl P. Horn and Daniel M. Reich and Christiane P. Koch},
-       title = {Krotov: A {Python} implementation of {Krotov's} method for quantum optimal control},
-       year = {2019},
-       journal = {arXiv:1902.11284},
-   }
