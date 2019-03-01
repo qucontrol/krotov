@@ -3,10 +3,10 @@ History
 =======
 
 
-(next release)
---------------
+0.3.0 (2019-03-01)
+------------------
 
-* Added: Preprint information ((``krotov.__arxiv__``, ``krotov.__citation__``, ``krotov.__bibtex__``)
+* Added: Preprint citation information (``krotov.__arxiv__``, ``krotov.__citation__``, ``krotov.__bibtex__``)
 * Added: Ability to continue from a previous optimization (`#26`_)
 * Added: Parameter ``out`` to ``print_table`` info-hook
 * Added: Parameter ``finalize`` to ``Result.load``
