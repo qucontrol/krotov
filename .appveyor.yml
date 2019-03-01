@@ -21,4 +21,4 @@ install:
 build: off
 
 test_script:
-  - ps: pytest --doctest-modules --cov=krotov --nbval --sanitize-with docs\nbval_sanitize.cfg --durations=10 src tests (get-item docs\*.rst).FullName docs\notebooks\01_example_simple_state_to_state.ipynb docs\notebooks\02_example_lambda_system_rwa_complex_pulse.ipynb docs\notebooks\03_example_lambda_system_rwa_non_hermitian.ipynb
+  - ps: pytest --doctest-modules --cov=krotov --nbval --sanitize-with docs\nbval_sanitize.cfg --durations=10 src tests README.rst (get-item docs\*.rst).FullName docs\notebooks\01_example_simple_state_to_state.ipynb docs\notebooks\02_example_lambda_system_rwa_complex_pulse.ipynb docs\notebooks\03_example_lambda_system_rwa_non_hermitian.ipynb

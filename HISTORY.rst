@@ -6,6 +6,7 @@ History
 (next release)
 --------------
 
+* Added: Preprint information ((``krotov.__arxiv__``, ``krotov.__citation__``, ``krotov.__bibtex__``)
 * Added: Ability to continue from a previous optimization (`#26`_)
 * Added: Parameter ``out`` to ``print_table`` info-hook
 * Added: Parameter ``finalize`` to ``Result.load``

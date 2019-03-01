@@ -19,12 +19,15 @@ Welcome to the Krotov package's documentation!
 .. image:: https://img.shields.io/coveralls/github/qucontrol/krotov/master.svg
    :alt: Coveralls
    :target: https://coveralls.io/github/qucontrol/krotov?branch=master
-.. image:: https://readthedocs.org/projects/krotov/badge/?version=latest
-   :alt: Documentation Status
-   :target: https://krotov.readthedocs.io/en/latest/?badge=latest
 .. image:: https://img.shields.io/badge/License-BSD-green.svg
    :alt: BSD License
    :target: https://opensource.org/licenses/BSD-3-Clause
+.. image:: https://readthedocs.org/projects/krotov/badge/?version=latest
+   :alt: Documentation Status
+   :target: https://krotov.readthedocs.io/en/latest/?badge=latest
+.. image:: https://img.shields.io/badge/arXiv-1902.11284-red.svg
+   :alt: arXiv
+   :target: https://arxiv.org/abs/1902.11284
 
 
 .. toctree::

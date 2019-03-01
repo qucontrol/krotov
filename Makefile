@@ -4,7 +4,7 @@ CONDA_PACKAGES = qutip
 TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
 TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 -x -s
-TESTS = src tests docs/notebooks/*.ipynb docs/*.rst
+TESTS = src tests docs/notebooks/*.ipynb README.rst docs/*.rst
 
 
 define PRINT_HELP_PYSCRIPT
