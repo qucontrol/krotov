@@ -12,7 +12,7 @@ more technical routines for parallelization, low-level data conversion, and
 estimators for second-order updates.
 """
 
-__version__ = '0.3.0'
+__version__ = '0.3.0+dev'
 
 __arxiv__ = '1902.11284'
 
