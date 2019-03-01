@@ -44,7 +44,7 @@ The functional consists of three parts:
       g_a(\epsilon_l(t))
           = \frac{\lambda_{a, l}}{S_l(t)} \Delta\epsilon_l^2(t)\,.
 
-  We introduce two parameters, the (inverse) Krotov "step width"
+  We introduce two parameters, the (inverse) Krotov "step size"
   :math:`\lambda_{a,l}` and the shape function :math:`S_l(t)` which can be used
   to influence desired properties of the optimized controls.
   :math:`\Delta\epsilon_l(t)` is the update of the control in a single iteration of
@@ -242,7 +242,7 @@ If :math:`S(t) \in [0,1]` is chosen as a function that smoothly goes to zero at
 of the optimization time interval. Thus, a smooth switch-on and switch-off can
 be maintained. The scaling factor :math:`\lambda_a` controls the overall
 magnitude of the pulse update thereby taking the role of an (inverse) "step
-width".  Values that are too large will change :math:`\epsilon^{(i)}(t)` by
+size".  Values that are too large will change :math:`\epsilon^{(i)}(t)` by
 only a small amount in every iteration, causing slow convergence. Values that
 are too small will cause sharp spikes in the optimized control and numerical
 instabilities (including a loss of monotonic convergence).
@@ -450,7 +450,7 @@ Choice of λₐ
 
 The monotonic convergence of Krotov's method is only guaranteed in the
 continuous limit; a coarse time step must be compensated by larger values of
-the inverse step width :math:`\lambda_a`, slowing down convergence. Generally,
+the inverse step size :math:`\lambda_a`, slowing down convergence. Generally,
 choosing :math:`\lambda_a` too small will lead to numerical instabilities and
 unphysical features in the optimized pulse. A lower limit for :math:`\lambda_a`
 can be determined from the requirement that the change
