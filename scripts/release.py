@@ -31,17 +31,19 @@ def make_release(package_name):
     click.confirm("Do you want to make a release?", abort=True)
     check_git_clean()
     new_version = ask_for_release_version(package_name)
-    run_tests()
     set_version(join('.', 'src', package_name, '__init__.py'), new_version)
     edit_history(new_version)
     while not check_dist():
         click.confirm(
             "Fix errors manually! Continue?", default=True, abort=True
         )
-    check_docs()
     make_release_commit(new_version)
+    make_notebooks()
+    check_docs()
+    run_tests()
+    make_notebooks_commit(new_version)
     make_upload(test=True)
-    push_release_commit()
+    push_release_commits()
     make_upload(test=False)
     make_and_push_tag(new_version)
     next_dev_version = new_version + '+dev'
@@ -281,6 +283,16 @@ def check_dist():
         return False
 
 
+def make_notebooks():
+    click.echo("Re-creating notebooks...")
+    try:
+        run(['make', 'notebooks'], check=True)
+        return True
+    except CalledProcessError as exc_info:
+        click.echo("ERROR: %s" % str(exc_info))
+        return False
+
+
 def check_docs():
     """Verify the documentation (interactively)"""
     click.echo("Making the documentation....")
@@ -305,6 +317,21 @@ def make_release_commit(version):
             '-a',
             '-m',
             "Bump version to %s and update HISTORY" % version,
+        ],
+        check=True,
+    )
+
+
+def make_notebooks_commit(version):
+    """Commit 'Reevaluate notebooks for version xxx'"""
+    click.confirm("Make commit for notebooks?", default=True, abort=True)
+    run(
+        [
+            'git',
+            'commit',
+            '-a',
+            '-m',
+            "Reevaluate notebooks for version %s" % version,
         ],
         check=True,
     )
@@ -341,7 +368,7 @@ def make_upload(test=True):
             )
 
 
-def push_release_commit():
+def push_release_commits():
     """Push local commits to origin"""
     click.confirm("Push release commit to origin?", default=True, abort=True)
     run(['git', 'push', 'origin', 'master'], check=True)
