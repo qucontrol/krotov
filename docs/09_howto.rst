@@ -39,6 +39,28 @@ independent (real-valued) controls.
 See the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for an example.
 
 
+How to stop the optimization when the error crosses some threshold
+------------------------------------------------------------------
+
+By default, an optimization stops after a predefined number of iterations
+(`iter_stop` parameter in :func:`.optimize_pulses`). However, through the
+interplay of the `info_hook` and the `check_convergence` routine  passed to
+:func:`.optimize_pulses`, the optimization can be stopped based on the
+optimization success or the rate of convergence: The `info_hook` routine should
+return the value of the optimization functional or error, which is accessible to
+`check_convergence` via the :attr:`.Result.info_vals` attribute, see
+:mod:`krotov.convergence` for details.
+
+Generally, you should use the :func:`krotov.info_hooks.print_table` function as
+an `info_hook`, which receives a function to evaluate the optimization
+functional $J_T$ as a parameter. Then, use
+:func:`krotov.convergence.value_below` as a `check_convergence` routine to stop
+the optimization when $J_T$ falls below some given threshold.
+
+See the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for
+an example.
+
+
 How to exclude a control from the optimization
 ----------------------------------------------
 
