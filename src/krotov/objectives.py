@@ -65,7 +65,7 @@ def _adjoint(op):
 
 
 class Objective:
-    """A single objective for optimization with Krotov's method
+    """A single objective for optimization with Krotov's method.
 
     Args:
         initial_state (qutip.Qobj): value for :attr:`initial_state`
@@ -87,7 +87,8 @@ class Objective:
             passed to :func:`.optimize_pulses`.
         c_ops (list or None): List of collapse operators, cf.
             :func:`~qutip.mesolve.mesolve`, in lieu of :attr:`H` being a
-                Liouvillian.
+            Liouvillian.
+
     Example:
 
         >>> H0 = - 0.5 * qutip.operators.sigmaz()
@@ -181,13 +182,32 @@ class Objective:
             c_ops=[_adjoint(op) for op in self.c_ops],
         )
 
-    def mesolve(self, tlist, rho0=None, e_ops=None, **kwargs):
-        """Run :func:`qutip.mesolve.mesolve` on the system of the objective
+    def mesolve(
+        self, tlist, rho0=None, H=None, c_ops=None, e_ops=None, **kwargs
+    ):
+        """Run :func:`qutip.mesolve.mesolve` on the system of the objective.
 
         Solve the dynamics for the :attr:`H` and :attr:`c_ops` of the
-        objective. If `rho0` is not given, the :attr:`initial_state` will be
-        propagated. All other arguments will be passed to
-        :func:`qutip.mesolve.mesolve`.
+        objective, starting from the objective's :attr:`initial_state`, by
+        delegating to :func:`qutip.mesolve.mesolve`. Both the initial state and
+        the dynamical generator for the propagation can be overridden by
+        passing `rho0` and `H`/`c_ops`.
+
+        Args:
+            tlist (numpy.ndarray): array of time grid points on which the
+                states are defined
+            rho0 (qutip.Qobj or None): The initial state for the propagation.
+                If None, the :attr:`initial_state` attribute is used.
+            H (qutip.Qobj or None): The dynamical generator (Hamiltonian or
+                Liouvillian) for the propagation. If None, the :attr:`H`
+                attribute is used.
+            c_ops (list or None): List of collapse (Lindblad) operators. If
+                None, the :attr:`c_ops` attribute is used.
+            e_ops (list or None): A list of operators whose expectation values
+                to calculate, for every point in `tlist`. See
+                :func:`qutip.mesolve.mesolve`.
+            **kwargs: All further arguments will be passed to
+                :func:`qutip.mesolve.mesolve`.
 
         Returns:
             qutip.solver.Result: Result of the propagation, see
@@ -197,8 +217,10 @@ class Objective:
             rho0 = self.initial_state
         if e_ops is None:
             e_ops = []
-        H = self.H
-        c_ops = self.c_ops
+        if H is None:
+            H = self.H
+        if c_ops is None:
+            c_ops = self.c_ops
         if FIX_QUTIP_932 and sys.platform == "darwin":  # pragma: no cover
             # "darwin" = macOS; the "pragma" excludes from coverage analysis
             controls = extract_controls([self])
@@ -215,8 +237,10 @@ class Objective:
             H=H, rho0=rho0, tlist=tlist, c_ops=c_ops, e_ops=e_ops, **kwargs
         )
 
-    def propagate(self, tlist, *, propagator, rho0=None, e_ops=None):
-        """Propagates the system of the objective over the entire time grid
+    def propagate(
+        self, tlist, *, propagator, rho0=None, H=None, c_ops=None, e_ops=None
+    ):
+        """Propagate the system of the objective over the entire time grid.
 
         Solve the dynamics for the `H` and `c_ops` of the objective. If `rho0`
         is not given, the `initial_state` will be propagated. This is similar
@@ -239,6 +263,10 @@ class Objective:
             qutip.solver.Result: Result of the propagation, using the same
             structure as :meth:`mesolve`.
         """
+        if H is None:
+            H = self.H
+        if c_ops is None:
+            c_ops = self.c_ops
         if e_ops is None:
             e_ops = []
         result = QutipSolverResult()
@@ -253,7 +281,7 @@ class Objective:
         result.states = []
         result.expect = []
         result.num_expect = len(e_ops)
-        result.num_collapse = len(self.c_ops)
+        result.num_collapse = len(c_ops)
         for _ in e_ops:
             result.expect.append([])
         state = rho0
@@ -272,17 +300,17 @@ class Objective:
             for control in controls
         ]
         for time_index in range(len(tlist) - 1):  # index over intervals
-            H = plug_in_pulse_values(self.H, pulses, mapping[0], time_index)
-            c_ops = [
+            H_at_t = plug_in_pulse_values(H, pulses, mapping[0], time_index)
+            c_ops_at_t = [
                 plug_in_pulse_values(c_op, pulses, mapping[ic + 1], time_index)
-                for (ic, c_op) in enumerate(self.c_ops)
+                for (ic, c_op) in enumerate(c_ops)
             ]
             dt = tlist[time_index + 1] - tlist[time_index]
             state = propagator(
-                H,
+                H_at_t,
                 state,
                 dt,
-                c_ops,
+                c_ops_at_t,
                 initialize=True,  # initialize=(time_index == 0)
             )
             if len(e_ops) == 0:
