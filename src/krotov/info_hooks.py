@@ -237,6 +237,7 @@ def print_debug_information(
                 )
             )
         )
+    out.flush()
 
 
 def _grapheme_len(text):
@@ -422,6 +423,7 @@ def print_table(
                 if ΔJ > 0:
                     out.write("*")
         out.write("\n")
+        out.flush()
         return J_T_val
 
     return info_hook
