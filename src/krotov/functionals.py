@@ -107,8 +107,8 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
     such that the resulting $f_{\tau}$ lies in the unit circle of the complex
     plane. Usually, this means that the weights should sum to $N$. The
     exception would be for mixed target states, where the weights should
-    compensate for the non-unit purity. The problem is circumvented by using
-    :func:`J_T_hs` for mixed target states.
+    compensate for the non-unit purity. The problem may be circumvented by
+    using :func:`J_T_hs` for mixed target states.
 
     The `kwargs` are ignored, allowing the function to be used in an
     `info_hook`.
@@ -277,9 +277,10 @@ def J_T_re(fw_states_T, objectives, tau_vals=None, **kwargs):
     in :func:`F_re`.
 
     Note:
-        If the `fw_states_T` or the target states are mixed states, it is
-        preferable to use :func:`J_T_hs`, as $J_{T,\text{re}}$ may take
-        negative values for mixed states.
+        If the target states are mixed, $J_{T,\text{re}}$ may take
+        negative values (for `fw_states_T` that are "in the right direction",
+        but more pure than the target states). In this case, you may consider
+        using :func:`J_T_hs`.
     """
     return 1 - F_re(fw_states_T, objectives, tau_vals)
 
@@ -354,7 +355,11 @@ def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
         For pure states (or Hilbert space states), $J_{T,\text{hs}}$ is
         equivalent to $J_{T,\text{re}}$, cf. :func:`J_T_re`. However, the
         backward-propagated states $\chi_k$ obtained from the two functionals
-        (:func:`chis_re` and :func:`chis_hs`) are *not* equivalent.
+        (:func:`chis_re` and :func:`chis_hs`) are *not* equivalent. This may
+        result in a vastly different optimization landscape that requires a
+        significantly different value of the $\lambda_a$ value that regulates
+        the overall magnitude of the pulse updates (given in `pulse_options` in
+        :func:`.optimize_pulses`).
     """
     if tau_vals is None:
         tau_vals = [
