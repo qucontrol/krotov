@@ -17,8 +17,8 @@ advanced gate optimizations, also see :ref:`HowtoLIOptimization`,
 :ref:`HowtoRobustOptimization`.
 
 
-How to optimize complex control fields
---------------------------------------
+How to optimize complex-valued control fields
+---------------------------------------------
 
 This implementation of Krotov's method requires real-valued control fields. You
 must rewrite your Hamiltonian to contain the real part and the imaginary part
@@ -215,6 +215,164 @@ An appropriate set of objectives can be generated with the
 :func:`~krotov.objectives.ensemble_objectives` function.
 
 
+.. _HowtoSpectralConstraints:
+
+How to apply spectral constraints
+---------------------------------
+
+In principle, Krotov's method can include spectral constraints while
+maintaining the guarantee for monotonic convergence :cite:`ReichJMO14` .
+However, the calculation of the pulse update with such spectral constraints
+requires solving a Fredholm equation of the second kind, which has not yet been
+implemented numerically. Thus, the ``krotov`` package does not support this
+approach (and no such support is planned).
+
+A "cheap" alternative that usually yields good results is to apply a spectral
+filter to the optimized pulses after each iteration. The
+:func:`.optimize_pulses` function allows this via the
+`modify_params_after_iter` argument.
+
+For example, the following function restricts the spectrum of each pulse to a
+given range::
+
+    def apply_spectral_filter(tlist, w0, w1):
+       """Spectral filter for real-valued pulses.
+
+       The resulting filter function performs a Fast-Fourier-Transform (FFT) of
+       each optimized pulse, and sets spectral components for angular
+       frequencies below `w0` or above `w1` to zero. The filtered pulse is then
+       the result of the inverse FFT, and multiplying again with the update
+       shape for the pulse, to ensure that the filtered pulse still fulfills
+       the required boundary conditions.
+
+       Args:
+           tlist (numpy.ndarray): Array of time grid values. All pulses must be
+               defined on the intervals of this time grid
+           w0 (float): The lowest allowed (angular) frequency
+           w1 (float): The highest allowed (angular) frequency
+
+       Returns:
+           callable: A function that can be passed to
+           `modify_params_after_iter` to apply the spectral filter.
+       """
+
+        dt = tlist[1] - tlist[0]  # assume equi-distant time grid
+
+        n = len(tlist) - 1  # = len(pulse)
+        # remember that pulses are defined on intervals of tlist
+
+        w = np.abs(np.fft.fftfreq(n, d=dt / (2.0 * np.pi)))
+        # the normalization factor 2π means that w0 and w1 are angular
+        # frequencies, corresponding directly to energies in the Hamiltonian
+        # (ħ = 1).
+
+        flt = (w0 <= w) * (w <= w1)
+        # flt is the (boolean) filter array, equivalent to an array of values 0
+        # and 1
+
+        def _filter(**kwargs):
+            # same interface as an `info_hook` function
+            pulses = kwargs['optimized_pulses']
+            shape_arrays = kwargs['shape_arrays']
+            for (pulse, shape) in zip(pulses, shape_arrays):
+                spectrum = np.fft.fft(pulse)
+                # apply the filter by element-wise multiplication
+                spectrum[:] *= flt[:]
+                # after the inverse fft, we should also multiply with the
+                # update shape function. Otherwise, there is no guarantee that
+                # the filtered pulse will be zero at t=0 and t=T (assuming that
+                # is what the update shape is supposed to enforce). Also, it is
+                # important that we overwrite `pulse` in-place (pulse[:] = ...)
+                pulse[:] = np.fft.ifft(spectrum).real * shape
+
+        return _filter
+
+This function is passed to :func:`.optimize_pulses` as e.g.
+``modify_params_after_iter=apply_spectral_filter(tlist, 0, 7)`` to constraining
+the spectrum of the pulse to angular frequencies $\omega \in [0, 7]$.
+You may want to explore how such a filter behaves in the example of the
+:ref:`/notebooks/05_example_transmon_xgate.ipynb`.
+
+Modifying the optimized pulses "manually" through a
+``modify_params_after_iter`` function means that we lose all guarantees of
+monotonic convergence. If the optimization with a spectral filter does not
+converge, you should increase the value of $\lambda_a$ in the `pulse_options`
+that are passed to :func:`.optimize_pulses`. A larger value of $\lambda_a$
+results in smaller updates in each iteration. This should also translate into
+the filter pulses being closer to the unfiltered pulses, increasing the
+probability that the changes due to the filter do not undo the monotonic
+convergence. You may also find that the optimization fails if the control
+problem physically cannot be solved with controls in the desired spectral
+range. Without a good physical intuition, trial and error may be
+required.
+
+
+How to limit the amplitude of the controls
+------------------------------------------
+
+Amplitude constraints on the control can be realized indirectly through
+parametrization :cite:`MuellerPRA2011`. For example, consider the physical
+Hamiltonian :math:`\Op{H} = \Op{H}_0 + \epsilon(t) \Op{H}_1`.
+
+There are several possible parametrizations of :math:`\epsilon(t)`
+in terms of an unconstrained function :math:`u(t)`:
+
+* For :math:`\epsilon(t) \ge 0`:
+
+   .. math::
+
+      \epsilon(t) = u^2(t)
+
+* For :math:`0 \le \epsilon(t) < \epsilon_{\max}`:
+
+   .. math::
+
+      \epsilon(t) = \epsilon_{\max} \tanh^2\left(u(t)\right)
+
+* For :math:`\epsilon_{\min} < \epsilon(t) < \epsilon_{\max}`:
+
+   .. math::
+
+      \epsilon(t)
+         = \frac{\epsilon_{\max} - \epsilon_{\min}}{2}
+              \tanh\left(u(t)\right)
+            + \frac{\epsilon_{\max} + \epsilon_{\min}}{2}
+
+Krotov's method can now calculate the update :math:`\Delta u(t)` in each
+iteration, and then :math:`\Delta \epsilon(t)` via the above equations.
+
+There is a caveat: In the update equation :eq:`krotov_first_order_update`, we
+now have the term
+
+.. math::
+
+   \Bigg(
+         \left.\frac{\partial \Op{H}}{\partial u}\right\vert_{{\scriptsize \begin{matrix}\phi^{(i+1)}(t)\\u^{(i+1)}(t)\end{matrix}}}
+   \Bigg)
+   =
+   \Bigg(
+         \left.\frac{\partial \epsilon}{\partial u}\frac{\partial \Op{H}}{\partial \epsilon}\right\vert_{{\scriptsize \begin{matrix}\phi^{(i+1)}(t)\\u^{(i+1)}(t)\end{matrix}}}
+   \Bigg)
+
+on the right hand side. As the dependendence of :math:`\epsilon(t)` on
+:math:`u(t)` is non-linear, we are left with a dependency on the unknown
+updated parametrization :math:`u^{(i+1)}(t)`. We resolve this by approximating
+:math:`u^{(i+1)}(t) \approx u^{(i)}(t)`, or equivalently :math:`\Delta u(t) \ll
+u(t)`, which can be enforced by choosing a sufficiently large value of
+:math:`\lambda_a` in the `pulse_options` that are passed to
+:func:`.optimize_pulses`.
+
+Currently, the ``krotov`` package does not yet support parametrizations in the
+above form, although this is a `planned feature <issue23_>`_.
+In the meantime, you could modify the control to fit within the desired
+amplitude constaints in the same way as applying spectral constaints, see
+:ref:`HowtoSpectralConstraints`.
+
+
+.. _issue23: https://github.com/qucontrol/krotov/issues/23
+
+
+
 How to parallelize the optimization
 -----------------------------------
 
@@ -228,7 +386,7 @@ How to prevent losing an optimization result
 --------------------------------------------
 
 Optimizations usually take several hundred to several thousand iterations to
-fully converge. Thuse, the :func:`.optimize_pulses` routine  may require
+fully converge. Thus, the :func:`.optimize_pulses` routine  may require
 significant runtime (often multiple days for large problems). Once an
 optimization has completed, you are strongly encouraged to store the result to
 disk, using :meth:`.Result.dump`.  You may also consider using
