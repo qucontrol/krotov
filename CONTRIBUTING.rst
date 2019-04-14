@@ -152,7 +152,7 @@ you are strongly encouraged to use. These include:
   Do not use ``\langle``/``\rangle``/``\vert`` manually!
 * ``\ket``, e.g. ``$\ket{\Psi}$`` for :math:`\ket{\Psi}` (or ``\Ket{}`` for auto-resizing).
 * ``\Braket``, e.g. ``$\Braket{\Phi}{\Psi}$`` for :math:`\Braket{\Phi}{\Psi}`.
-* ``\Op`` for for quantum operators, e.g. ``$\Op{H}$`` for :math:`\Op{H}`.
+* ``\Op`` for quantum operators, e.g. ``$\Op{H}$`` for :math:`\Op{H}`.
 * ``\Abs`` for absolute values, e.g. ``$\Abs{x}$`` for :math:`\Abs{x}`.
 * ``\AbsSq``  for the absolute-square, e.g. ``$\AbsSq{\Braket{\Phi}{\Psi}}$`` for :math:`\AbsSq{\Braket{\Phi}{\Psi}}`.
 * ``\avg`` for the expectation values, e.g. ``$\avg{\Op{H}}$`` for :math:`\avg{\Op{H}}` (or ``\Avg{}`` for auto-resizing).
@@ -309,7 +309,7 @@ they are not supported by the `Semantic Versioning`_ specification.
 The current version is available through the ``__version__`` attribute of the
 :mod:`krotov` package:
 
-.. code-block:: python
+.. doctest::
 
     >>> import krotov
     >>> krotov.__version__   # doctest: +SKIP

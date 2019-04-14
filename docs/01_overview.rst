@@ -16,14 +16,14 @@ Citing the Krotov Package
 
 You can also print this from ``krotov.__citation__``:
 
-.. code-block:: python
+.. doctest::
 
    >>> print(krotov.__citation__)
    M. H. Goerz et al., Krotov: A Python implementation of Krotov's method for quantum optimal control, arXiv:1902.11284 (2019)
 
 The corresponding BibTeX entry is available in ``krotov.__bibtex__``:
 
-.. code-block:: python
+.. doctest::
 
    >>> print(krotov.__bibtex__)
    @article{arxiv1902.11284,

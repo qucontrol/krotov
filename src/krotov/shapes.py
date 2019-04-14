@@ -7,7 +7,13 @@ import functools
 import numpy as np
 
 __all__ = [
-    'qutip_callback', 'zero_shape', 'one_shape', 'flattop', 'box', 'blackman']
+    'qutip_callback',
+    'zero_shape',
+    'one_shape',
+    'flattop',
+    'box',
+    'blackman',
+]
 
 
 def qutip_callback(func, **kwargs):
@@ -77,24 +83,24 @@ def flattop(t, t_start, t_stop, t_rise, t_fall=None, func='blackman'):
 
 
 def _flattop_sinsq(t, t_start, t_stop, t_rise, t_fall):
-    if (t >= t_start) and (t <= t_stop):
+    if t_start <= t <= t_stop:
         f = 1.0
         if t <= t_start + t_rise:
-            f = np.sin(np.pi * (t-t_start) / (2.0*t_rise))**2
+            f = np.sin(np.pi * (t - t_start) / (2.0 * t_rise)) ** 2
         elif t >= t_stop - t_fall:
-            f = np.sin(np.pi * (t-t_stop) / (2.0*t_fall))**2
+            f = np.sin(np.pi * (t - t_stop) / (2.0 * t_fall)) ** 2
         return f
     else:
         return 0.0
 
 
 def _flattop_blackman(t, t_start, t_stop, t_rise, t_fall):
-    if (t >= t_start) and (t <= t_stop):
+    if t_start <= t <= t_stop:
         f = 1.0
         if t <= t_start + t_rise:
-            f = blackman(t, t_start, t_start + 2*t_rise)
+            f = blackman(t, t_start, t_start + 2 * t_rise)
         elif t >= t_stop - t_fall:
-            f = blackman(t, t_stop - 2*t_fall, t_stop)
+            f = blackman(t, t_stop - 2 * t_fall, t_stop)
         return f
     else:
         return 0.0
@@ -122,19 +128,29 @@ def box(t, t_start, t_stop):
 
 
 def blackman(t, t_start, t_stop, a=0.16):
-    """Blackman window shape
+    r"""Blackman window shape
+
+    .. math::
+
+        B(t; t_0, t_1) =
+            \frac{1}{2}\left(
+                1 - a - \cos\left(2\pi \frac{t - t_0}{t_1 - t_0}\right)
+                + a \cos\left(4\pi \frac{t - t_0}{t_1 - t_0}\right)
+            \right)\,,
+
+    with $a = 0.16$.
 
     See http://en.wikipedia.org/wiki/Window_function#Blackman_windows
 
     A Blackman shape looks nearly identical to a Gaussian with a 6-sigma
-    interval between start and stop  Unlike the Gaussian,
+    interval between `t_start` and `t_stop`.  Unlike the Gaussian,
     however, it will go exactly to zero at the edges. Thus, Blackman pulses
     are often preferable to Gaussians.
 
     Args:
         t (float or numpy.ndarray): Time point or time grid
-        t_start (float): Starting point of Blackman shape
-        t_stop (float): End point of Blackman shape
+        t_start (float): Starting point $t_0$ of Blackman shape
+        t_stop (float): End point $t_1$ of Blackman shape
 
     Returns:
         float or numpy.ndarray: If `t` is a float, return the value of the
@@ -145,6 +161,12 @@ def blackman(t, t_start, t_stop, a=0.16):
     T = t_stop - t_start
     box_vec = np.vectorize(box)
     return (
-        0.5 * box_vec(t, t_start, t_stop) * (
-            1.0 - a - np.cos(2.0*np.pi * (t-t_start)/T) +
-            a * np.cos(4.0 * np.pi * (t-t_start)/T)))
+        0.5
+        * box_vec(t, t_start, t_stop)
+        * (
+            1.0
+            - a
+            - np.cos(2.0 * np.pi * (t - t_start) / T)
+            + a * np.cos(4.0 * np.pi * (t - t_start) / T)
+        )
+    )
