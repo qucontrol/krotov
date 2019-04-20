@@ -40,7 +40,6 @@ def optimize_pulses(
     iter_start=0,
     iter_stop=5000,
     check_convergence=None,
-    state_dependent_constraint=None,
     info_hook=None,
     modify_params_after_iter=None,
     storage='array',
@@ -129,9 +128,6 @@ def optimize_pulses(
             the optimization has converged. If None, the optimization will only
             end when `iter_stop` is reached. See :mod:`krotov.convergence` for
             details.
-        state_dependent_constraint (None or callable): Function that evaluates
-            a state-dependent constraint. If None, optimize without any
-            state-dependent constraint. Currently not implemented.
         info_hook (None or callable): Function that is called after each
             iteration of the optimization, for the purpose of analysis. Any
             value returned by `info_hook` (e.g. an evaluated functional
@@ -200,8 +196,6 @@ def optimize_pulses(
             info_hook = modify_params_after_iter
         else:
             info_hook = chain(modify_params_after_iter, info_hook)
-    if state_dependent_constraint is not None:
-        raise NotImplementedError("state_dependent_constraint")
     if isinstance(propagator, list):
         propagators = propagator
         assert len(propagators) == len(objectives)
