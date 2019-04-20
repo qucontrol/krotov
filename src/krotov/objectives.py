@@ -27,11 +27,9 @@ from .structural_conversions import (
 
 __all__ = [
     'Objective',
-    'summarize_qobj',
     'gate_objectives',
     'ensemble_objectives',
     'liouvillian',
-    'CtrlCounter',
 ]
 
 
@@ -345,7 +343,7 @@ class Objective:
             ...     target=ket11,
             ...     H=H
             ... )
-            >>> obj.summarize(ctrl_counter=CtrlCounter())
+            >>> obj.summarize(ctrl_counter=_CtrlCounter())
             '|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩'
             >>> obj = Objective(
             ...     initial_state=ket00,
@@ -353,27 +351,27 @@ class Objective:
             ...     H=H,
             ...     c_ops=[C1, C2]
             ... )
-            >>> obj.summarize(ctrl_counter=CtrlCounter())
+            >>> obj.summarize(ctrl_counter=_CtrlCounter())
             '|(2⊗2)⟩ - {H:[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]], c_ops:([NonHerm[2⊗2,2⊗2], u3[complex128]],[NonHerm[2⊗2,2⊗2], u4[complex128]])} - |(2⊗2)⟩'
         """
         if ctrl_counter is None:
             ctrl_counter = _CTRL_COUNTER
         if len(self.c_ops) == 0:
             res = "%s - {%s}" % (
-                summarize_qobj(self.initial_state, ctrl_counter),
-                summarize_qobj(self.H, ctrl_counter),
+                _summarize_qobj(self.initial_state, ctrl_counter),
+                _summarize_qobj(self.H, ctrl_counter),
             )
         else:
             res = "%s - {H:%s, c_ops:(%s)}" % (
-                summarize_qobj(self.initial_state, ctrl_counter),
-                summarize_qobj(self.H, ctrl_counter),
+                _summarize_qobj(self.initial_state, ctrl_counter),
+                _summarize_qobj(self.H, ctrl_counter),
                 ",".join(
-                    [summarize_qobj(c_op, ctrl_counter) for c_op in self.c_ops]
+                    [_summarize_qobj(c_op, ctrl_counter) for c_op in self.c_ops]
                 ),
             )
         if self.target is not None:
             if isinstance(self.target, qutip.Qobj):
-                res += " - %s" % (summarize_qobj(self.target, ctrl_counter))
+                res += " - %s" % (_summarize_qobj(self.target, ctrl_counter))
             else:
                 res += " - %r" % self.target
         return res
@@ -881,28 +879,28 @@ def liouvillian(H, c_ops):
         )
 
 
-def summarize_qobj(obj, ctrl_counter=None):
+def _summarize_qobj(obj, ctrl_counter=None):
     """Summarize a quantum object
 
-    A counter created by :func:`CtrlCounter` may be passed to distinguish
+    A counter created by :func:`_CtrlCounter` may be passed to distinguish
     control fields. If None, an automatic internal counter will be used.
 
     Example:
 
         >>> ket = qutip.ket([1, 0, 1])
-        >>> summarize_qobj(ket)
+        >>> _summarize_qobj(ket)
         '|(2⊗2⊗2)⟩'
         >>> bra = ket.dag()
-        >>> summarize_qobj(bra)
+        >>> _summarize_qobj(bra)
         '⟨(2⊗2⊗2)|'
         >>> rho = ket * bra
-        >>> summarize_qobj(rho)
+        >>> _summarize_qobj(rho)
         'Herm[2⊗2⊗2,2⊗2⊗2]'
         >>> a = qutip.create(10)
-        >>> summarize_qobj(a)
+        >>> _summarize_qobj(a)
         'NonHerm[10,10]'
         >>> S = qutip.to_super(a)
-        >>> summarize_qobj(S)
+        >>> _summarize_qobj(S)
         '[[10,10],[10,10]]'
     """
     if ctrl_counter is None:
@@ -947,12 +945,12 @@ def _summarize_qobj_nested_list(lst, ctrl_counter):
     """Summarize a nested-list time-dependent quantum object"""
     return (
         '['
-        + ", ".join([summarize_qobj(obj, ctrl_counter) for obj in lst])
+        + ", ".join([_summarize_qobj(obj, ctrl_counter) for obj in lst])
         + ']'
     )
 
 
-def CtrlCounter():
+def _CtrlCounter():
     """Constructor for a counter of controls.
 
     Returns a callable that returns a unique integer (starting at 1) for every
@@ -961,7 +959,7 @@ def CtrlCounter():
 
     Example:
 
-        >>> ctrl_counter = CtrlCounter()
+        >>> ctrl_counter = _CtrlCounter()
         >>> ctrl1 = np.zeros(10)
         >>> ctrl_counter(ctrl1)
         1
@@ -994,4 +992,4 @@ def CtrlCounter():
     return ctrl_counter
 
 
-_CTRL_COUNTER = CtrlCounter()  #: internal counter for controls
+_CTRL_COUNTER = _CtrlCounter()  #: internal counter for controls
