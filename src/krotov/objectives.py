@@ -44,22 +44,51 @@ signficant slowdown of the propagation, as it circumvents the use of Cython.
 """
 
 
-def _adjoint(op):
-    """Calculate adjoint of an operator in QuTiP nested-list format.
-    Controls are not modified."""
+def _adjoint(op, ignore_errors=False):
+    """Calculate adjoint of an object, specifically an operator in QuTiP
+    nested-list format.
+
+    Controls are not modified.
+
+    If the adjoint of `op` cannot be calculated, raise a :exc:`ValueError` or
+    return `op` unchanged if `ignore_errors` is True.
+    """
     if isinstance(op, list):
         adjoint_op = []
         for item in op:
             if isinstance(item, list):
-                assert len(item) == 2
-                adjoint_op.append([item[0].dag(), item[1]])
+                if len(item) != 2:
+                    if ignore_errors:
+                        return op
+                    else:
+                        raise ValueError(
+                            "%s is not the in the expected format of the "
+                            "two-element list '[operator, control]'" % item
+                        )
+                adjoint_op.append([_adjoint(item[0]), item[1]])
             else:
-                adjoint_op.append(item.dag())
+                adjoint_op.append(_adjoint(item))
         return adjoint_op
     elif op is None:
         return None
+    elif isinstance(op, str):
+        return op  # e.g. "PE" target
     else:
-        return op.dag()
+        try:
+            return op.dag()  # qutip
+        except AttributeError:
+            try:
+                return op.conj().T  # numpy
+            except AttributeError:
+                try:
+                    return op.conjugate().transpose()  # numpy-like
+                except AttributeError:
+                    if ignore_errors:
+                        return op
+                    else:
+                        raise ValueError(
+                            "Cannot calculate adjoint of %s" % op
+                        )
 
 
 class Objective:
@@ -108,6 +137,8 @@ class Objective:
         operator instead, see :func:`liouvillian`.
     """
 
+    _default_attribs = ['initial_state', 'H', 'target', 'c_ops']
+
     def __init__(self, *, initial_state, H, target, c_ops=None):
         if c_ops is None:
             c_ops = []
@@ -136,21 +167,45 @@ class Objective:
         # semi-deep copy where nested lists in the Hamiltonian and the c_ops
         # are re-created (copy by value), but non-list elements are copied by
         # reference.
-        return Objective(
+        new_objective = Objective(
             H=_nested_list_shallow_copy(self.H),
             initial_state=self.initial_state,
             target=self.target,
             c_ops=[_nested_list_shallow_copy(c) for c in self.c_ops],
         )
+        # restore custom attributes (like 'weight')
+        for attr in self.__dict__:
+            if attr not in self._default_attribs:
+                setattr(new_objective, attr, getattr(self, attr))
+        return new_objective
+
+    def __deepcopy__(self, memo):
+        new_objective = Objective(
+            H=copy.deepcopy(self.H, memo),
+            initial_state=copy.deepcopy(self.initial_state, memo),
+            target=copy.deepcopy(self.target, memo),
+            c_ops=[copy.deepcopy(c, memo) for c in self.c_ops],
+        )
+        # copy custom attributes (like 'weight')
+        for attr in self.__dict__:
+            if attr not in self._default_attribs:
+                setattr(
+                    new_objective,
+                    attr,
+                    copy.deepcopy(getattr(self, attr), memo),
+                )
+        return new_objective
 
     def __eq__(self, other):
         if other.__class__ is self.__class__:
-            return (self.H, self.initial_state, self.target, self.c_ops) == (
-                other.H,
-                other.initial_state,
-                other.target,
-                other.c_ops,
-            )
+            if self.__dict__.keys() != other.__dict__.keys():
+                return False
+            for attr in self.__dict__:
+                a = getattr(self, attr)
+                b = getattr(other, attr)
+                if not _recursive_eq(a, b):
+                    return False
+            return True
         else:
             return NotImplemented
 
@@ -167,18 +222,20 @@ class Objective:
 
         This does not affect the controls in :attr:`H`: these are
         assumed to be real-valued. Also, :attr:`.Objective.target` will be left
-        unchanged if it is not a :class:`qutip.Qobj` (a target state).
+        unchanged if its adjoint cannot be calculated (if it is not a target
+        state).
         """
-        return Objective(
+        adjoint_objective = Objective(
             H=_adjoint(self.H),
             initial_state=_adjoint(self.initial_state),
-            target=(
-                _adjoint(self.target)
-                if isinstance(self.target, qutip.Qobj)
-                else self.target
-            ),
+            target=_adjoint(self.target, ignore_errors=True),
             c_ops=[_adjoint(op) for op in self.c_ops],
         )
+        # copy custom attributes (like 'weight')
+        for attr in self.__dict__:
+            if attr not in self._default_attribs:
+                setattr(adjoint_objective, attr, getattr(self, attr))
+        return adjoint_objective
 
     def mesolve(
         self, tlist, rho0=None, H=None, c_ops=None, e_ops=None, **kwargs
@@ -993,3 +1050,38 @@ def _CtrlCounter():
 
 
 _CTRL_COUNTER = _CtrlCounter()  #: internal counter for controls
+
+
+def _recursive_eq(a, b):
+    """Recursively compare `a` and `b`.
+
+    The parameters `a` and `b` are assumed to be attributes of
+    :class:`Objective`, so we're making some assumptions about these either
+    being "standard" values (:class:`qutip.Qobj` and numpy arrays potentially
+    occuring in nested lists as time-dependent controls, or else `a` and `b`
+    comparing directly with ``==`` without throwing an exception.
+
+    If that's not enough, it will be up to the user to use wrapper
+    objects that implement a useful ``__eq__``.
+
+    We need this because '==' does not work for numpy arrays.
+    Cf. https://stackoverflow.com/questions/55778847
+    """
+    if type(a) != type(b):
+        return False
+    if isinstance(a, (list, tuple)):
+        return len(a) == len(b) and all(
+            _recursive_eq(v, w) for (v, w) in zip(a, b)
+        )
+    elif isinstance(a, dict):
+        return len(a) == len(b) and all(
+            _recursive_eq(v, b[k]) for (k, v) in a.items()
+        )
+    else:
+        try:
+            return bool(a == b)
+        except ValueError:
+            if isinstance(a, np.ndarray):
+                return np.array_equal(a, b)
+            else:
+                raise

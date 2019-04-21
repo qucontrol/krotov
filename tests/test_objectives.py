@@ -1,12 +1,15 @@
 """Tests for krotov.Objective in isolation"""
 import os
 import copy
+import pickle
 
 import numpy as np
 import scipy
 import qutip
-from qutip import tensor, sigmaz, sigmax, sigmam, identity
+from qutip import ket, tensor, sigmaz, sigmax, sigmam, sigmap, identity
+
 from itertools import product
+from collections import OrderedDict
 
 import krotov
 
@@ -35,6 +38,27 @@ def transmon_ham_and_states(Ec=0.386, EjEc=45, nstates=2, ng=0.0, T=10.0):
     profile = lambda t: np.exp(-40.0 * (t / T - 0.5) ** 2)
     eps0 = lambda t, args: 0.5 * profile(t) * np.cos(8 * np.pi * w01 * t)
     return ([H0, [H1, eps0]], psi0, psi1)
+
+
+@pytest.fixture
+def objective_with_c_ops():
+    u1 = lambda t, args: 1.0
+    u2 = lambda t, args: 1.0
+    a1 = np.random.random(100) + 1j * np.random.random(100)
+    a2 = np.random.random(100) + 1j * np.random.random(100)
+    H = [
+        tensor(sigmaz(), identity(2)) + tensor(identity(2), sigmaz()),
+        [tensor(sigmax(), identity(2)), u1],
+        [tensor(identity(2), sigmax()), u2],
+    ]
+    C1 = [[tensor(identity(2), sigmap()), a1]]
+    C2 = [[tensor(sigmap(), identity(2)), a2]]
+    ket00 = ket((0, 0))
+    ket11 = ket((1, 1))
+    obj = krotov.Objective(
+        initial_state=ket00, target=ket11, H=H, c_ops=[C1, C2]
+    )
+    return obj
 
 
 def test_krotov_objective_initialization(transmon_ham_and_states):
@@ -73,8 +97,15 @@ def test_objective_copy(transmon_ham_and_states):
     assert target1.c_ops[0][0] is target2.c_ops[0][0]
     assert target1.c_ops[0][1] is target2.c_ops[0][1]
 
+    target1.weight = 0.5
+    target1.xxx = 'something'
+    target2 = copy.copy(target1)
+    assert hasattr(target2, 'weight')
+    assert hasattr(target2, 'xxx')
+    assert target1 == target2
 
-def test_adoint_objective(transmon_ham_and_states):
+
+def test_adoint_objective(transmon_ham_and_states, objective_with_c_ops):
     """Test taking the adjoint of an objective"""
     H, psi0, psi1 = transmon_ham_and_states
     target = krotov.Objective(initial_state=psi0, target=psi1, H=H)
@@ -83,11 +114,19 @@ def test_adoint_objective(transmon_ham_and_states):
     assert isinstance(adjoint_target.H[0], qutip.Qobj)
     assert isinstance(adjoint_target.H[1], list)
     assert isinstance(adjoint_target.H[1][0], qutip.Qobj)
-    assert (adjoint_target.H[0] - target.H[0]).norm() < 1e-12
-    assert (adjoint_target.H[1][0] - target.H[1][0]).norm() < 1e-12
+    assert (adjoint_target.H[0] - target.H[0]).norm('max') < 1e-12
+    assert (adjoint_target.H[1][0] - target.H[1][0]).norm('max') < 1e-12
     assert adjoint_target.H[1][1] == target.H[1][1]
     assert adjoint_target.initial_state.isbra
     assert adjoint_target.target.isbra
+
+    # also try something that has numpy arrays
+    obj = objective_with_c_ops
+    obj_dag = obj.adjoint
+    δ = (obj_dag.c_ops[0][0][0].dag() - obj.c_ops[0][0][0]).norm('max')
+    assert δ < 1e-12
+    assert isinstance(obj_dag.c_ops[0][0][1], np.ndarray)
+    assert np.array_equal(obj_dag.c_ops[0][0][1], obj.c_ops[0][0][1])
 
 
 def test_adoint_objective_with_no_target(transmon_ham_and_states):
@@ -476,3 +515,78 @@ def test_transmon_3states_objectives():
     assert objectives[0].weight == 60.0 / 22.0
     assert objectives[1].weight == 3.0 / 22.0
     assert objectives[2].weight == 3.0 / 22.0
+
+
+def test_deepcopy_objective(objective_with_c_ops):
+    """Test doing a deepcopy, in particular that callable controls are
+    preserved (unlike pickling/unpickling)"""
+    obj1 = objective_with_c_ops
+    obj2 = copy.deepcopy(obj1)
+    assert obj2 is not obj1
+    assert obj1 == obj2
+    assert obj2.initial_state is not obj1.initial_state
+    assert obj2.initial_state == obj1.initial_state
+    assert obj2.target is not obj1.target
+    assert obj2.target == obj1.target
+    assert obj2.H[0] is not obj1.H[0]
+    assert obj2.H[0] == obj1.H[0]
+    # function references are left unchanged by deepcopy
+    assert obj2.H[1][1] is obj1.H[1][1]
+    # however, numpy-arrays as controls are not
+    assert obj2.c_ops[0][0][1] is not obj1.c_ops[0][0][1]
+    assert isinstance(obj2.c_ops[0][0][1], np.ndarray)
+    assert np.all(obj2.c_ops[0][0][1] == obj1.c_ops[0][0][1])
+
+    obj2.weight = 0.5
+    obj2.xxx = 'something'
+    obj3 = copy.deepcopy(obj2)
+    assert hasattr(obj3, 'weight')
+    assert hasattr(obj3, 'xxx')
+    assert obj3 == obj2
+
+
+def test_objective_pickle(objective_with_c_ops):
+    """Test that pickling and unpickling acts like a deepcopy, except that
+    callable controls (which are not pickleable) are replaced by a
+    placeholder"""
+    obj1 = objective_with_c_ops
+    obj2 = pickle.loads(pickle.dumps(obj1))
+    assert obj2 is not obj1
+    assert obj2 != obj1
+    assert str(obj2) != str(obj1)
+    assert repr(obj2) != repr(obj1)
+    assert obj2.initial_state is not obj1.initial_state
+    assert obj2.initial_state == obj1.initial_state
+    assert obj2.target is not obj1.target
+    assert obj2.target == obj1.target
+    assert obj2.H[0] is not obj1.H[0]
+    assert obj2.H[0] == obj1.H[0]
+    # function references cannot be pickled
+    assert isinstance(obj2.H[1][1], krotov.objectives._ControlPlaceholder)
+    assert repr(obj2.H[1][1]).startswith('_ControlPlaceholder(')
+    # numpy-arrays are pickled without problems
+    assert obj2.c_ops[0][0][1] is not obj1.c_ops[0][0][1]
+    assert isinstance(obj2.c_ops[0][0][1], np.ndarray)
+    assert np.all(obj2.c_ops[0][0][1] == obj1.c_ops[0][0][1])
+
+    obj2.weight = 0.5
+    obj2.xxx = 'something'
+    obj3 = pickle.loads(pickle.dumps(obj2))
+    assert hasattr(obj3, 'weight')
+    assert hasattr(obj3, 'xxx')
+    assert obj3 == obj2
+
+
+def test_objective_eq_with_extra_attribs(objective_with_c_ops):
+    obj1 = copy.deepcopy(objective_with_c_ops)
+    obj2 = copy.deepcopy(obj1)
+    assert obj1 == obj2
+
+    obj1.weight = 0.5
+    assert obj1 != obj2
+
+    obj2.weight = 0.5
+    assert obj1 == obj2
+
+    obj2.xxx = 'something'
+    assert obj1 != obj2
