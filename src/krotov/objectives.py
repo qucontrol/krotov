@@ -11,6 +11,7 @@ import sys
 import copy
 import itertools
 from functools import partial
+from collections import defaultdict
 
 import qutip
 from qutip.solver import Result as QutipSolverResult
@@ -100,6 +101,26 @@ class Objective:
         target (qutip.Qobj or None): value for :attr:`target`
         c_ops (list or None): value for :attr:`c_ops`
 
+    Example:
+
+        >>> H0 = - 0.5 * qutip.operators.sigmaz()
+        >>> H1 = qutip.operators.sigmax()
+        >>> eps = lambda t, args: ampl0
+        >>> H = [H0, [H1, eps]]
+        >>> krotov.Objective(
+        ...     initial_state=qutip.ket('0'), target=qutip.ket('1'), H=H
+        ... )
+        Objective[|Ψ₀(2)⟩ to |Ψ₁(2)⟩ via [H₀[2,2], [H₁[2,2], u₁(t)]]]
+
+    Raises:
+        ValueError: If any arguments have an invalid type or structure
+
+    Note:
+        Giving collapse operators via :attr:`c_ops` only makes sense if the
+        `propagator` passed to :func:`.optimize_pulses` takes them into account
+        explicitly. It is strongly recommended to set :attr:`H` as a Lindblad
+        operator instead, see :func:`liouvillian`.
+
     Attributes:
         H (qutip.Qobj or list): The (time-dependent) Hamiltonian or
             Liouvillian in nested-list format, cf.
@@ -116,28 +137,16 @@ class Objective:
             :func:`~qutip.mesolve.mesolve`, in lieu of :attr:`H` being a
             Liouvillian.
 
-    Example:
-
-        >>> H0 = - 0.5 * qutip.operators.sigmaz()
-        >>> H1 = qutip.operators.sigmax()
-        >>> eps = lambda t, args: ampl0
-        >>> H = [H0, [H1, eps]]
-        >>> krotov.Objective(
-        ...     initial_state=qutip.ket('0'), target=qutip.ket('1'), H=H
-        ... )
-        Objective[|(2)⟩ - {[Herm[2,2], [Herm[2,2], u1(t)]]} - |(2)⟩]
-
-    Raises:
-        ValueError: If any arguments have an invalid type or structure
-
-    Note:
-        Giving collapse operators via :attr:`c_ops` only makes sense if the
-        `propagator` passed to :func:`.optimize_pulses` takes them into account
-        explicitly. It is strongly recommended to set :attr:`H` as a Lindblad
-        operator instead, see :func:`liouvillian`.
     """
 
+    _counter = defaultdict(int)
+    _counter['u{count}(t)'] = 1  # it's nicer to start counting controls from 1
+    _count_cache = {}
     _default_attribs = ['initial_state', 'H', 'target', 'c_ops']
+
+    str_use_unicode = True
+    """Whether the string representation of an :class:`Objective` may use
+    unicode symbols, cf. :meth:`summarize` (class attribute)."""
 
     def __init__(self, *, initial_state, H, target, c_ops=None):
         if c_ops is None:
@@ -376,8 +385,46 @@ class Objective:
         result.expect = [np.array(a) for a in result.expect]
         return result
 
-    def summarize(self, ctrl_counter=None):
-        """Return a one-line summary of the objective as a string
+    @classmethod
+    def reset_symbol_counters(cls):
+        """Reset the internal symbol counters used for printing objectives.
+
+        See :meth:`summarize`.
+        """
+        cls._counter = defaultdict(int)
+        cls._counter['u{count}(t)'] = 1
+        cls._count_cache = {}
+
+    def summarize(self, use_unicode=True, reset_symbol_counters=False):
+        """Return a one-line summary of the objective as a string.
+
+        Args:
+            use_unicode(bool): If False, only use ascii symbols in the output
+            reset_symbol_counters(bool): If True, reset the internal object
+                counters (see :meth:`reset_symbol_counters`) before calculating
+                the result
+
+        The :meth:`summarize` method (which is also used for the :func:`repr`
+        and ``__str__`` of an :class:`Objective`) keeps per-process internal
+        counters for the various categories of objects that may occur as
+        attributes of an :class:`Objective` (kets, bras, Hermitian operators,
+        non-Hermitian Operators, density matrices, Liouvillians, Lindblad
+        operators, numpy arrays, control functions). This allows to keep track
+        of objects across multiple objectives. The counters can be reset with
+        :meth:`reset_symbol_counters`.
+
+        The ouput uses various unicode symbols (or ascii-equivalents, if
+        `use_unicode` is False):
+
+        - 'Ψ' ('Psi') for :class:`qutip.Qobj` quantum states (kets or bras)
+        - 'ρ' ('rho') for :class:`qutip.Qobj` operators that occur as initial
+          or target states (density matrices)
+        - 'L' for Lindblad operators (elements of :attr:`c_ops`)
+        - 'H' for Hermitian :class:`qutip.Qobj` operators (Hamiltonians)
+        - 'A' for non-Hermitian :class:`qutip.Qobj` operators in :attr:`H`
+        - '𝓛' ('Lv') for :class:`qutip.Qobj` super-operators (Liouvillians)
+        - 'a' for numpy arrays (of any dimension)
+        - 'u' for (callable) control functions.
 
         Example:
 
@@ -391,8 +438,8 @@ class Objective:
             ...     tensor(identity(2), sigmaz()),
             ...     [tensor(sigmax(), identity(2)), u1],
             ...     [tensor(identity(2), sigmax()), u2]]
-            >>> C1 = [tensor(identity(2), sigmap()), a1]
-            >>> C2 = [tensor(sigmap(), identity(2)), a2]
+            >>> C1 = [[tensor(identity(2), sigmap()), a1]]
+            >>> C2 = [[tensor(sigmap(), identity(2)), a2]]
             >>> ket00 = ket((0,0))
             >>> ket11 = ket((1,1))
             >>> obj = Objective(
@@ -400,44 +447,88 @@ class Objective:
             ...     target=ket11,
             ...     H=H
             ... )
-            >>> obj.summarize(ctrl_counter=_CtrlCounter())
-            '|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩'
+            >>> obj.reset_symbol_counters()
+            >>> obj.summarize()
+            '|Ψ₀(2⊗2)⟩ to |Ψ₁(2⊗2)⟩ via [H₀[2⊗2,2⊗2], [H₁[2⊗2,2⊗2], u₁(t)], [H₂[2⊗2,2⊗2], u₂(t)]]'
             >>> obj = Objective(
             ...     initial_state=ket00,
             ...     target=ket11,
             ...     H=H,
             ...     c_ops=[C1, C2]
             ... )
-            >>> obj.summarize(ctrl_counter=_CtrlCounter())
-            '|(2⊗2)⟩ - {H:[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]], c_ops:([NonHerm[2⊗2,2⊗2], u3[complex128]],[NonHerm[2⊗2,2⊗2], u4[complex128]])} - |(2⊗2)⟩'
+            >>> obj.summarize()
+            '|Ψ₀(2⊗2)⟩ to |Ψ₁(2⊗2)⟩ via {H:[H₀[2⊗2,2⊗2], [H₁[2⊗2,2⊗2], u₁(t)], [H₂[2⊗2,2⊗2], u₂(t)]], c_ops:([[L₀[2⊗2,2⊗2], a₀[100]]],[[L₁[2⊗2,2⊗2], a₁[100]]])}'
+            >>> obj.summarize(use_unicode=False)
+            '|Psi0(2*2)> to |Psi1(2*2)> via {H:[H0[2*2,2*2], [H1[2*2,2*2], u1(t)], [H2[2*2,2*2], u2(t)]], c_ops:([[L0[2*2,2*2], a0[100]]],[[L1[2*2,2*2], a1[100]]])}'
+            >>> copy.deepcopy(obj).summarize()  # different objects!
+            '|Ψ₂(2⊗2)⟩ to |Ψ₃(2⊗2)⟩ via {H:[H₃[2⊗2,2⊗2], [H₄[2⊗2,2⊗2], u₁(t)], [H₅[2⊗2,2⊗2], u₂(t)]], c_ops:([[L₂[2⊗2,2⊗2], a₂[100]]],[[L₃[2⊗2,2⊗2], a₃[100]]])}'
+            >>> copy.deepcopy(obj).summarize(reset_symbol_counters=True)
+            '|Ψ₀(2⊗2)⟩ to |Ψ₁(2⊗2)⟩ via {H:[H₀[2⊗2,2⊗2], [H₁[2⊗2,2⊗2], u₁(t)], [H₂[2⊗2,2⊗2], u₂(t)]], c_ops:([[L₀[2⊗2,2⊗2], a₀[100]]],[[L₁[2⊗2,2⊗2], a₁[100]]])}'
         """
-        if ctrl_counter is None:
-            ctrl_counter = _CTRL_COUNTER
+        if reset_symbol_counters:
+            self.reset_symbol_counters()
+        res = _summarize_component(
+            self.initial_state,
+            role='state',
+            counter=self._counter,
+            count_cache=self._count_cache,
+            use_unicode=use_unicode,
+        )
+        if self.target is not None:
+            res += " to "
+            role = 'target'
+            if (
+                isinstance(self.initial_state, qutip.Qobj)
+                and isinstance(self.target, qutip.Qobj)
+                and (self.target.dims == self.initial_state.dims)
+            ):
+                role = 'state'
+            res += _summarize_component(
+                self.target,
+                role=role,
+                counter=self._counter,
+                count_cache=self._count_cache,
+                use_unicode=use_unicode,
+            )
+        res += " via "
+
         if len(self.c_ops) == 0:
-            res = "%s - {%s}" % (
-                _summarize_qobj(self.initial_state, ctrl_counter),
-                _summarize_qobj(self.H, ctrl_counter),
+            res += _summarize_component(
+                self.H,
+                role='op',
+                counter=self._counter,
+                count_cache=self._count_cache,
+                use_unicode=use_unicode,
             )
         else:
-            res = "%s - {H:%s, c_ops:(%s)}" % (
-                _summarize_qobj(self.initial_state, ctrl_counter),
-                _summarize_qobj(self.H, ctrl_counter),
-                ",".join(
-                    [_summarize_qobj(c_op, ctrl_counter) for c_op in self.c_ops]
-                ),
+            res += '{H:'
+            res += _summarize_component(
+                self.H,
+                role='op',
+                counter=self._counter,
+                count_cache=self._count_cache,
+                use_unicode=use_unicode,
             )
-        if self.target is not None:
-            if isinstance(self.target, qutip.Qobj):
-                res += " - %s" % (_summarize_qobj(self.target, ctrl_counter))
-            else:
-                res += " - %r" % self.target
+            rendered_c_ops = [
+                _summarize_component(
+                    c_op,
+                    role='lindblad',
+                    counter=self._counter,
+                    count_cache=self._count_cache,
+                    use_unicode=use_unicode,
+                )
+                for c_op in self.c_ops
+            ]
+            res += ', c_ops:('
+            res += ",".join(rendered_c_ops)
+            res += ')}'
         return res
 
     def __str__(self):
-        return self.summarize()
+        return self.summarize(use_unicode=self.str_use_unicode)
 
     def __repr__(self):
-        return "%s[%s]" % (self.__class__.__name__, self.summarize())
+        return "%s[%s]" % (self.__class__.__name__, str(self))
 
     def __getstate__(self):
         # Return data for the pickle serialization of an objective.
@@ -944,120 +1035,192 @@ def liouvillian(H, c_ops):
         )
 
 
-def _summarize_qobj(obj, ctrl_counter=None):
-    """Summarize a quantum object
+def _obj_str_pattern(obj, role, use_unicode):
+    """For a given `obj` return a "string pattern" to be used summerizing that
+    `obj` as the component of an Objective.
 
-    A counter created by :func:`_CtrlCounter` may be passed to distinguish
-    control fields. If None, an automatic internal counter will be used.
-
-    Example:
-
-        >>> ket = qutip.ket([1, 0, 1])
-        >>> _summarize_qobj(ket)
-        '|(2⊗2⊗2)⟩'
-        >>> bra = ket.dag()
-        >>> _summarize_qobj(bra)
-        '⟨(2⊗2⊗2)|'
-        >>> rho = ket * bra
-        >>> _summarize_qobj(rho)
-        'Herm[2⊗2⊗2,2⊗2⊗2]'
-        >>> a = qutip.create(10)
-        >>> _summarize_qobj(a)
-        'NonHerm[10,10]'
-        >>> S = qutip.to_super(a)
-        >>> _summarize_qobj(S)
-        '[[10,10],[10,10]]'
+    The resulting string should be formatted with the keys ``count`` (a unique
+    str counter for the `obj` in its category), and ``dims`` with a str summary
+    of the shape/dimensions of `obj`.
     """
-    if ctrl_counter is None:
-        ctrl_counter = _CTRL_COUNTER
-    if isinstance(obj, list):
-        return _summarize_qobj_nested_list(obj, ctrl_counter)
-    elif callable(obj) and not isinstance(obj, qutip.Qobj):
-        return 'u%d(t)' % ctrl_counter(obj)
+    if callable(obj) and not isinstance(obj, qutip.Qobj):
+        if role == 'op':
+            return 'u{count}(t)'  # control
+        else:
+            return None
     elif isinstance(obj, np.ndarray):
-        return 'u%d[%s]' % (ctrl_counter(obj), obj.dtype.name)
+        return 'a{count}[{dims}]'  # array
+    elif isinstance(obj, qutip.Qobj):
+        if obj.type == 'ket':
+            if use_unicode:
+                return '|Ψ{count}({dims})⟩'
+            else:
+                return '|Psi{count}({dims})>'
+        elif obj.type == 'bra':
+            if use_unicode:
+                return '⟨Ψ{count}({dims})|'
+            else:
+                return '<Psi{count}({dims})|'
+        elif obj.type == 'oper':
+            if role == 'lindblad':
+                return 'L{count}[{dims}]'
+            if obj.isherm:
+                if role == 'state':
+                    if use_unicode:
+                        return 'ρ{count}[{dims}]'
+                    else:
+                        return 'rho{count}[{dims}]'
+                else:
+                    return 'H{count}[{dims}]'
+            else:
+                return 'A{count}[{dims}]'
+        elif obj.type == 'super':
+            if use_unicode:
+                return "𝓛{count}[{dims}]"
+            else:
+                return "Lv{count}[{dims}]"
+        else:
+            raise NotImplementedError("Unknown qobj type: %s" % obj.type)
+    else:
+        return None  # unknown object
+
+
+def _obj_dims_str(obj, use_unicode):
+    """Return a string that summarizes the shape/dimensions of the given obj"""
+    tensor = '*'
+    if use_unicode:
+        tensor = '⊗'
+    if isinstance(obj, qutip.Qobj):
+        if obj.type == 'ket':
+            return tensor.join(["%d" % d for d in obj.dims[0]])
+        elif obj.type == 'bra':
+            return tensor.join(["%d" % d for d in obj.dims[1]])
+        elif obj.type == 'oper':
+            return ",".join(
+                [tensor.join(["%d" % d for d in dim]) for dim in obj.dims]
+            )
+        elif obj.type == 'super':
+            dims = []
+            for dim in obj.dims:
+                dim1 = tensor.join(["%d" % d for d in dim[0]])
+                dim2 = tensor.join(["%d" % d for d in dim[1]])
+                dims.append('[%s,%s]' % (dim1, dim2))
+            return ",".join(dims)
+        else:
+            raise NotImplementedError("Unknown qobj type: %s" % obj.type)
+    elif hasattr(obj, 'shape'):
+        return ",".join(str(int(d)) for d in obj.shape)
+    else:
+        return None
+
+
+def _summarize_component(
+    obj, role, counter=None, count_cache=None, use_unicode=True
+):
+    """Return a string for an `obj` that appears as a component when
+    summarizing an Objective.
+
+
+    Args:
+        obj: Any object that occurs in any attribute of an :class:`Objective`.
+        role (str): The role the `obj` plays in the objective, one of 'state',
+            'target', 'op', 'lindblad'.
+        counter (defaultdict): A dictionary that matches a string pattern (as
+            an identifier for the category of the `obj` to the number of
+            objects that have been observed in that category.
+        count_cache (dict): For any previously seen `obj`, the value of
+            `counter[_obj_str_pattern(obj)]` from when that `obj` was first
+            seen
+        use_unicode (bool): If true, return a unicode representation, ascii
+            otherwise
+
+    For a given `obj`, let's say a ket-:class:`qutip.Qobj` this works as
+    follows:
+
+    - :func:`_obj_str_pattern` returns ``"|Ψ{count}({dims})⟩"``. This
+      unformatted string defines the "category" of the `obj`. Any object with
+      the same unformatted string is in the same category (kets, bras,
+      Hermitian operators, Non-Hermitian Operators, density matrices,
+      Liouvillian, Lindblad operators)
+    - if we have seen that particular `obj` before, ``{count}`` gets set from
+      the `count_cache`. Otherwise, we increase the count for the category, and
+      add the object to `count_cache` (using the memory-address of `obj` as a
+      key)
+    - the ``{dims}}`` get set by :func:`_obj_dims_str`.
+    """
+    allowed_roles = ['state', 'target', 'op', 'lindblad']
+    if role not in allowed_roles:
+        raise ValueError("Unknown %s not in %s" % (role, allowed_roles))
+    if counter is None:
+        counter = Objective._counter
+    if count_cache is None:
+        count_cache = Objective._count_cache
+    if isinstance(obj, list):
+        return _summarize_nested_list(
+            obj, role, counter, count_cache, use_unicode
+        )
     elif isinstance(obj, _ControlPlaceholder):
         return str(obj)
     elif isinstance(obj, (float, complex)):
         return str(obj)
-    elif not isinstance(obj, qutip.Qobj):
-        raise TypeError("obj must be a Qobj, not %s" % obj.__class__.__name__)
-    if obj.type == 'ket':
-        dims = "⊗".join(["%d" % d for d in obj.dims[0]])
-        return '|(%s)⟩' % dims
-    elif obj.type == 'bra':
-        dims = "⊗".join(["%d" % d for d in obj.dims[1]])
-        return '⟨(%s)|' % dims
-    elif obj.type == 'oper':
-        dim1 = "⊗".join(["%d" % d for d in obj.dims[0]])
-        dim2 = "⊗".join(["%d" % d for d in obj.dims[1]])
-        if obj.isherm:
-            return 'Herm[%s,%s]' % (dim1, dim2)
-        else:
-            return 'NonHerm[%s,%s]' % (dim1, dim2)
-    elif obj.type == 'super':
-        dims = []
-        for dim in obj.dims:
-            dim1 = "⊗".join(["%d" % d for d in dim[0]])
-            dim2 = "⊗".join(["%d" % d for d in dim[1]])
-            dims.append('[%s,%s]' % (dim1, dim2))
-        return '[' + ",".join(dims) + ']'
+    str_pattern = _obj_str_pattern(obj, role, use_unicode)
+    if str_pattern is None:
+        # we're dealing with some kind of unknown object, so we'll fall back to
+        # a single line, truncated str-representation
+        res = str(obj).replace("\n", " ")
+        if len(res) > 40:
+            if use_unicode:
+                res = res[:39] + "…"
+            else:
+                res = res[:37] + "..."
     else:
-        raise NotImplementedError("Unknown qobj type: %s" % obj.type)
+        key = id(obj)
+        # Lot's of objectes that occur as components of an Objectives, e.g.
+        # numpy arrays, are not hashable, and thus cannot be used as dictionary
+        # keys. Thus we use the memory address of the object (integer returned
+        # by :func:`id` as the key. This matches the intuition that objects
+        # with the same subscript are really the same object, not different
+        # objects that are potentially numerically equal.
+        dims = _obj_dims_str(obj, use_unicode)
+        if key in count_cache:
+            count = count_cache[key]
+            count_str = str(count)
+        else:
+            count = counter[str_pattern]
+            count_cache[key] = count
+            counter[str_pattern] += 1
+            # Things look a bit nicer if we synchronize the counters for
+            # Hermitian and Non-Hermitian operators
+            if str_pattern == 'A{count}[{dims}]':
+                counter['H{count}[{dims}]'] += 1
+            elif str_pattern == 'H{count}[{dims}]':
+                counter['A{count}[{dims}]'] += 1
+        if use_unicode:
+            # transform all digits in counter to unicode subscripts.
+            # Subscript symbols start at code point 0x2080
+            count_str = "".join(
+                chr(ord(d) - ord('0') + 0x2080) for d in str(count)
+            )
+        res = str_pattern.format(count=count_str, dims=dims)
+    return res
 
 
-def _summarize_qobj_nested_list(lst, ctrl_counter):
-    """Summarize a nested-list time-dependent quantum object"""
+def _summarize_nested_list(lst, role, counter, count_cache, use_unicode):
+    """Recursively call :func:`summarize_components` for the nested lists that
+    qutip uses for time-dependent operators
+    """
     return (
         '['
-        + ", ".join([_summarize_qobj(obj, ctrl_counter) for obj in lst])
+        + ", ".join(
+            [
+                _summarize_component(
+                    obj, role, counter, count_cache, use_unicode
+                )
+                for obj in lst
+            ]
+        )
         + ']'
     )
-
-
-def _CtrlCounter():
-    """Constructor for a counter of controls.
-
-    Returns a callable that returns a unique integer (starting at 1) for every
-    distinct control that is passed to it. This is intended for use with
-    :func:`summarize_qobj`.
-
-    Example:
-
-        >>> ctrl_counter = _CtrlCounter()
-        >>> ctrl1 = np.zeros(10)
-        >>> ctrl_counter(ctrl1)
-        1
-        >>> ctrl2 = np.zeros(10)
-        >>> assert ctrl2 is not ctrl1
-        >>> ctrl_counter(ctrl2)
-        2
-        >>> ctrl_counter(ctrl1)
-        1
-        >>> ctrl3 = lambda t, args: 0.0
-        >>> ctrl_counter(ctrl3)
-        3
-    """
-    # This will probably be used very rarely, if ever, but there's a *chance*
-    # that a user might want to pass a specific counter to summarize_qobj, so
-    # this still has to be public.
-
-    counter = 0
-    registry = {}
-
-    def ctrl_counter(ctrl):
-        nonlocal counter
-        if isinstance(ctrl, np.ndarray):
-            ctrl = id(ctrl)
-        if ctrl not in registry:
-            counter += 1
-            registry[ctrl] = counter
-        return registry[ctrl]
-
-    return ctrl_counter
-
-
-_CTRL_COUNTER = _CtrlCounter()  #: internal counter for controls
 
 
 def _recursive_eq(a, b):

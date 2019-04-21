@@ -61,6 +61,24 @@ def objective_with_c_ops():
     return obj
 
 
+@pytest.fixture
+def objective_liouville():
+    a1 = np.random.random(100) + 1j * np.random.random(100)
+    a2 = np.random.random(100) + 1j * np.random.random(100)
+    H = [
+        tensor(sigmaz(), identity(2)) + tensor(identity(2), sigmaz()),
+        [tensor(sigmax(), identity(2)), a1],
+        [tensor(identity(2), sigmax()), a2],
+    ]
+    L = krotov.objectives.liouvillian(H, c_ops=[])
+    ket00 = ket((0, 0))
+    ket11 = ket((1, 1))
+    obj = krotov.Objective(
+        initial_state=qutip.ket2dm(ket00), target=qutip.ket2dm(ket11), H=L
+    )
+    return obj
+
+
 def test_krotov_objective_initialization(transmon_ham_and_states):
     """Test basic instantiation of a krotov.Objective with qutip objects"""
     H, psi0, psi1 = transmon_ham_and_states
@@ -139,6 +157,34 @@ def test_adoint_objective_with_no_target(transmon_ham_and_states):
     assert adjoint_target.H[1][1] == target.H[1][1]
     assert adjoint_target.initial_state.isbra
     assert adjoint_target.target is None
+
+
+def test_objective_custom_target(objective_liouville):
+    """Test setting a non-standard object (like a dict) as target"""
+    krotov.objectives.Objective.reset_symbol_counters()
+    obj = copy.deepcopy(objective_liouville)
+    obj.target = OrderedDict([('func', 'PE'), ('val', 1)])
+    obj_dag = obj.adjoint
+    assert obj_dag.target == obj.target
+    with pytest.raises(ValueError):
+        krotov.objectives._adjoint(obj.target, ignore_errors=False)
+
+    res = obj.summarize()
+    expected = "ρ₀[2⊗2,2⊗2] to OrderedDict([('func', 'PE'), ('val', 1)… via [𝓛₀[[2⊗2,2⊗2],[2⊗2,2⊗2]], [𝓛₁[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₀[100]], [𝓛₂[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₁[100]]]"
+    assert res == expected
+
+    res = obj.summarize(use_unicode=False)
+    expected = "rho0[2*2,2*2] to OrderedDict([('func', 'PE'), ('val', ... via [Lv0[[2*2,2*2],[2*2,2*2]], [Lv1[[2*2,2*2],[2*2,2*2]], a0[100]], [Lv2[[2*2,2*2],[2*2,2*2]], a1[100]]]"
+    assert res == expected
+    krotov.objectives.Objective.reset_symbol_counters()
+
+
+def test_adjoint_of_invalid_nested_list():
+    H = ['H0', ['H1', lambda t, args: 1], ['H2', 'H3', lambda t, args: 1]]
+    with pytest.raises(ValueError) as exc_info:
+        krotov.objectives._adjoint(H, ignore_errors=False)
+    assert "expected format" in str(exc_info.value)
+    assert krotov.objectives._adjoint(H, ignore_errors=True) == H
 
 
 def test_invalid_objective(transmon_ham_and_states):
@@ -517,6 +563,83 @@ def test_transmon_3states_objectives():
     assert objectives[2].weight == 3.0 / 22.0
 
 
+def test_summarize_objective_with_c_ops(objective_with_c_ops):
+    obj = objective_with_c_ops
+    obj.reset_symbol_counters()
+
+    res = obj.summarize()
+    expected = '|Ψ₀(2⊗2)⟩ to |Ψ₁(2⊗2)⟩ via {H:[H₀[2⊗2,2⊗2], [H₁[2⊗2,2⊗2], u₁(t)], [H₂[2⊗2,2⊗2], u₂(t)]], c_ops:([[L₀[2⊗2,2⊗2], a₀[100]]],[[L₁[2⊗2,2⊗2], a₁[100]]])}'
+    assert res == expected
+
+    res = obj.summarize(use_unicode=False)
+    expected = '|Psi0(2*2)> to |Psi1(2*2)> via {H:[H0[2*2,2*2], [H1[2*2,2*2], u1(t)], [H2[2*2,2*2], u2(t)]], c_ops:([[L0[2*2,2*2], a0[100]]],[[L1[2*2,2*2], a1[100]]])}'
+    assert res == expected
+
+    obj_dag = obj.adjoint
+
+    res = obj_dag.summarize()
+    expected = '⟨Ψ₀(2⊗2)| to ⟨Ψ₁(2⊗2)| via {H:[H₃[2⊗2,2⊗2], [H₄[2⊗2,2⊗2], u₁(t)], [H₅[2⊗2,2⊗2], u₂(t)]], c_ops:([[L₂[2⊗2,2⊗2], a₀[100]]],[[L₃[2⊗2,2⊗2], a₁[100]]])}'
+    assert res == expected
+
+    res = obj_dag.summarize(use_unicode=False)
+    expected = '<Psi0(2*2)| to <Psi1(2*2)| via {H:[H3[2*2,2*2], [H4[2*2,2*2], u1(t)], [H5[2*2,2*2], u2(t)]], c_ops:([[L2[2*2,2*2], a0[100]]],[[L3[2*2,2*2], a1[100]]])}'
+    assert res == expected
+
+    obj.reset_symbol_counters()
+
+
+def test_summarize_liouville_objective(objective_liouville):
+    obj = objective_liouville
+    obj.reset_symbol_counters()
+
+    res = obj.summarize()
+    expected = 'ρ₀[2⊗2,2⊗2] to ρ₁[2⊗2,2⊗2] via [𝓛₀[[2⊗2,2⊗2],[2⊗2,2⊗2]], [𝓛₁[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₀[100]], [𝓛₂[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₁[100]]]'
+    assert res == expected
+
+    res = obj.summarize(use_unicode=False)
+    expected = 'rho0[2*2,2*2] to rho1[2*2,2*2] via [Lv0[[2*2,2*2],[2*2,2*2]], [Lv1[[2*2,2*2],[2*2,2*2]], a0[100]], [Lv2[[2*2,2*2],[2*2,2*2]], a1[100]]]'
+    assert res == expected
+
+    obj_dag = obj.adjoint
+
+    res = obj_dag.summarize()
+    expected = 'ρ₂[2⊗2,2⊗2] to ρ₃[2⊗2,2⊗2] via [𝓛₃[[2⊗2,2⊗2],[2⊗2,2⊗2]], [𝓛₄[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₀[100]], [𝓛₅[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₁[100]]]'
+    assert res == expected
+
+    res = obj_dag.summarize(use_unicode=False)
+    expected = 'rho2[2*2,2*2] to rho3[2*2,2*2] via [Lv3[[2*2,2*2],[2*2,2*2]], [Lv4[[2*2,2*2],[2*2,2*2]], a0[100]], [Lv5[[2*2,2*2],[2*2,2*2]], a1[100]]]'
+    assert res == expected
+
+    obj.reset_symbol_counters()
+
+
+def test_summarize_component_direct():
+    krotov.objectives.Objective.reset_symbol_counters()
+
+    H = ['H0', ['H1', 2j]]
+    res = krotov.objectives._summarize_component(H, 'op')
+    expected = '[H0, [H1, 2j]]'
+    assert res == expected
+
+    with pytest.raises(ValueError):
+        krotov.objectives._summarize_component(H, 'invalid')
+
+    ket0 = qutip.ket('0')
+    ket1 = qutip.ket('1')
+    ket2 = copy.deepcopy(ket0)
+    assert krotov.objectives._summarize_component(ket0, 'state') == '|Ψ₀(2)⟩'
+    assert krotov.objectives._summarize_component(ket1, 'state') == '|Ψ₁(2)⟩'
+    assert krotov.objectives._summarize_component(ket2, 'state') == '|Ψ₂(2)⟩'
+    krotov.objectives.Objective.reset_symbol_counters()
+    assert krotov.objectives._summarize_component(ket2, 'state') == '|Ψ₀(2)⟩'
+
+    H = qutip.sigmaz()
+    assert krotov.objectives._summarize_component(H, 'op') == 'H₀[2,2]'
+    assert krotov.objectives._summarize_component(H, 'lindblad') == 'L₀[2,2]'
+
+    krotov.objectives.Objective.reset_symbol_counters()
+
+
 def test_deepcopy_objective(objective_with_c_ops):
     """Test doing a deepcopy, in particular that callable controls are
     preserved (unlike pickling/unpickling)"""
@@ -590,3 +713,11 @@ def test_objective_eq_with_extra_attribs(objective_with_c_ops):
 
     obj2.xxx = 'something'
     assert obj1 != obj2
+
+
+def test_recursive_eq_dict():
+    d1 = {1: np.array([1, 2j]), 2: 'value'}
+    d2 = {1: np.array([1, 2j]), 2: 'value'}
+    with pytest.raises(ValueError):
+        d1 == d2
+    assert krotov.objectives._recursive_eq(d1, d2)

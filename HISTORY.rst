@@ -5,6 +5,7 @@ History
 (next version)
 --------------
 
+* Improved: Printing an ``Objective`` now uses internal counters and a symbolic notation to identify objects shared between different objectives. (`#43`_)
 * Improved: ``gate_objectives`` now takes into account if target states are (reshuffled) basis states and does not create unnecessary new copies.
 * Bugfix: Two ``Objective`` instances that contain numpy arrays as controls can now be compared with ``==`` (`#44`_)
 * Bugfix: Custom attributes (such as ``weight``) are now preserverd when copying an ``Objective`` (`#44`_)
@@ -54,4 +55,5 @@ History
 .. _#36: https://github.com/qucontrol/krotov/issues/36
 .. _#39: https://github.com/qucontrol/krotov/issues/39
 .. _#41: https://github.com/qucontrol/krotov/issues/41
+.. _#44: https://github.com/qucontrol/krotov/issues/43
 .. _#44: https://github.com/qucontrol/krotov/issues/44
