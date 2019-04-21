@@ -55,5 +55,5 @@ History
 .. _#36: https://github.com/qucontrol/krotov/issues/36
 .. _#39: https://github.com/qucontrol/krotov/issues/39
 .. _#41: https://github.com/qucontrol/krotov/issues/41
-.. _#44: https://github.com/qucontrol/krotov/issues/43
+.. _#43: https://github.com/qucontrol/krotov/issues/43
 .. _#44: https://github.com/qucontrol/krotov/issues/44
