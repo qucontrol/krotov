@@ -787,6 +787,14 @@ def gate_objectives(
         sum([gate[i, j] * basis_states[i] for i in range(gate.shape[0])])
         for j in range(gate.shape[1])
     ]
+    # Lots of gates just rearrange the basis states, and we can avoid some
+    # complexity (and make the repr of an Objective look nicer) by identifying
+    # this and setting the mapped_basis_states to the identical objects as the
+    # original basis_states
+    for (i, state) in enumerate(mapped_basis_states):
+        for (j, basis_state) in enumerate(basis_states):
+            if state == basis_state:
+                mapped_basis_states[i] = basis_state
     if liouville_states_set is None:
         # standard gate in Hilbert space
         initial_states = basis_states

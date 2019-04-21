@@ -5,6 +5,7 @@ History
 (next version)
 --------------
 
+* Improved: ``gate_objectives`` now takes into account if target states are (reshuffled) basis states and does not create unnecessary new copies.
 * Bugfix: Two ``Objective`` instances that contain numpy arrays as controls can now be compared with ``==`` (`#44`_)
 * Bugfix: Custom attributes (such as ``weight``) are now preserverd when copying an ``Objective`` (`#44`_)
 * Bugfix: Calling ``copy.deepcopy`` on an ``Objective`` now preserves control functions (`#44`_)
