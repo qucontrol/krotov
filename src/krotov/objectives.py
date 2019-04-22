@@ -113,7 +113,9 @@ class Objective:
         Objective[|Ψ₀(2)⟩ to |Ψ₁(2)⟩ via [H₀[2,2], [H₁[2,2], u₁(t)]]]
 
     Raises:
-        ValueError: If any arguments have an invalid type or structure
+        ValueError: If any arguments have an invalid type or structure. This
+            can be surpressed by setting the :attr:`type_checking` class
+            attribute to False.
 
     Note:
         Giving collapse operators via :attr:`c_ops` only makes sense if the
@@ -148,27 +150,36 @@ class Objective:
     """Whether the string representation of an :class:`Objective` may use
     unicode symbols, cf. :meth:`summarize` (class attribute)."""
 
+    type_checking = True
+    """By default, instantiating :class:`Objective` with invalid types raises a
+    :exc:`ValueError`. Setting this to False disables type checks in the
+    initializer, allowing certain advanced use cases such as using plain numpy
+    objects instead of QuTiP objects (class attribute)."""
+
     def __init__(self, *, initial_state, H, target, c_ops=None):
         if c_ops is None:
             c_ops = []
-        if not isinstance(H, (qutip.Qobj, list)):
-            raise ValueError(
-                "Invalid H, must be a Qobj, or a nested list, not %s"
-                % H.__class__.__name__
-            )
+        if self.type_checking:
+            if not isinstance(H, (qutip.Qobj, list)):
+                raise ValueError(
+                    "Invalid H, must be a Qobj, or a nested list, not %s"
+                    % H.__class__.__name__
+                )
         self.H = H
-        if not isinstance(initial_state, qutip.Qobj):
-            raise ValueError(
-                "Invalid initial_state: must be Qobj, not %s"
-                % initial_state.__class__.__name__
-            )
+        if self.type_checking:
+            if not isinstance(initial_state, qutip.Qobj):
+                raise ValueError(
+                    "Invalid initial_state: must be Qobj, not %s"
+                    % initial_state.__class__.__name__
+                )
         self.initial_state = initial_state
         self.target = target
-        if not isinstance(c_ops, list):
-            raise ValueError(
-                "Invalid c_ops: must be a list, not %s"
-                % c_ops.__class__.__name__
-            )
+        if self.type_checking:
+            if not isinstance(c_ops, list):
+                raise ValueError(
+                    "Invalid c_ops: must be a list, not %s"
+                    % c_ops.__class__.__name__
+                )
         self.c_ops = c_ops
 
     def __copy__(self):
@@ -302,7 +313,8 @@ class Objective:
         )
 
     def propagate(
-        self, tlist, *, propagator, rho0=None, H=None, c_ops=None, e_ops=None
+        self, tlist, *, propagator, rho0=None, H=None, c_ops=None, e_ops=None,
+        expect=qutip.expect
     ):
         """Propagate the system of the objective over the entire time grid.
 
@@ -317,7 +329,9 @@ class Objective:
         values in `tlist` (the control field switches in the middle between two
         points in `tlist`), :meth:`propagate` uses piecewise-constant controls
         on the intervals of `tlist` (the control field switches on the points
-        in `tlist`)
+        in `tlist`). The function `expect` is used to calculate expecation
+        values; it receives two parameters, an operator from `e_ops` and a
+        state, and must returnd the expectation value of the operator.
 
         Comparing the result of :meth:`mesolve` and :meth:`propagate` allows to
         estimate the "time discretization error". If the error is significant,
@@ -355,7 +369,7 @@ class Objective:
             result.states.append(state)
         else:
             for (i, oper) in enumerate(e_ops):
-                result.expect[i].append(qutip.expect(oper, state))
+                result.expect[i].append(expect(oper, state))
         controls = extract_controls([self])
         pulses_mapping = extract_controls_mapping([self], controls)
         mapping = pulses_mapping[0]  # "first objective" (dummy structure)
@@ -381,7 +395,7 @@ class Objective:
                 result.states.append(state)
             else:
                 for (i, oper) in enumerate(e_ops):
-                    result.expect[i].append(qutip.expect(oper, state))
+                    result.expect[i].append(expect(oper, state))
         result.expect = [np.array(a) for a in result.expect]
         return result
 

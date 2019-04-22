@@ -460,3 +460,11 @@ runtime, however, as states will have to be read from disk, or across the
 network.
 
 .. _Dask: http://docs.dask.org/en/latest/
+
+
+How to avoid the overhead of QuTiP objects
+------------------------------------------
+
+If you know what you are doing, it is possible to set up an :class:`.Objective`
+without any :class:`qutip.Qobj` instances, using arbitrary low-level objects
+instead.  See the :ref:`/notebooks/09_example_numpy.ipynb` for an example.

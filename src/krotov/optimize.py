@@ -46,7 +46,9 @@ def optimize_pulses(
     parallel_map=None,
     store_all_pulses=False,
     continue_from=None,
-    skip_initial_forward_propagation=False
+    skip_initial_forward_propagation=False,
+    norm=None,
+    overlap=None
 ):
     r"""Use Krotov's method to optimize towards the given `objectives`
 
@@ -170,6 +172,14 @@ def optimize_pulses(
             with `continue_from`, skip the initial forward propagation ("zeroth
             iteration"), and take the forward-propagated states from
             :attr:`.Result.states` instead.
+        norm (callable or None): A single-argument function to calculate the
+            norm of states. If None, delegate to the :meth:`~qutip.Qobj.norm`
+            method of the states.
+        overlap (callable or None): A two-argument function to calculate the
+            complex overlap of two states. If None, delegate to
+            :meth:`qutip.Qobj.overlap` for Hilbert space states and to the
+            Hilbert-Schmidt norm $\tr[\rho_1^\dagger \rho2]$ for density
+            matrices or operators.
 
     Returns:
         Result: The result of the optimization.
@@ -188,6 +198,10 @@ def optimize_pulses(
     if mu is None:
         mu = derivative_wrt_pulse
     second_order = sigma is not None
+    if norm is None:
+        norm = lambda state: state.norm()
+    if overlap is None:
+        overlap = _overlap
     if modify_params_after_iter is not None:
         # From a technical perspective, the `modify_params_after_iter` is
         # really just another info_hook, the only difference is the
@@ -261,7 +275,7 @@ def optimize_pulses(
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = np.array(
         [
-            _overlap(state_T, obj.target)
+            overlap(state_T, obj.target)
             for (state_T, obj) in zip(fw_states_T, objectives)
         ]
     )
@@ -324,7 +338,7 @@ def optimize_pulses(
     # Main optimization loop
     for krotov_iteration in range(iter_start + 1, iter_stop + 1):
 
-        logger.info("Started Krotov iteration %d" % krotov_iteration)
+        logger.info("Started Krotov iteration %d", krotov_iteration)
         tic = time.time()
 
         # Boundary condition for the backward propagation
@@ -336,7 +350,7 @@ def optimize_pulses(
         chi_states = chi_constructor(
             fw_states_T=fw_states_T, objectives=objectives, tau_vals=tau_vals
         )
-        chi_norms = [chi.norm() for chi in chi_states]
+        chi_norms = [norm(chi) for chi in chi_states]
         # normalizing χ improves numerical stability; the norm then has to be
         # taken into account when calculating Δϵ
         chi_states = [chi / nrm for (chi, nrm) in zip(chi_states, chi_norms)]
@@ -395,10 +409,10 @@ def optimize_pulses(
                         time_index,
                     )
                     Ψ = fw_states[i_obj]
-                    update = _overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩ ∈ ℂ
+                    update = overlap(χ, μ(Ψ))  # ⟨χ|μ|Ψ⟩ ∈ ℂ
                     update *= chi_norms[i_obj]
                     if second_order:
-                        update += 0.5 * σ * _overlap(delta_phis[i_obj], μ(Ψ))
+                        update += 0.5 * σ * overlap(delta_phis[i_obj], μ(Ψ))
                     delta_eps[i_pulse][time_index] += update
                 λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
@@ -432,7 +446,7 @@ def optimize_pulses(
         fw_states_T = fw_states
         tau_vals = np.array(
             [
-                _overlap(fw_state_T, obj.target)
+                overlap(fw_state_T, obj.target)
                 for (fw_state_T, obj) in zip(fw_states_T, objectives)
             ]
         )
@@ -473,7 +487,7 @@ def optimize_pulses(
             result.all_pulses.append(optimized_pulses)
         result.states = fw_states_T
 
-        logger.info("Finished Krotov iteration %d" % krotov_iteration)
+        logger.info("Finished Krotov iteration %d", krotov_iteration)
 
         # Convergence check
         msg = None
