@@ -5,6 +5,7 @@ TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
 TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 -x -s
 TESTS = src tests docs/notebooks/*.ipynb README.rst docs/*.rst
+BLACKOPTIONS = --skip-string-normalization --line-length 79
 
 
 define PRINT_HELP_PYSCRIPT
@@ -74,7 +75,7 @@ test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	@.venv/py36/bin/pip install -e .[dev]
 
 
-test36: .venv/py36/bin/py.test ## run tests for Python 3.6
+test36: .venv/py36/bin/py.test black-check ## run tests for Python 3.6
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
 
 
@@ -106,6 +107,12 @@ docs: .venv/py36/bin/sphinx-build ## generate Sphinx HTML documentation, includi
 spellcheck: .venv/py36/bin/sphinx-build ## check spelling in docs
 	@.venv/py36/bin/pip install sphinxcontrib-spelling
 	SPELLCHECK=en_US $(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build spelling
+
+black-check: .venv/py36/bin/python  ## Check all src and test files for complience to "black" code style
+	.venv/py36/bin/black $(BLACKOPTIONS) --diff --check src tests
+
+black: .venv/py36/bin/python  ## Apply 'black' code style to all src and test files
+	.venv/py36/bin/black $(BLACKOPTIONS) src tests
 
 coverage: test36  ## generate coverage report in ./htmlcov
 	.venv/py36/bin/coverage html

@@ -21,6 +21,7 @@ install:
   - pip freeze
 
 script:
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then black --skip-string-normalization --line-length 79 --check src tests; fi
   - py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 src tests docs/notebooks/*.ipynb README.rst docs/*.rst
 after_success:
   - coveralls

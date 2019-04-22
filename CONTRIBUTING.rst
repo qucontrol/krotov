@@ -125,6 +125,21 @@ the `nbval plugin`_.
 .. _nbval plugin: https://nbval.readthedocs.io/en/latest/
 
 
+Code Style
+----------
+
+All code must be compatible with :pep:`8`. The line length limit
+is 79 characters, although exceptions are permissible if this improves
+readability significantly.
+
+Beyond :pep:`8`, this project adopts the `Black code style`_, with
+``--skip-string-normalization --line-length 79``. You can
+run ``make black-check`` to check adherence to the code style, and
+``make black`` to apply it. The automatic test suite also includes the
+``black`` style check, so style violations are considered errors.
+
+.. _Black code style: https://github.com/ambv/black/#the-black-code-style
+
 .. _write-documentation:
 
 Write Documentation

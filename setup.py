@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """The setup script."""
+import sys
 
 from setuptools import setup, find_packages
 
@@ -30,10 +30,12 @@ requirements = ['glom', 'numpy', 'scipy', 'qutip', 'uniseg']
 # requirements for development (testing, generating docs)
 dev_requirements = [
     'jupyter', 'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'nbval',
-    'twine', 'pep8', 'flake8', 'wheel', 'sphinx', 'sphinx-autobuild',
+    'twine', 'pep8', 'flake8', 'pylint', 'wheel', 'sphinx', 'sphinx-autobuild',
     'sphinx_rtd_theme', 'nbsphinx', 'matplotlib', 'gitpython', 'watermark',
     'sphinxcontrib-bibtex', 'weylchamber>=0.3.1', 'click']
 dev_requirements.append('better-apidoc==0.3.1')
+if sys.version_info >= (3, 6):
+    dev_requirements.append('black')
 
 # some recommended packages that make development nicer
 dev_extras = [
@@ -59,7 +61,9 @@ setup(
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Physics',
     ],
-    description="Python implementation of Krotov's method for quantum optimal control",
+    description=(
+        "Python implementation of Krotov's method for quantum optimal control"
+    ),
     python_requires='~=3.5',
     install_requires=requirements,
     extras_require={
