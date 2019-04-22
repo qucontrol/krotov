@@ -219,7 +219,7 @@ def optimize_pulses(
         # functions (even with closures), it just returns the same function.
     _check_propagators_interface(propagators, logger)
 
-    adjoint_objectives = [obj.adjoint for obj in objectives]
+    adjoint_objectives = [obj.adjoint() for obj in objectives]
     if storage == 'array':
         storage = partial(np.empty, dtype=object)
     if parallel_map is None:

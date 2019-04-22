@@ -5,6 +5,7 @@ History
 (next version)
 --------------
 
+* Changed: The ``.adjoint`` property of ``Objective`` is now a method
 * Added: Ability to not use QuTiP ``Qobj`` objects, but arbitrary low-level objects instead.
 * Improved: Printing an ``Objective`` now uses internal counters and a symbolic notation to identify objects shared between different objectives. (`#43`_)
 * Improved: ``gate_objectives`` now takes into account if target states are (reshuffled) basis states and does not create unnecessary new copies.

@@ -236,7 +236,6 @@ class Objective:
         else:
             return not result
 
-    @property
     def adjoint(self):
         """The :class:`Objective` containing the adjoint of all components.
 

@@ -127,7 +127,7 @@ def test_adoint_objective(transmon_ham_and_states, objective_with_c_ops):
     """Test taking the adjoint of an objective"""
     H, psi0, psi1 = transmon_ham_and_states
     target = krotov.Objective(initial_state=psi0, target=psi1, H=H)
-    adjoint_target = target.adjoint
+    adjoint_target = target.adjoint()
     assert isinstance(adjoint_target.H, list)
     assert isinstance(adjoint_target.H[0], qutip.Qobj)
     assert isinstance(adjoint_target.H[1], list)
@@ -140,7 +140,7 @@ def test_adoint_objective(transmon_ham_and_states, objective_with_c_ops):
 
     # also try something that has numpy arrays
     obj = objective_with_c_ops
-    obj_dag = obj.adjoint
+    obj_dag = obj.adjoint()
     δ = (obj_dag.c_ops[0][0][0].dag() - obj.c_ops[0][0][0]).norm('max')
     assert δ < 1e-12
     assert isinstance(obj_dag.c_ops[0][0][1], np.ndarray)
@@ -151,7 +151,7 @@ def test_adoint_objective_with_no_target(transmon_ham_and_states):
     """Test taking the adjoint of an objective if target is None"""
     H, psi0, _ = transmon_ham_and_states
     target = krotov.Objective(initial_state=psi0, target=None, H=H)
-    adjoint_target = target.adjoint
+    adjoint_target = target.adjoint()
     assert (adjoint_target.H[0] - target.H[0]).norm() < 1e-12
     assert (adjoint_target.H[1][0] - target.H[1][0]).norm() < 1e-12
     assert adjoint_target.H[1][1] == target.H[1][1]
@@ -164,7 +164,7 @@ def test_objective_custom_target(objective_liouville):
     krotov.objectives.Objective.reset_symbol_counters()
     obj = copy.deepcopy(objective_liouville)
     obj.target = OrderedDict([('func', 'PE'), ('val', 1)])
-    obj_dag = obj.adjoint
+    obj_dag = obj.adjoint()
     assert obj_dag.target == obj.target
     with pytest.raises(ValueError):
         krotov.objectives._adjoint(obj.target, ignore_errors=False)
@@ -575,7 +575,7 @@ def test_summarize_objective_with_c_ops(objective_with_c_ops):
     expected = '|Psi0(2*2)> to |Psi1(2*2)> via {H:[H0[2*2,2*2], [H1[2*2,2*2], u1(t)], [H2[2*2,2*2], u2(t)]], c_ops:([[L0[2*2,2*2], a0[100]]],[[L1[2*2,2*2], a1[100]]])}'
     assert res == expected
 
-    obj_dag = obj.adjoint
+    obj_dag = obj.adjoint()
 
     res = obj_dag.summarize()
     expected = '⟨Ψ₀(2⊗2)| to ⟨Ψ₁(2⊗2)| via {H:[H₃[2⊗2,2⊗2], [H₄[2⊗2,2⊗2], u₁(t)], [H₅[2⊗2,2⊗2], u₂(t)]], c_ops:([[L₂[2⊗2,2⊗2], a₀[100]]],[[L₃[2⊗2,2⊗2], a₁[100]]])}'
@@ -600,7 +600,7 @@ def test_summarize_liouville_objective(objective_liouville):
     expected = 'rho0[2*2,2*2] to rho1[2*2,2*2] via [Lv0[[2*2,2*2],[2*2,2*2]], [Lv1[[2*2,2*2],[2*2,2*2]], a0[100]], [Lv2[[2*2,2*2],[2*2,2*2]], a1[100]]]'
     assert res == expected
 
-    obj_dag = obj.adjoint
+    obj_dag = obj.adjoint()
 
     res = obj_dag.summarize()
     expected = 'ρ₂[2⊗2,2⊗2] to ρ₃[2⊗2,2⊗2] via [𝓛₃[[2⊗2,2⊗2],[2⊗2,2⊗2]], [𝓛₄[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₀[100]], [𝓛₅[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₁[100]]]'
