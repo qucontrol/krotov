@@ -65,9 +65,7 @@ def test_dump_result_overwrite(oct_result_5, oct_result_10, tmpdir):
     assert result.iters[-1] == 10
 
 
-def test_dump_result_keep(
-    oct_result_5, oct_result_6, oct_result_10, tmpdir
-):
+def test_dump_result_keep(oct_result_5, oct_result_6, oct_result_10, tmpdir):
     filename = str(tmpdir.join("oct_result_{iter:06d}.dump"))
     assert not os.path.isfile(filename)
     dump_result = krotov.convergence.dump_result(filename, every=5)

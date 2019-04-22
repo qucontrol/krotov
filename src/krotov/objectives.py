@@ -87,9 +87,7 @@ def _adjoint(op, ignore_errors=False):
                     if ignore_errors:
                         return op
                     else:
-                        raise ValueError(
-                            "Cannot calculate adjoint of %s" % op
-                        )
+                        raise ValueError("Cannot calculate adjoint of %s" % op)
 
 
 class Objective:
@@ -312,7 +310,14 @@ class Objective:
         )
 
     def propagate(
-        self, tlist, *, propagator, rho0=None, H=None, c_ops=None, e_ops=None,
+        self,
+        tlist,
+        *,
+        propagator,
+        rho0=None,
+        H=None,
+        c_ops=None,
+        e_ops=None,
         expect=qutip.expect
     ):
         """Propagate the system of the objective over the entire time grid.

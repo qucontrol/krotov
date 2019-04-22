@@ -10,8 +10,11 @@ import pytest
 import krotov
 from krotov.shapes import qutip_callback
 from krotov.structural_conversions import (
-    pulse_options_dict_to_list, extract_controls, extract_controls_mapping,
-    discretize)
+    pulse_options_dict_to_list,
+    extract_controls,
+    extract_controls_mapping,
+    discretize,
+)
 
 
 def test_conversion_control_pulse_inverse():
@@ -22,7 +25,8 @@ def test_conversion_control_pulse_inverse():
     blackman = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=10)
 
     pulse_orig = krotov.structural_conversions.control_onto_interval(
-        discretize(blackman, tlist))
+        discretize(blackman, tlist)
+    )
 
     control = krotov.structural_conversions.pulse_onto_tlist(pulse_orig)
     pulse = krotov.structural_conversions.control_onto_interval(control)
@@ -64,11 +68,7 @@ def test_discretization_as_float():
     H = [qutip.Qobj(), [qutip.Qobj(), lambda t, args: 0]]
     u = H[1][1]
     objectives = [
-        krotov.Objective(
-            initial_state=qutip.Qobj(),
-            target=None,
-            H=H,
-        )
+        krotov.Objective(initial_state=qutip.Qobj(), target=None, H=H)
     ]
     tlist = np.linspace(0, 10, 100)
 
@@ -79,7 +79,7 @@ def test_discretization_as_float():
     guess_controls = res[0]
     assert guess_controls[0].dtype == np.float64
     guess_pulses = res[1]
-    assert guess_pulses [0].dtype== np.float64
+    assert guess_pulses[0].dtype == np.float64
     shape_arrays = res[4]
     assert shape_arrays[0].dtype == np.float64
 
@@ -101,16 +101,21 @@ def test_initialize_krotov_controls():
     pulse_options = {blackman: dict(lambda_a=1.0, shape=1)}
 
     objectives = [
-        krotov.Objective(initial_state=qutip.Qobj(), target=None, H=H, ),
+        krotov.Objective(initial_state=qutip.Qobj(), target=None, H=H)
     ]
 
     assert abs(blackman(0, None)) < 1e-15
     assert abs(blackman(T, None)) < 1e-15
 
-    (guess_controls, guess_pulses, pulses_mapping, lambda_vals,
-     shape_arrays) = (
-        krotov.optimize._initialize_krotov_controls(
-            objectives, pulse_options, tlist))
+    (
+        guess_controls,
+        guess_pulses,
+        pulses_mapping,
+        lambda_vals,
+        shape_arrays,
+    ) = krotov.optimize._initialize_krotov_controls(
+        objectives, pulse_options, tlist
+    )
 
     assert isinstance(guess_controls[0], np.ndarray)
     assert len(guess_controls[0]) == len(tlist)
@@ -141,8 +146,8 @@ def test_initialize_krotov_controls():
 def test_extract_controls_with_arrays():
     """Test extract_controls for controls that are numpy arrays"""
     X, Y, Z = qutip.Qobj(), qutip.Qobj(), qutip.Qobj()  # dummy Hamiltonians
-    u1, u2 = np.array([]), np.array([])                 # dummy controls
-    psi0, psi_tgt = qutip.Qobj(), qutip.Qobj()          # dummy states
+    u1, u2 = np.array([]), np.array([])  # dummy controls
+    psi0, psi_tgt = qutip.Qobj(), qutip.Qobj()  # dummy states
 
     assert X is not Y
     assert Y is not Z
@@ -150,10 +155,11 @@ def test_extract_controls_with_arrays():
     assert psi0 is not psi_tgt
 
     H1 = [X, [Y, u1], [Z, u2]]  # ham for first objective
-    H2 = [X, [Y, u2]]           # ham for second objective
+    H2 = [X, [Y, u2]]  # ham for second objective
     objectives = [
         krotov.Objective(initial_state=psi0, target=psi_tgt, H=H1),
-        krotov.Objective(initial_state=psi0, target=psi_tgt, H=H2)]
+        krotov.Objective(initial_state=psi0, target=psi_tgt, H=H2),
+    ]
 
     controls = extract_controls(objectives)
     control_map = extract_controls_mapping(objectives, controls)
@@ -188,7 +194,8 @@ def test_extract_controls():
     # check same Hamiltonian occuring in multiple objectives
     objectives = [
         krotov.Objective(initial_state=X, target=Y, H=H1),
-        krotov.Objective(initial_state=Y, target=X, H=H1)]
+        krotov.Objective(initial_state=Y, target=X, H=H1),
+    ]
     controls = extract_controls(objectives)
     maps = extract_controls_mapping(objectives, controls)
     assert len(controls) == 2
@@ -201,7 +208,8 @@ def test_extract_controls():
     objectives = [
         krotov.Objective(initial_state=X, target=Y, H=H1),
         krotov.Objective(initial_state=Y, target=X, H=H2),
-        krotov.Objective(initial_state=Y, target=X, H=H3)]
+        krotov.Objective(initial_state=Y, target=X, H=H3),
+    ]
     controls = extract_controls(objectives)
     assert len(controls) == 4
     for c in (f, g, h, d):
@@ -223,7 +231,8 @@ def test_pulse_options_dict_to_list(caplog):
 
     pulse_options = {
         id(u1): dict(lambda_a=1.0, shape=1),
-        id(u2): dict(lambda_a=2.0, shape=1)}
+        id(u2): dict(lambda_a=2.0, shape=1),
+    }
 
     pulse_options_list = pulse_options_dict_to_list(pulse_options, controls)
     assert len(pulse_options_list) == 2
@@ -231,8 +240,7 @@ def test_pulse_options_dict_to_list(caplog):
     assert pulse_options_list[1] == pulse_options[id(u2)]
 
     # check error for missing pulse options
-    pulse_options = {
-        id(u1): dict(lambda_a=1.0, shape=1)}
+    pulse_options = {id(u1): dict(lambda_a=1.0, shape=1)}
     with pytest.raises(ValueError) as exc_info:
         pulse_options_dict_to_list(pulse_options, controls)
     assert 'does not have any associated pulse options' in str(exc_info.value)

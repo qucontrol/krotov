@@ -72,7 +72,8 @@ __all__ = ['derivative_wrt_pulse']
 
 
 def derivative_wrt_pulse(
-        objectives, i_objective, pulses, pulses_mapping, i_pulse, time_index):
+    objectives, i_objective, pulses, pulses_mapping, i_pulse, time_index
+):
     r"""Calculate ∂H/∂ϵ for the standard equations of motion
 
     Args:
@@ -132,7 +133,8 @@ def derivative_wrt_pulse(
         for i in ham_mapping[1:]:
             mu += (1j * eqm_factor) * objective.H[ham_mapping[i]][0]
     for i_c_op in range(len(objective.c_ops)):
-        if len(pulses_mapping[i_objective][i_c_op+1][i_pulse]) != 0:
+        if len(pulses_mapping[i_objective][i_c_op + 1][i_pulse]) != 0:
             raise NotImplementedError(
-                "Time-dependent collapse operators not implemented")
+                "Time-dependent collapse operators not implemented"
+            )
     return mu

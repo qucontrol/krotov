@@ -178,9 +178,7 @@ class FwPropStepTask:
             for (ic, c_op) in enumerate(obj.c_ops)
         ]
         dt = tlist[time_index + 1] - tlist[time_index]
-        states[i_state] = propagators[i_state](
-            H, state, dt, c_ops
-        )
+        states[i_state] = propagators[i_state](H, state, dt, c_ops)
         # While there is no significant IPC-communication overhead associated
         # with the *input* of the task, the resulting state returned here still
         # must go through the `result_queue` of the Consumer. This is the main
