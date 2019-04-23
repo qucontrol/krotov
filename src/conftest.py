@@ -3,13 +3,13 @@
 This file is automatically evaluated by py.test. It ensures that we can write
 doctests without distracting import statements in the doctest.
 """
-import numpy
-import krotov
 import inspect
 from collections import OrderedDict
 
-# noinspection PyPackageRequirements
+import numpy
 import pytest
+
+import krotov
 
 
 @pytest.fixture(autouse=True)
