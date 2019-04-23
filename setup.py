@@ -29,17 +29,35 @@ requirements = ['glom', 'numpy', 'scipy', 'qutip', 'uniseg']
 
 # requirements for development (testing, generating docs)
 dev_requirements = [
-    'jupyter', 'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'nbval',
-    'twine', 'pep8', 'flake8', 'pylint', 'wheel', 'sphinx', 'sphinx-autobuild',
-    'sphinx_rtd_theme', 'nbsphinx', 'matplotlib', 'gitpython', 'watermark',
-    'sphinxcontrib-bibtex', 'weylchamber>=0.3.1', 'click']
+    'click',
+    'coverage',
+    'flake8',
+    'gitpython',
+    'isort',
+    'jupyter',
+    'matplotlib',
+    'nbsphinx',
+    'nbval',
+    'pep8',
+    'pylint',
+    'pytest',
+    'pytest-cov',
+    'pytest-xdist',
+    'sphinx',
+    'sphinx-autobuild',
+    'sphinx_rtd_theme',
+    'sphinxcontrib-bibtex',
+    'twine',
+    'watermark',
+    'weylchamber>=0.3.1',
+    'wheel',
+]
 dev_requirements.append('better-apidoc==0.3.1')
 if sys.version_info >= (3, 6):
     dev_requirements.append('black')
 
 # some recommended packages that make development nicer
-dev_extras = [
-    'jupyterlab', 'pdbpp']
+dev_extras = ['jupyterlab', 'pdbpp']
 
 version = get_version('./src/krotov/__init__.py')
 
@@ -66,10 +84,7 @@ setup(
     ),
     python_requires='~=3.5',
     install_requires=requirements,
-    extras_require={
-        'dev': dev_requirements,
-        'extras': dev_extras,
-    },
+    extras_require={'dev': dev_requirements, 'extras': dev_extras},
     license="BSD license",
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/x-rst',

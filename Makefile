@@ -114,6 +114,12 @@ black-check: .venv/py36/bin/python  ## Check all src and test files for complien
 black: .venv/py36/bin/python  ## Apply 'black' code style to all src and test files
 	.venv/py36/bin/black $(BLACKOPTIONS) src tests
 
+isort-check: .venv/py36/bin/python  ## Check all src and test files for correctly sorted imports
+	.venv/py36/bin/isort --recursive --check-only src tests
+
+isort: .venv/py36/bin/python  ## Sort imports in all src and test files
+	.venv/py36/bin/isort --recursive src tests
+
 coverage: test36  ## generate coverage report in ./htmlcov
 	.venv/py36/bin/coverage html
 	@echo "open htmlcov/index.html"
