@@ -1,8 +1,9 @@
 """Test of krotov.shape functions"""
-from krotov.shapes import flattop
 from functools import partial
 
 import pytest
+
+from krotov.shapes import flattop
 
 
 def test_flattop_blackman():

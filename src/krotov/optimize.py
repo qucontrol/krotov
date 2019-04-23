@@ -1,29 +1,29 @@
-import logging
-import time
 import copy
 import inspect
+import logging
+import time
 from functools import partial
 
 import numpy as np
-
 from qutip import Qobj
 from qutip.parallel import serial_map
 
+from .info_hooks import chain
+from .mu import derivative_wrt_pulse
+from .propagators import Propagator, expm
 from .result import Result
+from .second_order import _overlap
+from .shapes import one_shape, zero_shape
 from .structural_conversions import (
+    control_onto_interval,
+    discretize,
     extract_controls,
     extract_controls_mapping,
-    control_onto_interval,
-    pulse_options_dict_to_list,
-    pulse_onto_tlist,
     plug_in_pulse_values,
-    discretize,
+    pulse_onto_tlist,
+    pulse_options_dict_to_list,
 )
-from .mu import derivative_wrt_pulse
-from .info_hooks import chain
-from .second_order import _overlap
-from .shapes import zero_shape, one_shape
-from .propagators import expm, Propagator
+
 
 __all__ = ['optimize_pulses']
 

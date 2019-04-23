@@ -1,8 +1,10 @@
 """Test the dump_result convergence routine"""
-import os
-import krotov
-import pytest
 import copy
+import os
+
+import pytest
+
+import krotov
 
 
 def incl_range(a, b, step=1):

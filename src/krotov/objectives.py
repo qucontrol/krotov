@@ -7,24 +7,25 @@ optimization functional (:mod:`krotov.functionals`). For the same physical
 objective, there are usually several different functionals whose minimization
 achieve that objective.
 """
-import sys
 import copy
 import itertools
-from functools import partial
+import sys
 from collections import defaultdict
+from functools import partial
 
+import numpy as np
 import qutip
 from qutip.solver import Result as QutipSolverResult
-import numpy as np
 
 from .structural_conversions import (
     _nested_list_shallow_copy,
+    control_onto_interval,
+    discretize,
     extract_controls,
     extract_controls_mapping,
     plug_in_pulse_values,
-    control_onto_interval,
-    discretize,
 )
+
 
 __all__ = [
     'Objective',

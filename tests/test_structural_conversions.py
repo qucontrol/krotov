@@ -3,17 +3,16 @@ import logging
 from functools import partial
 
 import numpy as np
-
-import qutip
 import pytest
+import qutip
 
 import krotov
 from krotov.shapes import qutip_callback
 from krotov.structural_conversions import (
-    pulse_options_dict_to_list,
+    discretize,
     extract_controls,
     extract_controls_mapping,
-    discretize,
+    pulse_options_dict_to_list,
 )
 
 

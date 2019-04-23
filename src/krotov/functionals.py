@@ -50,10 +50,12 @@ The values for $J_T$ may be used in a convergence analysis, see
 :mod:`krotov.convergence`.
 """
 import logging
-import qutip
+
 import numpy as np
+import qutip
 
 from .second_order import _overlap
+
 
 __all__ = [
     'f_tau',

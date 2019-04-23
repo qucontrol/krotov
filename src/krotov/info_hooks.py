@@ -1,8 +1,10 @@
 """Routines that can be passed as `info_hook` to :func:`.optimize_pulses`"""
 import sys
 import time
+
 import numpy as np
 from uniseg.graphemecluster import grapheme_clusters
+
 
 __all__ = ['chain', 'print_debug_information', 'print_table']
 

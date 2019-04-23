@@ -1,14 +1,14 @@
 """High-level tests for `krotov` package."""
 
-import os
 import logging
+import os
 from copy import deepcopy
 from shutil import copyfile
-from pkg_resources import parse_version
 
+import numpy as np
 import pytest
 import qutip
-import numpy as np
+from pkg_resources import parse_version
 
 import krotov
 

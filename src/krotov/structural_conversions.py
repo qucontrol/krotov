@@ -2,9 +2,10 @@
 mesolve and Krotov"""
 import copy
 import logging
+import warnings
 
 import numpy as np
-import warnings
+
 
 __all__ = [
     'control_onto_interval',

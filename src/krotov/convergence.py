@@ -66,7 +66,9 @@ protects against losing the results of a long running optimization in the event
 of a crash.
 """
 from operator import xor
+
 import glom
+
 
 __all__ = [
     'Or',

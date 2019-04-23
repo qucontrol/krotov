@@ -1,19 +1,17 @@
 """Tests for krotov.Objective in isolation"""
-import os
 import copy
+import os
 import pickle
+from collections import OrderedDict
+from itertools import product
 
 import numpy as np
-import scipy
+import pytest
 import qutip
-from qutip import ket, tensor, sigmaz, sigmax, sigmam, sigmap, identity
-
-from itertools import product
-from collections import OrderedDict
+import scipy
+from qutip import identity, ket, sigmam, sigmap, sigmax, sigmaz, tensor
 
 import krotov
-
-import pytest
 
 
 @pytest.fixture

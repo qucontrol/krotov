@@ -66,9 +66,10 @@ from abc import ABC, abstractmethod
 import numpy as np
 import qutip
 import scipy
-from qutip.superoperator import mat2vec, vec2mat
-from qutip.cy.spmatfuncs import spmvpy_csr
 from qutip.cy.spconvert import dense2D_to_fastcsr_fmode
+from qutip.cy.spmatfuncs import spmvpy_csr
+from qutip.superoperator import mat2vec, vec2mat
+
 
 __all__ = ['expm', 'Propagator', 'DensityMatrixODEPropagator']
 

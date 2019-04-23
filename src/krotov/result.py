@@ -1,10 +1,11 @@
-import time
-import pickle
 import logging
+import pickle
+import time
 from textwrap import dedent
 
 from .objectives import Objective, _ControlPlaceholder
 from .structural_conversions import _nested_list_shallow_copy, pulse_onto_tlist
+
 
 __all__ = ['Result']
 

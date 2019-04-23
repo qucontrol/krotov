@@ -1,11 +1,13 @@
 """Tests of krotov.functionals"""
-import krotov
-import pytest
-import numpy as np
-import qutip
 import copy
-from qutip import ket
 from itertools import product
+
+import numpy as np
+import pytest
+import qutip
+from qutip import ket
+
+import krotov
 
 
 @pytest.fixture

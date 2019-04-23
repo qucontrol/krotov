@@ -6,6 +6,7 @@ import functools
 
 import numpy as np
 
+
 __all__ = [
     'qutip_callback',
     'zero_shape',

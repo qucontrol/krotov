@@ -1,11 +1,10 @@
 """Test for modify_params_after_iter/info_hook"""
-import io
 import contextlib
+import io
 
 import numpy as np
 
 import krotov
-
 from test_objectives import transmon_ham_and_states
 
 

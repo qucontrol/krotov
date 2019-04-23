@@ -77,6 +77,7 @@ import multiprocessing
 
 from .structural_conversions import plug_in_pulse_values
 
+
 __all__ = ['Consumer', 'FwPropStepTask', 'parallel_map_fw_prop_step']
 
 
