@@ -75,7 +75,7 @@ test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	@.venv/py36/bin/pip install -e .[dev]
 
 
-test36: .venv/py36/bin/py.test black-check ## run tests for Python 3.6
+test36: .venv/py36/bin/py.test isort-check black-check ## run tests for Python 3.6
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
 
 
