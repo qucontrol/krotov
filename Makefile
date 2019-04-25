@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build clean-venvs line pep8 docs dist install develop help
+.PHONY: black black-check clean clean-build clean-pyc clean-test clean-venvs coverage develop develop-docs develop-test dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook lint notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
 CONDA_PACKAGES = qutip
 TESTENV =
@@ -19,7 +19,7 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 
-help:
+help:  ## show this help
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 clean: clean-build clean-pyc clean-test clean-venvs ## remove all build, test, coverage, and Python artifacts, as well as environments
@@ -54,7 +54,7 @@ pep8: ## check style with pep8
 	pep8 src tests
 
 
-test:  test35 test36 ## run tests on every Python version
+test: test35 test36 ## run tests on every Python version
 
 
 .venv/py35/bin/py.test:
@@ -98,6 +98,8 @@ notebooks: $(NOTEBOOKLOGS)  ## re-evaluate the notebooks in docs/notebooks
 	@echo "All notebook are now up to date; the were executed using the python3 kernel"
 	@.venv/py36/bin/jupyter kernelspec list | grep python3
 
+
+pre-commit-hooks: .venv/py36/bin/py.test  ## install pre-commit hooks
 
 docs: .venv/py36/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs SPHINXBUILD=../.venv/py36/bin/sphinx-build clean

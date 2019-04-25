@@ -140,6 +140,25 @@ run ``make black-check`` to check adherence to the code style, and
 
 .. _Black code style: https://github.com/ambv/black/#the-black-code-style
 
+Imports within python modules must be sorted according to the isort_
+configuration in ``setup.cfg``. The command ``make isort-check`` checks whether
+all imports are sorted correctly, and ``make isort`` modifies all Python
+modules in-place with the proper sorting.
+
+.. _isort: https://github.com/timothycrosley/isort#readme
+
+The code style is enforced as part of the test suite, as well as through git
+pre-commit hooks that prevent committing code not does not meet the
+requirements. These hooks are managed through the `pre-commit framework`_.
+
+.. warning::
+   After cloning the ``qdynpylib`` repository, you must run
+   ``make pre-commit-hooks``, or (if you have ``pre-commit`` installed)
+   ``pre-commit install`` from within the project root folder.
+
+.. _pre-commit framework: https://pre-commit.com
+
+
 .. _write-documentation:
 
 Write Documentation
