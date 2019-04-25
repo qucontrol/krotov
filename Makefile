@@ -61,18 +61,18 @@ test:  test35 test36 ## run tests on every Python version
 	@conda create -y -m --override-channels -c defaults -p .venv/py35 python=3.5
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
 	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py35 $(CONDA_PACKAGES)
-	@.venv/py35/bin/pip install -e .[dev]
+	@.venv/py35/bin/python -m pip install -e .[dev]
 
 test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
-
 
 
 .venv/py36/bin/py.test:
 	@conda create -y -m --override-channels -c defaults -p .venv/py36 python=3.6
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
 	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py36 $(CONDA_PACKAGES)
-	@.venv/py36/bin/pip install -e .[dev]
+	@.venv/py36/bin/python -m pip install -e .[dev]
+	@.venv/py36/bin/python scripts/install-pre-commit.py
 
 
 test36: .venv/py36/bin/py.test isort-check black-check ## run tests for Python 3.6

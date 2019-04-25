@@ -3,7 +3,7 @@
 """The setup script."""
 import sys
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 
 def get_version(filename):
@@ -39,6 +39,7 @@ dev_requirements = [
     'nbsphinx',
     'nbval',
     'pep8',
+    'pre-commit',
     'pylint',
     'pytest',
     'pytest-cov',
