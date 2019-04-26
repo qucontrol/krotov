@@ -151,7 +151,7 @@ pre-commit hooks that prevent committing code not does not meet the
 requirements. These hooks are managed through the `pre-commit framework`_.
 
 .. warning::
-   After cloning the ``qdynpylib`` repository, you must run
+   After cloning the ``krotov`` repository, you must run
    ``make pre-commit-hooks``, or (if you have ``pre-commit`` installed)
    ``pre-commit install`` from within the project root folder.
 
