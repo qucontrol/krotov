@@ -38,7 +38,6 @@ dev_requirements = [
     'matplotlib',
     'nbsphinx',
     'nbval',
-    'pep8',
     'pre-commit',
     'pylint',
     'pytest',

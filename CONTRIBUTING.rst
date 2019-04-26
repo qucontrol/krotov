@@ -80,7 +80,7 @@ If you are a member of the `qucontrol organization`_, there is no need to fork
 
 It is strongly recommended that you use the conda_ package manager. The
 ``Makefile`` relies on conda to create local testing and documentation building
-environements (``make test`` and ``make docs``).
+environments (``make test`` and ``make docs``).
 
 Alternatively, you may  use ``make develop-test`` and ``make develop-docs`` to
 run the tests or generate the documentation within your active Python
@@ -135,8 +135,7 @@ readability significantly.
 Beyond :pep:`8`, this project adopts the `Black code style`_, with
 ``--skip-string-normalization --line-length 79``. You can
 run ``make black-check`` to check adherence to the code style, and
-``make black`` to apply it. The automatic test suite also includes the
-``black`` style check, so style violations are considered errors.
+``make black`` to apply it.
 
 .. _Black code style: https://github.com/ambv/black/#the-black-code-style
 
@@ -157,6 +156,14 @@ requirements. These hooks are managed through the `pre-commit framework`_.
    ``pre-commit install`` from within the project root folder.
 
 .. _pre-commit framework: https://pre-commit.com
+
+You may use ``make flake8-check`` and ``make pylint-check`` for additional
+checks on the code with flake8_ and pylint_, but there is no strict requirement
+for a perfect score with either one of these linters. They only serve as a
+guideline for code that might be improved.
+
+.. _flake8: http://flake8.pycqa.org
+.. _pylint: http://pylint.pycqa.org
 
 
 .. _write-documentation:
