@@ -16,7 +16,7 @@ install:
   - conda activate test_env
   - conda config --append channels conda-forge
   - conda install qutip
-  - pip install -e .[dev]
+  - pip install .[dev]
   - pip install coveralls
   - pip freeze
 
