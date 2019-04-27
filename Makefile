@@ -6,7 +6,7 @@ TESTENV =
 TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 -x -s
 TESTS = src tests docs/notebooks/*.ipynb README.rst docs/*.rst
 BLACKOPTIONS = --skip-string-normalization --line-length 79
-LATESTVENV = .venv/py36
+LATESTVENV = .venv/py37
 
 
 define PRINT_HELP_PYSCRIPT
@@ -54,7 +54,7 @@ flake8-check: $(LATESTVENV)/bin/python ## check style with flake8
 pylint-check: $(LATESTVENV)/bin/python ## check style with pylint
 	$(LATESTVENV)/bin/python -m pylint -j 0 src
 
-test: test35 test36 ## run tests on every supported Python version
+test: test35 test36 test37 ## run tests on every supported Python version
 
 
 .venv/py35/bin/py.test:
@@ -72,10 +72,20 @@ test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
 	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py36 $(CONDA_PACKAGES)
 	@.venv/py36/bin/python -m pip install -e .[dev]
-	@.venv/py36/bin/python scripts/install-pre-commit.py
 
 
 test36: .venv/py36/bin/py.test isort-check black-check ## run tests for Python 3.6
+	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
+
+.venv/py37/bin/py.test:
+	@conda create -y -m --override-channels -c defaults -p .venv/py37 python=3.7
+	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
+	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py37 $(CONDA_PACKAGES)
+	@.venv/py37/bin/python -m pip install -e .[dev]
+	@.venv/py37/bin/python scripts/install-pre-commit.py
+
+
+test37: .venv/py37/bin/py.test isort-check black-check ## run tests for Python 3.7
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
 
 
@@ -122,7 +132,7 @@ isort-check: $(LATESTVENV)/bin/python  ## Check all src and test files for corre
 isort: $(LATESTVENV)/bin/python  ## Sort imports in all src and test files
 	$(LATESTVENV)/bin/isort --recursive src tests
 
-coverage: test36  ## generate coverage report in ./htmlcov
+coverage: test37  ## generate coverage report in ./htmlcov
 	$(LATESTVENV)/bin/coverage html
 	@echo "open htmlcov/index.html"
 

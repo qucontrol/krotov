@@ -12,7 +12,7 @@ calculate the propagation over a single time step. In particular,
 dynamics within the optimization.  The signature for any `propagator`
 must be the same as the "reference" :func:`expm` propagator:
 
-    >>> inspect.formatargspec(*inspect.getfullargspec(krotov.propagators.expm))
+    >>> str(inspect.signature(krotov.propagators.expm))
     '(H, state, dt, c_ops=None, backwards=False, initialize=False)'
 
 The arguments are as follows (cf. :class:`Propagator`):

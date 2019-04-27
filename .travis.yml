@@ -3,6 +3,7 @@
 language: python
 python:
   # We don't actually use the Travis Python, but this keeps it organized.
+  - 3.7
   - 3.6
   - 3.5
 install:
@@ -22,8 +23,8 @@ install:
 
 script:
   - set -e
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then isort --recursive --check-only src tests; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then black --skip-string-normalization --line-length 79 --check src tests; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then isort --recursive --check-only src tests; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then black --skip-string-normalization --line-length 79 --check src tests; fi
   - py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 src tests docs/notebooks/*.ipynb README.rst docs/*.rst
 after_success:
   - coveralls
