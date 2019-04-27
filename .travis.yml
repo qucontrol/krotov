@@ -1,5 +1,5 @@
 # Config file for automatic testing at travis-ci.org
-
+dist: xenial
 language: python
 python:
   # We don't actually use the Travis Python, but this keeps it organized.
