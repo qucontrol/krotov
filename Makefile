@@ -62,7 +62,7 @@ test: test35 test36 test37 ## run tests on every supported Python version
 	@conda create -y -m --override-channels -c defaults -p .venv/py35 python=3.5
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
 	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py35 $(CONDA_PACKAGES)
-	@.venv/py35/bin/python -m pip install -e .[dev]
+	@PIP_USE_PEP517=false .venv/py35/bin/python -m pip install -e .[dev]
 
 test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
@@ -72,7 +72,7 @@ test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 	@conda create -y -m --override-channels -c defaults -p .venv/py36 python=3.6
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
 	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py36 $(CONDA_PACKAGES)
-	@.venv/py36/bin/python -m pip install -e .[dev]
+	@PIP_USE_PEP517=false .venv/py36/bin/python -m pip install -e .[dev]
 
 
 test36: .venv/py36/bin/py.test isort-check black-check ## run tests for Python 3.6
@@ -82,7 +82,7 @@ test36: .venv/py36/bin/py.test isort-check black-check ## run tests for Python 3
 	@conda create -y -m --override-channels -c defaults -p .venv/py37 python=3.7
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
 	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py37 $(CONDA_PACKAGES)
-	@.venv/py37/bin/python -m pip install -e .[dev]
+	@PIP_USE_PEP517=false .venv/py37/bin/python -m pip install -e .[dev]
 	@.venv/py37/bin/python scripts/install-pre-commit.py
 
 
@@ -164,7 +164,7 @@ uninstall:  ## uninstall the package from the active Python's site-packages
 	pip uninstall krotov
 
 develop: clean-build clean-pyc ## install the package to the active Python's site-packages, in develop mode
-	pip install -e .
+	PIP_USE_PEP517=false pip install -e .
 
 develop-test: develop ## run tests within the active Python environment
 	$(TESTENV) py.test -v $(TESTOPTIONS) $(TESTS)
@@ -178,5 +178,5 @@ jupyter-notebook: $(LATESTVENV)/bin/jupyter  ## run a notebook server for editin
 	$(LATESTVENV)/bin/jupyter notebook --config=/dev/null
 
 jupyter-lab: $(LATESTVENV)/bin/jupyter  ## run a jupyterlab server for editing the examples
-	@$(LATESTVENV)/bin/pip install -e .[extras]
+	@PIP_USE_PEP517=false $(LATESTVENV)/bin/python -m pip install -e .[extras]
 	$(LATESTVENV)/bin/jupyter lab --config=/dev/null
