@@ -17,7 +17,8 @@ install:
   - conda activate test_env
   - conda config --append channels conda-forge
   - conda install qutip
-  - pip install .[dev]
+  # we must use an editable install, otherwise coveralls won't work
+  - PIP_USE_PEP517=false pip install -e .[dev]
   - pip install coveralls
   - pip freeze
 
