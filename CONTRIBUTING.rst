@@ -7,6 +7,17 @@ Contributing
 Contributions are welcome, and they are greatly appreciated! Every little bit
 helps, and credit will always be given.
 
+
+Code of Conduct
+---------------
+
+Everyone interacting in the ``krotov`` project's code base,
+issue tracker, and any communication channels is expected to follow the
+`PyPA Code of Conduct`_.
+
+.. _`PyPA Code of Conduct`: https://www.pypa.io/en/latest/code-of-conduct/
+
+
 Report Bugs
 -----------
 
@@ -32,12 +43,6 @@ If you are proposing a feature:
   are welcome :)
 
 
-Fix Bugs / Implement Features
------------------------------
-
-Look through the GitHub issues for bugs or feature requests. Anybody is welcome to submit a pull request for open issues.
-
-
 Pull Request Guidelines
 -----------------------
 
@@ -46,7 +51,7 @@ Before you submit a pull request, check that it meets these guidelines:
 1. The pull request should include tests.
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
-   feature to the list in ``features.rst``.
+   feature to the list in ``docs/04_features.rst`` and/or ``HISTORY.rst``.
 3. Check https://travis-ci.org/qucontrol/krotov/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
@@ -95,6 +100,121 @@ You still can (and should) look at https://travis-ci.org/qucontrol/krotov/ to ch
 .. _Aaron Meurer's Git Workflow Notes:  https://www.asmeurer.com/git-workflow/
 
 .. _qucontrol organization: https://github.com/qucontrol
+
+
+.. _BranchingModel:
+
+Branching Model
+---------------
+
+For developers with direct access to the repository,
+``krotov`` uses a simple branching model where all
+developments happens directly on the ``master`` branch. Releases are tags on
+``master``. All commits on ``master`` *should* pass all tests and be
+well-documented. This is so that ``git bisect`` can be effective. For any
+non-trivial issue, it is recommended to create a topic branch, instead of
+working on ``master``. There are no restrictions on commits on topic branches,
+they do not need to contain complete documentation, pass any tests, or even be
+able to run.
+
+To create a topic-branch named ``issue1``::
+
+    $ git branch issue1
+    $ git checkout issue1
+
+You can then make commits, and push them to Github to trigger Continuous
+Integration testing::
+
+    $ git push -u origin issue1
+
+Commit early and often! At the same time, try to keep your topic branch
+as clean and organized as possible. If you have not yet pushed your topic
+branch to the "origin" remote:
+
+* Avoid having a series of meaningless granular commits like "start bugfix",
+  "continue development", "add more work on bugfix", "fix typos", and so forth.
+  Instead, use ``git commit --amend`` to add to your previous commit. This is
+  the ideal way to "commit early and often". You do not have to wait until a
+  commit is "perfect"; it is a good idea to make hourly/daily "snapshots" of
+  work in progress. Amending a commit also allows you to change the commit
+  message of your last commit.
+* You can combine multiple existing commits by "squashing" them. For example,
+  use ``git rebase -i HEAD~4`` to combined the previous four commits into one.
+  See the `"Rewriting History" section of Pro Git book`_ for details (if you
+  feel this is too far outside of your git comfort zone, just skip it).
+* If you work on a topic branch for a long time, and there is significant work
+  on ``master`` in the meantime, periodically rebase your topic branch on the
+  current master (``git rebase master``). Avoid merging ``master`` into your
+  topic branch. See `Merging vs. Rebasing`_.
+
+If you have already pushed your topic branch to the remote origin, you have to
+be a bit more careful. If you are sure that you are the only one working on
+that topic branch, you can still follow the above guidelines, and force-push
+the issue branch (``git push --force``). This also applies if you are an
+external contributor preparing a pull request in your own clone of the project.
+If you are collaborating with others on the topic branch, coordinate with them
+whether they are OK with rewriting the history. If not, merge instead of
+rebasing. You must never rewrite history on the ``master`` branch (nor will you
+be able to, as the ``master`` branch is "protected" and can only be force-pushed to
+in coordination with the project maintainer).  If something goes wrong with any
+advanced "history rewriting", there is always `"git reflog"`_ as a safety net
+-- you will never lose work that was committed before.
+
+When you are done with a topic branch (the issue has been fixed), finish up by
+merging the topic branch back into ``master``::
+
+    $ git checkout master
+    $ git merge --no-ff issue1
+
+The ``--no-ff`` option is critical, so that an explicit merge commit is created
+(especially if you rebased).  Summarize the changes of the branch relative to
+``master`` in the commit message.
+
+Then, you can push master and delete the topic branch both locally and on Github::
+
+    $ git push origin master
+    $ git push --delete origin issue1
+    $ git branch -D issue1
+
+.. _"Rewriting History" section of Pro Git book: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
+.. _Merging vs. Rebasing: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+.. _"git reflog": https://www.atlassian.com/git/tutorials/rewriting-history/git-reflog
+
+
+Commit Message Guidelines
+-------------------------
+
+Write commit messages according to this template:
+
+.. code-block:: none
+
+    Short (50 chars or less) summary ("subject line")
+
+    More detailed explanatory text. Wrap it to 72 characters. The blank
+    line separating the summary from the body is critical (unless you omit
+    the body entirely).
+
+    Write your subject line in the imperative: "Fix bug" and not "Fixed
+    bug" or "Fixes bug." This convention matches up with commit messages
+    generated by commands like git merge and git revert. A properly formed
+    git commit subject line should always be able to complete the sentence
+    "If applied, this commit will <your subject line here>".
+
+    Further paragraphs come after blank lines.
+
+    - Bullet points are okay, too.
+    - Typically a hyphen or asterisk is used for the bullet, followed by a
+      single space. Use a hanging indent.
+
+    You should reference any issue that is being addressed in the commit, as
+    e.g. "#1" for issue #1. If the commit closes an issue, state this on the
+    last line of the message (see below). This will automatically close the
+    issue on Github as soon as the commit is pushed there.
+
+    Closes #1
+
+See `Closing issues using keywords`_ for details on references to issues that
+Github will understand.
 
 
 Testing
@@ -396,53 +516,47 @@ The following assumes your current working directory is a checkout of
 ``krotov``, and that you have successfully run ``make test`` (which creates
 some local virtual environments that development relies on).
 
-.. _how-to-work-on-a-topic-branch:
 
-How to work on a topic branch
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How to install QuTiP from source ("illegal instruction" in QuTiP conda install)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When working on an non-trivial issue, it is recommended to create a topic
-branch, instead of pushing to ``master``.
+The local conda environments that ``make test`` and other ``make`` targets set
+up in the ``.venv`` folder use pre-compiled ``conda`` packages for QuTiP by
+default. Unfortunately, some of QuTiP's conda packages are compiled
+incorrectly, and crash the entire Python process whenever the ``qutip`` package
+is imported (QuTiP issues `#951 <QutipIssue951_>`_, `#920 <QutipIssue920_>`_,
+and `#674 <QutipIssue674_>`_). You will see a message like "Illegal
+instruction" or something similar. This problem happens especially on Linux and
+sometimes other Unixes (like macOS). Luckily, on Linux you will usually have
+the necessary compilers to install QuTiP "from source" (via ``pip``). To enable
+automatic installation via ``pip``, make the following changes to the
+``Makefile``:
 
-To create a branch named ``issue18``::
+* Un-comment the line::
 
-    $ git branch issue18
-    $ git checkout issue18
+      CONDA_PACKAGES = cython numpy scipy
 
-You can then make commits, and push them to Github to trigger Continuous Integration testing::
+  near the top of the ``Makefile``. Defining ``CONDA_PACKAGES`` as above will
+  ensure that the necessary build-requirements for QuTiP are available in the
+  conda environment.
 
-    $ git push origin issue18
+* Comment out all lines similar to::
 
-It is ok to force-push on an issue branch
+      @conda install -y --override-channels -c defaults -c conda-forge -p .venv/py37 qutip
 
-When you are done (the issue has been fixed), finish up by merging the topic
-branch back into ``master``::
+  By omitting this line, the ``Makefile`` will instead pick up the ``qutip``
+  dependency automatically from ``setup.py`` in the command following in the next
+  line::
 
-    $ git checkout master
-    $ git merge --no-ff issue18
+      .venv/py37/bin/python -m pip install -e .[dev]
 
-The ``--no-ff`` option is critical, so that an explicit merge commit is created.
-Summarize the changes of the branch relative to ``master`` in the commit
-message.
-
-Then, you can push master and delete the topic branch both locally and on Github::
-
-    $ git push origin master
-    $ git push --delete origin issue18
-    $ git branch -D issue18
+ This change is necessary for all of the ``.venv`` environments.
 
 
-How to reference a Github issue in a commit message
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _QutipIssue951: https://github.com/qutip/qutip/issues/951
+.. _QutipIssue920: https://github.com/qutip/qutip/issues/920
+.. _QutipIssue674: https://github.com/qutip/qutip/issues/674
 
-Simply put e.g. ``#14`` anywhere in your commit message, and Github will
-automatically link to your commit on the page for issue number 14.
-
-You may also use something like ``Closes #14`` as the last line of your
-commit message to automatically close the issue.
-See `Closing issues using keywords`_ for details.
-
-Also note the general `Commit Message Guidelines`_.
 
 How to run a jupyter notebook server for working on the example notebooks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -453,7 +567,7 @@ A notebook server that is isolated to the proper testing environment can be star
 
 This is equivalent to::
 
-    $ .venv/py36/bin/jupyter notebook --config=/dev/null
+    $ .venv/py37/bin/jupyter notebook --config=/dev/null
 
 You may run this with your own options, if you prefer. The
 ``--config=/dev/null`` guarantees that the notebook server is completely
@@ -472,8 +586,8 @@ Interactive debugging in notebooks is difficult. It becomes much easier if
 you convert the notebook to a script first.  To convert a notebook to an
 (I)Python script and run it with automatic debugging, execute e.g.::
 
-    $ ./.venv/py36/bin/jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
-    $ ./.venv/py36/bin/ipython --pdb debug.py
+    $ ./.venv/py37/bin/jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
+    $ ./.venv/py37/bin/ipython --pdb debug.py
 
 You can then also set a manual breakpoint by inserting the following line anywhere in the code::
 
@@ -497,7 +611,7 @@ would like to commit any example notebooks or tests that currently fail, as a
 form of `test-driven development`_, you have two options:
 
 *   Push onto a topic branch (which are allowed to have failing tests), see
-    :ref:`how-to-work-on-a-topic-branch`. The failing tests can then be fixed by
+    the :ref:`BranchingModel`. The failing tests can then be fixed by
     adding commits to the same branch.
 
 *   Mark the test as failing. For normal tests, add a decorator::
@@ -524,7 +638,7 @@ How to run a subset of tests
 
 To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
 
-    $ ./.venv/py36/bin/pytest tests/test_krotov.py
+    $ ./.venv/py37/bin/pytest tests/test_krotov.py
 
 See the `pytest test selection docs`_ for details.
 
@@ -533,7 +647,7 @@ How to run only as single test
 
 Decorate the test with e.g. ``@pytest.mark.xxx``, and then run, e.g::
 
-    $ ./.venv/py36/bin/pytest -m xxx tests/
+    $ ./.venv/py37/bin/pytest -m xxx tests/
 
 See the `pytest documentation on markers`_ for details.
 
@@ -542,7 +656,7 @@ How to run only the doctests
 
 Run the following::
 
-$ ./.venv/py36/bin/pytest --doctest-modules src
+$ ./.venv/py37/bin/pytest --doctest-modules src
 
 How to go into an interactive debugger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -550,7 +664,7 @@ How to go into an interactive debugger
 Optionally, install the `pdbpp` package into the testing environment, for a
 better experience::
 
-    $ ./.venv/py36/bin/python -m pip install pdbpp
+    $ ./.venv/py37/bin/python -m pip install pdbpp
 
 Then:
 
@@ -560,7 +674,7 @@ Then:
 
 - Run ``pytest`` with the option ``-s``, e.g.::
 
-    $ ./.venv/py36/bin/pytest -m xxx -s tests/
+    $ ./.venv/py37/bin/pytest -m xxx -s tests/
 
 You may also see the `pytest documentation on automatic debugging`_.
 
@@ -603,7 +717,6 @@ For docstrings or ``*.rst`` files, see :ref:`write-documentation`. For notebooks
 
 .. _Jupyter’s Common Configuration system: https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html#jupyter-s-common-configuration-system
 .. _Closing issues using keywords: https://help.github.com/articles/closing-issues-using-keywords/
-.. _Commit Message Guidelines: https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53
 .. _pytest test selection docs: https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests
 .. _pytest documentation on markers: https://docs.pytest.org/en/latest/example/markers.html
 .. _pytest documentation on automatic debugging: https://docs.pytest.org/en/latest/usage.html#dropping-to-pdb-python-debugger-on-failures
