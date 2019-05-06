@@ -290,7 +290,12 @@ def test_continue_optimization(
         assert len(oct_result4.states) == 1
         assert "7 iterations" in oct_result4.message
 
-        assert str(oct_result4) == str(oct_result3)
+        assert (
+            oct_result4.start_local_time_str
+            == oct_result3.start_local_time_str
+        )
+        assert oct_result4.iters == oct_result3.iters
+        assert oct_result4.message == oct_result3.message
 
     # fmt: off
     # check the combined log file
