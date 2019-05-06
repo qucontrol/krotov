@@ -47,7 +47,6 @@ dev_requirements = [
     'sphinx-autobuild',
     'sphinx_rtd_theme',
     'sphinxcontrib-bibtex',
-    'sphinxcontrib-spelling',
     'twine',
     'watermark',
     'weylchamber>=0.3.1',
