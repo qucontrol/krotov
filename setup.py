@@ -41,7 +41,7 @@ dev_requirements = [
     'pre-commit',
     'pylint',
     'pytest',
-    'pytest-cov',
+    'pytest-cov<=2.6.1',
     'pytest-xdist',
     'sphinx',
     'sphinx-autobuild',
