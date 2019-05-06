@@ -12,17 +12,6 @@ import git
 
 import krotov
 
-
-MOCK_MODULES = [
-    'numpy',
-    'numpy.linalg',
-    'scipy',
-    'scipy.sparse',
-    'matplotlib',
-    'matplotlib.pyplot',
-]
-sys.modules.update((mod_name, mock.Mock()) for mod_name in MOCK_MODULES)
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -77,6 +66,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.todo',
     'dollarmath',
+    'sphinxcontrib.spelling',
     'nbsphinx',
     'sphinx.ext.inheritance_diagram',
     'sphinxcontrib.bibtex',
@@ -126,6 +116,14 @@ extlinks = {
 # autodoc settings
 autoclass_content = 'both'
 autodoc_member_order = 'bysource'
+autodoc_mock_imports = [
+    'numpy',
+    'numpy.linalg',
+    'scipy',
+    'scipy.sparse',
+    'matplotlib',
+    'matplotlib.pyplot',
+]
 
 
 html_last_updated_fmt = '%b %d, %Y'
