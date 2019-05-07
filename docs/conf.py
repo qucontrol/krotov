@@ -66,7 +66,6 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.todo',
     'dollarmath',
-    'sphinxcontrib.spelling',
     'nbsphinx',
     'sphinx.ext.inheritance_diagram',
     'sphinxcontrib.bibtex',
