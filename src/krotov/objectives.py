@@ -35,12 +35,12 @@ __all__ = [
 ]
 
 
-FIX_QUTIP_932 = True
+FIX_QUTIP_932 = sys.platform != "linux"
 """Workaround for `QuTiP issue 932`_.
 
-If True, and only when running on macOS, in :meth:`Objective.mesolve`,
-replace any array controls with an equivalent function. This results in a
-signficant slowdown of the propagation, as it circumvents the use of Cython.
+If True, in :meth:`Objective.mesolve`, replace any array controls with an
+equivalent function. This results in a signficant slowdown of the propagation,
+as it circumvents the use of Cython.
 
 .. _QuTiP issue 932: https://github.com/qutip/qutip/issues/932
 """
@@ -294,8 +294,7 @@ class Objective:
             H = self.H
         if c_ops is None:
             c_ops = self.c_ops
-        if FIX_QUTIP_932 and sys.platform == "darwin":  # pragma: no cover
-            # "darwin" = macOS; the "pragma" excludes from coverage analysis
+        if FIX_QUTIP_932:  # pragma: no cover
             controls = extract_controls([self])
             pulses_mapping = extract_controls_mapping([self], controls)
             mapping = pulses_mapping[0]  # "first objective" (dummy structure)
