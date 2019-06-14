@@ -1203,7 +1203,6 @@ def _summarize_component(
         dims = _obj_dims_str(obj, use_unicode)
         if key in count_cache:
             count = count_cache[key]
-            count_str = str(count)
         else:
             count = counter[str_pattern]
             count_cache[key] = count
@@ -1214,6 +1213,7 @@ def _summarize_component(
                 counter['H{count}[{dims}]'] += 1
             elif str_pattern == 'H{count}[{dims}]':
                 counter['A{count}[{dims}]'] += 1
+        count_str = str(count)
         if use_unicode:
             # transform all digits in counter to unicode subscripts.
             # Subscript symbols start at code point 0x2080
