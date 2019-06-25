@@ -119,7 +119,7 @@ def print_debug_information(
         tlist (numpy.ndarray): array of time grid values on which the states
             are defined
         tau_vals (numpy.ndarray): for each objective, the complex overlap for
-            the forward-propagated state with the target state, or None if no
+            the target state with the forward-propagated state, or None if no
             target state is defined.
         start_time (float): The time at which the iteration started, in epoch
             seconds

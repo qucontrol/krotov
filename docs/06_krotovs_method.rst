@@ -104,21 +104,21 @@ The functional consists of three parts:
 The most commonly used final-time functionals (cf. :mod:`krotov.functionals`)
 optimize for a set of initial states :math:`\{\ket{\phi_k}\}` to evolve to a
 set of target states :math:`\{\ket{\phi_k^\tgt}\}`.  The functionals can then
-be expressed in terms of the complex overlaps of the final-time states with the
-target states under the given control. Thus,
+be expressed in terms of the complex overlaps of the target states with the
+final-time states under the given control. Thus,
 
 .. math::
    :label: tauk
 
-     \tau_k = \Braket{\phi_k(T)}{\phi_k^\tgt}
+     \tau_k = \Braket{\phi_k^\tgt}{\phi_k(T)}
 
 in Hilbert space, or
 
 .. math::
 
      \tau_k
-     = \langle\!\langle \Op{\rho}_k(T) \vert \Op{\rho}^{\tgt} \rangle\!\rangle
-     \equiv \tr\left[\Op{\rho}^{\dagger}_k(T) \Op{\rho}_k^{\tgt} \right]
+     = \langle\!\langle \Op{\rho}^{\tgt} \vert \Op{\rho}_k(T) \rangle\!\rangle
+     \equiv \tr\left[\Op{\rho}_k^{\tgt\,\dagger} \Op{\rho}_k(T) \right]
 
 in Liouville space.
 

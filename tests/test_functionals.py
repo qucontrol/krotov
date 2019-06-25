@@ -73,16 +73,16 @@ def transmon_3states_objectives():
 
 def test_f_tau_with_weights(sqrt_SWAP_basis, cphase_objectives):
     tau_vals = [
-        psi.overlap(obj.target)
+        obj.target.overlap(psi)
         for (psi, obj) in zip(sqrt_SWAP_basis, cphase_objectives)
     ]
     assert abs(tau_vals[0] - (1 + 0j)) < 1e-14
-    assert abs(tau_vals[1] - (0.5 - 0.5j)) < 1e-14
-    assert abs(tau_vals[2] - (0.5 - 0.5j)) < 1e-14
+    assert abs(tau_vals[1] - (0.5 + 0.5j)) < 1e-14
+    assert abs(tau_vals[2] - (0.5 + 0.5j)) < 1e-14
     assert abs(tau_vals[3] - (-1 + 0j)) < 1e-14
 
     F = krotov.functionals.f_tau(sqrt_SWAP_basis, cphase_objectives)
-    assert abs(F - ((1 - 1j) / 4)) < 1e-14
+    assert abs(F - ((1 + 1j) / 4)) < 1e-14
 
     objectives = copy.deepcopy(cphase_objectives)
 
@@ -91,7 +91,7 @@ def test_f_tau_with_weights(sqrt_SWAP_basis, cphase_objectives):
     objectives[2].weight = 0.5
     objectives[3].weight = 0
     F = krotov.functionals.f_tau(sqrt_SWAP_basis, objectives)
-    assert abs(F - ((2.25 - 1.25j) / 4)) < 1e-14
+    assert abs(F - ((2.25 + 1.25j) / 4)) < 1e-14
 
     # make sure we didn't inadvertently modify the original objectives
     for obj in cphase_objectives:

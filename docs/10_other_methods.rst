@@ -38,7 +38,7 @@ then :cite:`KhanejaJMR05`
 .. math::
 
    \begin{split}
-     \frac{\partial \tau_k^*}{\partial \epsilon_j}
+     \frac{\partial \tau_k}{\partial \epsilon_j}
      &= \frac{\partial}{\partial \epsilon_j}
        \big\langle \phi_k^{\tgt} \big\vert
                \Op{U}^{(i)}_{nt-1} \dots \Op{U}^{(i)}_{j} \dots
@@ -86,7 +86,7 @@ of Krotov’s method compared to GRAPE are :cite:`EitanPRA11`:
    in the boundary condition for the backward-propagated states,
    Eq. :eq:`chi_boundary`, while the update equation stays the same otherwise.
    In contrast, for functionals that do not depend trivially on the overlaps
-   :math:`\tau_k = \Braket{\phi_k(T)}{\phi_k^\tgt}`, the evaluation of
+   :math:`\tau_k = \Braket{\phi_k^\tgt}{\phi_k(T)}`, the evaluation of
    the gradient in GRAPE may deviate significantly from its usual form,
    requiring a problem-specific implementation from scratch.
 

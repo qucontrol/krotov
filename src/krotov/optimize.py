@@ -275,7 +275,7 @@ def optimize_pulses(
     fw_states_T = [states[-1] for states in forward_states]
     tau_vals = np.array(
         [
-            overlap(state_T, obj.target)
+            overlap(obj.target, state_T)
             for (state_T, obj) in zip(fw_states_T, objectives)
         ]
     )
@@ -446,7 +446,7 @@ def optimize_pulses(
         fw_states_T = fw_states
         tau_vals = np.array(
             [
-                overlap(fw_state_T, obj.target)
+                overlap(obj.target, fw_state_T)
                 for (fw_state_T, obj) in zip(fw_states_T, objectives)
             ]
         )

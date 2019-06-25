@@ -22,7 +22,7 @@ class Result:
         info_vals (list): For each iteration, the return value of `info_hook`,
             or None
         tau_vals (list[list[complex]): for each iteration, a list of complex
-            overlaps between the forward-propagated state and the target state
+            overlaps between the target state and the forward-propagated state
             for each objective, assuming :attr:`.Objective.target` contains the
             target state. If there is no target state, an empty list.
         guess_controls (list[numpy.ndarray]): List of the guess controls in

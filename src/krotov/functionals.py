@@ -12,8 +12,8 @@ following keyword-arguments:
       optimization objectives.
 
     * `tau_vals` (:class:`list` of :class:`complex` or :obj:`None`): The
-      overlaps of the `fw_states_T` and the corresponding
-      :attr:`.Objective.target`, assuming :attr:`.Objective.target` contains a
+      overlaps of the :attr:`.Objective.target` and the corresponding
+      `fw_states_T`, assuming :attr:`.Objective.target` contains a
       quantum state. If the objective defines no target state, a list of Nones
 
 Krotov's method does not have an explicit dependence on the optimization
@@ -77,7 +77,7 @@ __all__ = [
 
 
 def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
-    r"""Average of the complex overlaps with the target states
+    r"""Average complex overlaps of the target states with the `fw_states_T`.
 
     That is,
 
@@ -89,13 +89,13 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
 
     .. math::
 
-        \tau_k = \Braket{\Psi_k(T)}{\Psi_k^{\tgt}},
+        \tau_k = \Braket{\Psi_k^{\tgt}}{\Psi_k(T)},
 
     in Hilbert space, or
 
     .. math::
 
-        \tau_k = \tr\left[\Op{\rho}_k(T)\Op{\rho}_k^{\tgt}\right]
+        \tau_k = \tr\left[\Op{\rho}_k^{\tgt\,\dagger}\Op{\rho}_k(T)\right]
 
     in Liouville space, where $\ket{\Psi_k}$ or $\Op{\rho}_k$ are the elements
     of `fw_states_T`, and $\ket{\Psi_k^{\tgt}}$ or $\Op{\rho}^{\tgt}$ are the
@@ -117,7 +117,7 @@ def f_tau(fw_states_T, objectives, tau_vals=None, **kwargs):
     """
     if tau_vals is None:
         tau_vals = [
-            _overlap(psi, obj.target)
+            _overlap(obj.target, psi)
             for (psi, obj) in zip(fw_states_T, objectives)
         ]
     res = 0j
@@ -148,15 +148,15 @@ def F_ss(fw_states_T, objectives, tau_vals=None, **kwargs):
     """
     if tau_vals is None:
         # get the absolute square, analogously to the f_tau function above
-        tau_vals = [
-            abs(_overlap(psi, obj.target)) ** 2
+        tau_vals_abssq = [
+            abs(_overlap(obj.target, psi)) ** 2
             for (psi, obj) in zip(fw_states_T, objectives)
         ]
     else:
-        tau_vals = [abs(tau) ** 2 for tau in tau_vals]
-    F = f_tau(fw_states_T, objectives, tau_vals)
+        tau_vals_abssq = [abs(tau) ** 2 for tau in tau_vals]
+    F = f_tau(fw_states_T, objectives, tau_vals_abssq)
     assert abs(F.imag) < 1e-10, F.imag
-    return f_tau(fw_states_T, objectives, tau_vals).real
+    return F.real
 
 
 def J_T_ss(fw_states_T, objectives, tau_vals=None, **kwargs):
@@ -365,7 +365,7 @@ def J_T_hs(fw_states_T, objectives, tau_vals=None, **kwargs):
     """
     if tau_vals is None:
         tau_vals = [
-            _overlap(psi, obj.target)
+            _overlap(obj.target, psi)
             for (psi, obj) in zip(fw_states_T, objectives)
         ]
     res = 0.0

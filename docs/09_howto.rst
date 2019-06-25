@@ -92,7 +92,7 @@ In order to define a new optimization functional :math:`J_T`:
   states :math:`\ket{\phi_k(T)}` and the list of objectives. For convenience,
   when :attr:`~.Objective.target` contains a target state, `chi_constructor`
   will also receive `tau_vals` containing the overlaps :math:`\tau_k =
-  \Braket{\phi_k(T)}{\phi_k^{\tgt}}`. See :func:`.chis_re` for an example.
+  \Braket{\phi_k^{\tgt}}{\phi_k(T)}`. See :func:`.chis_re` for an example.
 
 * Optionally, define a function that can be used as an `info_hook`
   in :func:`.optimize_pulses` which returns the value
