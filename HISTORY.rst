@@ -15,6 +15,7 @@ History
 * Bugfix: Calling ``copy.deepcopy`` on an ``Objective`` now preserves control functions (`#44`_)
 * Improved: The ``Objective.mesolve`` and ``Objective.propagate`` methods can now receive arguments ``H`` and ``c_ops`` to override the respective attributes of the objectives. This make is easier to analyze perform a robustness analysis, where the result of an optimization should be propagated under a perturbed Hamiltonian.
 * Improved: The ``print_table`` and ``print_debug_information`` info-hooks now flush their output buffers after each iteration. As a result, when writing to a file, that file can be watched with ``tail -f``.
+* Changed: Redefine ``tau_vals`` as their complex conjugate, fixing a bug in ``chis_ss`` and ``chis_sm`` (`#46`_)
 
 0.3.0 (2019-03-01)
 ------------------
@@ -60,3 +61,4 @@ History
 .. _#41: https://github.com/qucontrol/krotov/issues/41
 .. _#43: https://github.com/qucontrol/krotov/issues/43
 .. _#44: https://github.com/qucontrol/krotov/issues/44
+.. _#46: https://github.com/qucontrol/krotov/issues/46
