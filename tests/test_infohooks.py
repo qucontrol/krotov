@@ -20,7 +20,7 @@ def test_infohook_chaining(transmon_ham_and_states):
     H, psi0, psi1 = transmon_ham_and_states
     obj = krotov.Objective(initial_state=psi0, target=psi1, H=H)
     tlist = np.array([0, 0.01, 0.02])
-    pulse_options = {H[1][1]: dict(lambda_a=1, shape=1)}
+    pulse_options = {H[1][1]: dict(lambda_a=1, update_shape=1)}
     stdout = io.StringIO()
 
     def adjust_lambda_a(**args):

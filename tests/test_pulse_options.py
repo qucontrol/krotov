@@ -18,7 +18,7 @@ def test_shape_validation():
     tlist = np.linspace(0, 10, 100)
 
     res = _initialize_krotov_controls(
-        objectives, {u: dict(lambda_a=1, shape=1)}, tlist
+        objectives, {u: dict(lambda_a=1, update_shape=1)}, tlist
     )
     # res consists of:
     # guess_controls, guess_pulses, pulses_mapping, lambda_vals, shape_arrays
@@ -33,33 +33,39 @@ def test_shape_validation():
     assert isinstance(lambda_vals[0], float)
 
     res = _initialize_krotov_controls(
-        objectives, {u: dict(lambda_a=1, shape=0)}, tlist
+        objectives, {u: dict(lambda_a=1, update_shape=0)}, tlist
     )
     shape_array = res[4][0]
     assert np.all(shape_array == 0)
 
     with pytest.raises(ValueError) as exc_info:
         _initialize_krotov_controls(objectives, {u: dict(lambda_a=1)}, tlist)
-    assert "key 'shape'" in str(exc_info.value)
+    assert "key 'update_shape'" in str(exc_info.value)
 
     with pytest.raises(ValueError) as exc_info:
-        _initialize_krotov_controls(objectives, {u: {'shape': 1}}, tlist)
+        _initialize_krotov_controls(
+            objectives, {u: {'update_shape': 1}}, tlist
+        )
     assert "key 'lambda_a'" in str(exc_info.value)
 
     with pytest.raises(ValueError) as exc_info:
         _initialize_krotov_controls(
-            objectives, {u: dict(lambda_a=1, shape=2)}, tlist
+            objectives, {u: dict(lambda_a=1, update_shape=2)}, tlist
         )
-    assert 'shape must be a callable' in str(exc_info.value)
+    assert 'update_shape must be a callable' in str(exc_info.value)
 
     with pytest.raises(ValueError) as exc_info:
         _initialize_krotov_controls(
-            objectives, {u: dict(lambda_a=1, shape=lambda t: 2.0)}, tlist
+            objectives,
+            {u: dict(lambda_a=1, update_shape=lambda t: 2.0)},
+            tlist,
         )
     assert 'in the range [0, 1]' in str(exc_info.value)
 
     with pytest.raises(ValueError) as exc_info:
         _initialize_krotov_controls(
-            objectives, {u: dict(lambda_a=1, shape=lambda t: 0.5j)}, tlist
+            objectives,
+            {u: dict(lambda_a=1, update_shape=lambda t: 0.5j)},
+            tlist,
         )
     assert 'real-valued' in str(exc_info.value)

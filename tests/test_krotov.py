@@ -39,7 +39,7 @@ def test_complex_control_rejection():
 
     objectives = [krotov.Objective(initial_state=psi0, target=psi1, H=H)]
 
-    pulse_options = {H[1][1]: dict(lambda_a=5, shape=S)}
+    pulse_options = {H[1][1]: dict(lambda_a=5, update_shape=S)}
 
     tlist = np.linspace(0, 5, 500)
 
@@ -97,7 +97,7 @@ def test_reject_invalid_shapes():
         )
 
     with pytest.raises(ValueError) as exc_info:
-        pulse_options = {H[1][1]: dict(lambda_a=5, shape=S_complex)}
+        pulse_options = {H[1][1]: dict(lambda_a=5, update_shape=S_complex)}
         krotov.optimize_pulses(
             objectives,
             pulse_options,
@@ -109,7 +109,7 @@ def test_reject_invalid_shapes():
     assert 'must be real-valued' in str(exc_info.value)
 
     with pytest.raises(ValueError) as exc_info:
-        pulse_options = {H[1][1]: dict(lambda_a=5, shape=S_negative)}
+        pulse_options = {H[1][1]: dict(lambda_a=5, update_shape=S_negative)}
         krotov.optimize_pulses(
             objectives,
             pulse_options,
@@ -121,7 +121,7 @@ def test_reject_invalid_shapes():
     assert 'must have values in the range [0, 1]' in str(exc_info.value)
 
     with pytest.raises(ValueError) as exc_info:
-        pulse_options = {H[1][1]: dict(lambda_a=5, shape=S_large)}
+        pulse_options = {H[1][1]: dict(lambda_a=5, update_shape=S_large)}
         krotov.optimize_pulses(
             objectives,
             pulse_options,
@@ -155,7 +155,7 @@ def simple_state_to_state_system():
             t, t_start=0, t_stop=5, t_rise=0.3, t_fall=0.3, func='sinsq'
         )
 
-    pulse_options = {H[1][1]: dict(lambda_a=5, shape=S)}
+    pulse_options = {H[1][1]: dict(lambda_a=5, update_shape=S)}
 
     tlist = np.linspace(0, 5, 500)
 

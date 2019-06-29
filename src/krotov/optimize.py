@@ -70,13 +70,13 @@ def optimize_pulses(
               small updates. Small values may lead to sharp spikes and
               numerical instability.
 
-            * ``'shape'`` : Function S(t) in the range [0, 1] that scales the
-              pulse update for the pulse value at t. This can be used to ensure
-              boundary conditions (S(0) = S(T) = 0), and enforce smooth
-              switch-on and switch-off. This can be a callable that takes a
-              single argument `t`; or the values 1 or 0 for a constant
-              update-shape. The value 0 disables the optimization of that
-              particular control.
+            * ``'update_shape'`` : Function S(t) in the range [0, 1] that
+            scales the pulse update for the pulse value at t. This can be used
+            to ensure boundary conditions (S(0) = S(T) = 0), and enforce smooth
+            switch-on and switch-off. This can be a callable that takes a
+            single argument `t`; or the values 1 or 0 for a constant
+            update-shape. The value 0 disables the optimization of that
+            particular control.
 
             For example, for `objectives` that contain a Hamiltonian of the
             form ``[H0, [H1, u], [H2, g]]``, where ``H0``, ``H1``, and ``H2``
@@ -89,7 +89,7 @@ def optimize_pulses(
                 >>> u = numpy.zeros(1000)
                 >>> g = lambda t, args: 0.0
                 >>> pulse_options = {
-                ...     id(u): {'lambda_a': 1.0, 'shape': 1},
+                ...     id(u): {'lambda_a': 1.0, 'update_shape': 1},
                 ...     g: dict(
                 ...         lambda_a=1.0,
                 ...         shape=partial(
@@ -535,7 +535,7 @@ def _shape_val_to_callable(val):
         if callable(val):
             return val
         else:
-            raise ValueError("shape must be a callable")
+            raise ValueError("update_shape must be a callable")
 
 
 def _enforce_shape_array_range(shape_array):
@@ -549,7 +549,7 @@ def _enforce_shape_array_range(shape_array):
     # sure that it will deviate by a significantly larger error.
     if np.min(shape_array) < -0.01 or np.max(shape_array) > 1.01:
         raise ValueError(
-            "Update shapes ('shape' in pulse options-dict) must have "
+            "Update shapes ('update_shape' in pulse options-dict) must have "
             "values in the range [0, 1], not [%s, %s]"
             % (np.min(shape_array), np.max(shape_array))
         )
@@ -607,16 +607,16 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     for options in options_list:
         try:
             S = discretize(
-                _shape_val_to_callable(options['shape']), tlist, args=()
+                _shape_val_to_callable(options['update_shape']), tlist, args=()
             )
         except KeyError:
             raise ValueError(
                 "Each value in pulse_options must be a dict that contains "
-                "the key 'shape'."
+                "the key 'update_shape'."
             )
         except (TypeError, np.ComplexWarning) as exc_info:
             raise ValueError(
-                "Update shapes ('shape' in pulse options-dict) must be "
+                "Update shapes ('update_shape' in pulse options-dict) must be "
                 "real-valued: %s" % exc_info
             )
         shape_arrays.append(

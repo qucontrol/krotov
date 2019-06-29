@@ -72,7 +72,7 @@ def test_discretization_as_float():
     tlist = np.linspace(0, 10, 100)
 
     res = krotov.optimize._initialize_krotov_controls(
-        objectives, {u: dict(lambda_a=1, shape=lambda t: 0)}, tlist
+        objectives, {u: dict(lambda_a=1, update_shape=lambda t: 0)}, tlist
     )
 
     guess_controls = res[0]
@@ -97,7 +97,7 @@ def test_initialize_krotov_controls():
     blackman = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=T)
     H = ['H0', ['H1', blackman]]
     tlist = np.linspace(0, T, 10)
-    pulse_options = {blackman: dict(lambda_a=1.0, shape=1)}
+    pulse_options = {blackman: dict(lambda_a=1.0, update_shape=1)}
 
     objectives = [
         krotov.Objective(initial_state=qutip.Qobj(), target=None, H=H)
@@ -229,8 +229,8 @@ def test_pulse_options_dict_to_list(caplog):
     assert u2 is not u3
 
     pulse_options = {
-        id(u1): dict(lambda_a=1.0, shape=1),
-        id(u2): dict(lambda_a=2.0, shape=1),
+        id(u1): dict(lambda_a=1.0, update_shape=1),
+        id(u2): dict(lambda_a=2.0, update_shape=1),
     }
 
     pulse_options_list = pulse_options_dict_to_list(pulse_options, controls)
@@ -239,16 +239,16 @@ def test_pulse_options_dict_to_list(caplog):
     assert pulse_options_list[1] == pulse_options[id(u2)]
 
     # check error for missing pulse options
-    pulse_options = {id(u1): dict(lambda_a=1.0, shape=1)}
+    pulse_options = {id(u1): dict(lambda_a=1.0, update_shape=1)}
     with pytest.raises(ValueError) as exc_info:
         pulse_options_dict_to_list(pulse_options, controls)
     assert 'does not have any associated pulse options' in str(exc_info.value)
 
     # check warning message for extra pulse options
     pulse_options = {
-        id(u1): dict(lambda_a=1.0, shape=1),
-        id(u2): dict(lambda_a=1.0, shape=1),
-        id(u3): dict(lambda_a=1.0, shape=1),
+        id(u1): dict(lambda_a=1.0, update_shape=1),
+        id(u2): dict(lambda_a=1.0, update_shape=1),
+        id(u3): dict(lambda_a=1.0, update_shape=1),
     }
     with caplog.at_level(logging.WARNING):
         pulse_options_dict_to_list(pulse_options, controls)

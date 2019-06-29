@@ -40,7 +40,8 @@ FIX_QUTIP_932 = sys.platform != "linux"
 
 If True, in :meth:`Objective.mesolve`, replace any array controls with an
 equivalent function. This results in a signficant slowdown of the propagation,
-as it circumvents the use of Cython.
+as it circumvents the use of Cython. Defaults to False on Linux, and True on
+any non-Linux system.
 
 .. _QuTiP issue 932: https://github.com/qutip/qutip/issues/932
 """

@@ -85,7 +85,7 @@ The functional consists of three parts:
       \Delta\epsilon_l(t) \equiv \epsilon_l^{(i+1)}(t) - \epsilon_l^{(i)}(t)\,.
 
    This introduces two parameters for each control, the (inverse)
-   Krotov "step width" :math:`\lambda_{a,l}` and the shape function
+   Krotov "step width" :math:`\lambda_{a,l}` and the update-shape function
    :math:`S_l(t) \in [0, 1]`. :math:`\Delta\epsilon_l(t)` is the update
    of the control in a single iteration of the optimization algorithm.
    As we will see below, :math:`\lambda_{a,l}` determines the overall magnitude
