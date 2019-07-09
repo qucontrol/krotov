@@ -50,7 +50,7 @@ def optimize_pulses(
     norm=None,
     overlap=None
 ):
-    r"""Use Krotov's method to optimize towards the given `objectives`
+    r"""Use Krotov's method to optimize towards the given `objectives`.
 
     Optimize all time-dependent controls found in the Hamiltonians or
     Liouvillians of the given `objectives`.
@@ -59,10 +59,10 @@ def optimize_pulses(
         objectives (list[Objective]): List of objectives
         pulse_options (dict): Mapping of time-dependent controls found in the
             Hamiltonians of the objectives to a dictionary of options for that
-            control. There must be an options-dict for each control. As numpy
+            control. There must be options given for *every* control. As numpy
             arrays are unhashable and thus cannot be used as dict keys, the
             options for a control that is an array must be set using the key
-            ``pulse_options[id(control)] = ...``. The options-dict of any
+            ``id(control)`` (see the example below). The options of any
             particular control must contain the following keys:
 
             * ``'lambda_a'``: the Krotov step size (float value). This governs
@@ -71,12 +71,12 @@ def optimize_pulses(
               numerical instability.
 
             * ``'update_shape'`` : Function S(t) in the range [0, 1] that
-            scales the pulse update for the pulse value at t. This can be used
-            to ensure boundary conditions (S(0) = S(T) = 0), and enforce smooth
-            switch-on and switch-off. This can be a callable that takes a
-            single argument `t`; or the values 1 or 0 for a constant
-            update-shape. The value 0 disables the optimization of that
-            particular control.
+              scales the pulse update for the pulse value at t. This can be
+              used to ensure boundary conditions (S(0) = S(T) = 0), and enforce
+              smooth switch-on and switch-off. This can be a callable that
+              takes a single argument `t`; or the values 1 or 0 for a constant
+              update-shape. The value 0 disables the optimization of that
+              particular control.
 
             For example, for `objectives` that contain a Hamiltonian of the
             form ``[H0, [H1, u], [H2, g]]``, where ``H0``, ``H1``, and ``H2``
