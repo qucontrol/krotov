@@ -17,6 +17,8 @@ History
 * Improved: The ``Objective.mesolve`` and ``Objective.propagate`` methods can now receive arguments ``H`` and ``c_ops`` to override the respective attributes of the objectives. This make is easier to analyze perform a robustness analysis, where the result of an optimization should be propagated under a perturbed Hamiltonian.
 * Improved: The ``print_table`` and ``print_debug_information`` info-hooks now flush their output buffers after each iteration. As a result, when writing to a file, that file can be watched with ``tail -f``.
 * Changed: Redefine ``tau_vals`` as their complex conjugate, fixing a bug in ``chis_ss`` and ``chis_sm`` (`#46`_)
+* Bugfix: Correctly calculate ∂H/∂ϵ if ϵ occurs in H multiple times (`#47`_, thanks to `@uiofgh`_)
+* Bugfix: Correctly calculate ∂H/∂ϵ=0 if the specific ϵ currently being updated does not occur in H (`#48`_)
 
 0.3.0 (2019-03-01)
 ------------------
@@ -53,6 +55,7 @@ History
 * Support for state-to-state and gate optimization, for both closed and open systems
 
 
+.. _@uiofgh: https://github.com/uiofgh
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
@@ -63,3 +66,5 @@ History
 .. _#43: https://github.com/qucontrol/krotov/issues/43
 .. _#44: https://github.com/qucontrol/krotov/issues/44
 .. _#46: https://github.com/qucontrol/krotov/issues/46
+.. _#47: https://github.com/qucontrol/krotov/issues/47
+.. _#48: https://github.com/qucontrol/krotov/issues/48

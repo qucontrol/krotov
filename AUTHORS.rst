@@ -21,3 +21,12 @@ Development Team
 .. _Michael Goerz: https://michaelgoerz.net
 .. _Daniel Reich: https://www.uni-kassel.de/fb10/en/institutes/physics/research-groups/quantum-dynamics-and-control/group-members/dr-daniel-reich.html
 .. _Christiane Koch: https://www.uni-kassel.de/fb10/en/institutes/physics/research-groups/quantum-dynamics-and-control/homepage.html
+
+
+Acknowledgements
+----------------
+
+We thank `@uiofgh`_ and `@nathanshammah`_ for reporting bugs and suggesting improvements.
+
+.. _@uiofgh: https://github.com/uiofgh
+.. _@nathanshammah: https://github.com/nathanshammah

@@ -74,7 +74,7 @@ __all__ = ['derivative_wrt_pulse']
 def derivative_wrt_pulse(
     objectives, i_objective, pulses, pulses_mapping, i_pulse, time_index
 ):
-    r"""Calculate ∂H/∂ϵ for the standard equations of motion
+    r"""Calculate ∂H/∂ϵ for the standard equations of motion.
 
     Args:
         objectives (list): List of :class:`.Objective` instances
@@ -88,14 +88,14 @@ def derivative_wrt_pulse(
             calculate the derivative
         time_index (int): The index of the value in ``pulses[i_pulse]`` that
             should be plugged in to ∂H/∂ϵ. Not used, as this routine only
-            considers equtions of motion that are linear in the controls.
+            considers equations of motion that are linear in the controls.
 
     Returns:
-        qutip.Qobj: The quantum operator or super-operator that
+        callable: The quantum operator or super-operator that
         represents ∂H/∂ϵ. In general, the return type can be any callable `mu`
         so that ``mu(state)`` calculates the result of applying ∂H/∂ϵ to
-        `state`. A :class:`~qutip.Qobj` is just the most convenient example of
-        an appropriate callable.
+        `state`. In most cases, a :class:`~qutip.Qobj` will be returned, which
+        is just the most convenient example of an appropriate callable.
 
     This function covers the following cases:
 
@@ -124,14 +124,14 @@ def derivative_wrt_pulse(
     ham_mapping = pulses_mapping[i_objective][0][i_pulse]
     eqm_factor = -1j  # the factor in front of objective.H in the eqm
     if len(ham_mapping) == 0:
-        return 0
+        return lambda state: 0 * state
     else:
         mu = objective.H[ham_mapping[0]][0]
         if mu.type == 'super':
             eqm_factor = 1
             mu *= 1j
         for i in ham_mapping[1:]:
-            mu += (1j * eqm_factor) * objective.H[ham_mapping[i]][0]
+            mu += (1j * eqm_factor) * objective.H[i][0]
     for i_c_op in range(len(objective.c_ops)):
         if len(pulses_mapping[i_objective][i_c_op + 1][i_pulse]) != 0:
             raise NotImplementedError(
