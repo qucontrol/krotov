@@ -19,6 +19,7 @@ History
 * Changed: Redefine ``tau_vals`` as their complex conjugate, fixing a bug in ``chis_ss`` and ``chis_sm`` (`#46`_)
 * Bugfix: Correctly calculate ∂H/∂ϵ if ϵ occurs in H multiple times (`#47`_, thanks to `@uiofgh`_)
 * Bugfix: Correctly calculate ∂H/∂ϵ=0 if the specific ϵ currently being updated does not occur in H (`#48`_)
+* Added: Method ``objectives_with_controls`` for ``Result`` object.
 
 0.3.0 (2019-03-01)
 ------------------

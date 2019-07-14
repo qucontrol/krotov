@@ -113,17 +113,53 @@ class Result:
     @property
     def optimized_objectives(self):
         """list[Objective]: A copy of the :attr:`objectives` with the
-        :attr:`optimized_controls` plugged in"""
+        :attr:`optimized_controls` plugged in."""
+        return self.objectives_with_controls(self.optimized_controls)
+
+    def objectives_with_controls(self, controls):
+        """List of objectives with the given `controls` plugged in.
+
+        Args:
+            controls (list[numpy.ndarray]): A list of control fields, defined
+                on the points of :attr:`tlist`. Must be of the same length as
+                :attr:`guess_controls` and :attr:`optimized_controls`.
+
+        Returns:
+            list[Objective]: A copy of :attr:`objectives`, where all control
+            fields are replaced by the elements of the `controls`.
+
+        Raises:
+            ValueError: If `controls` does not have the same number controls as
+                :attr:`guess_controls` and :attr:`optimized_controls`, or if
+                any `controls` are not defined on the points of the time grid.
+
+        See also:
+            For plugging in the optimized controls, the
+            :attr:`optimized_objectives` attribute is equivalent to
+            ``result.objectives_with_controls(result.optimized_controls)``.
+        """
+        n = len(self.guess_controls)
+        m = len(controls)
+        if n != m:
+            raise ValueError("Expected %d controls, %d given" % (n, m))
+        for control in controls:
+            try:
+                if len(control) != len(self.tlist):
+                    raise ValueError(
+                        "controls are not defined on the points of the time "
+                        "grid: control has %d values for %d time grid points"
+                        % (len(control), len(self.tlist))
+                    )
+            except TypeError:
+                pass  # control is not a numpy array (but maybe a callable)
         objectives = []
         for (i, obj) in enumerate(self.objectives):
             H = _plug_in_optimized_controls(
-                obj.H, self.optimized_controls, self.controls_mapping[i][0]
+                obj.H, controls, self.controls_mapping[i][0]
             )
             c_ops = [
                 _plug_in_optimized_controls(
-                    c_op,
-                    self.optimized_controls,
-                    self.controls_mapping[i][j + 1],
+                    c_op, controls, self.controls_mapping[i][j + 1]
                 )
                 for (j, c_op) in enumerate(obj.c_ops)
             ]

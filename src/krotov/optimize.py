@@ -483,8 +483,12 @@ def optimize_pulses(
         if not np.all(tau_vals == None):  # noqa
             result.tau_vals.append(tau_vals)
         result.optimized_controls = optimized_pulses
+        # pulses (time intervals) will be converted to controls (time grid
+        # points) farther below in "Finalize"
         if store_all_pulses:
-            result.all_pulses.append(optimized_pulses)
+            # we need to make a copy, so that the conversion in "Finalize"
+            # doesn't affect `all_pulses` as well.
+            result.all_pulses.append(copy.deepcopy(optimized_pulses))
         result.states = fw_states_T
 
         logger.info("Finished Krotov iteration %d", krotov_iteration)
