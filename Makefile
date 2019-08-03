@@ -1,6 +1,6 @@
 .PHONY: black black-check clean clean-build clean-pyc clean-test clean-venvs coverage develop develop-docs develop-test dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
-#CONDA_PACKAGES = cython numpy scipy
+CONDA_PACKAGES = cython numpy 'scipy<1.3.0'
 TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
 TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 -x -s
