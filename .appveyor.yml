@@ -16,7 +16,7 @@ install:
   - echo CONDA_PREFIX %CONDA_PREFIX%
   - echo PATH %PATH%
   - conda config --append channels conda-forge
-  - conda install qutip
+  - conda install qutip>=4.0,!=4.4.0
   - pip install .[dev]
   - pip freeze
 
