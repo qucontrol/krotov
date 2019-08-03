@@ -587,22 +587,24 @@ def gate(basis_states, fw_states_T):
     return qutip.Qobj(U, dims=dims)
 
 
-def mapped_basis(gate, basis_states):
-    """Result of applying `gate` to `basis_states`
+def mapped_basis(O, basis_states):
+    """Result of applying the gate `O` to `basis_states`
 
     Example:
 
         >>> from qutip import ket
         >>> basis = [ket(nums) for nums in [(0, 0), (0, 1), (1, 0), (1, 1)]]
         >>> states = mapped_basis(qutip.gates.cnot(), basis)
-        >>> assert (states[0] - ket((0,0))).norm() < 1e-15
-        >>> assert (states[1] - ket((0,1))).norm() < 1e-15
-        >>> assert (states[2] - ket((1,1))).norm() < 1e-15  # swap (1, 1) ...
-        >>> assert (states[3] - ket((1,0))).norm() < 1e-15  # ... and (1, 0)
+        >>> assert (states[0] - ket((0, 0))).norm() < 1e-15
+        >>> assert (states[1] - ket((0, 1))).norm() < 1e-15
+        >>> assert (states[2] - ket((1, 1))).norm() < 1e-15  # swap (1, 1) ...
+        >>> assert (states[3] - ket((1, 0))).norm() < 1e-15  # ... and (1, 0)
     """
     return tuple(
         [
-            sum([gate[i, j] * basis_states[i] for i in range(gate.shape[0])])
-            for j in range(gate.shape[1])
+            sum(
+                [complex(O[i, j]) * basis_states[i] for i in range(O.shape[0])]
+            )
+            for j in range(O.shape[1])
         ]
     )

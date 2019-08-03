@@ -71,6 +71,18 @@ def transmon_3states_objectives():
     return objectives
 
 
+def test_mapped_basis_preserves_hs_structure():
+    """Test that mapped_basis preserves the hilbert space structure of the
+    input basis."""
+    basis = [ket(nums) for nums in [(0, 0), (0, 1), (1, 0), (1, 1)]]
+    states = krotov.functionals.mapped_basis(qutip.gates.cnot(), basis)
+    for state in states:
+        assert isinstance(state, qutip.Qobj)
+        assert state.dims == basis[0].dims
+        assert state.shape == basis[0].shape
+        assert state.type == basis[0].type
+
+
 def test_f_tau_with_weights(sqrt_SWAP_basis, cphase_objectives):
     tau_vals = [
         obj.target.overlap(psi)

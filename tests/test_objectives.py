@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 import qutip
 import scipy
-from qutip import identity, ket, sigmam, sigmap, sigmax, sigmaz, tensor
+from qutip import identity, ket, sigmam, sigmap, sigmax, sigmay, sigmaz, tensor
 
 import krotov
 
@@ -291,6 +291,18 @@ def test_plug_in_array_controls_as_func():
     assert u2_func(tlist[2] + 0.6 * dt, None) == u2[3]
 
 
+def test_gate_objectives_single_qubit_gate():
+    """Test initialization of objectives for simple single-qubit gate"""
+    basis = [ket([0]), ket([1])]
+    gate = sigmay()  # = -i|0⟩⟨1| + i|1⟩⟨0|
+    H = [sigmaz(), [sigmax(), lambda t, args: 1.0]]
+    objectives = krotov.objectives.gate_objectives(basis, gate, H)
+    assert objectives == [
+        krotov.Objective(initial_state=basis[0], target=(1j * basis[1]), H=H),
+        krotov.Objective(initial_state=basis[1], target=(-1j * basis[0]), H=H),
+    ]
+
+
 def test_gate_objectives_shape_error():
     """Test that trying to construct gate objectives with a gate whose shape
     mismatches the basis throws an exception"""
@@ -335,10 +347,14 @@ def test_gate_objectives_pe():
     ]
     objectives = krotov.gate_objectives(basis, 'PE', H)
     assert len(objectives) == 4
+    bell_basis_states = bell_basis(basis)
+    for state in bell_basis_states:
+        assert isinstance(state, qutip.Qobj)
     for i in range(4):
-        assert objectives[i] == krotov.Objective(
-            initial_state=bell_basis(basis)[i], target='PE', H=H
+        expected_objective = krotov.Objective(
+            initial_state=bell_basis_states[i], target='PE', H=H
         )
+        assert objectives[i] == expected_objective
     assert krotov.gate_objectives(basis, 'perfect_entangler', H) == objectives
     assert krotov.gate_objectives(basis, 'perfect entangler', H) == objectives
     assert krotov.gate_objectives(basis, 'Perfect Entangler', H) == objectives

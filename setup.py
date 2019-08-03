@@ -29,6 +29,7 @@ requirements = ['glom', 'numpy', 'scipy', 'qutip', 'uniseg']
 
 # requirements for development (testing, generating docs)
 dev_requirements = [
+    'better-apidoc==0.3.1',
     'click',
     'coverage',
     'flake8',
@@ -49,10 +50,9 @@ dev_requirements = [
     'sphinxcontrib-bibtex',
     'twine',
     'watermark',
-    'weylchamber>=0.3.1',
+    'weylchamber>=0.3.2',
     'wheel',
 ]
-dev_requirements.append('better-apidoc==0.3.1')
 if sys.version_info >= (3, 6):
     dev_requirements.append('black')
 

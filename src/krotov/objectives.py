@@ -906,7 +906,12 @@ def gate_objectives(
             "basis states"
         )
     mapped_basis_states = [
-        sum([gate[i, j] * basis_states[i] for i in range(gate.shape[0])])
+        sum(
+            [
+                complex(gate[i, j]) * basis_states[i]
+                for i in range(gate.shape[0])
+            ]
+        )
         for j in range(gate.shape[1])
     ]
     # Lots of gates just rearrange the basis states, and we can avoid some
