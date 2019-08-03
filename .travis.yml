@@ -16,7 +16,7 @@ install:
   - conda create -q -n test_env python=$TRAVIS_PYTHON_VERSION
   - conda activate test_env
   - conda config --append channels conda-forge
-  - conda install qutip>=4.0,!=4.4.0
+  - conda install 'qutip>=4.0,!=4.4.0'
   # we must use an editable install, otherwise coveralls won't work
   - PIP_USE_PEP517=false pip install -e .[dev]
   - pip install coveralls
