@@ -38,11 +38,11 @@ The ``krotov`` package is built on top of `QuTiP`_.
 
 Development happens on `Github`_. You can read the full documentation at `ReadTheDocs`_.
 
-If you use the ``krotov`` package in your research, please `cite it <https://krotov.readthedocs.io/en/latest/01_overview.html#citing-the-krotov-package>`_.
+If you use the ``krotov`` package in your research, please `cite it <https://krotov.readthedocs.io/en/stable/01_overview.html#citing-the-krotov-package>`_.
 
 .. _QDYN Fortran library: https://www.qdyn-library.net
 .. _QuTiP: http://qutip.org
-.. _ReadTheDocs: https://krotov.readthedocs.io/en/latest/
+.. _ReadTheDocs: https://krotov.readthedocs.io/en/stable/
 
 
 Purpose
@@ -187,11 +187,11 @@ Then,
   number of control fields over all the objectives.
 
 .. |krotov.Objective| replace:: ``krotov.Objective``
-.. _krotov.Objective: https://krotov.readthedocs.io/en/latest/API/krotov.objectives.html#krotov.objectives.Objective
+.. _krotov.Objective: https://krotov.readthedocs.io/en/stable/API/krotov.objectives.html#krotov.objectives.Objective
 
 .. |krotov.optimize_pulses| replace:: ``krotov.optimize_pulses``
-.. _krotov.optimize_pulses: https://krotov.readthedocs.io/en/latest/API/krotov.optimize.html#krotov.optimize.optimize_pulses
+.. _krotov.optimize_pulses: https://krotov.readthedocs.io/en/stable/API/krotov.optimize.html#krotov.optimize.optimize_pulses
 
-See `Using Krotov with QuTiP <https://krotov.readthedocs.io/en/latest/07_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://krotov.readthedocs.io/en/latest/08_examples.html>`_ for details.
+See `Using Krotov with QuTiP <https://krotov.readthedocs.io/en/stable/07_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://krotov.readthedocs.io/en/stable/08_examples.html>`_ for details.
 
 .. _Jupyter notebook: http://jupyter.org
