@@ -69,6 +69,7 @@ extensions = [
     'nbsphinx',
     'sphinx.ext.inheritance_diagram',
     'sphinxcontrib.bibtex',
+    'rtd_latest_warning',
 ]
 if os.getenv('SPELLCHECK'):
     extensions += ('sphinxcontrib.spelling',)
