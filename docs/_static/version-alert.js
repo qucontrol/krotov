@@ -1,7 +1,7 @@
 "use strict";
 
-// Similar to https://github.com/rtfd/readthedocs.org/blob/master/readthedocs/core/static-src/core/js/doc-embed/version-compare.js
-// but adds admonition for the "latest" version -- which is (unreleased) master branch.
+// Source:
+// https://github.com/anymail/django-anymail/blob/4c443f5515d1d5269a95cb54cf75057c56a3b150/docs/_static/version-alert.js
 
 function warnOnLatestVersion() {
 
