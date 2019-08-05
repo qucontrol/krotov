@@ -49,6 +49,11 @@ def generate_patched_readme(_):
 
 # -- General configuration -----------------------------------------------------
 
+# on_rtd is whether we are on readthedocs.org, this line of code grabbed from
+# docs.readthedocs.org
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+
 # Report broken links as warnings
 nitpicky = True
 nitpick_ignore = [('py:class', 'callable')]
@@ -69,8 +74,10 @@ extensions = [
     'nbsphinx',
     'sphinx.ext.inheritance_diagram',
     'sphinxcontrib.bibtex',
-    'rtd_latest_warning',
 ]
+if on_rtd:
+    print("ON RTD: load versionwarning") # DEBUG
+    extensions += ('versionwarning.extension',)
 if os.getenv('SPELLCHECK'):
     extensions += ('sphinxcontrib.spelling',)
     spelling_show_suggestions = True
@@ -130,6 +137,12 @@ html_last_updated_fmt = '%b %d, %Y'
 html_split_index = False
 html_sidebars = {'**': ['searchbox.html', 'globaltoc.html', 'sourcelink.html']}
 html_short_title = '%s-%s' % (project, version)
+
+# Version Warning Banner configuration
+versionwarning_messages = {
+    'latest': 'You are reading the documentation for an unreleased development version. {newest} is the most recent released version.',
+    'warnlatestdoc': 'You are reading the documentation for an unreleased development version. {newest} is the most recent released version.',
+}
 
 # Mathjax settings
 mathjax_path = (
@@ -213,10 +226,6 @@ def iad_add_directive_header(self, sig):
 InstanceAttributeDocumenter.add_directive_header = iad_add_directive_header
 
 # -- Options for HTML output ---------------------------------------------------
-
-# on_rtd is whether we are on readthedocs.org, this line of code grabbed from
-# docs.readthedocs.org
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
