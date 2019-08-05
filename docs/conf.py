@@ -318,3 +318,4 @@ nbsphinx_prolog = r"""
 def setup(app):
     app.connect('builder-inited', run_apidoc)
     app.connect('builder-inited', generate_patched_readme)
+    app.add_javascript("version-alert.js")
