@@ -53,6 +53,11 @@ def generate_patched_readme(_):
 nitpicky = True
 nitpick_ignore = [('py:class', 'callable')]
 
+versionwarning_messages = {
+    'latest': 'You are reading the documentation for an unreleased development version. {newest} is the most recent released version.',
+}
+versionwarning_body_selector = 'div[itemprop="articleBody"]'
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
@@ -69,6 +74,7 @@ extensions = [
     'nbsphinx',
     'sphinx.ext.inheritance_diagram',
     'sphinxcontrib.bibtex',
+    'versionwarning.extension',
 ]
 if os.getenv('SPELLCHECK'):
     extensions += ('sphinxcontrib.spelling',)

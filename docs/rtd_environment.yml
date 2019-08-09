@@ -12,3 +12,4 @@ dependencies:
     - sphinxcontrib-bibtex
     - nbsphinx<0.4
     - gitpython
+    - sphinx-version-warning
