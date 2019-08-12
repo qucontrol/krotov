@@ -12,8 +12,3 @@ repos:
     hooks:
     - id: black
       args: ['--skip-string-normalization', '--line-length', '79', '--check']
--   repo: https://github.com/pre-commit/mirrors-isort
-    rev: v4.3.17
-    hooks:
-    - id: isort
-      args: ['--check-only', '--diff']
