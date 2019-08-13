@@ -1,11 +1,46 @@
 # Config file for automatic testing at travis-ci.org
 dist: xenial
 language: python
-python:
-  # We don't actually use the Travis Python, but this keeps it organized.
-  - 3.7
-  - 3.6
-  - 3.5
+matrix:
+  include:
+    - name: Check codestyle
+      python: 3.7
+      env: TOTEST=formatting
+    - name: Python 3.5
+      python: 3.5
+      env: TOTEST="src tests README.rst docs/*.rst"
+    - name: Python 3.6
+      python: 3.6
+      env: TOTEST="src tests README.rst docs/*.rst"
+    - name: Python 3.7
+      env: TOTEST="src tests README.rst docs/*.rst"
+    - name: Notebook 1 (State-to-State)
+      python: 3.7
+      env: TOTEST=docs/notebooks/01_example_simple_state_to_state.ipynb
+    - name: Notebook 2 (RWA)
+      python: 3.7
+      env: TOTEST=docs/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb
+    - name: Notebook 3 (Non-Hermitian)
+      python: 3.7
+      env: TOTEST=docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb
+    - name: Notebook 4 (Density Matrix)
+      python: 3.7
+      env: TOTEST=docs/notebooks/04_example_dissipative_qubit_reset.ipynb
+    - name: Notebook 5 (Quantum Gate)
+      python: 3.7
+      env: TOTEST=docs/notebooks/05_example_transmon_xgate.ipynb
+    - name: Notebook 6 (3 States)
+      python: 3.7
+      env: TOTEST=docs/notebooks/06_example_3states.ipynb
+    - name: Notebook 7 (Perfect Entanglers)
+      python: 3.7
+      env: TOTEST=docs/notebooks/07_example_PE.ipynb
+    - name: Notebook 8 (Ensemble Optimization)
+      python: 3.7
+      env: TOTEST=docs/notebooks/08_example_ensemble.ipynb TRAVISCMD=travis_wait
+    - name: Notebook 9 (NumPy)
+      python: 3.7
+      env: TOTEST=docs/notebooks/09_example_numpy.ipynb
 install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3.sh;
   - bash miniconda3.sh -b -p $HOME/miniconda3
@@ -24,8 +59,7 @@ install:
 
 script:
   - set -e
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then isort --recursive --check-only src tests; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then black --skip-string-normalization --line-length 79 --check src tests; fi
-  - py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 src tests docs/notebooks/*.ipynb README.rst docs/*.rst
+  - if [[ $TOTEST == 'formatting' ]]; then isort --recursive --check-only src tests; black --skip-string-normalization --line-length 79 --check src tests; fi
+  - if [[ $TOTEST != 'formatting' ]]; then $TRAVISCMD py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 $TOTEST; fi
 after_success:
   - codecov
