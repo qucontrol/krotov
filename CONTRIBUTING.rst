@@ -238,7 +238,7 @@ file (``*.rst``) are picked up (by the `pytest doctest plugin`_). Lastly, all
 :ref:`example notebooks <ContributeExamples>` are validated as a test, through
 the `nbval plugin`_.
 
-.. _test coverage: https://coveralls.io/github/qucontrol/krotov?branch=master
+.. _test coverage: https://codecov.io/gh/qucontrol/krotov
 .. _pytest: https://docs.pytest.org/en/latest/
 .. _doctests: https://docs.python.org/3.7/library/doctest.html
 .. _pytest doctest plugin: https://docs.pytest.org/en/latest/doctest.html

@@ -17,9 +17,9 @@ install:
   - conda activate test_env
   - conda config --append channels conda-forge
   - conda install 'qutip>=4.0,!=4.4.0'
-  # we must use an editable install, otherwise coveralls won't work
+  # we must use an editable install, otherwise coveralls/codecov won't work
   - PIP_USE_PEP517=false pip install -e .[dev]
-  - pip install coveralls
+  - pip install codecov
   - pip freeze
 
 script:
@@ -28,4 +28,4 @@ script:
   - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then black --skip-string-normalization --line-length 79 --check src tests; fi
   - py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 src tests docs/notebooks/*.ipynb README.rst docs/*.rst
 after_success:
-  - coveralls
+  - codecov

@@ -16,9 +16,9 @@ Krotov Python Package
 .. image:: https://ci.appveyor.com/api/projects/status/1cbm24w04jmxjpjh?svg=true
    :alt: AppVeyor Continuous Integration
    :target: https://ci.appveyor.com/project/goerz/krotov
-.. image:: https://img.shields.io/coveralls/github/qucontrol/krotov/master.svg
-   :alt: Coveralls
-   :target: https://coveralls.io/github/qucontrol/krotov?branch=master
+.. image:: https://codecov.io/gh/qucontrol/krotov/branch/master/graph/badge.svg
+   :alt: Codecov
+   :target: https://codecov.io/gh/qucontrol/krotov
 .. image:: https://img.shields.io/badge/License-BSD-green.svg
    :alt: BSD License
    :target: https://opensource.org/licenses/BSD-3-Clause
