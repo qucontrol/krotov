@@ -1,6 +1,6 @@
 .PHONY: black black-check clean clean-build clean-pyc clean-test clean-venvs coverage develop develop-docs develop-test dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
-CONDA_PACKAGES = cython numpy 'scipy<1.3.0'
+CONDA_PACKAGES = cython numpy 'scipy=1.2.1' 'matplotlib=3.1.0'
 TESTENV =
 #TESTENV = MATPLOTLIBRC=tests
 TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 -x -s
@@ -61,7 +61,7 @@ test: test35 test36 test37 ## run tests on every supported Python version
 .venv/py35/bin/py.test:
 	@conda create -y -m --override-channels -c defaults -p .venv/py35 python=3.5 $(CONDA_PACKAGES)
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
-	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py35 'qutip>=4.0,!=4.4.0'
+	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py35 'qutip=4.3.1'
 	@PIP_USE_PEP517=false .venv/py35/bin/python -m pip install -e .[dev]
 
 test35: .venv/py35/bin/py.test ## run tests for Python 3.5
@@ -71,7 +71,7 @@ test35: .venv/py35/bin/py.test ## run tests for Python 3.5
 .venv/py36/bin/py.test:
 	@conda create -y -m --override-channels -c defaults -p .venv/py36 python=3.6 $(CONDA_PACKAGES)
 	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
-	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py36 'qutip>=4.0,!=4.4.0'
+	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py36 'qutip=4.3.1'
 	@PIP_USE_PEP517=false .venv/py36/bin/python -m pip install -e .[dev]
 
 
