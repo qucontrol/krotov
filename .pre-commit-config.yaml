@@ -6,9 +6,11 @@ repos:
     -   id: krotov-pre-commit
         name: Local pre-commit (./scripts/pre-commit.py)
         entry: ./scripts/pre-commit.py
+        types: [python]
         language: script
 -   repo: https://github.com/ambv/black
     rev: 19.3b0
     hooks:
     - id: black
+      types: [python]
       args: ['--skip-string-normalization', '--line-length', '79', '--check']
