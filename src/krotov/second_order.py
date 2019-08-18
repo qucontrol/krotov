@@ -2,6 +2,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
+
 __all__ = ['Sigma', 'numerical_estimate_A']
 
 
