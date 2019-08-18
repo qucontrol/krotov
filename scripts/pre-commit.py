@@ -51,8 +51,15 @@ def main(argv=None):
     return_code = 0
     success = True
     for filename in args.filenames:
-        success &= no_trailing_whitespace(filename)
-        success &= no_debug_comment(filename)
+        for check in [no_trailing_whitespace, no_debug_comment]:
+            try:
+                success &= check(filename)
+            except (ValueError, OSError) as exc_info:
+                print(
+                    "Cannot check %s with %s: %s"
+                    % (filename, check.__name__, exc_info)
+                )
+                return_code = 1
     if not success:
         return_code = 1
     return return_code
