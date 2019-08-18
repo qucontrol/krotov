@@ -1,6 +1,6 @@
---- README.rst	2019-03-01 00:45:22.000000000 -0500
-+++ _README.rst	2019-03-01 00:44:52.000000000 -0500
-@@ -34,11 +34,11 @@
+--- README.rst	2019-08-18 19:14:38.000000000 -0400
++++ _README.rst	2019-08-18 19:05:16.000000000 -0400
+@@ -37,11 +37,11 @@
  This implementation follows the original implementation in the `QDYN Fortran library`_.
  The method is described in detail in `D. M. Reich, M. Ndong, and C. P. Koch, J. Chem. Phys. 136, 104103 (2012) <https://doi.org/10.1063/1.3691827>`_ (`arXiv:1008.5126 <http://arxiv.org/abs/1008.5126>`_).
  
@@ -14,7 +14,7 @@
  
  .. _QDYN Fortran library: https://www.qdyn-library.net
  .. _QuTiP: http://qutip.org
-@@ -137,14 +137,14 @@
+@@ -140,14 +140,14 @@
  
  Installation
  ------------
@@ -31,7 +31,7 @@
  
  You may also do
  
-@@ -162,7 +162,7 @@
+@@ -165,7 +165,7 @@
  .. _Python Packaging User Guide: https://packaging.python.org/tutorials/installing-packages/
  
  
@@ -40,7 +40,7 @@
  
  .. code-block:: console
  
-@@ -182,16 +182,11 @@
+@@ -185,16 +185,11 @@
  
  * define the necessary quantum operators and states using `QuTiP`_.
  * create a list of objectives, as instances of

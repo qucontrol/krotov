@@ -25,6 +25,15 @@ RX_VERSION = re.compile(
     r'(?P<devsuffix>[+-]dev)?$'
 )
 
+RX_NBVIEWER_URL = re.compile(
+    r'(?P<baseurl>https?://nbviewer\.jupyter\.org/[\w/-]+/blob/)'
+    r'(?P<branch>[\w.-]+)(?P<path>[\w%/.-]+)'
+)
+RX_BINDER_URL = re.compile(
+    r'(?P<baseurl>https?://mybinder\.org/v\d/[\w/-]+/)'
+    r'(?P<branch>[\w.-]+)(?P<path>\?filepath=[\w%/.-]+)'
+)
+
 
 def make_release(package_name):
     """Interactively create and publish a new release for the package"""
@@ -37,6 +46,13 @@ def make_release(package_name):
         click.confirm(
             "Fix errors manually! Continue?", default=True, abort=True
         )
+    files_with_binder_links = [
+        'README.rst',
+        join('docs', '08_examples.rst'),
+        join('docs', 'index.rst'),
+    ]
+    for filename in files_with_binder_links:
+        set_binder_branch(filename, new_version)
     make_release_commit(new_version)
     make_notebooks()
     check_docs()
@@ -50,6 +66,15 @@ def make_release(package_name):
     set_version(
         join('.', 'src', package_name, '__init__.py'), next_dev_version
     )
+    files_with_released_binder_links = [
+        'README.rst',
+        join('docs', 'index.rst'),
+    ]
+    for filename in files_with_binder_links:
+        if filename in files_with_released_binder_links:
+            # README and index always link to the latest released version
+            continue
+        set_binder_branch(filename, 'master')
     make_next_dev_version_commit(next_dev_version)
 
 
@@ -259,6 +284,21 @@ def set_version(filename, version):
         if not found_version_line:
             msg += ". Does not contain a line starting with '__version__'."
         raise ReleaseError(msg)
+
+
+def set_binder_branch(filename, branch='master'):
+    """Search for nbviewer/binder URLs and replace their branch name"""
+    shutil.copyfile(filename, filename + '.bak')
+    click.echo(
+        "Modifying %s to set branch %s in binder/nbviewer URLs"
+        % (filename, branch)
+    )
+    with open(filename + '.bak') as in_fh, open(filename, 'w') as out_fh:
+        for line in in_fh:
+            line = RX_NBVIEWER_URL.sub(r'\1%s\3' % branch, line)
+            line = RX_BINDER_URL.sub(r'\1%s\3' % branch, line)
+            out_fh.write(line)
+    os.remove(filename + ".bak")
 
 
 def edit_history(version):
@@ -480,6 +520,56 @@ def test_propose_next_version():
     assert propose_next_version('0.1.0+dev') == '0.1.1'
     assert propose_next_version('0.1.0.post1') == '0.1.1'
     assert propose_next_version('0.1.0.post1+dev') == '0.1.1'
+
+
+def test_nbviewer_binder_regexes():
+    url_nbviewer = (
+        r'http://nbviewer.jupyter.org/github/qucontrol/krotov/'
+        r'blob/master/docs/notebooks/'
+        r'03_example_lambda_system_rwa_non_hermitian.ipynb'
+    )
+    url_binder = (
+        r'https://mybinder.org/v2/gh/qucontrol/krotov/master'
+        r'?filepath=docs/notebooks/'
+        r'03_example_lambda_system_rwa_non_hermitian.ipynb'
+    )
+
+    match = RX_NBVIEWER_URL.match(url_nbviewer)
+    assert match
+    assert (
+        match.group('baseurl')
+        == 'http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/'
+    )
+    assert match.group('branch') == 'master'
+    assert (
+        match.group('path')
+        == '/docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb'
+    )
+    new_url_nbviewer = RX_NBVIEWER_URL.sub(r'\1%s\3' % 'v0.1.0', url_nbviewer)
+    assert new_url_nbviewer == (
+        r'http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v0.1.0/'
+        r'docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb'
+    )
+    assert RX_NBVIEWER_URL.match(new_url_nbviewer).group('branch') == 'v0.1.0'
+
+    match = RX_BINDER_URL.match(url_binder)
+    assert match
+    assert (
+        match.group('baseurl')
+        == 'https://mybinder.org/v2/gh/qucontrol/krotov/'
+    )
+    assert match.group('branch') == 'master'
+    assert match.group('path') == (
+        r'?filepath=docs/notebooks/'
+        r'03_example_lambda_system_rwa_non_hermitian.ipynb'
+    )
+    new_url_binder = RX_BINDER_URL.sub(r'\1%s\3' % 'v0.1.0', url_binder)
+    assert new_url_binder == (
+        r'https://mybinder.org/v2/gh/qucontrol/krotov/v0.1.0'
+        r'?filepath=docs/notebooks/'
+        r'03_example_lambda_system_rwa_non_hermitian.ipynb'
+    )
+    assert RX_BINDER_URL.match(new_url_binder).group('branch') == 'v0.1.0'
 
 
 ###############################################################################
