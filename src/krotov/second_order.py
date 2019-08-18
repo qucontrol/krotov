@@ -2,9 +2,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from qutip import Qobj
-
-
 __all__ = ['Sigma', 'numerical_estimate_A']
 
 
@@ -25,7 +22,7 @@ class Sigma(ABC):
     """
 
     @abstractmethod
-    def __call__(self, t):
+    def __call__(self, t):  # pragma: nocover
         """Evaluate σ(t)"""
         raise NotImplementedError()
 
@@ -40,7 +37,7 @@ class Sigma(ABC):
         guess_pulses,
         objectives,
         result,
-    ):
+    ):  # pragma: nocover
         """Recalculate the parametric dependencies of σ(t)
 
         This is called at the end of each control iteration, and may be used to
@@ -102,8 +99,8 @@ def numerical_estimate_A(
 
     where $\Delta\phi_k$ is the difference of the `forward_states`
     $\ket{\phi_k^{(i)}}$ propagated under the optimized pulse of iteration
-    $(i)$, and the `forward_states0` $\ket{\phi_k^{(i-1)}}$ propagated under the
-    guess pulse of iteration $(i)$ -- that is, the guess pulse of iteration
+    $(i)$, and the `forward_states0` $\ket{\phi_k^{(i-1)}}$ propagated under
+    the guess pulse of iteration $(i)$ -- that is, the guess pulse of iteration
     $(i-1)$; and $\Delta J_T$ is the difference of the final time functional,
 
     .. math::
