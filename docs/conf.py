@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+from pathlib import Path
 import os
 import shutil
 import subprocess
@@ -12,10 +13,10 @@ import git
 
 import krotov
 
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('_extensions'))
+DOCS = Path(__file__).parent
+ROOT = DOCS / '..'
+
+sys.path.insert(0, str((DOCS / '_extensions').resolve()))
 
 # -- Generate API documentation ------------------------------------------------
 def run_apidoc(app):
@@ -27,24 +28,24 @@ def run_apidoc(app):
         [
             'better-apidoc',
             '-t',
-            os.path.join('.', '_templates'),
+            str(DOCS / '_templates'),
             '--force',
             '--no-toc',
             '--separate',
             '-o',
-            os.path.join('.', 'API'),
-            os.path.join('..', 'src', 'krotov'),
+            str(DOCS / 'API'),
+            str(DOCS / '..' / 'src' / 'krotov'),
         ]
     )
 
 
 # -- Generate patched README documentation ------------------------------------
 def generate_patched_readme(_):
-    if not os.path.isfile('./_README.rst'):
-        shutil.copyfile(os.path.join('..', 'README.rst'), '_README.rst')
-        cmd = ['patch', '_README.rst', './_README.patch']
+    if not (DOCS / '_README.rst').is_file():
+        shutil.copyfile(DOCS / '..' / 'README.rst', DOCS / '_README.rst')
+        cmd = ['patch', str(DOCS / '_README.rst'), str(DOCS / '_README.patch')]
         subprocess.run(cmd, check=True)
-    assert os.path.isfile('./_README.rst')
+    assert (DOCS / '_README.rst').is_file()
 
 
 # -- General configuration -----------------------------------------------------
@@ -98,9 +99,8 @@ year = str(datetime.datetime.now().year)
 author = 'Michael Goerz'
 copyright = '{0}, {1}'.format(year, "Michael Goerz et al.")
 version = krotov.__version__
-rootfolder = os.path.join(os.path.dirname(__file__), '..')
 try:
-    last_commit = str(git.Repo(rootfolder).head.commit)[:7]
+    last_commit = str(git.Repo(ROOT).head.commit)[:7]
     release = last_commit
 except git.exc.InvalidGitRepositoryError:
     release = version

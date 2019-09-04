@@ -5,62 +5,48 @@ matrix:
   include:
     - name: Check codestyle
       python: 3.7
-      env: TOTEST=formatting
+      env: TOTEST="" TOXENV="run-blackcheck,run-isortcheck" TRAVISCMD=""
     - name: Python 3.5
       python: 3.5
-      env: TOTEST="src tests README.rst docs/*.rst"
+      env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py35-test TRAVISCMD=""
     - name: Python 3.6
       python: 3.6
-      env: TOTEST="src tests README.rst docs/*.rst"
+      env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py36-test TRAVISCMD=""
     - name: Python 3.7
       python: 3.7
-      env: TOTEST="src tests README.rst docs/*.rst"
+      env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 1 (State-to-State)
       python: 3.7
-      env: TOTEST=docs/notebooks/01_example_simple_state_to_state.ipynb
+      env: TOTEST=docs/notebooks/01_example_simple_state_to_state.ipynb TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 2 (RWA)
       python: 3.7
-      env: TOTEST=docs/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb
+      env: TOTEST=docs/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 3 (Non-Hermitian)
       python: 3.7
-      env: TOTEST=docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb
+      env: TOTEST=docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 4 (Density Matrix)
       python: 3.7
-      env: TOTEST=docs/notebooks/04_example_dissipative_qubit_reset.ipynb
+      env: TOTEST=docs/notebooks/04_example_dissipative_qubit_reset.ipynb TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 5 (Quantum Gate)
       python: 3.7
-      env: TOTEST=docs/notebooks/05_example_transmon_xgate.ipynb
+      env: TOTEST=docs/notebooks/05_example_transmon_xgate.ipynb TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 6 (3 States)
       python: 3.7
-      env: TOTEST=docs/notebooks/06_example_3states.ipynb
+      env: TOTEST=docs/notebooks/06_example_3states.ipynb TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 7 (Perfect Entanglers)
       python: 3.7
-      env: TOTEST=docs/notebooks/07_example_PE.ipynb
+      env: TOTEST=docs/notebooks/07_example_PE.ipynb TOXENV=py37-test TRAVISCMD=""
     - name: Notebook 8 (Ensemble Optimization)
       python: 3.7
-      env: TOTEST=docs/notebooks/08_example_ensemble.ipynb TRAVISCMD=travis_wait
+      env: TOTEST=docs/notebooks/08_example_ensemble.ipynb TRAVISCMD=travis_wait TOXENV=py37-test TRAVISCMD=travis_wait
     - name: Notebook 9 (NumPy)
       python: 3.7
-      env: TOTEST=docs/notebooks/09_example_numpy.ipynb
+      env: TOTEST=docs/notebooks/09_example_numpy.ipynb TOXENV=py37-test TRAVISCMD=""
 install:
-  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3.sh;
-  - bash miniconda3.sh -b -p $HOME/miniconda3
-  - source $HOME/miniconda3/etc/profile.d/conda.sh
-  - conda activate
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda create -q -n test_env python=$TRAVIS_PYTHON_VERSION cython numpy scipy jupyter matplotlib flake8
-  - conda activate test_env
-  - conda config --append channels conda-forge
-  - conda install qutip
-  # we must use an editable install, otherwise coveralls/codecov won't work
-  - PIP_USE_PEP517=false pip install -e .[dev]
-  - pip install codecov
+  - pip install tox
+  - pip install coveralls
   - pip freeze
-
 script:
-  - set -e
-  - if [[ $TOTEST == 'formatting' ]]; then isort --recursive --check-only src tests; black --skip-string-normalization --line-length 79 --check src tests; fi
-  - if [[ $TOTEST != 'formatting' ]]; then $TRAVISCMD py.test --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 $TOTEST; fi
+  - $TRAVISCMD tox -vv -e $TOXENV -- $TOTEST
 after_success:
   - codecov

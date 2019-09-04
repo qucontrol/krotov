@@ -1,30 +1,53 @@
-.PHONY: black black-check clean clean-build clean-pyc clean-test clean-venvs coverage develop develop-docs develop-test dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
+.PHONY: black black-check clean clean-build clean-pyc clean-test clean-venvs coverage dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
-CONDA_PACKAGES = cython numpy 'scipy<1.3.0'
-TESTENV =
-#TESTENV = MATPLOTLIBRC=tests
-TESTOPTIONS = --doctest-modules --cov=krotov --nbval --sanitize-with docs/nbval_sanitize.cfg --durations=10 -x -s
-TESTS = src tests docs/notebooks/*.ipynb README.rst docs/*.rst
-BLACKOPTIONS = --skip-string-normalization --line-length 79
-LATESTVENV = .venv/py37
+TOXOPTIONS =
+TOXINI = tox.ini
+TOX = tox -c $(TOXINI) $(TOXOPTIONS)
 
 
 define PRINT_HELP_PYSCRIPT
 import re, sys
 
 for line in sys.stdin:
-	match = re.match(r'^([a-z0-9A-Z_-]+):.*?## (.*)$$', line)
-	if match:
-		target, help = match.groups()
-		print("%-20s %s" % (target, help))
+    match = re.match(r'^([a-z0-9A-Z_-]+):.*?## (.*)$$', line)
+    if match:
+        target, help = match.groups()
+        print("%-20s %s" % (target, help))
+print("""
+All make commands delegate to tox. Environments will be created with venv by
+default. Alternatively, conda can be used by using the tox-conda.ini file,
+e.g. with `make TOXINI=tox-conda.ini test` You may also run `tox` directly. See
+`tox -av` for a list of available environments.
+""")
 endef
 export PRINT_HELP_PYSCRIPT
+
+define BOOTSTRAP_PYSCRIPT
+import sys
+import os
+from textwrap import dedent
+try:
+    import tox
+    if not os.path.isfile(".git/hooks/pre-commit"):
+        print("bootstrapping pre-commit hook")
+        tox.cmdline(['-e', 'run-cmd', '--', 'pre-commit', 'install'])
+except ImportError:
+    print(dedent("""
+    tox is not available. See https://tox.readthedocs.io for installation
+    instructions.
+    """))
+    sys.exit(1)
+endef
+export BOOTSTRAP_PYSCRIPT
 
 help:  ## show this help
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-build clean-pyc clean-test clean-venvs ## remove all build, test, coverage, and Python artifacts, as well as environments
-	$(MAKE) -C docs clean
+
+bootstrap: ## verify that tox is available and pre-commit hooks are active
+	@python -c "$$BOOTSTRAP_PYSCRIPT"
+
+clean: clean-docs clean-build clean-pyc clean-test clean-venvs ## remove all build, test, coverage, and Python artifacts, as well as environments
 
 clean-build: ## remove build artifacts
 	rm -fr build/
@@ -49,113 +72,69 @@ clean-venvs: ## remove testing/build environments
 	rm -fr .tox
 	rm -fr .venv
 
-flake8-check: $(LATESTVENV)/bin/python ## check style with flake8
-	$(LATESTVENV)/bin/python -m flake8 src tests
+clean-docs: ## remove documentation artifacts
+	$(MAKE) -C docs clean
 
-pylint-check: $(LATESTVENV)/bin/python ## check style with pylint
-	$(LATESTVENV)/bin/python -m pylint -j 0 src
+flake8-check: ## check style with flake8
+	$(TOX) -e run-flake8
 
-test: test35 test36 test37 ## run tests on every supported Python version
+pylint-check: ## check style with pylint
+	$(TOX) -e run-pylint
 
+test: bootstrap ## run tests on every supported Python version
+	$(TOX) -e py35-test,py36-test,py37-test
 
-.venv/py35/bin/py.test:
-	@conda create -y -m --override-channels -c defaults -p .venv/py35 python=3.5 $(CONDA_PACKAGES)
-	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
-	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py35 'qutip>=4.0,!=4.4.0'
-	@PIP_USE_PEP517=false .venv/py35/bin/python -m pip install -e .[dev]
+test35: bootstrap ## run tests for Python 3.5
+	$(TOX) -e py35-test
 
-test35: .venv/py35/bin/py.test ## run tests for Python 3.5
-	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
+test36: bootstrap ## run tests for Python 3.6
+	$(TOX) -e py36-test
 
+test37: bootstrap ## run tests for Python 3.7
+	$(TOX) -e py37-test
 
-.venv/py36/bin/py.test:
-	@conda create -y -m --override-channels -c defaults -p .venv/py36 python=3.6 $(CONDA_PACKAGES)
-	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
-	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py36 'qutip>=4.0,!=4.4.0'
-	@PIP_USE_PEP517=false .venv/py36/bin/python -m pip install -e .[dev]
+docs: bootstrap ## generate Sphinx HTML documentation, including API docs
+	$(TOX) -e docs
+	@echo "open docs/_build/index.html"
 
+spellcheck: bootstrap ## check spelling in docs
+	$(TOX) -e run-cmd -- pip install sphinxcontrib-spelling
+	SPELLCHECK=en_US $(TOX) -e docs -- -b spelling
 
-test36: .venv/py36/bin/py.test isort-check black-check ## run tests for Python 3.6
-	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
+black-check: bootstrap ## Check all src and test files for complience to "black" code style
+	$(TOX) -e run-blackcheck
 
-.venv/py37/bin/py.test:
-	@conda create -y -m --override-channels -c defaults -p .venv/py37 python=3.7 $(CONDA_PACKAGES)
-	@# if the conda installation does not work, simply comment out the following line, and let pip handle it
-	@conda install -y --override-channels -c defaults -c conda-forge -p .venv/py37 'qutip>=4,!=4.4.0'
-	@PIP_USE_PEP517=false .venv/py37/bin/python -m pip install -e .[dev]
-	@.venv/py37/bin/python scripts/install-pre-commit.py
+black: bootstrap ## Apply 'black' code style to all src and test files
+	$(TOX) -e run-black
 
+isort-check: bootstrap ## Check all src and test files for correctly sorted imports
+	$(TOX) -e run-isortcheck
 
-test37: .venv/py37/bin/py.test isort-check black-check ## run tests for Python 3.7
-	$(TESTENV) $< -v $(TESTOPTIONS) $(TESTS)
-
-
-$(LATESTVENV)/bin/python: $(LATESTVENV)/bin/py.test
-
-$(LATESTVENV)/bin/sphinx-build: $(LATESTVENV)/bin/py.test
-
-$(LATESTVENV)/bin/jupyter: $(LATESTVENV)/bin/py.test
-
-# How to execute notebook files
-%.ipynb.log: %.ipynb $(LATESTVENV)/bin/jupyter
-	@echo ""
-	@$(LATESTVENV)/bin/jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.timeout=180 --ExecutePreprocessor.kernel_name='python3' --config=/dev/null $< 2>&1 | tee $@
-
-NOTEBOOKFILES = $(shell find docs/notebooks/ -iname '*.ipynb'  -maxdepth 1)
-NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))
-
-notebooks: $(NOTEBOOKLOGS)  ## re-evaluate the notebooks in docs/notebooks
-	@echo ""
-	@echo "All notebook are now up to date; the were executed using the python3 kernel"
-	@$(LATESTVENV)/bin/jupyter kernelspec list | grep python3
-
-
-pre-commit-hooks: $(LATESTVENV)/bin/py.test  ## install pre-commit hooks
-
-docs: $(LATESTVENV)/bin/sphinx-build ## generate Sphinx HTML documentation, including API docs
-	$(MAKE) -C docs SPHINXBUILD=../$(LATESTVENV)/bin/sphinx-build clean
-	$(MAKE) -C docs SPHINXBUILD=../$(LATESTVENV)/bin/sphinx-build html
-	@echo "open docs/_build/html/index.html"
-
-spellcheck: $(LATESTVENV)/bin/sphinx-build ## check spelling in docs
-	@$(LATESTVENV)/bin/pip install sphinxcontrib-spelling
-	SPELLCHECK=en_US $(MAKE) -C docs SPHINXBUILD=../$(LATESTVENV)/bin/sphinx-build spelling
-
-black-check: $(LATESTVENV)/bin/python  ## Check all src and test files for complience to "black" code style
-	$(LATESTVENV)/bin/black $(BLACKOPTIONS) --diff --check src tests
-
-black: $(LATESTVENV)/bin/python  ## Apply 'black' code style to all src and test files
-	$(LATESTVENV)/bin/black $(BLACKOPTIONS) src tests
-
-isort-check: $(LATESTVENV)/bin/python  ## Check all src and test files for correctly sorted imports
-	$(LATESTVENV)/bin/isort --recursive --check-only src tests
-
-isort: $(LATESTVENV)/bin/python  ## Sort imports in all src and test files
-	$(LATESTVENV)/bin/isort --recursive src tests
+isort: bootstrap ## Sort imports in all src and test files
+	$(TOX) -e run-isort
 
 coverage: test37  ## generate coverage report in ./htmlcov
-	$(LATESTVENV)/bin/coverage html
+	$(TOX) -e coverage
 	@echo "open htmlcov/index.html"
 
-test-upload: $(LATESTVENV)/bin/python clean-build clean-pyc dist ## package and upload a release to test.pypi.org
-	$(LATESTVENV)/bin/twine check dist/*
-	$(LATESTVENV)/bin/twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+test-upload: bootstrap clean-build clean-pyc dist ## package and upload a release to test.pypi.org
+	$(TOX) -e run-cmd -- twine check dist/*
+	$(TOX) -e run-cmd -- twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-upload: $(LATESTVENV)/bin/python clean-build clean-pyc dist ## package and upload a release to pypi.org
-	$(LATESTVENV)/bin/twine check dist/*
-	$(LATESTVENV)/bin/twine upload dist/*
+upload: bootstrap clean-build clean-pyc dist ## package and upload a release to pypi.org
+	$(TOX) -e run-cmd -- twine check dist/*
+	$(TOX) -e run-cmd -- twine upload dist/*
 
-release: clean $(LATESTVENV)/bin/python ## Create a new version, package and upload it
-	$(LATESTVENV)/bin/python ./scripts/release.py
+release: bootstrap ## Create a new version, package and upload it
+	$(TOX) -e run-cmd -- python ./scripts/release.py
 
-
-dist: $(LATESTVENV)/bin/python clean-build clean-pyc ## builds source and wheel package
-	@$< setup.py sdist
-	@$< setup.py bdist_wheel
+dist: bootstrap ## builds source and wheel package
+	$(TOX) -e run-cmd -- python setup.py sdist
+	$(TOX) -e run-cmd -- python setup.py bdist_wheel
 	ls -l dist
 
-dist-check: $(LATESTVENV)/bin/python  ## Check all dist files for correctness
-	$(LATESTVENV)/bin/twine check dist/*
+dist-check: bootstrap ## Check all dist files for correctness
+	$(TOX) -e run-cmd -- twine check dist/*
 
 install: clean-build clean-pyc ## install the package to the active Python's site-packages
 	pip install .
@@ -163,20 +142,22 @@ install: clean-build clean-pyc ## install the package to the active Python's sit
 uninstall:  ## uninstall the package from the active Python's site-packages
 	pip uninstall krotov
 
-develop: clean-build clean-pyc ## install the package to the active Python's site-packages, in develop mode
-	PIP_USE_PEP517=false pip install -e .
+# How to execute notebook files
+%.ipynb.log: %.ipynb
+	@echo ""
+	$(TOX) -e run-cmd -- jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.kernel_name='python3' --config=/dev/null $< 2>&1 | tee $@
 
-develop-test: develop ## run tests within the active Python environment
-	$(TESTENV) py.test -v $(TESTOPTIONS) $(TESTS)
+NOTEBOOKFILES = $(shell find docs/ -maxdepth 1 -iname '*.ipynb')
+NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))
 
-develop-docs: develop  ## generate Sphinx HTML documentation, including API docs, within the active Python environment
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	@echo "open docs/_build/html/index.html"
+notebooks: bootstrap $(NOTEBOOKLOGS)  ## re-evaluate the notebooks
+	@echo ""
+	@echo "All notebook are now up to date; the were executed using the python3 kernel"
+	$(TOX) -e run-cmd -- jupyter kernelspec list | grep python3
 
-jupyter-notebook: $(LATESTVENV)/bin/jupyter  ## run a notebook server for editing the examples
-	$(LATESTVENV)/bin/jupyter notebook --config=/dev/null
+jupyter-notebook: bootstrap ## run a notebook server for editing the examples
+	$(TOX) -e run-cmd -- jupyter notebook --config=/dev/null
 
-jupyter-lab: $(LATESTVENV)/bin/jupyter  ## run a jupyterlab server for editing the examples
-	@PIP_USE_PEP517=false $(LATESTVENV)/bin/python -m pip install -e .[extras]
-	$(LATESTVENV)/bin/jupyter lab --config=/dev/null
+jupyter-lab: bootstrap ## run a jupyterlab server for editing the examples
+	$(TOX) -e run-cmd -- pip install jupyterlab
+	$(TOX) -e run-cmd -- jupyter lab --config=/dev/null

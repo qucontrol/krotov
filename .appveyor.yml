@@ -1,26 +1,56 @@
 environment:
 
   matrix:
-    - PYTHON_VERSION: 3.5
-      MINICONDA: C:\Miniconda3
-    - PYTHON_VERSION: 3.6
-      MINICONDA: C:\Miniconda3
-    - PYTHON_VERSION: 3.7
-      MINICONDA: C:\Miniconda3
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: src tests README.rst
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\01_example_simple_state_to_state.ipynb
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\02_example_lambda_system_rwa_complex_pulse.ipynb
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\03_example_lambda_system_rwa_non_hermitian.ipynb
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\04_example_dissipative_qubit_reset.ipynb
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\05_example_transmon_xgate.ipynb
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\06_example_3states.ipynb
+      # the following notebook currently do not run correctly on Windows
+      #- PYTHON: "C:\\Python36"
+      #  PYTHON_VERSION: 3.6
+      #  TOXENV: py36-test
+      #  TOTEST: docs\notebooks\07_example_PE.ipynb
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\08_example_ensemble.ipynb
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: 3.6
+      TOXENV: py36-test
+      TOTEST: docs\notebooks\09_example_numpy.ipynb
 
 install:
-  - "%MINICONDA%\\Scripts\\activate"
-  - conda config --set always_yes yes
-  - conda create -q -n test_env python=%PYTHON_VERSION% cython numpy "scipy<1.3.0"
-  - activate test_env
-  - echo CONDA_PREFIX %CONDA_PREFIX%
-  - echo PATH %PATH%
-  - conda config --append channels conda-forge
-  - conda install "qutip>=4.0,!=4.4.0"
-  - pip install .[dev]
-  - pip freeze
+  - "%PYTHON%\\python.exe -V"
+  - "%PYTHON%\\python.exe -m pip install tox"
+  - "%PYTHON%\\python.exe -m pip install coveralls"
+  - "%PYTHON%\\python.exe -m pip freeze"
+  - C:\Miniconda3\\Scripts\\activate"
 
 build: off
 
 test_script:
-  - ps: pytest --doctest-modules --cov=krotov --nbval --sanitize-with docs\nbval_sanitize.cfg --durations=10 src tests README.rst (get-item docs\*.rst).FullName docs\notebooks\01_example_simple_state_to_state.ipynb docs\notebooks\02_example_lambda_system_rwa_complex_pulse.ipynb docs\notebooks\03_example_lambda_system_rwa_non_hermitian.ipynb
+  - "%PYTHON%\\python.exe -m tox -c tox-conda.ini -vv -e %TOXENV% -- %TOTEST%"

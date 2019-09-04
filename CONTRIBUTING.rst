@@ -72,34 +72,70 @@ In short, if you are not a member of the `qucontrol organization`_,
 7. Push changes to the topic branch on *your* remote.
 8. Make a pull request against the base master branch through the Github website of your fork.
 
-The project contains a ``Makefile`` to help with development tasks. In your checked-out clone, do
+The project uses tox_ for automated testing accross multiple versions of Python
+and for various development tasks such as linting and generating the
+documentation. See :ref:`DevelopmentPrerequisites` for details.
+
+There is also a ``Makefile`` that wraps around tox, for
+convenience on Unix-based systems. In your checked-out clone, run
 
 .. code-block:: console
 
     $ make help
 
-to see the available make targets.
+to see the available make targets. If you cannot use ``make``, but want to use
+``tox`` directly (e.g., on Windows), run
+
+.. code-block:: console
+
+    $ tox -av
+
+to see a list of tox environments and a description.
 
 If you are a member of the `qucontrol organization`_, there is no need to fork
 ``krotov`` - you can directly pull and push to ``git@github.com:qucontrol/krotov.git``.
 
-It is strongly recommended that you use the conda_ package manager. The
-``Makefile`` relies on conda to create local testing and documentation building
-environments (``make test`` and ``make docs``).
-
-Alternatively, you may  use ``make develop-test`` and ``make develop-docs`` to
-run the tests or generate the documentation within your active Python
-environment. You will have to ensure that all the necessary dependencies are
-installed. Also, you will not be able to test the package against all supported
-Python versions.
-You still can (and should) look at https://travis-ci.org/qucontrol/krotov/ to check that your commits pass all tests.
-
-
-.. _conda: https://conda.io/docs/
+.. _tox: https://tox.readthedocs.io
 
 .. _Aaron Meurer's Git Workflow Notes:  https://www.asmeurer.com/git-workflow/
 
 .. _qucontrol organization: https://github.com/qucontrol
+
+
+.. _DevelopmentPrerequisites:
+
+
+Development Prerequisites
+-------------------------
+
+Contributing to the package's developments requires that you have Python 3.7
+and tox_ installed. It is strongly recommended that you also have installations
+of all other supported Python versions. The recommended way to install multiple
+versions of Python at the same time is through Use pyenv_ (or pyenv-win_ on
+Windows).
+
+Alternatively, you may install conda_ (via the Anaconda_ or Miniconda_
+distributions, or also through pyenv_). As ``conda`` can create environments
+with any version of Python (independent of which Python version ``conda`` was
+originally installed with), this alleviates the need for managing multiple
+versions.
+The advantage of using conda_ is that you may be able to avoid installing the
+compilers necessary for Python extension packages. The disadvantage is that
+environment creation is slower and the resulting environments are bigger, and
+that you may run into occasional binary incompatibilities between conda packages.
+
+.. warning::
+   If you want to use `conda`, you must use the ``tox-conda.ini`` configuration
+   file. That is, run all ``make`` comands as e.g.
+   ``make TOXINI=tox-conda.ini test`` and ``tox`` commands as e.g.
+   ``tox -c tox-conda.ini -e py35-test,py36-test,py37-test``
+
+.. _pyenv: https://github.com/pyenv/pyenv
+.. _pyenv-win: https://github.com/pyenv-win/pyenv-win
+.. _conda: https://conda.io/docs/
+.. _Anaconda: https://www.anaconda.com/distribution/
+.. _Miniconda: https://conda.io/en/latest/miniconda.html
+.. _QuTiP: http://qutip.org
 
 
 .. _BranchingModel:
@@ -228,7 +264,13 @@ From a checkout of the ``krotov`` repository, assuming conda_ is installed, you 
 
     $ make test
 
-to run the entire test suite.
+to run the entire test suite, or
+
+.. code-block:: console
+
+    $ tox -e py35-test,py36-test,py37-test
+
+if ``make`` is not available.
 
 The tests are organized in the ``tests`` subfolder. It includes python scripts
 whose name start with ``test_``, which contain functions whose names also start
@@ -254,15 +296,16 @@ readability significantly.
 
 Beyond :pep:`8`, this project adopts the `Black code style`_, with
 ``--skip-string-normalization --line-length 79``. You can
-run ``make black-check`` to check adherence to the code style, and
-``make black`` to apply it.
+run ``make black-check`` or ``tox -e run-blackcheck`` to check adherence to the
+code style, and ``make black`` or ``tox -e run-black`` to apply it.
 
 .. _Black code style: https://github.com/ambv/black/#the-black-code-style
 
 Imports within python modules must be sorted according to the isort_
-configuration in ``setup.cfg``. The command ``make isort-check`` checks whether
-all imports are sorted correctly, and ``make isort`` modifies all Python
-modules in-place with the proper sorting.
+configuration in ``setup.cfg``. The command ``make isort-check`` or ``tox -e
+run-isortcheck`` checks whether all imports are sorted correctly, and ``make
+isort`` or ``tox -e run-isort`` modifies all Python modules in-place with the
+proper sorting.
 
 .. _isort: https://github.com/timothycrosley/isort#readme
 
@@ -271,16 +314,17 @@ pre-commit hooks that prevent committing code not does not meet the
 requirements. These hooks are managed through the `pre-commit framework`_.
 
 .. warning::
-   After cloning the ``krotov`` repository, you must run
-   ``make pre-commit-hooks``, or (if you have ``pre-commit`` installed)
-   ``pre-commit install`` from within the project root folder.
+   After cloning the ``krotov`` repository, you should run
+   ``make bootstrap``, or ``tox -e run-cmd -- pre-commit install``
+   from within the project root folder.
 
 .. _pre-commit framework: https://pre-commit.com
 
-You may use ``make flake8-check`` and ``make pylint-check`` for additional
-checks on the code with flake8_ and pylint_, but there is no strict requirement
-for a perfect score with either one of these linters. They only serve as a
-guideline for code that might be improved.
+You may use ``make flake8-check`` or ``tox -e run-flake8`` and ``make
+pylint-check`` or ``tox -e run-pylint`` for additional checks on the code with
+flake8_ and pylint_, but there is no strict requirement for a perfect score
+with either one of these linters. They only serve as a guideline for code that
+might be improved.
 
 .. _flake8: http://flake8.pycqa.org
 .. _pylint: http://pylint.pycqa.org
@@ -335,6 +379,12 @@ assuming you have conda_ installed), you may run
 .. code-block:: console
 
     $ make docs
+
+or
+
+.. code-block:: console
+
+   $ tox -e docs
 
 to generate the documentation locally.
 
@@ -514,48 +564,7 @@ Developers' How-Tos
 
 The following assumes your current working directory is a checkout of
 ``krotov``, and that you have successfully run ``make test`` (which creates
-some local virtual environments that development relies on).
-
-
-How to install QuTiP from source ("illegal instruction" in QuTiP conda install)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The local conda environments that ``make test`` and other ``make`` targets set
-up in the ``.venv`` folder use pre-compiled ``conda`` packages for QuTiP by
-default. Unfortunately, some of QuTiP's conda packages are compiled
-incorrectly, and crash the entire Python process whenever the ``qutip`` package
-is imported (QuTiP issues `#951 <QutipIssue951_>`_, `#920 <QutipIssue920_>`_,
-and `#674 <QutipIssue674_>`_). You will see a message like "Illegal
-instruction" or something similar. This problem happens especially on Linux and
-sometimes other Unixes (like macOS). Luckily, on Linux you will usually have
-the necessary compilers to install QuTiP "from source" (via ``pip``). To enable
-automatic installation via ``pip``, make the following changes to the
-``Makefile``:
-
-* Un-comment the line::
-
-      CONDA_PACKAGES = cython numpy scipy
-
-  near the top of the ``Makefile``. Defining ``CONDA_PACKAGES`` as above will
-  ensure that the necessary build-requirements for QuTiP are available in the
-  conda environment.
-
-* Comment out all lines similar to::
-
-      @conda install -y --override-channels -c defaults -c conda-forge -p .venv/py37 qutip
-
-  By omitting this line, the ``Makefile`` will instead pick up the ``qutip``
-  dependency automatically from ``setup.py`` in the command following in the next
-  line::
-
-      .venv/py37/bin/python -m pip install -e .[dev]
-
- This change is necessary for all of the ``.venv`` environments.
-
-
-.. _QutipIssue951: https://github.com/qutip/qutip/issues/951
-.. _QutipIssue920: https://github.com/qutip/qutip/issues/920
-.. _QutipIssue674: https://github.com/qutip/qutip/issues/674
+the tox environments that development relies on).
 
 
 How to run a jupyter notebook server for working on the example notebooks
@@ -567,7 +576,7 @@ A notebook server that is isolated to the proper testing environment can be star
 
 This is equivalent to::
 
-    $ .venv/py37/bin/jupyter notebook --config=/dev/null
+    $ tox -e run-cmd -- jupyter notebook --config=/dev/null
 
 You may run this with your own options, if you prefer. The
 ``--config=/dev/null`` guarantees that the notebook server is completely
@@ -586,8 +595,8 @@ Interactive debugging in notebooks is difficult. It becomes much easier if
 you convert the notebook to a script first.  To convert a notebook to an
 (I)Python script and run it with automatic debugging, execute e.g.::
 
-    $ ./.venv/py37/bin/jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
-    $ ./.venv/py37/bin/ipython --pdb debug.py
+    $ tox -e run-cmd -- jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
+    $ tox -e run-cmd -- ipython --pdb debug.py
 
 You can then also set a manual breakpoint by inserting the following line anywhere in the code::
 
@@ -638,7 +647,7 @@ How to run a subset of tests
 
 To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
 
-    $ ./.venv/py37/bin/pytest tests/test_krotov.py
+    $ tox -e run-cmd -- pytest tests/test_krotov.py
 
 See the `pytest test selection docs`_ for details.
 
@@ -647,7 +656,7 @@ How to run only as single test
 
 Decorate the test with e.g. ``@pytest.mark.xxx``, and then run, e.g::
 
-    $ ./.venv/py37/bin/pytest -m xxx tests/
+    $ tox -e run-cmd -- pytest -m xxx tests/
 
 See the `pytest documentation on markers`_ for details.
 
@@ -656,7 +665,7 @@ How to run only the doctests
 
 Run the following::
 
-$ ./.venv/py37/bin/pytest --doctest-modules src
+$ tox -e run-cmd -- pytest --doctest-modules src
 
 How to go into an interactive debugger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -664,7 +673,7 @@ How to go into an interactive debugger
 Optionally, install the `pdbpp` package into the testing environment, for a
 better experience::
 
-    $ ./.venv/py37/bin/python -m pip install pdbpp
+    $ tox -e run-cmd -- pip install pdbpp
 
 Then:
 
@@ -674,7 +683,7 @@ Then:
 
 - Run ``pytest`` with the option ``-s``, e.g.::
 
-    $ ./.venv/py37/bin/pytest -m xxx -s tests/
+    $ tox -e run-cmd -- pytest -m xxx -s tests/
 
 You may also see the `pytest documentation on automatic debugging`_.
 
