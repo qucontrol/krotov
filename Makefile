@@ -28,9 +28,12 @@ import os
 from textwrap import dedent
 try:
     import tox
+    TOXINI = os.environ.get('TOXINI', 'tox.ini')
     if not os.path.isfile(".git/hooks/pre-commit"):
         print("bootstrapping pre-commit hook")
-        tox.cmdline(['-e', 'run-cmd', '--', 'pre-commit', 'install'])
+        cmdline = ['-c', TOXINI, '-e', 'run-cmd', '--', 'pre-commit', 'install']
+        print("tox " + " ".join(cmdline))
+        tox.cmdline(cmdline)
 except ImportError:
     print(dedent("""
     tox is not available. See https://tox.readthedocs.io for installation
@@ -45,7 +48,7 @@ help:  ## show this help
 
 
 bootstrap: ## verify that tox is available and pre-commit hooks are active
-	@python -c "$$BOOTSTRAP_PYSCRIPT"
+	@TOXINI="$(TOXINI)" python -c "$$BOOTSTRAP_PYSCRIPT"
 
 clean: clean-docs clean-build clean-pyc clean-test clean-venvs ## remove all build, test, coverage, and Python artifacts, as well as environments
 
