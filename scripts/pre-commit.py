@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Lokal pre-commit hooks"""
+"""Local pre-commit hooks"""
 import os
 import re
 import subprocess
@@ -11,7 +11,7 @@ try:
     from tox.session import load_config
 except ImportError:
     print("tox must be available for pre-commit hooks.")
-    print("See https://tox.readthedocs.io for installation")
+    print("See https://tox.readthedocs.io for installation instructions.")
     sys.exit(1)
 
 
@@ -54,11 +54,11 @@ def run_tox_env_commands(envname, *args):
     Roughly equivalent to checking that ``tox -e <envname> -- <args>`` finishes
     with exit status 0. However, the ``tox`` executable is not invoked.
     Instead, the environment directory for the given `envname` is extracted
-    from the default tox configuration name, as well as the list of commands
+    from the default tox configuration file, as well as the list of commands
     for that environment. The commands are then executed directly with a PATH
     variable set to the bin-folder of the environment directory. This means
     that the environment directory must exist (from a previous manual
-    invokation of tox). This avoids potential "hangs" and other unforseen
+    invocation of tox). This avoids potential "hangs" and other unforeseen
     problems from having to initialize a tox environment during the execution
     of a pre-commit hook (which should be relatively fast).
 
@@ -78,16 +78,16 @@ def run_tox_env_commands(envname, *args):
     env_config = config.envconfigs[envname]
     if env_config.envdir.isdir():
         success = True
+        shell_env = {'PATH': str(env_config.envbindir)}
+        if 'PATH' in os.environ:
+            shell_env['PATH'] += os.pathsep + os.environ['PATH']
+        for varname in env_config.passenv:
+            if varname == 'PATH':
+                continue
+            else:
+                if varname in os.environ:
+                    shell_env[varname] = os.environ[varname]
         for cmd in env_config.commands:
-            shell_env = {'PATH': str(env_config.envbindir)}
-            if 'PATH' in os.environ:
-                shell_env['PATH'] += os.pathsep + os.environ['PATH']
-            for varname in env_config.passenv:
-                if varname == 'PATH':
-                    continue
-                else:
-                    if varname in os.environ:
-                        shell_env[varname] = os.environ[varname]
             proc = subprocess.run(cmd, env=shell_env, cwd=env_config.changedir)
             success &= proc.returncode == 0
         return success

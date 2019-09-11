@@ -2,21 +2,21 @@
 """Automation script for making a release. Must be run from the root for the
 repository"""
 # Note: Version scheme according to https://www.python.org/dev/peps/pep-0440
-import os
-from os.path import join
-import sys
-import re
-from subprocess import run, DEVNULL, CalledProcessError
-from pkg_resources import parse_version
 import json
-import urllib.request
+import os
+import re
+import shutil
+import sys
 import urllib.error
 import urllib.parse
-import shutil
+import urllib.request
+from os.path import join
+from subprocess import DEVNULL, CalledProcessError, run
 
-import pytest
-import git
 import click
+import git
+import pytest
+from pkg_resources import parse_version
 
 
 RX_VERSION = re.compile(

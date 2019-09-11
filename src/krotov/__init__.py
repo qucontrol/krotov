@@ -11,6 +11,7 @@ functionals, convergence checks, analysis tools, and propagators, as well as
 more technical routines for parallelization, low-level data conversion, and
 estimators for second-order updates.
 """
+# fmt: off
 
 __version__ = '0.3.0+dev'
 
@@ -30,23 +31,24 @@ __bibtex__ = r'''
 }
 '''.strip()
 
-
 # expose submodules for easy import
-from . import shapes
-from . import structural_conversions
-from . import propagators
-from . import functionals
-from . import info_hooks
-from . import objectives
-from . import mu
-from . import result
-from . import convergence
-from . import second_order
-from . import parallelization
-
+from . import (
+    convergence,
+    functionals,
+    info_hooks,
+    mu,
+    objectives,
+    parallelization,
+    propagators,
+    result,
+    second_order,
+    shapes,
+    structural_conversions,
+)
 # expose primary classes/functions
-from .objectives import Objective, gate_objectives, ensemble_objectives
+from .objectives import Objective, ensemble_objectives, gate_objectives
 from .optimize import optimize_pulses
+
 
 __all__ = [
     'optimize_pulses',
