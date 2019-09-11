@@ -15,6 +15,9 @@ matrix:
     - name: Python 3.7
       python: 3.7
       env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py37-test TRAVISCMD=""
+    - name: Docs
+      python: 3.7
+      env: TOTEST="" TOXENV=docs TRAVISCMD=""
     - name: Notebook 1 (State-to-State)
       python: 3.7
       env: TOTEST=docs/notebooks/01_example_simple_state_to_state.ipynb TOXENV=py37-test TRAVISCMD=""
