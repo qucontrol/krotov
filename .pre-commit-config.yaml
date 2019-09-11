@@ -3,14 +3,23 @@ fail_fast: false
 repos:
 -   repo: local
     hooks:
-    -   id: krotov-pre-commit
-        name: Local pre-commit (./scripts/pre-commit.py)
-        entry: ./scripts/pre-commit.py
+    -   id: whitespace
+        name: whitespace
+        entry: ./scripts/pre-commit.py whitespace
         types: [python]
         language: script
--   repo: https://github.com/ambv/black
-    rev: 19.3b0
-    hooks:
-    - id: black
-      types: [python]
-      args: ['--skip-string-normalization', '--line-length', '79', '--check']
+    -   id: debug-comments
+        name: debug-comments
+        entry: ./scripts/pre-commit.py debug-comments
+        types: [python]
+        language: script
+    -   id: black
+        name: black
+        entry: ./scripts/pre-commit.py black
+        types: [python]
+        language: script
+    -   id: isort
+        name: isort
+        entry: ./scripts/pre-commit.py isort
+        types: [python]
+        language: script
