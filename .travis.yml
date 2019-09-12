@@ -54,6 +54,7 @@ matrix:
 install:
   - pip install tox
   - pip install coveralls
+  - pip install --upgrade cython
   - pip freeze
   - printenv
 script:

@@ -47,6 +47,7 @@ install:
   - "%PYTHON%\\python.exe -V"
   - "%PYTHON%\\python.exe -m pip install tox"
   - "%PYTHON%\\python.exe -m pip install coveralls"
+  - "%PYTHON%\\python.exe -m pip install cython" 
   - "%PYTHON%\\python.exe -m pip freeze"
   - C:\Miniconda3-x64\\Scripts\\activate"
 
