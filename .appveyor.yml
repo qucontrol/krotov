@@ -48,7 +48,7 @@ install:
   - "%PYTHON%\\python.exe -m pip install tox"
   - "%PYTHON%\\python.exe -m pip install coveralls"
   - "%PYTHON%\\python.exe -m pip freeze"
-  - C:\Miniconda3\\Scripts\\activate"
+  - C:\Miniconda3-x64\\Scripts\\activate"
 
 build: off
 
