@@ -1,4 +1,4 @@
-.PHONY: black black-check clean clean-build clean-pyc clean-test clean-venvs coverage dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
+.PHONY: black black-check clean clean-build clean-tests clean-venvs coverage dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
 TOXOPTIONS =
 TOXINI = tox.ini
@@ -50,33 +50,20 @@ help:  ## show this help
 bootstrap: ## verify that tox is available and pre-commit hooks are active
 	@TOXINI="$(TOXINI)" python -c "$$BOOTSTRAP_PYSCRIPT"
 
-clean: clean-docs clean-build clean-pyc clean-test clean-venvs ## remove all build, test, coverage, and Python artifacts, as well as environments
+clean: ## remove all build, test, coverage, and Python artifacts, as well as environments
+	$(TOX) -e clean
 
 clean-build: ## remove build artifacts
-	rm -fr build/
-	rm -fr dist/
-	rm -fr .eggs/
-	rm -fr src/*.egg-info
-	rm -fr pip-wheel-metadata
-	find tests src -name '*.egg-info' -exec rm -fr {} +
-	find tests src -name '*.egg' -exec rm -f {} +
+	$(TOX) -e clean-build
 
-clean-pyc: ## remove Python file artifacts
-	find tests src -name '*.pyc' -exec rm -f {} +
-	find tests src -name '*.pyo' -exec rm -f {} +
-	find tests src -name '*~' -exec rm -f {} +
-	find tests src -name '__pycache__' -exec rm -fr {} +
+clean-tests: ## remove test and coverage artifacts
+	$(TOX) -e clean-tests
 
-clean-test: ## remove test and coverage artifacts
-	rm -f .coverage
-	rm -fr htmlcov/
-
-clean-venvs: ## remove testing/build environments
-	rm -fr .tox
-	rm -fr .venv
+clean-venvs: ## remove tox virtual environments
+	$(TOX) -e clean-venv
 
 clean-docs: ## remove documentation artifacts
-	$(MAKE) -C docs clean
+	$(TOX) -e clean-docs
 
 flake8-check: ## check style with flake8
 	$(TOX) -e run-flake8
@@ -123,11 +110,11 @@ coverage: test37  ## generate coverage report in ./htmlcov
 	$(TOX) -e coverage
 	@echo "open htmlcov/index.html"
 
-test-upload: bootstrap clean-build clean-pyc dist ## package and upload a release to test.pypi.org
+test-upload: bootstrap clean-build dist ## package and upload a release to test.pypi.org
 	$(TOX) -e run-cmd -- twine check dist/*
 	$(TOX) -e run-cmd -- twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-upload: bootstrap clean-build clean-pyc dist ## package and upload a release to pypi.org
+upload: bootstrap clean-build dist ## package and upload a release to pypi.org
 	$(TOX) -e run-cmd -- twine check dist/*
 	$(TOX) -e run-cmd -- twine upload dist/*
 
@@ -142,7 +129,7 @@ dist: bootstrap ## builds source and wheel package
 dist-check: bootstrap ## Check all dist files for correctness
 	$(TOX) -e run-cmd -- twine check dist/*
 
-install: clean-build clean-pyc ## install the package to the active Python's site-packages
+install: clean-build ## install the package to the active Python's site-packages
 	pip install .
 
 uninstall:  ## uninstall the package from the active Python's site-packages
