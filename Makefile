@@ -84,8 +84,8 @@ flake8-check: ## check style with flake8
 pylint-check: ## check style with pylint
 	$(TOX) -e run-pylint
 
-test: bootstrap ## run tests on every supported Python version
-	$(TOX) -e py35-test,py36-test,py37-test
+test: bootstrap ## run tests for current stable Python release
+	$(TOX) -e py37-test
 
 test35: bootstrap ## run tests for Python 3.5
 	$(TOX) -e py35-test
