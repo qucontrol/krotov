@@ -40,13 +40,7 @@ oct_decision_tree.pdf:
 
 
 clean:
-	@-rm -rf $(BUILDDIR)/*
-	@-rm -rf API/*.rst
-	@-rm -f notebooks/*.log
-	@-rm -f *.log
-	@-rm -f _README.rst
-	@-rm -f krotovscheme.aux krotovscheme.log
-	@-rm -f oct_decision_tree.aux oct_decision_tree.log
+	@python clean.py
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
