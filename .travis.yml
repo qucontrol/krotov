@@ -60,7 +60,7 @@ before_install:
     - sudo apt-get -y install liblapack-dev libblas-dev gfortran
 install:
   - pip install tox
-  - pip install coveralls
+  - pip install codecov
   - pip install --upgrade cython
   - pip freeze
   - printenv
