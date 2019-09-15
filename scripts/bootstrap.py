@@ -17,6 +17,11 @@ tox is not available. See https://tox.readthedocs.io for installation
 instructions.
 '''
 
+_TOX_OUTDATED_WARN = r'''
+WARNING: tox.ini is older than tox-pyenv.ini and tox-conda.ini. Touch or modify
+tox.ini to confirm.
+'''
+
 
 def main(argv=None):
     """Main function"""
@@ -25,7 +30,16 @@ def main(argv=None):
     root = pathlib.Path(__file__).parent.parent
 
     # 1. Bootstrap the tox.ini file
-    if not (root / 'tox.ini').is_file():
+    if (root / 'tox.ini').is_file():
+        # if there are updates to the tracked tox-pyenv.ini and tox-conda.ini,
+        # people might forget that this doesn't update their local,
+        # bootstrapped tox.ini. This remindes them.
+        tox_ini_mtime = (root / 'tox.ini').stat().st_mtime
+        tox_pyenv_mtime = (root / 'tox-pyenv.ini').stat().st_mtime
+        tox_conda_mtime = (root / 'tox-conda.ini').stat().st_mtime
+        if tox_ini_mtime < max(tox_pyenv_mtime, tox_conda_mtime):
+            print(_TOX_OUTDATED_WARN)
+    else:
         tox_ini = os.environ.get('TOXINI', 'tox-pyenv.ini')
         if not (root / tox_ini).is_file():
             tox_ini = 'tox-pyenv.ini'
