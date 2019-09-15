@@ -22,53 +22,33 @@ e.g. with `make TOXINI=tox-conda.ini test` You may also run `tox` directly. See
 endef
 export PRINT_HELP_PYSCRIPT
 
-define BOOTSTRAP_PYSCRIPT
-import sys
-import os
-from textwrap import dedent
-try:
-    import tox
-    TOXINI = os.environ.get('TOXINI', 'tox.ini')
-    if not os.path.isfile(".git/hooks/pre-commit"):
-        print("bootstrapping pre-commit hook")
-        cmdline = ['-c', TOXINI, '-e', 'run-cmd', '--', 'pre-commit', 'install']
-        print("tox " + " ".join(cmdline))
-        tox.cmdline(cmdline)
-except ImportError:
-    print(dedent("""
-    tox is not available. See https://tox.readthedocs.io for installation
-    instructions.
-    """))
-    sys.exit(1)
-endef
-export BOOTSTRAP_PYSCRIPT
 
 help:  ## show this help
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 
 bootstrap: ## verify that tox is available and pre-commit hooks are active
-	@TOXINI="$(TOXINI)" python -c "$$BOOTSTRAP_PYSCRIPT"
+	python scripts/bootstrap.py
 
-clean: ## remove all build, test, coverage, and Python artifacts, as well as environments
+clean: bootstrap ## remove all build, test, coverage, and Python artifacts, as well as environments
 	$(TOX) -e clean
 
-clean-build: ## remove build artifacts
+clean-build: bootstrap ## remove build artifacts
 	$(TOX) -e clean-build
 
-clean-tests: ## remove test and coverage artifacts
+clean-tests: bootstrap ## remove test and coverage artifacts
 	$(TOX) -e clean-tests
 
-clean-venvs: ## remove tox virtual environments
+clean-venvs: bootstrap ## remove tox virtual environments
 	$(TOX) -e clean-venv
 
-clean-docs: ## remove documentation artifacts
+clean-docs: bootstrap ## remove documentation artifacts
 	$(TOX) -e clean-docs
 
-flake8-check: ## check style with flake8
+flake8-check: bootstrap ## check style with flake8
 	$(TOX) -e run-flake8
 
-pylint-check: ## check style with pylint
+pylint-check: bootstrap ## check style with pylint
 	$(TOX) -e run-pylint
 
 test: bootstrap ## run tests for current stable Python release

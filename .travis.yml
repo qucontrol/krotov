@@ -65,6 +65,6 @@ install:
   - pip freeze
   - printenv
 script:
-  - $TRAVISCMD tox -vv -e $TOXENV -- $TOTEST
+  - $TRAVISCMD tox -c tox-pyenv.ini -e $TOXENV -- $TOTEST
 after_success:
   - codecov

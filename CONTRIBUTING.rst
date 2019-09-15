@@ -90,7 +90,15 @@ to see the available make targets. If you cannot use ``make``, but want to use
 
     $ tox -av
 
-to see a list of tox environments and a description.
+to see a list of tox environments and a description. For the initial
+configuration of tox environments, you may have to run
+
+.. code-block:: console
+
+    $ tox -e bootstrap
+
+in order to set up the ``tox.ini`` configuration file.
+
 
 If you are a member of the `qucontrol organization`_, there is no need to fork
 ``krotov`` - you can directly pull and push to ``git@github.com:qucontrol/krotov.git``.
@@ -128,7 +136,8 @@ that you may run into occasional binary incompatibilities between conda packages
    If you want to use `conda`, you must use the ``tox-conda.ini`` configuration
    file. That is, run all ``make`` comands as e.g.
    ``make TOXINI=tox-conda.ini test`` and ``tox`` commands as e.g.
-   ``tox -c tox-conda.ini -e py35-test,py36-test,py37-test``
+   ``tox -c tox-conda.ini -e py35-test,py36-test,py37-test``. Alternatively,
+   make ``tox-conda.ini`` the default by copying it to ``tox.ini``.
 
 .. _pyenv: https://github.com/pyenv/pyenv
 .. _pyenv-win: https://github.com/pyenv-win/pyenv-win
@@ -258,7 +267,7 @@ Testing
 
 The Krotov package includes a full test-suite using pytest_. We strive for a `test coverage`_ above 90%.
 
-From a checkout of the ``krotov`` repository, assuming conda_ is installed, you can use
+From a checkout of the ``krotov`` repository, you can use
 
 .. code-block:: console
 
@@ -315,8 +324,9 @@ requirements. These hooks are managed through the `pre-commit framework`_.
 
 .. warning::
    After cloning the ``krotov`` repository, you should run
-   ``make bootstrap``, or ``tox -e run-cmd -- pre-commit install``
-   from within the project root folder.
+   ``make bootstrap``, ``tox -e bootstrap``, or ``python scripts/bootstrap.py``
+   from within the project root folder. These set up ``tox``, and the
+   pre-commit hooks
 
 .. _pre-commit framework: https://pre-commit.com
 
@@ -373,8 +383,7 @@ Also see :ref:`math-in-example-notebooks`.
 
 You may use the BibTeX_ plugin for citations.
 
-At any point, from a checkout of the ``krotov`` repository (and
-assuming you have conda_ installed), you may run
+At any point, from a checkout of the ``krotov`` repository, you may run
 
 .. code-block:: console
 
