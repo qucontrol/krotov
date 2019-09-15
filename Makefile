@@ -1,8 +1,10 @@
 .PHONY: black black-check clean clean-build clean-tests clean-venv coverage dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
-TOXOPTIONS =
-TOXINI = tox.ini
+TOXOPTIONS ?=
+TOXINI ?= tox.ini
 TOX = tox -c $(TOXINI) $(TOXOPTIONS)
+# and empty TESTS delegates to tox.ini
+TESTS ?=
 
 
 define PRINT_HELP_PYSCRIPT
@@ -52,19 +54,19 @@ pylint-check: bootstrap ## check style with pylint
 	$(TOX) -e run-pylint
 
 test: bootstrap ## run tests for current stable Python release
-	$(TOX) -e py37-test
+	$(TOX) -e py37-test -- $(TESTS)
 
 test35: bootstrap ## run tests for Python 3.5
-	$(TOX) -e py35-test
+	$(TOX) -e py35-test -- $(TESTS)
 
 test36: bootstrap ## run tests for Python 3.6
-	$(TOX) -e py36-test
+	$(TOX) -e py36-test -- $(TESTS)
 
 test37: bootstrap ## run tests for Python 3.7
-	$(TOX) -e py37-test
+	$(TOX) -e py37-test -- $(TESTS)
 
 test38: bootstrap ## run tests for Python 3.8 (dev)
-	$(TOX) -e py38dev-test
+	$(TOX) -e py38dev-test -- $(TESTS)
 
 docs: bootstrap ## generate Sphinx HTML documentation, including API docs
 	$(TOX) -e docs

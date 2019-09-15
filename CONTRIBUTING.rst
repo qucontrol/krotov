@@ -654,9 +654,15 @@ form of `test-driven development`_, you have two options:
 How to run a subset of tests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To run e.g. only the tests defined in ``tests/test_krotov.py``, use::
+To run e.g. only the tests defined in ``tests/test_krotov.py``, use any of the following::
+
+    $ make test TESTS=tests/test_krotov.py
+
+    $ tox -e py37-test -- tests/test_krotov.py
 
     $ tox -e run-cmd -- pytest tests/test_krotov.py
+
+    $ .tox/py37/bin/pytest tests/test_krotov.py
 
 See the `pytest test selection docs`_ for details.
 
