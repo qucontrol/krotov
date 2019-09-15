@@ -1,4 +1,4 @@
-.PHONY: black black-check clean clean-build clean-tests clean-venvs coverage dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
+.PHONY: black black-check clean clean-build clean-tests clean-venv coverage dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
 TOXOPTIONS =
 TOXINI = tox.ini
@@ -30,20 +30,20 @@ help:  ## show this help
 bootstrap: ## verify that tox is available and pre-commit hooks are active
 	python scripts/bootstrap.py
 
-clean: bootstrap ## remove all build, test, coverage, and Python artifacts, as well as environments
-	$(TOX) -e clean
+clean:  ## remove all build, test, coverage, and Python artifacts, as well as environments
+	python scripts/clean.py all
 
-clean-build: bootstrap ## remove build artifacts
-	$(TOX) -e clean-build
+clean-build: ## remove build artifacts
+	python scripts/clean.py build
 
-clean-tests: bootstrap ## remove test and coverage artifacts
-	$(TOX) -e clean-tests
+clean-tests: ## remove test and coverage artifacts
+	python scripts/clean.py tests
 
-clean-venvs: bootstrap ## remove tox virtual environments
-	$(TOX) -e clean-venv
+clean-venv: ## remove tox virtual environments
+	python scripts/clean.py venv
 
-clean-docs: bootstrap ## remove documentation artifacts
-	$(TOX) -e clean-docs
+clean-docs: ## remove documentation artifacts
+	python docs/clean.py
 
 flake8-check: bootstrap ## check style with flake8
 	$(TOX) -e run-flake8

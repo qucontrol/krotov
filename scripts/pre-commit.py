@@ -75,7 +75,11 @@ def run_tox_env_commands(envname, *args):
     # from an alternative tox.ini file
     tox_cmdline = ['-e', envname, '--', *args]
     config = load_config(tox_cmdline)
-    env_config = config.envconfigs[envname]
+    try:
+        env_config = config.envconfigs[envname]
+    except KeyError:
+        print("tox is not set up correctly. Run `tox -e bootstrap`")
+        sys.exit(1)
     if env_config.envdir.isdir():
         success = True
         shell_env = {'PATH': str(env_config.envbindir)}
