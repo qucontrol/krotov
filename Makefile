@@ -1,4 +1,4 @@
-.PHONY: black black-check clean clean-build clean-tests clean-venv coverage dist dist-check docs help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
+.PHONY: black black-check clean clean-build clean-tests clean-venv coverage dist dist-check docs docs-pdf help install isort isort-check jupyter-lab jupyter-notebook flake8-check pylint-check notebooks pre-commit-hooks release spellcheck test test-upload uninstall upload
 .DEFAULT_GOAL := help
 TOXOPTIONS ?=
 TOXINI ?= tox.ini
@@ -71,6 +71,11 @@ test38: bootstrap ## run tests for Python 3.8 (dev)
 docs: bootstrap ## generate Sphinx HTML documentation, including API docs
 	$(TOX) -e docs
 	@echo "open docs/_build/index.html"
+
+docs-pdf: bootstrap  ## generate a PDF version of the documentation
+	$(TOX) -e docs -- _build/tex -b latex
+	cp docs/krotovscheme.pdf docs/oct_decision_tree.pdf docs/_build/tex/
+	$(TOX) -e run-cmd -- python docs/build_pdf.py
 
 spellcheck: bootstrap ## check spelling in docs
 	$(TOX) -e run-cmd -- pip install sphinxcontrib-spelling

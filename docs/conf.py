@@ -185,6 +185,55 @@ mathjax_config = {
     },
 }
 
+# LaTeX settings
+latex_engine = 'lualatex'
+latex_elements = {
+    'fontpkg': r'''
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+''',
+    'preamble': r'''
+\usepackage[titles]{tocloft}
+\cftsetpnumwidth {1.25cm}\cftsetrmarg{1.5cm}
+\setlength{\cftchapnumwidth}{0.75cm}
+\setlength{\cftsecindent}{\cftchapnumwidth}
+\setlength{\cftsecnumwidth}{1.25cm}
+\usepackage{braket}
+\newcommand{\tr}[0]{\operatorname{tr}}
+\newcommand{\diag}[0]{\operatorname{diag}}
+\newcommand{\abs}[0]{\operatorname{abs}}
+\newcommand{\pop}[0]{\operatorname{pop}}
+\newcommand{\aux}[0]{\text{aux}}
+\newcommand{\opt}[0]{\text{opt}}
+\newcommand{\tgt}[0]{\text{tgt}}
+\newcommand{\init}[0]{\text{init}}
+\newcommand{\lab}[0]{\text{lab}}
+\newcommand{\rwa}[0]{\text{rwa}}
+\renewcommand{\Braket}[2]{\left\langle{}#1\vphantom{#2}\mid{}#2\vphantom{#1}\right\rangle}
+\newcommand{\ketbra}[2]{\vert#1\rangle\!\langle#2\vert}
+\newcommand{\op}[1]{\hat{#1}}
+\newcommand{\Op}[1]{\hat{#1}}
+\newcommand{\dd}[0]{\,\text{d}}
+\newcommand{\Liouville}[0]{\mathcal{L}}
+\newcommand{\DynMap}[0]{\mathcal{E}}
+\newcommand{\identity}[0]{\mathbf{1}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\Norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\Abs}[1]{\left\vert#1\right\vert}
+\newcommand{\avg}[1]{\langle#1\rangle}
+\newcommand{\Avg}[1]{\left\langle#1\right\rangle}
+\newcommand{\AbsSq}[1]{\left\vert#1\right\vert^2}
+\renewcommand{\Re}[0]{\operatorname{Re}}
+\renewcommand{\Im}[0]{\operatorname{Im}}
+''',
+    'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
+    'printindex': r'\footnotesize\raggedright\printindex',
+    'babel': '',
+}
+latex_show_urls = 'no'
+
+
 # Napoleon settings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
