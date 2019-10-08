@@ -120,9 +120,9 @@ uninstall:  ## uninstall the package from the active Python's site-packages
 # How to execute notebook files
 %.ipynb.log: %.ipynb
 	@echo ""
-	$(TOX) -e run-cmd -- jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.kernel_name='python3' --config=/dev/null $< 2>&1 | tee $@
+	$(TOX) -e run-cmd -- jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.kernel_name='python3'  --ExecutePreprocessor.timeout=-1 --config=/dev/null $< 2>&1 | tee $@
 
-NOTEBOOKFILES = $(shell find docs/ -maxdepth 1 -iname '*.ipynb')
+NOTEBOOKFILES = $(shell find docs/notebooks -maxdepth 1 -iname '*.ipynb')
 NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))
 
 notebooks: bootstrap $(NOTEBOOKLOGS)  ## re-evaluate the notebooks
