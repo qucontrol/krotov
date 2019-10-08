@@ -2,8 +2,8 @@
 History
 =======
 
-(next version)
---------------
+0.4.0 (2019-10-08)
+------------------
 
 * Added: Support for Python 3.7
 * Changed: The ``'shape'`` key in ``pulse_options`` was renamed to ``'update_shape'``, to further avoid confusion between pulse shapes and update shapes.
