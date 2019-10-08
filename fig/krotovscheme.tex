@@ -1,0 +1,174 @@
+\documentclass{article}
+\usepackage{amsmath}
+\newcommand{\bra}[1]{\ensuremath{\langle #1 \vert}}  % for normal text
+\newcommand{\ket}[1]{\ensuremath{\vert #1 \rangle}}  % for normal text
+\newcommand{\Bra}[1]{\left\langle #1 \right\vert}
+\newcommand{\KetBra}[2]{\Ket{#1}\kern-0.1em\Bra{#2}}
+\newcommand{\Ket}[1]{\left\vert #1 \right\rangle}
+\newcommand{\Op}[1]{\ensuremath{\boldsymbol{\mathsf{\hat{#1}}}}}
+
+\usepackage{tikz}
+
+\usepackage[psfixbb,graphics,tightpage,active]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tikzpicture}[
+  x=0.85cm,
+  y=1.0cm,
+]
+  %\tikzset{help lines/.style=gray, ultra thin}
+  %\tikzset{help lines/.style=white, ultra thin}
+  %\draw[style=help lines, step=1cm] (0,0) grid (20,15);
+\tikzstyle{every node}+=[font= \small ]
+
+%%% propagation boxes
+% lower
+\draw[color=gray!20, fill=gray!20,rounded corners=10] (2,2.1) rectangle (16,4.40);
+\node[align=center] at (9, 2.3){\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {2}}} forward-propagation with updated control};
+%\draw[color=gray!20, fill=gray!20,rounded corners=10] (14,2.8) rectangle (16,4.75);
+% upper
+\draw[color=gray!20, fill=gray!20,rounded corners=10] (2,5.60) rectangle (16,7.9);
+  \node[align=center] at (9, 7.7){\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {1}}} backward-propagation and storage with guess control};
+%\draw[color=gray!20, fill=gray!20,rounded corners=10] (14,5.25) rectangle (16,7.2);
+
+%%% forward propagation
+
+\node (psifw1) at (3,4) {%
+  \begin{tikzpicture}
+    \draw (0,0)--(0.5,-0.25)--(1,0);
+    \node at (0.5,0.25) {$\phi_k(0)$};
+  \end{tikzpicture}
+};
+
+\node (psifw2) at (6,4) {%
+  \begin{tikzpicture}
+    \draw (0,0)--(0.5,-0.25)--(1,0);
+    \node at (0.5,0.25) {$\phi_k(t_1)$};
+  \end{tikzpicture}
+};
+\draw[->] (psifw1) .. controls +(1,-1) and +(-1,-1) .. node(epsn1)[fill=gray!20]{$\epsilon^{(i)}_1$} (psifw2);
+
+\node (psifw3) at (9,4) {%
+  \begin{tikzpicture}
+    \draw[color=gray!20] (0,0)--(0.5,-0.25)--(1,0);
+    \node[color=gray!20] at (0.5,0.25) {$\phi_k(t)$};
+    \node at (0.5,0.25) {\dots};
+  \end{tikzpicture}
+};
+\draw[->] (psifw2) .. controls +(1,-1) and +(-1,-1) .. node(epsn2)[fill=gray!20]{$\epsilon^{(i)}_2$} (psifw3);
+
+\node (psifw4) at (12,4) {%
+  \begin{tikzpicture}
+    \draw (0,0)--(0.5,-0.25)--(1,0);
+    \node at (0.5,0.25) {$\phi_k(t_{N_T-1})$};
+  \end{tikzpicture}
+};
+\draw[->] (psifw3) .. controls +(1,-1) and +(-1,-1) .. node(epsn3)[fill=gray!20]{$\epsilon^{(i)}_{N_T-1}$} (psifw4);
+
+\node (psifw5) at (15,4) {%
+  \begin{tikzpicture}
+    %\draw[color=gray!20](0,0)--(0.5,-0.25)--(1,0);
+    \node at (0.5,0.25) {$\phi_k(T)$};
+  \end{tikzpicture}
+};
+\draw[->] (psifw4) .. controls +(1,-1) and +(-1,-1) .. node(epsn4)[fill=gray!20]{$\epsilon^{(i)}_{N_T}$} (psifw5);
+
+%%% backward propagation
+
+\node (chi1) at (3,6) {%
+  \begin{tikzpicture}
+    \draw (0,0)--(0.5,0.25)--(1,0);
+    \node at (0.5,-0.25) {$\chi_k(0)$};
+  \end{tikzpicture}
+};
+
+\node (chi2) at (6,6) {%
+  \begin{tikzpicture}
+    \draw (0,0)--(0.5,0.25)--(1,0);
+    \node at (0.5,-0.25) {$\chi_k(t_1)$};
+  \end{tikzpicture}
+};
+\draw[<-] (chi1) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_1$} (chi2);
+
+\node (chi3) at (9,6) {%
+  \begin{tikzpicture}
+    \draw[color=gray!20] (0,0)--(0.5,0.25)--(1,0);
+    \node[color=gray!20] at (0.5,-0.25) {$\chi_k(t)$};
+    \node at (0.5,-0.25) {\dots};
+  \end{tikzpicture}
+};
+\draw[<-] (chi2) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_2$} (chi3);
+
+\node (chi4) at (12,6) {%
+  \begin{tikzpicture}
+    \draw (0,0)--(0.5,0.25)--(1,0);
+    \node at (0.5,-0.25) {$\chi_k(t_{N_T-1})$};
+  \end{tikzpicture}
+};
+\draw[<-] (chi3) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_{N_T-1}$} (chi4);
+
+\node (chi5) at (15,6) {%
+  \begin{tikzpicture}
+    \draw[color=gray!20] (0,0)--(0.5,0.25)--(1,0);
+    \node[] at (0.5,-0.25) {$\chi_k(T)$};
+  \end{tikzpicture}
+};
+\draw[<-] (chi4) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_{N_T}$} (chi5);
+
+%%% mu
+\node (mu1) at (3,5) {%
+  \begin{tikzpicture}
+    \draw (-0.5,0.4)--(0.5,0.4);
+    \node at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
+    \draw (-0.5,-0.4)--(0.5,-0.4);
+  \end{tikzpicture}
+};
+\draw[->] (mu1) -| (epsn1);
+
+\node (mu2) at (6,5) {%
+  \begin{tikzpicture}
+    \draw (-0.5,0.4)--(0.5,0.4);
+    \node at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
+    \draw (-0.5,-0.4)--(0.5,-0.4);
+  \end{tikzpicture}
+};
+\draw[->] (mu2) -| (epsn2);
+
+\node (mu3) at (9,5) {%
+  \begin{tikzpicture}
+    \draw[color=white] (-0.5,0.4)--(0.5,0.4);
+    \node[color=white] at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
+    \node at (0,0) {\dots};
+    \draw[color=white] (-0.5,-0.4)--(0.5,-0.4);
+  \end{tikzpicture}
+};
+\draw[->] (mu3) -| (epsn3);
+
+\node (mu4) at (12,5) {%
+  \begin{tikzpicture}
+    \draw (-0.5,0.4)--(0.5,0.4);
+    \node at (0,0) {$\frac{\partial H}{\partial \epsilon}$};
+    \draw (-0.5,-0.4)--(0.5,-0.4);
+  \end{tikzpicture}
+};
+\draw[->] (mu4) -| (epsn4);
+
+%\node at (15,5) {%
+%  \begin{tikzpicture}
+%    \draw (-0.5,0)--(0.5,0);
+%  \end{tikzpicture}
+%};
+%\node at (16.1,5) {%
+%  \begin{tikzpicture}
+%    \node at (0,0) {$ = \; \tau$};
+%  \end{tikzpicture}
+%};
+
+%
+\end{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
