@@ -295,8 +295,8 @@ def set_binder_branch(filename, branch='master'):
     )
     with open(filename + '.bak') as in_fh, open(filename, 'w') as out_fh:
         for line in in_fh:
-            line = RX_NBVIEWER_URL.sub(r'\1%s\3' % branch, line)
-            line = RX_BINDER_URL.sub(r'\1%s\3' % branch, line)
+            line = RX_NBVIEWER_URL.sub(r'\g<1>%s\g<3>' % branch, line)
+            line = RX_BINDER_URL.sub(r'\g<1>%s\g<3>' % branch, line)
             out_fh.write(line)
     os.remove(filename + ".bak")
 
@@ -545,7 +545,9 @@ def test_nbviewer_binder_regexes():
         match.group('path')
         == '/docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb'
     )
-    new_url_nbviewer = RX_NBVIEWER_URL.sub(r'\1%s\3' % 'v0.1.0', url_nbviewer)
+    new_url_nbviewer = RX_NBVIEWER_URL.sub(
+        r'\g<1>%s\g<3>' % 'v0.1.0', url_nbviewer
+    )
     assert new_url_nbviewer == (
         r'http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v0.1.0/'
         r'docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb'
@@ -563,7 +565,7 @@ def test_nbviewer_binder_regexes():
         r'?filepath=docs/notebooks/'
         r'03_example_lambda_system_rwa_non_hermitian.ipynb'
     )
-    new_url_binder = RX_BINDER_URL.sub(r'\1%s\3' % 'v0.1.0', url_binder)
+    new_url_binder = RX_BINDER_URL.sub(r'\g<1>%s\g<3>' % 'v0.1.0', url_binder)
     assert new_url_binder == (
         r'https://mybinder.org/v2/gh/qucontrol/krotov/v0.1.0'
         r'?filepath=docs/notebooks/'
