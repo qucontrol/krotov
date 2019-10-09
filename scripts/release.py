@@ -52,7 +52,7 @@ def make_release(package_name):
         join('docs', 'index.rst'),
     ]
     for filename in files_with_binder_links:
-        set_binder_branch(filename, new_version)
+        set_binder_branch(filename, "v" + str(new_version))
     make_release_commit(new_version)
     make_notebooks()
     check_docs()
