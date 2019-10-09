@@ -74,7 +74,7 @@ docs: bootstrap ## generate Sphinx HTML documentation, including API docs
 
 spellcheck: bootstrap ## check spelling in docs
 	$(TOX) -e run-cmd -- pip install sphinxcontrib-spelling
-	SPELLCHECK=en_US $(TOX) -e docs -- -b spelling
+	SPELLCHECK=en_US $(TOX) -e docs -- _build -b spelling
 
 black-check: bootstrap ## Check all src and test files for complience to "black" code style
 	$(TOX) -e run-blackcheck
