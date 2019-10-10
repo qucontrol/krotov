@@ -195,6 +195,6 @@ Then,
 .. |krotov.optimize_pulses| replace:: ``krotov.optimize_pulses``
 .. _krotov.optimize_pulses: https://krotov.readthedocs.io/en/stable/API/krotov.optimize.html#krotov.optimize.optimize_pulses
 
-See `Using Krotov with QuTiP <https://krotov.readthedocs.io/en/stable/07_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://krotov.readthedocs.io/en/stable/08_examples.html>`_ for details.
+See `Using Krotov with QuTiP <https://krotov.readthedocs.io/en/stable/08_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://krotov.readthedocs.io/en/stable/09_examples.html>`_ for details.
 
 .. _Jupyter notebook: http://jupyter.org

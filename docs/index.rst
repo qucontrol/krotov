@@ -42,11 +42,12 @@ Welcome to the Krotov package's documentation!
    03_authors
    04_features
    05_history
-   06_krotovs_method
-   07_qutip_usage
-   08_examples
-   09_howto
-   10_other_methods
+   06_introduction
+   07_krotovs_method
+   08_qutip_usage
+   09_examples
+   10_howto
+   11_other_methods
    99_bibliography
 
 
