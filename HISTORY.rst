@@ -3,8 +3,8 @@ History
 =======
 
 
-(next version)
---------------
+0.4.1 (2019-10-11)
+------------------
 
 * Update: Documentation now contains all information from https://arxiv.org/abs/1902.11284v4 (`#54`_)
 * Added: a PDF of the documentation is now available at https://github.com/qucontrol/krotov/tree/master/docs/pdf (`#52`_, thanks to `@TejasAvinashShetty`_)

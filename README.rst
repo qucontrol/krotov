@@ -27,7 +27,7 @@ Krotov Python Package
    :target: https://krotov.readthedocs.io/en/latest/?badge=latest
 .. image:: https://mybinder.org/badge_logo.svg
    :alt: Launch Binder
-   :target: https://mybinder.org/v2/gh/qucontrol/krotov/v0.4.0?filepath=docs%2Fnotebooks
+   :target: https://mybinder.org/v2/gh/qucontrol/krotov/v0.4.1?filepath=docs%2Fnotebooks
 .. image:: https://img.shields.io/badge/arXiv-1902.11284-red.svg
    :alt: arXiv
    :target: https://arxiv.org/abs/1902.11284
