@@ -345,8 +345,13 @@ given range::
         return _filter
 
 This function is passed to :func:`.optimize_pulses` as e.g.
-``modify_params_after_iter=apply_spectral_filter(tlist, 0, 7)`` to constraining
-the spectrum of the pulse to angular frequencies $\omega \in [0, 7]$.
+
+.. code-block:: python
+
+   modify_params_after_iter=apply_spectral_filter(tlist, 0, 7)
+
+to constrain the spectrum of the pulse to angular frequencies
+:math:`\omega \in [0, 7]`.
 You may want to explore how such a filter behaves in the example of the
 :ref:`/notebooks/05_example_transmon_xgate.ipynb`.
 
