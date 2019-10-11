@@ -206,6 +206,7 @@ latex_elements = {
 \setlength{\cftchapnumwidth}{0.75cm}
 \setlength{\cftsecindent}{\cftchapnumwidth}
 \setlength{\cftsecnumwidth}{1.25cm}
+\usepackage{emptypage}
 \usepackage{braket}
 \newcommand{\tr}[0]{\operatorname{tr}}
 \newcommand{\diag}[0]{\operatorname{diag}}

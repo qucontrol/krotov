@@ -56,13 +56,20 @@ def _patch_line(line):
         return r'\end{split}' + "\n"
     if line.startswith(r'\release{'):
         version = get_version(ROOT / '../src/krotov/__init__.py')
+        if version.endswith('dev'):
+            version += (
+                " ("
+                + re.match(r'\\release\{(.*)\}', line.strip()).group(1)
+                + ")"
+            )
         line = r'\release{' + version + "}\n"
     if line.startswith(r'\author{'):
         line = r'\author{Michael Goerz \textit{et. al.}}' + "\n"
     if line.startswith(r'\section{'):
         # don't put section numbers in the HISTORY, in front of version numbers
         match = re.match(
-            r'\\section\{(\d+\.\d+\.\d+\s+\([\d-]+\))\}', line.strip()
+            r'\\section\{(\d+\.\d+\.\d+\s+\([\d-]+\)|[\s(]*next version[)\s]*)\}',
+            line.strip(),
         )
         if match:
             line = r'\section*{' + match.group(1) + "}\n"

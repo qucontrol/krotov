@@ -6,7 +6,7 @@ For non-released development versions, a PDF of the documentation can be generat
 
     tox -e bootstrap
     tox -e docs -- _build/tex -b latex
-    cp docs/krotovscheme.pdf docs/oct_decision_tree.pdf docs/_build/tex/
+    cp docs/*.pdf docs/_build/tex/
     tox -e run-cmd -- python docs/build_pdf.py
 
 or simply `make docs-pdf` to create a file `docs/_build/tex/krotov.pdf`.

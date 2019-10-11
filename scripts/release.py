@@ -48,7 +48,7 @@ def make_release(package_name):
         )
     files_with_binder_links = [
         'README.rst',
-        join('docs', '08_examples.rst'),
+        join('docs', '09_examples.rst'),
         join('docs', 'index.rst'),
     ]
     for filename in files_with_binder_links:
@@ -58,10 +58,15 @@ def make_release(package_name):
     check_docs()
     run_tests()
     make_notebooks_commit(new_version)
+    manual_pdf = "./docs/pdf/krotov%s.pdf" % new_version
+    make_manual_pdf(manual_pdf)
+    make_manual_pdf_commit(manual_pdf)
+    squash_commits(n=3)
     make_upload(test=True)
     push_release_commits()
     make_upload(test=False)
     make_and_push_tag(new_version)
+    # release is finished; go back to a dev state
     next_dev_version = new_version + '+dev'
     set_version(
         join('.', 'src', package_name, '__init__.py'), next_dev_version
@@ -375,6 +380,33 @@ def make_notebooks_commit(version):
         ],
         check=True,
     )
+
+
+def make_manual_pdf(outfile):
+    """Create the PDF manual"""
+    run(['make', 'docs-pdf'], check=True)
+    shutil.copyfile('./docs/_build/tex/krotov.pdf', outfile)
+
+
+def make_manual_pdf_commit(manual_pdf):
+    """Commit 'Add pdf manual ...'"""
+    click.confirm("Make commit for PDF manual?", default=True, abort=True)
+    run(['git', 'add', manual_pdf], check=True)
+    run(
+        ['git', 'commit', '-m', "Add PDF manual in %s" % manual_pdf],
+        check=True,
+    )
+
+
+def squash_commits(n):
+    """Squash release commits"""
+    click.confirm(
+        "Ready to squash %d release commits (change 'pick' to 's' for all "
+        "but first commit)?" % n,
+        default=True,
+        abort=True,
+    )
+    run(['git', 'rebase', '--interactive', 'HEAD~%d' % n], check=True)
 
 
 def make_upload(test=True):

@@ -7,6 +7,7 @@ History
 --------------
 
 * Update: Documentation now contains all information from https://arxiv.org/abs/1902.11284v4 (`#54`_)
+* Added: a PDF of the documentation is now available at https://github.com/qucontrol/krotov/tree/master/docs/pdf (`#52`_, thanks to `@TejasAvinashShetty`_)
 
 
 0.4.0 (2019-10-08)
@@ -65,6 +66,7 @@ History
 
 
 .. _@uiofgh: https://github.com/uiofgh
+.. _@TejasAvinashShetty: https://github.com/TejasAvinashShetty
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
@@ -77,4 +79,5 @@ History
 .. _#46: https://github.com/qucontrol/krotov/issues/46
 .. _#47: https://github.com/qucontrol/krotov/issues/47
 .. _#48: https://github.com/qucontrol/krotov/issues/48
-.. _#54: https://github.com/qucontrol/krotov/issues/48
+.. _#52: https://github.com/qucontrol/krotov/issues/42
+.. _#54: https://github.com/qucontrol/krotov/issues/54
