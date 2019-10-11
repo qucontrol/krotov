@@ -40,6 +40,7 @@ dev_requirements = [
     'nbsphinx',
     'nbval',
     'pre-commit',
+    'pybtex',
     'pylint',
     'pytest',
     'pytest-cov<=2.6.1',

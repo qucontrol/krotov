@@ -47,7 +47,7 @@ find in the objectives, and iteratively calculate updates to all controls in
 order to meet all `objectives` simultaneously. The result of the optimization
 will be in the returned :class:`.Result` object, with a list of the optimized
 controls in :attr:`~.Result.optimized_controls`.
-The :attr:`~.Result.optimized_objectives` property contains a copy of the
+The :obj:`~.Result.optimized_objectives` property contains a copy of the
 objectives with the :attr:`~.Result.optimized_controls` plugged into the
 Hamiltonian or Liouvillian and/or collapse operators. The dynamics under the
 optimized controls can then again be simulated through

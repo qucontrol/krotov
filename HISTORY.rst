@@ -2,6 +2,13 @@
 History
 =======
 
+
+(next version)
+--------------
+
+* Update: Documentation now contains all information from https://arxiv.org/abs/1902.11284v4 (`#54`_)
+
+
 0.4.0 (2019-10-08)
 ------------------
 
@@ -20,6 +27,7 @@ History
 * Bugfix: Correctly calculate ∂H/∂ϵ if ϵ occurs in H multiple times (`#47`_, thanks to `@uiofgh`_)
 * Bugfix: Correctly calculate ∂H/∂ϵ=0 if the specific ϵ currently being updated does not occur in H (`#48`_)
 * Added: Method ``objectives_with_controls`` for ``Result`` object.
+
 
 0.3.0 (2019-03-01)
 ------------------
@@ -69,3 +77,4 @@ History
 .. _#46: https://github.com/qucontrol/krotov/issues/46
 .. _#47: https://github.com/qucontrol/krotov/issues/47
 .. _#48: https://github.com/qucontrol/krotov/issues/48
+.. _#54: https://github.com/qucontrol/krotov/issues/48

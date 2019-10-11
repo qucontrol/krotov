@@ -1,6 +1,8 @@
 How-Tos
 =======
 
+.. _HowtoGateOptimization:
+
 How to optimize towards a quantum gate
 --------------------------------------
 
@@ -124,13 +126,32 @@ for an example.
 How to optimize towards a two-qubit gate up to single-qubit corrections
 -----------------------------------------------------------------------
 
+On many quantum computing platforms, applying arbitrary single-qubit
+gates is easy compared to entangling two-qubit gates. A specific
+entangling gate like CNOT is combined with single-qubit gates to form a
+universal set of gates. For a given physical system, it can be hard to
+know a-priori which entangling gates are easy or even possible to
+realize. For example, trapped neutral atoms only allow for the
+realization of diagonal two-qubit
+gates :cite:`JakschPRL2000,GoerzNJP2014` like CPHASE.
+However, the CPHASE gate is "locally equivalent" to CNOT: only
+additional single-qubit operations are required to obtain one from the
+other. A "local-invariants functional" :cite:`MullerPRA11`
+defines an optimization with respect to a such a local equivalence
+class, and thus is free to find the specific realization of a two-qubit
+gate that is easiest to realize.
+
 Use :func:`krotov.objectives.gate_objectives` with ``local_invariants=True`` in
-order to construct a list of objectives suitable for an optimization using a
-"local-invariant functional" :cite:`MullerPRA11`. This optimizes towards a
+order to construct a list of objectives suitable for an optimization using the
+local-invariant functional :cite:`MullerPRA11`. This optimizes towards a
 point in the `Weyl chamber`_.
 
 The |weylchamber package|_ contains the suitable `chi_constructor` routines to
 pass to :func:`.optimize_pulses`.
+
+The optimization towards a local equivalence class may require use of the
+second-order update equation, see :ref:`SecondOrderUpdate`.
+
 
 
 .. _HowtoPEOptimization:
@@ -138,17 +159,31 @@ pass to :func:`.optimize_pulses`.
 How to optimize towards an arbitrary perfect entangler
 ------------------------------------------------------
 
-Closely related to an optimization towards a point in the Weyl chamber is the
-optimization towards an arbitrary perfectly entangling two-qubit gate.
-Geometrically, this means optimizing towards the polyhedron of perfect
-entanglers in the `Weyl chamber`_.
+The relevant property of a gate is often its entangling power, and the
+requirement for a two-qubit gate in a universal set of gates is that it is a
+"perfect entangler". A perfect entangler can produce a maximally entangled
+state from a separable input state. Since 85% of all two-qubit gates are
+perfect entanglers :cite:`WattsE2013,MuszPRA2013`, a functional that targets an
+arbitrary perfect entangler :cite:`WattsPRA2015,GoerzPRA2015` solves the
+control problem with the least constraints.
+
+The optimization towards an arbitrary perfect entangler is closely related to
+an optimization towards a point in the Weyl chamber
+(:ref:`HowtoLIOptimization`): It turns out that 
+in the geometric representation of the `Weyl chamber`_, all the perfect
+entanglers lie within a polyhedron, and we can simply minimize the geometric
+distance to the surface of this polyhedron.
 
 Use :func:`krotov.objectives.gate_objectives` with ``gate='PE'`` in
-order to construct a list of objectives suitable for an optimization using a
-"perfect entanglers" functional :cite:`WattsPRA2015,GoerzPRA2015`.
+order to construct a list of objectives suitable for an optimization using the
+perfect entanglers functional :cite:`WattsPRA2015,GoerzPRA2015`.
 This is illustrated in the :ref:`/notebooks/07_example_PE.ipynb`.
 
 Again, the `chi_constructor` is available in the |weylchamber package|_.
+
+Both the optimization towards a local equivalence class and an arbitrary perfect
+entangler may require use of the second-order update equation, see
+:ref:`SecondOrderUpdate`.
 
 .. |weylchamber package| replace:: ``weylchamber`` package
 .. _weylchamber package: https://github.com/qucontrol/weylchamber
@@ -206,13 +241,35 @@ example.
 How to optimize for robust pulses
 ---------------------------------
 
-Control pulses can be made robust with respect to variations in the system by
-doing an ensemble optimization, as proposed in Ref. :cite:`GoerzPRA2014`. The
-idea if to sample a representative selection of possible system Hamiltonians,
-and to optimize over an *average* of the entire ensemble.
 
-An appropriate set of objectives can be generated with the
-:func:`~krotov.objectives.ensemble_objectives` function.
+Control fields can be made robust with respect to variations in the
+system by performing an "ensemble
+optimization" :cite:`GoerzPRA2014`. The idea is to sample a
+representative selection of possible system Hamiltonians, and to
+optimize over an average of the entire ensemble. In the functional,
+Eq. :eq:`functional`, respectively the update
+Eq. :eq:`krotov_first_order_update`,
+the index :math:`k` now numbers not only the states, but also different
+ensemble Hamiltonians: :math:`\Op{H}(\{\epsilon_l(t)\}) \rightarrow \{\Op{H}_k(\{\epsilon_l(t)\})\}`.
+
+The example considered in Ref. :cite:`GoerzPRA2014` is that
+of a CPHASE two-qubit gate on trapped Rydberg atoms. Two classical
+fluctuations contribute significantly to the gate error: deviations in
+the pulse amplitude (:math:`\Omega = 1` ideally), and fluctuations in
+the energy of the Rydberg level (:math:`\Delta_{\text{ryd}} = 0`
+ideally). Starting from a set of objectives for the unperturbed system, see
+:ref:`HowtoGateOptimization`, :func:`~krotov.objectives.ensemble_objectives`
+creates an extended set of objectives that duplicates the original objectives
+once for each Hamiltonian from a set perturbed Hamiltonian
+:math:`\Op{H}(\Omega \neq 1, \Delta_{\text{ryd}} \neq 0)`.
+As shown in Ref. :cite:`GoerzNJP2014`, an optimization over the average of all
+these objectives  results in controls that are robust over a wide range of
+system perturbations.
+
+A simpler example of an ensemble optimization is
+:ref:`/notebooks/08_example_ensemble.ipynb`, which considers a state-to-state
+transition in a Lamba-System with a dissipative intermediary state.
+
 
 
 .. _HowtoSpectralConstraints:

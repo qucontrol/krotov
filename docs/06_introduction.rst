@@ -51,10 +51,7 @@ representative of concurrent update methods is GRadient Ascent Pulse
 Engineering (GRAPE) :cite:`KhanejaJMR05`, whereas Krotov's
 method, which comes with the advantage of guaranteed monotonic
 convergence, requires sequential
-updates :cite:`Tannor92,ReichJCP12`. While GRAPE is found in
-various software packages, there has not been an open source
-implementation of Krotov's method to date. Our package provides that
-missing implementation.
+updates :cite:`Tannor92,ReichJCP12`.
 
 The choice of Python as an implementation language is due to Python's
 easy-to-learn syntax, expressiveness, and immense popularity in the
@@ -99,10 +96,9 @@ implement the entire optimization and time propagation in a single, more
 efficient (compiled) language. Our Python implementation of Krotov's
 method puts an emphasis on clarity, and the documentation provides
 detailed explanations of all necessary concepts, especially the correct
-time discretization, see Appendix :ref:`TODO`,
-and the possibility to parallelize the optimization. Thus, the
-:mod:`krotov` package can serve as a reference implementation, leveraging
-Python's reputation as "executable pseudocode", and as a foundation
+:ref:`TimeDiscretization` and the possibility to parallelize the optimization.
+Thus, the :mod:`krotov` package can serve as a reference implementation,
+leveraging Python's reputation as "executable pseudocode", and as a foundation
 against which to test other implementations.
 
 .. _QuTiP library: http://qutip.org

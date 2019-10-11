@@ -1,57 +1,75 @@
 \documentclass[border=10pt,multi,tikz]{standalone}
 \usepackage[edges]{forest}
-\usetikzlibrary{arrows.meta}% arrows is deprecated
-\renewcommand{\familydefault}{\sfdefault}
+\usetikzlibrary{arrows.meta, positioning}% arrows is deprecated
+\usepackage{amssymb}
 \usepackage[none]{hyphenat} % no hyphenation
 
 \begin{document}
+\begin{tikzpicture}[]
 \tikzset{% \tikzstyle is deprecated
   block/.style={rectangle, draw, fill=white!20, text width=10em, text centered, rounded corners, minimum height=4em},
-  line/.style={draw, very thick, color=black!50, -Stealth},
+  line/.style={draw, very thick, color=black!75, -Stealth},
 }
-\begin{forest}
-  arrow to/.style n args=2{%
-    delay={%
-      tikz+={%
-        \draw [every edge, line] () -- (!#1) node [above, midway] {#2};
-      },
-    },
-    !u.s sep+=30pt,
-  },
-  before typesetting nodes={%
-    where n=1{%
-      edge label/.wrap value={%
-        node [left,pos=.75, anchor=mid east] {#1}
-      },
-    }{%
-      edge label/.wrap value={%
-        node [right,pos=.75, anchor=mid west] {#1}
-      },
-    },
-  },
-  for tree={%
-    parent anchor=children,
-    child anchor=parent,
-    block,
-    edge={line},
-    l sep+=15pt,
-  },
-  forked edges
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  [Can the controls be parametrized with less than 20 parameters?
-    [Is the choice of control parameters obvious?, edge label=yes
-      [Use gradient-free methods directly, edge label=yes]
-      [Use CRAB, edge label=no]
-    ]
-    [Are the controls approximately time-continuous?, edge label=no
-      [Is $\frac{\partial J_T}{\partial \langle \phi_k\vert}$ known?, edge label=yes, arrow to={s}{no}
-        [Use Krotov's method, edge label=yes]
-      ]
-      [Is  $\frac{\partial J_T}{\partial \epsilon(t)}$ known?, edge label=no
-        [Use GRAPE, edge label=yes]
-      ]
-    ]
-  ]
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\end{forest}
+\newlength{\VertSep}
+\setlength{\VertSep}{1cm}
+
+\node[block] (NumberOfParameters) {number of control parameters?};
+\node[block, below left=\VertSep and 1cm of NumberOfParameters]
+  (Analytical) {Are the controls ``analytical''?};
+  \node[block, below left=3.2*\the\VertSep and -1.5cm of Analytical]
+    (GradientFree) {Use general gradient-free methods};
+  \node[block, below right=3.2*\the\VertSep and -1.5cm of Analytical]
+    (CRAB) {Use CRAB};
+
+\node[block, below=\VertSep of NumberOfParameters]
+  (PWC) {Are the controls piecewise-constant?};
+  \node[block, below=\VertSep of PWC]
+    (UseGOAT) {Use GROUP/GOAT};
+
+\node[block, below right=\VertSep and 3cm of NumberOfParameters]
+  (Continuous) {Are the controls approximately time-continuous?};
+  \node[block, below left=\VertSep and -1.5cm of Continuous]
+    (GradientKnown){Is  $\frac{\partial J_T}{\partial \epsilon(t)}$ known?};
+    \node[block, below=\VertSep of GradientKnown]
+      (UseGRAPE) {Use GRAPE};
+  \node[block, below right=\VertSep and -1.5cm of Continuous]
+    (ChiKnown){Is $\frac{\partial J_T}{\partial \langle \phi_k\vert}$ known?};
+    \node[block, below=\VertSep of ChiKnown]
+      (UseKrotov){Use Krotov's method};
+
+\draw[line] (NumberOfParameters.south) -- ++(0, -0.3*\the\VertSep)
+  -| (Analytical.north)
+  node[above right=0pt and 4pt] {$n \lesssim 20$};
+\draw[line] (Analytical.south) -- ++(0, -0.3*\the\VertSep)
+  -| (GradientFree.north)
+  node[above right=4pt and 4pt] {yes};
+\draw[line] (Analytical.south) -- ++(0, -0.3*\the\VertSep)
+  -| (CRAB.north)
+  node[above left=4pt and 4pt] {no};
+\draw[line] (NumberOfParameters.south) -- ++(0, -0.3*\the\VertSep)
+  -| (PWC.north)
+  node[above right=0pt and 4pt] {$20 \lesssim n \lesssim 100$};
+\draw[line] (PWC.south) -- (UseGOAT.north)
+  node[midway, left=4pt] {no}
+  node[midway, right=4pt] {(analytical)};
+\draw[line] (PWC.east) -- (Continuous.west)
+  node[midway, above] {yes};
+\draw[line] (NumberOfParameters.south) -- ++(0, -0.3*\the\VertSep)
+  -| (Continuous.north)
+  node[above left=0pt and 4pt] {$n \gtrsim 100$}
+  node[above right=0pt and 4pt] {(piecewise-constant)};
+\draw[line] (Continuous.south) -- ++(0, -0.3*\the\VertSep)
+  -| (GradientKnown.north)
+  node[above right=4pt and 4pt] {no};
+\draw[line] (Continuous.south) -- ++(0, -0.3*\the\VertSep)
+  -| (ChiKnown.north)
+  node[above left=4pt and 4pt] {yes}
+  node[above right=4pt and 4pt] {($n \gg 100$)};
+\draw[line] (GradientKnown.south) -- (UseGRAPE.north)
+  node[midway, right=4pt] {yes};
+\draw[line] (ChiKnown.south) -- (UseKrotov.north)
+  node[midway, left=4pt] {yes};
+\draw[line] (ChiKnown.west) -- (GradientKnown.east)
+  node[midway, above=2pt] {no};
+\end{tikzpicture}
 \end{document}

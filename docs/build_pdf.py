@@ -7,6 +7,7 @@ You must also have the DejaVu fonts installed on your system
 (https://dejavu-fonts.github.io).
 """
 
+import re
 import shutil
 import subprocess
 import sys
@@ -37,6 +38,10 @@ def _patch_line(line):
     line = line.replace(
         '{{oct_decision_tree}.svg}', '{{oct_decision_tree}.pdf}'
     )
+    line = line.replace(
+        r'\sphinxurl{krotov\_pseudocode.pdf}',
+        r'\url{https://krotov.readthedocs.io/en/latest/krotov_pseudocode.pdf}',
+    )
     if line.startswith(r'\(\newcommand'):
         return None
     if line == r'\begin{split}\begin{equation}' + "\n":
@@ -54,6 +59,13 @@ def _patch_line(line):
         line = r'\release{' + version + "}\n"
     if line.startswith(r'\author{'):
         line = r'\author{Michael Goerz \textit{et. al.}}' + "\n"
+    if line.startswith(r'\section{'):
+        # don't put section numbers in the HISTORY, in front of version numbers
+        match = re.match(
+            r'\\section\{(\d+\.\d+\.\d+\s+\([\d-]+\))\}', line.strip()
+        )
+        if match:
+            line = r'\section*{' + match.group(1) + "}\n"
     return line
 
 
@@ -70,6 +82,10 @@ def patch_krotov_tex_lines(texfile):
                 out_fh.write(line)
 
 
+def _multiline_str(*lines):
+    return "\n".join(lines)
+
+
 def patch_krotov_tex(texfile):
     """Fix errors in the given texfile, acting on the whole text."""
     tex = texfile.read_text(encoding='utf8')
@@ -79,6 +95,20 @@ def patch_krotov_tex(texfile):
     )
     tex = tex.replace(
         r'\end{align}\end{split}' + "\n" + r'\end{equation*}', r'\end{align*}'
+    )
+    tex = tex.replace(
+        _multiline_str(
+            r'\chapter{Indices and tables}',
+            r'\label{\detokenize{index:indices-and-tables}}\begin{itemize}',
+            r'\item {} ',
+            r'\DUrole{xref,std,std-ref}{genindex}',
+            r'',
+            r'\item {} ',
+            r'\DUrole{xref,std,std-ref}{modindex}',
+            r'',
+            r'\end{itemize}',
+        ),
+        '',
     )
     texfile.write_text(tex, encoding='utf8')
 

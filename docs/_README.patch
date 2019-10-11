@@ -1,20 +1,20 @@
---- README.rst	2019-08-18 19:14:38.000000000 -0400
-+++ _README.rst	2019-08-18 19:05:16.000000000 -0400
-@@ -37,11 +37,11 @@
+--- README.rst	2019-10-10 20:24:45.000000000 -0400
++++ _README.rst	2019-10-10 20:24:04.000000000 -0400
+@@ -36,11 +36,11 @@
+ 
  This implementation follows the original implementation in the `QDYN Fortran library`_.
- The method is described in detail in `D. M. Reich, M. Ndong, and C. P. Koch, J. Chem. Phys. 136, 104103 (2012) <https://doi.org/10.1063/1.3691827>`_ (`arXiv:1008.5126 <http://arxiv.org/abs/1008.5126>`_).
  
 -The ``krotov`` package is built on top of `QuTiP`_.
 +The :mod:`krotov` package is built on top of `QuTiP`_.
  
- Development happens on `Github`_. You can read the full documentation at `ReadTheDocs`_.
+ Development happens on `Github`_. You can read the full documentation at `ReadTheDocs`_ or `download a PDF version`_.
  
 -If you use the ``krotov`` package in your research, please `cite it <https://krotov.readthedocs.io/en/stable/01_overview.html#citing-the-krotov-package>`_.
-+If you use the :mod:`krotov` package in your research, please :ref:`cite it <CitingKrotov>`.
++If you use the :mod:`krotov` package in your research, please `cite it <https://krotov.readthedocs.io/en/stable/01_overview.html#citing-the-krotov-package>`_.
  
  .. _QDYN Fortran library: https://www.qdyn-library.net
  .. _QuTiP: http://qutip.org
-@@ -140,14 +140,14 @@
+@@ -119,14 +119,14 @@
  
  Installation
  ------------
@@ -24,14 +24,14 @@
  
  .. code-block:: console
  
-     $ pip install krotov
+     $ python -m pip install krotov
  
 -This is the preferred method to install the ``krotov`` package, as it will always install the most recent stable release.
 +This is the preferred method to install the :mod:`krotov` package, as it will always install the most recent stable release.
  
  You may also do
  
-@@ -165,7 +165,7 @@
+@@ -144,7 +144,7 @@
  .. _Python Packaging User Guide: https://packaging.python.org/tutorials/installing-packages/
  
  
@@ -40,21 +40,20 @@
  
  .. code-block:: console
  
-@@ -185,16 +185,11 @@
+@@ -164,17 +164,11 @@
+ Then,
  
- * define the necessary quantum operators and states using `QuTiP`_.
- * create a list of objectives, as instances of
--  |krotov.Objective|_
--* call |krotov.optimize_pulses|_ to perform an optimization of an arbitrary
--  number of control fields over all the objectives.
-+  :class:`krotov.Objective <krotov.objectives.Objective>`
-+* call :func:`krotov.optimize_pulses <krotov.optimize.optimize_pulses>` to
-+  perform an optimization of an arbitrary number of control fields over all the
-+  objectives.
+ 1. define the necessary quantum operators and states using `QuTiP`_.
+-2. create a list of objectives, as instances of
+-   |krotov.Objective|_.
+-3. call |krotov.optimize_pulses|_ to perform an optimization of an arbitrary
++2. create a list of objectives, as instances of :class:`krotov.Objective <krotov.objectives.Objective>`.
++3. call :func:`krotov.optimize_pulses <krotov.optimize.optimize_pulses>` to perform an optimization of an arbitrary
+    number of control fields over all the objectives.
  
 -.. |krotov.Objective| replace:: ``krotov.Objective``
 -.. _krotov.Objective: https://krotov.readthedocs.io/en/stable/API/krotov.objectives.html#krotov.objectives.Objective
--
+ 
 -.. |krotov.optimize_pulses| replace:: ``krotov.optimize_pulses``
 -.. _krotov.optimize_pulses: https://krotov.readthedocs.io/en/stable/API/krotov.optimize.html#krotov.optimize.optimize_pulses
 -

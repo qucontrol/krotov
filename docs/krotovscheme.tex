@@ -7,8 +7,6 @@
 \newcommand{\Ket}[1]{\left\vert #1 \right\rangle}
 \newcommand{\Op}[1]{\ensuremath{\boldsymbol{\mathsf{\hat{#1}}}}}
 
-\renewcommand{\familydefault}{\sfdefault}
-
 \usepackage{tikz}
 
 \usepackage[psfixbb,graphics,tightpage,active]{preview}
@@ -50,7 +48,7 @@
     \node at (0.5,0.25) {$\phi_k(t_1)$};
   \end{tikzpicture}
 };
-\draw[->] (psifw1) .. controls +(1,-1) and +(-1,-1) .. node(epsn1)[fill=gray!20]{$\epsilon^{(i+1)}_1$} (psifw2);
+\draw[->] (psifw1) .. controls +(1,-1) and +(-1,-1) .. node(epsn1)[fill=gray!20]{$\epsilon^{(i)}_1$} (psifw2);
 
 \node (psifw3) at (9,4) {%
   \begin{tikzpicture}
@@ -59,7 +57,7 @@
     \node at (0.5,0.25) {\dots};
   \end{tikzpicture}
 };
-\draw[->] (psifw2) .. controls +(1,-1) and +(-1,-1) .. node(epsn2)[fill=gray!20]{$\epsilon^{(i+1)}_2$} (psifw3);
+\draw[->] (psifw2) .. controls +(1,-1) and +(-1,-1) .. node(epsn2)[fill=gray!20]{$\epsilon^{(i)}_2$} (psifw3);
 
 \node (psifw4) at (12,4) {%
   \begin{tikzpicture}
@@ -67,7 +65,7 @@
     \node at (0.5,0.25) {$\phi_k(t_{nt-1})$};
   \end{tikzpicture}
 };
-\draw[->] (psifw3) .. controls +(1,-1) and +(-1,-1) .. node(epsn3)[fill=gray!20]{$\epsilon^{(i+1)}_{nt-2}$} (psifw4);
+\draw[->] (psifw3) .. controls +(1,-1) and +(-1,-1) .. node(epsn3)[fill=gray!20]{$\epsilon^{(i)}_{nt-2}$} (psifw4);
 
 \node (psifw5) at (15,4) {%
   \begin{tikzpicture}
@@ -75,7 +73,7 @@
     \node at (0.5,0.25) {$\phi_k(T)$};
   \end{tikzpicture}
 };
-\draw[->] (psifw4) .. controls +(1,-1) and +(-1,-1) .. node(epsn4)[fill=gray!20]{$\epsilon^{(i+1)}_{nt-1}$} (psifw5);
+\draw[->] (psifw4) .. controls +(1,-1) and +(-1,-1) .. node(epsn4)[fill=gray!20]{$\epsilon^{(i)}_{nt-1}$} (psifw5);
 
 %%% backward propagation
 
@@ -92,7 +90,7 @@
     \node at (0.5,-0.25) {$\chi_k(t_1)$};
   \end{tikzpicture}
 };
-\draw[<-] (chi1) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i)}_1$} (chi2);
+\draw[<-] (chi1) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_1$} (chi2);
 
 \node (chi3) at (9,6) {%
   \begin{tikzpicture}
@@ -101,7 +99,7 @@
     \node at (0.5,-0.25) {\dots};
   \end{tikzpicture}
 };
-\draw[<-] (chi2) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i)}_2$} (chi3);
+\draw[<-] (chi2) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_2$} (chi3);
 
 \node (chi4) at (12,6) {%
   \begin{tikzpicture}
@@ -109,7 +107,7 @@
     \node at (0.5,-0.25) {$\chi_k(t_{nt-1})$};
   \end{tikzpicture}
 };
-\draw[<-] (chi3) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i)}_{nt-2}$} (chi4);
+\draw[<-] (chi3) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_{nt-2}$} (chi4);
 
 \node (chi5) at (15,6) {%
   \begin{tikzpicture}
@@ -117,7 +115,7 @@
     \node[] at (0.5,-0.25) {$\chi_k(T)$};
   \end{tikzpicture}
 };
-\draw[<-] (chi4) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i)}_{nt-1}$} (chi5);
+\draw[<-] (chi4) .. controls +(1,1) and +(-1,1) .. node[fill=gray!20]{$\epsilon^{(i-1)}_{nt-1}$} (chi5);
 
 %%% mu
 \node (mu1) at (3,5) {%
