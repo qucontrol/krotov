@@ -5,9 +5,8 @@
 
 function warnOnLatestVersion() {
 
-  // The warning text and link is really specific to RTD hosting,
-  // so we can just check their global to determine version:
-  if (!window.READTHEDOCS_DATA || window.READTHEDOCS_DATA.version !== "latest") {
+  // We display the warning if the "release" in Sphinx conf.py contains "dev"
+  if (!window.DOCUMENTATION_OPTIONS.VERSION.includes("dev")) {
     return;  // not latest, or not on RTD
   }
 
