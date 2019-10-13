@@ -104,11 +104,13 @@ year = str(datetime.datetime.now().year)
 author = 'Michael Goerz'
 copyright = '{0}, {1}'.format(year, "Michael Goerz et al.")
 version = krotov.__version__
-try:
-    last_commit = str(git.Repo(ROOT).head.commit)[:7]
-    release = last_commit
-except git.exc.InvalidGitRepositoryError:
-    release = version
+release = version
+if version.endswith('dev'):
+    try:
+        last_commit = str(git.Repo(ROOT).head.commit)[:7]
+        release = "%s (%s)" % (version, last_commit)
+    except git.exc.InvalidGitRepositoryError:
+        pass
 numfig = True
 
 html_extra_path = ['./pseudocode/krotov_pseudocode.pdf']
