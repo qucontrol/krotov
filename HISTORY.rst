@@ -3,6 +3,11 @@ History
 =======
 
 
+(next version)
+--------------
+
+* Added: Allow to pass `args` to time-dependent control functions (`#56`_, thanks to `@timohillmann`_)
+
 0.4.1 (2019-10-11)
 ------------------
 
@@ -67,6 +72,7 @@ History
 
 .. _@uiofgh: https://github.com/uiofgh
 .. _@TejasAvinashShetty: https://github.com/TejasAvinashShetty
+.. _@timohillmann: https://github.com/timohillmann
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
@@ -81,3 +87,4 @@ History
 .. _#48: https://github.com/qucontrol/krotov/issues/48
 .. _#52: https://github.com/qucontrol/krotov/issues/42
 .. _#54: https://github.com/qucontrol/krotov/issues/54
+.. _#56: https://github.com/qucontrol/krotov/issues/56

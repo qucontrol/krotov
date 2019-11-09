@@ -26,9 +26,14 @@ Development Team
 Acknowledgements
 ----------------
 
-We thank `@uiofgh`_, `@nathanshammah`_, and `@TejasAvinasShetty`_ for reporting
-bugs and suggesting improvements.
+We thank
+`@TejasAvinasShetty`_,
+`@nathanshammah`_,
+`@timohillmann`_, and
+`@uiofgh`_,
+for reporting bugs and suggesting improvements.
 
-.. _@uiofgh: https://github.com/uiofgh
-.. _@nathanshammah: https://github.com/nathanshammah
 .. _@TejasAvinasShetty: https://github.com/TejasAvinashShetty
+.. _@nathanshammah: https://github.com/nathanshammah
+.. _@timohillmann: https://github.com/timohillmann
+.. _@uiofgh: https://github.com/uiofgh
