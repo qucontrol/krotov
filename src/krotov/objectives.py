@@ -258,7 +258,15 @@ class Objective:
         return adjoint_objective
 
     def mesolve(
-        self, tlist, rho0=None, H=None, c_ops=None, e_ops=None, **kwargs
+        self,
+        tlist,
+        *,
+        rho0=None,
+        H=None,
+        c_ops=None,
+        e_ops=None,
+        args=None,
+        **kwargs
     ):
         """Run :func:`qutip.mesolve.mesolve` on the system of the objective.
 
@@ -281,6 +289,8 @@ class Objective:
             e_ops (list or None): A list of operators whose expectation values
                 to calculate, for every point in `tlist`. See
                 :func:`qutip.mesolve.mesolve`.
+            args (dict or None): dictionary of parameters for time-dependent
+                Hamiltonians and collapse operators
             **kwargs: All further arguments will be passed to
                 :func:`qutip.mesolve.mesolve`.
 
@@ -296,6 +306,8 @@ class Objective:
             H = self.H
         if c_ops is None:
             c_ops = self.c_ops
+        if args is None:
+            args = {}
         if FIX_QUTIP_932:  # pragma: no cover
             controls = extract_controls([self])
             pulses_mapping = extract_controls_mapping([self], controls)
@@ -318,6 +330,7 @@ class Objective:
             tlist=tlist,
             c_ops=c_ops,
             e_ops=e_ops,
+            args=args,
             options=options,
             **kwargs
         )
@@ -331,6 +344,7 @@ class Objective:
         H=None,
         c_ops=None,
         e_ops=None,
+        args=None,
         expect=qutip.expect
     ):
         """Propagate the system of the objective over the entire time grid.
@@ -364,6 +378,8 @@ class Objective:
             c_ops = self.c_ops
         if e_ops is None:
             e_ops = []
+        if args is None:
+            args = {}
         result = QutipSolverResult()
         try:
             result.solver = propagator.__name__
@@ -391,7 +407,7 @@ class Objective:
         pulses_mapping = extract_controls_mapping([self], controls)
         mapping = pulses_mapping[0]  # "first objective" (dummy structure)
         pulses = [  # defined on the tlist intervals
-            control_onto_interval(discretize(control, tlist))
+            control_onto_interval(discretize(control, tlist, args=(args,)))
             for control in controls
         ]
         for time_index in range(len(tlist) - 1):  # index over intervals
