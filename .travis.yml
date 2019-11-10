@@ -64,6 +64,7 @@ install:
   - pip freeze
   - printenv
 script:
+  - if [[ "${TOXENV}" == "py38dev-test" ]]; then travis_wait 40 tox -c tox-pyenv.ini -e py38dev-runcmd -- python --version; fi
   - $TRAVISCMD tox -c tox-pyenv.ini -e $TOXENV -- $TOTEST
 after_success:
   - codecov
