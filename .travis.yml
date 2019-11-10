@@ -54,7 +54,6 @@ matrix:
       python: 3.7
       env: TOTEST=docs/notebooks/09_example_numpy.ipynb TOXENV=py37-test TRAVISCMD=""
   allow_failures:
-    - name: Docs
     - name: Python 3.8-dev
 before_install:
     - sudo apt-get -y install liblapack-dev libblas-dev gfortran
