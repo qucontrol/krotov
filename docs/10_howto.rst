@@ -105,22 +105,29 @@ used at all. The function could be rewritten as::
 
        return [H0, [H1, guess_control]]
 
-   args=dict(ampl0=0.2, t_stop=5, t_rise=0.3)
+   ARGS = dict(ampl0=0.2, t_stop=5, t_rise=0.3)
 
-The `args` must be passed to :func:`.optimize_pulses` via the `pulse_options`
+The `ARGS` must be passed to :func:`.optimize_pulses` via the `pulse_options`
 parameter::
 
    pulse_options = {
-      guess_control: dict(lambda_a=5, update_shape=S, args=args)
+      guess_control: dict(lambda_a=5, update_shape=S, args=ARGS)
    }
 
-Both :meth:`.Objective.mesolve` and :meth:`.Objective.propagate` may also
-receive an `args` parameter.
+Both :meth:`.Objective.mesolve` and :meth:`.Objective.propagate` take an
+optional `args` dict also.
 
-Compare the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb`
-and the :ref:`/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb` for
-another example. In the former, the value for ``Ω0`` is hardcoded, while in the
-latter, it is given via `args`.
+The `args` in `pulse_options` are used automatically when evaluating the
+respective initial guess.  Note that the use of `args` does not extend
+to `update_shape`, which is always a function of `t` only.  Any other
+parameters in the `update_shape` are best set via :func:`functools.partial`,
+see the :ref:`/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb`.
+
+Compare that example to the
+:ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb`.
+In the latter, the values for the parameters in the control fields and the
+Hamiltonian are hardcoded, while in the former, all parameters are centrally
+defined in a dict which is passed to the optimization and propagation routines.
 
 .. _QuTiP's documentation on using the args variable: http://qutip.org/docs/latest/guide/dynamics/dynamics-time.html#using-the-args-variable
 .. _closure: https://www.learnpython.org/en/Closures
@@ -145,7 +152,7 @@ functional $J_T$ as a parameter. Then, use
 :func:`krotov.convergence.value_below` as a `check_convergence` routine to stop
 the optimization when $J_T$ falls below some given threshold.
 
-See the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for
+See the thee :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for
 an example.
 
 

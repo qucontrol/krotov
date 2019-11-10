@@ -88,16 +88,26 @@ def optimize_pulses(
 
             For example, for `objectives` that contain a Hamiltonian of the
             form ``[H0, [H1, u], [H2, g]]``, where ``H0``, ``H1``, and ``H2``
-            are :class:`~qutip.Qobj` instances, ``u`` is a numpy array of
-            control values, and ``g`` is a control function (a callable), a
-            possible value for `pulse_options` would look like this::
+            are :class:`~qutip.Qobj` instances, ``u`` is a numpy array
 
-                >>> from krotov.shapes import flattop
-                >>> from functools import partial
+            .. doctest::
+
                 >>> u = numpy.zeros(1000)
+
+            and ``g`` is a control function
+
+            .. doctest::
+
                 >>> def g(t, args):
                 ...     E0 = args.get('E0', 0.0)
                 ...     return E0
+
+            then a possible value for `pulse_options` would look like this:
+
+            .. doctest::
+
+                >>> from krotov.shapes import flattop
+                >>> from functools import partial
                 >>> pulse_options = {
                 ...     id(u): {'lambda_a': 1.0, 'update_shape': 1},
                 ...     g: dict(
@@ -108,6 +118,9 @@ def optimize_pulses(
                 ...         args=dict(E0=1.0)
                 ...     )
                 ... }
+
+            The use of :class:`dict` and the ``{...}`` syntax are completely
+            equivalent, but :class:`dict` is better for nested indentation.
 
         tlist (numpy.ndarray): Array of time grid values, cf.
             :func:`~qutip.mesolve.mesolve`
