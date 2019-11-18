@@ -63,7 +63,7 @@ def optimize_pulses(
             arrays are unhashable and thus cannot be used as dict keys, the
             options for a control that is an array must be set using the key
             ``id(control)`` (see the example below). The options of any
-            particular control must contain the following keys:
+            particular control *must* contain the following keys:
 
             * ``'lambda_a'``: the Krotov step size (float value). This governs
               the overall magnitude of the pulse update. Large values result in
@@ -78,25 +78,49 @@ def optimize_pulses(
               update-shape. The value 0 disables the optimization of that
               particular control.
 
+            In addition, the following keys *may* occur:
+
+            * ``'args'``: If the control is a callable with arguments
+              ``(t, args)`` (as required by QuTiP), a dict of argument values
+              to pass as `args`. If ``'args'`` is not specified via the
+              `pulse_options`, controls will be discretized using the default
+              ``args=None``.
+
             For example, for `objectives` that contain a Hamiltonian of the
             form ``[H0, [H1, u], [H2, g]]``, where ``H0``, ``H1``, and ``H2``
-            are :class:`~qutip.Qobj` instances, ``u`` is a numpy array of
-            control values, and ``g`` is a control function (a callable), a
-            possible value for `pulse_options` would look like this::
+            are :class:`~qutip.Qobj` instances, ``u`` is a numpy array
+
+            .. doctest::
+
+                >>> u = numpy.zeros(1000)
+
+            and ``g`` is a control function
+
+            .. doctest::
+
+                >>> def g(t, args):
+                ...     E0 = args.get('E0', 0.0)
+                ...     return E0
+
+            then a possible value for `pulse_options` would look like this:
+
+            .. doctest::
 
                 >>> from krotov.shapes import flattop
                 >>> from functools import partial
-                >>> u = numpy.zeros(1000)
-                >>> g = lambda t, args: 0.0
                 >>> pulse_options = {
                 ...     id(u): {'lambda_a': 1.0, 'update_shape': 1},
                 ...     g: dict(
                 ...         lambda_a=1.0,
-                ...         shape=partial(
+                ...         update_shape=partial(
                 ...             flattop, t_start=0, t_stop=10, t_rise=1.5
-                ...         )
+                ...         ),
+                ...         args=dict(E0=1.0)
                 ...     )
                 ... }
+
+            The use of :class:`dict` and the ``{...}`` syntax are completely
+            equivalent, but :class:`dict` is better for nested indentation.
 
         tlist (numpy.ndarray): Array of time grid values, cf.
             :func:`~qutip.mesolve.mesolve`
@@ -586,11 +610,16 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
     try:
         guess_controls = [
-            discretize(control, tlist) for control in guess_controls
+            discretize(
+                control,
+                tlist,
+                args=(pulse_options[control].get('args', None),),
+            )
+            for control in guess_controls
         ]
     except (TypeError, np.ComplexWarning) as exc_info:
         raise ValueError(
-            "Cannot discretize controls: %s. Note that"
+            "Cannot discretize controls: %s. Note that "
             "all controls must be real-valued. Complex controls must be "
             "split into an independent real and imaginary part in the "
             "objectives before passing them to the optimization" % exc_info

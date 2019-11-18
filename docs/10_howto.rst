@@ -41,6 +41,99 @@ independent (real-valued) controls.
 See the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for an example.
 
 
+.. _HowtoUseArgs:
+
+How to use `args` in time-dependent control fields
+--------------------------------------------------
+
+QuTiP requires that the functions that are used to express time-dependencies
+have the signature ``func(t, args)`` where `t` is a scalar value for the time
+and `args` is a dict containing values for static parameters, see
+`QuTiP's documentation on using the args variable`_. Most of the :mod:`krotov`
+package's :ref:`krotov-example-notebooks` use closures or hardcoded values
+instead of `args`. For example, in the
+:ref:`/notebooks/01_example_simple_state_to_state.ipynb`, the Hamiltonian is
+defined as::
+
+   def hamiltonian(omega=1.0, ampl0=0.2):
+      """Two-level-system Hamiltonian
+
+      Args:
+         omega (float): energy separation of the qubit levels
+         ampl0 (float): constant amplitude of the driving field
+      """
+      H0 = -0.5 * omega * qutip.operators.sigmaz()
+      H1 = qutip.operators.sigmax()
+
+      def guess_control(t, args):
+         return ampl0 * krotov.shapes.flattop(
+               t, t_start=0, t_stop=5, t_rise=0.3, func="blackman"
+         )
+
+      return [H0, [H1, guess_control]]
+
+Note how `ampl0` is used in `guess_control` as a closure_ from the surrounding
+`hamiltonian` scope, `t_stop` and `t_rise` are hardcoded, and `args` is not
+used at all. The function could be rewritten as::
+
+   def guess_control(t, args):
+      """Initial control amplitude.
+
+      Args:
+         t (float): Time value at which to evaluate the control.
+         args (dict): Dictionary containing the value "ampl0" with the
+           amplitude of the driving field, "t_stop" with the time at which the
+           control shape ends, and "t_rise" for the duration of the
+           switch-on/switch-off time.
+      """
+       return args['ampl0'] * krotov.shapes.flattop(
+           t,
+           t_start=0,
+           t_stop=args['t_stop'],
+           t_rise=args['t_rise'],
+           func="blackman"
+       )
+
+   def hamiltonian(omega=1.0):
+       """Two-level-system Hamiltonian
+
+       Args:
+           omega (float): energy separation of the qubit levels
+       """
+       H0 = -0.5 * omega * qutip.operators.sigmaz()
+       H1 = qutip.operators.sigmax()
+
+       return [H0, [H1, guess_control]]
+
+   ARGS = dict(ampl0=0.2, t_stop=5, t_rise=0.3)
+
+The `ARGS` must be passed to :func:`.optimize_pulses` via the `pulse_options`
+parameter::
+
+   pulse_options = {
+      guess_control: dict(lambda_a=5, update_shape=S, args=ARGS)
+   }
+
+Both :meth:`.Objective.mesolve` and :meth:`.Objective.propagate` take an
+optional `args` dict also.
+
+The `args` in `pulse_options` are used automatically when evaluating the
+respective initial guess.  Note that the use of `args` does not extend
+to `update_shape`, which is always a function of `t` only.  Any other
+parameters in the `update_shape` are best set via :func:`functools.partial`,
+see the :ref:`/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb`.
+
+Compare that example to the
+:ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb`.
+In the latter, the values for the parameters in the control fields and the
+Hamiltonian are hardcoded, while in the former, all parameters are centrally
+defined in a dict which is passed to the optimization and propagation routines.
+
+.. _QuTiP's documentation on using the args variable: http://qutip.org/docs/latest/guide/dynamics/dynamics-time.html#using-the-args-variable
+.. _closure: https://www.learnpython.org/en/Closures
+
+
+
 How to stop the optimization when the error crosses some threshold
 ------------------------------------------------------------------
 
@@ -59,7 +152,7 @@ functional $J_T$ as a parameter. Then, use
 :func:`krotov.convergence.value_below` as a `check_convergence` routine to stop
 the optimization when $J_T$ falls below some given threshold.
 
-See the :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for
+See the thee :ref:`/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb` for
 an example.
 
 
@@ -169,7 +262,7 @@ control problem with the least constraints.
 
 The optimization towards an arbitrary perfect entangler is closely related to
 an optimization towards a point in the Weyl chamber
-(:ref:`HowtoLIOptimization`): It turns out that 
+(:ref:`HowtoLIOptimization`): It turns out that
 in the geometric representation of the `Weyl chamber`_, all the perfect
 entanglers lie within a polyhedron, and we can simply minimize the geometric
 distance to the surface of this polyhedron.
