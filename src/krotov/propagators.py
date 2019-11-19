@@ -1,4 +1,4 @@
-"""Routines that can be passed as `propagator` to :func:`.optimize_pulses`
+r"""Routines that can be passed as `propagator` to :func:`.optimize_pulses`
 
 The numerical effort involved in the optimization is almost entirely within the
 simulation of the system dynamics. In every iteration and for every objective,

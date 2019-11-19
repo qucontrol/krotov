@@ -8,13 +8,7 @@ import numpy as np
 from qutip import Qobj
 from qutip.parallel import serial_map
 
-from .info_hooks import chain
-from .mu import derivative_wrt_pulse
-from .propagators import Propagator, expm
-from .result import Result
-from .second_order import _overlap
-from .shapes import one_shape, zero_shape
-from .structural_conversions import (
+from .conversions import (
     control_onto_interval,
     discretize,
     extract_controls,
@@ -23,6 +17,12 @@ from .structural_conversions import (
     pulse_onto_tlist,
     pulse_options_dict_to_list,
 )
+from .info_hooks import chain
+from .mu import derivative_wrt_pulse
+from .propagators import Propagator, expm
+from .result import Result
+from .second_order import _overlap
+from .shapes import one_shape, zero_shape
 
 
 __all__ = ['optimize_pulses']

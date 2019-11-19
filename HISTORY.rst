@@ -7,6 +7,7 @@ History
 --------------
 
 * Added: Allow to pass `args` to time-dependent control functions (`#56`_, thanks to `@timohillmann`_)
+* Changed: Renamed ``krotov.structural_conversions`` to ``krotov.conversions``
 
 0.4.1 (2019-10-11)
 ------------------

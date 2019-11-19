@@ -7,13 +7,13 @@ import pytest
 import qutip
 
 import krotov
-from krotov.shapes import qutip_callback
-from krotov.structural_conversions import (
+from krotov.conversions import (
     discretize,
     extract_controls,
     extract_controls_mapping,
     pulse_options_dict_to_list,
 )
+from krotov.shapes import qutip_callback
 
 
 def test_conversion_control_pulse_inverse():
@@ -23,12 +23,12 @@ def test_conversion_control_pulse_inverse():
 
     blackman = qutip_callback(krotov.shapes.blackman, t_start=0, t_stop=10)
 
-    pulse_orig = krotov.structural_conversions.control_onto_interval(
+    pulse_orig = krotov.conversions.control_onto_interval(
         discretize(blackman, tlist)
     )
 
-    control = krotov.structural_conversions.pulse_onto_tlist(pulse_orig)
-    pulse = krotov.structural_conversions.control_onto_interval(control)
+    control = krotov.conversions.pulse_onto_tlist(pulse_orig)
+    pulse = krotov.conversions.control_onto_interval(control)
 
     assert np.max(np.abs(pulse - pulse_orig)) < 1e-14
 
@@ -258,7 +258,7 @@ def test_pulse_options_dict_to_list(caplog):
 def test_control_tlist_calculation():
     """Test calculation of tlist_midpoints for non-equidistant time grid"""
     tlist = np.array([0, 1.0, 2.0, 2.2])
-    midpoints = krotov.structural_conversions._tlist_midpoints(tlist)
+    midpoints = krotov.conversions._tlist_midpoints(tlist)
     assert len(midpoints) == len(tlist) - 1
     assert midpoints[0] == 0.5
     assert midpoints[1] == 1.5

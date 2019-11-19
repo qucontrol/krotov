@@ -22,7 +22,7 @@ def tls_control_system():
         ),
     ]
     controls = [eps1, eps2]
-    controls_mapping = krotov.structural_conversions.extract_controls_mapping(
+    controls_mapping = krotov.conversions.extract_controls_mapping(
         objectives, controls
     )
     return objectives, controls, controls_mapping
@@ -44,7 +44,7 @@ def tls_control_system_tdcops(tls_control_system):
             initial_state=ket('0'), target=ket('1'), H=H2, c_ops=c_ops
         ),
     ]
-    controls_mapping = krotov.structural_conversions.extract_controls_mapping(
+    controls_mapping = krotov.conversions.extract_controls_mapping(
         objectives, controls
     )
     return objectives, controls, controls_mapping

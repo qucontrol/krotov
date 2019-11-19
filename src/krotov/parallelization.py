@@ -1,4 +1,4 @@
-"""Support routines for running the optimization in parallel across the
+r"""Support routines for running the optimization in parallel across the
 objectives
 
 The time-propagation that is the main numerical effort in an optimization with
@@ -75,7 +75,7 @@ can be done in shared-memory with no overhead.
 """
 import multiprocessing
 
-from .structural_conversions import plug_in_pulse_values
+from .conversions import plug_in_pulse_values
 
 
 __all__ = ['Consumer', 'FwPropStepTask', 'parallel_map_fw_prop_step']

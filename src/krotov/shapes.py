@@ -152,6 +152,7 @@ def blackman(t, t_start, t_stop, a=0.16):
         t (float or numpy.ndarray): Time point or time grid
         t_start (float): Starting point $t_0$ of Blackman shape
         t_stop (float): End point $t_1$ of Blackman shape
+        a (float): Blackman coefficient.
 
     Returns:
         float or numpy.ndarray: If `t` is a float, return the value of the

@@ -34,6 +34,7 @@ __bibtex__ = r'''
 # expose submodules for easy import
 from . import (
     convergence,
+    conversions,
     functionals,
     info_hooks,
     mu,
@@ -43,7 +44,6 @@ from . import (
     result,
     second_order,
     shapes,
-    structural_conversions,
 )
 # expose primary classes/functions
 from .objectives import Objective, ensemble_objectives, gate_objectives

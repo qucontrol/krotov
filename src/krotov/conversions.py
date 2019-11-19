@@ -1,5 +1,12 @@
-"""Routines for converting between structures good for QuTiP's
-mesolve and Krotov"""
+"""Routines for structural conversions.
+
+Conversion between between data structures used by QuTiP's
+:func:`~qutip.mesolve.mesolve` and data structures used internally in an
+optimization with Krotov's method. This includes the
+time discretization of control fields, and in particular converting between a
+discretization defined on the *points* of the time grid ("controls") and
+piecewise-constant "pulses" defined on the *intervals* of the time grid.
+"""
 import copy
 import logging
 import warnings

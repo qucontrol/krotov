@@ -18,7 +18,7 @@ import qutip
 from qutip.solver import Options as QutipSolverOptions
 from qutip.solver import Result as QutipSolverResult
 
-from .structural_conversions import (
+from .conversions import (
     _nested_list_shallow_copy,
     control_onto_interval,
     discretize,
