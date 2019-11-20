@@ -16,11 +16,12 @@ import numpy as np
 
 __all__ = [
     'control_onto_interval',
-    'pulse_onto_tlist',
+    'discretize',
     'extract_controls',
     'extract_controls_mapping',
+    'plug_in_pulse_values',
+    'pulse_onto_tlist',
     'pulse_options_dict_to_list',
-    'discretize',
 ]
 
 
