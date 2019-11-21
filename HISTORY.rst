@@ -8,6 +8,7 @@ History
 
 * Added: Allow to pass `args` to time-dependent control functions (`#56`_, thanks to `@timohillmann`_)
 * Changed: Renamed ``krotov.structural_conversions`` to ``krotov.conversions``
+* Bugfix: Crash when ``krotov.optimize_pulses`` is called with ``iter_stop=0`` (`#58`_)
 
 0.4.1 (2019-10-11)
 ------------------
@@ -89,3 +90,4 @@ History
 .. _#52: https://github.com/qucontrol/krotov/issues/42
 .. _#54: https://github.com/qucontrol/krotov/issues/54
 .. _#56: https://github.com/qucontrol/krotov/issues/56
+.. _#58: https://github.com/qucontrol/krotov/issues/58

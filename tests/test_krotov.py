@@ -1,5 +1,6 @@
 """High-level tests for `krotov` package."""
 
+import io
 import logging
 import os
 from copy import deepcopy
@@ -162,6 +163,42 @@ def simple_state_to_state_system():
     return objectives, pulse_options, tlist
 
 
+@pytest.mark.parametrize('iter_stop', [0, -1])
+def test_zero_iterations(iter_stop, simple_state_to_state_system):
+    objectives, pulse_options, tlist = simple_state_to_state_system
+
+    with io.StringIO() as log_fh:
+
+        result = krotov.optimize_pulses(
+            objectives,
+            pulse_options=pulse_options,
+            tlist=tlist,
+            propagator=krotov.propagators.expm,
+            chi_constructor=krotov.functionals.chis_re,
+            store_all_pulses=True,
+            info_hook=krotov.info_hooks.print_table(
+                J_T=krotov.functionals.J_T_re, out=log_fh
+            ),
+            iter_stop=iter_stop,
+            skip_initial_forward_propagation=True,
+        )
+
+        log = log_fh.getvalue()
+
+    assert len(log.splitlines()) == 2
+    assert result.message == 'Reached 0 iterations'
+    assert len(result.guess_controls) == 1  # one control field
+    assert len(result.guess_controls) == len(result.optimized_controls)
+    assert len(result.guess_controls[0]) == len(result.tlist)
+    assert len(result.optimized_controls[0]) == len(result.tlist)
+    for (c1, c2) in zip(result.guess_controls, result.optimized_controls):
+        assert np.all(c1 == c2)
+    for pulses_for_iteration in result.all_pulses:
+        for pulse in pulses_for_iteration:
+            # the pulses are defined on the *intervals* of tlist
+            assert len(pulse) == len(result.tlist) - 1
+
+
 def test_continue_optimization(
     simple_state_to_state_system, request, tmpdir, caplog
 ):
@@ -203,12 +240,42 @@ def test_continue_optimization(
             in caplog.text
         )
 
+        # fmt: off
         assert len(oct_result1.iters) == 4  # 0 ... 3
         assert len(oct_result1.iter_seconds) == 4
         assert len(oct_result1.info_vals) == 4
         assert len(oct_result1.all_pulses) == 4
         assert len(oct_result1.states) == 1
+        assert len(oct_result1.guess_controls) == 1  # one control field
+        assert len(oct_result1.guess_controls) == len(oct_result1.optimized_controls)
+        assert len(oct_result1.guess_controls[0]) == len(oct_result1.tlist)
+        assert len(oct_result1.optimized_controls[0]) == len(oct_result1.tlist)
+        for pulses_for_iteration in oct_result1.all_pulses:
+            for pulse in pulses_for_iteration:
+                # the pulses are defined on the *intervals* of tlist
+                assert len(pulse) == len(oct_result1.tlist) - 1
         assert "3 iterations" in oct_result1.message
+        # fmt: on
+
+        # repeating the same optimization only propagates the guess pulse
+        # (we'll check this later while verifying the output of the log file)
+        krotov.optimize_pulses(
+            objectives,
+            pulse_options=pulse_options,
+            tlist=tlist,
+            propagator=krotov.propagators.expm,
+            chi_constructor=krotov.functionals.chis_re,
+            store_all_pulses=True,
+            info_hook=krotov.info_hooks.print_table(
+                J_T=krotov.functionals.J_T_re, out=log_fh
+            ),
+            check_convergence=krotov.convergence.Or(
+                krotov.convergence.check_monotonic_error,
+                krotov.convergence.dump_result(dumpfile, every=2),
+            ),
+            continue_from=oct_result1,
+            iter_stop=3,
+        )
 
         # another 2 iterations
         oct_result2 = krotov.optimize_pulses(

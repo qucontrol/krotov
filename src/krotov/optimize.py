@@ -312,7 +312,7 @@ def optimize_pulses(
         forward_states0 = forward_states = None
 
     info = None
-    optimized_pulses = guess_pulses
+    optimized_pulses = copy.deepcopy(guess_pulses)
     if info_hook is not None:
         info = info_hook(
             objectives=objectives,
@@ -339,6 +339,7 @@ def optimize_pulses(
     result.tlist = tlist
     result.objectives = objectives
     result.guess_controls = guess_controls
+    result.optimized_controls = optimized_pulses
     result.controls_mapping = pulses_mapping
     if continue_from is None:
         # we only store information about the "0" iteration if we're starting a
