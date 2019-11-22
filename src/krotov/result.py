@@ -1,3 +1,4 @@
+import datetime
 import logging
 import pickle
 import time
@@ -81,12 +82,18 @@ class Result:
         - Number of objectives: {n_objectives}
         - Number of iterations: {n_iters}
         - Reason for termination: {message}
-        - Ended at {end_local_time}
+        - Ended at {end_local_time} ({time_delta})
         '''.format(
                 start_local_time=self.start_local_time_str,
                 n_objectives=len(self.objectives),
                 n_iters=len(self.iters) - 1,  # do not count zero iteration
                 end_local_time=self.end_local_time_str,
+                time_delta=str(
+                    datetime.timedelta(
+                        seconds=time.mktime(self.end_local_time)
+                        - time.mktime(self.start_local_time)
+                    )
+                ),
                 message=self.message,
             )
         ).strip()
