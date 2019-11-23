@@ -339,7 +339,7 @@ def print_table(
     Args:
         J_T (callable): A function that extract the value of the final time
             functional from the keyword-arguments passed to the `info_hook`.
-        show_g_a_int_per_pulse (callable): If True, print a column with the
+        show_g_a_int_per_pulse (bool): If True, print a column with the
             value of :math:`\int_0^T g_a(\epsilon_i(t)) \dd t = \int_0^T
             \frac{\lambda_{a, i}}{S_i(t)} \Abs{\Delta \epsilon_i(t)}^2 \dd t`
             for every pulse $\epsilon_i(t)$. Otherwise, only print the sum over

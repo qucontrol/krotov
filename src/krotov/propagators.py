@@ -25,7 +25,7 @@ The arguments are as follows (cf. :class:`Propagator`):
   The nested-list for `H` used here, with scalar values for the controls, is
   obtained internally from the format used by :func:`~qutip.mesolve.mesolve`,
   with time-dependent controls over the entire time grid, via
-  :func:`krotov.structural_conversions.plug_in_pulse_values`.
+  :func:`krotov.conversions.plug_in_pulse_values`.
 * `state` is the :class:`qutip.Qobj` state that should be propagated, either a
   Hilbert space state, or a density matrix.
 * `dt` is the time step (a float). It is always positive, even for
