@@ -48,11 +48,13 @@ from . import (
 # expose primary classes/functions
 from .objectives import Objective, ensemble_objectives, gate_objectives
 from .optimize import optimize_pulses
+from .result import Result
 
 
 __all__ = [
-    'optimize_pulses',
     'Objective',
-    'gate_objectives',
+    'Result',
     'ensemble_objectives',
+    'gate_objectives',
+    'optimize_pulses',
 ]

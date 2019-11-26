@@ -1,3 +1,6 @@
+"""Module defining the :class:`Result` object that is returned by
+:func:`.optimize_pulses`.
+"""
 import datetime
 import logging
 import pickle
@@ -12,7 +15,7 @@ __all__ = ['Result']
 
 
 class Result:
-    """Result object for a Krotov optimization
+    """Result of a Krotov optimization with :func:`.optimize_pulses`.
 
     Attributes:
         objectives (list[Objective]): The control objectives
