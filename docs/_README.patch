@@ -1,20 +1,23 @@
---- README.rst	2019-10-10 20:24:45.000000000 -0400
-+++ _README.rst	2019-10-10 20:24:04.000000000 -0400
-@@ -36,11 +36,11 @@
+--- README.rst	2019-12-04 16:41:06.000000000 -0500
++++ _README.rst	2019-12-04 16:40:58.000000000 -0500
+@@ -36,14 +36,14 @@
  
  This implementation follows the original implementation in the `QDYN Fortran library`_.
  
 -The ``krotov`` package is built on top of `QuTiP`_.
 +The :mod:`krotov` package is built on top of `QuTiP`_.
  
- Development happens on `Github`_. You can read the full documentation at `ReadTheDocs`_ or `download a PDF version`_.
+ Development happens on `Github`_. You can read the full documentation at `online`__ or `download a PDF version`_.
+ 
+ .. _ReadTheDocs: https://krotov.readthedocs.io/en/stable/
+ __ ReadTheDocs_
  
 -If you use the ``krotov`` package in your research, please `cite it <https://krotov.readthedocs.io/en/stable/01_overview.html#citing-the-krotov-package>`_.
 +If you use the :mod:`krotov` package in your research, please `cite it <https://krotov.readthedocs.io/en/stable/01_overview.html#citing-the-krotov-package>`_.
  
  .. _QDYN Fortran library: https://www.qdyn-library.net
  .. _QuTiP: http://qutip.org
-@@ -119,14 +119,14 @@
+@@ -121,14 +121,14 @@
  
  Installation
  ------------
@@ -31,7 +34,7 @@
  
  You may also do
  
-@@ -144,7 +144,7 @@
+@@ -146,7 +146,7 @@
  .. _Python Packaging User Guide: https://packaging.python.org/tutorials/installing-packages/
  
  
@@ -40,7 +43,7 @@
  
  .. code-block:: console
  
-@@ -164,17 +164,11 @@
+@@ -166,17 +166,11 @@
  Then,
  
  1. define the necessary quantum operators and states using `QuTiP`_.
