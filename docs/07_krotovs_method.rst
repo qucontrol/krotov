@@ -37,11 +37,14 @@ Liouville-von-Neumann equation
    \frac{\partial}{\partial t} \hat{\rho}(t)
    = \frac{1}{\hbar} \Liouville(t) \hat{\rho}(t)
 
-replaces the Schrödinger equation. The most direct example of a control
-problem is a state-to-state transition. The objective is for a known
-quantum state at time zero to evolve to a specific target state at final
-time :math:`T`, controlling, e.g. a chemical
-reaction :cite:`TannorJCP1985`. Another example is the
+replaces the Schrödinger equation, with the (non-Hermitian) Liouvillian
+:math:`\Liouville(t)`.
+The most direct example of a control problem is a state-to-state transition.
+The objective is for a known quantum state :math:`\ket{\phi}` at time
+zero to evolve to a specific target state :math:`\ket{\phi^\tgt}` at
+final time :math:`T`, controlling, e.g. a chemical
+reaction :cite:`TannorJCP1985`.
+Another example is the
 realization of quantum gates, the building blocks of a quantum computer.
 In this case, the states forming a computational basis must transform
 according to a unitary transformation :cite:`NielsenChuang`,
@@ -60,9 +63,6 @@ When there are multiple independent controls :math:`\{\epsilon_l(t)\}`
 involved in the dynamics, these may correspond e.g., to different color
 lasers used in the excitation of a Rydberg atom, or different
 polarization components of an electric field.
-
-Optimization functional
------------------------
 
 The quantum control methods build on a rich field of classical control
 theory :cite:`BellmanBook,PontryaginBook`. This includes
@@ -86,6 +86,9 @@ the functional. The updated controls then become the guess for the next
 iteration of the algorithm, until the value of the functional is
 sufficiently small, or convergence is reached.
 
+Optimization functional
+-----------------------
+
 Mathematically, Krotov's method, when applied to quantum
 systems :cite:`Tannor92,ReichJCP12`, minimizes a functional
 of the most general form
@@ -100,28 +103,9 @@ of the most general form
 
 where the :math:`\{\ket{\phi_k^{(i)}(T)}\}` are the time-evolved
 initial states :math:`\{\ket{\phi_k}\}` under the controls
-:math:`\{\epsilon^{(i)}_l(t)\}` of the :math:`i`\ 'th iteration
-(:math:`i>0`). That is, the field :math:`\epsilon_l^{(i)}(t)` is the
-result of
-
-.. math::
-   :label: update
-
-   \epsilon_l^{(i)}(t)
-   = \epsilon_l^{(i-1)}(t) + \Delta\epsilon_l^{(i)}(t)
-
-for the control update :math:`\Delta\epsilon_l^{(i)}(t)` and the guess
-control :math:`\epsilon_l^{(i-1)}(t)`, starting from the initial guess
-control :math:`\epsilon_l^{(0)}(t)`. The update is constructed such that
-the value of the functional decreases,
-
-.. math::
-
-   J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}] \leq
-     J[\{\ket{\phi_k^{(i-1)}(t)}\}, \{\epsilon_l^{(i-1)}(t)\}]\,.
-
-In the simplest case of a single state-to-state transition, the index
-:math:`k` vanishes. For the example of a two-qubit quantum gate,
+:math:`\{\epsilon^{(i)}_l(t)\}` of the :math:`i`\ 'th iteration. In the
+simplest case of a single state-to-state transition, the index :math:`k`
+vanishes. For the example of a two-qubit quantum gate,
 :math:`\{\ket{\phi_k}\}` would be the logical basis states
 :math:`\ket{00}`, :math:`\ket{01}`, :math:`\ket{10}`, and
 :math:`\ket{11}`, all evolving under the same Hamiltonian
@@ -153,56 +137,19 @@ The functional consists of three parts:
          \,,
         \end{split}
 
-   with :math:`\lambda_{a,l} > 0` and :math:`S_{l}(t) \in [0, 1]`. For
-   this specific form, using the guess control field
-   :math:`\epsilon_l^{(i-1)}(t)` as the "reference" field for the
-   optimized :math:`\epsilon_l^{(i)}(t)`, the update
-   :math:`\Delta\epsilon^{(i)}_l(t)` in each iteration will be
-   proportional to :math:`\frac{S_l(t)}{\lambda_{a,l}}`, see
-   :ref:`FirstOrderUpdate`. Note that
-   this also makes :math:`g_a` proportional to
-   :math:`\frac{S_l(t)}{\lambda_{a,l}}`, so that :math:`g_a` is still
-   well-defined for :math:`S_l(t) = 0`. The (inverse) Krotov "step
-   width" :math:`\lambda_{a,l}` can be used to determine the overall
-   magnitude of :math:`\Delta\epsilon^{(i)}_l(t)`. Values that are too
-   large will change :math:`\epsilon_l^{(i)}(t)` by only a small amount
-   in every iteration, causing slow convergence. Values that are too
-   small will result in numerical instability, see :ref:`TimeDiscretization`
-   and :ref:`ChoiceOfLambdaA`.
-   The "update shape" function :math:`S_l(t)` allows to ensure boundary
-   conditions on :math:`\epsilon^{(i)}_l(t)`: If both the guess field
-   :math:`\epsilon^{(i-1)}_l(t)` and :math:`S_l(t)` switch on and off
-   smoothly around :math:`t=0` and :math:`t=T`, then this feature will
-   be preserved by the optimization. A typical example for an update
-   shape is
+
+   with the inverse "step width" :math:`\lambda_{a,l} > 0`, the "update
+   shape" function :math:`S_{l}(t) \in [0, 1]`, and the :ref:`IterativeControlUpdate`
 
    .. math::
-      :label: flattop
+      :label: update
 
-      S_l(t) = \begin{cases}
-            B(t; t_0=0, t_1=2 t_{\text{on}})
-              & \text{for} \quad 0 < t < t_{\text{on}} \\
-            1 & \text{for} \quad t_{\text{on}} \le t \le T - t_{\text{off}} \\
-            B(t; t_0=T-2 t_{\text{off}}, t_1=T)
-              & \text{for} \quad T - t_{\text{off}} < t < T\,,
-          \end{cases}
+      \Delta\epsilon_l^{(i)}(t)
+      \equiv \epsilon_l^{(i)}(t) - \epsilon_l^{(i-1)}(t)\,,
 
-   cf. :func:`krotov.shapes.flattop`, with the `Blackman shape`_
-
-   .. math::
-      :label: blackman
-
-      B(t; t_0, t_1) =
-            \frac{1}{2}\left(
-              1 - a - \cos\left(2\pi \frac{t - t_0}{t_1 - t_0}\right)
-              + a \cos\left(4\pi \frac{t - t_0}{t_1 - t_0}\right)
-            \right)\,,\quad a = 0.16\,,
-
-   which is similar to a Gaussian, but exactly zero at
-   :math:`t = t_0, t_1`.
-   Moreover, any part of the control field can be
-   kept unchanged in the optimization by choosing :math:`S_l(t) = 0` for
-   the corresponding intervals of the time grid.
+   where :math:`\epsilon_l^{(i-1)}(t)` is the optimized control of the
+   previous iteration – that is, the guess control of the current
+   iteration :math:`(i)`.
 
 -  An optional state-dependent running cost, :math:`g_b`. This may be
    used to encode time-dependent control
@@ -216,8 +163,6 @@ The functional consists of three parts:
    that do not require a :math:`g_b`, e.g., by using a non-Hermitian
    Hamiltonian to remove population from the forbidden subspace during
    the time evolution.
-
-.. _Blackman shape: https://en.wikipedia.org/wiki/Window_function#Blackman_window
 
 The most commonly used final-time functionals (cf. :mod:`krotov.functionals`)
 optimize for a set of initial states :math:`\{\ket{\phi_k}\}` to evolve to a
@@ -280,12 +225,88 @@ e^{i\varphi_k}\ket{\phi_k^{\tgt}}` :cite:`PalaoPRA2003`:
   cf. :func:`.J_T_re`.
 
 
+.. _IterativeControlUpdate:
+
+Iterative control update
+------------------------
+
+Starting from the initial guess control :math:`\epsilon_l^{(0)}(t)`, the
+optimized field :math:`\epsilon_l^{(i)}(t)` in iteration :math:`i > 0`
+is the result of applying a control update,
+
+.. math::
+   :label: eps_update
+
+   \epsilon_l^{(i)}(t)
+   = \epsilon_l^{(i-1)}(t) + \Delta\epsilon_l^{(i)}(t)\,.
+
+Krotov's method is a clever construction of a particular
+:math:`\Delta\epsilon_l^{(i)}(t)` that ensures
+
+.. math::
+
+   J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}] \leq
+     J[\{\ket{\phi_k^{(i-1)}(t)}\}, \{\epsilon_l^{(i-1)}(t)\}]\,.
+
+Krotov's solution for :math:`\Delta\epsilon_l^{(i)}(t)` is given in
+below (:ref:`FirstOrderUpdate` and :ref:`SecondOrderUpdate`).
+As shown there,
+for the specific running cost of Eq. :eq:`g_a`, using the
+guess control field :math:`\epsilon_l^{(i-1)}(t)` as the "reference"
+field, the update :math:`\Delta\epsilon^{(i)}_l(t)` is proportional to
+:math:`\frac{S_l(t)}{\lambda_{a,l}}`. Note that this also makes
+:math:`g_a` proportional to :math:`\frac{S_l(t)}{\lambda_{a,l}}`, so
+that Eq. :eq:`g_a` is still well-defined for
+:math:`S_l(t) = 0`. The (inverse) Krotov step width
+:math:`\lambda_{a,l}` can be used to determine the overall magnitude of
+:math:`\Delta\epsilon^{(i)}_l(t)`. Values that are too large will change
+:math:`\epsilon_l^{(i)}(t)` by only a small amount in every iteration,
+causing slow convergence. Values that are too small will result in numerical
+instability, see :ref:`TimeDiscretization` and :ref:`ChoiceOfLambdaA`.  The
+"update shape" function :math:`S_l(t)` allows to ensure boundary conditions on
+:math:`\epsilon^{(i)}_l(t)`: If both the guess field
+:math:`\epsilon^{(i-1)}_l(t)` and :math:`S_l(t)` switch on and off smoothly
+around :math:`t=0` and :math:`t=T`, then this feature will be preserved by the
+optimization. A typical example for an update shape is
+
+   .. math::
+      :label: flattop
+
+      S_l(t) = \begin{cases}
+            B(t; t_0=0, t_1=2 t_{\text{on}})
+              & \text{for} \quad 0 < t < t_{\text{on}} \\
+            1 & \text{for} \quad t_{\text{on}} \le t \le T - t_{\text{off}} \\
+            B(t; t_0=T-2 t_{\text{off}}, t_1=T)
+              & \text{for} \quad T - t_{\text{off}} < t < T\,,
+          \end{cases}
+
+   cf. :func:`krotov.shapes.flattop`, with the `Blackman shape`_
+
+   .. math::
+      :label: blackman
+
+      B(t; t_0, t_1) =
+            \frac{1}{2}\left(
+              1 - a - \cos\left(2\pi \frac{t - t_0}{t_1 - t_0}\right)
+              + a \cos\left(4\pi \frac{t - t_0}{t_1 - t_0}\right)
+            \right)\,,\quad a = 0.16\,,
+
+which is similar to a Gaussian, but exactly zero at
+:math:`t = t_0, t_1`. This is essential to maintain the typical boundary
+condition of zero amplitude at the beginning and end of the optimized
+control field. Generally, *any* part of the control field can be kept
+unchanged in the optimization by choosing :math:`S_l(t) = 0` for the
+corresponding intervals of the time grid.
+
+.. _Blackman shape: https://en.wikipedia.org/wiki/Window_function#Blackman_window
+
+
 .. Note::
 
    In the remainder of this chapter, we review some of the mathematical details
-   of how Krotov's method calculates the update in Eq. :eq:`update`. These
-   details are not necessary to *use* the :mod:`krotov` package as a "black
-   box" optimization tool, so you may skip ahead to
+   of how Krotov's method calculates the update in Eqs. :eq:`update`, :eq:`eps_update`.
+   These details are not necessary to *use* the :mod:`krotov` package as a
+   "black box" optimization tool, so you may skip ahead to
    :ref:`using-krotov-with-qutip` and come back at a later time.
 
 
@@ -379,7 +400,7 @@ a single state-to-state transition (:math:`N=1`),
           \underbrace{%
             \Braket{\phi(T)}{\phi^\tgt}
             \Braket{\phi^\tgt}{\phi(T)}
-          }_{=\Abs{\Braket{\phi^\tgt}{\phi(T)}}^2}
+          }_{\Abs{\Braket{\phi^\tgt}{\phi(T)}}^2}
           \Bigg\vert_{(i-1)} \\
       &= \left(\Braket{\phi^\tgt}{\phi^{(i-1)}(T)}\right) \Ket{\phi^\tgt}\,,
    \end{split}
@@ -714,5 +735,3 @@ Liouvillian :cite:`BartanaJCP93,OhtsukiJCP99,GoerzNJP2014` and a non-Hermitian
 Hamiltonian :cite:`MullerQIP11,GoerzQST2018`.
 
 See the :ref:`/notebooks/04_example_dissipative_qubit_reset.ipynb` for an example.
-
-

@@ -32,26 +32,27 @@ experiments :cite:`GlaserEPJD2015,LovecchioPRA16,vanFrankSciRep16,OfekNat16,Sor
 attests to the level of maturity that quantum optimal control in quantum
 technologies has reached.
 
-In order to calculate optimized external field shapes, two choices need
-to be made – about the optimization functional and about the
-optimization method. The functional consists of the desired figure of
-merit, such as a gate or state preparation error, as well as additional
-constraints, such as amplitude or bandwidth
-restrictions :cite:`GlaserEPJD2015,KochJPCM16`. Optimal
-control methods in general can be classified into gradient-free and
-gradient-based algorithms that either evaluate the optimization
-functional alone or together with its
-gradient :cite:`GlaserEPJD2015`. Gradient-based methods
-typically converge faster, unless the number of optimization parameters
-can be kept small. Most gradient-based methods rely on the iterative
-solution of a set of coupled equations that include forward propagation
-of initial states, backward propagation of adjoint states, and the
-control update :cite:`GlaserEPJD2015`. A popular
-representative of concurrent update methods is GRadient Ascent Pulse
-Engineering (GRAPE) :cite:`KhanejaJMR05`, whereas Krotov's
-method, which comes with the advantage of guaranteed monotonic
-convergence, requires sequential
+In order to calculate optimized external field shapes, two choices need to be
+made – about the optimization functional and about the optimization method.
+The functional consists of the desired figure of merit, such as a gate or state
+preparation error, as well as additional constraints, such as amplitude or
+bandwidth restrictions :cite:`GlaserEPJD2015,KochJPCM16`.
+Optimal control methods in general can be classified into gradient-free and
+gradient-based algorithms that either evaluate the optimization functional
+alone or together with its gradient :cite:`GlaserEPJD2015`.
+Gradient-based methods typically converge faster, unless the number of
+optimization parameters can be kept small.
+Most gradient-based methods rely on the iterative solution of a set of coupled
+equations that include forward propagation of initial states, backward
+propagation of adjoint states, and the control update :cite:`GlaserEPJD2015`.
+A popular representative of concurrent update methods is GRadient Ascent Pulse
+Engineering (GRAPE) :cite:`KhanejaJMR05`.
+Krotov's method, in contrast, requires sequential
 updates :cite:`Tannor92,ReichJCP12`.
+This comes with the advantage of guaranteed monotonic convergence and
+obviates the need for a line search in the direction of the
+gradient :cite:`EitanPRA11`.
+
 
 The choice of Python as an implementation language is due to Python's
 easy-to-learn syntax, expressiveness, and immense popularity in the

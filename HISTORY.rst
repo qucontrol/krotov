@@ -6,6 +6,7 @@ History
 (next version)
 --------------
 
+* Update: Documentation now contains all information from https://arxiv.org/abs/1902.11284v5
 * Added: Allow to pass `args` to time-dependent control functions (`#56`_, thanks to `@timohillmann`_)
 * Changed: Renamed ``krotov.structural_conversions`` to ``krotov.conversions``
 * Bugfix: Crash when ``krotov.optimize_pulses`` is called with ``iter_stop=0`` (`#58`_)

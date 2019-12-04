@@ -119,7 +119,7 @@ Development Prerequisites
 Contributing to the package's developments requires that you have Python 3.7
 and tox_ installed. It is strongly recommended that you also have installations
 of all other supported Python versions. The recommended way to install multiple
-versions of Python at the same time is through Use pyenv_ (or pyenv-win_ on
+versions of Python at the same time is through pyenv_ (or pyenv-win_ on
 Windows).
 
 Alternatively, you may install conda_ (via the Anaconda_ or Miniconda_

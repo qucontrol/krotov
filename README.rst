@@ -38,13 +38,15 @@ This implementation follows the original implementation in the `QDYN Fortran lib
 
 The ``krotov`` package is built on top of `QuTiP`_.
 
-Development happens on `Github`_. You can read the full documentation at `ReadTheDocs`_ or `download a PDF version`_.
+Development happens on `Github`_. You can read the full documentation at `online`__ or `download a PDF version`_.
+
+.. _ReadTheDocs: https://krotov.readthedocs.io/en/stable/
+__ ReadTheDocs_
 
 If you use the ``krotov`` package in your research, please `cite it <https://krotov.readthedocs.io/en/stable/01_overview.html#citing-the-krotov-package>`_.
 
 .. _QDYN Fortran library: https://www.qdyn-library.net
 .. _QuTiP: http://qutip.org
-.. _ReadTheDocs: https://krotov.readthedocs.io/en/stable/
 .. _download a PDF version: https://github.com/qucontrol/krotov/tree/master/docs/pdf
 
 

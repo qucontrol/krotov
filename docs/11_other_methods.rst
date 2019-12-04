@@ -228,7 +228,7 @@ time interval :math:`n` in Hilbert space,
 .. math::
 
    \Op{U}^{(i-1)}_{n} = \exp\Bigg[ -\frac{\mathrm{i}}{\hbar} \Op{H}\big(
-   \underbrace{\epsilon^{(i-1)}(\tilde t_{n-1})}_{=\epsilon^{(i-1)}_n} \big) \dd
+   \underbrace{\epsilon^{(i-1)}(\tilde t_{n-1})}_{\epsilon^{(i-1)}_n} \big) \dd
    t\Bigg];\qquad \tilde{t}_n \equiv t_n + \dd t / 2\,.
 
 The independent control parameters are now the scalar values
@@ -359,9 +359,13 @@ This is often relevant to design control fields that meet experimental
 constraints. One possible realization is to calculate the gradients for
 the control parameters from the gradients of the time-discrete control
 amplitudes via the chain
-rule :cite:`SkinnerJMR2010,MotzoiPRA2011`. This approach
+rule :cite:`WinckelIP2008,SkinnerJMR2010,MotzoiPRA2011,LucarelliPRA2018`.
+This approach
 has recently been named "GRadient Optimization Using Parametrization"
-(GROUP) :cite:`SorensenPRA2018`. An alternative for a
+(GROUP) :cite:`SorensenPRA2018`.
+An implementation of several variants of GROUP is available in the
+QEngine C++ library :cite:`SorensenCPC2019`.
+An alternative for a
 moderate number of control parameters is "gradient-optimization of
 analytic controls" (GOAT) :cite:`MachnesPRL2018`. GOAT
 evaluates the relevant gradient with forward-mode differentiation; that
@@ -519,7 +523,10 @@ Choosing an optimization method
    :width: 100%
 
    Decision tree for the choice of a numerical open-loop
-   optimization method. For "piecewise-constant controls", the control
+   optimization method.
+   The choice of control method is most directly associated with the number of
+   control parameters (:math:`n`).
+   For "piecewise-constant controls", the control
    parameters are the values of the control field in each time interval.
    For "analytical" controls, we assume that the control fields are
    described by a fixed analytical formula parametrized by the control
@@ -529,7 +536,7 @@ Choosing an optimization method
    components. Each method in the diagram is meant to include all its
    variants, a multitude of gradient-free methods and e.g. DCRAB for
    CRAB, GRAPE-LBFGS and sequential/hybrid gradient-descent for GRAPE,
-   and K-BFGS for Krotov, see text for detail.
+   and K-BFGS for Krotov's method, see text for detail.
 
 In the following, we discuss some of the concerns in the choice of
 optimization methods. The discussion is limited to iterative open-loop
@@ -573,7 +580,7 @@ iteration schemes :cite:`MadayJCP2003` may also be used.
 
 The decision tree in :numref:`figoctdecisiontree` can guide the
 choice of an optimization method. The key deciding factors are the
-number of control parameters and whether the controls are time-discrete.
+number of control parameters (:math:`n`) and whether the controls are time-discrete.
 Of course, the parametrization of the controls is itself a choice.
 Sometimes, experimental constraints only allow controls that depend on a
 small number of tunable parameters. However, this necessarily limits the
