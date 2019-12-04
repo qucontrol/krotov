@@ -35,8 +35,14 @@ RX_BINDER_URL = re.compile(
 )
 
 
-def make_release(package_name):
-    """Interactively create and publish a new release for the package"""
+def make_release(package_name, fast_test=False):
+    """Interactively create and publish a new release for the package.
+
+    If `fast_test` is passed as True, do a fast test-run of the release script.
+    This skips testing, and verification, does not push any
+    commits, and make no releases on PyPI. It does make local commits, which
+    should be reset after the script completes.
+    """
     click.confirm("Do you want to make a release?", abort=True)
     check_git_clean()
     new_version = ask_for_release_version(package_name)
@@ -53,19 +59,22 @@ def make_release(package_name):
     ]
     for filename in files_with_binder_links:
         set_binder_branch(filename, "v" + str(new_version))
+    set_binder_package_version(version=new_version)
     make_release_commit(new_version)
-    make_notebooks()
-    check_docs()
-    run_tests()
+    make_notebooks(fast_test=fast_test)
+    if not fast_test:
+        check_docs()
+        run_tests()
     make_notebooks_commit(new_version)
     manual_pdf = "./docs/pdf/krotov%s.pdf" % new_version
     make_manual_pdf(manual_pdf)
     make_manual_pdf_commit(manual_pdf)
     squash_commits(n=3)
-    make_upload(test=True)
-    push_release_commits()
-    make_upload(test=False)
-    make_and_push_tag(new_version)
+    if not fast_test:
+        make_upload(test=True)
+        push_release_commits()
+        make_upload(test=False)
+        make_and_push_tag(new_version)
     # release is finished; go back to a dev state
     next_dev_version = new_version + '+dev'
     set_version(
@@ -80,6 +89,7 @@ def make_release(package_name):
             # README and index always link to the latest released version
             continue
         set_binder_branch(filename, 'master')
+    set_binder_package_version(branch='master')
     make_next_dev_version_commit(next_dev_version)
 
 
@@ -306,6 +316,32 @@ def set_binder_branch(filename, branch='master'):
     os.remove(filename + ".bak")
 
 
+def set_binder_package_version(version=None, branch=None):
+    """Set the version of the krotov package in binder/environment.yml.
+
+    Either a `version` must be given, in which case Binder dependes on
+    ``krotov==<version>``, or `branch`, in which case Binder depens on
+    ``git+https://github.com/qucontrol/krotov.git@<branch>#egg=krotov``.
+    """
+    filename = 'binder/environment.yml'
+    shutil.copyfile(filename, filename + '.bak')
+    # fmt: off
+    with open(filename + '.bak') as in_fh, open(filename, 'w') as out_fh:
+        for line in in_fh:
+            if line.startswith('    - ') and 'krotov' in line:
+                if version is not None:
+                    click.echo("Modifying %s to set krotov version %s" % (filename, version))
+                    line = '    - krotov==%s' % version
+                elif branch is not None:
+                    click.echo("Modifying %s to set krotov branch %s" % (filename, branch))
+                    line = '    - git+https://github.com/qucontrol/krotov.git@%s#egg=krotov' % branch
+                else:
+                    raise ValueError("You must give either a version or a branch")
+            out_fh.write(line)
+    # fmt: on
+    os.remove(filename + ".bak")
+
+
 def edit_history(version):
     """Interactively edit HISTORY.rst"""
     click.echo(
@@ -328,10 +364,18 @@ def check_dist():
         return False
 
 
-def make_notebooks():
+def make_notebooks(fast_test=False):
+    """Re-run all notebooks in the documentation.
+
+    If `fast_test` is given as True, only the first notebook is run.
+    """
     click.echo("Re-creating notebooks...")
+    target = 'notebooks'
+    if fast_test:
+        # only make the first notebook
+        target = 'docs/notebooks/01_example_simple_state_to_state.ipynb.log'
     try:
-        run(['make', 'notebooks'], check=True)
+        run(['make', target], check=True)
         return True
     except CalledProcessError as exc_info:
         click.echo("ERROR: %s" % str(exc_info))
@@ -611,9 +655,12 @@ def test_nbviewer_binder_regexes():
 
 @click.command(help=__doc__)
 @click.help_option('--help', '-h')
-def main():
+@click.option(
+    '--test', is_flag=True, help="Do a fast test-run of the release script"
+)
+def main(test):
     try:
-        make_release(get_package_name())
+        make_release(get_package_name(), fast_test=bool(test))
     except Exception as exc_info:
         click.echo(str(exc_info))
         sys.exit(1)
