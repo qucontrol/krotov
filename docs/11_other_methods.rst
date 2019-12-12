@@ -219,7 +219,7 @@ are obtained as
 .. math::
    :label: discrete_time_evolution
 
-   \ket{\phi^{(i-1)}_k(T)} = \Op{U}^{(i-1)}_{nt-1} \dots
+   \ket{\phi^{(i-1)}_k(T)} = \Op{U}^{(i-1)}_{N_T} \dots
    \Op{U}^{(i-1)}_{n} \dots \Op{U}^{(i-1)}_{1} \big\vert \phi_k \big\rangle\,,
 
 where :math:`\Op{U}^{(i-1)}_{n}` is the time evolution operator on the
@@ -232,7 +232,7 @@ time interval :math:`n` in Hilbert space,
    t\Bigg];\qquad \tilde{t}_n \equiv t_n + \dd t / 2\,.
 
 The independent control parameters are now the scalar values
-:math:`\epsilon_n`, respectively :math:`\epsilon_{l,n}` if there are
+:math:`\epsilon_n`, respectively :math:`\epsilon_{ln}` if there are
 multiple control fields indexed by :math:`l`.
 
 The GRAPE method looks at the direct gradient
@@ -254,12 +254,12 @@ leads to
 
    \begin{split}
      \frac{\partial \tau_k}{\partial \epsilon_n} &= \frac{\partial}{\partial
-     \epsilon_n} \big\langle \phi_k^{\tgt} \big\vert \Op{U}^{(i-1)}_{nt-1} \dots
+     \epsilon_n} \big\langle \phi_k^{\tgt} \big\vert \Op{U}^{(i-1)}_{N_T} \dots
      \Op{U}^{(i-1)}_{n} \dots \Op{U}^{(i-1)}_{1} \big\vert \phi_k \big\rangle \\
      &=
          \underbrace{%
      \big\langle \phi_k^{\tgt} \big\vert
-               \Op{U}^{(i-1)}_{nt-1} \dots \Op{U}^{(i-1)}_{n+1}}_{%
+               \Op{U}^{(i-1)}_{N_T} \dots \Op{U}^{(i-1)}_{n+1}}_{%
      \bra{\chi^{(i-1)}_k(t_{n+1})} } \,
      \frac{\partial\Op{U}^{(i-1)}_{n}}{\partial\epsilon_n} \,
           \underbrace{%

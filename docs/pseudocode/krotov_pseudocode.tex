@@ -124,12 +124,21 @@ the function $\chi$.
 In many applications, $H_k \equiv H$ is the same in all objectives, and
 $\VarOperator{\mu}{lkn} \equiv \VarOperator{\mu}{l}$ if $H$ is linear in the
 controls in addition.
+The subscript $n$ and the superscript $(i-1)$ for
+$\VarOperator{\mu^{\PropAnnotation{(i-1)}}}{lkn}$ in
+lines~\ref{ln:pulse_update},~\ref{ln:pulse_update2} comes into play only if $H$
+is \emph{not} linear in the control.
+Mathematically, $\VarOperator{\mu}{lkn}$ would then have to be evaluated using
+the \emph{updated} control.
+Since the update is not yet known, the \emph{guess} control may be used as an
+approximation (valid for sufficiently large $\lambda_{a,l}$).
 
 The CPU resources required for the optimization are dominated by the time
 propagation (calls to the function $U$ in
 lines~\ref{ln:prop1},~\ref{ln:prop2}~\ref{ln:prop3}). This is under the
 assumption that evaluating $U$ dominates the application of the operator
-$\VarOperator{\mu}{lkn}$ to the state $\VarPropState{\phi}{k}{(i)}{t_{n-1}}$ and
+$\VarOperator{\mu^{\PropAnnotation{(i-1)}}}{lkn}$
+to the state $\VarPropState{\phi}{k}{(i)}{t_{n-1}}$ and
 the evaluation of the inner product of two states,
 lines~\ref{ln:pulse_update},~\ref{ln:pulse_update2}.
 This condition is fulfilled for any non-trivial Hilbert space dimension.
@@ -180,8 +189,8 @@ $\{\VarPropState{\chi}{k}{(i-1)}{t=0}\}$, eliminating $\VarArray{X}$ at the
       on the $n$'th interval of the propagation time grid ($t_0 = 0, \dots,
       t_{N_T} = T$),
       i.e., $\VarScalar{\epsilon^{(0)}_{ln}} \equiv
-      \epsilon^{(0)}_l(\tilde{t}_n)$ with
-      $\tilde{t}_n \equiv t_n + ((t_{n+1} - t_n)/2) $
+      \epsilon^{(0)}_l(\tilde{t}_{n-1})$ with
+      $n \in [1, N_T]$ and $\tilde{t}_n \equiv (t_{n} + t_{n+1})/2$
       \item
       list of update-shape values $\{\VarScalar{S_{ln}}\}$ with each
       $\VarScalar{S_{ln}} \in [0,1]$
@@ -200,17 +209,20 @@ $\{\VarPropState{\chi}{k}{(i-1)}{t=0}\}$, eliminating $\VarArray{X}$ at the
       $\VarPropState{\chi}{k}{}{t_{n-1}}$ by solving the differential
       equation~\eqref{eq:bw_eqm}
       \item
-      list of operators $\VarOperator{\mu}{lkn} = \frac{\partial
-      H_k}{\partial \epsilon_{ln}}$, where $H_k$ is the right-hand-side of the
+      list of operators
+      $\VarOperator{\mu}{lkn}
+      = \frac{\partial H_k}{\partial \epsilon_{l}(t)}\big\vert
+        _{\epsilon_{ln}}$,
+      where $H_k$ is the right-hand-side of the
       equation of motion of $\VarPropState{\phi}{k}{}{t}$, up to a factor of
-      $(-\mathrm{i}/\hbar)$, cf.~Eq.~\eqref{eq:fw_eqm};
+      $(-\mathrm{i}/\hbar)$, cf.~Eq.~\eqref{eq:fw_eqm}
       \item
       function $\chi$ that receives a list of states $\{\VarPropState{\phi}{k}{}{T}\}$ and
       returns a list of states $\{\VarPropState{\chi}{k}{}{T}\}$ according to
-      Eq.~\eqref{eq:chi_boundary};
+      Eq.~\eqref{eq:chi_boundary}
       \item
       optionally, if  a second order construction of the
-      pulse update is necessary: function $\sigma(t)$.
+      pulse update is necessary: function $\sigma(t)$
       \end{enumerate}
     }
     \Ensure{%
@@ -276,10 +288,10 @@ $\{\VarPropState{\chi}{k}{(i-1)}{t=0}\}$, eliminating $\VarArray{X}$ at the
       \State $\Forall \VarScalar{k}: \VarArray{\Phi_1}[\VarScalar{k},0] \gets \VarPropState{\phi}{k}{(i)}{t_0} \gets \VarState{\phi_k^{\text{init}}}$
       \For{$\VarScalar{n} \gets 1, \dots, N_T$} \Comment{sequential update loop}
          \State $\Forall \VarScalar{k}: \VarPropState{\chi}{k}{(i-1)}{t_{n-1}} \gets \VarArray{X}[\VarScalar{k}, \VarScalar{n}-1]$
-         \State $\Forall \VarScalar{l}: \VarScalar{\Delta \epsilon_{ln}} \gets \frac{\VarScalar{S_{l, n-1}}}{\VarScalar{\lambda_{a, l}}} \Im \sum_{\VarScalar{k}} \big\langle \VarPropState{\chi}{k}{(i-1)}{t_{n-1}} \big\vert \VarOperator{\mu}{lkn} \big\vert \VarPropState{\phi}{k}{(i)}{t_{n-1}} \big\rangle$ \Comment{first order} \label{ln:pulse_update}
+         \State $\Forall \VarScalar{l}: \VarScalar{\Delta \epsilon_{ln}} \gets \frac{\VarScalar{S_{ln}}}{\VarScalar{\lambda_{a, l}}} \Im \sum_{\VarScalar{k}} \big\langle \VarPropState{\chi}{k}{(i-1)}{t_{n-1}} \big\vert \VarOperator{\mu^{\PropAnnotation{(i-1)}}}{lkn} \big\vert \VarPropState{\phi}{k}{(i)}{t_{n-1}} \big\rangle$ \Comment{first order} \label{ln:pulse_update}
          \If{$\sigma(t) \neq 0$} \Comment{second order}
            \State $\Forall \VarScalar{k}: \VarPropState{\Delta\phi}{k}{(i)}{t_{n-1}} \gets \VarPropState{\phi}{k}{(i)}{t_{n-1}} - \VarArray{\Phi_0}[\VarScalar{k},\VarScalar{n}-1]$ \label{ln:delta_phi}
-           \State $\Forall \VarScalar{l}: \VarScalar{\Delta \epsilon_{ln}} \gets \VarScalar{\Delta \epsilon_{ln}} + \frac{\VarScalar{S_{l, n-1}}}{\VarScalar{\lambda_{a, l}}} \Im \sum_{\VarScalar{k}} \frac{1}{2} \sigma(\tilde{t}_n) \big\langle \VarPropState{\Delta\phi}{k}{(i)}{t_{n-1}} \big\vert \VarOperator{\mu}{lkn} \big\vert \VarPropState{\phi}{k}{(i)}{t_{n-1}} \big\rangle$ \label{ln:pulse_update2}
+           \State $\Forall \VarScalar{l}: \VarScalar{\Delta \epsilon_{ln}} \gets \VarScalar{\Delta \epsilon_{ln}} + \frac{\VarScalar{S_{ln}}}{\VarScalar{\lambda_{a, l}}} \Im \sum_{\VarScalar{k}} \frac{1}{2} \sigma(\tilde{t}_n) \big\langle \VarPropState{\Delta\phi}{k}{(i)}{t_{n-1}} \big\vert \VarOperator{\mu^{\PropAnnotation{(i-1)}}}{lkn} \big\vert \VarPropState{\phi}{k}{(i)}{t_{n-1}} \big\rangle$ \label{ln:pulse_update2}
          \EndIf
          \State $\Forall \VarScalar{l}: \VarScalar{\epsilon_{ln}^{(i)}} \gets \VarScalar{\epsilon_{ln}^{(i-1)}} + \VarScalar{\Delta \epsilon_{ln}}$ \Comment{apply update}
          \State $\Forall \VarScalar{k}: \VarArray{\Phi_1}[\VarScalar{k},\VarScalar{n}] \gets \VarPropState{\phi}{k}{(i)}{t_n} \gets U(\VarPropState{\phi}{k}{(i)}{t_{n-1}}, \{\VarScalar{\epsilon_{ln}^{(i)}}\})$ \Comment{propagate and store} \label{ln:prop3}
@@ -294,6 +306,7 @@ $\{\VarPropState{\chi}{k}{(i-1)}{t=0}\}$, eliminating $\VarArray{X}$ at the
 
 \section*{Optimization Functional and Equations of Motion}
 
+\vspace{-5mm}
 \begin{equation}
   \label{eq:functional}
   J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}]
@@ -305,16 +318,17 @@ $\{\VarPropState{\chi}{k}{(i-1)}{t=0}\}$, eliminating $\VarArray{X}$ at the
 \begin{equation}%
   \label{eq:fw_eqm}
   \frac{\partial}{\partial t} \Ket{\phi_k^{(i)}(t)} =
-  -\frac{\mathrm{i}}{\hbar} \Op{H}^{(i)} \Ket{\phi_k^{(i)}(t)}
+  -\frac{\mathrm{i}}{\hbar} \Op{H}^{(i)}(t) \Ket{\phi_k^{(i)}(t)}
 \end{equation}
 
 \begin{equation}%
   \label{eq:bw_eqm}
   \frac{\partial}{\partial t} \Ket{\chi_k^{(i-1)}(t)}
-  = -\frac{\mathrm{i}}{\hbar} \Op{H}^{\dagger\,(i-1)} \Ket{\chi_k^{(i-1)}(t)}
+  = -\frac{\mathrm{i}}{\hbar} \Op{H}^{\dagger\,(i-1)}(t) \Ket{\chi_k^{(i-1)}(t)}
     + \left.\frac{\partial g_b}{\partial \Bra{\phi_k}}\right\vert_{(i-1)}\,
 \end{equation}
 
+\vspace{-3mm}
 \begin{equation}%
   \label{eq:chi_boundary}
   \text{with}\qquad
@@ -329,15 +343,16 @@ $\{\VarPropState{\chi}{k}{(i-1)}{t=0}\}$, eliminating $\VarArray{X}$ at the
     \item The index $\VarScalar{k}$ numbers the independent states to be
       propagated, respectively the independent ``objectives'' (see text for
       details), $\VarScalar{l}$ numbers the independent control fields, and
-      $\VarScalar{n}$ numbers the intervals on the time grid.
+      $\VarScalar{n}$ numbers the intervals on the time grid. All of these
+      indices start at 1.
     \item The optimization loop may be stopped if the optimization functional or
       the change of functional falls below a pre-defined threshold, a maximum
       number of iterations is reached, or any other criterion.
-    \item The braket notation in lines~\ref{ln:pulse_update} indicates the
+    \item The braket notation in line~\ref{ln:pulse_update} indicates the
       (Hilbert-Schmidt) inner product of the state
       $\VarPropState{\chi}{k}{(i-1)}{t_n-1}$ and the state
-      resulting from applying $\VarOperator{\mu}{lkn}$ to
-      $\VarPropState{\phi}{k}{(i)}{t_{n-1}}$.
+      resulting from applying $\VarOperator{\mu^{\PropAnnotation{(i-1)}}}{lkn}$
+      to $\VarPropState{\phi}{k}{(i)}{t_{n-1}}$.
       In Hilbert space, this is the standard braket.
       In Liouville space, it is $\tr\left(\VarState{\chi_k}^\dagger
       \;\VarOperator{\mu}{lkn}[\VarState{\phi_k}]\right)$ with density

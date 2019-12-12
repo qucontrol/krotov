@@ -335,9 +335,16 @@ functional :math:`J_T`, the condition for monotonic convergence is
          \Bigg\vert \phi_k^{(i)}(t) \Bigg\rangle
        \right]\,,
 
-see Ref. :cite:`PalaoPRA2003`. If there are multiple
-controls, the condition holds for every control field
-:math:`\epsilon_l(t)` independently.
+see Ref. :cite:`PalaoPRA2003`.
+The notation for the derivative on the right hand side being evaluated
+at :math:`{(i)}` should be understood to apply when the control
+Hamiltonian is not linear so that
+:math:`\frac{\partial \Op{H}}{\partial \epsilon_l(t)}` is still
+time-dependent; the derivative must then be evaluated for
+:math:`\epsilon^{(i)}_l(t)` – or, numerically, for
+:math:`\epsilon^{(i-1)}_l(t) \approx \epsilon^{(i)}_l(t)`. If there are
+multiple controls, Eq. :eq:`krotov_first_order_proto_update`
+holds for every control field :math:`\epsilon_l(t)` independently.
 
 For :math:`g_a` as in Eq. :eq:`g_a`, this results in an
 *update*
@@ -512,8 +519,8 @@ Time discretization
 The derivation of Krotov's method assumes time-continuous control
 fields. Only in this case, monotonic convergence is mathematically
 guaranteed. However, for practical numerical applications, we have to
-consider controls on a discrete time grid with :math:`nt` points running
-from :math:`t=0` to :math:`t=T`, with a time step :math:`\dd t`. The
+consider controls on a discrete time grid with :math:`N_T+1` points running
+from :math:`t=t_0=0` to :math:`t=t_{N_T}=T`, with a time step :math:`\dd t`. The
 states are defined on the points of the time grid, while the controls
 are assumed to be constant on the intervals of the time grid.
 See the notebook `Time Discretization in Quantum Optimal Control`_
