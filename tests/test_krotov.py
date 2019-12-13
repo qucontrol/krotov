@@ -371,7 +371,7 @@ def test_continue_optimization(
     with open(logfile, encoding='utf8') as fh1, open(logfile_expected, encoding='utf8') as fh2:
         for line1 in fh1:
             line2 = next(fh2)
-            assert line1[:65] == line2[:65]
+            assert line1[:63] == line2[:63]
     # fmt: on
 
     # continue from an incomplete dump file

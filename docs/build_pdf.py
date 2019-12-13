@@ -129,7 +129,7 @@ def main():
     """Main function."""
     texfile = ROOT / '_build/tex/krotov.tex'
     if not texfile.is_file():
-        print(f"{texfile} does not exist")
+        print("%s does not exist" % texfile)
         sys.exit(1)
     patch_krotov_tex_lines(texfile)
     patch_krotov_tex(texfile)

@@ -1,10 +1,15 @@
 """Test for modify_params_after_iter/info_hook"""
 import contextlib
 import io
+import os
+from pathlib import Path
 
 import numpy as np
+import pytest
 
 import krotov
+from krotov.info_hooks import print_table
+from test_krotov import simple_state_to_state_system
 from test_objectives import transmon_ham_and_states
 
 
@@ -66,3 +71,141 @@ def test_infohook_chaining(transmon_ham_and_states):
     assert 'msg: λₐ: 1.0 → 0.5' in stdout.getvalue()
     assert 'Iteration 1: \tF = 0.001978' in stdout.getvalue()
     assert 'msg: λₐ: 0.5 → 0.25' in stdout.getvalue()
+
+
+def test_invalid_print_table():
+    J_T = lambda **kwargs: 1.0
+    with pytest.raises(ValueError) as exc_info:
+        print_table(J_T=J_T, col_formats=".2e")
+    assert '8 elements' in str(exc_info.value)
+    with pytest.raises(ValueError) as exc_info:
+        print_table(J_T=J_T, col_formats="eeeeeeee")
+    assert 'percent format string' in str(exc_info.value)
+    with pytest.raises(ValueError) as exc_info:
+        print_table(J_T=J_T, col_formats=(".2e", ".2e"))
+    assert '8 elements' in str(exc_info.value)
+    with pytest.raises(ValueError) as exc_info:
+        # fmt: off
+        col_formats = (
+            '%d', '%.2', '%.2e', '%.2e', '%.2e', '%.2e', '%.2e', '%d',
+        )
+        # fmt: on
+        print_table(J_T=J_T, col_formats=col_formats)
+    assert 'Invalid col_formats' in str(exc_info.value)
+    with pytest.raises(ValueError) as exc_info:
+        print_table(J_T=J_T, col_headers="header")
+    assert '8 elements' in str(exc_info.value)
+    with pytest.raises(ValueError) as exc_info:
+        print_table(J_T=J_T, col_headers=("header", "header"))
+    assert '8 elements' in str(exc_info.value)
+
+    # fmt: off
+    col_headers = (
+        "it", "J_T", "∫gₐ(ϵ{i})dt", "∑∫gₐ(t)dt", "J", "ΔJ_T", "ΔJ", "secs",
+    )
+    # fmt: on
+    with pytest.raises(ValueError) as exc_info:
+        print_table(
+            J_T=J_T, show_g_a_int_per_pulse=True, col_headers=col_headers
+        )
+    assert "must support '.format(l=l)'" in str(exc_info.value)
+
+    class no_format:
+        """dummy broken g_a_hdr formatter"""
+
+    # fmt: off
+    col_headers = (
+        "iteration", "J_T", no_format(), "∑∫gₐ(t)dt", "J", "ΔJ_T", "ΔJ",
+        "secs",
+    )
+    # fmt: on
+    with pytest.raises(ValueError) as exc_info:
+        print_table(
+            J_T=J_T, show_g_a_int_per_pulse=True, col_headers=col_headers
+        )
+    assert "must support '.format(l=l)'" in str(exc_info.value)
+
+
+def test_print_table_custom_format(request, simple_state_to_state_system):
+    """Test print_table with custom col_formats."""
+    objectives, pulse_options, tlist = simple_state_to_state_system
+    testdir = Path(os.path.splitext(request.module.__file__)[0])
+
+    with io.StringIO() as log_fh:
+
+        krotov.optimize_pulses(
+            objectives,
+            pulse_options=pulse_options,
+            tlist=tlist,
+            propagator=krotov.propagators.expm,
+            chi_constructor=krotov.functionals.chis_re,
+            store_all_pulses=True,
+            info_hook=krotov.info_hooks.print_table(
+                J_T=krotov.functionals.J_T_re,
+                col_formats=(
+                    '%8d',
+                    '%12.4e',
+                    '%12.4e',
+                    '%12.4e',
+                    '%12.4e',
+                    '%12.4e',
+                    '%12.4e',
+                    '%05d',
+                ),
+                out=log_fh,
+            ),
+            iter_stop=1,
+            skip_initial_forward_propagation=True,
+        )
+
+        log = log_fh.getvalue()
+
+    expected_log = (testdir / 'custom_format_out.txt').read_text(
+        encoding='utf8'
+    )
+    for (ln, ln_e) in zip(log.splitlines(), expected_log.splitlines()):
+        # we have to remove the secs in the last column (not stable)
+        assert ln[:-2] == ln_e[:-2]
+
+
+def test_print_table_custom_header(request, simple_state_to_state_system):
+    """Test print_table with custom col_formats."""
+    objectives, pulse_options, tlist = simple_state_to_state_system
+    testdir = Path(os.path.splitext(request.module.__file__)[0])
+
+    with io.StringIO() as log_fh:
+
+        krotov.optimize_pulses(
+            objectives,
+            pulse_options=pulse_options,
+            tlist=tlist,
+            propagator=krotov.propagators.expm,
+            chi_constructor=krotov.functionals.chis_re,
+            store_all_pulses=True,
+            info_hook=krotov.info_hooks.print_table(
+                J_T=krotov.functionals.J_T_re,
+                col_headers=(
+                    'iteration',
+                    ' final time functional',
+                    ' running cost (pulse {l})',
+                    ' total running cost',
+                    ' total functional',
+                    ' change in final time functional',
+                    ' change in total functional',
+                    ' seconds for iteration',
+                ),
+                show_g_a_int_per_pulse=True,
+                out=log_fh,
+            ),
+            iter_stop=1,
+            skip_initial_forward_propagation=True,
+        )
+
+        log = log_fh.getvalue()
+
+    expected_log = (testdir / 'custom_header_out.txt').read_text(
+        encoding='utf8'
+    )
+    for (ln, ln_e) in zip(log.splitlines(), expected_log.splitlines()):
+        # we have to remove the secs in the last column (not stable)
+        assert ln[:-2] == ln_e[:-2]

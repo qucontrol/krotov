@@ -313,26 +313,38 @@ def optimize_pulses(
 
     info = None
     optimized_pulses = copy.deepcopy(guess_pulses)
+    info_hook_static_args = dict(
+        # these do no change between iterations (although
+        # `modify_params_after_iter` may modify any of these, to
+        # the extent that they're mutable)
+        objectives=objectives,
+        adjoint_objectives=adjoint_objectives,
+        lambda_vals=lambda_vals,
+        shape_arrays=shape_arrays,
+        tlist=tlist,
+        propagator=propagator,
+        chi_constructor=chi_constructor,
+        mu=mu,
+        sigma=sigma,
+        iter_start=iter_start,
+        iter_stop=iter_stop,
+    )
     if info_hook is not None:
         info = info_hook(
-            objectives=objectives,
-            adjoint_objectives=adjoint_objectives,
             backward_states=None,
             forward_states=forward_states,
             forward_states0=forward_states0,
             guess_pulses=guess_pulses,
             optimized_pulses=optimized_pulses,
             g_a_integrals=g_a_integrals,
-            lambda_vals=lambda_vals,
-            shape_arrays=shape_arrays,
             fw_states_T=fw_states_T,
-            tlist=tlist,
             tau_vals=tau_vals,
             start_time=tic,
             stop_time=toc,
             iteration=0,
             info_vals=[],
             shared_data={},
+            **info_hook_static_args
         )
 
     # Initialize Result object
@@ -481,24 +493,20 @@ def optimize_pulses(
         # Display information about iteration
         if info_hook is not None:
             info = info_hook(
-                objectives=objectives,
-                adjoint_objectives=adjoint_objectives,
                 backward_states=backward_states,
                 forward_states=forward_states,
                 forward_states0=forward_states0,
                 fw_states_T=fw_states_T,
-                tlist=tlist,
                 guess_pulses=guess_pulses,
                 optimized_pulses=optimized_pulses,
                 g_a_integrals=g_a_integrals,
-                lambda_vals=lambda_vals,
-                shape_arrays=shape_arrays,
                 tau_vals=tau_vals,
                 start_time=tic,
                 stop_time=toc,
                 info_vals=result.info_vals,
                 shared_data={},
                 iteration=krotov_iteration,
+                **info_hook_static_args
             )
         # Update optimization `result` with info from finished iteration
         result.iters.append(krotov_iteration)
@@ -522,6 +530,11 @@ def optimize_pulses(
         msg = None
         if check_convergence is not None:
             msg = check_convergence(result)
+        if krotov_iteration >= info_hook_static_args['iter_stop']:
+            # modify_params_after_iter may change iter_stop!
+            iter_stop = info_hook_static_args['iter_stop']
+            result.message = "Reached %d iterations" % iter_stop
+            break
         if bool(msg) is True:  # this is not an anti-pattern!
             result.message = "Reached convergence"
             if isinstance(msg, str):

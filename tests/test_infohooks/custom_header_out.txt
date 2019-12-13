@@ -1,0 +1,3 @@
+iteration   final time functional  total running cost  total functional  change in final time functional  change in total functional  seconds for iteration
+0                        1.00e+00            0.00e+00          1.00e+00                              n/a                         n/a                      0
+1                        7.65e-01            2.33e-02          7.88e-01                        -2.35e-01                   -2.12e-01                      2

@@ -2,6 +2,11 @@
 History
 =======
 
+(next version)
+--------------
+
+* Added: parameters `col_formats` and `col_headers` to customize the output of ``krotov.info_hooks.print_table`` (`#65`_)
+* Added: info-hooks now have access to the additional arguments `propagator`, `chi_constructor`, `mu`, `sigma`, `iter_start`, and `iter_stop` (`#66`_)
 
 0.5.0 (2019-12-04)
 ------------------
@@ -98,3 +103,5 @@ History
 .. _#58: https://github.com/qucontrol/krotov/issues/58
 .. _#59: https://github.com/qucontrol/krotov/issues/59
 .. _#60: https://github.com/qucontrol/krotov/issues/60
+.. _#65: https://github.com/qucontrol/krotov/issues/65
+.. _#66: https://github.com/qucontrol/krotov/issues/66
