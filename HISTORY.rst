@@ -9,6 +9,7 @@ History
 * Added: parameters `col_formats` and `col_headers` to customize the output of ``krotov.info_hooks.print_table`` (`#65`_)
 * Added: info-hooks now have access to the additional arguments `propagator`, `chi_constructor`, `mu`, `sigma`, `iter_start`, and `iter_stop` (`#66`_)
 * Added: parameter `keep_original_objectives` to ``krotov.objectives.ensemble_objectives`` (`#67`_)
+* Added: "Related Software" in the documentation
 
 0.5.0 (2019-12-04)
 ------------------

@@ -48,6 +48,7 @@ Welcome to the Krotov package's documentation!
    09_examples
    10_howto
    11_other_methods
+   12_related_software
    99_bibliography
 
 
