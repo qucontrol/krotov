@@ -28,9 +28,9 @@ Welcome to the Krotov package's documentation!
 .. image:: https://mybinder.org/badge_logo.svg
    :alt: Launch Binder
    :target: https://mybinder.org/v2/gh/qucontrol/krotov/v0.5.0?filepath=docs%2Fnotebooks
-.. image:: https://img.shields.io/badge/arXiv-1902.11284-red.svg
-   :alt: arXiv
-   :target: https://arxiv.org/abs/1902.11284
+.. image:: https://img.shields.io/badge/DOI-10.21468/SciPostPhys.7.6.080-blue.svg
+   :alt: DOI
+   :target: https://doi.org/10.21468/SciPostPhys.7.6.080
 
 
 .. toctree::

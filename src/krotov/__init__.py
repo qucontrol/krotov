@@ -18,16 +18,21 @@ __version__ = '0.5.0+dev'
 __arxiv__ = '1902.11284'
 
 __citation__ = (
-    "M. H. Goerz et al., Krotov: A Python implementation of Krotov's method for quantum optimal control, arXiv:%s (2019)"
-    % __arxiv__
+    "M. H. Goerz et al., "
+    "Krotov: A Python implementation of Krotov's method for quantum optimal "
+    "control, "
+    "SciPost Phys. 7, 080 (2019)"
 )
 
 __bibtex__ = r'''
-@article{arxiv1902.11284,
+@article{GoerzSPP2019,
     author = {Michael H. Goerz and Daniel Basilewitsch and Fernando Gago-Encinas and Matthias G. Krauss and Karl P. Horn and Daniel M. Reich and Christiane P. Koch},
     title = {Krotov: A {Python} implementation of {Krotov's} method for quantum optimal control},
-    year = {2019},
-    journal = {arXiv:1902.11284},
+    journal={SciPost Phys.},
+    volume={7},
+    pages={80},
+    year={2019},
+    doi={10.21468/SciPostPhys.7.6.080},
 }
 '''.strip()
 

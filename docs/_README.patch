@@ -1,5 +1,5 @@
---- README.rst	2019-12-04 16:41:06.000000000 -0500
-+++ _README.rst	2019-12-04 16:40:58.000000000 -0500
+--- README.rst	2019-12-13 21:54:14.000000000 -0500
++++ _README.rst	2019-12-13 21:54:08.000000000 -0500
 @@ -36,14 +36,14 @@
  
  This implementation follows the original implementation in the `QDYN Fortran library`_.
