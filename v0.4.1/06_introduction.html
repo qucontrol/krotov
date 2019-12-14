@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; Krotov a6a2405 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/version-alert.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Krotov’s Method" href="07_krotovs_method.html" />
+    <link rel="prev" title="History" href="05_history.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_history.html">History</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Quantum information science has changed our perception of quantum
+physics from passive understanding to a source of technological
+advances <a class="bibtex reference internal" href="99_bibliography.html#acinnjp18" id="id1">[1]</a>. By way of actively exploiting
+the two essential elements of quantum physics, coherence and
+entanglement, technologies such as quantum
+computing <a class="bibtex reference internal" href="99_bibliography.html#nielsenchuang" id="id2">[2]</a> or quantum
+sensing <a class="bibtex reference internal" href="99_bibliography.html#degenrmp17" id="id3">[3]</a> hold the promise for solving
+computationally hard problems or reaching unprecedented sensitivity.
+These technologies rely on the ability to accurately perform quantum
+operations for increasingly complex quantum systems. Quantum optimal
+control allows to address this challenge by providing a set of tools to
+devise and implement shapes of external fields that accomplish a given
+task in the best way possible <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id4">[4]</a>.
+Originally developed in the context of molecular
+physics <a class="bibtex reference internal" href="99_bibliography.html#tannor92" id="id5">[5]</a><a class="bibtex reference internal" href="99_bibliography.html#grossjcp92" id="id6">[6]</a> and nuclear magnetic
+resonance <a class="bibtex reference internal" href="99_bibliography.html#murdochjmr87" id="id7">[7]</a><a class="bibtex reference internal" href="99_bibliography.html#glasercpl89" id="id8">[8]</a>, quantum optimal
+control theory has been adapted to the specific needs of quantum
+information science in recent
+years <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id9">[4]</a><a class="bibtex reference internal" href="99_bibliography.html#kochjpcm16" id="id10">[9]</a>. Calculation of
+optimized external field shapes for tasks such as state preparation or
+quantum gate implementation have thus become
+standard <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id11">[4]</a>, even for large Hilbert
+space dimensions as encountered in e.g. Rydberg
+atoms <a class="bibtex reference internal" href="99_bibliography.html#cuiqst17" id="id12">[10]</a><a class="bibtex reference internal" href="99_bibliography.html#patschpra18" id="id13">[11]</a>. Experimental
+implementation of the calculated field shapes, using arbitrary waveform
+generators, has been eased by the latter becoming available
+commercially. Successful demonstration of quantum operations in various
+experiments <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id14">[4]</a><a class="bibtex reference internal" href="99_bibliography.html#lovecchiopra16" id="id15">[12]</a><a class="bibtex reference internal" href="99_bibliography.html#vanfrankscirep16" id="id16">[13]</a><a class="bibtex reference internal" href="99_bibliography.html#ofeknat16" id="id17">[14]</a><a class="bibtex reference internal" href="99_bibliography.html#sorensennat16" id="id18">[15]</a><a class="bibtex reference internal" href="99_bibliography.html#heeresnatcomm17" id="id19">[16]</a><a class="bibtex reference internal" href="99_bibliography.html#heckpnas18" id="id20">[17]</a><a class="bibtex reference internal" href="99_bibliography.html#fengpra18" id="id21">[18]</a><a class="bibtex reference internal" href="99_bibliography.html#omrans2019" id="id22">[19]</a><a class="bibtex reference internal" href="99_bibliography.html#larrouy" id="id23">[20]</a>
+attests to the level of maturity that quantum optimal control in quantum
+technologies has reached.</p>
+<p>In order to calculate optimized external field shapes, two choices need
+to be made – about the optimization functional and about the
+optimization method. The functional consists of the desired figure of
+merit, such as a gate or state preparation error, as well as additional
+constraints, such as amplitude or bandwidth
+restrictions <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id24">[4]</a><a class="bibtex reference internal" href="99_bibliography.html#kochjpcm16" id="id25">[9]</a>. Optimal
+control methods in general can be classified into gradient-free and
+gradient-based algorithms that either evaluate the optimization
+functional alone or together with its
+gradient <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id26">[4]</a>. Gradient-based methods
+typically converge faster, unless the number of optimization parameters
+can be kept small. Most gradient-based methods rely on the iterative
+solution of a set of coupled equations that include forward propagation
+of initial states, backward propagation of adjoint states, and the
+control update <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id27">[4]</a>. A popular
+representative of concurrent update methods is GRadient Ascent Pulse
+Engineering (GRAPE) <a class="bibtex reference internal" href="99_bibliography.html#khanejajmr05" id="id28">[21]</a>, whereas Krotov’s
+method, which comes with the advantage of guaranteed monotonic
+convergence, requires sequential
+updates <a class="bibtex reference internal" href="99_bibliography.html#tannor92" id="id29">[5]</a><a class="bibtex reference internal" href="99_bibliography.html#reichjcp12" id="id30">[22]</a>.</p>
+<p>The choice of Python as an implementation language is due to Python’s
+easy-to-learn syntax, expressiveness, and immense popularity in the
+scientific community. Moreover, the <a class="reference external" href="http://qutip.org">QuTiP library</a> exists,
+providing a general purpose tool to numerically describe quantum systems
+and their dynamics. QuTiP already includes basic versions of other
+popular quantum control algorithms such as GRAPE and the gradient-free
+CRAB <a class="bibtex reference internal" href="99_bibliography.html#canevapra11" id="id31">[23]</a>. The <a class="reference external" href="https://jupyter.org">Jupyter notebook</a> framework is available to provide an ideal
+platform for the interactive exploration of the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package’s
+capabilities, and to facilitate reproducible research workflows.</p>
+<p>The <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package targets both students wishing to
+enter the field of quantum optimal control, and researchers in the
+field. By providing a comprehensive set of <a class="reference internal" href="09_examples.html#krotov-example-notebooks"><span class="std std-ref">Examples</span></a>, we
+enable users of
+our package to explore the formulation of typical control problems, and
+to understand how Krotov’s method can solve them. These examples are
+inspired by recent
+publications <a class="bibtex reference internal" href="99_bibliography.html#mullerqip11" id="id32">[24]</a><a class="bibtex reference internal" href="99_bibliography.html#goerzpra2014" id="id33">[25]</a><a class="bibtex reference internal" href="99_bibliography.html#goerznjp2014" id="id34">[26]</a><a class="bibtex reference internal" href="99_bibliography.html#wattspra2015" id="id35">[27]</a><a class="bibtex reference internal" href="99_bibliography.html#goerzpra2015" id="id36">[28]</a><a class="bibtex reference internal" href="99_bibliography.html#basilewitschnjp2017" id="id37">[29]</a>,
+and thus show the use of the method in the purview of current research.
+In particular, the package is not restricted to closed quantum systems,
+but can fully address open system dynamics, and thus aide in the
+development of Noisy Intermediate-Scale Quantum (NISQ)
+technology <a class="bibtex reference internal" href="99_bibliography.html#preskillq2018" id="id38">[30]</a>. Optimal control is also
+increasingly important in the design of
+experiments <a class="bibtex reference internal" href="99_bibliography.html#glaserepjd2015" id="id39">[4]</a><a class="bibtex reference internal" href="99_bibliography.html#lovecchiopra16" id="id40">[12]</a><a class="bibtex reference internal" href="99_bibliography.html#vanfrankscirep16" id="id41">[13]</a><a class="bibtex reference internal" href="99_bibliography.html#ofeknat16" id="id42">[14]</a><a class="bibtex reference internal" href="99_bibliography.html#sorensennat16" id="id43">[15]</a><a class="bibtex reference internal" href="99_bibliography.html#heeresnatcomm17" id="id44">[16]</a><a class="bibtex reference internal" href="99_bibliography.html#heckpnas18" id="id45">[17]</a><a class="bibtex reference internal" href="99_bibliography.html#fengpra18" id="id46">[18]</a><a class="bibtex reference internal" href="99_bibliography.html#omrans2019" id="id47">[19]</a><a class="bibtex reference internal" href="99_bibliography.html#larrouy" id="id48">[20]</a>,
+and we hope that the availability of an easy-to-use implementation of
+Krotov’s method will facilitate this further.</p>
+<p>Large Hilbert space
+dimensions <a class="bibtex reference internal" href="99_bibliography.html#goerzepjqt2015" id="id49">[31]</a><a class="bibtex reference internal" href="99_bibliography.html#goerznpjqi17" id="id50">[32]</a><a class="bibtex reference internal" href="99_bibliography.html#cuiqst17" id="id51">[10]</a><a class="bibtex reference internal" href="99_bibliography.html#patschpra18" id="id52">[11]</a>
+and open quantum systems <a class="bibtex reference internal" href="99_bibliography.html#goerznjp2014" id="id53">[26]</a> in particular
+require considerable numerical effort to optimize. Compared to the
+Fortran and C/C++ languages traditionally used for scientific computing,
+and more recently Julia <a class="bibtex reference internal" href="99_bibliography.html#bezansonsirev2017" id="id54">[33]</a>, pure
+Python code usually performs slower by two to three orders of
+magnitude <a class="bibtex reference internal" href="99_bibliography.html#akeretac2015" id="id55">[34]</a><a class="bibtex reference internal" href="99_bibliography.html#eichhorncsj2018" id="id56">[35]</a>. Thus, for
+hard optimization problems that require several thousand iterations to
+converge, the Python implementation provided by the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package
+may not be sufficiently fast. In this case, it may be desirable to
+implement the entire optimization and time propagation in a single, more
+efficient (compiled) language. Our Python implementation of Krotov’s
+method puts an emphasis on clarity, and the documentation provides
+detailed explanations of all necessary concepts, especially the correct
+<a class="reference internal" href="07_krotovs_method.html#timediscretization"><span class="std std-ref">Time discretization</span></a> and the possibility to parallelize the optimization.
+Thus, the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package can serve as a reference implementation,
+leveraging Python’s reputation as “executable pseudocode”, and as a foundation
+against which to test other implementations.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="07_krotovs_method.html" class="btn btn-neutral float-right" title="Krotov’s Method" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="05_history.html" class="btn btn-neutral float-left" title="History" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

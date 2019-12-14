@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.shapes &mdash; Krotov a6a2405 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/version-alert.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.shapes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.shapes</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions that may be used for the `update_shape` value in the options-dict</span>
+<span class="sd">for each control (`pulse_options` parameter in :func:`.optimize_pulses`), or</span>
+<span class="sd">for generating guess pulses&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;qutip_callback&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;zero_shape&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;one_shape&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;flattop&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;box&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;blackman&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="qutip_callback"><a class="viewcode-back" href="../../API/krotov.shapes.html#krotov.shapes.qutip_callback">[docs]</a><span class="k">def</span> <span class="nf">qutip_callback</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert `func` into the correct form of a QuTiP time-dependent control</span>
+
+<span class="sd">    QuTiP requires that &quot;callback&quot; functions that are used to express</span>
+<span class="sd">    time-dependent controls take a parameter `t` and `args`. This function</span>
+<span class="sd">    takes a function `func` that takes `t` as its first parameter and an</span>
+<span class="sd">    arbitrary number of other parameters. The given `kwargs` set values for</span>
+<span class="sd">    these other parameters. Parameters not contained in `kwargs` are set</span>
+<span class="sd">    *at runtime* from the `args` dict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">partial_func</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="n">partial_func</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">callback</span></div>
+
+
+<div class="viewcode-block" id="zero_shape"><a class="viewcode-back" href="../../API/krotov.shapes.html#krotov.shapes.zero_shape">[docs]</a><span class="k">def</span> <span class="nf">zero_shape</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Shape function 0 for all values of `t`&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="one_shape"><a class="viewcode-back" href="../../API/krotov.shapes.html#krotov.shapes.one_shape">[docs]</a><span class="k">def</span> <span class="nf">one_shape</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Shape function 1 for all values of `t`&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="flattop"><a class="viewcode-back" href="../../API/krotov.shapes.html#krotov.shapes.flattop">[docs]</a><span class="k">def</span> <span class="nf">flattop</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">,</span> <span class="n">t_rise</span><span class="p">,</span> <span class="n">t_fall</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;blackman&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Flat shape (one) with a switch-on/switch-off from zero</span>
+
+<span class="sd">    The flattop function starts at 0, and ramps to to 1 during the `t_rise`</span>
+<span class="sd">    interval. For ``func=&#39;blackman&#39;``, the switch-on shape is half of a</span>
+<span class="sd">    Blackman window (see :func:`blackman`). For ``func=&#39;sinsq``, it is a</span>
+<span class="sd">    sine-squared curve. The function then remains at value 1, before ramping</span>
+<span class="sd">    down to 0 again during `t_fall`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        t (float): Time  point or time grid</span>
+<span class="sd">        t_start (float): Start of flattop window</span>
+<span class="sd">        t_stop (float): Stop of flattop window</span>
+<span class="sd">        t_rise (float): Duration of ramp-up, starting at `t_start`</span>
+<span class="sd">        t_fall (float): Duration of ramp-down, ending at `t_stop`.</span>
+<span class="sd">            If not given, ``t_fall=t_rise``.</span>
+<span class="sd">        func (str): One of &#39;blackman&#39;, &#39;sinsq&#39;</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        You may use :class:`numpy.vectorize` to transform this into a shape</span>
+<span class="sd">        function for arrays, :func:`functools.partial` to fix the function</span>
+<span class="sd">        arguments other than `t`, creating a function suitable for the</span>
+<span class="sd">        `update_shape` value of `pulse_options`, and :func:`qutip_callback` to</span>
+<span class="sd">        create a function suitable as a time-dependent control in QuTiP.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">t_fall</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">t_fall</span> <span class="o">=</span> <span class="n">t_rise</span>
+    <span class="k">if</span> <span class="n">func</span> <span class="o">==</span> <span class="s1">&#39;blackman&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_flattop_blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">,</span> <span class="n">t_rise</span><span class="p">,</span> <span class="n">t_fall</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func</span> <span class="o">==</span> <span class="s1">&#39;sinsq&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_flattop_sinsq</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">,</span> <span class="n">t_rise</span><span class="p">,</span> <span class="n">t_fall</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid func: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_flattop_sinsq</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">,</span> <span class="n">t_rise</span><span class="p">,</span> <span class="n">t_fall</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t_start</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">t_stop</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">t_start</span> <span class="o">+</span> <span class="n">t_rise</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_start</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">t_rise</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="n">t_stop</span> <span class="o">-</span> <span class="n">t_fall</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_stop</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">t_fall</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">f</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+
+<span class="k">def</span> <span class="nf">_flattop_blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">,</span> <span class="n">t_rise</span><span class="p">,</span> <span class="n">t_fall</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t_start</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">t_stop</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">t_start</span> <span class="o">+</span> <span class="n">t_rise</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_start</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t_rise</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="n">t_stop</span> <span class="o">-</span> <span class="n">t_fall</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_stop</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t_fall</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+
+<div class="viewcode-block" id="box"><a class="viewcode-back" href="../../API/krotov.shapes.html#krotov.shapes.box">[docs]</a><span class="k">def</span> <span class="nf">box</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Box-shape (Theta-function)</span>
+
+<span class="sd">    The shape is 0 before `t_start` and after `t_stop` and 1 elsewhere.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        t (float): Time point or time grid</span>
+<span class="sd">        t_start (float): First value of `t` for which the box has value 1</span>
+<span class="sd">        t_stop (float): Last value of `t` for which the box has value 1</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        You may use :class:`numpy.vectorize`, :func:`functools.partial`, or</span>
+<span class="sd">        :func:`qutip_callback`, cf.  :func:`flattop`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_start</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="n">t_stop</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="mf">1.0</span></div>
+
+
+<div class="viewcode-block" id="blackman"><a class="viewcode-back" href="../../API/krotov.shapes.html#krotov.shapes.blackman">[docs]</a><span class="k">def</span> <span class="nf">blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.16</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Blackman window shape</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        B(t; t_0, t_1) =</span>
+<span class="sd">            \frac{1}{2}\left(</span>
+<span class="sd">                1 - a - \cos\left(2\pi \frac{t - t_0}{t_1 - t_0}\right)</span>
+<span class="sd">                + a \cos\left(4\pi \frac{t - t_0}{t_1 - t_0}\right)</span>
+<span class="sd">            \right)\,,</span>
+
+<span class="sd">    with $a = 0.16$.</span>
+
+<span class="sd">    See http://en.wikipedia.org/wiki/Window_function#Blackman_windows</span>
+
+<span class="sd">    A Blackman shape looks nearly identical to a Gaussian with a 6-sigma</span>
+<span class="sd">    interval between `t_start` and `t_stop`.  Unlike the Gaussian,</span>
+<span class="sd">    however, it will go exactly to zero at the edges. Thus, Blackman pulses</span>
+<span class="sd">    are often preferable to Gaussians.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        t (float or numpy.ndarray): Time point or time grid</span>
+<span class="sd">        t_start (float): Starting point $t_0$ of Blackman shape</span>
+<span class="sd">        t_stop (float): End point $t_1$ of Blackman shape</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float or numpy.ndarray: If `t` is a float, return the value of the</span>
+<span class="sd">        Blackman shape at `t`.  If `t` is an array, return an array of same</span>
+<span class="sd">        size as `t`, containing the values for the Blackman shape (zero before</span>
+<span class="sd">        `t_start` and after `t_stop`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">t_stop</span> <span class="o">-</span> <span class="n">t_start</span>
+    <span class="n">box_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="mf">0.5</span>
+        <span class="o">*</span> <span class="n">box_vec</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="p">,</span> <span class="n">t_stop</span><span class="p">)</span>
+        <span class="o">*</span> <span class="p">(</span>
+            <span class="mf">1.0</span>
+            <span class="o">-</span> <span class="n">a</span>
+            <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_start</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_start</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

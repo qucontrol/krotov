@@ -1,0 +1,903 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Optimization of a State-to-State Transfer in a Two-Level-System &mdash; Krotov a6a2405 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/version-alert.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Optimization of a State-to-State Transfer in a Lambda System in the RWA" href="02_example_lambda_system_rwa_complex_pulse.html" />
+    <link rel="prev" title="Examples" href="../09_examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../09_examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization of a State-to-State Transfer in a Two-Level-System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Two-level-Hamiltonian">Two-level-Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optimization-target">Optimization target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Simulate-dynamics-under-the-guess-field">Simulate dynamics under the guess field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optimize">Optimize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Simulate-the-dynamics-under-the-optimized-field">Simulate the dynamics under the optimized field</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html">Optimization of a State-to-State Transfer in a Lambda System in the RWA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_example_lambda_system_rwa_non_hermitian.html">Optimization of a Dissipative State-to-State Transfer in a Lambda System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_example_dissipative_qubit_reset.html">Optimization of Dissipative Qubit Reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_example_transmon_xgate.html">Optimization of an X-Gate for a Transmon Qubit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_example_3states.html">Optimization of a Dissipative Quantum Gate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_example_PE.html">Optimization towards a Perfect Entangler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_example_ensemble.html">Ensemble Optimization for Robust Pulses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_example_numpy.html">Optimization with numpy Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../09_examples.html">Examples</a> &raquo;</li>
+        
+      <li>Optimization of a State-to-State Transfer in a Two-Level-System</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/a6a2405/docs/notebooks/01_example_simple_state_to_state.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/a6a2405?filepath=docs/notebooks/01_example_simple_state_to_state.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<div class="section" id="Optimization-of-a-State-to-State-Transfer-in-a-Two-Level-System">
+<h1>Optimization of a State-to-State Transfer in a Two-Level-System<a class="headerlink" href="#Optimization-of-a-State-to-State-Transfer-in-a-Two-Level-System" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
+<span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="kn">import</span> <span class="nn">qutip</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">krotov</span>
+<span class="o">%</span><span class="k">watermark</span> -v --iversions
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+qutip            4.4.1
+numpy            1.17.2
+matplotlib       3.1.1
+krotov           0.4.1
+matplotlib.pylab 1.17.2
+scipy            1.3.1
+CPython 3.7.3
+IPython 7.8.0
+</pre></div></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2}\mid{#2}\vphantom{#1}\right\rangle} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}}\)</span></p>
+<p>This first example illustrates the basic use of the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> package by solving a simple canonical optimization problem: the transfer of population in a two level system.</p>
+<div class="section" id="Two-level-Hamiltonian">
+<h2>Two-level-Hamiltonian<a class="headerlink" href="#Two-level-Hamiltonian" title="Permalink to this headline">¶</a></h2>
+<p>We consider the Hamiltonian <span class="math notranslate nohighlight">\(\op{H}_{0} = - \frac{\omega}{2} \op{\sigma}_{z}\)</span>, representing a simple qubit with energy level splitting <span class="math notranslate nohighlight">\(\omega\)</span> in the basis <span class="math notranslate nohighlight">\(\{\ket{0},\ket{1}\}\)</span>. The control field <span class="math notranslate nohighlight">\(\epsilon(t)\)</span> is assumed to couple via the Hamiltonian <span class="math notranslate nohighlight">\(\op{H}_{1}(t) = \epsilon(t) \op{\sigma}_{x}\)</span> to the qubit, i.e., the control field effectively drives transitions between both qubit states.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ampl0</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Two-level-system Hamiltonian</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        omega (float): energy separation of the qubit levels</span>
+<span class="sd">        ampl0 (float): constant amplitude of the driving field</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">H0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">omega</span> <span class="o">*</span> <span class="n">qutip</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span>
+    <span class="n">H1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">sigmax</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">guess_control</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ampl0</span> <span class="o">*</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">flattop</span><span class="p">(</span>
+            <span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t_rise</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s2">&quot;blackman&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">H0</span><span class="p">,</span> <span class="p">[</span><span class="n">H1</span><span class="p">,</span> <span class="n">guess_control</span><span class="p">]]</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">H</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The control field here switches on from zero at <span class="math notranslate nohighlight">\(t=0\)</span> to it’s maximum amplitude 0.2 within the time period 0.3 (the switch-on shape is half a <a class="reference external" href="https://en.wikipedia.org/wiki/Window_function#Blackman_window">Blackman pulse</a>). It switches off again in the time period 0.3 before the final time <span class="math notranslate nohighlight">\(T=5\)</span>). We use a time grid with 500 time steps between 0 and <span class="math notranslate nohighlight">\(T\)</span>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_pulse</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
+        <span class="n">pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">pulse</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pulse amplitude&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_pulse</span><span class="p">(</span><span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">tlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_example_simple_state_to_state_10_0.png" src="../_images/notebooks_01_example_simple_state_to_state_10_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Optimization-target">
+<h2>Optimization target<a class="headerlink" href="#Optimization-target" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">krotov</span></code> package requires the goal of the optimization to be described by a list of <code class="docutils literal notranslate"><span class="pre">Objective</span></code> instances. In this example, there is only a single objective: the state-to-state transfer from initial state <span class="math notranslate nohighlight">\(\ket{\Psi_{\init}} = \ket{0}\)</span> to the target state <span class="math notranslate nohighlight">\(\ket{\Psi_{\tgt}} = \ket{1}\)</span>, under the dynamics of the Hamiltonian <span class="math notranslate nohighlight">\(\op{H}(t)\)</span>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">krotov</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span>
+        <span class="n">initial_state</span><span class="o">=</span><span class="n">qutip</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">),</span> <span class="n">target</span><span class="o">=</span><span class="n">qutip</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">),</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span>
+    <span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">objectives</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Objective[|Ψ₀(2)⟩ to |Ψ₁(2)⟩ via [H₀[2,2], [H₁[2,2], u₁(t)]]]]
+</pre></div></div>
+</div>
+<p>In addition, we would like to maintain the property of the control field to be zero at <span class="math notranslate nohighlight">\(t=0\)</span> and <span class="math notranslate nohighlight">\(t=T\)</span>, with a smooth switch-on and switch-off. We can define an “update shape” <span class="math notranslate nohighlight">\(S(t) \in [0, 1]\)</span> for this purpose: Krotov’s method will update the field at each point in time proportionally to <span class="math notranslate nohighlight">\(S(t)\)</span>; wherever <span class="math notranslate nohighlight">\(S(t)\)</span> is zero, the optimization will not change the value of the control from the original guess.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Shape function for the field update&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">flattop</span><span class="p">(</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t_rise</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">t_fall</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;blackman&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Beyond the shape, Krotov’s method uses a parameter <span class="math notranslate nohighlight">\(\lambda_a\)</span> for each control field that determines the overall magnitude of the respective field in each iteration (the smaller <span class="math notranslate nohighlight">\(\lambda_a\)</span>, the larger the update; specifically, the update is proportional to <span class="math notranslate nohighlight">\(\frac{S(t)}{\lambda_a}\)</span>). Both the update-shape <span class="math notranslate nohighlight">\(S(t)\)</span> and the <span class="math notranslate nohighlight">\(\lambda_a\)</span> parameter must be passed to the optimization routine as “pulse options”:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pulse_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lambda_a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">update_shape</span><span class="o">=</span><span class="n">S</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Simulate-dynamics-under-the-guess-field">
+<h2>Simulate dynamics under the guess field<a class="headerlink" href="#Simulate-dynamics-under-the-guess-field" title="Permalink to this headline">¶</a></h2>
+<p>Before running the optimization procedure, we first simulate the dynamics under the guess field <span class="math notranslate nohighlight">\(\epsilon_{0}(t)\)</span>. The following solves equation of motion for the defined objective, which contains the initial state <span class="math notranslate nohighlight">\(\ket{\Psi_{\init}}\)</span> and the Hamiltonian <span class="math notranslate nohighlight">\(\op{H}(t)\)</span> defining its evolution. This delegates to QuTiP’s usual <code class="docutils literal notranslate"><span class="pre">mesolve</span></code> function.</p>
+<p>We use the projectors <span class="math notranslate nohighlight">\(\op{P}_0 = \ket{0}\bra{0}\)</span> and <span class="math notranslate nohighlight">\(\op{P}_1 = \ket{1}\bra{1}\)</span> for calculating the population:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">proj0</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">qutip</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">))</span>
+<span class="n">proj1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">qutip</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">guess_dynamics</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj0</span><span class="p">,</span> <span class="n">proj1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>The plot of the population dynamics shows that the guess field does not transfer the initial state <span class="math notranslate nohighlight">\(\ket{\Psi_{\init}} = \ket{0}\)</span> to the desired target state <span class="math notranslate nohighlight">\(\ket{\Psi_{\tgt}} = \ket{1}\)</span> (so the optimization will have something to do).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_population</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;population&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_population</span><span class="p">(</span><span class="n">guess_dynamics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_example_simple_state_to_state_25_0.png" src="../_images/notebooks_01_example_simple_state_to_state_25_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Optimize">
+<h2>Optimize<a class="headerlink" href="#Optimize" title="Permalink to this headline">¶</a></h2>
+<p>In the following we optimize the guess field <span class="math notranslate nohighlight">\(\epsilon_{0}(t)\)</span> such that the intended state-to-state transfer <span class="math notranslate nohighlight">\(\ket{\Psi_{\init}} \rightarrow \ket{\Psi_{\tgt}}\)</span> is solved, via the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> package’s central <code class="docutils literal notranslate"><span class="pre">optimize_pulses</span></code> routine. It requires, besides the previously defined <code class="docutils literal notranslate"><span class="pre">objectives</span></code>, information about the optimization functional <span class="math notranslate nohighlight">\(J_T\)</span> (implicitly, via <code class="docutils literal notranslate"><span class="pre">chi_constructor</span></code>, which calculates the states <span class="math notranslate nohighlight">\(\ket{\chi} = \frac{J_T}{\bra{\Psi}}\)</span>).</p>
+<p>Here, we choose <span class="math notranslate nohighlight">\(J_T = J_{T,\text{ss}} = 1 - F_{\text{ss}}\)</span> with <span class="math notranslate nohighlight">\(F_{\text{ss}} = \Abs{\Braket{\Psi_{\tgt}}{\Psi(T)}}^2\)</span>, with <span class="math notranslate nohighlight">\(\ket{\Psi(T)}\)</span> the forward propagated state of <span class="math notranslate nohighlight">\(\ket{\Psi_{\init}}\)</span>. Even though <span class="math notranslate nohighlight">\(J_T\)</span> is not explicitly required for the optimization, it is nonetheless useful to be able to calculate and print it as a way to provide some feedback about the optimization progress. Here, we pass as an <code class="docutils literal notranslate"><span class="pre">info_hook</span></code> the function
+<code class="docutils literal notranslate"><span class="pre">krotov.info_hooks.print_table</span></code>, using <code class="docutils literal notranslate"><span class="pre">krotov.functionals.J_T_ss</span></code> (which implements the above functional; the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> library contains implementations of all the “standard” functionals used in quantum control). This <code class="docutils literal notranslate"><span class="pre">info_hook</span></code> prints a tabular overview after each iteration, containing the value of <span class="math notranslate nohighlight">\(J_T\)</span>, the magnitude of the integrated pulse update, and information on how much <span class="math notranslate nohighlight">\(J_T\)</span> (and the full Krotov functional <span class="math notranslate nohighlight">\(J\)</span>) changes between iterations. It also stores the
+value of <span class="math notranslate nohighlight">\(J_T\)</span> internally in the <code class="docutils literal notranslate"><span class="pre">Result.info_vals</span></code> attribute.</p>
+<p>The value of <span class="math notranslate nohighlight">\(J_T\)</span> can also be used to check the convergence. In this example, we limit the number of total iterations to 10, but more generally, we could use the <code class="docutils literal notranslate"><span class="pre">check_convergence</span></code> parameter to stop the optimization when <span class="math notranslate nohighlight">\(J_T\)</span> falls below some threshold. Here, we only pass a function that checks that the value of <span class="math notranslate nohighlight">\(J_T\)</span> is monotonically decreasing. The <code class="docutils literal notranslate"><span class="pre">krotov.convergence.check_monotonic_error</span></code> relies on <code class="docutils literal notranslate"><span class="pre">krotov.info_hooks.print_table</span></code> internally having stored the value
+of <span class="math notranslate nohighlight">\(J_T\)</span> to the <code class="docutils literal notranslate"><span class="pre">Result.info_vals</span></code> in each iteration.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_result</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize_pulses</span><span class="p">(</span>
+    <span class="n">objectives</span><span class="p">,</span>
+    <span class="n">pulse_options</span><span class="o">=</span><span class="n">pulse_options</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="o">=</span><span class="n">tlist</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">expm</span><span class="p">,</span>
+    <span class="n">chi_constructor</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">chis_ss</span><span class="p">,</span>
+    <span class="n">info_hook</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">print_table</span><span class="p">(</span><span class="n">J_T</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">J_T_ss</span><span class="p">),</span>
+    <span class="n">check_convergence</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">value_below</span><span class="p">(</span><span class="s1">&#39;1e-3&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;J_T&#39;</span><span class="p">),</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">check_monotonic_error</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">store_all_pulses</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  iter.        J_T    ∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs
+      0   9.51e-01    0.00e+00   9.51e-01        n/a        n/a     0
+      1   9.24e-01    2.32e-03   9.27e-01  -2.70e-02  -2.47e-02     1
+      2   8.83e-01    3.53e-03   8.87e-01  -4.11e-02  -3.75e-02     1
+      3   8.23e-01    5.22e-03   8.28e-01  -6.06e-02  -5.54e-02     1
+      4   7.38e-01    7.39e-03   7.45e-01  -8.52e-02  -7.78e-02     1
+      5   6.26e-01    9.75e-03   6.36e-01  -1.11e-01  -1.01e-01     1
+      6   4.96e-01    1.16e-02   5.07e-01  -1.31e-01  -1.19e-01     1
+      7   3.62e-01    1.21e-02   3.74e-01  -1.34e-01  -1.22e-01     1
+      8   2.44e-01    1.09e-02   2.55e-01  -1.18e-01  -1.07e-01     1
+      9   1.53e-01    8.43e-03   1.62e-01  -9.03e-02  -8.19e-02     1
+     10   9.20e-02    5.80e-03   9.78e-02  -6.14e-02  -5.56e-02     1
+     11   5.35e-02    3.66e-03   5.72e-02  -3.85e-02  -3.48e-02     1
+     12   3.06e-02    2.19e-03   3.28e-02  -2.29e-02  -2.07e-02     2
+     13   1.73e-02    1.27e-03   1.86e-02  -1.33e-02  -1.20e-02     2
+     14   9.79e-03    7.24e-04   1.05e-02  -7.55e-03  -6.82e-03     1
+     15   5.52e-03    4.10e-04   5.93e-03  -4.27e-03  -3.86e-03     1
+     16   3.11e-03    2.31e-04   3.35e-03  -2.41e-03  -2.18e-03     1
+     17   1.76e-03    1.30e-04   1.89e-03  -1.36e-03  -1.23e-03     1
+     18   9.92e-04    7.36e-05   1.07e-03  -7.65e-04  -6.91e-04     1
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_result</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Krotov Optimization Result
+--------------------------
+- Started at 2019-10-11 12:18:39
+- Number of objectives: 1
+- Number of iterations: 18
+- Reason for termination: Reached convergence: J_T &lt; 1e-3
+- Ended at 2019-10-11 12:19:08
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Simulate-the-dynamics-under-the-optimized-field">
+<h2>Simulate the dynamics under the optimized field<a class="headerlink" href="#Simulate-the-dynamics-under-the-optimized-field" title="Permalink to this headline">¶</a></h2>
+<p>Having obtained the optimized control field, we can simulate the dynamics to verify that the optimized field indeed drives the initial state <span class="math notranslate nohighlight">\(\ket{\Psi_{\init}} = \ket{0}\)</span> to the desired target state <span class="math notranslate nohighlight">\(\ket{\Psi_{\tgt}} = \ket{1}\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_dynamics</span> <span class="o">=</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span>
+    <span class="n">tlist</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj0</span><span class="p">,</span> <span class="n">proj1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_population</span><span class="p">(</span><span class="n">opt_dynamics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_example_simple_state_to_state_33_0.png" src="../_images/notebooks_01_example_simple_state_to_state_33_0.png" />
+</div>
+</div>
+<p>To gain some intuition on how the controls and the dynamics change throughout the optimization procedure, we can generate a plot of the control fields and the dynamics after each iteration of the optimization algorithm. This is possible because we set <code class="docutils literal notranslate"><span class="pre">store_all_pulses=True</span></code> in the call to <code class="docutils literal notranslate"><span class="pre">optimize_pulses</span></code>, which allows to recover the optimized controls from each iteration from <code class="docutils literal notranslate"><span class="pre">Result.all_pulses</span></code>. The flag is not set to True by default, as for long-running optimizations with thousands or
+tens of thousands iterations, the storage of all control fields may require significant memory.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_iterations</span><span class="p">(</span><span class="n">opt_result</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot the control fields in population dynamics over all iterations.</span>
+
+<span class="sd">    This depends on ``store_all_pulses=True`` in the call to</span>
+<span class="sd">    `optimize_pulses`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax_ctr</span><span class="p">,</span> <span class="n">ax_dyn</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">n_iters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">iters</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">pulses</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">iters</span><span class="p">,</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">all_pulses</span><span class="p">):</span>
+        <span class="n">controls</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">krotov</span><span class="o">.</span><span class="n">structural_conversions</span><span class="o">.</span><span class="n">pulse_onto_tlist</span><span class="p">(</span><span class="n">pulse</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">pulse</span> <span class="ow">in</span> <span class="n">pulses</span>
+        <span class="p">]</span>
+        <span class="n">objectives</span> <span class="o">=</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">objectives_with_controls</span><span class="p">(</span><span class="n">controls</span><span class="p">)</span>
+        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span>
+            <span class="n">opt_result</span><span class="o">.</span><span class="n">tlist</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj0</span><span class="p">,</span> <span class="n">proj1</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">iteration</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ls</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span>  <span class="c1"># dashed</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># full opacity</span>
+            <span class="n">ctr_label</span> <span class="o">=</span> <span class="s1">&#39;guess&#39;</span>
+            <span class="n">pop_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0 (guess)&#39;</span><span class="p">,</span> <span class="s1">&#39;1 (guess)&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">iteration</span> <span class="o">==</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">iters</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">ls</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span>  <span class="c1"># solid</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># full opacity</span>
+            <span class="n">ctr_label</span> <span class="o">=</span> <span class="s1">&#39;optimized&#39;</span>
+            <span class="n">pop_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0 (optimized)&#39;</span><span class="p">,</span> <span class="s1">&#39;1 (optimized)&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ls</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span>  <span class="c1"># solid</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_iters</span><span class="p">)</span>  <span class="c1"># max 50%</span>
+            <span class="n">ctr_label</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">pop_labels</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">ax_ctr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">dynamics</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
+            <span class="n">controls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">ctr_label</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="n">ls</span><span class="o">=</span><span class="n">ls</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax_dyn</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">dynamics</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
+            <span class="n">dynamics</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">pop_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span>  <span class="c1"># default blue</span>
+            <span class="n">ls</span><span class="o">=</span><span class="n">ls</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax_dyn</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">dynamics</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
+            <span class="n">dynamics</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">pop_labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>  <span class="c1"># default orange</span>
+            <span class="n">ls</span><span class="o">=</span><span class="n">ls</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">ax_dyn</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax_dyn</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax_dyn</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;population&#39;</span><span class="p">)</span>
+    <span class="n">ax_ctr</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax_ctr</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax_ctr</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;control amplitude&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_iterations</span><span class="p">(</span><span class="n">opt_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_example_simple_state_to_state_36_0.png" src="../_images/notebooks_01_example_simple_state_to_state_36_0.png" />
+</div>
+</div>
+<p>The initial guess (dashed) and final optimized (solid) control amplitude and resulting dynamics are shown with full opacity, whereas the curves corresponding intermediate iterations are shown with decreasing transparency.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02_example_lambda_system_rwa_complex_pulse.html" class="btn btn-neutral float-right" title="Optimization of a State-to-State Transfer in a Lambda System in the RWA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../09_examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
