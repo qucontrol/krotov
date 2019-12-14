@@ -7,9 +7,10 @@ assignees: ''
 
 ---
 
-Is there something you cannot figure out how to do?
+Is there something you cannot figure out how to do? Describe the problem!
 
 * Krotov version:
+* QuTiP version:
 * Python version:
 * Operating System:
 
