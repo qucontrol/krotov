@@ -684,11 +684,12 @@ def gate_objectives(
     basis_states,
     gate,
     H,
+    *,
     c_ops=None,
     local_invariants=False,
     liouville_states_set=None,
     weights=None,
-    normalize_weights=True,
+    normalize_weights=True
 ):
     r"""Construct a list of objectives for optimizing towards a quantum gate
 
@@ -1025,7 +1026,7 @@ def _gate_objectives_li_pe(basis_states, gate, H, c_ops):
     ]
 
 
-def ensemble_objectives(objectives, Hs):
+def ensemble_objectives(objectives, Hs, *, keep_original_objectives=True):
     """Extend `objectives` for an "ensemble optimization"
 
     This creates a list of objectives for an optimization for robustness with
@@ -1039,14 +1040,22 @@ def ensemble_objectives(objectives, Hs):
         objectives (list[Objective]): The $n$ original objectives
         Hs (list): List of $m$ variations of the original
             Hamiltonian/Liouvillian
+        keep_original_objectives (bool): If given as False, drop the original
+            objectives from the result. This is especially useful if `Hs`
+            contains the original Hamiltonian (which is often more
+            straightforward)
 
     Returns:
         list[Objective]: List of $n (m+1)$ new objectives that consists of the
         original objectives, plus one copy of the original objectives per
         element of `Hs` where the `H` attribute of each objectives is
-        replaced by that element.
+        replaced by that element. Alternatively, for
+        ``keep_original_objectives=False``, list of $n m$ new objectives
+        without the original objectives.
     """
-    new_objectives = copy.copy(objectives)
+    new_objectives = []
+    if keep_original_objectives:
+        new_objectives = copy.copy(objectives)
     for H in Hs:
         for obj in objectives:
             new_objectives.append(
