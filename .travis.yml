@@ -1,6 +1,10 @@
 # Config file for automatic testing at travis-ci.org
 dist: xenial
 language: python
+env:
+  global:
+    # Doctr deploy key for qucontrol/krotov
+    - secure: "GMn30DUTZh2SvIvFu9HSGEZRy0y6JyOJ3wl7iM2ykV9aXbe3QkgE+rREnrPqsgcT15rj0CQLpOuCEWspiwqiEL1suokOGDjBRXoyMXHYy7WFRxP7dfFxQzuquN2rW8wS+MLJhQRRBJBoLopsRZioREelDxWUbqOCSKO9PXQA2oWl1i9XeqriXG9w5/jH74A8WeV+wL9uJ/+RPZoHjU+oCQ9Ri9ad3FYJCThqxIAFCMiKx2gMrxJlmU3kgRJulh6fyL8YK3dNV9132o5SElzVAtoe0pNNphIJx6UyqGBKctazXyPr+mlLokZw9tx6rg25bmc4XlRG46pqTP89wC8Xc7WBKxdJsYNksqgvxKZGt8vUenpDeYwvZMRbcukclHTskQbZFHJsXALhNnPe0APgrRK45aDL7++RBD8+BCjcMHQVd6qFd6UKCrs2etTXkI5uTqQtJve7Pe8ofcTcN1BQwI9IlcZYveuMX8Tn5378+Lwxqbc92OSkGPYRp+uOjKiQXDZbdCCokcqL9OGyGh9TcEgSD1BNMT8ZlGFGtQ18oXnP70hhvm0UPEgk3FIRWFX2VRIeWlZX4UntUDiaIo65C9GSIO2lEqZL23SPm8z/vk5Jh20JFSYvRi/Llr0mORZQiZyY+b2ZaoYhQutnK3wNdA7IIhbfzxuh1wUCuxdtaBA="
 matrix:
   fast_finish: true
   include:
@@ -9,7 +13,7 @@ matrix:
       env: TOTEST="" TOXENV="run-blackcheck,run-isortcheck" TRAVISCMD=""
     - name: Docs
       python: 3.7
-      env: TOTEST="" TOXENV=docs TRAVISCMD=""
+      env: DOCS="true"
       addons:
         apt_packages:
           - pandoc
@@ -58,13 +62,26 @@ matrix:
 before_install:
     - sudo apt-get -y install liblapack-dev libblas-dev gfortran
 install:
+  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+  - travis_wait source .travis/texlive/texlive_install.sh
   - pip install tox
   - pip install codecov
   - pip install --upgrade cython
   - pip freeze
   - printenv
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
 script:
+  - set -e
   - if [[ "${TOXENV}" == "py38dev-test" ]]; then travis_wait 40 tox -c tox-pyenv.ini -e py38dev-runcmd -- python --version; fi
-  - $TRAVISCMD tox -c tox-pyenv.ini -e $TOXENV -- $TOTEST
+  - |
+    if [[ "${DOCS}" == "true" ]]; then
+      source .travis/docs.sh
+    else
+      $TRAVISCMD tox -c tox-pyenv.ini -e $TOXENV -- $TOTEST
+    fi
+  - echo "DONE"
 after_success:
-  - codecov
+  - if [[ "${DOCS}" != "true" ]]; then codecov; fi

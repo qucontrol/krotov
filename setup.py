@@ -54,6 +54,7 @@ dev_requirements = [
     'watermark',
     'weylchamber>=0.3.2',
     'wheel',
+    'doctr',
 ]
 if sys.version_info >= (3, 6):
     dev_requirements.append('black')

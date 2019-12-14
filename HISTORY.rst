@@ -10,6 +10,7 @@ History
 * Added: info-hooks now have access to the additional arguments `propagator`, `chi_constructor`, `mu`, `sigma`, `iter_start`, and `iter_stop` (`#66`_)
 * Added: parameter `keep_original_objectives` to ``krotov.objectives.ensemble_objectives`` (`#67`_)
 * Added: "Related Software" in the documentation
+* Update: Documentation is now hosted on gh-pages_ and deployed by Doctr_ (`#68`_)
 
 0.5.0 (2019-12-04)
 ------------------
@@ -84,6 +85,8 @@ History
 * Support for state-to-state and gate optimization, for both closed and open systems
 
 
+.. _gh-pages: https://qucontrol.github.io/krotov
+.. _Doctr: https://drdoctr.github.io
 .. _@uiofgh: https://github.com/uiofgh
 .. _@TejasAvinashShetty: https://github.com/TejasAvinashShetty
 .. _@timohillmann: https://github.com/timohillmann
@@ -110,3 +113,4 @@ History
 .. _#65: https://github.com/qucontrol/krotov/issues/65
 .. _#66: https://github.com/qucontrol/krotov/issues/66
 .. _#67: https://github.com/qucontrol/krotov/issues/67
+.. _#68: https://github.com/qucontrol/krotov/issues/68

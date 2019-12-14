@@ -407,6 +407,23 @@ to generate the documentation locally.
 .. _BibTeX: https://sphinxcontrib-bibtex.readthedocs.io/en/latest/
 .. _Matplotlib Sphinx cheat sheet: https://matplotlib.org/sampledoc/cheatsheet.html
 
+
+Deploy the documentation
+------------------------
+
+The documentation is automatically deployed to
+https://qucontrol.github.io/krotov/ (the gh-pages_ associated with the
+:mod:`krotov` package's Github repository) every time commits are pushed to
+Github. This is done via the Travis continuous integration service and Doctr_.
+The documentation for all versions of :mod:`krotov` is visible on the
+`gh-pages` git branch. Any changes that are committed and pushed from this
+branch will be deployed to the online documentation. Do not routinely perform
+manual edits on the `gh-pages` branch! Let Doctr_ do its job of automatically
+deploying documentation instead.
+
+.. _Doctr: https://drdoctr.github.io
+.. _gh-pages: https://pages.github.com
+
 .. _ContributeExamples:
 
 Contribute Examples

@@ -447,6 +447,9 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# JavaScript filenames, relative to html_static_path
+html_js_files = ["version-menu.js"]
+
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
 # html_last_updated_fmt = '%b %d, %Y'
@@ -506,4 +509,3 @@ nbsphinx_prolog = r"""
 def setup(app):
     app.connect('builder-inited', run_apidoc)
     app.connect('builder-inited', generate_patched_readme)
-    app.add_javascript("version-alert.js")

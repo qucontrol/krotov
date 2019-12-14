@@ -40,7 +40,7 @@ def _patch_line(line):
     )
     line = line.replace(
         r'\sphinxurl{krotov\_pseudocode.pdf}',
-        r'\url{https://krotov.readthedocs.io/en/latest/krotov_pseudocode.pdf}',
+        r'\url{https://qucontrol.github.io/krotov/krotov_pseudocode.pdf}',
     )
     if line.startswith(r'\(\newcommand'):
         return None
