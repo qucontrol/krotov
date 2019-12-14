@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Contributing &mdash; Krotov 1.0.0-dev (f23602c) documentation</title>
+  <title>Contributing &mdash; Krotov 1.0.0-dev (a6634ac) documentation</title>
   
 
   
@@ -105,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#code-style">Code Style</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#write-documentation">Write Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploy-the-documentation">Deploy the documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contribute-examples">Contribute Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#math-in-example-notebooks">Math in Example Notebooks</a></li>
 </ul>
@@ -531,6 +532,18 @@ Do not use <code class="docutils literal notranslate"><span class="pre">\langle<
 </pre></div>
 </div>
 <p>to generate the documentation locally.</p>
+</div>
+<div class="section" id="deploy-the-documentation">
+<h2>Deploy the documentation<a class="headerlink" href="#deploy-the-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The documentation is automatically deployed to
+<a class="reference external" href="https://qucontrol.github.io/krotov/">https://qucontrol.github.io/krotov/</a> (the <a class="reference external" href="https://pages.github.com">gh-pages</a> associated with the
+<a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package’s Github repository) every time commits are pushed to
+Github. This is done via the Travis continuous integration service and <a class="reference external" href="https://drdoctr.github.io">Doctr</a>.
+The documentation for all versions of <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> is visible on the
+<cite>gh-pages</cite> git branch. Any changes that are committed and pushed from this
+branch will be deployed to the online documentation. Do not routinely perform
+manual edits on the <cite>gh-pages</cite> branch! Let <a class="reference external" href="https://drdoctr.github.io">Doctr</a> do its job of automatically
+deploying documentation instead.</p>
 </div>
 <div class="section" id="contribute-examples">
 <span id="contributeexamples"></span><h2>Contribute Examples<a class="headerlink" href="#contribute-examples" title="Permalink to this headline">¶</a></h2>
