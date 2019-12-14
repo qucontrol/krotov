@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.mu &mdash; Krotov 1.0.0-dev (cf8f37f) documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.mu</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.mu</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Routines for `mu` in :func:`krotov.optimize.optimize_pulses`</span>
+
+<span class="sd">The first-order Krotov update equation is usually written as</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">       \Delta \epsilon(t) \propto \Im</span>
+<span class="sd">       \Bigg\langle</span>
+<span class="sd">         \chi_k^{(i)}(t)</span>
+<span class="sd">       \Bigg\vert</span>
+<span class="sd">         \Bigg(</span>
+<span class="sd">            \left.\frac{\partial \Op{H}}{\partial \epsilon}\right\vert_{</span>
+<span class="sd">                {\scriptsize \begin{matrix}</span>
+<span class="sd">                    \phi^{(i+1)}(t)\\\epsilon^{(i+1)}(t)</span>
+<span class="sd">                \end{matrix}}}</span>
+<span class="sd">         \Bigg)</span>
+<span class="sd">       \Bigg\vert</span>
+<span class="sd">         \phi_k^{(i+1)}(t)</span>
+<span class="sd">       \Bigg\rangle\,,</span>
+
+<span class="sd">where $\ket{\chi_k}$ are states backward-propagated from a boundary condition</span>
+<span class="sd">determined by the functional, $\ket{\phi_k}$ are forward-propagated from the</span>
+<span class="sd">initial states, and $\frac{\partial \Op{H}}{\partial \epsilon}$ is the</span>
+<span class="sd">derivative of the Hamiltonian with respect to the field. However, this is true</span>
+<span class="sd">only for Hilbert-space states evolving under a Schrödinger equation.</span>
+
+<span class="sd">More generally (e.g. when the states $\chi_k$ and $\phi_k$ are density matrices</span>
+<span class="sd">and the equation of motion is the master equation in Lindblad form), the</span>
+<span class="sd">correct formulation is</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    \frac{\partial \Op{H}}{\partial \epsilon}</span>
+<span class="sd">    \rightarrow</span>
+<span class="sd">    \mu = \frac{\partial H}{\partial \epsilon}\,,</span>
+
+<span class="sd">where $H$ is now the abstract operator appearing in the equation of motion of</span>
+<span class="sd">the abstract state</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    \dot\phi_k(t) = -i H \phi_k(t)</span>
+
+
+<span class="sd">For density matrices, we have</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    \frac{\partial}{\partial t}\Op{\rho}_k(t) = \Liouville \Op{\rho}_k(t)</span>
+
+<span class="sd">and thus $H = i \Liouville$.</span>
+
+<span class="sd">To allow for arbitrary equations of motion, a routine `mu` may be passed to</span>
+<span class="sd">:func:`.optimize_pulses` that returns the abstract operator $\mu$ as a</span>
+<span class="sd">:class:`~qutip.Qobj`, or alternatively as a callable that takes $\phi_k$ as its</span>
+<span class="sd">argument and evaluates $\mu \phi_k$. The default `mu` is</span>
+<span class="sd">:func:`derivative_wrt_pulse`, which covers the most common equation of motions:</span>
+
+<span class="sd">* standard Schrödinger equation</span>
+<span class="sd">* master equation, where either the `H` attribute of the objective contains a</span>
+<span class="sd">  Hamiltonian and there are Lindblad operators in `c_ops`, or the `H` attribute</span>
+<span class="sd">  contains a super-operator $\Liouville$ directly (the case discussed above).</span>
+
+<span class="sd">Alternative implementations of `mu` must have the same signature as</span>
+<span class="sd">:func:`derivative_wrt_pulse`, but should only be required in rare</span>
+<span class="sd">circumstances, such as when the derivative still depends on the control values</span>
+<span class="sd">or on the states. (Or, if you can provide a more efficient problem-specific</span>
+<span class="sd">implementation).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;derivative_wrt_pulse&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="derivative_wrt_pulse"><a class="viewcode-back" href="../../API/krotov.mu.html#krotov.mu.derivative_wrt_pulse">[docs]</a><span class="k">def</span> <span class="nf">derivative_wrt_pulse</span><span class="p">(</span>
+    <span class="n">objectives</span><span class="p">,</span> <span class="n">i_objective</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">pulses_mapping</span><span class="p">,</span> <span class="n">i_pulse</span><span class="p">,</span> <span class="n">time_index</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate ∂H/∂ϵ for the standard equations of motion.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        objectives (list): List of :class:`.Objective` instances</span>
+<span class="sd">        i_objective (int): The index of the objective in `objectives` whose</span>
+<span class="sd">            equation of motion the derivative should be calculated.</span>
+<span class="sd">        pulses (list): The list of pulses occuring in `objectives`</span>
+<span class="sd">        pulses_mapping (list): The mapping of elements of `pulses` to the</span>
+<span class="sd">            components of `objectives`, as returned by</span>
+<span class="sd">            :func:`.extract_controls_mapping`</span>
+<span class="sd">        i_pulse (int): The index of the pulse in `pulses` for which to</span>
+<span class="sd">            calculate the derivative</span>
+<span class="sd">        time_index (int): The index of the value in ``pulses[i_pulse]`` that</span>
+<span class="sd">            should be plugged in to ∂H/∂ϵ. Not used, as this routine only</span>
+<span class="sd">            considers equations of motion that are linear in the controls.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        callable: The quantum operator or super-operator that</span>
+<span class="sd">        represents ∂H/∂ϵ. In general, the return type can be any callable `mu`</span>
+<span class="sd">        so that ``mu(state)`` calculates the result of applying ∂H/∂ϵ to</span>
+<span class="sd">        `state`. In most cases, a :class:`~qutip.Qobj` will be returned, which</span>
+<span class="sd">        is just the most convenient example of an appropriate callable.</span>
+
+<span class="sd">    This function covers the following cases:</span>
+
+<span class="sd">    * the :attr:`~.Objective.H` attribute of the objective contains a</span>
+<span class="sd">      Hamiltonian, there are no :attr:`~.Objective.c_ops` (Schrödinger</span>
+<span class="sd">      equation: the abstract H in ∂H/∂ϵ is the Hamiltonian directly)</span>
+
+<span class="sd">    * the :attr:`~.Objective.H` attribute of the objective contains a</span>
+<span class="sd">      Hamiltonian $\Op{H}$, and there are Lindblad operators $\Op{L}_i$ in</span>
+<span class="sd">      :attr:`~.Objective.c_ops` (master equation in Lindblad form). The</span>
+<span class="sd">      abstract H is $i \Liouville$ for the Liouvillian defined as</span>
+
+<span class="sd">      .. math::</span>
+
+<span class="sd">        \Liouville[\Op{\rho}] =</span>
+<span class="sd">        -i[\Op{H},\Op{\rho}]+\sum_{i} \left(</span>
+<span class="sd">            \Op{L}_i \Op{\rho} \Op{L}_i^\dagger -</span>
+<span class="sd">            \frac{1}{2} \left\{</span>
+<span class="sd">                \Op{L}_i^\dagger \Op{L}_i, \Op{\rho}\right\} \right)</span>
+
+<span class="sd">    * the :attr:`~.Objective.H` attribute of the objective contains a</span>
+<span class="sd">      super-operator $\Liouville$, there are no :attr:`~.Objective.c_ops`</span>
+<span class="sd">      (general master equation). The abstract H is again $i \Liouville$.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">objective</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i_objective</span><span class="p">]</span>
+    <span class="n">ham_mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span><span class="p">[</span><span class="n">i_objective</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">i_pulse</span><span class="p">]</span>
+    <span class="n">eqm_factor</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span>  <span class="c1"># the factor in front of objective.H in the eqm</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ham_mapping</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">state</span><span class="p">:</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">state</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">objective</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="n">ham_mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">mu</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;super&#39;</span><span class="p">:</span>
+            <span class="n">eqm_factor</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">mu</span> <span class="o">*=</span> <span class="mi">1</span><span class="n">j</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ham_mapping</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">mu</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">eqm_factor</span><span class="p">)</span> <span class="o">*</span> <span class="n">objective</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i_c_op</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objective</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pulses_mapping</span><span class="p">[</span><span class="n">i_objective</span><span class="p">][</span><span class="n">i_c_op</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">i_pulse</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="s2">&quot;Time-dependent collapse operators not implemented&quot;</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">mu</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

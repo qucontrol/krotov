@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.parallelization &mdash; Krotov 1.0.0-dev (cf8f37f) documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.parallelization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.parallelization</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Support routines for running the optimization in parallel across the</span>
+<span class="sd">objectives</span>
+
+<span class="sd">The time-propagation that is the main numerical effort in an optimization with</span>
+<span class="sd">Krotov&#39;s method can naturally be performed in parallel for the different</span>
+<span class="sd">objectives. There are three time-propagations that happen inside</span>
+<span class="sd">:func:`.optimize_pulses`:</span>
+
+<span class="sd">1. A forward propagation of the :attr:`~.Objective.initial_state` of each</span>
+<span class="sd">   objective under the initial guess pulse.</span>
+
+<span class="sd">2. A backward propagation of the states $\ket{\chi_k}$ constructed by the</span>
+<span class="sd">   `chi_constructor` routine that is passed to :func:`.optimize_pulses`, where</span>
+<span class="sd">   the number of states is the same as the number of objectives.</span>
+
+<span class="sd">3. A forward propagation of the :attr:`~.Objective.initial_state` of each</span>
+<span class="sd">   objective under the optimized pulse in each iteration. This can only</span>
+<span class="sd">   be parallelized *per time step*, as the propagated states from each time</span>
+<span class="sd">   step collectively determine the pulse update for the next time step, which</span>
+<span class="sd">   is then used for the next propagation step. (In this sense Krotov&#39;s method</span>
+<span class="sd">   is &quot;sequential&quot;)</span>
+
+
+<span class="sd">The :func:`.optimize_pulses` routine has a parameter `parallel_map` that can</span>
+<span class="sd">receive a tuple of three &quot;map&quot; functions to enable parallelization,</span>
+<span class="sd">corresponding to the three propagation listed above. If not given,</span>
+<span class="sd">:func:`qutip.parallel.serial_map` is used for all three propations, running in</span>
+<span class="sd">serial. Any alternative &quot;map&quot; must have the same interface as</span>
+<span class="sd">:func:`qutip.parallel.serial_map`.</span>
+
+<span class="sd">It would be natural to assume that :func:`qutip.parallel.parallel_map` would be</span>
+<span class="sd">a good choice for parallel execution, using multiple CPUs on the same machine.</span>
+<span class="sd">However, this function is only a good choice for the propagation (1) and (2):</span>
+<span class="sd">these run in parallel over the entire time grid without any communication, and</span>
+<span class="sd">thus minimal overhead.  However, this is not true for the propagation (3),</span>
+<span class="sd">which must synchronize after each time step. In that case, the &quot;naive&quot; use of</span>
+<span class="sd">:func:`qutip.parallel.parallel_map` results in a communication overhead that</span>
+<span class="sd">completely dominates the propagation, and actually makes the optimization</span>
+<span class="sd">slower (potentially by more than an order of magnitude).</span>
+
+<span class="sd">The function :func:`parallel_map_fw_prop_step` provided in this module is an</span>
+<span class="sd">appropriate alternative implementation that uses long-running processes,</span>
+<span class="sd">internal caching, and minimal inter-process communication to eliminate the</span>
+<span class="sd">communication overhead as much as possible. However, the internal caching is</span>
+<span class="sd">valid only under the assumption that the `propagate` function does not have</span>
+<span class="sd">side effects.</span>
+
+<span class="sd">In general,</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    parallel_map=(</span>
+<span class="sd">        qutip.parallel_map,</span>
+<span class="sd">        qutip.parallel_map,</span>
+<span class="sd">        krotov.parallelization.parallel_map_fw_prop_step,</span>
+<span class="sd">    )</span>
+
+<span class="sd">is a decent choice for enabling parallelization for a typical multi-objective</span>
+<span class="sd">optimization.</span>
+
+<span class="sd">You may implement your own &quot;map&quot; functions to exploit parallelization paradigms</span>
+<span class="sd">other than Python&#39;s built-in :mod:`multiprocessing`, provided here. This</span>
+<span class="sd">includes distributed propagation, e.g. through ipyparallel_ clusters. To write</span>
+<span class="sd">your own `parallel_map` functions, review the source code of</span>
+<span class="sd">:func:`.optimize_pulses` in detail.</span>
+
+<span class="sd">In most cases, it will be difficult to obtain a linear speedup from</span>
+<span class="sd">parallelization: even with carefully tuned manual interprocess communication,</span>
+<span class="sd">the communication overhead can be substantial. For best results, it would be</span>
+<span class="sd">necessary to use `parallel_map` functions implemented in Cython, where the GIL</span>
+<span class="sd">can be released and the entire propagation (and storage of propagated states)</span>
+<span class="sd">can be done in shared-memory with no overhead.</span>
+
+<span class="sd">.. _ipyparallel: https://ipyparallel.readthedocs.io/en/latest/</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="kn">from</span> <span class="nn">.conversions</span> <span class="kn">import</span> <span class="n">plug_in_pulse_values</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Consumer&#39;</span><span class="p">,</span> <span class="s1">&#39;FwPropStepTask&#39;</span><span class="p">,</span> <span class="s1">&#39;parallel_map_fw_prop_step&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Consumer"><a class="viewcode-back" href="../../API/krotov.parallelization.html#krotov.parallelization.Consumer">[docs]</a><span class="k">class</span> <span class="nc">Consumer</span><span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A process-based task consumer</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task_queue (multiprocessing.JoinableQueue): A queue from which to read</span>
+<span class="sd">            tasks.</span>
+<span class="sd">        result_queue (multiprocessing.Queue): A queue where to put the results</span>
+<span class="sd">            of a task</span>
+<span class="sd">        data: cached (in-process) data that will be passed to each task</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">,</span> <span class="n">result_queue</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_queue</span> <span class="o">=</span> <span class="n">task_queue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_queue</span> <span class="o">=</span> <span class="n">result_queue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+<div class="viewcode-block" id="Consumer.run"><a class="viewcode-back" href="../../API/krotov.parallelization.html#krotov.parallelization.Consumer.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Execute all tasks on the `task_queue`.</span>
+
+<span class="sd">        Each task must be a callable that takes `data` as its only argument.</span>
+<span class="sd">        The return value of the task will be put on the `result_queue`. A None</span>
+<span class="sd">        value on the `task_queue` acts as a &quot;poison pill&quot;, causing the</span>
+<span class="sd">        :class:`Consumer` process to shut down.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">next_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">next_task</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Poison pill means shutdown</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">task_queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="n">answer</span> <span class="o">=</span> <span class="n">next_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="FwPropStepTask"><a class="viewcode-back" href="../../API/krotov.parallelization.html#krotov.parallelization.FwPropStepTask">[docs]</a><span class="k">class</span> <span class="nc">FwPropStepTask</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A task that performs a single forward-propagation step</span>
+
+<span class="sd">    The task object is a callable, receiving the single tuple of the same</span>
+<span class="sd">    form as `task_args` in :func:`parallel_map_fw_prop_step` as input. This</span>
+<span class="sd">    `data` is internally cached by the :class:`Consumer` that will execute</span>
+<span class="sd">    the task.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        i_state (int): The index of the state to propagation. That is, the</span>
+<span class="sd">            index of the objective from whose :attr:`~.Objective.initial_state`</span>
+<span class="sd">            the propagation started</span>
+<span class="sd">        pulse_vals (list[float]): the values of the pulses at `time_index` to</span>
+<span class="sd">            use.</span>
+<span class="sd">        time_index (int): the index of the interval on the time grid covered by</span>
+<span class="sd">            the propagation step</span>
+
+<span class="sd">    The passed arguments update the internal state (`data`) of the</span>
+<span class="sd">    :class:`Consumer` executing the task; they are the minimal information that</span>
+<span class="sd">    must be passed via inter-process communication to enable the forward</span>
+<span class="sd">    propagation (assuming `propagate` in :func:`.optimize_pulses` has no</span>
+<span class="sd">    side-effects)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i_state</span><span class="p">,</span> <span class="n">pulse_vals</span><span class="p">,</span> <span class="n">time_index</span><span class="p">):</span>
+        <span class="c1"># The task object itself gets send to the Consumer via IPC (pickling).</span>
+        <span class="c1"># Since this is only a few scalar values, we largely avoid</span>
+        <span class="c1"># communication overhead</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i_state</span> <span class="o">=</span> <span class="n">i_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pulse_vals</span> <span class="o">=</span> <span class="n">pulse_vals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_index</span> <span class="o">=</span> <span class="n">time_index</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="p">(</span>
+            <span class="n">states</span><span class="p">,</span>
+            <span class="n">objectives</span><span class="p">,</span>
+            <span class="n">pulses</span><span class="p">,</span>
+            <span class="n">pulses_mapping</span><span class="p">,</span>
+            <span class="n">tlist</span><span class="p">,</span>
+            <span class="n">_</span><span class="p">,</span>  <span class="c1"># time_index</span>
+            <span class="n">propagators</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="c1"># the data is passed by the Consumer, and is cached locally inside of</span>
+        <span class="c1"># each process. Thus, it does not contribute to the IPC communication</span>
+        <span class="c1"># overhead</span>
+        <span class="n">time_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_index</span>
+        <span class="n">pulse_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_vals</span>
+        <span class="n">i_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">i_state</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">pulse_val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pulses</span><span class="p">,</span> <span class="n">pulse_vals</span><span class="p">):</span>
+            <span class="n">pulse</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pulse_val</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">pulse_val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pulses</span><span class="p">,</span> <span class="n">pulse_vals</span><span class="p">):</span>
+            <span class="n">pulse</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pulse_val</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+        <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">c_op</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="n">ic</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c_op</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span>
+        <span class="n">states</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span> <span class="o">=</span> <span class="n">propagators</span><span class="p">[</span><span class="n">i_state</span><span class="p">](</span><span class="n">H</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">)</span>
+        <span class="c1"># While there is no significant IPC-communication overhead associated</span>
+        <span class="c1"># with the *input* of the task, the resulting state returned here still</span>
+        <span class="c1"># must go through the `result_queue` of the Consumer. This is the main</span>
+        <span class="c1"># bottleneck of this implementation.</span>
+        <span class="k">return</span> <span class="n">states</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="parallel_map_fw_prop_step"><a class="viewcode-back" href="../../API/krotov.parallelization.html#krotov.parallelization.parallel_map_fw_prop_step">[docs]</a><span class="k">def</span> <span class="nf">parallel_map_fw_prop_step</span><span class="p">(</span><span class="n">shared</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">task_args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;`parallel_map` function for the forward-propagation by one time step</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        shared: A global object to which we can attach attributes for sharing</span>
+<span class="sd">            data between different calls to :func:`parallel_map_fw_prop_step`,</span>
+<span class="sd">            allowing us to have long-running :class:`Consumer` processes,</span>
+<span class="sd">            avoiding process-management overhead.</span>
+<span class="sd">            This happens to be a callable (the original internal routine for</span>
+<span class="sd">            performing a forward-propagation), but here, it is (ab-)used as a</span>
+<span class="sd">            storage object only.</span>
+<span class="sd">        values (list): a list 0..(N-1) where N is the number of objectives</span>
+<span class="sd">        task_args (tuple): A tuple of 7 components:</span>
+
+<span class="sd">            1. A list of states to propagate, one for each objective.</span>
+<span class="sd">            2. The list of objectives</span>
+<span class="sd">            3. The list of optimized pulses (updated up to `time_index`)</span>
+<span class="sd">            4. The &quot;pulses mapping&quot;, cf :func:`.extract_controls_mapping`</span>
+<span class="sd">            5. The list of time grid points</span>
+<span class="sd">            6. The index of the interval on the time grid over which to</span>
+<span class="sd">               propagate</span>
+<span class="sd">            7. A list of `propagate` callables, as passed to</span>
+<span class="sd">               :func:`.optimize_pulses`.  The propagators must not have</span>
+<span class="sd">               side-effects in order for :func:`parallel_map_fw_prop_step` to</span>
+<span class="sd">               work correctly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># `shared` is the original task function, but here we abuse it</span>
+    <span class="c1"># as a shared namespace, between calls to `my_map`, by setting custom</span>
+    <span class="c1"># data attributes on it</span>
+    <span class="n">tlist</span> <span class="o">=</span> <span class="n">task_args</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">pulses</span> <span class="o">=</span> <span class="n">task_args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">time_index</span> <span class="o">=</span> <span class="n">task_args</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">time_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># set up a Consumer process that stays active for the entire</span>
+        <span class="c1"># propagation (multiple calls of `parallel_map_fw_prop_step`)</span>
+        <span class="n">shared</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">JoinableQueue</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">shared</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">shared</span><span class="o">.</span><span class="n">consumers</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Consumer</span><span class="p">(</span><span class="n">shared</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">shared</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">task_args</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">consumer</span> <span class="ow">in</span> <span class="n">shared</span><span class="o">.</span><span class="n">consumers</span><span class="p">:</span>
+            <span class="n">consumer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="c1"># Assign tasks</span>
+    <span class="n">pulse_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">pulses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pulses</span><span class="p">))]</span>
+    <span class="k">for</span> <span class="n">i_state</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+        <span class="n">shared</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+            <span class="n">FwPropStepTask</span><span class="p">(</span><span class="n">i_state</span><span class="p">,</span> <span class="n">pulse_vals</span><span class="p">,</span> <span class="n">time_index</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">i_state</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+        <span class="n">shared</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>  <span class="c1"># wait to finish</span>
+    <span class="c1"># collect results</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">shared</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">time_index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># end of time grid</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">shared</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># add poison pill</span>
+            <span class="n">shared</span><span class="o">.</span><span class="n">tasks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>  <span class="c1"># wait to finish</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

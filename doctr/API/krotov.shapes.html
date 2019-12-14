@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.shapes module &mdash; Krotov 1.0.0-dev (cf8f37f) documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="krotov.second_order module" href="krotov.second_order.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="krotov.html">API of the Krotov package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="krotov.convergence.html">krotov.convergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.conversions.html">krotov.conversions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.info_hooks.html">krotov.info_hooks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.objectives.html">krotov.objectives module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.optimize.html">krotov.optimize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.parallelization.html">krotov.parallelization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.propagators.html">krotov.propagators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.result.html">krotov.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.second_order.html">krotov.second_order module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.shapes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="krotov.html">krotov package</a> &raquo;</li>
+        
+      <li>krotov.shapes module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-krotov.shapes">
+<span id="krotov-shapes-module"></span><h1>krotov.shapes module<a class="headerlink" href="#module-krotov.shapes" title="Permalink to this headline">¶</a></h1>
+<p>Functions that may be used for the <cite>update_shape</cite> value in the options-dict
+for each control (<cite>pulse_options</cite> parameter in <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>), or
+for generating guess pulses</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.shapes.blackman" title="krotov.shapes.blackman"><code class="xref py py-obj docutils literal notranslate"><span class="pre">blackman</span></code></a></p></td>
+<td><p>Blackman window shape</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#krotov.shapes.box" title="krotov.shapes.box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">box</span></code></a></p></td>
+<td><p>Box-shape (Theta-function)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.shapes.flattop" title="krotov.shapes.flattop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flattop</span></code></a></p></td>
+<td><p>Flat shape (one) with a switch-on/switch-off from zero</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#krotov.shapes.one_shape" title="krotov.shapes.one_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_shape</span></code></a></p></td>
+<td><p>Shape function 1 for all values of <cite>t</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.shapes.qutip_callback" title="krotov.shapes.qutip_callback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qutip_callback</span></code></a></p></td>
+<td><p>Convert <cite>func</cite> into the correct form of a QuTiP time-dependent control</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#krotov.shapes.zero_shape" title="krotov.shapes.zero_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_shape</span></code></a></p></td>
+<td><p>Shape function 0 for all values of <cite>t</cite></p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.shapes.blackman" title="krotov.shapes.blackman"><code class="xref py py-func docutils literal notranslate"><span class="pre">blackman</span></code></a>, <a class="reference internal" href="#krotov.shapes.box" title="krotov.shapes.box"><code class="xref py py-func docutils literal notranslate"><span class="pre">box</span></code></a>, <a class="reference internal" href="#krotov.shapes.flattop" title="krotov.shapes.flattop"><code class="xref py py-func docutils literal notranslate"><span class="pre">flattop</span></code></a>, <a class="reference internal" href="#krotov.shapes.one_shape" title="krotov.shapes.one_shape"><code class="xref py py-func docutils literal notranslate"><span class="pre">one_shape</span></code></a>, <a class="reference internal" href="#krotov.shapes.qutip_callback" title="krotov.shapes.qutip_callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip_callback</span></code></a>, <a class="reference internal" href="#krotov.shapes.zero_shape" title="krotov.shapes.zero_shape"><code class="xref py py-func docutils literal notranslate"><span class="pre">zero_shape</span></code></a></p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="krotov.shapes.qutip_callback">
+<code class="sig-prename descclassname">krotov.shapes.</code><code class="sig-name descname">qutip_callback</code><span class="sig-paren">(</span><em class="sig-param">func</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/shapes.html#qutip_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.shapes.qutip_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <cite>func</cite> into the correct form of a QuTiP time-dependent control</p>
+<p>QuTiP requires that “callback” functions that are used to express
+time-dependent controls take a parameter <cite>t</cite> and <cite>args</cite>. This function
+takes a function <cite>func</cite> that takes <cite>t</cite> as its first parameter and an
+arbitrary number of other parameters. The given <cite>kwargs</cite> set values for
+these other parameters. Parameters not contained in <cite>kwargs</cite> are set
+<em>at runtime</em> from the <cite>args</cite> dict.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.shapes.zero_shape">
+<code class="sig-prename descclassname">krotov.shapes.</code><code class="sig-name descname">zero_shape</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/shapes.html#zero_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.shapes.zero_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape function 0 for all values of <cite>t</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.shapes.one_shape">
+<code class="sig-prename descclassname">krotov.shapes.</code><code class="sig-name descname">one_shape</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/shapes.html#one_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.shapes.one_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape function 1 for all values of <cite>t</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.shapes.flattop">
+<code class="sig-prename descclassname">krotov.shapes.</code><code class="sig-name descname">flattop</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">t_start</em>, <em class="sig-param">t_stop</em>, <em class="sig-param">t_rise</em>, <em class="sig-param">t_fall=None</em>, <em class="sig-param">func='blackman'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/shapes.html#flattop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.shapes.flattop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flat shape (one) with a switch-on/switch-off from zero</p>
+<p>The flattop function starts at 0, and ramps to to 1 during the <cite>t_rise</cite>
+interval. For <code class="docutils literal notranslate"><span class="pre">func='blackman'</span></code>, the switch-on shape is half of a
+Blackman window (see <a class="reference internal" href="#krotov.shapes.blackman" title="krotov.shapes.blackman"><code class="xref py py-func docutils literal notranslate"><span class="pre">blackman()</span></code></a>). For <code class="docutils literal notranslate"><span class="pre">func='sinsq</span></code>, it is a
+sine-squared curve. The function then remains at value 1, before ramping
+down to 0 again during <cite>t_fall</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Time  point or time grid</p></li>
+<li><p><strong>t_start</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Start of flattop window</p></li>
+<li><p><strong>t_stop</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Stop of flattop window</p></li>
+<li><p><strong>t_rise</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Duration of ramp-up, starting at <cite>t_start</cite></p></li>
+<li><p><strong>t_fall</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Duration of ramp-down, ending at <cite>t_stop</cite>.
+If not given, <code class="docutils literal notranslate"><span class="pre">t_fall=t_rise</span></code>.</p></li>
+<li><p><strong>func</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – One of ‘blackman’, ‘sinsq’</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.vectorize.html#numpy.vectorize" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.vectorize</span></code></a> to transform this into a shape
+function for arrays, <a class="reference external" href="https://docs.python.org/3.7/library/functools.html#functools.partial" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a> to fix the function
+arguments other than <cite>t</cite>, creating a function suitable for the
+<cite>update_shape</cite> value of <cite>pulse_options</cite>, and <a class="reference internal" href="#krotov.shapes.qutip_callback" title="krotov.shapes.qutip_callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip_callback()</span></code></a> to
+create a function suitable as a time-dependent control in QuTiP.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.shapes.box">
+<code class="sig-prename descclassname">krotov.shapes.</code><code class="sig-name descname">box</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">t_start</em>, <em class="sig-param">t_stop</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/shapes.html#box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.shapes.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Box-shape (Theta-function)</p>
+<p>The shape is 0 before <cite>t_start</cite> and after <cite>t_stop</cite> and 1 elsewhere.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Time point or time grid</p></li>
+<li><p><strong>t_start</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – First value of <cite>t</cite> for which the box has value 1</p></li>
+<li><p><strong>t_stop</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Last value of <cite>t</cite> for which the box has value 1</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.vectorize.html#numpy.vectorize" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.vectorize</span></code></a>, <a class="reference external" href="https://docs.python.org/3.7/library/functools.html#functools.partial" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.partial()</span></code></a>, or
+<a class="reference internal" href="#krotov.shapes.qutip_callback" title="krotov.shapes.qutip_callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip_callback()</span></code></a>, cf.  <a class="reference internal" href="#krotov.shapes.flattop" title="krotov.shapes.flattop"><code class="xref py py-func docutils literal notranslate"><span class="pre">flattop()</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.shapes.blackman">
+<code class="sig-prename descclassname">krotov.shapes.</code><code class="sig-name descname">blackman</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">t_start</em>, <em class="sig-param">t_stop</em>, <em class="sig-param">a=0.16</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/shapes.html#blackman"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.shapes.blackman" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blackman window shape</p>
+<div class="math notranslate nohighlight">
+\[B(t; t_0, t_1) =
+    \frac{1}{2}\left(
+        1 - a - \cos\left(2\pi \frac{t - t_0}{t_1 - t_0}\right)
+        + a \cos\left(4\pi \frac{t - t_0}{t_1 - t_0}\right)
+    \right)\,,\]</div>
+<p>with <span class="math notranslate nohighlight">\(a = 0.16\)</span>.</p>
+<p>See <a class="reference external" href="http://en.wikipedia.org/wiki/Window_function#Blackman_windows">http://en.wikipedia.org/wiki/Window_function#Blackman_windows</a></p>
+<p>A Blackman shape looks nearly identical to a Gaussian with a 6-sigma
+interval between <cite>t_start</cite> and <cite>t_stop</cite>.  Unlike the Gaussian,
+however, it will go exactly to zero at the edges. Thus, Blackman pulses
+are often preferable to Gaussians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><em>numpy.ndarray</em></a>) – Time point or time grid</p></li>
+<li><p><strong>t_start</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Starting point <span class="math notranslate nohighlight">\(t_0\)</span> of Blackman shape</p></li>
+<li><p><strong>t_stop</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – End point <span class="math notranslate nohighlight">\(t_1\)</span> of Blackman shape</p></li>
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Blackman coefficient.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If <cite>t</cite> is a float, return the value of the
+Blackman shape at <cite>t</cite>.  If <cite>t</cite> is an array, return an array of same
+size as <cite>t</cite>, containing the values for the Blackman shape (zero before
+<cite>t_start</cite> and after <cite>t_stop</cite>)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)">float</a> or <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="krotov.second_order.html" class="btn btn-neutral float-left" title="krotov.second_order module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
