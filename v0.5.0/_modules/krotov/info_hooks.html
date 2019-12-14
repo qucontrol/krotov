@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.info_hooks &mdash; Krotov 0.5.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/version-alert.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.info_hooks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.info_hooks</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Routines that can be passed as `info_hook` to :func:`.optimize_pulses`&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">uniseg.graphemecluster</span> <span class="kn">import</span> <span class="n">grapheme_clusters</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chain&#39;</span><span class="p">,</span> <span class="s1">&#39;print_debug_information&#39;</span><span class="p">,</span> <span class="s1">&#39;print_table&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_qobj_nbytes</span><span class="p">(</span><span class="n">qobj</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return an estimate for the number of bytes of memory required to store a</span>
+<span class="sd">    Qobj&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">qobj</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">nbytes</span>
+        <span class="o">+</span> <span class="n">qobj</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">indptr</span><span class="o">.</span><span class="n">nbytes</span>
+        <span class="o">+</span> <span class="n">qobj</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">nbytes</span>
+        <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
+        <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">qobj</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="chain"><a class="viewcode-back" href="../../API/krotov.info_hooks.html#krotov.info_hooks.chain">[docs]</a><span class="k">def</span> <span class="nf">chain</span><span class="p">(</span><span class="o">*</span><span class="n">hooks</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Chain multiple `info_hook` or `modify_params_after_iter` callables</span>
+<span class="sd">    together.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; def print_fidelity(**kwargs):</span>
+<span class="sd">        ...     F_re = np.average(np.array(kwargs[&#39;tau_vals&#39;]).real)</span>
+<span class="sd">        ...     print(&quot;    F = %f&quot; % F_re)</span>
+<span class="sd">        &gt;&gt;&gt; info_hook = chain(print_debug_information, print_fidelity)</span>
+
+<span class="sd">    Note:</span>
+
+<span class="sd">        Functions that are connected via :func:`chain` may use the</span>
+<span class="sd">        `shared_data` share the same `shared_data` argument, which they can use</span>
+<span class="sd">        to communicate down the chain.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">info_hook</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">hooks</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">hook</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">info_hook</span></div>
+
+
+<div class="viewcode-block" id="print_debug_information"><a class="viewcode-back" href="../../API/krotov.info_hooks.html#krotov.info_hooks.print_debug_information">[docs]</a><span class="k">def</span> <span class="nf">print_debug_information</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">objectives</span><span class="p">,</span>
+    <span class="n">adjoint_objectives</span><span class="p">,</span>
+    <span class="n">backward_states</span><span class="p">,</span>
+    <span class="n">forward_states</span><span class="p">,</span>
+    <span class="n">forward_states0</span><span class="p">,</span>
+    <span class="n">guess_pulses</span><span class="p">,</span>
+    <span class="n">optimized_pulses</span><span class="p">,</span>
+    <span class="n">g_a_integrals</span><span class="p">,</span>
+    <span class="n">lambda_vals</span><span class="p">,</span>
+    <span class="n">shape_arrays</span><span class="p">,</span>
+    <span class="n">fw_states_T</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="n">tau_vals</span><span class="p">,</span>
+    <span class="n">start_time</span><span class="p">,</span>
+    <span class="n">stop_time</span><span class="p">,</span>
+    <span class="n">iteration</span><span class="p">,</span>
+    <span class="n">info_vals</span><span class="p">,</span>
+    <span class="n">shared_data</span><span class="p">,</span>
+    <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Print full debug information about the current Krotov iteration</span>
+
+<span class="sd">    This routine is intended to be passed to :func:`.optimize_pulses` as</span>
+<span class="sd">    `info_hook`, and it exemplifies the full signature of a routine suitable</span>
+<span class="sd">    for this purpose.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        objectives (list[Objective]): list of the objectives</span>
+<span class="sd">        adjoint_objectives (list[Objective]): list of the adjoint objectives</span>
+<span class="sd">        backward_states (list): If available, for each objective, an array-like</span>
+<span class="sd">            object containing the states of the Krotov backward propagation.</span>
+<span class="sd">        forward_states: If available (second order only), for each objective,</span>
+<span class="sd">            an array-like object containing the forward-propagated states under</span>
+<span class="sd">            the optimized pulses. None otherwise.</span>
+<span class="sd">        forward_states0: If available (second order only), for each objective,</span>
+<span class="sd">            an array-like object containing the forward-propagated states under</span>
+<span class="sd">            the guess pulses. None otherwise.</span>
+<span class="sd">        guess_pulses (list[numpy.ndarray]): list of guess pulses</span>
+<span class="sd">        optimized_pulses (list[numpy.ndarray]): list of optimized pulses</span>
+<span class="sd">        g_a_integrals (numpy.ndarray): array of values</span>
+<span class="sd">            :math:`\int_0^T g_a(t) \dd t = \int_0^T \frac{\lambda_a}{S(t)}</span>
+<span class="sd">            \Abs{\Delta \epsilon(t)}^2 \dd t`, for each pulse $\epsilon(t)$.</span>
+<span class="sd">            The pulse updates $\Delta \epsilon(t)$ are the differences of the</span>
+<span class="sd">            `optimized_pulses` and the `guess_pulses` (zero in the zeroth</span>
+<span class="sd">            iteration that only performs a forward-propagation of the guess</span>
+<span class="sd">            pulses). The quantity $\int g_a(t) \dd t$ is a very useful measure</span>
+<span class="sd">            of how much the pulse amplitudes changes in each iteration. This</span>
+<span class="sd">            tells us whether we&#39;ve chosen good values for $\lambda_a$. Values</span>
+<span class="sd">            that are too small cause &quot;pulse explosions&quot; which immediately show</span>
+<span class="sd">            up in $\int_0^T g_a(t) \dd t$.  Also, whether $\int g_a(t) \dd t$</span>
+<span class="sd">            is increasing or decreasing between iterations gives an indication</span>
+<span class="sd">            whether the optimization is &quot;speeding up&quot; or &quot;slowing down&quot;, and</span>
+<span class="sd">            thus whether convergence is reached (negligible pulse updates).</span>
+<span class="sd">        lambda_vals (numpy.ndarray): for each pulse, the value of the</span>
+<span class="sd">            $\lambda_a$ parameter</span>
+<span class="sd">        shape_arrays (list[numpy.ndarray]): for each pulse, the array of</span>
+<span class="sd">            update-shape values $S(t)$</span>
+<span class="sd">        fw_states_T (list): for each objective, the forward-propagated state</span>
+<span class="sd">        tlist (numpy.ndarray): array of time grid values on which the states</span>
+<span class="sd">            are defined</span>
+<span class="sd">        tau_vals (numpy.ndarray): for each objective, the complex overlap for</span>
+<span class="sd">            the target state with the forward-propagated state, or None if no</span>
+<span class="sd">            target state is defined.</span>
+<span class="sd">        start_time (float): The time at which the iteration started, in epoch</span>
+<span class="sd">            seconds</span>
+<span class="sd">        stop_time (float): The time at which the iteration started, in epoch</span>
+<span class="sd">            seconds</span>
+<span class="sd">        iteration (int): The current iteration number. For the initial</span>
+<span class="sd">            propagation of the guess controls, zero.</span>
+<span class="sd">        shared_data (dict): Dict of data shared between any</span>
+<span class="sd">            `modify_params_after_iter` and any `info_hook` functions chained</span>
+<span class="sd">            together via :func:`chain`.</span>
+<span class="sd">        info_vals (list): List of the return values of the info_hook from</span>
+<span class="sd">            previous iterations</span>
+<span class="sd">        out: An open file handle where to write the information. This parameter</span>
+<span class="sd">            is not part of the `info_hook` interface, and defaults to stdout.</span>
+<span class="sd">            Use :func:`functools.partial` to pass a different value.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This routine implements the full signature of an `info_hook` in</span>
+<span class="sd">        :func:`.optimize_pulses`, excluding `out`. However, since</span>
+<span class="sd">        the `info_hook` only allows for keyword arguments, it is usually much</span>
+<span class="sd">        simpler to use Python&#39;s variable keyword arguments syntax</span>
+<span class="sd">        (``**kwargs``). For example, consider the following `info_hook` that</span>
+<span class="sd">        prints (and stores) the value of the real-part gate fidelity::</span>
+
+<span class="sd">            def print_fidelity(**kwargs):</span>
+<span class="sd">                F_re = np.average(np.array(kwargs[&#39;tau_vals&#39;]).real)</span>
+<span class="sd">                print(&quot;    F = %f&quot; % F_re)</span>
+<span class="sd">                return F_re</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Iteration </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">iteration</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iteration</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;    objectives:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">objectives</span><span class="p">):</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;        </span><span class="si">%d</span><span class="s2">:</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">obj</span><span class="p">))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;    adjoint objectives:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">adjoint_objectives</span><span class="p">):</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;        </span><span class="si">%d</span><span class="s2">:</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">obj</span><span class="p">))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;    S(t) (ranges): </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">%</span> <span class="p">(</span>
+                <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s2">&quot;[</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">S</span><span class="p">))</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">shape_arrays</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+        <span class="s2">&quot;    duration: </span><span class="si">%.1f</span><span class="s2"> secs (started at </span><span class="si">%s</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">),</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">start_time</span><span class="p">)),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+        <span class="s2">&quot;    optimized pulses (ranges): </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">_pulse_range</span><span class="p">(</span><span class="n">pulse</span><span class="p">)</span> <span class="k">for</span> <span class="n">pulse</span> <span class="ow">in</span> <span class="n">optimized_pulses</span><span class="p">]))</span>
+    <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+        <span class="s2">&quot;    ∫gₐ(t)dt: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">g_a_integrals</span><span class="p">]))</span>
+    <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;    λₐ: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">λ</span> <span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">lambda_vals</span><span class="p">])))</span>
+    <span class="n">MB_per_timeslot</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_qobj_nbytes</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">fw_states_T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="mi">1024</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;    storage (bw, fw, fw0): &quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">backward_states</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;None, &quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">backward_states</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">%d</span><span class="s2"> * </span><span class="si">%s</span><span class="s2">(</span><span class="si">%d</span><span class="s2">)] (</span><span class="si">%.1f</span><span class="s2"> MB), &quot;</span>
+            <span class="o">%</span> <span class="p">(</span>
+                <span class="n">n</span><span class="p">,</span>
+                <span class="n">backward_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">backward_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">backward_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">MB_per_timeslot</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">forward_states</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;None, &quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">forward_states</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">%d</span><span class="s2"> * </span><span class="si">%s</span><span class="s2">(</span><span class="si">%d</span><span class="s2">)] (</span><span class="si">%.1f</span><span class="s2"> MB), &quot;</span>
+            <span class="o">%</span> <span class="p">(</span>
+                <span class="n">n</span><span class="p">,</span>
+                <span class="n">forward_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">forward_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">forward_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">MB_per_timeslot</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">forward_states0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;None</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">forward_states0</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;[</span><span class="si">%d</span><span class="s2"> * </span><span class="si">%s</span><span class="s2">(</span><span class="si">%d</span><span class="s2">)] (</span><span class="si">%.1f</span><span class="s2"> MB)</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">%</span> <span class="p">(</span>
+                <span class="n">n</span><span class="p">,</span>
+                <span class="n">forward_states0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">forward_states0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">forward_states0</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">MB_per_timeslot</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+        <span class="s2">&quot;    fw_states_T norm: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">state</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">fw_states_T</span><span class="p">]))</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">tau_vals</span> <span class="o">==</span> <span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;    τ: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">%</span> <span class="p">(</span>
+                <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="s2">&quot;(</span><span class="si">%.2e</span><span class="s2">:</span><span class="si">%.2f</span><span class="s2">π)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">tau_vals</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
+
+
+<span class="k">def</span> <span class="nf">_grapheme_len</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Number of graphemes in `text`</span>
+
+<span class="sd">    This is the length of the `text` when printed::</span>
+<span class="sd">        &gt;&gt;&gt; s = &#39;Â&#39;</span>
+<span class="sd">        &gt;&gt;&gt; len(s)</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; _grapheme_len(s)</span>
+<span class="sd">        1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">grapheme_clusters</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">_rjust</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">fillchar</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Right-justify text for a total of `width` graphemes</span>
+
+<span class="sd">    The `width` is based on graphemes::</span>
+
+<span class="sd">        &gt;&gt;&gt; s = &#39;Â&#39;</span>
+<span class="sd">        &gt;&gt;&gt; s.rjust(2)</span>
+<span class="sd">        &#39;Â&#39;</span>
+<span class="sd">        &gt;&gt;&gt; _rjust(s, 2)</span>
+<span class="sd">        &#39; Â&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">len_text</span> <span class="o">=</span> <span class="n">_grapheme_len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fillchar</span> <span class="o">*</span> <span class="p">(</span><span class="n">width</span> <span class="o">-</span> <span class="n">len_text</span><span class="p">)</span> <span class="o">+</span> <span class="n">text</span>
+
+
+<div class="viewcode-block" id="print_table"><a class="viewcode-back" href="../../API/krotov.info_hooks.html#krotov.info_hooks.print_table">[docs]</a><span class="k">def</span> <span class="nf">print_table</span><span class="p">(</span>
+    <span class="n">J_T</span><span class="p">,</span>
+    <span class="n">show_g_a_int_per_pulse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">J_T_prev</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Print a tabular overview of the functional values in the iteration</span>
+
+<span class="sd">    An example output is:</span>
+
+<span class="sd">    .. code-block:: console</span>
+
+<span class="sd">        iter.        J_T    ∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs</span>
+<span class="sd">            0   1.00e+00    0.00e+00   1.00e+00        n/a        n/a     0</span>
+<span class="sd">            1   7.65e-01    2.33e-02   7.88e-01  -2.35e-01  -2.12e-01     1</span>
+<span class="sd">            2   5.56e-01    2.07e-02   5.77e-01  -2.09e-01  -1.88e-01     1</span>
+
+<span class="sd">    The table has the following columns:</span>
+
+<span class="sd">    * iteration number</span>
+<span class="sd">    * value of the final-time functional $J_T$</span>
+<span class="sd">    * If `show_g_a_int_per_pulse` is True and there is more than one control</span>
+<span class="sd">      pulse: one column for each pulse containing the value of :math:`\int_0^T</span>
+<span class="sd">      \frac{\lambda_{a, i}}{S_i(t)} \Abs{\Delta \epsilon_i(t)}^2 \dd t`</span>
+<span class="sd">    * The value of :math:`\sum_i \int_0^T g_a(\epsilon_i(t)) \dd t =</span>
+<span class="sd">      \sum_i \int_0^T \frac{\lambda_{a, i}}{S_i(t)}</span>
+<span class="sd">      \Abs{\Delta \epsilon_i(t)}^2 \dd t`, or just :math:`\int_0^T</span>
+<span class="sd">      \frac{\lambda_{a}}{S(t)} \Abs{\Delta \epsilon(t)}^2 \dd t` if there</span>
+<span class="sd">      is only a single control pulse (as in the above example output).</span>
+<span class="sd">      This value (respectively the individual values with</span>
+<span class="sd">      `show_g_a_int_per_pulse`) should always be at least three orders of</span>
+<span class="sd">      magnitude smaller than the pulse fluence :math:`\sum_i\int_0^T</span>
+<span class="sd">      \Abs{\epsilon_i(t)}^2 \dd t`.  Larger changes in the pulse amplitude may</span>
+<span class="sd">      be a sign of a &quot;pulse explosion&quot; due to values for $\lambda_{a,i}$ that</span>
+<span class="sd">      are too small. Changes in :math:`\sum_i \int_0^T \frac{\lambda_{a,</span>
+<span class="sd">      i}}{S_i(t)}` are often a better indicator of whether the optimization is</span>
+<span class="sd">      &quot;speeding up&quot;/&quot;slowing down&quot;/reaching convergence than the values of</span>
+<span class="sd">      $J_T$.</span>
+<span class="sd">    * The value of the total functional :math:`J = J_T +</span>
+<span class="sd">      \sum_i \int_0^T g_a(\epsilon_i(t)) \dd t`</span>
+<span class="sd">    * The change $\Delta J_T$ in the final time functional compared to the</span>
+<span class="sd">      previous iteration. This should be a negative value, indicating monotonic</span>
+<span class="sd">      convergence in a minimization of $J_T$.</span>
+<span class="sd">    * The change $\Delta J$ in the total functional compared to the previous</span>
+<span class="sd">      iteration. This is evaluated as :math:`\Delta J = \Delta J_T +</span>
+<span class="sd">      \sum_i \int_0^T g_a(\epsilon_i(t)) \dd t`. Somewhat counter-intuitively,</span>
+<span class="sd">      $\Delta J$ does not contain a contribution from the $g_a(t)$ of the</span>
+<span class="sd">      previous iteration. This is because the $\Delta \epsilon_i(T)$ on which</span>
+<span class="sd">      $g_a(t)$ depends must be evaluated with respect to the same reference</span>
+<span class="sd">      field (the guess pulse of the *current* iteration), to that</span>
+<span class="sd">      $\Delta \epsilon_i(T) = 0$ when evaluated with the optimized pulse of the</span>
+<span class="sd">      previous iteration (i.e., the same guess pulse of the current iteration).</span>
+<span class="sd">    * The number of seconds in wallclock time spent on the iteration</span>
+<span class="sd">    * An indicator ``*`` or ``**`` if there is a loss of monotonic convergence</span>
+<span class="sd">      in $\Delta J_T$ and/or $\Delta J$. Krotov&#39;s method mathematically</span>
+<span class="sd">      guarantees a negative $\Delta J$ in the continuous limit. Assuming there</span>
+<span class="sd">      are no errors in the time propagation, or in the `chi_constructor` passed</span>
+<span class="sd">      to :func:`.optimize_pulses`, a loss of monotonic convergence is due to</span>
+<span class="sd">      the $\lambda_a$ associated with the pulses (via `pulse_options` in</span>
+<span class="sd">      :func:`.optimize_pulses`) being too small. In practice, we usually don&#39;t</span>
+<span class="sd">      care too much about a loss of monotonic convergence in $\Delta J$, but a</span>
+<span class="sd">      loss of convergence in $\Delta J_T$ is a serious sign of trouble. It is</span>
+<span class="sd">      often associated with sharp discontinuous spikes in the optimized pulses,</span>
+<span class="sd">      or a dramatic increase in the pulse amplitude.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        J_T (callable): A function that extract the value of the final time</span>
+<span class="sd">            functional from the keyword-arguments passed to the `info_hook`.</span>
+<span class="sd">        show_g_a_int_per_pulse (bool): If True, print a column with the</span>
+<span class="sd">            value of :math:`\int_0^T g_a(\epsilon_i(t)) \dd t = \int_0^T</span>
+<span class="sd">            \frac{\lambda_{a, i}}{S_i(t)} \Abs{\Delta \epsilon_i(t)}^2 \dd t`</span>
+<span class="sd">            for every pulse $\epsilon_i(t)$. Otherwise, only print the sum over</span>
+<span class="sd">            those integrals for all pulses.</span>
+<span class="sd">        J_T_prev (None or callable): A function that extract the value of the</span>
+<span class="sd">            final time functional *from the previous iteration*. If None, use</span>
+<span class="sd">            the last values from the `info_vals` passed to the `info_hook`.</span>
+<span class="sd">        unicode (bool): Whether to use unicode symbols for the column headers.</span>
+<span class="sd">            Some systems have broken monospace fonts in the Jupyter notebook</span>
+<span class="sd">            that cause the headers not to line up as intended.</span>
+<span class="sd">        out: An open file handle where to write the table. Defaults to stdout.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_J_T_prev</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;info_vals&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">J_T_prev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">J_T_prev</span> <span class="o">=</span> <span class="n">get_J_T_prev</span>
+
+    <span class="k">def</span> <span class="nf">info_hook</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">iteration</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span>
+        <span class="n">n_pulses</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;guess_pulses&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">iteration</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;iter.&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;J_T&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">n_pulses</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">show_g_a_int_per_pulse</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pulses</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">unicode</span><span class="p">:</span>
+                            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;∫gₐ(ϵ</span><span class="si">%d</span><span class="s2">)dt&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">12</span><span class="p">))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;g_a_int_</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">12</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">unicode</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;∑∫gₐ(t)dt&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;g_a_int&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">unicode</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;∫gₐ(t)dt&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;g_a_int&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;J&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">unicode</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;ΔJ_T&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;Delta_J_T&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">unicode</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;ΔJ&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;Delta J&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_rjust</span><span class="p">(</span><span class="s2">&quot;secs&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">J_T_val</span> <span class="o">=</span> <span class="n">J_T</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Σgₐdt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;g_a_integrals&#39;</span><span class="p">])</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="n">J_T_val</span> <span class="o">+</span> <span class="n">Σgₐdt</span>
+        <span class="k">if</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">J_T_prev_val</span> <span class="o">=</span> <span class="n">J_T_prev</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">ΔJ_T</span> <span class="o">=</span> <span class="n">J_T_val</span> <span class="o">-</span> <span class="n">J_T_prev_val</span>
+            <span class="n">ΔJ</span> <span class="o">=</span> <span class="n">ΔJ_T</span> <span class="o">+</span> <span class="n">Σgₐdt</span>
+        <span class="n">secs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;stop_time&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">])</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%7d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">iteration</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%10.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">J_T_val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_pulses</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">show_g_a_int_per_pulse</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pulses</span><span class="p">):</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%11.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;g_a_integrals&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%11.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">Σgₐdt</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%10.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">J</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iteration</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%10s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;n/a&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%10s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;n/a&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%10.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ΔJ_T</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%10.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ΔJ</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">%5d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">secs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ΔJ_T</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">ΔJ</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ΔJ_T</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ΔJ</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">J_T_val</span>
+
+    <span class="k">return</span> <span class="n">info_hook</span></div>
+
+
+<span class="k">def</span> <span class="nf">_pulse_range</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the range information about the given pulse value array</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; _pulse_range(np.array([-1, 1, 5]))</span>
+<span class="sd">        &#39;[-1.00, 5.00]&#39;</span>
+<span class="sd">        &gt;&gt;&gt; _pulse_range(np.array([-1, 1+5j, 5]))</span>
+<span class="sd">        &#39;[(r:-1.00, i:0.00), (r:5.00, i:5.00)]&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
+        <span class="n">pulse_real</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">pulse_imag</span> <span class="o">=</span> <span class="n">pulse</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">)</span>
+        <span class="n">i0</span><span class="p">,</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pulse_imag</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pulse_imag</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;[(r:</span><span class="si">%.2f</span><span class="s2">, i:</span><span class="si">%.2f</span><span class="s2">), (r:</span><span class="si">%.2f</span><span class="s2">, i:</span><span class="si">%.2f</span><span class="s2">)]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r0</span><span class="p">,</span> <span class="n">i0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">i1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;[</span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.2f</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pulse</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pulse</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
