@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.objectives module &mdash; Krotov 33284bb documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="krotov.optimize module" href="krotov.optimize.html" />
+    <link rel="prev" title="krotov.mu module" href="krotov.mu.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0.post1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_grape_crab.html">Krotov vs GRAPE and CRAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_propagation.html">Time Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_time_discretization.html">Time Discretization Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="krotov.html">API of the Krotov package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="krotov.convergence.html">krotov.convergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.info_hooks.html">krotov.info_hooks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.objectives module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.optimize.html">krotov.optimize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.propagators.html">krotov.propagators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.pulse_options.html">krotov.pulse_options module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.result.html">krotov.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.shapes.html">krotov.shapes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.structural_conversions.html">krotov.structural_conversions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="krotov.html">krotov package</a> &raquo;</li>
+        
+      <li>krotov.objectives module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-krotov.objectives">
+<span id="krotov-objectives-module"></span><h1>krotov.objectives module<a class="headerlink" href="#module-krotov.objectives" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Data:</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#krotov.objectives.CtrlCounter" title="krotov.objectives.CtrlCounter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CtrlCounter</span></code></a></td>
+<td>Constructor for a counter of controls.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Objective</span></code></a></td>
+<td>A single objective for optimization with Krotov’s method</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#krotov.objectives.ensemble_objectives" title="krotov.objectives.ensemble_objectives"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble_objectives</span></code></a></td>
+<td>Extend <cite>objectives</cite> for an “ensemble optimization”</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gate_objectives</span></code></a></td>
+<td>Construct a list of objectives for optimizing towards a quantum gate</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#krotov.objectives.summarize_qobj" title="krotov.objectives.summarize_qobj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize_qobj</span></code></a></td>
+<td>Summarize a quantum object</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.objectives.CtrlCounter" title="krotov.objectives.CtrlCounter"><code class="xref py py-data docutils literal notranslate"><span class="pre">CtrlCounter</span></code></a>, <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-data docutils literal notranslate"><span class="pre">Objective</span></code></a>, <a class="reference internal" href="#krotov.objectives.ensemble_objectives" title="krotov.objectives.ensemble_objectives"><code class="xref py py-data docutils literal notranslate"><span class="pre">ensemble_objectives</span></code></a>, <a class="reference internal" href="#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-data docutils literal notranslate"><span class="pre">gate_objectives</span></code></a>, <a class="reference internal" href="#krotov.objectives.summarize_qobj" title="krotov.objectives.summarize_qobj"><code class="xref py py-data docutils literal notranslate"><span class="pre">summarize_qobj</span></code></a></p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="krotov.objectives.FIX_QUTIP_932">
+<code class="descclassname">krotov.objectives.</code><code class="descname">FIX_QUTIP_932</code><em class="property"> = True</em><a class="headerlink" href="#krotov.objectives.FIX_QUTIP_932" title="Permalink to this definition">¶</a></dt>
+<dd><p>Workaround for <a class="reference external" href="https://github.com/qutip/qutip/issues/932">QuTiP issue 932</a>.</p>
+<p>If True, and only when running on macOS, in <a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Objective.mesolve()</span></code></a>,
+replace any array controls with an equivalent function. This results in a
+signficant slowdown of the propagation, as it circumvents the use of Cython.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.objectives.CtrlCounter">
+<code class="descclassname">krotov.objectives.</code><code class="descname">CtrlCounter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#CtrlCounter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.CtrlCounter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for a counter of controls.</p>
+<p>Returns a callable that returns a unique integer (starting at 1) for every
+distinct control that is passed to it. This is intended for use with
+<a class="reference internal" href="#krotov.objectives.summarize_qobj" title="krotov.objectives.summarize_qobj"><code class="xref py py-func docutils literal notranslate"><span class="pre">summarize_qobj()</span></code></a>.</p>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl_counter</span> <span class="o">=</span> <span class="n">CtrlCounter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl_counter</span><span class="p">(</span><span class="n">ctrl1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">ctrl2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">ctrl1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl_counter</span><span class="p">(</span><span class="n">ctrl2</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl_counter</span><span class="p">(</span><span class="n">ctrl1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl3</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl_counter</span><span class="p">(</span><span class="n">ctrl3</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="krotov.objectives.Objective">
+<em class="property">class </em><code class="descclassname">krotov.objectives.</code><code class="descname">Objective</code><span class="sig-paren">(</span><em>*</em>, <em>initial_state</em>, <em>H</em>, <em>target</em>, <em>c_ops=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.Objective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A single objective for optimization with Krotov’s method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>initial_state</strong> (<a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><em>qutip.Qobj</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a></li>
+<li><strong>H</strong> (<a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><em>qutip.Qobj</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a></li>
+<li><strong>target</strong> (<a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><em>qutip.Qobj</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a></li>
+<li><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.c_ops" title="krotov.objectives.Objective.c_ops"><code class="xref py py-attr docutils literal notranslate"><span class="pre">c_ops</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="krotov.objectives.Objective.H">
+<code class="descname">H</code><a class="headerlink" href="#krotov.objectives.Objective.H" title="Permalink to this definition">¶</a></dt>
+<dd><p>The (time-dependent) Hamiltonian,
+cf. <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a>. This includes the control
+fields.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)">qutip.Qobj</a> or <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.objectives.Objective.initial_state">
+<code class="descname">initial_state</code><a class="headerlink" href="#krotov.objectives.Objective.initial_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>The initial state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)">qutip.Qobj</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.objectives.Objective.target">
+<code class="descname">target</code><a class="headerlink" href="#krotov.objectives.Objective.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object describing the “target” of the optimization, for the
+dynamics starting from <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a>. Usually, this will be
+the target state (the state into which <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> should
+evolve). More generally, it can be an arbitrary object meeting the
+requirements of a specific <cite>chi_constructor</cite> function that will be
+passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.objectives.Objective.c_ops">
+<code class="descname">c_ops</code><a class="headerlink" href="#krotov.objectives.Objective.c_ops" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of collapse operators,
+cf. <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">mesolve()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a> or <a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)">None</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – If any arguments have an invalid type</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="krotov.objectives.Objective.adjoint">
+<code class="descname">adjoint</code><a class="headerlink" href="#krotov.objectives.Objective.adjoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> containing the adjoint of all components.</p>
+<p>This does not affect the controls in <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a>: these are
+assumed to be real-valued. Also, <a class="reference internal" href="#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.target</span></code></a> will be left
+unchanged if it is not a <a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">qutip.Qobj</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.objectives.Objective.mesolve">
+<code class="descname">mesolve</code><span class="sig-paren">(</span><em>tlist</em>, <em>rho0=None</em>, <em>e_ops=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.mesolve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.Objective.mesolve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a> on the system of the objective</p>
+<p>Solve the dynamics for the <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a> and <a class="reference internal" href="#krotov.objectives.Objective.c_ops" title="krotov.objectives.Objective.c_ops"><code class="xref py py-attr docutils literal notranslate"><span class="pre">c_ops</span></code></a> of the
+objective. If <cite>rho0</cite> is not given, the <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> will be
+propagated. All other arguments will be passed to
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Result of the propagation, see
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a> for details.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.solver.Result" title="(in QuTiP: Quantum Toolbox in Python v4.4)">qutip.solver.Result</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.objectives.Objective.propagate">
+<code class="descname">propagate</code><span class="sig-paren">(</span><em>tlist</em>, <em>*</em>, <em>propagator</em>, <em>rho0=None</em>, <em>e_ops=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.propagate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.Objective.propagate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Propagates the system of the objective over the entire time grid</p>
+<p>Solve the dynamics for the <cite>H</cite> and <cite>c_ops</cite> of the objective. If <cite>rho0</cite>
+is not given, the <cite>initial_state</cite> will be propagated. This is similar
+to the <a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesolve()</span></code></a> method, but instead of using
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a>, the <cite>propagate</cite> function is used to go
+between points on the time grid. This function is the same as what is
+passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>. The crucial difference between this
+and <a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesolve()</span></code></a> is in the time discretization convention. While
+<a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesolve()</span></code></a> uses piecewise-constant controls centered around the
+values in <cite>tlist</cite> (the control field switches in the middle between two
+points in <cite>tlist</cite>), <a class="reference internal" href="#krotov.objectives.Objective.propagate" title="krotov.objectives.Objective.propagate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">propagate()</span></code></a> uses piecewise-constant controls
+on the intervals of <cite>tlist</cite> (the control field switches on the points
+in <cite>tlist</cite>)</p>
+<p>Comparing the result of <a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesolve()</span></code></a> and <a class="reference internal" href="#krotov.objectives.Objective.propagate" title="krotov.objectives.Objective.propagate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">propagate()</span></code></a> allows to
+estimate the “time discretization error”. If the error is significant,
+a shorter time step shoud be used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Result of the propagation, using the same
+structure as <a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesolve()</span></code></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.solver.Result" title="(in QuTiP: Quantum Toolbox in Python v4.4)">qutip.solver.Result</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.objectives.Objective.summarize">
+<code class="descname">summarize</code><span class="sig-paren">(</span><em>ctrl_counter=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.summarize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.Objective.summarize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a one-line summary of the objective as a string</p>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmap</span><span class="p">,</span> <span class="n">identity</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="n">tensor</span><span class="p">(</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sigmaz</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="n">u1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sigmax</span><span class="p">()),</span> <span class="n">u2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sigmap</span><span class="p">()),</span> <span class="n">a1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C2</span> <span class="o">=</span> <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">sigmap</span><span class="p">(),</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="n">a2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ket00</span> <span class="o">=</span> <span class="n">ket</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ket11</span> <span class="o">=</span> <span class="n">ket</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">initial_state</span><span class="o">=</span><span class="n">ket00</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="n">ket11</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">H</span><span class="o">=</span><span class="n">H</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span><span class="o">.</span><span class="n">summarize</span><span class="p">()</span>
+<span class="go">&#39;|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">initial_state</span><span class="o">=</span><span class="n">ket00</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">target</span><span class="o">=</span><span class="n">ket11</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">c_ops</span><span class="o">=</span><span class="p">[</span><span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span><span class="o">.</span><span class="n">summarize</span><span class="p">()</span>
+<span class="go">&#39;|(2⊗2)⟩ - {H:[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]], c_ops:([NonHerm[2⊗2,2⊗2], u3[complex128]],[NonHerm[2⊗2,2⊗2], u4[complex128]])} - |(2⊗2)⟩&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.objectives.Objective.__getstate__">
+<code class="descname">__getstate__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.__getstate__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.Objective.__getstate__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data for the pickle serialization of an objective.</p>
+<p>This may not preserve time-dependent controls, and is only to enable
+the serialization of <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> objects.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.objectives.summarize_qobj">
+<code class="descclassname">krotov.objectives.</code><code class="descname">summarize_qobj</code><span class="sig-paren">(</span><em>obj</em>, <em>ctrl_counter=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#summarize_qobj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.summarize_qobj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Summarize a quantum object</p>
+<p>A counter created by <a class="reference internal" href="#krotov.objectives.CtrlCounter" title="krotov.objectives.CtrlCounter"><code class="xref py py-func docutils literal notranslate"><span class="pre">CtrlCounter()</span></code></a> may be passed to distinguish
+control fields.</p>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ket</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">summarize_qobj</span><span class="p">(</span><span class="n">ket</span><span class="p">)</span>
+<span class="go">&#39;|(2⊗2⊗2)⟩&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bra</span> <span class="o">=</span> <span class="n">ket</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">summarize_qobj</span><span class="p">(</span><span class="n">bra</span><span class="p">)</span>
+<span class="go">&#39;⟨(2⊗2⊗2)|&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span> <span class="o">=</span> <span class="n">ket</span> <span class="o">*</span> <span class="n">bra</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">summarize_qobj</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+<span class="go">&#39;Herm[2⊗2⊗2,2⊗2⊗2]&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">summarize_qobj</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">&#39;NonHerm[10,10]&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">to_super</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">summarize_qobj</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="go">&#39;[[10,10],[10,10]]&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.objectives.gate_objectives">
+<code class="descclassname">krotov.objectives.</code><code class="descname">gate_objectives</code><span class="sig-paren">(</span><em>basis_states</em>, <em>gate</em>, <em>H</em>, <em>c_ops=None</em>, <em>local_invariants=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#gate_objectives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.gate_objectives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a list of objectives for optimizing towards a quantum gate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>basis_states</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><em>qutip.Qobj</em></a><em>]</em>) – A list of <span class="math notranslate nohighlight">\(n\)</span> canonical basis states</li>
+<li><strong>gate</strong> – The gate to optimize for, as a <span class="math notranslate nohighlight">\(n \times n\)</span> matrix-like object
+(must have a <cite>shape</cite> attribute, and be indexable by two indices).
+Alternatively, <cite>gate</cite> may be the string ‘perfect_entangler’ or
+‘PE’, to indicate the optimization for an arbitrary two-qubit
+perfect entangler.</li>
+<li><strong>H</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><em>qutip.Qobj</em></a>) – The Hamiltonian for the time evolution</li>
+<li><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A list of collapse (Lindblad) operators, or None
+for unitary dynamics</li>
+<li><strong>local_invariants</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, initialize the objectives for an
+optimization towards a two-qubit gate that is “locally equivalent”
+to <cite>gate</cite>. That is, the result of the optimization should implement
+<cite>gate</cite> up to single-qubit operations.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>The objectives that define the optimization towards
+the gate. For a “normal” gate with a basis in Hilbert space, the
+objectives will have the <cite>basis_states</cite> as each
+<a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> and the result of applying <cite>gate</cite>
+to the <cite>basis_states</cite> as each <a class="reference internal" href="#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a>.</p>
+<p>For an optimization towards a perfect-entangler, or for the
+<cite>local_invariants</cite> of the given <cite>gate</cite>, each
+<a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> will be the Bell basis state
+described in “Theorem 1” in Y. Makhlin, Quantum Inf. Process. 1, 243
+(2002), derived from the canonical <cite>basis_states</cite>. The
+<a class="reference internal" href="#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a> will be the string ‘PE’ for a
+perfect-entanglers optimization, and <cite>gate</cite> for the local-invariants
+optimization.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective">Objective</a>]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – If <cite>gate</cite>, <cite>basis_states</cite>, and <cite>local_invariants</cite> are
+incompatible, or <cite>gate</cite> is invalid (not a recognized string)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The dimension of the <cite>basis_states</cite> is not required to be the dimension
+of the <cite>gate</cite>; the <cite>basis_states</cite> may define a logical subspace in a
+larger Hilbert space.</p>
+</div>
+<p class="rubric">Examples</p>
+<ul>
+<li><p class="first">A single-qubit gate:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmay</span><span class="p">,</span> <span class="n">identity</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="n">ket</span><span class="p">([</span><span class="mi">1</span><span class="p">])]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gate</span> <span class="o">=</span> <span class="n">sigmay</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gate</span>
+<span class="go">Quantum object: dims = [[2], [2]], shape = (2, 2), type = oper, isherm = True</span>
+<span class="go">Qobj data =</span>
+<span class="go">[[0.+0.j 0.-1.j]</span>
+<span class="go"> [0.+1.j 0.+0.j]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="n">sigmaz</span><span class="p">(),[</span><span class="n">sigmax</span><span class="p">(),</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectives</span> <span class="o">=</span> <span class="n">gate_objectives</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">objectives</span> <span class="o">==</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="n">Objective</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">initial_state</span><span class="o">=</span><span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="n">target</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">basis</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">H</span><span class="o">=</span><span class="n">H</span>
+<span class="gp">... </span>    <span class="p">),</span>
+<span class="gp">... </span>    <span class="n">Objective</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">initial_state</span><span class="o">=</span><span class="n">basis</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="n">target</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">H</span><span class="o">=</span><span class="n">H</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">An arbitrary two-qubit perfect entangler:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="n">tensor</span><span class="p">(</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sigmaz</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sigmax</span><span class="p">()),</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objectives</span> <span class="o">=</span> <span class="n">gate_objectives</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="s1">&#39;PE&#39;</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weylchamber</span> <span class="kn">import</span> <span class="n">bell_basis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">Objective</span><span class="p">(</span>
+<span class="gp">... </span>       <span class="n">initial_state</span><span class="o">=</span><span class="n">bell_basis</span><span class="p">(</span><span class="n">basis</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="n">target</span><span class="o">=</span><span class="s1">&#39;PE&#39;</span><span class="p">,</span>
+<span class="gp">... </span>       <span class="n">H</span><span class="o">=</span><span class="n">H</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">A two-qubit gate, up to single-qubit operation (“local invariants”):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objectives</span> <span class="o">=</span> <span class="n">gate_objectives</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">basis</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">gates</span><span class="o">.</span><span class="n">cnot</span><span class="p">(),</span> <span class="n">H</span><span class="p">,</span> <span class="n">local_invariants</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">Objective</span><span class="p">(</span>
+<span class="gp">... </span>       <span class="n">initial_state</span><span class="o">=</span><span class="n">bell_basis</span><span class="p">(</span><span class="n">basis</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="n">target</span><span class="o">=</span><span class="n">qutip</span><span class="o">.</span><span class="n">gates</span><span class="o">.</span><span class="n">cnot</span><span class="p">(),</span>
+<span class="gp">... </span>       <span class="n">H</span><span class="o">=</span><span class="n">H</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.objectives.ensemble_objectives">
+<code class="descclassname">krotov.objectives.</code><code class="descname">ensemble_objectives</code><span class="sig-paren">(</span><em>objectives</em>, <em>Hs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#ensemble_objectives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.objectives.ensemble_objectives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extend <cite>objectives</cite> for an “ensemble optimization”</p>
+<p>This creates a list of objectives for an optimization for robustness with
+respect to variations in some parameter of the Hamiltonian. The trick is to
+simply optimize over the average of multiple copies of the system
+(the <cite>Hs</cite>) sampling that variation. See
+Goerz, Halperin, Aytac, Koch, Whaley. Phys. Rev. A 90, 032329 (2014)
+for details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objectives</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><em>Objective</em></a><em>]</em>) – The <span class="math notranslate nohighlight">\(n\)</span> original objectives</li>
+<li><strong>Hs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – List of <span class="math notranslate nohighlight">\(m\)</span> variations of the original
+Hamiltonian/Liouvillian</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of <span class="math notranslate nohighlight">\(n (m+1)\)</span> new objectives that consists of the
+original objectives, plus one copy of the original objectives per
+element of <cite>Hs</cite> where the <cite>H</cite> attribute of each objectives is
+replaced by that element.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective">Objective</a>]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="krotov.optimize.html" class="btn btn-neutral float-right" title="krotov.optimize module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="krotov.mu.html" class="btn btn-neutral float-left" title="krotov.mu module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

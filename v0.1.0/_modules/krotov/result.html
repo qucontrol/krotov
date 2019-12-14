@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.result &mdash; Krotov 33284bb documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/version-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0.post1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_grape_crab.html">Krotov vs GRAPE and CRAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_propagation.html">Time Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_time_discretization.html">Time Discretization Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.result</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.result</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
+
+<span class="kn">from</span> <span class="nn">.objectives</span> <span class="kn">import</span> <span class="n">Objective</span><span class="p">,</span> <span class="n">_ControlPlaceholder</span>
+<span class="kn">from</span> <span class="nn">.structural_conversions</span> <span class="kn">import</span> <span class="n">_nested_list_shallow_copy</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Result&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../API/krotov.result.html#krotov.result.Result">[docs]</a><span class="k">class</span> <span class="nc">Result</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Result object for a Krotov optimization</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        objectives (list[Objective]): The control objectives</span>
+<span class="sd">        tlist (numpy.ndarray): The time grid values</span>
+<span class="sd">        iters (list[int]): Iteration numbers, starting at 0.</span>
+<span class="sd">        iter_seconds (list[int]): for each iteration number, the number of</span>
+<span class="sd">            seconds that were spent in the optimization</span>
+<span class="sd">        info_vals (list): For each iteration, the return value of `info_hook`,</span>
+<span class="sd">            or None</span>
+<span class="sd">        tau_vals (list[list[complex]): for each iteration, a list of complex</span>
+<span class="sd">            overlaps between the forward-propagated state and the target state</span>
+<span class="sd">            for each objective, assuming :attr:`.Objective.target` contains the</span>
+<span class="sd">            target state.</span>
+<span class="sd">        guess_controls (list[numpy.ndarray]): List of the guess controls in</span>
+<span class="sd">            array format</span>
+<span class="sd">        optimized_controls (list[numpy.ndarray]): List of the optimized control</span>
+<span class="sd">            fields, in the order corresponding to :attr:`guess_controls`</span>
+<span class="sd">        controls_mapping (list): A nested list that indicates where in</span>
+<span class="sd">            :attr:`objectives` the :attr:`guess_controls` and</span>
+<span class="sd">            :attr:`optimized_controls` are used (as returned by</span>
+<span class="sd">            :func:`.extract_controls_mapping`)</span>
+<span class="sd">        all_pulses (list): If the optimization was performed with</span>
+<span class="sd">            ``store_all_pulses=True``, for each iteration, a list of the</span>
+<span class="sd">            optimized pulses (in the order corresponding to</span>
+<span class="sd">            :attr:`guess_controls`).</span>
+<span class="sd">            These pulses are defined at midpoints of the `tlist` intervals.</span>
+<span class="sd">            Empty list if ``store_all_pulses=False``</span>
+<span class="sd">        states (list[list[qutip.Qobj]]): for each objective, a list of states</span>
+<span class="sd">            for each value in `tlist`, obtained from propagation under the</span>
+<span class="sd">            final optimized control fields.</span>
+<span class="sd">        start_local_time (time.struct_time): Time stamp of when the</span>
+<span class="sd">            optimization started</span>
+<span class="sd">        end_local_time (time.struct_time): Time stamp of when the optimization</span>
+<span class="sd">            ended</span>
+<span class="sd">        message (str): Description of why :func:`.optimize_pulses` completed,</span>
+<span class="sd">            E.g, &quot;Reached 1000 iterations&quot;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">time_fmt</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Format used in :attr:`start_local_time_str` and</span>
+<span class="sd">    :attr:`end_local_time_str`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tlist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iter_seconds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info_vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau_vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">guess_controls</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimized_controls</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controls_mapping</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_pulses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_local_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_local_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dedent</span><span class="p">(</span>
+            <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Krotov Optimization Result</span>
+<span class="sd">        --------------------------</span>
+<span class="sd">        - Started at {start_local_time}</span>
+<span class="sd">        - Number of objectives: {n_objectives}</span>
+<span class="sd">        - Number of iterations: {n_iters}</span>
+<span class="sd">        - Reason for termination: {message}</span>
+<span class="sd">        - Ended at {end_local_time}</span>
+<span class="sd">        &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">start_local_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">start_local_time_str</span><span class="p">,</span>
+                <span class="n">n_objectives</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">),</span>
+                <span class="n">n_iters</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iters</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># do not count zero iteration</span>
+                <span class="n">end_local_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">end_local_time_str</span><span class="p">,</span>
+                <span class="n">message</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">start_local_time_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The :attr:`start_local_time` attribute formatted as a string&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_local_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_fmt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_local_time</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;n/a&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">end_local_time_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The :attr:`end_local_time` attribute formatted as a string&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_local_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_fmt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_local_time</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;n/a&#39;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">optimized_objectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list[Objective]: A copy of the :attr:`objectives` with the</span>
+<span class="sd">        :attr:`optimized_controls` plugged in&quot;&quot;&quot;</span>
+        <span class="n">objectives</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">):</span>
+            <span class="n">H</span> <span class="o">=</span> <span class="n">_plug_in_optimized_controls</span><span class="p">(</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">controls_mapping</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">_plug_in_optimized_controls</span><span class="p">(</span>
+                    <span class="n">c_op</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">controls_mapping</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">c_op</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">objectives</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Objective</span><span class="p">(</span>
+                    <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span>
+                    <span class="n">initial_state</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span>
+                    <span class="n">target</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                    <span class="n">c_ops</span><span class="o">=</span><span class="n">c_ops</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">objectives</span>
+
+<div class="viewcode-block" id="Result.load"><a class="viewcode-back" href="../../API/krotov.result.html#krotov.result.Result.load">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">objectives</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct :class:`Result` object from a :meth:`dump` file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): The file from which to load the :class:`Result`.</span>
+<span class="sd">                Must be in the format created by :meth:`dump`.</span>
+<span class="sd">            objectives (None or list[Objective]): If given, after loading</span>
+<span class="sd">                :class:`Result` from the given `filename`, overwrite</span>
+<span class="sd">                :attr:`objectives` with the given `objectives`. This is</span>
+<span class="sd">                necessary because :meth:`dump` does not preserve time-dependent</span>
+<span class="sd">                controls that are Python functions.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Result: The :class:`Result` instance loaded from `filename`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dump_fh</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dump_fh</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">objectives</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">objectives</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">_contains_control_placeholders</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">H</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">_contains_control_placeholders</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="k">for</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">c_ops</span><span class="p">]</span>
+                <span class="p">):</span>
+                    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;krotov&#39;</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Result.objectives contains control placeholders. &quot;</span>
+                        <span class="s2">&quot;You should overwrite it.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">objectives</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Result.dump"><a class="viewcode-back" href="../../API/krotov.result.html#krotov.result.Result.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Dump the :class:`Result` to a binary :mod:`pickle` file.</span>
+
+<span class="sd">        The original :class:`Result` object can be restored from the resulting</span>
+<span class="sd">        file using :meth:`load`. However, time-dependent control fields that</span>
+<span class="sd">        are callables/functions will not be preserved, as they are not</span>
+<span class="sd">        &quot;pickleable&quot;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): Name of file to which to dump the :class:`Result`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dump_fh</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dump_fh</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_contains_control_placeholders</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">([</span><span class="n">_contains_control_placeholders</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">_ControlPlaceholder</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_plug_in_optimized_controls</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Auxilliary routine to :attr:`Result.optimized_objectives`&quot;&quot;&quot;</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">_nested_list_shallow_copy</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">control_mapping</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">control_mapping</span><span class="p">:</span>
+            <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">control</span>
+    <span class="k">return</span> <span class="n">H</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

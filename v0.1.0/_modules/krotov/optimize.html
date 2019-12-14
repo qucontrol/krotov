@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.optimize &mdash; Krotov 33284bb documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/version-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0.post1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_grape_crab.html">Krotov vs GRAPE and CRAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_propagation.html">Time Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_time_discretization.html">Time Discretization Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.optimize</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.optimize</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">Qobj</span>
+<span class="kn">from</span> <span class="nn">qutip.parallel</span> <span class="kn">import</span> <span class="n">serial_map</span>
+
+<span class="kn">from</span> <span class="nn">.result</span> <span class="kn">import</span> <span class="n">Result</span>
+<span class="kn">from</span> <span class="nn">.structural_conversions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">extract_controls</span><span class="p">,</span> <span class="n">extract_controls_mapping</span><span class="p">,</span> <span class="n">control_onto_interval</span><span class="p">,</span>
+    <span class="n">pulse_options_dict_to_list</span><span class="p">,</span> <span class="n">pulse_onto_tlist</span><span class="p">,</span>
+    <span class="n">plug_in_pulse_values</span><span class="p">,</span> <span class="n">discretize</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.mu</span> <span class="kn">import</span> <span class="n">derivative_wrt_pulse</span>
+<span class="kn">from</span> <span class="nn">.info_hooks</span> <span class="kn">import</span> <span class="n">chain</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;optimize_pulses&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_overlap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">complex</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Complex overlap of two quantum objects.</span>
+
+<span class="sd">    If `a`, `b` are not quantum objects or are not compatible, return None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Qobj</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">Qobj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">dims</span> <span class="o">!=</span> <span class="n">b</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;oper&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">complex</span><span class="p">((</span><span class="n">a</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">tr</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">overlap</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="optimize_pulses"><a class="viewcode-back" href="../../API/krotov.optimize.html#krotov.optimize.optimize_pulses">[docs]</a><span class="k">def</span> <span class="nf">optimize_pulses</span><span class="p">(</span>
+    <span class="n">objectives</span><span class="p">,</span>
+    <span class="n">pulse_options</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="p">,</span>
+    <span class="n">chi_constructor</span><span class="p">,</span>
+    <span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">iter_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">iter_stop</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">check_convergence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">state_dependent_constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">info_hook</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">modify_params_after_iter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">storage</span><span class="o">=</span><span class="s1">&#39;array&#39;</span><span class="p">,</span>
+    <span class="n">parallel_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">store_all_pulses</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Use Krotov&#39;s method to optimize towards the given `objectives`</span>
+
+<span class="sd">    Optimize all time-dependent controls found in the Hamiltonians of the given</span>
+<span class="sd">    `objectives`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        objectives (list[Objective]): List of objectives</span>
+<span class="sd">        pulse_options (dict): Mapping of time-dependent controls found in the</span>
+<span class="sd">            Hamiltonians of the objectives to :class:`.PulseOptions` instances.</span>
+<span class="sd">            There must be a mapping for each control. As numpy arrays are</span>
+<span class="sd">            unhashable and thus cannot be used as dict keys, the options for a</span>
+<span class="sd">            ``control`` that is an array must set using</span>
+<span class="sd">            ``pulse_options[id(control)] = ...``</span>
+<span class="sd">        tlist (numpy.ndarray): Array of time grid values, cf.</span>
+<span class="sd">            :func:`~qutip.mesolve.mesolve`</span>
+<span class="sd">        propagator (callable): Function that propagates the state backward or</span>
+<span class="sd">            forwards in time by a single time step, between two points in</span>
+<span class="sd">            `tlist`</span>
+<span class="sd">        chi_constructor (callable): Function that calculates the boundary</span>
+<span class="sd">            condition for the backward propagation. This is where the</span>
+<span class="sd">            final-time functional (indirectly) enters the optimization.</span>
+<span class="sd">        mu (None or callable): Function that calculates the derivative</span>
+<span class="sd">            $\frac{\partial H}{\partial\epsilon}$ for an equation of motion</span>
+<span class="sd">            $\dot{\phi}(t) = -i H[\phi(t)]$ of an abstract operator $H$ and an</span>
+<span class="sd">            abstract state $\phi$. If None, defaults to</span>
+<span class="sd">            :func:`krotov.mu.derivative_wrt_pulse`, which covers the standard</span>
+<span class="sd">            Schrödinger and master equations. See :mod:`krotov.mu` for a</span>
+<span class="sd">            full explanation of the role of `mu` in the optimization, and the</span>
+<span class="sd">            required function signature.</span>
+<span class="sd">        sigma (None or callable): Function that calculates the second-order</span>
+<span class="sd">            Krotov term. If None, the first-order Krotov method is used.</span>
+<span class="sd">        iter_start (int): The formal iteration number at which to start the</span>
+<span class="sd">            optimization</span>
+<span class="sd">        iter_stop (int): The iteration number after which to end the</span>
+<span class="sd">            optimization, whether or not convergence has been reached</span>
+<span class="sd">        check_convergence (None or callable): Function that determines whether</span>
+<span class="sd">            the optimization has converged. If None, the optimization will only</span>
+<span class="sd">            end when `iter_stop` is reached. See :mod:`krotov.convergence` for</span>
+<span class="sd">            details.</span>
+<span class="sd">        state_dependent_constraint (None or callable): Function that evaluates</span>
+<span class="sd">            a state-dependent constraint. If None, optimize without any</span>
+<span class="sd">            state-dependent constraint. Currently not implemented.</span>
+<span class="sd">        info_hook (None or callable): Function that is called after each</span>
+<span class="sd">            iteration of the optimization, for the purpose of analysis. Any</span>
+<span class="sd">            value returned by `info_hook` (e.g. an evaluated functional J_T)</span>
+<span class="sd">            will be stored, for each iteration, in the `info_vals` attribute of</span>
+<span class="sd">            the returned :class:`.Result`. The `info_hook` must have the same</span>
+<span class="sd">            signature as :func:`krotov.info_hooks.print_debug_information`. It</span>
+<span class="sd">            should not modify its arguments except for `shared_data` in any</span>
+<span class="sd">            way.</span>
+<span class="sd">        modify_params_after_iter (None or callable): Function that is called</span>
+<span class="sd">            after each iteration, which may modify its arguments for certain</span>
+<span class="sd">            advanced use cases, such as dynamically adjusting `lambda_vals`, or</span>
+<span class="sd">            applying spectral filters to the `optimized_pulses`. It has the</span>
+<span class="sd">            same interface as `info_hook` but should not return anything. The</span>
+<span class="sd">            `modify_params_after_iter` function is called immediately before</span>
+<span class="sd">            `info_hook`, and can transfer arbitrary data to any subsequent</span>
+<span class="sd">            `info_hook` via the `shared_data` argument.</span>
+<span class="sd">        storage (callable): Storage constructor for the storage of</span>
+<span class="sd">            propagated states. Must accept an integer parameter `N` and return</span>
+<span class="sd">            an empty array of length `N`. The default value &#39;array&#39; is</span>
+<span class="sd">            equivalent to ``functools.partial(numpy.empty, dtype=object)``.</span>
+<span class="sd">        parallel_map (callable or None): Parallel function evaluator. The</span>
+<span class="sd">            argument must have the same specification as</span>
+<span class="sd">            :func:`qutip.parallel.serial_map`,</span>
+<span class="sd">            which is used when None is passed. Alternatives are</span>
+<span class="sd">            :func:`qutip.parallel.parallel_map` or</span>
+<span class="sd">            :func:`qutip.ipynbtools.parallel_map`.</span>
+<span class="sd">        store_all_pulses (bool): Whether or not to store the optimized pulses</span>
+<span class="sd">            from *all* iterations in :class:`.Result`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Result: The result of the optimization.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If any controls are not real-valued, or if any update</span>
+<span class="sd">            shape is not a real-valued function in the range [0, 1].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;krotov&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Initialization</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initializing optimization with Krotov&#39;s method&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mu</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">derivative_wrt_pulse</span>
+    <span class="k">if</span> <span class="n">sigma</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Second order&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">modify_params_after_iter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># From a technical perspective, the `modify_params_after_iter` is</span>
+        <span class="c1"># really just another info_hook, the only difference is the</span>
+        <span class="c1"># convention that info_hooks shouldn&#39;t modify the parameters.</span>
+        <span class="k">if</span> <span class="n">info_hook</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">info_hook</span> <span class="o">=</span> <span class="n">modify_params_after_iter</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">info_hook</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="n">modify_params_after_iter</span><span class="p">,</span> <span class="n">info_hook</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">state_dependent_constraint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;state_dependent_constraint&quot;</span><span class="p">)</span>
+
+    <span class="n">adjoint_objectives</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span><span class="o">.</span><span class="n">adjoint</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objectives</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">storage</span> <span class="o">==</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span>
+        <span class="n">storage</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">parallel_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">parallel_map</span> <span class="o">=</span> <span class="n">serial_map</span>
+
+    <span class="p">(</span>
+        <span class="n">guess_controls</span><span class="p">,</span>
+        <span class="n">guess_pulses</span><span class="p">,</span>
+        <span class="n">pulses_mapping</span><span class="p">,</span>
+        <span class="n">lambda_vals</span><span class="p">,</span>
+        <span class="n">shape_arrays</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">_initialize_krotov_controls</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">pulse_options</span><span class="p">,</span> <span class="n">tlist</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">Result</span><span class="p">()</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">start_local_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">()</span>
+
+    <span class="c1"># Initial forward-propagation</span>
+    <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">forward_states</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span>
+        <span class="n">_forward_propagation</span><span class="p">,</span>
+        <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">))),</span>
+        <span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">guess_pulses</span><span class="p">,</span> <span class="n">pulses_mapping</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">propagator</span><span class="p">,</span> <span class="n">storage</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">toc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="n">fw_states_T</span> <span class="o">=</span> <span class="p">[</span><span class="n">states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">states</span> <span class="ow">in</span> <span class="n">forward_states</span><span class="p">]</span>
+    <span class="n">tau_vals</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">_overlap</span><span class="p">(</span><span class="n">state_T</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">state_T</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fw_states_T</span><span class="p">,</span> <span class="n">objectives</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="n">info_hook</span><span class="p">(</span>
+        <span class="n">objectives</span><span class="o">=</span><span class="n">objectives</span><span class="p">,</span>
+        <span class="n">adjoint_objectives</span><span class="o">=</span><span class="n">adjoint_objectives</span><span class="p">,</span>
+        <span class="n">backward_states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">forward_states</span><span class="o">=</span><span class="n">forward_states</span><span class="p">,</span>
+        <span class="n">optimized_pulses</span><span class="o">=</span><span class="n">guess_pulses</span><span class="p">,</span>
+        <span class="n">lambda_vals</span><span class="o">=</span><span class="n">lambda_vals</span><span class="p">,</span>
+        <span class="n">shape_arrays</span><span class="o">=</span><span class="n">shape_arrays</span><span class="p">,</span>
+        <span class="n">fw_states_T</span><span class="o">=</span><span class="n">fw_states_T</span><span class="p">,</span>
+        <span class="n">tau_vals</span><span class="o">=</span><span class="n">tau_vals</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="o">=</span><span class="n">tic</span><span class="p">,</span>
+        <span class="n">stop_time</span><span class="o">=</span><span class="n">toc</span><span class="p">,</span>
+        <span class="n">iteration</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">shared_data</span><span class="o">=</span><span class="p">{},</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Initialize result</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">tlist</span> <span class="o">=</span> <span class="n">tlist</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">objectives</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">guess_controls</span> <span class="o">=</span> <span class="n">guess_controls</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">controls_mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">iters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">tau_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tau_vals</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">store_all_pulses</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">all_pulses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">guess_pulses</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="n">fw_states_T</span>
+
+    <span class="k">for</span> <span class="n">krotov_iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iter_start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iter_stop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Started Krotov iteration </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">krotov_iteration</span><span class="p">)</span>
+        <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="c1"># Boundary condition for the backward propagation</span>
+        <span class="c1"># -- this is where the functional enters the optimizaton</span>
+        <span class="n">chi_states</span> <span class="o">=</span> <span class="n">chi_constructor</span><span class="p">(</span><span class="n">fw_states_T</span><span class="p">,</span> <span class="n">objectives</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">tau_vals</span><span class="p">)</span>
+        <span class="n">chi_norms</span> <span class="o">=</span> <span class="p">[</span><span class="n">chi</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> <span class="k">for</span> <span class="n">chi</span> <span class="ow">in</span> <span class="n">chi_states</span><span class="p">]</span>
+        <span class="c1"># normalizing χ improves numerical stability; the norm then has to be</span>
+        <span class="c1"># taken into account when calculating Δϵ</span>
+        <span class="n">chi_states</span> <span class="o">=</span> <span class="p">[</span><span class="n">chi</span> <span class="o">/</span> <span class="n">nrm</span> <span class="k">for</span> <span class="p">(</span><span class="n">chi</span><span class="p">,</span> <span class="n">nrm</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">chi_states</span><span class="p">,</span> <span class="n">chi_norms</span><span class="p">)]</span>
+
+        <span class="c1"># Backward propagation</span>
+        <span class="n">backward_states</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span>
+            <span class="n">_backward_propagation</span><span class="p">,</span>
+            <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">))),</span>
+            <span class="p">(</span>
+                <span class="n">chi_states</span><span class="p">,</span>
+                <span class="n">adjoint_objectives</span><span class="p">,</span>
+                <span class="n">guess_pulses</span><span class="p">,</span>
+                <span class="n">pulses_mapping</span><span class="p">,</span>
+                <span class="n">tlist</span><span class="p">,</span>
+                <span class="n">propagator</span><span class="p">,</span>
+                <span class="n">storage</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Forward propagation and pulse update</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Started forward propagation/pulse update&quot;</span><span class="p">)</span>
+        <span class="c1"># forward_states_from_previous_iter = forward_states</span>
+        <span class="n">forward_states</span> <span class="o">=</span> <span class="p">[</span><span class="n">storage</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">))]</span>
+        <span class="k">for</span> <span class="n">i_obj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">)):</span>
+            <span class="n">forward_states</span><span class="p">[</span><span class="n">i_obj</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i_obj</span><span class="p">]</span><span class="o">.</span><span class="n">initial_state</span>
+        <span class="n">delta_eps</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">guess_pulses</span>
+        <span class="p">]</span>
+        <span class="n">optimized_pulses</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">guess_pulses</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">time_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># iterate over time intervals</span>
+            <span class="c1"># pulse update</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i_pulse</span><span class="p">,</span> <span class="n">guess_pulse</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">guess_pulses</span><span class="p">):</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">i_obj</span><span class="p">,</span> <span class="n">objective</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">objectives</span><span class="p">):</span>
+                    <span class="n">χ</span> <span class="o">=</span> <span class="n">backward_states</span><span class="p">[</span><span class="n">i_obj</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span>
+                    <span class="n">μ</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span>
+                        <span class="n">objectives</span><span class="p">,</span>
+                        <span class="n">i_obj</span><span class="p">,</span>
+                        <span class="n">guess_pulses</span><span class="p">,</span>
+                        <span class="n">pulses_mapping</span><span class="p">,</span>
+                        <span class="n">i_pulse</span><span class="p">,</span>
+                        <span class="n">time_index</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">Ψ</span> <span class="o">=</span> <span class="n">forward_states</span><span class="p">[</span><span class="n">i_obj</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span>
+                    <span class="n">update</span> <span class="o">=</span> <span class="n">_overlap</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="n">μ</span><span class="p">(</span><span class="n">Ψ</span><span class="p">))</span>  <span class="c1"># ⟨χ|μ|Ψ⟩</span>
+                    <span class="n">update</span> <span class="o">*=</span> <span class="n">chi_norms</span><span class="p">[</span><span class="n">i_obj</span><span class="p">]</span>
+                    <span class="n">delta_eps</span><span class="p">[</span><span class="n">i_pulse</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">update</span>
+                <span class="n">λₐ</span> <span class="o">=</span> <span class="n">lambda_vals</span><span class="p">[</span><span class="n">i_pulse</span><span class="p">]</span>
+                <span class="n">S_t</span> <span class="o">=</span> <span class="n">shape_arrays</span><span class="p">[</span><span class="n">i_pulse</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span>
+                <span class="n">Δϵ</span> <span class="o">=</span> <span class="p">(</span><span class="n">S_t</span> <span class="o">/</span> <span class="n">λₐ</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta_eps</span><span class="p">[</span><span class="n">i_pulse</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span>
+                <span class="n">optimized_pulses</span><span class="p">[</span><span class="n">i_pulse</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Δϵ</span>
+            <span class="c1"># forward propagation</span>
+            <span class="n">fw_states</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span>
+                <span class="n">_forward_propagation_step</span><span class="p">,</span>
+                <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">))),</span>
+                <span class="p">(</span>
+                    <span class="n">forward_states</span><span class="p">,</span>
+                    <span class="n">objectives</span><span class="p">,</span>
+                    <span class="n">optimized_pulses</span><span class="p">,</span>
+                    <span class="n">pulses_mapping</span><span class="p">,</span>
+                    <span class="n">tlist</span><span class="p">,</span>
+                    <span class="n">time_index</span><span class="p">,</span>
+                    <span class="n">propagator</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+            <span class="c1"># storage</span>
+            <span class="k">for</span> <span class="n">i_obj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">)):</span>
+                <span class="n">forward_states</span><span class="p">[</span><span class="n">i_obj</span><span class="p">][</span><span class="n">time_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fw_states</span><span class="p">[</span><span class="n">i_obj</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished forward propagation/pulse update&quot;</span><span class="p">)</span>
+        <span class="n">fw_states_T</span> <span class="o">=</span> <span class="n">fw_states</span>
+        <span class="n">tau_vals</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">_overlap</span><span class="p">(</span><span class="n">fw_state_T</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">fw_state_T</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fw_states_T</span><span class="p">,</span> <span class="n">objectives</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="n">toc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="c1"># Display information about iteration</span>
+        <span class="k">if</span> <span class="n">info_hook</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">info_hook</span><span class="p">(</span>
+                <span class="n">objectives</span><span class="o">=</span><span class="n">objectives</span><span class="p">,</span>
+                <span class="n">adjoint_objectives</span><span class="o">=</span><span class="n">adjoint_objectives</span><span class="p">,</span>
+                <span class="n">backward_states</span><span class="o">=</span><span class="n">backward_states</span><span class="p">,</span>
+                <span class="n">forward_states</span><span class="o">=</span><span class="n">forward_states</span><span class="p">,</span>
+                <span class="n">fw_states_T</span><span class="o">=</span><span class="n">fw_states_T</span><span class="p">,</span>
+                <span class="n">optimized_pulses</span><span class="o">=</span><span class="n">optimized_pulses</span><span class="p">,</span>
+                <span class="n">lambda_vals</span><span class="o">=</span><span class="n">lambda_vals</span><span class="p">,</span>
+                <span class="n">shape_arrays</span><span class="o">=</span><span class="n">shape_arrays</span><span class="p">,</span>
+                <span class="n">tau_vals</span><span class="o">=</span><span class="n">tau_vals</span><span class="p">,</span>
+                <span class="n">start_time</span><span class="o">=</span><span class="n">tic</span><span class="p">,</span>
+                <span class="n">stop_time</span><span class="o">=</span><span class="n">toc</span><span class="p">,</span>
+                <span class="n">shared_data</span><span class="o">=</span><span class="p">{},</span>
+                <span class="n">iteration</span><span class="o">=</span><span class="n">krotov_iteration</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="c1"># Update optimization `result` with info from finished iteration</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">iters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">krotov_iteration</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">iter_seconds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span><span class="p">))</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">tau_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tau_vals</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">optimized_controls</span> <span class="o">=</span> <span class="n">optimized_pulses</span>
+        <span class="k">if</span> <span class="n">store_all_pulses</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">all_pulses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">optimized_pulses</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="n">fw_states_T</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished Krotov iteration </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">krotov_iteration</span><span class="p">)</span>
+
+        <span class="c1"># Convergence check</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">check_convergence</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">check_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>  <span class="c1"># this is not an anti-pattern!</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Reached convergence&quot;</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">msg</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># prepare for next iteration</span>
+            <span class="n">guess_pulses</span> <span class="o">=</span> <span class="n">optimized_pulses</span>
+
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># optimization finished without `check_convergence` break</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Reached </span><span class="si">%d</span><span class="s2"> iterations&quot;</span> <span class="o">%</span> <span class="n">iter_stop</span>
+
+    <span class="c1"># Finalize</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">end_local_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pulse</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optimized_pulses</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pulse_onto_tlist</span><span class="p">(</span><span class="n">pulse</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<span class="k">def</span> <span class="nf">_initialize_krotov_controls</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">pulse_options</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract discretized guess controls and pulses from `objectives`, and</span>
+<span class="sd">    return them with the associated mapping and option data&quot;&quot;&quot;</span>
+    <span class="n">guess_controls</span> <span class="o">=</span> <span class="n">extract_controls</span><span class="p">(</span><span class="n">objectives</span><span class="p">)</span>
+    <span class="n">pulses_mapping</span> <span class="o">=</span> <span class="n">extract_controls_mapping</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">guess_controls</span><span class="p">)</span>
+    <span class="n">options_list</span> <span class="o">=</span> <span class="n">pulse_options_dict_to_list</span><span class="p">(</span><span class="n">pulse_options</span><span class="p">,</span> <span class="n">guess_controls</span><span class="p">)</span>
+    <span class="n">guess_controls</span> <span class="o">=</span> <span class="p">[</span><span class="n">discretize</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">tlist</span><span class="p">)</span> <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">guess_controls</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">guess_controls</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">control</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;All controls must be real-valued. Complex controls must be &quot;</span>
+                <span class="s2">&quot;split into an independent real and imaginary part in the &quot;</span>
+                <span class="s2">&quot;objectives before passing them to the optimization&quot;</span><span class="p">)</span>
+    <span class="n">guess_pulses</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># defined on the tlist intervals</span>
+        <span class="n">control_onto_interval</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">guess_controls</span><span class="p">]</span>
+    <span class="n">lambda_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">options</span><span class="o">.</span><span class="n">lambda_a</span> <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="n">options_list</span><span class="p">]</span>
+    <span class="n">shape_arrays</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="n">options_list</span><span class="p">:</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">discretize</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">())</span>
+        <span class="n">shape_arrays</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">control_onto_interval</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">shape_array</span> <span class="ow">in</span> <span class="n">shape_arrays</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">shape_array</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Update shapes (shape attribute in PulseOptions) must be &quot;</span>
+                <span class="s2">&quot;real-valued&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">shape_array</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">shape_array</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1.01</span><span class="p">:</span>
+            <span class="c1"># 1.01 accounts for rounding errors: In principle, shapes &gt; 1 are</span>
+            <span class="c1"># not a problem, but then it cancels with λₐ, which makes things</span>
+            <span class="c1"># unnecessarily confusing.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Update shapes (shape attribute in PulseOptions) must have &quot;</span>
+                <span class="s2">&quot;values in the range [0, 1]&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">guess_controls</span><span class="p">,</span> <span class="n">guess_pulses</span><span class="p">,</span> <span class="n">pulses_mapping</span><span class="p">,</span> <span class="n">lambda_vals</span><span class="p">,</span>
+        <span class="n">shape_arrays</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_forward_propagation</span><span class="p">(</span>
+    <span class="n">i_objective</span><span class="p">,</span>
+    <span class="n">objectives</span><span class="p">,</span>
+    <span class="n">pulses</span><span class="p">,</span>
+    <span class="n">pulses_mapping</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="p">,</span>
+    <span class="n">storage</span><span class="p">,</span>
+    <span class="n">store_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Forward propagation of the initial state of a single objective over the</span>
+<span class="sd">    entire `tlist`&quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;krotov&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;Started initial forward propagation of objective </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i_objective</span>
+    <span class="p">)</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i_objective</span><span class="p">]</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">initial_state</span>
+    <span class="k">if</span> <span class="n">store_all</span><span class="p">:</span>
+        <span class="n">storage_array</span> <span class="o">=</span> <span class="n">storage</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">))</span>
+        <span class="n">storage_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span><span class="p">[</span><span class="n">i_objective</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">time_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># index over intervals</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+        <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">c_op</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="n">ic</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c_op</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">propagator</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">store_all</span><span class="p">:</span>
+            <span class="n">storage_array</span><span class="p">[</span><span class="n">time_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;Finished initial forward propagation of objective </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i_objective</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">store_all</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">storage_array</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+
+<span class="k">def</span> <span class="nf">_backward_propagation</span><span class="p">(</span>
+    <span class="n">i_state</span><span class="p">,</span>
+    <span class="n">chi_states</span><span class="p">,</span>
+    <span class="n">adjoint_objectives</span><span class="p">,</span>
+    <span class="n">pulses</span><span class="p">,</span>
+    <span class="n">pulses_mapping</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="p">,</span>
+    <span class="n">storage</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Backward propagation of chi_states[i_state] over the entire `tlist`&quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;krotov&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Started backward propagation of state </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i_state</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">chi_states</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">adjoint_objectives</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+    <span class="n">storage_array</span> <span class="o">=</span> <span class="n">storage</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">))</span>
+    <span class="n">storage_array</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">time_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># index bw over intervals</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">plug_in_pulse_values</span><span class="p">(</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time_index</span><span class="p">,</span> <span class="n">conjugate</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">c_op</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="n">ic</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c_op</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">propagator</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">,</span> <span class="n">backwards</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">storage_array</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished backward propagation of state </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i_state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">storage_array</span>
+
+
+<span class="k">def</span> <span class="nf">_forward_propagation_step</span><span class="p">(</span>
+    <span class="n">i_state</span><span class="p">,</span>
+    <span class="n">states</span><span class="p">,</span>
+    <span class="n">objectives</span><span class="p">,</span>
+    <span class="n">pulses</span><span class="p">,</span>
+    <span class="n">pulses_mapping</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="n">time_index</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Forward-propagate states[i_state] by a single time step&quot;&quot;&quot;</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i_state</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span><span class="p">[</span><span class="n">i_state</span><span class="p">]</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+    <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">c_op</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="n">ic</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c_op</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">propagator</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

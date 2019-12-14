@@ -1,1 +1,1 @@
-{"folders": ["doctr"], "labels": {"doctr": "doctr (dev)"}, "versions": ["doctr"], "hidden": [], "outdated": [], "unreleased": ["doctr"], "latest_release": null, "downloads": {"doctr": [["htmlzip", "doctr/download/krotov.html.zip"]]}}
+{"folders": ["doctr", "v0.1.0"], "labels": {"doctr": "doctr (dev)", "v0.1.0": "v0.1.0 (latest release)"}, "versions": ["doctr", "v0.1.0"], "hidden": [], "outdated": [], "unreleased": ["doctr"], "latest_release": "v0.1.0", "downloads": {"doctr": [["htmlzip", "doctr/download/krotov.html.zip"]], "v0.1.0": []}}
