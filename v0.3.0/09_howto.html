@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How-Tos &mdash; Krotov fe52ca2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/version-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Other Optimization Methods" href="10_other_methods.html" />
+    <link rel="prev" title="Optimization towards a Perfect Entangler" href="notebooks/07_example_PE.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How-Tos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-optimize-towards-a-quantum-gate">How to optimize towards a quantum gate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-optimize-complex-control-fields">How to optimize complex control fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-exclude-a-control-from-the-optimization">How to exclude a control from the optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-define-a-new-optimization-functional">How to define a new optimization functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-penalize-population-in-a-forbidden-subspace">How to penalize population in a forbidden subspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-optimize-towards-a-two-qubit-gate-up-to-single-qubit-corrections">How to optimize towards a two-qubit gate up to single-qubit corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-optimize-towards-an-arbitrary-perfect-entangler">How to optimize towards an arbitrary perfect entangler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-optimize-in-a-dissipative-system">How to optimize in a dissipative system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-optimize-for-robust-pulses">How to optimize for robust pulses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-parallelize-the-optimization">How to parallelize the optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-prevent-losing-an-optimization-result">How to prevent losing an optimization result</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-continue-from-a-previous-optimization">How to continue from a previous optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-maximize-numerical-efficiency">How to maximize numerical efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-deal-with-the-optimization-running-out-of-memory">How to deal with the optimization running out of memory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="10_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>How-Tos</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="how-tos">
+<h1>How-Tos<a class="headerlink" href="#how-tos" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-optimize-towards-a-quantum-gate">
+<h2>How to optimize towards a quantum gate<a class="headerlink" href="#how-to-optimize-towards-a-quantum-gate" title="Permalink to this headline">¶</a></h2>
+<p>To optimize towards a quantum gate <span class="math notranslate nohighlight">\(\Op{O}\)</span> in a <em>closed</em> quantum system,
+set one <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> for each state in the logical basis, with the basis
+state <span class="math notranslate nohighlight">\(\ket{\phi_k}\)</span> as the <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> and
+<span class="math notranslate nohighlight">\(\Op{O} \ket{\phi_k}\)</span> as the <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a>.</p>
+<p>You may use <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.gate_objectives()</span></code></a>
+to construct the appropriate list of objectives. See the
+<a class="reference internal" href="notebooks/05_example_transmon_xgate.html"><span class="std std-ref">Optimization of an X-Gate for a Transmon Qubit</span></a> for an example. For more
+advanced gate optimizations, also see <a class="reference internal" href="#howtolioptimization"><span class="std std-ref">How to optimize towards a two-qubit gate up to single-qubit corrections</span></a>,
+<a class="reference internal" href="#howtopeoptimization"><span class="std std-ref">How to optimize towards an arbitrary perfect entangler</span></a>, <a class="reference internal" href="#howtodissipativeoptimization"><span class="std std-ref">How to optimize in a dissipative system</span></a>, and
+<a class="reference internal" href="#howtorobustoptimization"><span class="std std-ref">How to optimize for robust pulses</span></a>.</p>
+</div>
+<div class="section" id="how-to-optimize-complex-control-fields">
+<h2>How to optimize complex control fields<a class="headerlink" href="#how-to-optimize-complex-control-fields" title="Permalink to this headline">¶</a></h2>
+<p>This implementation of Krotov’s method requires real-valued control fields. You
+must rewrite your Hamiltonian to contain the real part and the imaginary part
+of the field as two independent controls. This is always possible. For example,
+for a driven harmonic oscillator in the rotating wave approximation, the
+interaction Hamiltonian is given by</p>
+<div class="math notranslate nohighlight">
+\[\Op{H}_\text{int}
+= \epsilon^*(t) \Op{a} + \epsilon(t) \Op{a}^\dagger
+=  \epsilon_{\text{re}}(t) (\Op{a} + \Op{a}^\dagger) + \epsilon_{\text{im}}(t) (i \Op{a}^\dagger - i \Op{a})\,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_{\text{re}}(t)= \Re[\epsilon(t)]\)</span> and
+<span class="math notranslate nohighlight">\(\epsilon_{\text{im}}(t) = \Im[\epsilon(t)]\)</span> are considered as two
+independent (real-valued) controls.</p>
+<p>See the <a class="reference internal" href="notebooks/02_example_lambda_system_rwa_complex_pulse.html"><span class="std std-ref">Optimization of a state-to-state transfer in a lambda system with RWA</span></a> for an example.</p>
+</div>
+<div class="section" id="how-to-exclude-a-control-from-the-optimization">
+<h2>How to exclude a control from the optimization<a class="headerlink" href="#how-to-exclude-a-control-from-the-optimization" title="Permalink to this headline">¶</a></h2>
+<p>In order to force the optimization to leave any particular control field
+unchanged, set its update shape to <a class="reference internal" href="API/krotov.shapes.html#krotov.shapes.zero_shape" title="krotov.shapes.zero_shape"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.shapes.zero_shape()</span></code></a>
+in the <cite>pulse_options</cite> that you pass to <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p>
+</div>
+<div class="section" id="how-to-define-a-new-optimization-functional">
+<h2>How to define a new optimization functional<a class="headerlink" href="#how-to-define-a-new-optimization-functional" title="Permalink to this headline">¶</a></h2>
+<p>In order to define a new optimization functional <span class="math notranslate nohighlight">\(J_T\)</span>:</p>
+<ul>
+<li><p class="first">Decide on what should go in <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.target</span></code></a> to best describe the
+<em>physical</em> control target. If the control target is reached when the
+<a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.initial_state</span></code></a> evolves to a specific target state under the
+optimal control fields, that target state should be included in
+<a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a>.</p>
+</li>
+<li><p class="first">Define a function <cite>chi_constructor</cite> that calculates the boundary
+condition for the backward-propagation in Krotov’s method,</p>
+<div class="math notranslate nohighlight">
+\[\ket{\chi_k(T)} \equiv - \left. \frac{\partial J_T}{\partial \bra{\phi_k(T)}} \right\vert_{\ket{\phi_k(T)}}\,,\]</div>
+<p>or the equivalent experession in Liouville space. This function should
+calculate the states <span class="math notranslate nohighlight">\(\ket{\chi_k}\)</span> based  on the forward-propagated
+states <span class="math notranslate nohighlight">\(\ket{\phi_k(T)}\)</span> and the list of objectives. For convenience,
+when <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a> contains a target state, <cite>chi_constructor</cite>
+will also receive <cite>tau_vals</cite> containing the overlaps <span class="math notranslate nohighlight">\(\tau_k =
+\Braket{\phi_k(T)}{\phi_k^{\tgt}}\)</span>. See <a class="reference internal" href="API/krotov.functionals.html#krotov.functionals.chis_re" title="krotov.functionals.chis_re"><code class="xref py py-func docutils literal notranslate"><span class="pre">chis_re()</span></code></a> for an example.</p>
+</li>
+<li><p class="first">Optionally, define a function that can be used as an <cite>info_hook</cite>
+in <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> which returns the value
+<span class="math notranslate nohighlight">\(J_T\)</span>. This is not required to run an optimization since the
+functional is entirely implicit in <cite>chi_constructor</cite>. However, calculating
+the value of the functional is useful for convergence analysis
+(<cite>check_convergence</cite> in <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>)</p>
+</li>
+</ul>
+<p>See <a class="reference internal" href="API/krotov.functionals.html#module-krotov.functionals" title="krotov.functionals"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.functionals</span></code></a> for some standard functionals. An example for a
+more advanced functional is the <a class="reference internal" href="notebooks/07_example_PE.html"><span class="std std-ref">Optimization towards a Perfect Entangler</span></a>.</p>
+</div>
+<div class="section" id="how-to-penalize-population-in-a-forbidden-subspace">
+<h2>How to penalize population in a forbidden subspace<a class="headerlink" href="#how-to-penalize-population-in-a-forbidden-subspace" title="Permalink to this headline">¶</a></h2>
+<p>In principle, <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> has a <cite>state_dependent_constraint</cite>.
+However, this has some caveats. Most notably, it results in an inhomogeneous
+equation of motion, which is currently not implemented.</p>
+<p>The recommended “workaround” is to place artificially high dissipation on the
+levels in the forbidden subspace. A non-Hermitian Hamiltonian is usually a
+good way to realize this. See the
+<a class="reference internal" href="notebooks/03_example_lambda_system_rwa_non_hermitian.html"><span class="std std-ref">Optimization of a dissipative state-to-state transfer in a Lambda system</span></a>
+for an example.</p>
+</div>
+<div class="section" id="how-to-optimize-towards-a-two-qubit-gate-up-to-single-qubit-corrections">
+<span id="howtolioptimization"></span><h2>How to optimize towards a two-qubit gate up to single-qubit corrections<a class="headerlink" href="#how-to-optimize-towards-a-two-qubit-gate-up-to-single-qubit-corrections" title="Permalink to this headline">¶</a></h2>
+<p>Use <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.objectives.gate_objectives()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">local_invariants=True</span></code> in
+order to construct a list of objectives suitable for an optimization using a
+“local-invariant functional” <a class="reference internal" href="99_bibliography.html#mullerpra11" id="id1">[MullerPRA11]</a>. This optimizes towards a
+point in the <a class="reference external" href="https://weylchamber.readthedocs.io/en/latest/tutorial.html">Weyl chamber</a>.</p>
+<p>The <a class="reference external" href="https://github.com/qucontrol/weylchamber"><code class="docutils literal notranslate"><span class="pre">weylchamber</span></code> package</a> contains the suitable <cite>chi_constructor</cite> routines to
+pass to <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p>
+</div>
+<div class="section" id="how-to-optimize-towards-an-arbitrary-perfect-entangler">
+<span id="howtopeoptimization"></span><h2>How to optimize towards an arbitrary perfect entangler<a class="headerlink" href="#how-to-optimize-towards-an-arbitrary-perfect-entangler" title="Permalink to this headline">¶</a></h2>
+<p>Closely related to an optimization towards a point in the Weyl chamber is the
+optimization towards an arbitrary perfectly entangling two-qubit gate.
+Geometrically, this means optimizing towards the polyhedron of perfect
+entanglers in the <a class="reference external" href="https://weylchamber.readthedocs.io/en/latest/tutorial.html">Weyl chamber</a>.</p>
+<p>Use <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.objectives.gate_objectives()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">gate='PE'</span></code> in
+order to construct a list of objectives suitable for an optimization using a
+“perfect entanglers” functional <a class="reference internal" href="99_bibliography.html#wattspra2015" id="id2">[WattsPRA2015]</a><a class="reference internal" href="99_bibliography.html#goerzpra2015" id="id3">[GoerzPRA2015]</a>.
+This is illustrated in the <a class="reference internal" href="notebooks/07_example_PE.html"><span class="std std-ref">Optimization towards a Perfect Entangler</span></a>.</p>
+<p>Again, the <cite>chi_constructor</cite> is available in the <a class="reference external" href="https://github.com/qucontrol/weylchamber"><code class="docutils literal notranslate"><span class="pre">weylchamber</span></code> package</a>.</p>
+</div>
+<div class="section" id="how-to-optimize-in-a-dissipative-system">
+<span id="howtodissipativeoptimization"></span><h2>How to optimize in a dissipative system<a class="headerlink" href="#how-to-optimize-in-a-dissipative-system" title="Permalink to this headline">¶</a></h2>
+<p>To optimize a dissipative system, it is sufficient to set an <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a>
+with a density matrix for the <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> and
+<a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a>, and a Liouvillian in <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.H</span></code></a>.
+See the <a class="reference internal" href="notebooks/04_example_dissipative_qubit_reset.html"><span class="std std-ref">Optimization of Dissipative Qubit Reset</span></a> for an
+example.</p>
+<p>Instead of a Liouvillian, it is also possible to set <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.H</span></code></a> to
+the system Hamiltonian, and <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective.c_ops" title="krotov.objectives.Objective.c_ops"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.c_ops</span></code></a> to the appropriate
+Lindblad operators. However, it is generally much more efficient to use
+<a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.liouvillian" title="krotov.objectives.liouvillian"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.objectives.liouvillian()</span></code></a> to convert a time-dependent Hamiltonian
+and a list of Lindblad operators into a time-dependent Liouvillian. In either
+case, the <cite>propagate</cite> routine passed to <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>
+must be aware of and compatible with the convention for the objectives.</p>
+<p>Specifically for gate optimization, the routine
+<a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-func docutils literal notranslate"><span class="pre">gate_objectives()</span></code></a>
+can be used to automatically set appropriate objectives for an optimization in
+Liouville space. The parameter <cite>liouville_states_set</cite> indicates that the system
+dynamics are in Liouville space and sets an appropriate choice of matrices that
+track the optimization according to Ref. <a class="reference internal" href="99_bibliography.html#goerznjp2014" id="id4">[GoerzNJP2014]</a>.
+See the <a class="reference internal" href="notebooks/06_example_3states.html"><span class="std std-ref">Optimization of a Dissipative Quantum Gate</span></a> for an example.</p>
+<p>For weak dissipation, it may also be possible to avoid the use of density
+matrices altogether, and to instead use a non-Hermitian Hamiltonian. For example, you may
+use the effective Hamiltonian from the MCWF method <a class="reference internal" href="99_bibliography.html#pleniormp1998" id="id5">[PlenioRMP1998]</a>,</p>
+<div class="math notranslate nohighlight">
+\[\Op{H}_{\text{eff}} = \Op{H} - \frac{i}{2} \sum_k \Op{L}_k^\dagger \Op{L}_k\,,\]</div>
+<p>for the Hermitian Hamiltonian <span class="math notranslate nohighlight">\(\Op{H}\)</span> and the Lindblad operators
+<span class="math notranslate nohighlight">\(\Op{L}_k\)</span>.  Propagating <span class="math notranslate nohighlight">\(\Op{H}_{\text{eff}}\)</span> (without quantum
+jumps) will lead to a decay in the norm of the state corresponding to how much
+dissipation the state is subjected to. Numerically, this will usually increase
+the value of the optimization functional (that is, the error). Thus the
+optimization can be pushed towards avoiding decoherence, without explicitly
+performing the optimization in Liouville space. See the
+<a class="reference internal" href="notebooks/03_example_lambda_system_rwa_non_hermitian.html"><span class="std std-ref">Optimization of a dissipative state-to-state transfer in a Lambda system</span></a> for an
+example.</p>
+</div>
+<div class="section" id="how-to-optimize-for-robust-pulses">
+<span id="howtorobustoptimization"></span><h2>How to optimize for robust pulses<a class="headerlink" href="#how-to-optimize-for-robust-pulses" title="Permalink to this headline">¶</a></h2>
+<p>Control pulses can be made robust with respect to variations in the system by
+doing an ensemble optimization, as proposed in Ref. <a class="reference internal" href="99_bibliography.html#goerzpra2014" id="id6">[GoerzPRA2014]</a>. The
+idea if to sample a representative selection of possible system Hamiltonians,
+and to optimize over an <em>average</em> of the entire ensemble.</p>
+<p>An appropriate set of objectives can be generated with the
+<a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.ensemble_objectives" title="krotov.objectives.ensemble_objectives"><code class="xref py py-func docutils literal notranslate"><span class="pre">ensemble_objectives()</span></code></a> function.</p>
+</div>
+<div class="section" id="how-to-parallelize-the-optimization">
+<h2>How to parallelize the optimization<a class="headerlink" href="#how-to-parallelize-the-optimization" title="Permalink to this headline">¶</a></h2>
+<p>Krotov’s method is inherently parallel across different objectives. See
+<a class="reference internal" href="API/krotov.parallelization.html#module-krotov.parallelization" title="krotov.parallelization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.parallelization</span></code></a>, and the
+<a class="reference internal" href="notebooks/05_example_transmon_xgate.html"><span class="std std-ref">Optimization of an X-Gate for a Transmon Qubit</span></a> for an example.</p>
+</div>
+<div class="section" id="how-to-prevent-losing-an-optimization-result">
+<span id="howtostoreresult"></span><h2>How to prevent losing an optimization result<a class="headerlink" href="#how-to-prevent-losing-an-optimization-result" title="Permalink to this headline">¶</a></h2>
+<p>Optimizations usually take several hundred to several thousand iterations to
+fully converge. Thuse, the <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> routine  may require
+significant runtime (often multiple days for large problems). Once an
+optimization has completed, you are strongly encouraged to store the result to
+disk, using <a class="reference internal" href="API/krotov.result.html#krotov.result.Result.dump" title="krotov.result.Result.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.dump()</span></code></a>.  You may also consider using
+<a class="reference internal" href="API/krotov.convergence.html#krotov.convergence.dump_result" title="krotov.convergence.dump_result"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_result()</span></code></a> during the <cite>check_convergence</cite> step to dump the current
+state of the optimization to disk at regular intervals. This protects you from
+losing work if the optimization is interrupted in any way, like an unexpected
+crash.</p>
+<p>In order to continue after such a crash, you can restore a <a class="reference internal" href="API/krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
+object containing the recent state of the optimization using
+<a class="reference internal" href="API/krotov.result.html#krotov.result.Result.load" title="krotov.result.Result.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.load()</span></code></a> (with the original <cite>objectives</cite> and <code class="docutils literal notranslate"><span class="pre">finalize=True</span></code> if
+the dump file originates from <a class="reference internal" href="API/krotov.convergence.html#krotov.convergence.dump_result" title="krotov.convergence.dump_result"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_result()</span></code></a>). You may then call
+<a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> and pass the loaded <a class="reference internal" href="API/krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object as
+<cite>continue_from</cite>.  The new optimization will start from the most recent
+optimized controls as a guess, and continue to count iterations from the
+previous result. See <a class="reference internal" href="#howtocontinueoptimization"><span class="std std-ref">How to continue from a previous optimization</span></a> for further details.</p>
+</div>
+<div class="section" id="how-to-continue-from-a-previous-optimization">
+<span id="howtocontinueoptimization"></span><h2>How to continue from a previous optimization<a class="headerlink" href="#how-to-continue-from-a-previous-optimization" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="#howtostoreresult"><span class="std std-ref">How to prevent losing an optimization result</span></a> for how to continue from an optimization that ended
+(crashed) prematurely.  Even when an optimization has completed normally, you
+may still want to continue with further iterations – either because you find
+that the original <cite>iter_stop</cite> was insufficient to reach full convergence, or
+because you would like to modify some parameters, like the λₐ values for
+each control. In this case, you can again call <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> and
+pass the <a class="reference internal" href="API/krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object from the previous optimization as
+<cite>continue_from</cite>. Note that while you are free to change the <cite>pulse_options</cite>
+between the two optimization, the <cite>objectives</cite> must remain the same. The
+functional (<cite>chi_constructor</cite>) and the <cite>info_hook</cite> should also remain the same
+(otherwise, you may and up with inconsistencies in your <a class="reference internal" href="API/krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>). The
+<a class="reference internal" href="API/krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object returned by the second optimization will include all
+the data from the first optimization.</p>
+</div>
+<div class="section" id="how-to-maximize-numerical-efficiency">
+<h2>How to maximize numerical efficiency<a class="headerlink" href="#how-to-maximize-numerical-efficiency" title="Permalink to this headline">¶</a></h2>
+<p>For systems of non-trivial size, the main numerical effort should be in the
+simulation of the system dynamics. Every iteration of Krotov’s method requires
+a full backward propagation and a full forward propagation of the states associated with each
+objective, see <a class="reference internal" href="API/krotov.propagators.html#module-krotov.propagators" title="krotov.propagators"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.propagators</span></code></a>. Therefore, the best numerical
+efficiency can be achieved by optimizing the performance of the <cite>propagator</cite>
+that is passed to <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p>
+<p>One possibility is to implement problem-specific propagators, such as
+<a class="reference internal" href="API/krotov.propagators.html#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">krotov.propagators.DensityMatrixODEPropagator</span></code></a>. Going further, you
+might consider implementing the propagator with the help of lower-level instructions, e.g.,
+by using <a class="reference external" href="https://cython.org">Cython</a>.</p>
+</div>
+<div class="section" id="how-to-deal-with-the-optimization-running-out-of-memory">
+<h2>How to deal with the optimization running out of memory<a class="headerlink" href="#how-to-deal-with-the-optimization-running-out-of-memory" title="Permalink to this headline">¶</a></h2>
+<p>Krotov’s method requires the storage of at least one set of propagated state
+over the entire time grid, for each objective. For the second-order update
+equation, up to three sets of stored states per objective may be required. In
+particular for larger systems and dynamics in Liouville space, the memory
+required for storing these states may be prohibitively expensive.</p>
+<p>The <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> accepts a <cite>storage</cite> parameter
+to which a constructor for an array-like container can be passed wherein the
+propagated states will be stored. It is possible to pass custom out-of-memory
+storage objects, such as <a class="reference external" href="http://docs.dask.org/en/latest/">Dask</a> arrays. This may carry a significant penalty in
+runtime, however, as states will have to be read from disk, or across the
+network.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="10_other_methods.html" class="btn btn-neutral float-right" title="Other Optimization Methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="notebooks/07_example_PE.html" class="btn btn-neutral float-left" title="Optimization towards a Perfect Entangler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

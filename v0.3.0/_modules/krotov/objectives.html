@@ -1,0 +1,1188 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.objectives &mdash; Krotov fe52ca2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/version-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.objectives</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.objectives</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Routines for formulating objectives.</span>
+
+<span class="sd">Objectives, represented as an :class:`Objective` instance, describe the</span>
+<span class="sd">*physical* objective of an optimization, e.g. a state-to-state transformation,</span>
+<span class="sd">or a quantum gate. This is distinct from the *mathematical* formulation of an</span>
+<span class="sd">optimization functional (:mod:`krotov.functionals`). For the same physical</span>
+<span class="sd">objective, there are usually several different functionals whose minimization</span>
+<span class="sd">achieve that objective.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">import</span> <span class="nn">qutip</span>
+<span class="kn">from</span> <span class="nn">qutip.solver</span> <span class="kn">import</span> <span class="n">Result</span> <span class="k">as</span> <span class="n">QutipSolverResult</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.structural_conversions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_nested_list_shallow_copy</span><span class="p">,</span>
+    <span class="n">extract_controls</span><span class="p">,</span>
+    <span class="n">extract_controls_mapping</span><span class="p">,</span>
+    <span class="n">plug_in_pulse_values</span><span class="p">,</span>
+    <span class="n">control_onto_interval</span><span class="p">,</span>
+    <span class="n">discretize</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;Objective&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;summarize_qobj&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gate_objectives&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ensemble_objectives&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;liouvillian&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CtrlCounter&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">FIX_QUTIP_932</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="sd">&quot;&quot;&quot;Workaround for `QuTiP issue 932`_.</span>
+
+<span class="sd">If True, and only when running on macOS, in :meth:`Objective.mesolve`,</span>
+<span class="sd">replace any array controls with an equivalent function. This results in a</span>
+<span class="sd">signficant slowdown of the propagation, as it circumvents the use of Cython.</span>
+
+<span class="sd">.. _QuTiP issue 932: https://github.com/qutip/qutip/issues/932</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">_adjoint</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate adjoint of an operator in QuTiP nested-list format.</span>
+<span class="sd">    Controls are not modified.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">adjoint_op</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">op</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+                <span class="n">adjoint_op</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">(),</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">adjoint_op</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">dag</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">adjoint_op</span>
+    <span class="k">elif</span> <span class="n">op</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="Objective"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective">[docs]</a><span class="k">class</span> <span class="nc">Objective</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A single objective for optimization with Krotov&#39;s method</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        initial_state (qutip.Qobj): value for :attr:`initial_state`</span>
+<span class="sd">        H (qutip.Qobj or list): value for :attr:`H`</span>
+<span class="sd">        target (qutip.Qobj or None): value for :attr:`target`</span>
+<span class="sd">        c_ops (list or None): value for :attr:`c_ops`</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        H (qutip.Qobj or list): The (time-dependent) Hamiltonian or</span>
+<span class="sd">            Liouvillian in nested-list format, cf.</span>
+<span class="sd">            :func:`qutip.mesolve.mesolve`. This includes the control fields.</span>
+<span class="sd">        initial_state (qutip.Qobj): The initial state, as a Hilbert space</span>
+<span class="sd">            state, or a density matrix.</span>
+<span class="sd">        target: An object describing the &quot;target&quot; of the optimization, for the</span>
+<span class="sd">            dynamics starting from :attr:`initial_state`. Usually, this will be</span>
+<span class="sd">            the target state (the state into which :attr:`initial_state` should</span>
+<span class="sd">            evolve). More generally, it can be an arbitrary object meeting the</span>
+<span class="sd">            conventions of a specific `chi_constructor` function that will be</span>
+<span class="sd">            passed to :func:`.optimize_pulses`.</span>
+<span class="sd">        c_ops (list or None): List of collapse operators, cf.</span>
+<span class="sd">            :func:`~qutip.mesolve.mesolve`, in lieu of :attr:`H` being a</span>
+<span class="sd">                Liouvillian.</span>
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; H0 = - 0.5 * qutip.operators.sigmaz()</span>
+<span class="sd">        &gt;&gt;&gt; H1 = qutip.operators.sigmax()</span>
+<span class="sd">        &gt;&gt;&gt; eps = lambda t, args: ampl0</span>
+<span class="sd">        &gt;&gt;&gt; H = [H0, [H1, eps]]</span>
+<span class="sd">        &gt;&gt;&gt; krotov.Objective(</span>
+<span class="sd">        ...     initial_state=qutip.ket(&#39;0&#39;), target=qutip.ket(&#39;1&#39;), H=H</span>
+<span class="sd">        ... )</span>
+<span class="sd">        Objective[|(2)⟩ - {[Herm[2,2], [Herm[2,2], u1(t)]]} - |(2)⟩]</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If any arguments have an invalid type or structure</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Giving collapse operators via :attr:`c_ops` only makes sense if the</span>
+<span class="sd">        `propagator` passed to :func:`.optimize_pulses` takes them into account</span>
+<span class="sd">        explicitly. It is strongly recommended to set :attr:`H` as a Lindblad</span>
+<span class="sd">        operator instead, see :func:`liouvillian`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">c_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">c_ops</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="p">(</span><span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid H, must be a Qobj, or a nested list, not </span><span class="si">%s</span><span class="s2">&quot;</span>
+                <span class="o">%</span> <span class="n">H</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">H</span> <span class="o">=</span> <span class="n">H</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid initial_state: must be Qobj, not </span><span class="si">%s</span><span class="s2">&quot;</span>
+                <span class="o">%</span> <span class="n">initial_state</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">initial_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c_ops</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid c_ops: must be a list, not </span><span class="si">%s</span><span class="s2">&quot;</span>
+                <span class="o">%</span> <span class="n">c_ops</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span> <span class="o">=</span> <span class="n">c_ops</span>
+
+    <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># When we use copy.copy(objective), we want a</span>
+        <span class="c1"># semi-deep copy where nested lists in the Hamiltonian and the c_ops</span>
+        <span class="c1"># are re-created (copy by value), but non-list elements are copied by</span>
+        <span class="c1"># reference.</span>
+        <span class="k">return</span> <span class="n">Objective</span><span class="p">(</span>
+            <span class="n">H</span><span class="o">=</span><span class="n">_nested_list_shallow_copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">),</span>
+            <span class="n">initial_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span>
+            <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+            <span class="n">c_ops</span><span class="o">=</span><span class="p">[</span><span class="n">_nested_list_shallow_copy</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">H</span><span class="p">,</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">c_ops</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># pragma: nocover</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="bp">NotImplemented</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="n">result</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The :class:`Objective` containing the adjoint of all components.</span>
+
+<span class="sd">        This does not affect the controls in :attr:`H`: these are</span>
+<span class="sd">        assumed to be real-valued. Also, :attr:`.Objective.target` will be left</span>
+<span class="sd">        unchanged if it is not a :class:`qutip.Qobj` (a target state).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Objective</span><span class="p">(</span>
+            <span class="n">H</span><span class="o">=</span><span class="n">_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">),</span>
+            <span class="n">initial_state</span><span class="o">=</span><span class="n">_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">),</span>
+            <span class="n">target</span><span class="o">=</span><span class="p">(</span>
+                <span class="n">_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">)</span>
+                <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span>
+            <span class="p">),</span>
+            <span class="n">c_ops</span><span class="o">=</span><span class="p">[</span><span class="n">_adjoint</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">],</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Objective.mesolve"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective.mesolve">[docs]</a>    <span class="k">def</span> <span class="nf">mesolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">rho0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run :func:`qutip.mesolve.mesolve` on the system of the objective</span>
+
+<span class="sd">        Solve the dynamics for the :attr:`H` and :attr:`c_ops` of the</span>
+<span class="sd">        objective. If `rho0` is not given, the :attr:`initial_state` will be</span>
+<span class="sd">        propagated. All other arguments will be passed to</span>
+<span class="sd">        :func:`qutip.mesolve.mesolve`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            qutip.solver.Result: Result of the propagation, see</span>
+<span class="sd">            :func:`qutip.mesolve.mesolve` for details.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rho0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rho0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span>
+        <span class="k">if</span> <span class="n">e_ops</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">e_ops</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+        <span class="n">c_ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span>
+        <span class="k">if</span> <span class="n">FIX_QUTIP_932</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="c1"># &quot;darwin&quot; = macOS; the &quot;pragma&quot; excludes from coverage analysis</span>
+            <span class="n">controls</span> <span class="o">=</span> <span class="n">extract_controls</span><span class="p">([</span><span class="bp">self</span><span class="p">])</span>
+            <span class="n">pulses_mapping</span> <span class="o">=</span> <span class="n">extract_controls_mapping</span><span class="p">([</span><span class="bp">self</span><span class="p">],</span> <span class="n">controls</span><span class="p">)</span>
+            <span class="n">mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># &quot;first objective&quot; (dummy structure)</span>
+            <span class="n">H</span> <span class="o">=</span> <span class="n">_plug_in_array_controls_as_func</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tlist</span><span class="p">)</span>
+            <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">_plug_in_array_controls_as_func</span><span class="p">(</span>
+                    <span class="n">c_op</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="n">ic</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">tlist</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c_op</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="k">return</span> <span class="n">qutip</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span>
+            <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">rho0</span><span class="o">=</span><span class="n">rho0</span><span class="p">,</span> <span class="n">tlist</span><span class="o">=</span><span class="n">tlist</span><span class="p">,</span> <span class="n">c_ops</span><span class="o">=</span><span class="n">c_ops</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="n">e_ops</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Objective.propagate"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective.propagate">[docs]</a>    <span class="k">def</span> <span class="nf">propagate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">propagator</span><span class="p">,</span> <span class="n">rho0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Propagates the system of the objective over the entire time grid</span>
+
+<span class="sd">        Solve the dynamics for the `H` and `c_ops` of the objective. If `rho0`</span>
+<span class="sd">        is not given, the `initial_state` will be propagated. This is similar</span>
+<span class="sd">        to the :meth:`mesolve` method, but instead of using</span>
+<span class="sd">        :func:`qutip.mesolve.mesolve`, the `propagate` function is used to go</span>
+<span class="sd">        between points on the time grid. This function is the same as what is</span>
+<span class="sd">        passed to :func:`.optimize_pulses`. The crucial difference between this</span>
+<span class="sd">        and :meth:`mesolve` is in the time discretization convention. While</span>
+<span class="sd">        :meth:`mesolve` uses piecewise-constant controls centered around the</span>
+<span class="sd">        values in `tlist` (the control field switches in the middle between two</span>
+<span class="sd">        points in `tlist`), :meth:`propagate` uses piecewise-constant controls</span>
+<span class="sd">        on the intervals of `tlist` (the control field switches on the points</span>
+<span class="sd">        in `tlist`)</span>
+
+<span class="sd">        Comparing the result of :meth:`mesolve` and :meth:`propagate` allows to</span>
+<span class="sd">        estimate the &quot;time discretization error&quot;. If the error is significant,</span>
+<span class="sd">        a shorter time step shoud be used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            qutip.solver.Result: Result of the propagation, using the same</span>
+<span class="sd">            structure as :meth:`mesolve`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">e_ops</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">e_ops</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">QutipSolverResult</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="n">propagator</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="n">propagator</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;n/a&#39;</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">expect</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">num_expect</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">e_ops</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">num_collapse</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">e_ops</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">rho0</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e_ops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">oper</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">e_ops</span><span class="p">):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qutip</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">oper</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
+        <span class="n">controls</span> <span class="o">=</span> <span class="n">extract_controls</span><span class="p">([</span><span class="bp">self</span><span class="p">])</span>
+        <span class="n">pulses_mapping</span> <span class="o">=</span> <span class="n">extract_controls_mapping</span><span class="p">([</span><span class="bp">self</span><span class="p">],</span> <span class="n">controls</span><span class="p">)</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="n">pulses_mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># &quot;first objective&quot; (dummy structure)</span>
+        <span class="n">pulses</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># defined on the tlist intervals</span>
+            <span class="n">control_onto_interval</span><span class="p">(</span><span class="n">discretize</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">tlist</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">controls</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">time_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># index over intervals</span>
+            <span class="n">H</span> <span class="o">=</span> <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+            <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">plug_in_pulse_values</span><span class="p">(</span><span class="n">c_op</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">[</span><span class="n">ic</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">time_index</span><span class="p">)</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c_op</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tlist</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">propagator</span><span class="p">(</span>
+                <span class="n">H</span><span class="p">,</span>
+                <span class="n">state</span><span class="p">,</span>
+                <span class="n">dt</span><span class="p">,</span>
+                <span class="n">c_ops</span><span class="p">,</span>
+                <span class="n">initialize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># initialize=(time_index == 0)</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e_ops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">oper</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">e_ops</span><span class="p">):</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qutip</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">oper</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">expect</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Objective.summarize"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective.summarize">[docs]</a>    <span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a one-line summary of the objective as a string</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">            &gt;&gt;&gt; from qutip import ket, tensor, sigmaz, sigmax, sigmap, identity</span>
+<span class="sd">            &gt;&gt;&gt; u1 = lambda t, args: 1.0</span>
+<span class="sd">            &gt;&gt;&gt; u2 = lambda t, args: 1.0</span>
+<span class="sd">            &gt;&gt;&gt; a1 = np.random.random(100) + 1j*np.random.random(100)</span>
+<span class="sd">            &gt;&gt;&gt; a2 = np.random.random(100) + 1j*np.random.random(100)</span>
+<span class="sd">            &gt;&gt;&gt; H = [</span>
+<span class="sd">            ...     tensor(sigmaz(), identity(2)) +</span>
+<span class="sd">            ...     tensor(identity(2), sigmaz()),</span>
+<span class="sd">            ...     [tensor(sigmax(), identity(2)), u1],</span>
+<span class="sd">            ...     [tensor(identity(2), sigmax()), u2]]</span>
+<span class="sd">            &gt;&gt;&gt; C1 = [tensor(identity(2), sigmap()), a1]</span>
+<span class="sd">            &gt;&gt;&gt; C2 = [tensor(sigmap(), identity(2)), a2]</span>
+<span class="sd">            &gt;&gt;&gt; ket00 = ket((0,0))</span>
+<span class="sd">            &gt;&gt;&gt; ket11 = ket((1,1))</span>
+<span class="sd">            &gt;&gt;&gt; obj = Objective(</span>
+<span class="sd">            ...     initial_state=ket00,</span>
+<span class="sd">            ...     target=ket11,</span>
+<span class="sd">            ...     H=H</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; obj.summarize(ctrl_counter=CtrlCounter())</span>
+<span class="sd">            &#39;|(2⊗2)⟩ - {[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]]} - |(2⊗2)⟩&#39;</span>
+<span class="sd">            &gt;&gt;&gt; obj = Objective(</span>
+<span class="sd">            ...     initial_state=ket00,</span>
+<span class="sd">            ...     target=ket11,</span>
+<span class="sd">            ...     H=H,</span>
+<span class="sd">            ...     c_ops=[C1, C2]</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; obj.summarize(ctrl_counter=CtrlCounter())</span>
+<span class="sd">            &#39;|(2⊗2)⟩ - {H:[Herm[2⊗2,2⊗2], [Herm[2⊗2,2⊗2], u1(t)], [Herm[2⊗2,2⊗2], u2(t)]], c_ops:([NonHerm[2⊗2,2⊗2], u3[complex128]],[NonHerm[2⊗2,2⊗2], u4[complex128]])} - |(2⊗2)⟩&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ctrl_counter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ctrl_counter</span> <span class="o">=</span> <span class="n">_CTRL_COUNTER</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> - {</span><span class="si">%s</span><span class="s2">}&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">summarize_qobj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">),</span>
+                <span class="n">summarize_qobj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> - {H:</span><span class="si">%s</span><span class="s2">, c_ops:(</span><span class="si">%s</span><span class="s2">)}&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">summarize_qobj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">),</span>
+                <span class="n">summarize_qobj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">),</span>
+                <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">summarize_qobj</span><span class="p">(</span><span class="n">c_op</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">)</span> <span class="k">for</span> <span class="n">c_op</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_ops</span><span class="p">]</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+                <span class="n">res</span> <span class="o">+=</span> <span class="s2">&quot; - </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">summarize_qobj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">+=</span> <span class="s2">&quot; - </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">summarize</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">[</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">summarize</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Return data for the pickle serialization of an objective.</span>
+        <span class="c1">#</span>
+        <span class="c1"># This may not preserve time-dependent controls, and is only to enable</span>
+        <span class="c1"># the serialization of :class:`.Result` objects.</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        <span class="c1"># Remove the unpicklable entries.</span>
+        <span class="n">state</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_remove_functions_from_nested_list</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">])</span>
+        <span class="n">state</span><span class="p">[</span><span class="s1">&#39;c_ops&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_remove_functions_from_nested_list</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;c_ops&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">state</span></div>
+
+
+<span class="k">class</span> <span class="nc">_ControlPlaceholder</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Placeholder for a control function, for pickling&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;u</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_remove_functions_from_nested_list</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">_remove_functions_from_nested_list</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_ControlPlaceholder</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">lst</span>
+
+
+<span class="k">def</span> <span class="nf">_plug_in_array_controls_as_func</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert array controls to piece-wise constant functions</span>
+
+<span class="sd">    It uses the piece-wise constant convention of mesolve: pulses switch in the</span>
+<span class="sd">    middle between to `tlist` points.</span>
+
+<span class="sd">    This is a workaround for https://github.com/qutip/qutip/issues/932</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">_nested_list_shallow_copy</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">tlist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">control_mapping</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">control_mapping</span><span class="p">:</span>
+                <span class="c1"># Use the same formula that QuTiP normally passes to Cython for</span>
+                <span class="c1"># compilation</span>
+                <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_array_as_func</span><span class="p">,</span> <span class="n">array</span><span class="o">=</span><span class="n">control</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">nt</span><span class="o">=</span><span class="n">nt</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+    <span class="k">return</span> <span class="n">H</span>
+
+
+<span class="k">def</span> <span class="nf">_array_as_func</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">nt</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="mi">0</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+        <span class="k">else</span> <span class="n">array</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">nt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">))))]</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_reversed_enumerate</span><span class="p">(</span><span class="n">collection</span><span class="p">):</span>
+    <span class="c1"># better than `reversed(list(enumerate(collection)))`, because it doesn&#39;t</span>
+    <span class="c1"># create copies, via `list`</span>
+    <span class="k">return</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">))),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">collection</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_rho1</span><span class="p">(</span><span class="n">basis_states</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;State ρ₁ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>  <span class="c1"># dimension of logical subspace</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span> <span class="o">*</span> <span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">*</span> <span class="n">psi</span> <span class="o">*</span> <span class="n">psi</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">psi</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>
+            <span class="c1"># note that i is 0-based, unlike in the paper</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_rho2</span><span class="p">(</span><span class="n">basis_states</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;State ρ₂ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>  <span class="c1"># dimension of logical subspace</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">psi_i</span> <span class="o">*</span> <span class="n">psi_j</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">psi_i</span><span class="p">,</span> <span class="n">psi_j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">basis_states</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_rho3</span><span class="p">(</span><span class="n">basis_states</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;State ρ₃ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>  <span class="c1"># dimension of logical subspace</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">psi</span> <span class="o">*</span> <span class="n">psi</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">psi</span> <span class="ow">in</span> <span class="n">basis_states</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="gate_objectives"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.gate_objectives">[docs]</a><span class="k">def</span> <span class="nf">gate_objectives</span><span class="p">(</span>
+    <span class="n">basis_states</span><span class="p">,</span>
+    <span class="n">gate</span><span class="p">,</span>
+    <span class="n">H</span><span class="p">,</span>
+    <span class="n">c_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">local_invariants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">liouville_states_set</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">normalize_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a list of objectives for optimizing towards a quantum gate</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        basis_states (list[qutip.Qobj]): A list of $n$ canonical basis states</span>
+<span class="sd">        gate: The gate to optimize for, as a $n \times n$ matrix-like object</span>
+<span class="sd">            (must have a `shape` attribute, and be indexable by two indices).</span>
+<span class="sd">            Alternatively, `gate` may be the string &#39;perfect_entangler&#39; or</span>
+<span class="sd">            &#39;PE&#39;, to indicate the optimization for an arbitrary two-qubit</span>
+<span class="sd">            perfect entangler.</span>
+<span class="sd">        H (list or qutip.Qobj): The Hamiltonian (or Liouvillian) for the time</span>
+<span class="sd">            evolution, in nested-list format.</span>
+<span class="sd">        c_ops (list or None): A list of collapse (Lindblad) operators, or None</span>
+<span class="sd">            for unitary dynamics or if `H` is a Liouvillian (preferred!)</span>
+<span class="sd">        local_invariants (bool): If True, initialize the objectives for an</span>
+<span class="sd">            optimization towards a two-qubit gate that is &quot;locally equivalent&quot;</span>
+<span class="sd">            to `gate`. That is, the result of the optimization should implement</span>
+<span class="sd">            `gate` up to single-qubit operations.</span>
+<span class="sd">        liouville_states_set (None or str): If not None, one of &quot;full&quot;,</span>
+<span class="sd">            &quot;3states&quot;, &quot;d+1&quot;. This sets the objectives for a gate</span>
+<span class="sd">            optimization in Liouville space, using the states defined in</span>
+<span class="sd">            Goerz et al. New J. Phys. 16, 055012 (2014). See Examples for</span>
+<span class="sd">            details.</span>
+<span class="sd">        weights (None or list): If given as a list, weights for the different</span>
+<span class="sd">            objectives. These will be added as a custom attribute to the</span>
+<span class="sd">            respective :class:`.Objective`, and may be used by a particular</span>
+<span class="sd">            functional (`chi_constructor`). The intended use case is for the</span>
+<span class="sd">            `liouville_states_set` values &#39;3states&#39;, and &#39;d+1&#39;, where the</span>
+<span class="sd">            different objectives have clear physical interpretations that might</span>
+<span class="sd">            be given differing importance. A weight of 0 will completely drop</span>
+<span class="sd">            the corresponding objective.</span>
+<span class="sd">        normalize_weights (bool): If True, and if `weights` is given as a list</span>
+<span class="sd">            of values, normalize the weights so that they sum to $N$, the</span>
+<span class="sd">            number of objectives. IF False, the weights will be used unchanged.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[Objective]: The objectives that define the optimization towards</span>
+<span class="sd">        the gate. For a &quot;normal&quot; gate with a basis in Hilbert space, the</span>
+<span class="sd">        objectives will have the `basis_states` as each</span>
+<span class="sd">        :attr:`~.Objective.initial_state` and the result of applying `gate`</span>
+<span class="sd">        to the `basis_states` as each :attr:`~.Objective.target`.</span>
+
+<span class="sd">        For an optimization towards a perfect-entangler, or for the</span>
+<span class="sd">        `local_invariants` of the given `gate`, each</span>
+<span class="sd">        :attr:`~.Objective.initial_state` will be the Bell basis state</span>
+<span class="sd">        described in &quot;Theorem 1&quot; in Y. Makhlin, Quantum Inf. Process. 1, 243</span>
+<span class="sd">        (2002), derived from the canonical `basis_states`. The</span>
+<span class="sd">        :attr:`~.Objective.target` will be the string &#39;PE&#39; for a</span>
+<span class="sd">        perfect-entanglers optimization, and `gate` for the local-invariants</span>
+<span class="sd">        optimization.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If `gate`, `basis_states`, and `local_invariants` are</span>
+<span class="sd">            incompatible, or `gate` is invalid (not a recognized string)</span>
+
+<span class="sd">    .. Note::</span>
+
+<span class="sd">        The dimension of the `basis_states` is not required to be the dimension</span>
+<span class="sd">        of the `gate`; the `basis_states` may define a logical subspace in a</span>
+<span class="sd">        larger Hilbert space.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        * A single-qubit gate::</span>
+
+<span class="sd">            &gt;&gt;&gt; from qutip import ket, bra, tensor</span>
+<span class="sd">            &gt;&gt;&gt; from qutip import sigmaz, sigmax, sigmay, sigmam, identity</span>
+<span class="sd">            &gt;&gt;&gt; basis = [ket([0]), ket([1])]</span>
+<span class="sd">            &gt;&gt;&gt; gate = sigmay()  # = -i|0⟩⟨1| + i|1⟩⟨0|</span>
+<span class="sd">            &gt;&gt;&gt; H = [sigmaz(),[sigmax(), lambda t, args: 1.0]]</span>
+<span class="sd">            &gt;&gt;&gt; objectives = gate_objectives(basis, gate, H)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives == [</span>
+<span class="sd">            ...     Objective(</span>
+<span class="sd">            ...         initial_state=basis[0],</span>
+<span class="sd">            ...         target=(1j * basis[1]),</span>
+<span class="sd">            ...         H=H</span>
+<span class="sd">            ...     ),</span>
+<span class="sd">            ...     Objective(</span>
+<span class="sd">            ...         initial_state=basis[1],</span>
+<span class="sd">            ...         target=(-1j * basis[0]),</span>
+<span class="sd">            ...         H=H</span>
+<span class="sd">            ...     )</span>
+<span class="sd">            ... ]</span>
+
+<span class="sd">        * An arbitrary two-qubit perfect entangler:</span>
+
+<span class="sd">            &gt;&gt;&gt; basis = [ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]</span>
+<span class="sd">            &gt;&gt;&gt; H = [</span>
+<span class="sd">            ...     tensor(sigmaz(), identity(2)) +</span>
+<span class="sd">            ...     tensor(identity(2), sigmaz()),</span>
+<span class="sd">            ...     [tensor(sigmax(), identity(2)), lambda t, args: 1.0],</span>
+<span class="sd">            ...     [tensor(identity(2), sigmax()), lambda t, args: 1.0]]</span>
+<span class="sd">            &gt;&gt;&gt; objectives = gate_objectives(basis, &#39;PE&#39;, H)</span>
+<span class="sd">            &gt;&gt;&gt; from weylchamber import bell_basis</span>
+<span class="sd">            &gt;&gt;&gt; for i in range(4):</span>
+<span class="sd">            ...     assert objectives[i] == Objective(</span>
+<span class="sd">            ...        initial_state=bell_basis(basis)[i],</span>
+<span class="sd">            ...        target=&#39;PE&#39;,</span>
+<span class="sd">            ...        H=H</span>
+<span class="sd">            ...     )</span>
+
+<span class="sd">        * A two-qubit gate, up to single-qubit operation (&quot;local invariants&quot;):</span>
+
+<span class="sd">            &gt;&gt;&gt; objectives = gate_objectives(</span>
+<span class="sd">            ...     basis, qutip.gates.cnot(), H, local_invariants=True</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; for i in range(4):</span>
+<span class="sd">            ...     assert objectives[i] == Objective(</span>
+<span class="sd">            ...        initial_state=bell_basis(basis)[i],</span>
+<span class="sd">            ...        target=qutip.gates.cnot(),</span>
+<span class="sd">            ...        H=H</span>
+<span class="sd">            ...     )</span>
+
+<span class="sd">        * A two-qubit gate in a dissipative system tracked by 3 density</span>
+<span class="sd">          matrices::</span>
+
+<span class="sd">            &gt;&gt;&gt; L = krotov.objectives.liouvillian(H, c_ops=[</span>
+<span class="sd">            ...     tensor(sigmam(), identity(2)),</span>
+<span class="sd">            ...     tensor(identity(2), sigmam())])</span>
+<span class="sd">            &gt;&gt;&gt; objectives = gate_objectives(</span>
+<span class="sd">            ...     basis, qutip.gates.cnot(), L,</span>
+<span class="sd">            ...     liouville_states_set=&#39;3states&#39;,</span>
+<span class="sd">            ...     weights=[20, 1, 1]</span>
+<span class="sd">            ... )</span>
+
+<span class="sd">          The three states, for a system with a logical subspace of dimension</span>
+<span class="sd">          $d$ with a basis $\{\ket{i}\}$, $i \in [1, d]$ are:</span>
+
+<span class="sd">          .. math::</span>
+
+<span class="sd">            \Op{\rho}_1 &amp;= \sum_{i=1}^{d}</span>
+<span class="sd">                \frac{2 (d-i+1)}{d (d+1)} \ketbra{i}{i} \\</span>
+<span class="sd">            \Op{\rho}_2 &amp;= \sum_{i,j=1}^{d}</span>
+<span class="sd">                \frac{1}{d} \ketbra{i}{j} \\</span>
+<span class="sd">            \Op{\rho}_3 &amp;= \sum_{i=1}^{d}</span>
+<span class="sd">                \frac{1}{d} \ketbra{i}{i}</span>
+
+<span class="sd">          The explicit form of the three states in this example is::</span>
+
+<span class="sd">            &gt;&gt;&gt; assert np.allclose(objectives[0].initial_state.full(),</span>
+<span class="sd">            ...     np.diag([0.4, 0.3, 0.2, 0.1]))</span>
+
+<span class="sd">            &gt;&gt;&gt; assert np.allclose(objectives[1].initial_state.full(),</span>
+<span class="sd">            ...     np.full((4, 4), 1/4))</span>
+
+<span class="sd">            &gt;&gt;&gt; assert np.allclose(objectives[2].initial_state.full(),</span>
+<span class="sd">            ...     np.diag([1/4, 1/4, 1/4, 1/4]))</span>
+
+<span class="sd">          The objectives in this example are weighted (20/1/1)::</span>
+
+<span class="sd">            &gt;&gt;&gt; &quot;%.5f&quot; % objectives[0].weight</span>
+<span class="sd">            &#39;2.72727&#39;</span>
+<span class="sd">            &gt;&gt;&gt; &quot;%.5f&quot; % objectives[1].weight</span>
+<span class="sd">            &#39;0.13636&#39;</span>
+<span class="sd">            &gt;&gt;&gt; &quot;%.5f&quot; % objectives[2].weight</span>
+<span class="sd">            &#39;0.13636&#39;</span>
+<span class="sd">            &gt;&gt;&gt; sum_of_weights = sum([obj.weight for obj in objectives])</span>
+<span class="sd">            &gt;&gt;&gt; &quot;%.1f&quot; % sum_of_weights</span>
+<span class="sd">            &#39;3.0&#39;</span>
+
+<span class="sd">        * A two-qubit gate in a dissipative system tracked by $d + 1 = 5$</span>
+<span class="sd">          pure-state density matrices::</span>
+
+<span class="sd">            &gt;&gt;&gt; objectives = gate_objectives(</span>
+<span class="sd">            ...     basis, qutip.gates.cnot(), L,</span>
+<span class="sd">            ...     liouville_states_set=&#39;d+1&#39;</span>
+<span class="sd">            ... )</span>
+
+<span class="sd">          The first four `initial_states` are the pure states corresponding to</span>
+<span class="sd">          the Hilbert space basis</span>
+
+<span class="sd">            &gt;&gt;&gt; assert objectives[0].initial_state == qutip.ket2dm(ket(&#39;00&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[1].initial_state == qutip.ket2dm(ket(&#39;01&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[2].initial_state == qutip.ket2dm(ket(&#39;10&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[3].initial_state == qutip.ket2dm(ket(&#39;11&#39;))</span>
+
+<span class="sd">          The fifth state is $\Op{\rho}_2$ from &#39;3states&#39;::</span>
+
+<span class="sd">            &gt;&gt;&gt; assert np.allclose(objectives[4].initial_state.full(),</span>
+<span class="sd">            ...     np.full((4, 4), 1/4))</span>
+
+<span class="sd">        * A two-qubit gate in a dissipative system tracked by the full</span>
+<span class="sd">          Liouville space basis::</span>
+
+<span class="sd">            &gt;&gt;&gt; objectives = gate_objectives(</span>
+<span class="sd">            ...     basis, qutip.gates.cnot(), L,</span>
+<span class="sd">            ...     liouville_states_set=&#39;full&#39;</span>
+<span class="sd">            ... )</span>
+
+<span class="sd">          The Liouville space basis states are all the possible dyadic products</span>
+<span class="sd">          of the Hilbert space basis::</span>
+
+<span class="sd">            &gt;&gt;&gt; assert objectives[0].initial_state == ket(&#39;00&#39;) * bra(&#39;00&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[1].initial_state == ket(&#39;00&#39;) * bra(&#39;01&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[2].initial_state == ket(&#39;00&#39;) * bra(&#39;10&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[3].initial_state == ket(&#39;00&#39;) * bra(&#39;11&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[4].initial_state == ket(&#39;01&#39;) * bra(&#39;00&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[5].initial_state == ket(&#39;01&#39;) * bra(&#39;01&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[6].initial_state == ket(&#39;01&#39;) * bra(&#39;10&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[7].initial_state == ket(&#39;01&#39;) * bra(&#39;11&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[8].initial_state == ket(&#39;10&#39;) * bra(&#39;00&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[9].initial_state == ket(&#39;10&#39;) * bra(&#39;01&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[10].initial_state == ket(&#39;10&#39;) * bra(&#39;10&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[11].initial_state == ket(&#39;10&#39;) * bra(&#39;11&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[12].initial_state == ket(&#39;11&#39;) * bra(&#39;00&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[13].initial_state == ket(&#39;11&#39;) * bra(&#39;01&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[14].initial_state == ket(&#39;11&#39;) * bra(&#39;10&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; assert objectives[15].initial_state == ket(&#39;11&#39;) * bra(&#39;11&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gate</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">gate</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pe&#39;</span><span class="p">,</span> <span class="s1">&#39;perfect_entangler&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">_gate_objectives_li_pe</span><span class="p">(</span><span class="n">basis_states</span><span class="p">,</span> <span class="s1">&#39;PE&#39;</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;gate must be either a square matrix, or one of the strings &quot;</span>
+                <span class="s2">&quot;&#39;PE&#39; or &#39;perfect_entangler&#39;, not &#39;&quot;</span> <span class="o">+</span> <span class="n">gate</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span>
+            <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">local_invariants</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">gate</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;If local_invariants is True, gate must be a 4 × 4 matrix, &quot;</span>
+                <span class="s2">&quot;not &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">gate</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">_gate_objectives_li_pe</span><span class="p">(</span><span class="n">basis_states</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">)</span>
+
+    <span class="c1"># &quot;Normal&quot; gate:</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">gate</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">gate</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;gate must be a matrix of the same dimension as the number of &quot;</span>
+            <span class="s2">&quot;basis states&quot;</span>
+        <span class="p">)</span>
+    <span class="n">mapped_basis_states</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">sum</span><span class="p">([</span><span class="n">gate</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">basis_states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gate</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gate</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">liouville_states_set</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># standard gate in Hilbert space</span>
+        <span class="n">initial_states</span> <span class="o">=</span> <span class="n">basis_states</span>
+        <span class="n">target_states</span> <span class="o">=</span> <span class="n">mapped_basis_states</span>
+    <span class="k">elif</span> <span class="n">liouville_states_set</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;full&#39;</span><span class="p">:</span>
+        <span class="n">initial_states</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">psi_i</span> <span class="o">*</span> <span class="n">psi_j</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">psi_i</span><span class="p">,</span> <span class="n">psi_j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">basis_states</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">target_states</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">psi_i</span> <span class="o">*</span> <span class="n">psi_j</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">psi_i</span><span class="p">,</span> <span class="n">psi_j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+                <span class="n">mapped_basis_states</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="k">elif</span> <span class="n">liouville_states_set</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;3states&#39;</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>  <span class="c1"># dimension of logical subspace</span>
+        <span class="n">initial_states</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">_rho1</span><span class="p">(</span><span class="n">basis_states</span><span class="p">),</span>
+            <span class="n">_rho2</span><span class="p">(</span><span class="n">basis_states</span><span class="p">),</span>
+            <span class="n">_rho3</span><span class="p">(</span><span class="n">basis_states</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">target_states</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">_rho1</span><span class="p">(</span><span class="n">mapped_basis_states</span><span class="p">),</span>
+            <span class="n">_rho2</span><span class="p">(</span><span class="n">mapped_basis_states</span><span class="p">),</span>
+            <span class="n">_rho3</span><span class="p">(</span><span class="n">mapped_basis_states</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="k">elif</span> <span class="n">liouville_states_set</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;d+1&#39;</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>
+        <span class="n">initial_states</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">basis_states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">basis_states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">initial_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_rho2</span><span class="p">(</span><span class="n">basis_states</span><span class="p">))</span>
+        <span class="n">target_states</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">mapped_basis_states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">mapped_basis_states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">target_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_rho2</span><span class="p">(</span><span class="n">mapped_basis_states</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid `liouville_states_set`: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">liouville_states_set</span>
+        <span class="p">)</span>
+    <span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Objective</span><span class="p">(</span>
+            <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target_state</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="o">=</span><span class="n">c_ops</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">initial_states</span><span class="p">,</span> <span class="n">target_states</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="c1"># apply weights</span>
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;If weight are given, there must be a weight for each &quot;</span>
+                <span class="s2">&quot;objective&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">normalize_weights</span><span class="p">:</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">)</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_reversed_enumerate</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;weights must be greater than zero&quot;</span><span class="p">)</span>
+            <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+            <span class="k">if</span> <span class="n">weight</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">objectives</span></div>
+
+
+<span class="k">def</span> <span class="nf">_gate_objectives_li_pe</span><span class="p">(</span><span class="n">basis_states</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Objectives for two-qubit local-invariants or perfect-entangler</span>
+<span class="sd">    optimizaton&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Optimization towards a two-qubit gate requires 4 basis_states&quot;</span>
+        <span class="p">)</span>
+    <span class="c1"># Bell states as in &quot;Theorem 1&quot; in</span>
+    <span class="c1"># Y. Makhlin, Quantum Inf. Process. 1, 243 (2002)</span>
+    <span class="n">psi1</span> <span class="o">=</span> <span class="p">(</span><span class="n">basis_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">basis_states</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">psi2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">basis_states</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">basis_states</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">psi3</span> <span class="o">=</span> <span class="p">(</span><span class="n">basis_states</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">basis_states</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">psi4</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">basis_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">basis_states</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">Objective</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">psi</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">gate</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="o">=</span><span class="n">c_ops</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">psi</span> <span class="ow">in</span> <span class="p">[</span><span class="n">psi1</span><span class="p">,</span> <span class="n">psi2</span><span class="p">,</span> <span class="n">psi3</span><span class="p">,</span> <span class="n">psi4</span><span class="p">]</span>
+    <span class="p">]</span>
+
+
+<div class="viewcode-block" id="ensemble_objectives"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.ensemble_objectives">[docs]</a><span class="k">def</span> <span class="nf">ensemble_objectives</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">Hs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extend `objectives` for an &quot;ensemble optimization&quot;</span>
+
+<span class="sd">    This creates a list of objectives for an optimization for robustness with</span>
+<span class="sd">    respect to variations in some parameter of the Hamiltonian. The trick is to</span>
+<span class="sd">    simply optimize over the average of multiple copies of the system</span>
+<span class="sd">    (the `Hs`) sampling that variation. See</span>
+<span class="sd">    Goerz, Halperin, Aytac, Koch, Whaley. Phys. Rev. A 90, 032329 (2014)</span>
+<span class="sd">    for details.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        objectives (list[Objective]): The $n$ original objectives</span>
+<span class="sd">        Hs (list): List of $m$ variations of the original</span>
+<span class="sd">            Hamiltonian/Liouvillian</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[Objective]: List of $n (m+1)$ new objectives that consists of the</span>
+<span class="sd">        original objectives, plus one copy of the original objectives per</span>
+<span class="sd">        element of `Hs` where the `H` attribute of each objectives is</span>
+<span class="sd">        replaced by that element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_objectives</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">objectives</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">H</span> <span class="ow">in</span> <span class="n">Hs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objectives</span><span class="p">:</span>
+            <span class="n">new_objectives</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Objective</span><span class="p">(</span>
+                    <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span>
+                    <span class="n">initial_state</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">initial_state</span><span class="p">,</span>
+                    <span class="n">target</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                    <span class="n">c_ops</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">c_ops</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_objectives</span></div>
+
+
+<div class="viewcode-block" id="liouvillian"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.liouvillian">[docs]</a><span class="k">def</span> <span class="nf">liouvillian</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert Hamiltonian and Lindblad operators into a Liouvillian.</span>
+
+<span class="sd">    This is like :func:`qutip.superoperator.liouvillian`, but `H` may be a</span>
+<span class="sd">    time-dependent Hamiltonian in nested-list format. `H` is assumed to contain</span>
+<span class="sd">    a drift Hamiltonian, and the Lindblad operators in `c_ops` cannot be</span>
+<span class="sd">    time-dependent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">qutip</span><span class="o">.</span><span class="n">liouvillian</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qutip</span><span class="o">.</span><span class="n">liouvillian</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">))</span>
+                <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">qutip</span><span class="o">.</span><span class="n">liouvillian</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_ops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;No drift Hamiltonian&quot;</span>
+        <span class="k">return</span> <span class="n">res</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;H must either be a Qobj, or a time-dependent Hamiltonian in &quot;</span>
+            <span class="s2">&quot;nested-list format&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="summarize_qobj"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.summarize_qobj">[docs]</a><span class="k">def</span> <span class="nf">summarize_qobj</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Summarize a quantum object</span>
+
+<span class="sd">    A counter created by :func:`CtrlCounter` may be passed to distinguish</span>
+<span class="sd">    control fields. If None, an automatic internal counter will be used.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; ket = qutip.ket([1, 0, 1])</span>
+<span class="sd">        &gt;&gt;&gt; summarize_qobj(ket)</span>
+<span class="sd">        &#39;|(2⊗2⊗2)⟩&#39;</span>
+<span class="sd">        &gt;&gt;&gt; bra = ket.dag()</span>
+<span class="sd">        &gt;&gt;&gt; summarize_qobj(bra)</span>
+<span class="sd">        &#39;⟨(2⊗2⊗2)|&#39;</span>
+<span class="sd">        &gt;&gt;&gt; rho = ket * bra</span>
+<span class="sd">        &gt;&gt;&gt; summarize_qobj(rho)</span>
+<span class="sd">        &#39;Herm[2⊗2⊗2,2⊗2⊗2]&#39;</span>
+<span class="sd">        &gt;&gt;&gt; a = qutip.create(10)</span>
+<span class="sd">        &gt;&gt;&gt; summarize_qobj(a)</span>
+<span class="sd">        &#39;NonHerm[10,10]&#39;</span>
+<span class="sd">        &gt;&gt;&gt; S = qutip.to_super(a)</span>
+<span class="sd">        &gt;&gt;&gt; summarize_qobj(S)</span>
+<span class="sd">        &#39;[[10,10],[10,10]]&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ctrl_counter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ctrl_counter</span> <span class="o">=</span> <span class="n">_CTRL_COUNTER</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_summarize_qobj_nested_list</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;u</span><span class="si">%d</span><span class="s1">(t)&#39;</span> <span class="o">%</span> <span class="n">ctrl_counter</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;u</span><span class="si">%d</span><span class="s1">[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctrl_counter</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">_ControlPlaceholder</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">complex</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;obj must be a Qobj, not </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;ket&#39;</span><span class="p">:</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="s2">&quot;⊗&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="s1">&#39;|(</span><span class="si">%s</span><span class="s1">)⟩&#39;</span> <span class="o">%</span> <span class="n">dims</span>
+    <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;bra&#39;</span><span class="p">:</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="s2">&quot;⊗&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="s1">&#39;⟨(</span><span class="si">%s</span><span class="s1">)|&#39;</span> <span class="o">%</span> <span class="n">dims</span>
+    <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;oper&#39;</span><span class="p">:</span>
+        <span class="n">dim1</span> <span class="o">=</span> <span class="s2">&quot;⊗&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="n">dim2</span> <span class="o">=</span> <span class="s2">&quot;⊗&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">isherm</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Herm[</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;NonHerm[</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;super&#39;</span><span class="p">:</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
+            <span class="n">dim1</span> <span class="o">=</span> <span class="s2">&quot;⊗&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dim</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="n">dim2</span> <span class="o">=</span> <span class="s2">&quot;⊗&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dim</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Unknown qobj type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_summarize_qobj_nested_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Summarize a nested-list time-dependent quantum object&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="s1">&#39;[&#39;</span>
+        <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">summarize_qobj</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ctrl_counter</span><span class="p">)</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
+        <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="CtrlCounter"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.CtrlCounter">[docs]</a><span class="k">def</span> <span class="nf">CtrlCounter</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Constructor for a counter of controls.</span>
+
+<span class="sd">    Returns a callable that returns a unique integer (starting at 1) for every</span>
+<span class="sd">    distinct control that is passed to it. This is intended for use with</span>
+<span class="sd">    :func:`summarize_qobj`.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; ctrl_counter = CtrlCounter()</span>
+<span class="sd">        &gt;&gt;&gt; ctrl1 = np.zeros(10)</span>
+<span class="sd">        &gt;&gt;&gt; ctrl_counter(ctrl1)</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; ctrl2 = np.zeros(10)</span>
+<span class="sd">        &gt;&gt;&gt; assert ctrl2 is not ctrl1</span>
+<span class="sd">        &gt;&gt;&gt; ctrl_counter(ctrl2)</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; ctrl_counter(ctrl1)</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; ctrl3 = lambda t, args: 0.0</span>
+<span class="sd">        &gt;&gt;&gt; ctrl_counter(ctrl3)</span>
+<span class="sd">        3</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This will probably be used very rarely, if ever, but there&#39;s a *chance*</span>
+    <span class="c1"># that a user might want to pass a specific counter to summarize_qobj, so</span>
+    <span class="c1"># this still has to be public.</span>
+
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">registry</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">ctrl_counter</span><span class="p">(</span><span class="n">ctrl</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">counter</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ctrl</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">ctrl</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">ctrl</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ctrl</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">registry</span><span class="p">:</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">registry</span><span class="p">[</span><span class="n">ctrl</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span>
+        <span class="k">return</span> <span class="n">registry</span><span class="p">[</span><span class="n">ctrl</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ctrl_counter</span></div>
+
+
+<span class="n">_CTRL_COUNTER</span> <span class="o">=</span> <span class="n">CtrlCounter</span><span class="p">()</span>  <span class="c1">#: internal counter for controls</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

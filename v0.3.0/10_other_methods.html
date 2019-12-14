@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Other Optimization Methods &mdash; Krotov fe52ca2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/version-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="99_bibliography.html" />
+    <link rel="prev" title="How-Tos" href="09_howto.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_howto.html">How-Tos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Other Optimization Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#gradient-ascent-pulse-engineering-grape">GRadient Ascent Pulse Engineering (GRAPE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grape-in-qutip">GRAPE in QuTiP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gradient-free-optimization">Gradient-free optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#crab">CRAB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#choosing-an-optimization-method">Choosing an optimization method</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Other Optimization Methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="other-optimization-methods">
+<h1>Other Optimization Methods<a class="headerlink" href="#other-optimization-methods" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gradient-ascent-pulse-engineering-grape">
+<h2>GRadient Ascent Pulse Engineering (GRAPE)<a class="headerlink" href="#gradient-ascent-pulse-engineering-grape" title="Permalink to this headline">¶</a></h2>
+<p>At its core, Krotov’s method is a gradient-based optimization method, and
+most directly compares to GRadient Ascent Pulse Engineering (GRAPE)
+<a class="reference internal" href="99_bibliography.html#khanejajmr05" id="id1">[KhanejaJMR05]</a>, another gradient-based method widely used in quantum control.</p>
+<p>The GRAPE method looks at the direct gradient <span class="math notranslate nohighlight">\(\partial
+J_T/\partial \epsilon_j\)</span> with respect to any control parameter
+<span class="math notranslate nohighlight">\(\epsilon_j\)</span>. In all practical applications, the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html">L-BFGS-B</a> quasi-Newton
+method <a class="reference internal" href="99_bibliography.html#byrdsjsc1995" id="id2">[ByrdSJSC1995]</a><a class="reference internal" href="99_bibliography.html#zhuatms97" id="id3">[ZhuATMS97]</a> is then used to calculate a pulse update
+based on the gradient and a numerical estimation of the Hessian
+<span class="math notranslate nohighlight">\(\partial^2 J_T/\partial \epsilon_j \partial \epsilon_{j^\prime}\)</span>.</p>
+<p>The control parameter <span class="math notranslate nohighlight">\(\epsilon_j\)</span> may be the value of a control field
+in a particular time interval. When the control field is a discretization of a
+time-continuous control, and for typical functionals like <a class="reference internal" href="API/krotov.functionals.html#krotov.functionals.J_T_re" title="krotov.functionals.J_T_re"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_re()</span></code></a> or
+<a class="reference internal" href="API/krotov.functionals.html#krotov.functionals.J_T_sm" title="krotov.functionals.J_T_sm"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_sm()</span></code></a>, the calculation of the gradient <span class="math notranslate nohighlight">\(\partial J_T/\partial
+\epsilon_j\)</span> requires very similar numerical effort to performing a single
+iteration in Krotov’s method. In both cases, a forward and backward propagation
+over the entire time grid is required. This results from the derivative of the
+complex overlaps <span class="math notranslate nohighlight">\(\tau_k\)</span> between the propagated states
+<span class="math notranslate nohighlight">\(\{\ket{\phi_k(T)}\}\)</span> and the target states
+<span class="math notranslate nohighlight">\(\{\ket{\phi_k^{\tgt}}\}\)</span>, as defined in Eq.&nbsp;<a class="reference internal" href="06_krotovs_method.html#equation-tauk">(1)</a>, on which the
+standard functionals are based. The relevant term in the gradient is then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+  \frac{\partial \tau_k^*}{\partial \epsilon_j}
+  &amp;= \frac{\partial}{\partial \epsilon_j}
+    \big\langle \phi_k^{\tgt} \big\vert
+            \Op{U}^{(i)}_{nt-1} \dots \Op{U}^{(i)}_{j} \dots \Op{U}^{(i)}_{1} \big\vert \phi_k \big\rangle \\
+  &amp;=
+    \underbrace{
+      \big\langle \phi_k^{\tgt} \big\vert \Op{U}^{(i)}_{nt-1} \dots \Op{U}^{(i)}_{j+1}}_{
+      \bra{\chi^{(i)}_k(t_{j+1})}
+     }
+      \, \frac{\partial\Op{U}^{(i)}_{j}}{\partial\epsilon_j} \,
+     \underbrace{\Op{U}^{(i)}_{j-1} \dots \Op{U}^{(i)}_{1} \big\vert \phi_k \big\rangle}_{
+      \ket{\phi^{(i)}_k(t_j)}
+     }\,,
+\end{split}\end{split}\]</div>
+<p>with the time evolution operator <span class="math notranslate nohighlight">\(\Op{U}^{(i)}_j\)</span> for the time interval
+<span class="math notranslate nohighlight">\(j\)</span>, using the guess controls in iteration <span class="math notranslate nohighlight">\((i)\)</span> of the
+optimization. We end up with backward-propagated states
+<span class="math notranslate nohighlight">\(\ket{\chi_k(t_{j+1})}\)</span> and forward-propagated states
+<span class="math notranslate nohighlight">\(\ket{\phi_k(t_j)}\)</span>. Compare this with the first-order update equation
+<a class="reference internal" href="06_krotovs_method.html#equation-krotov-first-order-update">(9)</a> for Krotov’s method.</p>
+<p>In this example of (discretized) time-continuous controls, both GRAPE and
+Krotov’s method can generally be used interchangeably.
+Historically, Krotov’s method has been widely used in the control of atomic and
+molecular dynamics, whereas GRAPE has its origin in NMR.</p>
+<p>Two benefits of Krotov’s method compared to GRAPE are:</p>
+<ul class="simple">
+<li>Krotov’s method mathematically guarantees monotonic convergence in the
+continuous limit.</li>
+<li>Using different functionals <span class="math notranslate nohighlight">\(J_T\)</span> in Krotov’s method is only reflected
+in the boundary condition for the backward-propagated states,
+Eq.&nbsp;<a class="reference internal" href="06_krotovs_method.html#equation-chi-boundary">(8)</a>, while the update equation stays the same otherwise.
+In contrast, for functionals that do not depend trivially on the overlaps
+<span class="math notranslate nohighlight">\(\tau_k\)</span>, the evaluation of the gradient in GRAPE may look very
+different from the above scheme, requiring a problem-specific implementation
+from scratch.</li>
+</ul>
+<p>GRAPE has a significant advantage if the controls are not time-continuous, but
+are <em>physically</em> piecewise constant (“bang-bang control”). The calculation of
+the GRAPE-gradient is unaffected by this, whereas Krotov’s method can break
+down when the controls are not approximately continuous.</p>
+</div>
+<div class="section" id="grape-in-qutip">
+<span id="grapeinqutip"></span><h2>GRAPE in QuTiP<a class="headerlink" href="#grape-in-qutip" title="Permalink to this headline">¶</a></h2>
+<p>An implementation of GRAPE is included in QuTiP, see the <a class="reference external" href="http://qutip.org/docs/latest/guide/guide-control.html">section on Quantum
+Optimal Control in the QuTiP docs</a>.  It is used via the
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.control.pulseoptim.optimize_pulse" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.control.pulseoptim.optimize_pulse()</span></code></a> function.
+However, some of the design choices in QuTiP’s GRAPE effectively limit
+the routine to applications with physically piecewise-constant pulses (where
+GRAPE has an advantage over Krotov’s method, as discussed in the previous
+section).</p>
+<p>For discretized time-continuous pulses, the implementation of Krotov’s method
+in <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> has the following advantages over
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.control.pulseoptim.optimize_pulse" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.control.pulseoptim.optimize_pulse()</span></code></a>:</p>
+<ul class="simple">
+<li>Krotov’s method can optimize for more than one control field at the same time
+(hence the name of the routine <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> compared to
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.control.pulseoptim.optimize_pulse" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulse()</span></code></a>).</li>
+<li>Krotov’s method optimizes a list of <a class="reference internal" href="API/krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> instances
+simultaneously. The optimization for multiple simultaneous objectives in
+QuTiP’s GRAPE implementation is limited to optimizing a quantum gate. Other
+uses of simultaneous objectives, such as optimizing for robustness, are not
+available.</li>
+<li>Krotov’s method can start from an arbitrary set of guess controls. In the
+GRAPE implementation, guess pulses can only be chosen from a specific set of
+options (including “random”). Again, this makes sense for a control field
+that is piecewise constant with relatively few switching points, but is very
+disadvantageous for time-continuous controls.</li>
+<li>Krotov’s method has complete flexibility in which propagation method is used
+(via the <cite>propagator</cite> argument to <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>), while QuTiP’s
+GRAPE only allows to choose between fixed number of methods for
+time-propagation. Supplying a problem-specific propagator is not possible.</li>
+</ul>
+<p>Thus, QuTiP’s GRAPE implementation and the implementation of Krotov’s method in
+this package complement each other, but will not compare directly.</p>
+</div>
+<div class="section" id="gradient-free-optimization">
+<h2>Gradient-free optimization<a class="headerlink" href="#gradient-free-optimization" title="Permalink to this headline">¶</a></h2>
+<p>In situations where the controls can be reduced to a relatively small number of
+controllable parameters (typically less than 20), gradient-free optimization
+becomes feasible.</p>
+<p>Gradient-free optimization does not require backward propagation, but only a
+forward-propagation of the initial states and the evaluation of an arbitrary
+functional <span class="math notranslate nohighlight">\(J_T\)</span>. Thus, it is more efficient <em>per iteration</em> than the
+gradient-based methods, and does not require the storage of states. However,
+the number of iterations can grow extremely large, especially with an
+increasing number of control parameters. Thus, an optimization with a
+gradient-free method is not necessarily more efficient overall compared to a
+gradient-based optimization with much faster convergence. Gradient-free
+optimization is also prone to get stuck in local optimization minima.</p>
+<p>It is however extremely efficient if the number of parameters is very small,
+e.g. the parameters of an analytic pulse shape. As an example, consider control
+pulses that are restricted to Gaussian pulses, so that the only free parameters
+are the peak amplitude and pulse width. This makes gradient-free optimization
+very useful for “pre-optimization’, that is, for finding guess controls that
+are then further optimized with a gradient-based method <a class="reference internal" href="99_bibliography.html#goerzepjqt2015" id="id4">[GoerzEPJQT2015]</a>.</p>
+<p>A further benefit of gradient-free optimization is that it can be applied to
+<em>any</em> functional, even if <span class="math notranslate nohighlight">\(\partial J_T / \partial \bra{\phi_k}\)</span> or
+<span class="math notranslate nohighlight">\(\partial J_T / \partial \epsilon_j\)</span> cannot be calculated.</p>
+<p>Generally, gradient-free optimization can be easily realized directly in QuTiP
+or any other software package for the simulation of quantum dynamics:</p>
+<ul class="simple">
+<li>Write a function that takes an array of optimization parameters as input
+and returns a figure of merit. This function would, e.g., construct a
+numerical control pulse from the control parameters, simulate the dynamics
+using <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a>, and evaluate a figure of merit (like the
+overlap with a target state)</li>
+<li>Pass the function to <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.3.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a> for gradient-free optimization.</li>
+</ul>
+<p>The implementation in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.3.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a> allows to choose between
+different optimization methods, with “Nelder-Mead simplex” being the default.
+There exist also more advanced methods such as <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#sbplx-based-on-subplex">Subplex</a> in <a class="reference external" href="https://nlopt.readthedocs.io/">NLopt</a> that may be
+worth exploring for improvements in numerical efficiency, and additional
+functionality such as support for non-linear constraints.</p>
+</div>
+<div class="section" id="crab">
+<h2>CRAB<a class="headerlink" href="#crab" title="Permalink to this headline">¶</a></h2>
+<p>A special case of gradient-free optimization is the Chopped RAndom Basis (CRAB)
+method <a class="reference internal" href="99_bibliography.html#doriaprl11" id="id5">[DoriaPRL11]</a><a class="reference internal" href="99_bibliography.html#canevapra2011" id="id6">[CanevaPRA2011]</a>.
+The essence of CRAB is in the specific choice of the parametrization in terms of a
+low-dimensional random basis, as the name implies. The optimization itself is
+normally performed by Nelder-Mead simplex based on this parametrization,
+although any other gradient-free method could be used as well.</p>
+<p>An implementation of CRAB is included in QuTiP, see <a class="reference external" href="http://qutip.org/docs/latest/guide/guide-control.html#the-crab-algorithm">QuTiP’s documentation of
+CRAB</a>, and uses the same <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.control.pulseoptim.optimize_pulse" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.control.pulseoptim.optimize_pulse()</span></code></a>
+interface as the GRAPE method discussed above (<a class="reference internal" href="#grapeinqutip"><span class="std std-ref">GRAPE in QuTiP</span></a>) with the
+same limitations.</p>
+</div>
+<div class="section" id="choosing-an-optimization-method">
+<span id="id7"></span><h2>Choosing an optimization method<a class="headerlink" href="#choosing-an-optimization-method" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id8">
+<span id="figoctdecisiontree"></span><a class="reference internal image-reference" href="_images/oct_decision_tree.svg"><img alt="decision tree." src="_images/oct_decision_tree.svg" width="100%" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Decision tree for the choice of an optimization method</span></p>
+</div>
+<p>Whether to use a gradient-free optimization method, GRAPE, or
+Krotov’s method depends on the size of the problem (both the Hilbert
+space dimension and the number of control parameters), the requirements
+on the control pulse, and the optimization functional. Gradient-free
+methods should be used if propagation is extremely cheap (small Hilbert
+space dimension), the number of independent control parameters is
+smaller than 20, or the functional is of a form that does not allow to
+calculate gradients easily. It is always a good idea to use a gradient-free
+method to obtain guess pulses for use with a gradient-based method.</p>
+<p>GRAPE should be used if the control parameters are discrete,
+such as on a coarse-grained time grid, and the derivative of <span class="math notranslate nohighlight">\(J_T\)</span>
+with respect to each control parameter is easily computable.</p>
+<p>Krotov’s method should be used if the control is near-continuous, and if the
+derivative of <span class="math notranslate nohighlight">\(J_T\)</span> with respect to the states, Eq.&nbsp;<a class="reference internal" href="06_krotovs_method.html#equation-chi-boundary">(8)</a>,
+can be easily calculated. When these conditions are met, Krotov’s method gives
+excellent convergence, although it is often observed to slow down when getting
+close to the minimum of <span class="math notranslate nohighlight">\(J_T\)</span>. It can be beneficial to switch from
+Krotov’s method to GRAPE with L-BFGS-B in the final stage of the optimization,
+which has better asymptotic convergence due to the inclusion of the Hessian.</p>
+<p>The decision tree in <a class="reference internal" href="#figoctdecisiontree"><span class="std std-numref">Fig. 2</span></a> can guide the choice of an
+optimization method. The deciding factor between gradient-free and
+gradient-based is the number of control parameters. For gradient-free
+optimization, CRAB’s random parametrization is useful for when there is no
+obviously better parametrization of the control, like if the control is
+restricted to an analytical pulse shape and we only want to optimize the free
+parameters of that pulse shape. For gradient-based methods, the decision
+between GRAPE and Krotov depends mainly on whether the pulses are approximately
+time-continuous (up to discretization), or are of bang-bang type.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="99_bibliography.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="09_howto.html" class="btn btn-neutral float-left" title="How-Tos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 14, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
