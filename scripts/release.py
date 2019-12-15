@@ -389,7 +389,7 @@ def check_docs():
     click.echo(
         "Check documentation in file://"
         + os.getcwd()
-        + "/docs/_build/html/index.html"
+        + "/docs/_build/index.html"
     )
     click.confirm(
         "Does the documentation look correct?", default=True, abort=True
