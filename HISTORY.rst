@@ -2,8 +2,8 @@
 History
 =======
 
-(next version)
---------------
+1.0.0 (2019-12-15)
+------------------
 
 * Update: Citation info now points to `SciPost paper <https://scipost.org/SciPostPhys.7.6.080>`_ (`#61`_)
 * Added: parameters `col_formats` and `col_headers` to customize the output of ``krotov.info_hooks.print_table`` (`#65`_)
