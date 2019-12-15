@@ -105,12 +105,14 @@ author = 'Michael Goerz'
 copyright = '{0}, {1}'.format(year, "Michael Goerz et al.")
 version = krotov.__version__
 release = version
+git_tag = "v%s" % version
 if version.endswith('dev'):
     try:
         last_commit = str(git.Repo(ROOT).head.commit)[:7]
         release = "%s (%s)" % (version, last_commit)
+        git_tag = str(git.Repo(ROOT).head.commit)
     except git.exc.InvalidGitRepositoryError:
-        pass
+        git_tag = "master"
 numfig = True
 
 html_extra_path = ['./pseudocode/krotov_pseudocode.pdf']
@@ -501,7 +503,7 @@ nbsphinx_prolog = r"""
     .. role:: raw-html(raw)
         :format: html
 
-    :raw-html:`<a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/{{ env.config.release }}/{{ docname }}" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/{{ env.config.release }}?filepath={{ docname }}" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>`
+    :raw-html:`<a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/{{ env.config.git_tag }}/{{ docname }}" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/{{ env.config.release }}?filepath={{ docname }}" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>`
 """
 
 
