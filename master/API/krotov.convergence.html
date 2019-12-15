@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>krotov.convergence module &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  <title>krotov.convergence module &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-dev
+                1.0.0-rc1+dev
               </div>
             
           
@@ -385,7 +385,7 @@ For more advanced use cases, <cite>spec</cite> can be a
 the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object as <code class="docutils literal notranslate"><span class="pre">glom.glom(result,</span> <span class="pre">spec,</span> <span class="pre">**kwargs)</span></code>.</p>
 </div>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">value_below</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">value_below</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">limit</span><span class="o">=</span><span class="s1">&#39;1e-4&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">spec</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># same as the default spec</span>
 <span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;J_T&#39;</span>
@@ -413,7 +413,7 @@ arbitrary value, not necessarily the value of the functional <span class="math n
 optimization is minimizing (specified implicitly via the <cite>chi_constructor</cite>
 argument to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>).</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">value_above</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">value_above</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">limit</span><span class="o">=</span><span class="s1">&#39;0.999&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">spec</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Fidelity&#39;</span>
@@ -461,7 +461,7 @@ error, by flipping <cite>spec0</cite> and <cite>spec1</cite>, setting <cite>limi
 setting <cite>absolute_value</cite> to False. See <a class="reference internal" href="#krotov.convergence.check_monotonic_error" title="krotov.convergence.check_monotonic_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_error()</span></code></a>.</p>
 </div>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">delta_below</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="s1">&#39;1e-4&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ΔJ_T&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">delta_below</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="s1">&#39;1e-4&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ΔJ_T&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">9e-1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
@@ -492,7 +492,7 @@ returns the value of the functional <span class="math notranslate nohighlight">\
 expect to be minimized), which is then available in
 <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">9e-1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_error</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">)</span>
@@ -519,7 +519,7 @@ iteration.</p>
 that the <cite>info_hook</cite> returns a fidelity (to be maximized), not an error
 (like <span class="math notranslate nohighlight">\(J_T\)</span>, to be minimized).</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_fidelity</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
@@ -600,7 +600,7 @@ the optimization due to I/O overhead.</p>
     <p>
         &copy; Copyright 2019, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Dec 15, 2019.
+        Last updated on Dec 16, 2019.
       </span>
 
     </p>

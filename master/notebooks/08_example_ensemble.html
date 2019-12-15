@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Ensemble Optimization for Robust Pulses &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  <title>Ensemble Optimization for Robust Pulses &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-dev
+                1.0.0-rc1+dev
               </div>
             
           
@@ -420,7 +420,7 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/1.0.0-dev (2080a8b)/docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/1.0.0-dev (2080a8b)?filepath=docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/09193fc03b64c085fc48179c0a6ac940909574ad/docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/09193fc03b64c085fc48179c0a6ac940909574ad?filepath=docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
 <div class="section" id="Ensemble-Optimization-for-Robust-Pulses">
 <h1>Ensemble Optimization for Robust Pulses<a class="headerlink" href="#Ensemble-Optimization-for-Robust-Pulses" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
@@ -449,14 +449,14 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-numpy            1.17.2
-matplotlib.pylab 1.17.2
-krotov           1.0.0-dev
-qutip            4.4.1
 scipy            1.3.1
+matplotlib.pylab 1.17.2
+qutip            4.4.1
+numpy            1.17.2
+krotov           1.0.0-rc1
 matplotlib       3.1.2
 CPython 3.7.3
-IPython 7.10.1
+IPython 7.10.2
 </pre></div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2}\mid{#2}\vphantom{#1}\right\rangle} \newcommand{ketbra}[2]{\vert#1\rangle\!\langle#2\vert} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}} \newcommand{toP}[0]{\omega_{12}} \newcommand{toS}[0]{\omega_{23}}\)</span></p>
@@ -1188,9 +1188,9 @@ J_T(μ=1) = 2.67e-03
 <div class="highlight"><pre>
 iter.      J_T  ∫gₐ(ϵ₁)dt  ∫gₐ(ϵ₂)dt  ∫gₐ(ϵ₃)dt  ∫gₐ(ϵ₄)dt   ∑∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs
 0     5.91e-04   0.00e+00   0.00e+00   0.00e+00   0.00e+00    0.00e+00   5.91e-04        n/a        n/a     1
-13    3.25e-04   1.26e-04   1.98e-05   1.02e-04   1.84e-05    2.66e-04   5.90e-04  -2.66e-04  -3.54e-07     3
-14    1.83e-04   6.32e-05   1.41e-05   5.12e-05   1.29e-05    1.41e-04   3.24e-04  -1.42e-04  -2.11e-07     3
-15    1.06e-04   3.19e-05   1.00e-05   2.59e-05   9.11e-06    7.69e-05   1.83e-04  -7.70e-05  -1.27e-07     3
+13    3.25e-04   1.26e-04   1.98e-05   1.02e-04   1.84e-05    2.66e-04   5.90e-04  -2.66e-04  -3.54e-07     2
+14    1.83e-04   6.32e-05   1.41e-05   5.12e-05   1.29e-05    1.41e-04   3.24e-04  -1.42e-04  -2.11e-07     2
+15    1.06e-04   3.19e-05   1.00e-05   2.59e-05   9.11e-06    7.69e-05   1.83e-04  -7.70e-05  -1.27e-07     2
 </pre></div></div>
 </div>
 <p>Now, we can compare the robustness of the optimized pulses from the original unperturbed optimization (label “-1”), the continued unperturbed optimization (label “0”), and the ensemble optimization (label “1”):</p>
@@ -1269,7 +1269,7 @@ iter.      J_T  ∫gₐ(ϵ₁)dt  ∫gₐ(ϵ₂)dt  ∫gₐ(ϵ₃)dt  ∫gₐ(ϵ
     <p>
         &copy; Copyright 2019, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Dec 15, 2019.
+        Last updated on Dec 16, 2019.
       </span>
 
     </p>

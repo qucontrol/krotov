@@ -1,0 +1,1067 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Optimization of Dissipative Qubit Reset &mdash; Krotov 1.0.0-rc1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Optimization of an X-Gate for a Transmon Qubit" href="05_example_transmon_xgate.html" />
+    <link rel="prev" title="Optimization of a Dissipative State-to-State Transfer in a Lambda System" href="03_example_lambda_system_rwa_non_hermitian.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-rc1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../09_examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_example_simple_state_to_state.html">Optimization of a State-to-State Transfer in a Two-Level-System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html">Optimization of a State-to-State Transfer in a Lambda System in the RWA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_example_lambda_system_rwa_non_hermitian.html">Optimization of a Dissipative State-to-State Transfer in a Lambda System</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization of Dissipative Qubit Reset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Define-parameters">Define parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Define-the-Liouvillian">Define the Liouvillian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Define-the-optimization-target">Define the optimization target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Simulate-the-dynamics-of-the-guess-field">Simulate the dynamics of the guess field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optimize">Optimize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Simulate-the-dynamics-of-the-optimized-field">Simulate the dynamics of the optimized field</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="05_example_transmon_xgate.html">Optimization of an X-Gate for a Transmon Qubit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_example_3states.html">Optimization of a Dissipative Quantum Gate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_example_PE.html">Optimization towards a Perfect Entangler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_example_ensemble.html">Ensemble Optimization for Robust Pulses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_example_numpy.html">Optimization with numpy Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../09_examples.html">Examples</a> &raquo;</li>
+        
+      <li>Optimization of Dissipative Qubit Reset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.0.0-rc1/docs/notebooks/04_example_dissipative_qubit_reset.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.0.0-rc1?filepath=docs/notebooks/04_example_dissipative_qubit_reset.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<div class="section" id="Optimization-of-Dissipative-Qubit-Reset">
+<h1>Optimization of Dissipative Qubit Reset<a class="headerlink" href="#Optimization-of-Dissipative-Qubit-Reset" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
+<span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="kn">import</span> <span class="nn">qutip</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">krotov</span>
+
+<span class="o">%</span><span class="k">watermark</span> -v --iversions
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+qutip            4.4.1
+scipy            1.3.1
+matplotlib       3.1.2
+numpy            1.17.2
+matplotlib.pylab 1.17.2
+krotov           1.0.0-rc1
+CPython 3.7.3
+IPython 7.10.2
+</pre></div></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{int}[0]{\text{int}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2} \mid #2\vphantom{#1}\right\rangle} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}}\)</span></p>
+<p>This example illustrates an optimization in an <em>open</em> quantum system, where the dynamics is governed by the Liouville-von Neumann equation. Hence, states are represented by density matrices <span class="math notranslate nohighlight">\(\op{\rho}(t)\)</span> and the time-evolution operator is given by a general dynamical map <span class="math notranslate nohighlight">\(\DynMap\)</span>.</p>
+<div class="section" id="Define-parameters">
+<h2>Define parameters<a class="headerlink" href="#Define-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The system consists of a qubit with Hamiltonian <span class="math notranslate nohighlight">\(\op{H}_{q}(t) = - \frac{\omega_{q}}{2} \op{\sigma}_{z} - \frac{\epsilon(t)}{2} \op{\sigma}_{z}\)</span>, where <span class="math notranslate nohighlight">\(\omega_{q}\)</span> is an energy level splitting that can be dynamically adjusted by the control <span class="math notranslate nohighlight">\(\epsilon(t)\)</span>. This qubit couples strongly to another two-level system (TLS) with Hamiltonian <span class="math notranslate nohighlight">\(\op{H}_{t} = - \frac{\omega_{t}}{2} \op{\sigma}_{z}\)</span> with static energy level splitting <span class="math notranslate nohighlight">\(\omega_{t}\)</span>. The coupling strength between
+both systems is given by <span class="math notranslate nohighlight">\(J\)</span> with the interaction Hamiltonian given by <span class="math notranslate nohighlight">\(\op{H}_{\int} = J \op{\sigma}_{x} \otimes \op{\sigma}_{x}\)</span>.</p>
+<p>The Hamiltonian for the system of qubit and TLS is</p>
+<div class="math notranslate nohighlight">
+\[\op{H}(t)
+  = \op{H}_{q}(t) \otimes \identity_{t}
+    + \identity_{q} \otimes \op{H}_{t} + \op{H}_{\int}.\]</div>
+<p>In addition, the TLS is embedded in a heat bath with inverse temperature <span class="math notranslate nohighlight">\(\beta\)</span>. The TLS couples to the bath with rate <span class="math notranslate nohighlight">\(\kappa\)</span>. In order to simulate the dissipation arising from this coupling, we consider the two Lindblad operators</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\op{L}_{1} &amp;= \sqrt{\kappa (N_{th}+1)} \identity_{q} \otimes \ket{0}\bra{1} \\
+\op{L}_{2} &amp;= \sqrt{\kappa N_{th}} \identity_{q} \otimes \ket{1}\bra{0}
+\end{split}\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(N_{th} = 1/(e^{\beta \omega_{t}} - 1)\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">omega_q</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># qubit level splitting</span>
+<span class="n">omega_T</span> <span class="o">=</span> <span class="mf">3.0</span>  <span class="c1"># TLS level splitting</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># qubit-TLS coupling</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># TLS decay rate</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># inverse bath temperature</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">25.0</span>  <span class="c1"># final time</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="mi">2500</span>  <span class="c1"># number of time steps</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Define-the-Liouvillian">
+<h2>Define the Liouvillian<a class="headerlink" href="#Define-the-Liouvillian" title="Permalink to this headline">¶</a></h2>
+<p>The dynamics of the qubit-TLS system state <span class="math notranslate nohighlight">\(\op{\rho}(t)\)</span> is governed by the Liouville-von Neumann equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+  \frac{\partial}{\partial t} \op{\rho}(t)
+    &amp;= \Liouville(t) \op{\rho}(t) \\
+    &amp;= - i \left[\op{H}(t), \op{\rho}(t)\right]
+      + \sum_{k=1,2} \left(
+            \op{L}_{k} \op{\rho}(t) \op{L}_{k}^\dagger
+            - \frac{1}{2}
+            \op{L}_{k}^\dagger
+            \op{L}_{k} \op{\rho}(t)
+            - \frac{1}{2} \op{\rho}(t)
+            \op{L}_{k}^\dagger
+            \op{L}_{k}
+        \right)\,.
+\end{split}\end{split}\]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">liouvillian</span><span class="p">(</span><span class="n">omega_q</span><span class="p">,</span> <span class="n">omega_T</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Liouvillian for the coupled system of qubit and TLS&quot;&quot;&quot;</span>
+
+    <span class="c1"># drift qubit Hamiltonian</span>
+    <span class="n">H0_q</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">omega_q</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># drive qubit Hamiltonian</span>
+    <span class="n">H1_q</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># drift TLS Hamiltonian</span>
+    <span class="n">H0_T</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">omega_T</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Lift Hamiltonians to joint system operators</span>
+    <span class="n">H0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">H0_q</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">H0_T</span><span class="p">)</span>
+    <span class="n">H1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">H1_q</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># qubit-TLS interaction</span>
+    <span class="n">H_int</span> <span class="o">=</span> <span class="n">J</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1"># convert Hamiltonians to QuTiP objects</span>
+    <span class="n">H0</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">H0</span> <span class="o">+</span> <span class="n">H_int</span><span class="p">)</span>
+    <span class="n">H1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">H1</span><span class="p">)</span>
+
+    <span class="c1"># Define Lindblad operators</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">omega_T</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="c1"># Cooling on TLS</span>
+    <span class="n">L1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="p">)</span>
+    <span class="c1"># Heating on TLS</span>
+    <span class="n">L2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">kappa</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="p">)</span>
+
+    <span class="c1"># convert Lindblad operators to QuTiP objects</span>
+    <span class="n">L1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
+    <span class="n">L2</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">L2</span><span class="p">)</span>
+
+    <span class="c1"># generate the Liouvillian</span>
+    <span class="n">L0</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">liouvillian</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H0</span><span class="p">,</span> <span class="n">c_ops</span><span class="o">=</span><span class="p">[</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">])</span>
+    <span class="n">L1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">liouvillian</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">H1</span><span class="p">)</span>
+
+    <span class="c1"># Shift the qubit and TLS into resonance by default</span>
+    <span class="n">eps0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">omega_T</span> <span class="o">-</span> <span class="n">omega_q</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">L0</span><span class="p">,</span> <span class="p">[</span><span class="n">L1</span><span class="p">,</span> <span class="n">eps0</span><span class="p">]]</span>
+
+
+<span class="n">L</span> <span class="o">=</span> <span class="n">liouvillian</span><span class="p">(</span><span class="n">omega_q</span><span class="o">=</span><span class="n">omega_q</span><span class="p">,</span> <span class="n">omega_T</span><span class="o">=</span><span class="n">omega_T</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="n">J</span><span class="p">,</span> <span class="n">kappa</span><span class="o">=</span><span class="n">kappa</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Define-the-optimization-target">
+<h2>Define the optimization target<a class="headerlink" href="#Define-the-optimization-target" title="Permalink to this headline">¶</a></h2>
+<p>The initial state of qubit and TLS are assumed to be in thermal equilibrium with the heat bath (although only the TLS is directly interacting with the bath). Both states are given by</p>
+<div class="math notranslate nohighlight">
+\[  \op{\rho}_{\alpha}^{th} =
+\frac{e^{x_{\alpha}} \ket{0}\bra{0} + e^{-x_{\alpha}} \ket{1}\bra{1}}{2
+\cosh(x_{\alpha})},
+  \qquad
+  x_{\alpha} = \frac{\omega_{\alpha} \beta}{2},\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha = q,t\)</span>. The initial state of the bipartite system of qubit and TLS is given by the thermal state <span class="math notranslate nohighlight">\(\op{\rho}_{th} = \op{\rho}_{q}^{th} \otimes \op{\rho}_{t}^{th}\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">x_q</span> <span class="o">=</span> <span class="n">omega_q</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">rho_q_th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_q</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x_q</span><span class="p">)])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x_q</span><span class="p">))</span>
+
+<span class="n">x_T</span> <span class="o">=</span> <span class="n">omega_T</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">rho_T_th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_T</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x_T</span><span class="p">)])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x_T</span><span class="p">))</span>
+
+<span class="n">rho_th</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">rho_q_th</span><span class="p">,</span> <span class="n">rho_T_th</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Since we are ultimately only interested in the state of the qubit, we define <code class="docutils literal notranslate"><span class="pre">trace_TLS</span></code>. It returns the reduced state of the qubit <span class="math notranslate nohighlight">\(\op{\rho}_{q} = \tr_{t}\{\op{\rho}\}\)</span> when passed the state <span class="math notranslate nohighlight">\(\op{\rho}\)</span> of the bipartite system.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">trace_TLS</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Partial trace over the TLS degrees of freedom&quot;&quot;&quot;</span>
+    <span class="n">rho_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+    <span class="n">rho_q</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">rho_q</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">rho_q</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">rho_q</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">rho_q</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The target state is (temporarily) the ground state of the bipartite system, i.e., <span class="math notranslate nohighlight">\(\op{\rho}_{\tgt} = \ket{00}\bra{00}\)</span>. Note that in the end we will only optimize the reduced state of the qubit.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">rho_q_trg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">rho_T_trg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">rho_trg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">rho_q_trg</span><span class="p">,</span> <span class="n">rho_T_trg</span><span class="p">)</span>
+<span class="n">rho_trg</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">rho_trg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next, the list of <code class="docutils literal notranslate"><span class="pre">objectives</span></code> is defined, which contains the initial and target state and the Liouvillian <span class="math notranslate nohighlight">\(\Liouville(t)\)</span> that determines the system dynamics.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span><span class="n">krotov</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">rho_th</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">rho_trg</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">L</span><span class="p">)]</span>
+<span class="n">objectives</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Objective[ρ₀[4,4] to ρ₁[4,4] via [𝓛₀[[4,4],[4,4]], [𝓛₁[[4,4],[4,4]], u₁(t)]]]]
+</pre></div></div>
+</div>
+<p>In the following, we define the shape function <span class="math notranslate nohighlight">\(S(t)\)</span>, which we use in order to ensure a smooth switch on and off in the beginning and end. Note that at times <span class="math notranslate nohighlight">\(t\)</span> where <span class="math notranslate nohighlight">\(S(t)\)</span> vanishes, the updates of the field is suppressed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Shape function for the field update&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">flattop</span><span class="p">(</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">t_rise</span><span class="o">=</span><span class="mf">0.05</span> <span class="o">*</span> <span class="n">T</span><span class="p">,</span> <span class="n">t_fall</span><span class="o">=</span><span class="mf">0.05</span> <span class="o">*</span> <span class="n">T</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;sinsq&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We re-use this function to also shape the guess control <span class="math notranslate nohighlight">\(\epsilon_{0}(t)\)</span> to be zero at <span class="math notranslate nohighlight">\(t=0\)</span> and <span class="math notranslate nohighlight">\(t=T\)</span>. This is on top of the originally defined constant value shifting the qubit and TLS into resonance.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">shape_field</span><span class="p">(</span><span class="n">eps0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies the shape function S(t) to the guess field&quot;&quot;&quot;</span>
+    <span class="n">eps0_shaped</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">eps0</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eps0_shaped</span>
+
+
+<span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">shape_field</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>At last, before heading to the actual optimization below, we assign the shape function <span class="math notranslate nohighlight">\(S(t)\)</span> to the OCT parameters of the control and choose <code class="docutils literal notranslate"><span class="pre">lambda_a</span></code>, a numerical parameter that controls the field update magnitude in each iteration.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pulse_options</span> <span class="o">=</span> <span class="p">{</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lambda_a</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">update_shape</span><span class="o">=</span><span class="n">S</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Simulate-the-dynamics-of-the-guess-field">
+<h2>Simulate the dynamics of the guess field<a class="headerlink" href="#Simulate-the-dynamics-of-the-guess-field" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">nt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_pulse</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
+        <span class="n">pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">pulse</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pulse amplitude&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The following plot shows the guess field <span class="math notranslate nohighlight">\(\epsilon_{0}(t)\)</span> as a constant that puts qubit and TLS into resonance, but with a smooth switch-on and switch-off.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_pulse</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">tlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_example_dissipative_qubit_reset_27_0.png" src="../_images/notebooks_04_example_dissipative_qubit_reset_27_0.png" />
+</div>
+</div>
+<p>We solve the equation of motion for this guess field, storing the expectation values for the population in the bipartite levels:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">psi00</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])))</span>
+<span class="n">psi01</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
+<span class="n">psi10</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])))</span>
+<span class="n">psi11</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
+<span class="n">proj_00</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi00</span><span class="p">)</span>
+<span class="n">proj_01</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi01</span><span class="p">)</span>
+<span class="n">proj_10</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi10</span><span class="p">)</span>
+<span class="n">proj_11</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">guess_dynamics</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span>
+    <span class="n">tlist</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj_00</span><span class="p">,</span> <span class="n">proj_01</span><span class="p">,</span> <span class="n">proj_10</span><span class="p">,</span> <span class="n">proj_11</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_population</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;qubit 0&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">times</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;TLS 0&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;population&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+
+<span class="n">plot_population</span><span class="p">(</span><span class="n">guess_dynamics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_example_dissipative_qubit_reset_31_0.png" src="../_images/notebooks_04_example_dissipative_qubit_reset_31_0.png" />
+</div>
+</div>
+<p>The population dynamics of qubit and TLS ground state show that both are oscillating and especially the qubit’s ground state population reaches a maximal value at intermediate times <span class="math notranslate nohighlight">\(t &lt; T\)</span>. This maximum is indeed the maximum that is physically possible. It corresponds to a perfect swap of the initial qubit and TLS purities. However, we want to reach this maximum at final time <span class="math notranslate nohighlight">\(T\)</span> (not before), so the guess control is not yet working as desired.</p>
+</div>
+<div class="section" id="Optimize">
+<h2>Optimize<a class="headerlink" href="#Optimize" title="Permalink to this headline">¶</a></h2>
+<p>Our optimization target is the ground state <span class="math notranslate nohighlight">\(\ket{\Psi_{q}^{\tgt}} = \ket{0}\)</span> of the qubit, irrespective of the state of the TLS. Thus, our optimization functional reads</p>
+<div class="math notranslate nohighlight">
+\[  F_{re} = 1 -
+\Braket{\Psi_{q}^{\tgt}}{\tr_{t}\{\op{\rho}(T)\} \,|\; \Psi_{q}^{\tgt}}\,,\]</div>
+<p>and we first define <code class="docutils literal notranslate"><span class="pre">print_qubit_error</span></code>, which prints out the above functional after each iteration.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">print_qubit_error</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Utility function writing the qubit error to screen&quot;&quot;&quot;</span>
+    <span class="n">taus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">state_T</span> <span class="ow">in</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;fw_states_T&#39;</span><span class="p">]:</span>
+        <span class="n">state_q_T</span> <span class="o">=</span> <span class="n">trace_TLS</span><span class="p">(</span><span class="n">state_T</span><span class="p">)</span>
+        <span class="n">taus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state_q_T</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+    <span class="n">J_T_re</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">taus</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    qubit error: </span><span class="si">%.1e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">J_T_re</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">J_T_re</span>
+</pre></div>
+</div>
+</div>
+<p>In order to minimize the above functional, we need to provide the correct <code class="docutils literal notranslate"><span class="pre">chi_constructor</span></code> for the Krotov optimization. This is the only place where the functional (implicitly) enters the optimization. Given our bipartite system and choice of <span class="math notranslate nohighlight">\(F_{re}\)</span>, the equation for <span class="math notranslate nohighlight">\(\op{\chi}(T)\)</span> reads</p>
+<div class="math notranslate nohighlight">
+\[  \op{\chi}(T) =
+  \sum_{k=0,1} a_{k}
+\op{\rho}_{q}^{\tgt} \otimes \ket{k}\bra{k}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\{\ket{k}\}\)</span> a basis for the TLS Hilbert space.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">TLS_onb_trg</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Returns the tensor product of qubit target state</span>
+<span class="sd">    and a basis for the TLS Hilbert space&quot;&quot;&quot;</span>
+    <span class="n">rho1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">rho_q_trg</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])))</span>
+    <span class="n">rho2</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">rho_q_trg</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">rho1</span><span class="p">,</span> <span class="n">rho2</span><span class="p">]</span>
+
+
+<span class="n">TLS_onb</span> <span class="o">=</span> <span class="n">TLS_onb_trg</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">chis_qubit</span><span class="p">(</span><span class="n">fw_states_T</span><span class="p">,</span> <span class="n">objectives</span><span class="p">,</span> <span class="n">tau_vals</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate chis for the chosen functional&quot;&quot;&quot;</span>
+    <span class="n">chis</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">state_i_T</span> <span class="ow">in</span> <span class="n">fw_states_T</span><span class="p">:</span>
+        <span class="n">chis_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">state_k</span> <span class="ow">in</span> <span class="n">TLS_onb</span><span class="p">:</span>
+            <span class="n">a_i_k</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">_overlap</span><span class="p">(</span><span class="n">state_i_T</span><span class="p">,</span> <span class="n">state_k</span><span class="p">)</span>
+            <span class="n">chis_i</span> <span class="o">+=</span> <span class="n">a_i_k</span> <span class="o">*</span> <span class="n">state_k</span>
+        <span class="n">chis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">chis_i</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">chis</span>
+</pre></div>
+</div>
+</div>
+<p>We now carry out the optimization for five iterations.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
+<span class="c1"># the DensityMatrixODEPropagator is not sufficiently exact to guarantee that</span>
+<span class="c1"># you won&#39;t get slightly different results in the optimization when</span>
+<span class="c1"># running this on different systems</span>
+<span class="n">opt_result</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize_pulses</span><span class="p">(</span>
+    <span class="n">objectives</span><span class="p">,</span>
+    <span class="n">pulse_options</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">DensityMatrixODEPropagator</span><span class="p">(</span>
+        <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span>
+    <span class="p">),</span>
+    <span class="n">chi_constructor</span><span class="o">=</span><span class="n">chis_qubit</span><span class="p">,</span>
+    <span class="n">info_hook</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">print_debug_information</span><span class="p">,</span> <span class="n">print_qubit_error</span>
+    <span class="p">),</span>
+    <span class="n">check_convergence</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">check_monotonic_error</span><span class="p">,</span>
+    <span class="n">iter_stop</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Iteration 0
+    objectives:
+        1:ρ₀[4,4] to ρ₁[4,4] via [𝓛₀[[4,4],[4,4]], [𝓛₁[[4,4],[4,4]], u₂(t)]]
+    adjoint objectives:
+        1:ρ₂[4,4] to ρ₃[4,4] via [𝓛₂[[4,4],[4,4]], [𝓛₃[[4,4],[4,4]], u₂(t)]]
+    chi_constructor: chis_qubit
+    mu: derivative_wrt_pulse
+    S(t) (ranges): [0.000000, 1.000000]
+    iter_start: 0
+    iter_stop: 5
+    duration: 0.5 secs (started at 2019-12-15 18:25:18)
+    optimized pulses (ranges): [0.00, 2.00]
+    ∫gₐ(t)dt: 0.00e+00
+    λₐ: 1.00e-02
+    storage (bw, fw, fw0): None, None, None
+    fw_states_T norm: 1.000000
+    τ: (7.97e-01:0.00π)
+    qubit error: 1.1e-01
+Iteration 1
+    duration: 2.4 secs (started at 2019-12-15 18:25:19)
+    optimized pulses (ranges): [0.00, 2.06]
+    ∫gₐ(t)dt: 7.72e-02
+    λₐ: 1.00e-02
+    storage (bw, fw, fw0): [1 * ndarray(2500)] (1.3 MB), None, None
+    fw_states_T norm: 1.000000
+    τ: (7.98e-01:0.00π)
+    qubit error: 1.1e-01
+Iteration 2
+    duration: 2.5 secs (started at 2019-12-15 18:25:21)
+    optimized pulses (ranges): [0.00, 2.23]
+    ∫gₐ(t)dt: 5.72e-01
+    λₐ: 1.00e-02
+    storage (bw, fw, fw0): [1 * ndarray(2500)] (1.3 MB), None, None
+    fw_states_T norm: 1.000000
+    τ: (8.01e-01:0.00π)
+    qubit error: 6.7e-02
+Iteration 3
+    duration: 2.5 secs (started at 2019-12-15 18:25:24)
+    optimized pulses (ranges): [0.00, 2.33]
+    ∫gₐ(t)dt: 8.11e-02
+    λₐ: 1.00e-02
+    storage (bw, fw, fw0): [1 * ndarray(2500)] (1.3 MB), None, None
+    fw_states_T norm: 1.000000
+    τ: (7.99e-01:0.00π)
+    qubit error: 5.0e-02
+Iteration 4
+    duration: 2.8 secs (started at 2019-12-15 18:25:26)
+    optimized pulses (ranges): [0.00, 2.19]
+    ∫gₐ(t)dt: 2.16e-01
+    λₐ: 1.00e-02
+    storage (bw, fw, fw0): [1 * ndarray(2500)] (1.3 MB), None, None
+    fw_states_T norm: 1.000000
+    τ: (8.02e-01:0.00π)
+    qubit error: 4.9e-02
+Iteration 5
+    duration: 2.6 secs (started at 2019-12-15 18:25:29)
+    optimized pulses (ranges): [0.00, 2.15]
+    ∫gₐ(t)dt: 6.38e-02
+    λₐ: 1.00e-02
+    storage (bw, fw, fw0): [1 * ndarray(2500)] (1.3 MB), None, None
+    fw_states_T norm: 1.000000
+    τ: (8.03e-01:0.00π)
+    qubit error: 4.9e-02
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_result</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Krotov Optimization Result
+--------------------------
+- Started at 2019-12-15 18:25:18
+- Number of objectives: 1
+- Number of iterations: 5
+- Reason for termination: Reached 5 iterations
+- Ended at 2019-12-15 18:25:32 (0:00:14)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Simulate-the-dynamics-of-the-optimized-field">
+<h2>Simulate the dynamics of the optimized field<a class="headerlink" href="#Simulate-the-dynamics-of-the-optimized-field" title="Permalink to this headline">¶</a></h2>
+<p>The plot of the optimized field shows that the optimization slightly shifts the field such that qubit and TLS are no longer perfectly in resonance.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_pulse</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_example_dissipative_qubit_reset_43_0.png" src="../_images/notebooks_04_example_dissipative_qubit_reset_43_0.png" />
+</div>
+</div>
+<p>This slight shift of qubit and TLS out of resonance delays the population oscillations between qubit and TLS ground state such that the qubit ground state is maximally populated at final time <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">optimized_dynamics</span> <span class="o">=</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span>
+    <span class="n">tlist</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj_00</span><span class="p">,</span> <span class="n">proj_01</span><span class="p">,</span> <span class="n">proj_10</span><span class="p">,</span> <span class="n">proj_11</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">plot_population</span><span class="p">(</span><span class="n">optimized_dynamics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_example_dissipative_qubit_reset_45_0.png" src="../_images/notebooks_04_example_dissipative_qubit_reset_45_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="05_example_transmon_xgate.html" class="btn btn-neutral float-right" title="Optimization of an X-Gate for a Transmon Qubit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="03_example_lambda_system_rwa_non_hermitian.html" class="btn btn-neutral float-left" title="Optimization of a Dissipative State-to-State Transfer in a Lambda System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 16, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

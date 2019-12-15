@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.convergence module &mdash; Krotov 1.0.0-rc1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="krotov.conversions module" href="krotov.conversions.html" />
+    <link rel="prev" title="krotov package" href="krotov.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-rc1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="krotov.html">API of the Krotov package</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.convergence module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.conversions.html">krotov.conversions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.info_hooks.html">krotov.info_hooks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.objectives.html">krotov.objectives module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.optimize.html">krotov.optimize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.parallelization.html">krotov.parallelization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.propagators.html">krotov.propagators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.result.html">krotov.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.second_order.html">krotov.second_order module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.shapes.html">krotov.shapes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="krotov.html">krotov package</a> &raquo;</li>
+        
+      <li>krotov.convergence module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-krotov.convergence">
+<span id="krotov-convergence-module"></span><h1>krotov.convergence module<a class="headerlink" href="#module-krotov.convergence" title="Permalink to this headline">¶</a></h1>
+<p>Routines for <cite>check_convergence</cite> in <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.optimize.optimize_pulses()</span></code></a></p>
+<p>A <cite>check_convergence</cite> function may be used to determine whether an optimization
+is converged, and thus can be stopped before the maximum number of
+iterations (<cite>iter_stop</cite>) is reached. A function suitable for
+<cite>check_convergence</cite> must receive a <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object, and return a value
+that evaluates as True or False in a Boolean context, indicating whether the
+optimization has converged or not.</p>
+<p>The <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object that the <cite>check_convergence</cite> function receives as
+an argument will be up-to-date for the current iteration. That is, it will
+already contain the current values from <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>’s <cite>info_hook</cite>
+in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>, the current <a class="reference internal" href="krotov.result.html#krotov.result.Result.tau_vals" title="krotov.result.Result.tau_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tau_vals</span></code></a>, etc.  The
+<a class="reference internal" href="krotov.result.html#krotov.result.Result.optimized_controls" title="krotov.result.Result.optimized_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.optimized_controls</span></code></a> attribute will contain the current optimized
+pulses (defined on the intervals of <a class="reference internal" href="krotov.result.html#krotov.result.Result.tlist" title="krotov.result.Result.tlist"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tlist</span></code></a>).</p>
+<p>The <cite>check_convergence</cite> function must not modify the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object it
+receives in any way. The proper place for custom modifications after each
+iteration in <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> is through the <cite>modify_params_after_iter</cite>
+routine (e.g., dynamically adjusting λₐ if convergence is too slow or pulse
+updates are too large).</p>
+<p>It is recommended that a <cite>check_convergence</cite> function returns None (which is
+False in a Boolean context) if the optimization has not yet converged. If the
+optimization has converged, <cite>check_convergence</cite> should return a message string
+(which is True in a Boolean context). The returned string will be included in
+the final <a class="reference internal" href="krotov.result.html#krotov.result.Result.message" title="krotov.result.Result.message"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.message</span></code></a>.</p>
+<p>A typical usage for <cite>check_convergence</cite> is ending the optimization when the
+error falls below a specified limit. Such a <cite>check_convergence</cite> function can be
+generated by <a class="reference internal" href="#krotov.convergence.value_below" title="krotov.convergence.value_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_below()</span></code></a>. Often, this “error” is the value of the
+functional <span class="math notranslate nohighlight">\(J_T\)</span>. However, it is up to the user to ensure that the
+explicit value of <span class="math notranslate nohighlight">\(J_T\)</span> can be calculated; <span class="math notranslate nohighlight">\(J_T\)</span> in Krotov’s method
+is completely implicit, and enters the optimization only indirectly via the
+<cite>chi_constructor</cite> passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>. A specific
+<cite>chi_constructor</cite> implies the minimization of the functional <span class="math notranslate nohighlight">\(J_T\)</span> from
+which <cite>chi_constructor</cite> was derived. A convergence check based on the
+<em>explicit</em> value of <span class="math notranslate nohighlight">\(J_T\)</span> can be realized by passing an <cite>info_hook</cite> that
+returns the value of <span class="math notranslate nohighlight">\(J_T\)</span>. This value is then stored in
+<a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>, which is where <a class="reference internal" href="#krotov.convergence.value_below" title="krotov.convergence.value_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_below()</span></code></a> looks for it.</p>
+<p>An <cite>info_hook</cite> could also calculate and return an arbitrary measure of
+<em>success</em>, not related to <span class="math notranslate nohighlight">\(J_T\)</span> (e.g. a fidelity, or a concurrence).
+Since we expect the optimization (the minimization of <span class="math notranslate nohighlight">\(J_T\)</span>) to maximize
+a fidelity, a convergence check might want to look at whether the calculated
+value is <em>above</em> some threshold. This can be done via <a class="reference internal" href="#krotov.convergence.value_above" title="krotov.convergence.value_above"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_above()</span></code></a>.</p>
+<p>In addition to looking at the <em>value</em> of some figure of merit, one might want
+stop the optimization when there is an insufficient improvement between
+iterations. The <a class="reference internal" href="#krotov.convergence.delta_below" title="krotov.convergence.delta_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">delta_below()</span></code></a> function generates a <cite>check_convergence</cite>
+function for this purpose.  Multiple convergence conditions (“stop optimization
+when <span class="math notranslate nohighlight">\(J_T\)</span> reaches <span class="math notranslate nohighlight">\(10^{-5}\)</span>, or if <span class="math notranslate nohighlight">\(\Delta J_T &lt; 10^{-6}\)</span>”)
+can be defined via <a class="reference internal" href="#krotov.convergence.Or" title="krotov.convergence.Or"><code class="xref py py-func docutils literal notranslate"><span class="pre">Or()</span></code></a>.</p>
+<p>While Krotov’s method is guaranteed to monotonically converge in the continuous
+limit, this no longer strictly holds when time is discretized (in particular if
+λₐ is too small). You can use <a class="reference internal" href="#krotov.convergence.check_monotonic_error" title="krotov.convergence.check_monotonic_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_error()</span></code></a> or
+<a class="reference internal" href="#krotov.convergence.check_monotonic_fidelity" title="krotov.convergence.check_monotonic_fidelity"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_fidelity()</span></code></a> as a <cite>check_convergence</cite> function that stops
+the optimization when monotonic convergence is lost.</p>
+<p>The <cite>check_convergence</cite> routine may also be used to store the current state of
+the optimization to disk, as a side effect. This is achieved by the routine
+<a class="reference internal" href="#krotov.convergence.dump_result" title="krotov.convergence.dump_result"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_result()</span></code></a>, which can be chained with other convergence checks with
+<a class="reference internal" href="#krotov.convergence.Or" title="krotov.convergence.Or"><code class="xref py py-func docutils literal notranslate"><span class="pre">Or()</span></code></a>. Dumping the current state of the optimization at regular intervals
+protects against losing the results of a long running optimization in the event
+of a crash.</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.convergence.Or" title="krotov.convergence.Or"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Or</span></code></a></p></td>
+<td><p>Chain multiple <cite>check_convergence</cite> functions together in a logical Or.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#krotov.convergence.check_monotonic_error" title="krotov.convergence.check_monotonic_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_monotonic_error</span></code></a></p></td>
+<td><p>Check for monotonic convergence with respect to the error</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.convergence.check_monotonic_fidelity" title="krotov.convergence.check_monotonic_fidelity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_monotonic_fidelity</span></code></a></p></td>
+<td><p>Check for monotonic convergence with respect to the fidelity</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#krotov.convergence.delta_below" title="krotov.convergence.delta_below"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delta_below</span></code></a></p></td>
+<td><p>Constructor for a routine that checks if <span class="math notranslate nohighlight">\(\Abs{v_1 - v_0} &lt; \varepsilon\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.convergence.dump_result" title="krotov.convergence.dump_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dump_result</span></code></a></p></td>
+<td><p>Return a function for dumping the result every so many iterations</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#krotov.convergence.value_above" title="krotov.convergence.value_above"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_above</span></code></a></p></td>
+<td><p>Constructor for routine that checks if a value is above <cite>limit</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.convergence.value_below" title="krotov.convergence.value_below"><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_below</span></code></a></p></td>
+<td><p>Constructor for routine that checks if a value is below <cite>limit</cite></p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.convergence.Or" title="krotov.convergence.Or"><code class="xref py py-func docutils literal notranslate"><span class="pre">Or</span></code></a>, <a class="reference internal" href="#krotov.convergence.check_monotonic_error" title="krotov.convergence.check_monotonic_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_error</span></code></a>, <a class="reference internal" href="#krotov.convergence.check_monotonic_fidelity" title="krotov.convergence.check_monotonic_fidelity"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_fidelity</span></code></a>, <a class="reference internal" href="#krotov.convergence.delta_below" title="krotov.convergence.delta_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">delta_below</span></code></a>, <a class="reference internal" href="#krotov.convergence.dump_result" title="krotov.convergence.dump_result"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_result</span></code></a>, <a class="reference internal" href="#krotov.convergence.value_above" title="krotov.convergence.value_above"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_above</span></code></a>, <a class="reference internal" href="#krotov.convergence.value_below" title="krotov.convergence.value_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_below</span></code></a></p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="krotov.convergence.Or">
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">Or</code><span class="sig-paren">(</span><em class="sig-param">*funcs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#Or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.Or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chain multiple <cite>check_convergence</cite> functions together in a logical Or.</p>
+<p>Each parameter must be a function suitable to pass to
+<a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> as <cite>check_convergence</cite>. It
+must receive a <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object and should return None or a string
+message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A function <code class="docutils literal notranslate"><span class="pre">check_convergence(result)</span></code> that returns the
+result of the first “non-passing” function in <cite>*funcs</cite>. A “non-passing”
+result is one that evaluates to True in a Boolean context (should be a
+string message)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.convergence.value_below">
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_below</code><span class="sig-paren">(</span><em class="sig-param">limit</em>, <em class="sig-param">spec=('info_vals'</em>, <em class="sig-param">T[-1])</em>, <em class="sig-param">name=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_below" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for routine that checks if a value is below <cite>limit</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A float value (or str-representation of a float)
+against which to compare the value extracted from <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a></p></li>
+<li><p><strong>spec</strong> – A specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> attribute from which to
+extract the value to compare against <cite>limit</cite>. Defaults to a
+specification extracting the last value in
+<a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a> (returned by the <cite>info_hook</cite> passed to
+<a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>). This should be some kind of error
+measure, e.g., the value of the functional <span class="math notranslate nohighlight">\(J_T\)</span> that is being
+minimized.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A name identifying the checked value, used for the
+message returned by the <cite>check_convergence</cite> routine. Defaults to
+<code class="docutils literal notranslate"><span class="pre">str(spec)</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v19.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> (see Note)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A function <code class="docutils literal notranslate"><span class="pre">check_convergence(result)</span></code> that extracts the
+value specified by <cite>spec</cite> from the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object, and checks
+it against <cite>limit</cite>. If the value is below the <cite>limit</cite>, it returns an
+appropriate message string. Otherwise, it returns None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>spec</cite> can be a callable that receives <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> and returns
+the value to check against the limit. You should also pass a <cite>name</cite>
+like ‘J_T’, or ‘error’ as a label for the value.
+For more advanced use cases, <cite>spec</cite> can be a
+<a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v19.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a>-specification that extracts the value to check from
+the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object as <code class="docutils literal notranslate"><span class="pre">glom.glom(result,</span> <span class="pre">spec,</span> <span class="pre">**kwargs)</span></code>.</p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">value_below</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">limit</span><span class="o">=</span><span class="s1">&#39;1e-4&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">spec</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># same as the default spec</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;J_T&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># returns None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">9e-5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">&#39;J_T &lt; 1e-4&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.convergence.value_above">
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_above</code><span class="sig-paren">(</span><em class="sig-param">limit</em>, <em class="sig-param">spec=('info_vals'</em>, <em class="sig-param">T[-1])</em>, <em class="sig-param">name=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_above"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_above" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for routine that checks if a value is above <cite>limit</cite></p>
+<p>Like <a class="reference internal" href="#krotov.convergence.value_below" title="krotov.convergence.value_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_below()</span></code></a>, but for checking whether an extracted value is
+<em>above</em>, not below a value. By default, it looks at the last value in
+<a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>, under the assumption that the <cite>info_hook</cite> passed
+to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> returns some figure of merit we expect to be
+maximized, like a fidelity. Note that an <cite>info_hook</cite> is free to return an
+arbitrary value, not necessarily the value of the functional <span class="math notranslate nohighlight">\(J_T\)</span> that the
+optimization is minimizing (specified implicitly via the <cite>chi_constructor</cite>
+argument to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>).</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">value_above</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">limit</span><span class="o">=</span><span class="s1">&#39;0.999&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">spec</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Fidelity&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># returns None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">&#39;Fidelity &gt; 0.999&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.convergence.delta_below">
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">delta_below</code><span class="sig-paren">(</span><em class="sig-param">limit</em>, <em class="sig-param">spec1=('info_vals'</em>, <em class="sig-param">T[-1])</em>, <em class="sig-param">spec0=('info_vals'</em>, <em class="sig-param">T[-2])</em>, <em class="sig-param">absolute_value=True</em>, <em class="sig-param">name=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#delta_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.delta_below" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for a routine that checks if
+<span class="math notranslate nohighlight">\(\Abs{v_1 - v_0} &lt; \varepsilon\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A float value (or str-representation of a float)
+for <span class="math notranslate nohighlight">\(\varepsilon\)</span></p></li>
+<li><p><strong>spec1</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v19.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
+attribute from which to extract <span class="math notranslate nohighlight">\(v_1\)</span>. Defaults to a spec
+extracting the last value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p></li>
+<li><p><strong>spec0</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v19.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
+attribute from which to extract <span class="math notranslate nohighlight">\(v_0\)</span>.  Defaults to a spec
+extracting the last-but-one value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p></li>
+<li><p><strong>absolute_value</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If False, check for <span class="math notranslate nohighlight">\(v_1 - v_0 &lt; \varepsilon\)</span>,
+instead of the absolute value.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A name identifying the delta, used for the
+message returned by the <cite>check_convergence</cite> routine. Defaults to
+<code class="docutils literal notranslate"><span class="pre">&quot;Δ({spec1},{spec0}&quot;</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v19.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use <a class="reference internal" href="#krotov.convergence.delta_below" title="krotov.convergence.delta_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">delta_below()</span></code></a> to implement a check for strict
+monotonic convergence, e.g. when <cite>info_hook</cite> returns the optimization
+error, by flipping <cite>spec0</cite> and <cite>spec1</cite>, setting <cite>limit</cite> to zero, and
+setting <cite>absolute_value</cite> to False. See <a class="reference internal" href="#krotov.convergence.check_monotonic_error" title="krotov.convergence.check_monotonic_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_error()</span></code></a>.</p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">delta_below</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="s1">&#39;1e-4&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ΔJ_T&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">9e-1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">4e-4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">2e-4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">&#39;ΔJ_T &lt; 1e-4&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.convergence.check_monotonic_error">
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">check_monotonic_error</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#check_monotonic_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.check_monotonic_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for monotonic convergence with respect to the error</p>
+<p>Check that the last value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a> is
+smaller than the last-but-one value. If yes, return None. If no, return an
+appropriate error message.</p>
+<p>This assumes that the <cite>info_hook</cite> passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>
+returns the value of the functional <span class="math notranslate nohighlight">\(J_T\)</span> (or another quantity that we
+expect to be minimized), which is then available in
+<a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">9e-1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_error</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_error</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">2e-1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_error</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">&#39;Loss of monotonic convergence; error decrease &lt; 0&#39;</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Use <a class="reference internal" href="#krotov.convergence.check_monotonic_fidelity" title="krotov.convergence.check_monotonic_fidelity"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_fidelity()</span></code></a> for when <cite>info_hook</cite> returns a
+“fidelity”, that is, a measure that should <em>increase</em> in each
+iteration.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.convergence.check_monotonic_fidelity">
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">check_monotonic_fidelity</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#check_monotonic_fidelity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.check_monotonic_fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for monotonic convergence with respect to the fidelity</p>
+<p>This is like <a class="reference internal" href="#krotov.convergence.check_monotonic_error" title="krotov.convergence.check_monotonic_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_error()</span></code></a>, but looking for a monotonic
+<em>increase</em> in the values in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>. Thus, it is assumed
+that the <cite>info_hook</cite> returns a fidelity (to be maximized), not an error
+(like <span class="math notranslate nohighlight">\(J_T\)</span>, to be minimized).</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_fidelity</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_fidelity</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">info_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_monotonic_fidelity</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">&#39;Loss of monotonic convergence; fidelity increase &lt; 0&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.convergence.dump_result">
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">dump_result</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">every=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#dump_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.dump_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a function for dumping the result every so many iterations</p>
+<p>For long-running optimizations, it can be useful to dump the current state
+of the optimization every once in a while, so that the result is not lost
+in the event of a crash or unexpected shutdown. This function returns a
+routine that can be passed as a <cite>check_convergence</cite> routine that does
+nothing except to dump the current <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object to a file (cf.
+<a class="reference internal" href="krotov.result.html#krotov.result.Result.dump" title="krotov.result.Result.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.dump()</span></code></a>). Failure to write the dump file stops the
+optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of file to dump to. This may include a field
+<code class="docutils literal notranslate"><span class="pre">{iter}</span></code> which will be formatted with the most recent iteration
+number, via <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str.format" title="(in Python v3.7)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>. Existing files will be overwritten.</p></li>
+<li><p><strong>every</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – dump the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> every so many iterations.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Choose <cite>every</cite> so that dumping does not happen more than once every few
+minutes, at most. Dumping after every single iteration may slow down
+the optimization due to I/O overhead.</p>
+</div>
+<p class="rubric">Examples</p>
+<ul>
+<li><p>dump every 10 iterations to the same file <cite>oct_result.dump</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">dump_result</span><span class="p">(</span><span class="s1">&#39;oct_result.dump&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>dump every 100 iterations to  files <code class="docutils literal notranslate"><span class="pre">oct_result_000100.dump</span></code>,
+<code class="docutils literal notranslate"><span class="pre">oct_result_000200.dump</span></code>, etc.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_convergence</span> <span class="o">=</span> <span class="n">dump_result</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;oct_result_</span><span class="si">{iter:06d}</span><span class="s1">.dump&#39;</span><span class="p">,</span> <span class="n">every</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="krotov.conversions.html" class="btn btn-neutral float-right" title="krotov.conversions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="krotov.html" class="btn btn-neutral float-left" title="krotov package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 16, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

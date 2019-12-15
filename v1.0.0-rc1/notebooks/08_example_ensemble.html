@@ -1,0 +1,1302 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ensemble Optimization for Robust Pulses &mdash; Krotov 1.0.0-rc1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Optimization with numpy Arrays" href="09_example_numpy.html" />
+    <link rel="prev" title="Optimization towards a Perfect Entangler" href="07_example_PE.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-rc1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../09_examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_example_simple_state_to_state.html">Optimization of a State-to-State Transfer in a Two-Level-System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html">Optimization of a State-to-State Transfer in a Lambda System in the RWA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_example_lambda_system_rwa_non_hermitian.html">Optimization of a Dissipative State-to-State Transfer in a Lambda System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_example_dissipative_qubit_reset.html">Optimization of Dissipative Qubit Reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_example_transmon_xgate.html">Optimization of an X-Gate for a Transmon Qubit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_example_3states.html">Optimization of a Dissipative Quantum Gate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_example_PE.html">Optimization towards a Perfect Entangler</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Ensemble Optimization for Robust Pulses</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Control-objectives-for-population-transfer-in-the-Lambda-system">Control objectives for population transfer in the Lambda system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Robustness-to-amplitude-fluctuations">Robustness to amplitude fluctuations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Setting-the-ensemble-objectives">Setting the ensemble objectives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optimize">Optimize</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Robustness-analysis">Robustness analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="09_example_numpy.html">Optimization with numpy Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../09_examples.html">Examples</a> &raquo;</li>
+        
+      <li>Ensemble Optimization for Robust Pulses</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.0.0-rc1/docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.0.0-rc1?filepath=docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<div class="section" id="Ensemble-Optimization-for-Robust-Pulses">
+<h1>Ensemble Optimization for Robust Pulses<a class="headerlink" href="#Ensemble-Optimization-for-Robust-Pulses" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
+<span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">qutip</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">krotov</span>
+<span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">Qobj</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="o">%</span><span class="k">watermark</span> -v --iversions
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+scipy            1.3.1
+matplotlib.pylab 1.17.2
+qutip            4.4.1
+numpy            1.17.2
+krotov           1.0.0-rc1
+matplotlib       3.1.2
+CPython 3.7.3
+IPython 7.10.2
+</pre></div></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2}\mid{#2}\vphantom{#1}\right\rangle} \newcommand{ketbra}[2]{\vert#1\rangle\!\langle#2\vert} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}} \newcommand{toP}[0]{\omega_{12}} \newcommand{toS}[0]{\omega_{23}}\)</span></p>
+<p>This example revisits the <a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html"><span class="doc">Optimization of a State-to-State Transfer in a Lambda System in the RWA</span></a>, attempting to make the control pulses robustness with respect to variations in the pulse amplitude, through “ensemble optimization”.</p>
+<p><strong>Note</strong>: This notebook uses some parallelization features (<code class="docutils literal notranslate"><span class="pre">qutip.parallel_map</span></code>/<code class="docutils literal notranslate"><span class="pre">multiprocessing.Pool</span></code>). Unfortunately, on Windows, <code class="docutils literal notranslate"><span class="pre">multiprocessing.Pool</span></code> does not work correctly for functions defined in a Jupyter notebook (due to the <code class="docutils literal notranslate"><span class="pre">`spawn</span></code> method &lt;<a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods">https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods</a>&gt;`__ being used on Windows, instead of Unix-<code class="docutils literal notranslate"><span class="pre">fork</span></code>, see also <a class="reference external" href="https://stackoverflow.com/questions/45719956">https://stackoverflow.com/questions/45719956</a>). We therefore replace <code class="docutils literal notranslate"><span class="pre">parallel_map</span></code> with
+<code class="docutils literal notranslate"><span class="pre">serial_map</span></code> when running on Windows.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">serial_map</span> <span class="k">as</span> <span class="n">parallel_map</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">parallel_map</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Control-objectives-for-population-transfer-in-the-Lambda-system">
+<h2>Control objectives for population transfer in the Lambda system<a class="headerlink" href="#Control-objectives-for-population-transfer-in-the-Lambda-system" title="Permalink to this headline">¶</a></h2>
+<p>As in the original example, we define the Hamiltonian for a Lambda system in the rotating wave approximation, like this:</p>
+<p><img alt="Lambda system considered in this notebook" src="../_images/energylevels.png" /></p>
+<p>We set up the control fields and the Hamiltonian exactly as before:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">Omega_P1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Guess for the real part of the pump pulse&quot;&quot;&quot;</span>
+    <span class="n">Ω0</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="k">return</span> <span class="n">Ω0</span> <span class="o">*</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">Omega_P2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Guess for the imaginary part of the pump pulse&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+
+
+<span class="k">def</span> <span class="nf">Omega_S1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Guess for the real part of the Stokes pulse&quot;&quot;&quot;</span>
+    <span class="n">Ω0</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="k">return</span> <span class="n">Ω0</span> <span class="o">*</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">Omega_S2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Guess for the imaginary part of the Stokes pulse&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">(</span><span class="n">E1</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">E2</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">E3</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">omega_P</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">omega_S</span><span class="o">=</span><span class="mf">4.5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Lambda-system Hamiltonian in the RWA&quot;&quot;&quot;</span>
+
+    <span class="c1"># detunings</span>
+    <span class="n">ΔP</span> <span class="o">=</span> <span class="n">E1</span> <span class="o">+</span> <span class="n">omega_P</span> <span class="o">-</span> <span class="n">E2</span>
+    <span class="n">ΔS</span> <span class="o">=</span> <span class="n">E3</span> <span class="o">+</span> <span class="n">omega_S</span> <span class="o">-</span> <span class="n">E2</span>
+
+    <span class="n">H0</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">([[</span><span class="n">ΔP</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ΔS</span><span class="p">]])</span>
+
+    <span class="n">HP_re</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">Qobj</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+    <span class="n">HP_im</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">Qobj</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">j</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="n">j</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+
+    <span class="n">HS_re</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">Qobj</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+    <span class="n">HS_im</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">Qobj</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="n">j</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">H0</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">HP_re</span><span class="p">,</span> <span class="n">Omega_P1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">HP_im</span><span class="p">,</span> <span class="n">Omega_P2</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">HS_re</span><span class="p">,</span> <span class="n">Omega_S1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">HS_im</span><span class="p">,</span> <span class="n">Omega_S2</span><span class="p">],</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">H</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The control objective is the realization of a phase sensitive <span class="math notranslate nohighlight">\(\ket{1} \rightarrow \ket{3}\)</span> transition in the lab frame. Thus, in the rotating frame, we must take into account an additional phase factor.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ket1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
+<span class="n">ket2</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
+<span class="n">ket3</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">rwa_target_state</span><span class="p">(</span><span class="n">ket3</span><span class="p">,</span> <span class="n">E2</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">omega_S</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">E2</span> <span class="o">-</span> <span class="n">omega_S</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">ket3</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">psi_target</span> <span class="o">=</span> <span class="n">rwa_target_state</span><span class="p">(</span><span class="n">ket3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">objective</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">ket1</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">psi_target</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">)</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span><span class="n">objective</span><span class="p">]</span>
+<span class="n">objectives</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [H₀[3,3], [H₁[3,3], u₁(t)], [H₂[3,3], u₂(t)], [H₃[3,3], u₃(t)], [H₄[3,3], u₄(t)]]]]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Robustness-to-amplitude-fluctuations">
+<h2>Robustness to amplitude fluctuations<a class="headerlink" href="#Robustness-to-amplitude-fluctuations" title="Permalink to this headline">¶</a></h2>
+<p>A potential source of error is fluctuations in the pulse amplitude between different runs of the experiment. To account for this, the <code class="docutils literal notranslate"><span class="pre">hamiltonian</span></code> function above include a parameter <code class="docutils literal notranslate"><span class="pre">mu</span></code> that scales the pulse amplitudes by the given factor.</p>
+<p>We can analyze the result of the <a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html"><span class="doc">Optimization of a State-to-State Transfer in a Lambda System in the RWA</span></a> with respect to such fluctuations. We load the earlier optimization result from disk, and verify that the optimized controls produce the <span class="math notranslate nohighlight">\(\ket{1} \rightarrow \ket{3}\)</span> transition as desired.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_result_unperturbed</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s1">&#39;lambda_rwa_opt_result.dump&#39;</span><span class="p">,</span> <span class="n">objectives</span><span class="o">=</span><span class="p">[</span><span class="n">objective</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">proj1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket1</span><span class="p">)</span>
+<span class="n">proj2</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket2</span><span class="p">)</span>
+<span class="n">proj3</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_unperturbed_dynamics</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">opt_result_unperturbed</span>
+    <span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">mesolve</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj1</span><span class="p">,</span> <span class="n">proj2</span><span class="p">,</span> <span class="n">proj3</span><span class="p">])</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_population</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;3&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;population&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_population</span><span class="p">(</span><span class="n">opt_unperturbed_dynamics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_example_ensemble_20_0.png" src="../_images/notebooks_08_example_ensemble_20_0.png" />
+</div>
+</div>
+<p>Now we can analyze how robust this control is for variations of ±20% of the pulse amplitude. Numerically, this is achieved by scaling the control Hamiltonians with a pre-factor <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">scale_control</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scale all control Hamiltonians by `mu`.&quot;&quot;&quot;</span>
+    <span class="n">H_scaled</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">H_scaled</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">mu</span> <span class="o">*</span> <span class="n">spec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">H_scaled</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">H_scaled</span>
+</pre></div>
+</div>
+</div>
+<p>For the analysis, we take the following sample of <span class="math notranslate nohighlight">\(\mu\)</span> values:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mu_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We measure the success of the transfer via the “population error”, i.e., the deviation from 1.0 of the population in state <span class="math notranslate nohighlight">\(\ket{3}\)</span> at final time <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">pop_error</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">scale_control</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">),</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj3</span><span class="p">])</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">_f</span><span class="p">(</span><span class="n">mu</span><span class="p">):</span>
+    <span class="c1"># parallel_map needs a global function</span>
+    <span class="k">return</span> <span class="n">pop_error</span><span class="p">(</span><span class="n">opt_result_unperturbed</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+
+<span class="n">pop_errors_norobust</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="n">mu_vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_robustness</span><span class="p">(</span><span class="n">mu_vals</span><span class="p">,</span> <span class="n">pop_errors</span><span class="p">,</span> <span class="n">pop_errors0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu_vals</span><span class="p">,</span> <span class="n">pop_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pop_errors0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># reset colors</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pop_errors0</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">pop_errors_prev</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pop_errors0</span><span class="p">):</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                    <span class="n">mu_vals</span><span class="p">,</span> <span class="n">pop_errors_prev</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">))</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu_vals</span><span class="p">,</span> <span class="n">pop_errors0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;relative coupling strength&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$1 - \vert \langle \Psi \vert 3 \rangle \vert^2$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pop_errors0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_robustness</span><span class="p">(</span><span class="n">mu_vals</span><span class="p">,</span> <span class="n">pop_errors_norobust</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_example_ensemble_29_0.png" src="../_images/notebooks_08_example_ensemble_29_0.png" />
+</div>
+</div>
+<p>The plot shows that as the pulse amplitude deviates from the optimal value, the error rises quickly: our previous optimization result is not robust.</p>
+<p>The highlighted region of ±10% is our “region of interest” within which we would like the control to be robust by applying optimal control.</p>
+</div>
+<div class="section" id="Setting-the-ensemble-objectives">
+<h2>Setting the ensemble objectives<a class="headerlink" href="#Setting-the-ensemble-objectives" title="Permalink to this headline">¶</a></h2>
+<p>They central idea of optimizing for robustness is to take multiple copies of the Hamiltonian, sampling over the space of variations to which would like to be robust, and optimize over the average of this ensemble.</p>
+<p>Here, we sample 5 values of <span class="math notranslate nohighlight">\(\mu\)</span> (including the unperturbed <span class="math notranslate nohighlight">\(\mu=1\)</span>) in the region of interest, <span class="math notranslate nohighlight">\(\mu \in [0.9, 1.1]\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ensemble_mu</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>The corresponding Hamiltonians are</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ham_ensemble</span> <span class="o">=</span> <span class="p">[</span><span class="n">scale_control</span><span class="p">(</span><span class="n">objective</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="n">ensemble_mu</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">krotov.objectives.ensemble_objectives</span></code> extends the original objective of a single unperturbed state-to-state transition with one additional objective for each ensemble Hamiltonian for <span class="math notranslate nohighlight">\(\mu \neq 1\)</span>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ensemble_objectives</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">objectives</span><span class="o">.</span><span class="n">ensemble_objectives</span><span class="p">(</span>
+    <span class="n">objectives</span><span class="p">,</span> <span class="n">ham_ensemble</span><span class="p">,</span> <span class="n">keep_original_objectives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ensemble_objectives</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [H₀[3,3], [H₅[3,3], u₁(t)], [H₆[3,3], u₂(t)], [H₇[3,3], u₃(t)], [H₈[3,3], u₄(t)]]],
+ Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [H₀[3,3], [H₉[3,3], u₁(t)], [H₁₀[3,3], u₂(t)], [H₁₁[3,3], u₃(t)], [H₁₂[3,3], u₄(t)]]],
+ Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [H₀[3,3], [H₁₃[3,3], u₁(t)], [H₁₄[3,3], u₂(t)], [H₁₅[3,3], u₃(t)], [H₁₆[3,3], u₄(t)]]],
+ Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [H₀[3,3], [H₁₇[3,3], u₁(t)], [H₁₈[3,3], u₂(t)], [H₁₉[3,3], u₃(t)], [H₂₀[3,3], u₄(t)]]],
+ Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [H₀[3,3], [H₂₁[3,3], u₁(t)], [H₂₂[3,3], u₂(t)], [H₂₃[3,3], u₃(t)], [H₂₄[3,3], u₄(t)]]]]
+</pre></div></div>
+</div>
+<p>It is important that all five objectives reference the same four control pulses, as is the case here.</p>
+</div>
+<div class="section" id="Optimize">
+<h2>Optimize<a class="headerlink" href="#Optimize" title="Permalink to this headline">¶</a></h2>
+<p>We use the same update shape <span class="math notranslate nohighlight">\(S(t)\)</span> and <span class="math notranslate nohighlight">\(\lambda_a\)</span> value as in the original optimization:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scales the Krotov methods update of the pulse value at the time t&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">flattop</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;sinsq&#39;</span><span class="p">)</span>
+
+
+<span class="n">λ</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">pulse_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lambda_a</span><span class="o">=</span><span class="n">λ</span><span class="p">,</span> <span class="n">update_shape</span><span class="o">=</span><span class="n">S</span><span class="p">),</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lambda_a</span><span class="o">=</span><span class="n">λ</span><span class="p">,</span> <span class="n">update_shape</span><span class="o">=</span><span class="n">S</span><span class="p">),</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lambda_a</span><span class="o">=</span><span class="n">λ</span><span class="p">,</span> <span class="n">update_shape</span><span class="o">=</span><span class="n">S</span><span class="p">),</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lambda_a</span><span class="o">=</span><span class="n">λ</span><span class="p">,</span> <span class="n">update_shape</span><span class="o">=</span><span class="n">S</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>It will be interesting to see how the optimization progresses for each individual element of the ensemble. Thus, we write an <code class="docutils literal notranslate"><span class="pre">info_hook</span></code> routine that prints out a tabular overview of <span class="math notranslate nohighlight">\(1 - \Re\Braket{\Psi(T)}{3}_{\Op{H}_i}\)</span> for all <span class="math notranslate nohighlight">\(\Op{H}_i\)</span> in the ensemble, as well as their average (the total functional <span class="math notranslate nohighlight">\(J_T\)</span> that is being minimized)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">print_J_T_per_target</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">iteration</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ensemble_mu</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iteration</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;iteration &quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%11s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="s2">&quot;J_T(avg)&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([(</span><span class="s2">&quot;J_T(μ=</span><span class="si">%.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">μ</span><span class="p">)</span> <span class="k">for</span> <span class="n">μ</span> <span class="ow">in</span> <span class="n">ensemble_mu</span><span class="p">])</span>
+        <span class="p">)</span>
+    <span class="n">J_T_vals</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;tau_vals&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+    <span class="n">J_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">J_T_vals</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="p">(</span><span class="s2">&quot;</span><span class="si">%9d</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">iteration</span><span class="p">)</span>
+        <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%11.2e</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">J_T</span><span class="p">)</span>
+        <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([(</span><span class="s2">&quot;</span><span class="si">%11.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">J_T_vals</span><span class="p">])</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We’ll also want to look at the output of <code class="docutils literal notranslate"><span class="pre">krotov.info_hooks.print_table</span></code>, but in order to keep the output orderly, we will write that information to a file <code class="docutils literal notranslate"><span class="pre">ensemble_opt.log</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">log_fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;ensemble_opt.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To speed up the optimization slightly, we parallelize across the five objectives with appropriate <code class="docutils literal notranslate"><span class="pre">parallel_map</span></code> functions. The optimization starts for the same guess pulses as the original <a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html"><span class="doc">Optimization of a State-to-State Transfer in a Lambda System in the RWA</span></a>. Generally, for a robustness ensemble optimization, this will yield better results than trying to take the optimized pulses for the unperturbed system as a guess.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_result</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize_pulses</span><span class="p">(</span>
+    <span class="n">ensemble_objectives</span><span class="p">,</span>
+    <span class="n">pulse_options</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">expm</span><span class="p">,</span>
+    <span class="n">chi_constructor</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">chis_re</span><span class="p">,</span>
+    <span class="n">info_hook</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+        <span class="n">print_J_T_per_target</span><span class="p">,</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">print_table</span><span class="p">(</span>
+            <span class="n">J_T</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">J_T_re</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">log_fh</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">check_convergence</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">value_below</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;J_T&#39;</span><span class="p">),</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">check_monotonic_error</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">parallel_map</span><span class="o">=</span><span class="p">(</span>
+        <span class="n">qutip</span><span class="o">.</span><span class="n">parallel_map</span><span class="p">,</span>
+        <span class="n">qutip</span><span class="o">.</span><span class="n">parallel_map</span><span class="p">,</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">parallelization</span><span class="o">.</span><span class="n">parallel_map_fw_prop_step</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">iter_stop</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+iteration    J_T(avg) J_T(μ=0.90) J_T(μ=0.95) J_T(μ=1.00) J_T(μ=1.05) J_T(μ=1.10)
+        0    1.01e+00    1.01e+00    1.01e+00    1.01e+00    1.01e+00    1.01e+00
+        1    6.79e-01    6.94e-01    6.83e-01    6.75e-01    6.71e-01    6.71e-01
+        2    4.14e-01    4.41e-01    4.21e-01    4.07e-01    4.00e-01    4.00e-01
+        3    2.36e-01    2.68e-01    2.43e-01    2.27e-01    2.20e-01    2.23e-01
+        4    1.32e-01    1.63e-01    1.37e-01    1.21e-01    1.16e-01    1.22e-01
+        5    7.46e-02    1.04e-01    7.78e-02    6.29e-02    5.98e-02    6.86e-02
+        6    4.47e-02    7.13e-02    4.58e-02    3.24e-02    3.13e-02    4.26e-02
+        7    2.92e-02    5.32e-02    2.88e-02    1.66e-02    1.72e-02    3.04e-02
+        8    2.14e-02    4.32e-02    1.96e-02    8.59e-03    1.04e-02    2.50e-02
+        9    1.73e-02    3.74e-02    1.46e-02    4.48e-03    7.25e-03    2.28e-02
+       10    1.52e-02    3.41e-02    1.19e-02    2.38e-03    5.83e-03    2.21e-02
+       11    1.42e-02    3.20e-02    1.03e-02    1.29e-03    5.23e-03    2.20e-02
+       12    1.36e-02    3.07e-02    9.37e-03    7.20e-04    5.00e-03    2.20e-02
+</pre></div></div>
+</div>
+<p>After twelve iterations (which were sufficient to produce an error <span class="math notranslate nohighlight">\(&lt;10^{-3}\)</span> in the original optimization), we find the average error over the ensemble to be still above <span class="math notranslate nohighlight">\(&gt;10^{-2}\)</span>. However, the error for <span class="math notranslate nohighlight">\(\mu = 1\)</span> is only <em>slightly</em> larger than in the original optimization; the lack of success is entirely due to the large error for the other elements of the ensemble for <span class="math notranslate nohighlight">\(\mu \neq 1\)</span>. Achieving robustness is hard!</p>
+<p>We continue the optimization until the <em>average</em> error falls below <span class="math notranslate nohighlight">\(10^{-3}\)</span>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dumpfile</span> <span class="o">=</span> <span class="s2">&quot;./ensemble_opt_result.dump&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">):</span>
+    <span class="n">opt_result</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">Result</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">,</span> <span class="n">objectives</span><span class="p">)</span>
+    <span class="n">print_J_T_per_target</span><span class="p">(</span><span class="n">iteration</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tau_vals</span><span class="o">=</span><span class="n">opt_result</span><span class="o">.</span><span class="n">tau_vals</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;      ...&quot;</span><span class="p">)</span>
+    <span class="n">n_iters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">tau_vals</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iters</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n_iters</span><span class="p">):</span>
+        <span class="n">print_J_T_per_target</span><span class="p">(</span><span class="n">iteration</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">tau_vals</span><span class="o">=</span><span class="n">opt_result</span><span class="o">.</span><span class="n">tau_vals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">opt_result</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize_pulses</span><span class="p">(</span>
+        <span class="n">ensemble_objectives</span><span class="p">,</span>
+        <span class="n">pulse_options</span><span class="p">,</span>
+        <span class="n">tlist</span><span class="p">,</span>
+        <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">expm</span><span class="p">,</span>
+        <span class="n">chi_constructor</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">chis_re</span><span class="p">,</span>
+        <span class="n">info_hook</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+            <span class="n">print_J_T_per_target</span><span class="p">,</span>
+            <span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">print_table</span><span class="p">(</span>
+                <span class="n">J_T</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">J_T_re</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">log_fh</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">check_convergence</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span>
+            <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">value_below</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;J_T&#39;</span><span class="p">),</span>
+            <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">check_monotonic_error</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">parallel_map</span><span class="o">=</span><span class="p">(</span>
+            <span class="n">qutip</span><span class="o">.</span><span class="n">parallel_map</span><span class="p">,</span>
+            <span class="n">qutip</span><span class="o">.</span><span class="n">parallel_map</span><span class="p">,</span>
+            <span class="n">krotov</span><span class="o">.</span><span class="n">parallelization</span><span class="o">.</span><span class="n">parallel_map_fw_prop_step</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">iter_stop</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">continue_from</span><span class="o">=</span><span class="n">opt_result</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">opt_result</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+iteration    J_T(avg) J_T(μ=0.90) J_T(μ=0.95) J_T(μ=1.00) J_T(μ=1.05) J_T(μ=1.10)
+        0    1.36e-02    3.07e-02    9.37e-03    7.20e-04    5.00e-03    2.20e-02
+      ...
+      670    1.05e-03    2.80e-03    4.83e-04    1.10e-04    5.22e-04    1.34e-03
+      671    1.05e-03    2.79e-03    4.79e-04    1.10e-04    5.20e-04    1.33e-03
+      672    1.04e-03    2.77e-03    4.76e-04    1.10e-04    5.17e-04    1.33e-03
+      673    1.03e-03    2.76e-03    4.73e-04    1.11e-04    5.14e-04    1.32e-03
+      674    1.03e-03    2.74e-03    4.70e-04    1.11e-04    5.11e-04    1.31e-03
+      675    1.02e-03    2.72e-03    4.66e-04    1.11e-04    5.08e-04    1.30e-03
+      676    1.02e-03    2.71e-03    4.63e-04    1.12e-04    5.06e-04    1.29e-03
+      677    1.01e-03    2.69e-03    4.60e-04    1.12e-04    5.03e-04    1.28e-03
+      678    1.00e-03    2.68e-03    4.57e-04    1.12e-04    5.00e-04    1.27e-03
+      679    9.99e-04    2.67e-03    4.54e-04    1.13e-04    4.98e-04    1.27e-03
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_result</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Krotov Optimization Result
+--------------------------
+- Started at 2019-12-14 07:18:32
+- Number of objectives: 1
+- Number of iterations: 679
+- Reason for termination: Reached convergence: J_T &lt; 0.001
+- Ended at 2019-12-14 09:49:45 (2:31:13)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">log_fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Even now, the ideal Hamiltonian (<span class="math notranslate nohighlight">\(\mu = 1\)</span>) has the lowest error in the ensemble by a significant margin. However, notice that the error in the <span class="math notranslate nohighlight">\(J_T\)</span> for <span class="math notranslate nohighlight">\(\mu = 1\)</span> is actually rising, while the errors for values of <span class="math notranslate nohighlight">\(\mu \neq 1\)</span> are falling by a much larger value! This is a good thing: we sacrifice a little bit of fidelity in the unperturbed dynamics to an increase in robustness.</p>
+<p>The optimized “robust” pulse looks as follows:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">plot_pulse_amplitude_and_phase</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">,</span> <span class="n">pulse_imaginary</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+    <span class="n">amplitudes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">,</span> <span class="n">pulse_imaginary</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">phases</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">,</span> <span class="n">pulse_imaginary</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">amplitudes</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pulse amplitude&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">phases</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pulse phase (π)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pump pulse amplitude and phase:&quot;</span><span class="p">)</span>
+<span class="n">plot_pulse_amplitude_and_phase</span><span class="p">(</span>
+    <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tlist</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stokes pulse amplitude and phase:&quot;</span><span class="p">)</span>
+<span class="n">plot_pulse_amplitude_and_phase</span><span class="p">(</span>
+    <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">tlist</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+pump pulse amplitude and phase:
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_example_ensemble_53_1.png" src="../_images/notebooks_08_example_ensemble_53_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Stokes pulse amplitude and phase:
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_example_ensemble_53_3.png" src="../_images/notebooks_08_example_ensemble_53_3.png" />
+</div>
+</div>
+<p>and produces the dynamics (in the unperturbed system) shown below:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_robust_dynamics</span> <span class="o">=</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span>
+    <span class="n">tlist</span><span class="p">,</span> <span class="n">e_ops</span><span class="o">=</span><span class="p">[</span><span class="n">proj1</span><span class="p">,</span> <span class="n">proj2</span><span class="p">,</span> <span class="n">proj3</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_population</span><span class="p">(</span><span class="n">opt_robust_dynamics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_example_ensemble_56_0.png" src="../_images/notebooks_08_example_ensemble_56_0.png" />
+</div>
+</div>
+<div class="section" id="Robustness-analysis">
+<h3>Robustness analysis<a class="headerlink" href="#Robustness-analysis" title="Permalink to this headline">¶</a></h3>
+<p>When comparing the robustness of the “robust” optimized pulse to that obtained from the original optimization for the unperturbed Hamiltonian, we should make sure that we have converged to a comparable error: We would like to avoid the suspicion that the ensemble error is below our threshold only because the error for <span class="math notranslate nohighlight">\(\mu = 1\)</span> is so much lower. Therefore, we continue the original unperturbed optimization for a few more iterations, until we reach the same error
+<span class="math notranslate nohighlight">\(\approx 1.13 \times 10^{-4}\)</span> that we found as the result of the ensemble optimization, looking at <span class="math notranslate nohighlight">\(\mu=1\)</span> only:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;J_T(μ=1) = </span><span class="si">%.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">tau_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+J_T(μ=1) = 2.67e-03
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt_result_unperturbed_cont</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize_pulses</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">objective</span><span class="p">],</span>
+    <span class="n">pulse_options</span><span class="p">,</span>
+    <span class="n">tlist</span><span class="p">,</span>
+    <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">expm</span><span class="p">,</span>
+    <span class="n">chi_constructor</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">chis_re</span><span class="p">,</span>
+    <span class="n">info_hook</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">info_hooks</span><span class="o">.</span><span class="n">print_table</span><span class="p">(</span>
+        <span class="n">J_T</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">functionals</span><span class="o">.</span><span class="n">J_T_re</span><span class="p">,</span>
+        <span class="n">show_g_a_int_per_pulse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">check_convergence</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">value_below</span><span class="p">(</span><span class="mf">1.13e-4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;J_T&#39;</span><span class="p">),</span>
+        <span class="n">krotov</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">check_monotonic_error</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">iter_stop</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">continue_from</span><span class="o">=</span><span class="n">opt_result_unperturbed</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+iter.      J_T  ∫gₐ(ϵ₁)dt  ∫gₐ(ϵ₂)dt  ∫gₐ(ϵ₃)dt  ∫gₐ(ϵ₄)dt   ∑∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs
+0     5.91e-04   0.00e+00   0.00e+00   0.00e+00   0.00e+00    0.00e+00   5.91e-04        n/a        n/a     1
+13    3.25e-04   1.26e-04   1.98e-05   1.02e-04   1.84e-05    2.66e-04   5.90e-04  -2.66e-04  -3.54e-07     2
+14    1.83e-04   6.32e-05   1.41e-05   5.12e-05   1.29e-05    1.41e-04   3.24e-04  -1.42e-04  -2.11e-07     2
+15    1.06e-04   3.19e-05   1.00e-05   2.59e-05   9.11e-06    7.69e-05   1.83e-04  -7.70e-05  -1.27e-07     2
+</pre></div></div>
+</div>
+<p>Now, we can compare the robustness of the optimized pulses from the original unperturbed optimization (label “-1”), the continued unperturbed optimization (label “0”), and the ensemble optimization (label “1”):</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">_f</span><span class="p">(</span><span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pop_error</span><span class="p">(</span>
+        <span class="n">opt_result_unperturbed_cont</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span>
+    <span class="p">)</span>
+
+
+<span class="n">pop_errors_norobust_cont</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="n">mu_vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">_f</span><span class="p">(</span><span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pop_error</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+
+<span class="n">pop_errors_robust</span> <span class="o">=</span> <span class="n">parallel_map</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="n">mu_vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plot_robustness</span><span class="p">(</span>
+    <span class="n">mu_vals</span><span class="p">,</span>
+    <span class="n">pop_errors_robust</span><span class="p">,</span>
+    <span class="n">pop_errors0</span><span class="o">=</span><span class="p">[</span><span class="n">pop_errors_norobust_cont</span><span class="p">,</span> <span class="n">pop_errors_norobust</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_example_ensemble_64_0.png" src="../_images/notebooks_08_example_ensemble_64_0.png" />
+</div>
+</div>
+<p>We see that without the ensemble optimization, we only lower the error for exactly <span class="math notranslate nohighlight">\(\mu = 1\)</span>: the more we converge, the less robust the result. In contrast, the ensemble optimization results in considerably lower errors (order of magnitude!) throughout the highlighted “region of interest” and beyond.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="09_example_numpy.html" class="btn btn-neutral float-right" title="Optimization with numpy Arrays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="07_example_PE.html" class="btn btn-neutral float-left" title="Optimization towards a Perfect Entangler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 16, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

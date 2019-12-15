@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Contributing &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  <title>Contributing &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-dev
+                1.0.0-rc1+dev
               </div>
             
           
@@ -538,12 +538,39 @@ Do not use <code class="docutils literal notranslate"><span class="pre">\langle<
 <p>The documentation is automatically deployed to
 <a class="reference external" href="https://qucontrol.github.io/krotov/">https://qucontrol.github.io/krotov/</a> (the <a class="reference external" href="https://pages.github.com">gh-pages</a> associated with the
 <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package’s Github repository) every time commits are pushed to
-Github. This is done via the Travis continuous integration service and <a class="reference external" href="https://drdoctr.github.io">Doctr</a>.
+Github. This is done via the <a class="reference external" href="https://travis-ci.org">Travis</a> Continuous Integration service and <a class="reference external" href="https://drdoctr.github.io">Doctr</a>.
 The documentation for all versions of <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> is visible on the
-<cite>gh-pages</cite> git branch. Any changes that are committed and pushed from this
+<code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> git branch. Any changes that are committed and pushed from this
 branch will be deployed to the online documentation. Do not routinely perform
-manual edits on the <cite>gh-pages</cite> branch! Let <a class="reference external" href="https://drdoctr.github.io">Doctr</a> do its job of automatically
+manual edits on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch! Let <a class="reference external" href="https://drdoctr.github.io">Doctr</a> do its job of automatically
 deploying documentation instead.</p>
+<p>The deployment of the documentation is set up roughly as follows:</p>
+<ul class="simple">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">.travis.yml</span></code>, there is “Docs” job set up that executes the
+<code class="docutils literal notranslate"><span class="pre">.travis/docs.sh</span></code> script.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.travis/docs.sh</span></code> script builds the HTML documentation, as well as
+downloadable versions of the documentation (tagged released only!). It then
+calls <code class="docutils literal notranslate"><span class="pre">doctr</span> <span class="pre">deploy</span></code> to deploy to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doctr</span> <span class="pre">deploy</span></code> copies the built documentation to the appropriate subfolder
+on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>. It then gets the script <code class="docutils literal notranslate"><span class="pre">.travis/docs_post_process.py</span></code>
+script from the release branch and executes it.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.travis/docs_post_process.py</span></code> script (using the
+<code class="docutils literal notranslate"><span class="pre">.travis/versions.py</span></code> module) analyzes <em>all</em> folders on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> and
+generates a <code class="docutils literal notranslate"><span class="pre">versions.json</span></code> file on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>. This file contains all
+the information required to render the navigation menu in the bottom left
+corner of the online documentation. That menu is rendered by the javascript
+in <code class="docutils literal notranslate"><span class="pre">./docs/_static/version-menu.js</span></code> (cf. <code class="docutils literal notranslate"><span class="pre">html_js_files</span> <span class="pre">=</span>
+<span class="pre">[&quot;version-menu.js&quot;]</span></code> in <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code>). The
+<code class="docutils literal notranslate"><span class="pre">.travis/docs_post_process.py</span></code> script also generates an <code class="docutils literal notranslate"><span class="pre">index.html</span></code>
+pointing to the most recent stable release.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doctr</span> <span class="pre">deploy</span></code> commits the rendered documentation as well as the
+<code class="docutils literal notranslate"><span class="pre">versions.json</span></code> and <code class="docutils literal notranslate"><span class="pre">index.html</span></code> files and pushes the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>
+branch. It does this using the deploy key in <code class="docutils literal notranslate"><span class="pre">./docs/doctr_deploy_key.enc</span></code>.
+That file contains the private key matching the public <code class="docutils literal notranslate"><span class="pre">doctr</span></code> key in
+<a class="reference external" href="https://github.com/qucontrol/krotov/settings/keys">https://github.com/qucontrol/krotov/settings/keys</a>. The private key itself is
+encrypted with <a class="reference external" href="https://docs.travis-ci.com/user/encryption-keys/">Travis’ public key</a>, so that only Travis can decrypt it with
+their private key, and use it to authenticate while pushing to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p></li>
+</ul>
 </div>
 <div class="section" id="contribute-examples">
 <span id="contributeexamples"></span><h2>Contribute Examples<a class="headerlink" href="#contribute-examples" title="Permalink to this headline">¶</a></h2>
@@ -847,7 +874,7 @@ messages with time stamps:</p>
     <p>
         &copy; Copyright 2019, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Dec 15, 2019.
+        Last updated on Dec 16, 2019.
       </span>
 
     </p>

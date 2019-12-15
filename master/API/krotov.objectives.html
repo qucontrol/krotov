@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>krotov.objectives module &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  <title>krotov.objectives module &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-dev
+                1.0.0-rc1+dev
               </div>
             
           
@@ -298,7 +298,7 @@ any non-Linux system.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H0</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">qutip</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H0</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">qutip</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">sigmaz</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H1</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">sigmax</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eps</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">ampl0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="n">H0</span><span class="p">,</span> <span class="p">[</span><span class="n">H1</span><span class="p">,</span> <span class="n">eps</span><span class="p">]]</span>
@@ -512,7 +512,7 @@ or target states (density matrices)</p></li>
 <li><p>‘u’ for (callable) control functions.</p></li>
 </ul>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmap</span><span class="p">,</span> <span class="n">identity</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmap</span><span class="p">,</span> <span class="n">identity</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -648,7 +648,7 @@ larger Hilbert space.</p>
 </div>
 </li>
 <li><p>An arbitrary two-qubit perfect entangler:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="p">[</span>
 <span class="gp">... </span>    <span class="n">tensor</span><span class="p">(</span><span class="n">sigmaz</span><span class="p">(),</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span>
 <span class="gp">... </span>    <span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sigmaz</span><span class="p">()),</span>
@@ -666,7 +666,7 @@ larger Hilbert space.</p>
 </div>
 </li>
 <li><p>A two-qubit gate, up to single-qubit operation (“local invariants”):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objectives</span> <span class="o">=</span> <span class="n">gate_objectives</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objectives</span> <span class="o">=</span> <span class="n">gate_objectives</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">basis</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">gates</span><span class="o">.</span><span class="n">cnot</span><span class="p">(),</span> <span class="n">H</span><span class="p">,</span> <span class="n">local_invariants</span><span class="o">=</span><span class="kc">True</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
@@ -733,7 +733,7 @@ pure-state density matrices:</p>
 </div>
 <p>The first four <cite>initial_states</cite> are the pure states corresponding to
 the Hilbert space basis</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">==</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket</span><span class="p">(</span><span class="s1">&#39;00&#39;</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">==</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket</span><span class="p">(</span><span class="s1">&#39;00&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">==</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket</span><span class="p">(</span><span class="s1">&#39;01&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">==</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">==</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">ket</span><span class="p">(</span><span class="s1">&#39;11&#39;</span><span class="p">))</span>
@@ -848,7 +848,7 @@ time-dependent.</p>
     <p>
         &copy; Copyright 2019, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Dec 15, 2019.
+        Last updated on Dec 16, 2019.
       </span>
 
     </p>

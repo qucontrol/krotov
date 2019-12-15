@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>History &mdash; Krotov 1.0.0-rc1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="06_introduction.html" />
+    <link rel="prev" title="Features" href="04_features.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-rc1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">History</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.0.0 (2019-12-15)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">0.5.0 (2019-12-04)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">0.4.1 (2019-10-11)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">0.4.0 (2019-10-08)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">0.3.0 (2019-03-01)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">0.2.0 (2019-02-14)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">0.1.0 (2018-12-24)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>History</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="history">
+<h1>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1.0.0 (2019-12-15)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Update: Citation info now points to <a class="reference external" href="https://scipost.org/SciPostPhys.7.6.080">SciPost paper</a> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/61">#61</a>)</p></li>
+<li><p>Added: parameters <cite>col_formats</cite> and <cite>col_headers</cite> to customize the output of <code class="docutils literal notranslate"><span class="pre">krotov.info_hooks.print_table</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/65">#65</a>)</p></li>
+<li><p>Added: info-hooks now have access to the additional arguments <cite>propagator</cite>, <cite>chi_constructor</cite>, <cite>mu</cite>, <cite>sigma</cite>, <cite>iter_start</cite>, and <cite>iter_stop</cite> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/66">#66</a>)</p></li>
+<li><p>Added: parameter <cite>keep_original_objectives</cite> to <code class="docutils literal notranslate"><span class="pre">krotov.objectives.ensemble_objectives</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/67">#67</a>)</p></li>
+<li><p>Added: “Related Software” in the documentation</p></li>
+<li><p>Update: Documentation is now hosted on <a class="reference external" href="https://qucontrol.github.io/krotov">gh-pages</a> and deployed by <a class="reference external" href="https://drdoctr.github.io">Doctr</a> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/68">#68</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>0.5.0 (2019-12-04)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Update: Documentation now contains all information from <a class="reference external" href="https://arxiv.org/abs/1902.11284v5">https://arxiv.org/abs/1902.11284v5</a></p></li>
+<li><p>Added: Allow to pass <cite>args</cite> to time-dependent control functions (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/56">#56</a>, thanks to <a class="reference external" href="https://github.com/timohillmann">&#64;timohillmann</a>)</p></li>
+<li><p>Changed: Renamed <code class="docutils literal notranslate"><span class="pre">krotov.structural_conversions</span></code> to <code class="docutils literal notranslate"><span class="pre">krotov.conversions</span></code></p></li>
+<li><p>Bugfix: Crash when <code class="docutils literal notranslate"><span class="pre">krotov.optimize_pulses</span></code> is called with <code class="docutils literal notranslate"><span class="pre">iter_stop=0</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/58">#58</a>)</p></li>
+<li><p>Added: <code class="docutils literal notranslate"><span class="pre">krotov.result.Result</span></code> is now exposed at the top level of the API, as <code class="docutils literal notranslate"><span class="pre">krotov.Result</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/59">#59</a>, thanks to <a class="reference external" href="https://github.com/nathanshammah">&#64;nathanshammah</a>)</p></li>
+<li><p>Added: str-representation of <code class="docutils literal notranslate"><span class="pre">krotov.result.Result</span></code> now includes the total running time (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/60">#60</a>, thanks to <a class="reference external" href="https://github.com/nathanshammah">&#64;nathanshammah</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>0.4.1 (2019-10-11)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Update: Documentation now contains all information from <a class="reference external" href="https://arxiv.org/abs/1902.11284v4">https://arxiv.org/abs/1902.11284v4</a> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/54">#54</a>)</p></li>
+<li><p>Added: a PDF of the documentation is now available at <a class="reference external" href="https://github.com/qucontrol/krotov/tree/master/docs/pdf">https://github.com/qucontrol/krotov/tree/master/docs/pdf</a> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/42">#52</a>, thanks to <a class="reference external" href="https://github.com/TejasAvinashShetty">&#64;TejasAvinashShetty</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>0.4.0 (2019-10-08)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added: Support for Python 3.7</p></li>
+<li><p>Changed: The <code class="docutils literal notranslate"><span class="pre">'shape'</span></code> key in <code class="docutils literal notranslate"><span class="pre">pulse_options</span></code> was renamed to <code class="docutils literal notranslate"><span class="pre">'update_shape'</span></code>, to further avoid confusion between pulse shapes and update shapes.</p></li>
+<li><p>Changed: The <code class="docutils literal notranslate"><span class="pre">.adjoint</span></code> property of <code class="docutils literal notranslate"><span class="pre">Objective</span></code> is now a method</p></li>
+<li><p>Added: Ability to not use QuTiP <code class="docutils literal notranslate"><span class="pre">Qobj</span></code> objects, but arbitrary low-level objects instead.</p></li>
+<li><p>Improved: Printing an <code class="docutils literal notranslate"><span class="pre">Objective</span></code> now uses internal counters and a symbolic notation to identify objects shared between different objectives. (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/43">#43</a>)</p></li>
+<li><p>Improved: <code class="docutils literal notranslate"><span class="pre">gate_objectives</span></code> now takes into account if target states are (reshuffled) basis states and does not create unnecessary new copies.</p></li>
+<li><p>Bugfix: Two <code class="docutils literal notranslate"><span class="pre">Objective</span></code> instances that contain numpy arrays as controls can now be compared with <code class="docutils literal notranslate"><span class="pre">==</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/44">#44</a>)</p></li>
+<li><p>Bugfix: Custom attributes (such as <code class="docutils literal notranslate"><span class="pre">weight</span></code>) are now preserved when copying an <code class="docutils literal notranslate"><span class="pre">Objective</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/44">#44</a>)</p></li>
+<li><p>Bugfix: Calling <code class="docutils literal notranslate"><span class="pre">copy.deepcopy</span></code> on an <code class="docutils literal notranslate"><span class="pre">Objective</span></code> now preserves control functions (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/44">#44</a>)</p></li>
+<li><p>Improved: The <code class="docutils literal notranslate"><span class="pre">Objective.mesolve</span></code> and <code class="docutils literal notranslate"><span class="pre">Objective.propagate</span></code> methods can now receive arguments <code class="docutils literal notranslate"><span class="pre">H</span></code> and <code class="docutils literal notranslate"><span class="pre">c_ops</span></code> to override the respective attributes of the objectives. This make is easier to analyze perform a robustness analysis, where the result of an optimization should be propagated under a perturbed Hamiltonian.</p></li>
+<li><p>Improved: The <code class="docutils literal notranslate"><span class="pre">print_table</span></code> and <code class="docutils literal notranslate"><span class="pre">print_debug_information</span></code> info-hooks now flush their output buffers after each iteration. As a result, when writing to a file, that file can be watched with <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-f</span></code>.</p></li>
+<li><p>Changed: Redefine <code class="docutils literal notranslate"><span class="pre">tau_vals</span></code> as their complex conjugate, fixing a bug in <code class="docutils literal notranslate"><span class="pre">chis_ss</span></code> and <code class="docutils literal notranslate"><span class="pre">chis_sm</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/46">#46</a>)</p></li>
+<li><p>Bugfix: Correctly calculate ∂H/∂ϵ if ϵ occurs in H multiple times (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/47">#47</a>, thanks to <a class="reference external" href="https://github.com/uiofgh">&#64;uiofgh</a>)</p></li>
+<li><p>Bugfix: Correctly calculate ∂H/∂ϵ=0 if the specific ϵ currently being updated does not occur in H (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/48">#48</a>)</p></li>
+<li><p>Added: Method <code class="docutils literal notranslate"><span class="pre">objectives_with_controls</span></code> for <code class="docutils literal notranslate"><span class="pre">Result</span></code> object.</p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>0.3.0 (2019-03-01)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added: Preprint citation information (<code class="docutils literal notranslate"><span class="pre">krotov.__arxiv__</span></code>, <code class="docutils literal notranslate"><span class="pre">krotov.__citation__</span></code>, <code class="docutils literal notranslate"><span class="pre">krotov.__bibtex__</span></code>)</p></li>
+<li><p>Added: Ability to continue from a previous optimization (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/26">#26</a>)</p></li>
+<li><p>Added: Parameter <code class="docutils literal notranslate"><span class="pre">out</span></code> to <code class="docutils literal notranslate"><span class="pre">print_table</span></code> info-hook</p></li>
+<li><p>Added: Parameter <code class="docutils literal notranslate"><span class="pre">finalize</span></code> to <code class="docutils literal notranslate"><span class="pre">Result.load</span></code></p></li>
+<li><p>Added: Ability to dump optimization result every so many iterations (<code class="docutils literal notranslate"><span class="pre">dump_result</span></code> check-convergence routine)</p></li>
+<li><p>Added: <cite>re-entrant</cite> option for <code class="docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></p></li>
+<li><p>Bugfix: Discretize controls to float values (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/41">#41</a>)</p></li>
+<li><p>Bugfix: Fix overlap for non-Hermitian operators (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/39">#39</a>)</p></li>
+<li><p>Bugfix: Interface for passing <code class="docutils literal notranslate"><span class="pre">tau_vals</span></code> to <code class="docutils literal notranslate"><span class="pre">chi_constructor</span></code> (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/36">#36</a>)</p></li>
+<li><p>Added: function <code class="docutils literal notranslate"><span class="pre">above_value</span></code> for convergence check (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/35">#35</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>0.2.0 (2019-02-14)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added: Implementation of all the standard functionals</p></li>
+<li><p>Added: The <code class="docutils literal notranslate"><span class="pre">info_hook</span></code> receives additional information, including ∫gₐ(t)dt (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/32">#32</a>)</p></li>
+<li><p>Added: Initialization of objectives for gate optimization in Liouville space</p></li>
+<li><p>Added: A new propagator <code class="docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code> for faster density matrix propagation</p></li>
+<li><p>Added: Support for “stateful” propagators by subclassing from <code class="docutils literal notranslate"><span class="pre">krotov.propagators.Propagator</span></code></p></li>
+<li><p>Changed: more flexibility for parallelization (<a class="reference external" href="https://github.com/qucontrol/krotov/issues/29">#29</a>)</p></li>
+<li><p>Added: Support for the second-order pulse update</p></li>
+<li><p>Changed: The options for the controls (λₐ, update-shape) are now passed through a simplified <code class="docutils literal notranslate"><span class="pre">dict</span></code> interface, instead of a custom <code class="docutils literal notranslate"><span class="pre">PulseOptions</span></code> class.</p></li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>0.1.0 (2018-12-24)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Initial release with complete implementation of first-order Krotov’s method</p></li>
+<li><p>Support for state-to-state and gate optimization, for both closed and open systems</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="06_introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="04_features.html" class="btn btn-neutral float-left" title="Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 16, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

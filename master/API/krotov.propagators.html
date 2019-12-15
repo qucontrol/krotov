@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>krotov.propagators module &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  <title>krotov.propagators module &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-dev
+                1.0.0-rc1+dev
               </div>
             
           
@@ -240,7 +240,7 @@ calculate the propagation over a single time step. In particular,
 <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a> is not automatically used for simulating any
 dynamics within the optimization.  The signature for any <cite>propagator</cite>
 must be the same as the “reference” <a class="reference internal" href="#krotov.propagators.expm" title="krotov.propagators.expm"><code class="xref py py-func docutils literal notranslate"><span class="pre">expm()</span></code></a> propagator:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">expm</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">expm</span><span class="p">))</span>
 <span class="go">&#39;(H, state, dt, c_ops=None, backwards=False, initialize=False)&#39;</span>
 </pre></div>
 </div>
@@ -456,7 +456,7 @@ and <cite>state</cite> internally.</p></li>
     <p>
         &copy; Copyright 2019, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Dec 15, 2019.
+        Last updated on Dec 16, 2019.
       </span>
 
     </p>

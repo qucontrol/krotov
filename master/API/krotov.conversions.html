@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>krotov.conversions module &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  <title>krotov.conversions module &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-dev
+                1.0.0-rc1+dev
               </div>
             
           
@@ -339,14 +339,14 @@ be passed.</p></li>
 <cite>objectives</cite>, the second index relates to the Hamiltonian (0) or the
 <cite>c_ops</cite> (1…), and the third index relates to the <cite>controls</cite>.</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">qutip</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">qutip</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">krotov</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(),</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(),</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">()</span> <span class="c1"># dummy Hams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u1</span><span class="p">,</span> <span class="n">u2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>                <span class="c1"># dummy controls</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span><span class="p">,</span> <span class="n">psi_tgt</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(),</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">()</span>         <span class="c1"># dummy states</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H1</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">u1</span><span class="p">],</span> <span class="p">[</span><span class="n">Z</span><span class="p">,</span> <span class="n">u1</span><span class="p">]]</span>  <span class="c1"># ham for first objective</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H1</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">u1</span><span class="p">],</span> <span class="p">[</span><span class="n">Z</span><span class="p">,</span> <span class="n">u1</span><span class="p">]]</span>  <span class="c1"># ham for first objective</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H2</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">u2</span><span class="p">]]</span>           <span class="c1"># ham for second objective</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c_ops</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">X</span><span class="p">,</span> <span class="n">u1</span><span class="p">]],</span> <span class="p">[[</span><span class="n">Y</span><span class="p">,</span> <span class="n">u2</span><span class="p">]]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span>
@@ -367,7 +367,7 @@ be passed.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">controls</span> <span class="o">==</span> <span class="p">[</span><span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span> <span class="o">=</span> <span class="n">extract_controls_mapping</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">controls</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span> <span class="o">=</span> <span class="n">extract_controls_mapping</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">controls</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span>
 <span class="go">[[[[1, 2], []], [[0], []], [[], [0]]], [[[], [1]], [[0], []], [[], [0]]]]</span>
 </pre></div>
@@ -376,21 +376,21 @@ be passed.</p></li>
 <ul>
 <li><p>For the first objective (0), in the Hamiltonian (0), where is
 the first pulse (0) used? (answer: in <code class="docutils literal notranslate"><span class="pre">H1[1]</span></code> and <code class="docutils literal notranslate"><span class="pre">H1[2]</span></code>)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">[1, 2]</span>
 </pre></div>
 </div>
 </li>
 <li><p>For the second objective (1), in the second <code class="docutils literal notranslate"><span class="pre">c_ops</span></code> (2), where is
 the second pulse (1) used? (answer: in <code class="docutils literal notranslate"><span class="pre">c_ops[1][0]</span></code>)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">[0]</span>
 </pre></div>
 </div>
 </li>
 <li><p>For the second objective (1), in the Hamiltonian (0), where is the
 first pulse (0) used? (answer: nowhere)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">controls_mapping</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">[]</span>
 </pre></div>
 </div>
@@ -438,7 +438,7 @@ is replaced by the value of the appropriate pulse at <cite>time_index</cite>.</p
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span> <span class="c1"># dummy Hams, these would normally be Qobjs</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span> <span class="c1"># dummy Hams, these would normally be Qobjs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u1</span><span class="p">,</span> <span class="n">u2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">u1</span><span class="p">],</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">u1</span><span class="p">],</span> <span class="p">[</span><span class="n">Z</span><span class="p">,</span> <span class="n">u2</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pulses</span> <span class="o">=</span> <span class="p">[</span><span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">]</span>
@@ -535,7 +535,7 @@ of the input values before and after the point.</p>
     <p>
         &copy; Copyright 2019, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Dec 15, 2019.
+        Last updated on Dec 16, 2019.
       </span>
 
     </p>
