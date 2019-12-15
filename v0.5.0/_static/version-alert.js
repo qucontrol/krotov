@@ -114,7 +114,7 @@ function _addVersionsMenu(version_data) {
   }
   if (version_data["outdated"].indexOf(current_folder) >=0){
     warning = document.createElement('div');
-    warning.setAttribute('class', 'admonition');
+    warning.setAttribute('class', 'admonition danger');
     msg = "This document is for an <strong>outdated version</strong>.";
   }
   if (warning !== undefined){
