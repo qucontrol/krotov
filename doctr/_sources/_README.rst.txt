@@ -22,9 +22,9 @@ Krotov Python Package
 .. image:: https://img.shields.io/badge/License-BSD-green.svg
    :alt: BSD License
    :target: https://opensource.org/licenses/BSD-3-Clause
-.. image:: https://readthedocs.org/projects/krotov/badge/?version=latest
-   :alt: Documentation Status
-   :target: https://krotov.readthedocs.io/en/latest/?badge=latest
+.. image:: https://img.shields.io/badge/docs-doctr-blue.svg
+   :alt: Documentation
+   :target: https://qucontrol.github.io/krotov
 .. image:: https://mybinder.org/badge_logo.svg
    :alt: Launch Binder
    :target: https://mybinder.org/v2/gh/qucontrol/krotov/v0.5.0?filepath=docs%2Fnotebooks
@@ -38,12 +38,12 @@ This implementation follows the original implementation in the `QDYN Fortran lib
 
 The :mod:`krotov` package is built on top of `QuTiP`_.
 
-Development happens on `Github`_. You can read the full documentation at `online`__ or `download a PDF version`_.
+Development happens on `Github`_. You can read the full documentation `online`__ or `download a PDF version`_.
 
-.. _ReadTheDocs: https://krotov.readthedocs.io/en/stable/
-__ ReadTheDocs_
+.. _Documentation: https://qucontrol.github.io/krotov
+__ Documentation_
 
-If you use the :mod:`krotov` package in your research, please `cite it <https://krotov.readthedocs.io/en/stable/01_overview.html#citing-the-krotov-package>`_.
+If you use the :mod:`krotov` package in your research, please `cite it <https://qucontrol.github.io/krotov/v0.5.0/01_overview.html#citing-the-krotov-package>`_.
 
 .. _QDYN Fortran library: https://www.qdyn-library.net
 .. _QuTiP: http://qutip.org

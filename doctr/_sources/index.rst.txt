@@ -22,9 +22,9 @@ Welcome to the Krotov package's documentation!
 .. image:: https://img.shields.io/badge/License-BSD-green.svg
    :alt: BSD License
    :target: https://opensource.org/licenses/BSD-3-Clause
-.. image:: https://readthedocs.org/projects/krotov/badge/?version=latest
-   :alt: Documentation Status
-   :target: https://krotov.readthedocs.io/en/latest/?badge=latest
+.. image:: https://img.shields.io/badge/docs-doctr-blue.svg
+   :alt: Documentation
+   :target: https://qucontrol.github.io/krotov
 .. image:: https://mybinder.org/badge_logo.svg
    :alt: Launch Binder
    :target: https://mybinder.org/v2/gh/qucontrol/krotov/v0.5.0?filepath=docs%2Fnotebooks
