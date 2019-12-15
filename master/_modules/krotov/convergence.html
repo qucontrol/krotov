@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.convergence &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.convergence</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.convergence</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Routines for `check_convergence` in :func:`krotov.optimize.optimize_pulses`</span>
+
+<span class="sd">A `check_convergence` function may be used to determine whether an optimization</span>
+<span class="sd">is converged, and thus can be stopped before the maximum number of</span>
+<span class="sd">iterations (`iter_stop`) is reached. A function suitable for</span>
+<span class="sd">`check_convergence` must receive a :class:`.Result` object, and return a value</span>
+<span class="sd">that evaluates as True or False in a Boolean context, indicating whether the</span>
+<span class="sd">optimization has converged or not.</span>
+
+<span class="sd">The :class:`.Result` object that the `check_convergence` function receives as</span>
+<span class="sd">an argument will be up-to-date for the current iteration. That is, it will</span>
+<span class="sd">already contain the current values from :func:`.optimize_pulses`&#39;s `info_hook`</span>
+<span class="sd">in :attr:`.Result.info_vals`, the current :attr:`~.Result.tau_vals`, etc.  The</span>
+<span class="sd">:attr:`.Result.optimized_controls` attribute will contain the current optimized</span>
+<span class="sd">pulses (defined on the intervals of :attr:`~.Result.tlist`).</span>
+
+<span class="sd">The `check_convergence` function must not modify the :class:`.Result` object it</span>
+<span class="sd">receives in any way. The proper place for custom modifications after each</span>
+<span class="sd">iteration in :func:`.optimize_pulses` is through the `modify_params_after_iter`</span>
+<span class="sd">routine (e.g., dynamically adjusting λₐ if convergence is too slow or pulse</span>
+<span class="sd">updates are too large).</span>
+
+<span class="sd">It is recommended that a `check_convergence` function returns None (which is</span>
+<span class="sd">False in a Boolean context) if the optimization has not yet converged. If the</span>
+<span class="sd">optimization has converged, `check_convergence` should return a message string</span>
+<span class="sd">(which is True in a Boolean context). The returned string will be included in</span>
+<span class="sd">the final :attr:`.Result.message`.</span>
+
+<span class="sd">A typical usage for `check_convergence` is ending the optimization when the</span>
+<span class="sd">error falls below a specified limit. Such a `check_convergence` function can be</span>
+<span class="sd">generated by :func:`value_below`. Often, this &quot;error&quot; is the value of the</span>
+<span class="sd">functional :math:`J_T`. However, it is up to the user to ensure that the</span>
+<span class="sd">explicit value of :math:`J_T` can be calculated; :math:`J_T` in Krotov&#39;s method</span>
+<span class="sd">is completely implicit, and enters the optimization only indirectly via the</span>
+<span class="sd">`chi_constructor` passed to :func:`.optimize_pulses`. A specific</span>
+<span class="sd">`chi_constructor` implies the minimization of the functional :math:`J_T` from</span>
+<span class="sd">which `chi_constructor` was derived. A convergence check based on the</span>
+<span class="sd">*explicit* value of :math:`J_T` can be realized by passing an `info_hook` that</span>
+<span class="sd">returns the value of :math:`J_T`. This value is then stored in</span>
+<span class="sd">:attr:`.Result.info_vals`, which is where :func:`value_below` looks for it.</span>
+
+<span class="sd">An `info_hook` could also calculate and return an arbitrary measure of</span>
+<span class="sd">*success*, not related to :math:`J_T` (e.g. a fidelity, or a concurrence).</span>
+<span class="sd">Since we expect the optimization (the minimization of :math:`J_T`) to maximize</span>
+<span class="sd">a fidelity, a convergence check might want to look at whether the calculated</span>
+<span class="sd">value is *above* some threshold. This can be done via :func:`value_above`.</span>
+
+<span class="sd">In addition to looking at the *value* of some figure of merit, one might want</span>
+<span class="sd">stop the optimization when there is an insufficient improvement between</span>
+<span class="sd">iterations. The :func:`delta_below` function generates a `check_convergence`</span>
+<span class="sd">function for this purpose.  Multiple convergence conditions (&quot;stop optimization</span>
+<span class="sd">when :math:`J_T` reaches :math:`10^{-5}`, or if :math:`\Delta J_T &lt; 10^{-6}`&quot;)</span>
+<span class="sd">can be defined via :func:`Or`.</span>
+
+<span class="sd">While Krotov&#39;s method is guaranteed to monotonically converge in the continuous</span>
+<span class="sd">limit, this no longer strictly holds when time is discretized (in particular if</span>
+<span class="sd">λₐ is too small). You can use :func:`check_monotonic_error` or</span>
+<span class="sd">:func:`check_monotonic_fidelity` as a `check_convergence` function that stops</span>
+<span class="sd">the optimization when monotonic convergence is lost.</span>
+
+<span class="sd">The `check_convergence` routine may also be used to store the current state of</span>
+<span class="sd">the optimization to disk, as a side effect. This is achieved by the routine</span>
+<span class="sd">:func:`dump_result`, which can be chained with other convergence checks with</span>
+<span class="sd">:func:`Or`. Dumping the current state of the optimization at regular intervals</span>
+<span class="sd">protects against losing the results of a long running optimization in the event</span>
+<span class="sd">of a crash.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">xor</span>
+
+<span class="kn">import</span> <span class="nn">glom</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;Or&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;value_below&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;value_above&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;delta_below&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;check_monotonic_error&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;check_monotonic_fidelity&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dump_result&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="Or"><a class="viewcode-back" href="../../API/krotov.convergence.html#krotov.convergence.Or">[docs]</a><span class="k">def</span> <span class="nf">Or</span><span class="p">(</span><span class="o">*</span><span class="n">funcs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Chain multiple `check_convergence` functions together in a logical Or.</span>
+
+<span class="sd">    Each parameter must be a function suitable to pass to</span>
+<span class="sd">    :func:`~krotov.optimize.optimize_pulses` as `check_convergence`. It</span>
+<span class="sd">    must receive a :class:`.Result` object and should return None or a string</span>
+<span class="sd">    message.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        callable: A function ``check_convergence(result)`` that returns the</span>
+<span class="sd">        result of the first &quot;non-passing&quot; function in `*funcs`. A &quot;non-passing&quot;</span>
+<span class="sd">        result is one that evaluates to True in a Boolean context (should be a</span>
+<span class="sd">        string message)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">msg</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">check_convergence</span></div>
+
+
+<div class="viewcode-block" id="value_below"><a class="viewcode-back" href="../../API/krotov.convergence.html#krotov.convergence.value_below">[docs]</a><span class="k">def</span> <span class="nf">value_below</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="n">spec</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Constructor for routine that checks if a value is below `limit`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        limit (float or str): A float value (or str-representation of a float)</span>
+<span class="sd">            against which to compare the value extracted from :class:`.Result`</span>
+<span class="sd">        spec: A specification of the :class:`.Result` attribute from which to</span>
+<span class="sd">            extract the value to compare against `limit`. Defaults to a</span>
+<span class="sd">            specification extracting the last value in</span>
+<span class="sd">            :attr:`.Result.info_vals` (returned by the `info_hook` passed to</span>
+<span class="sd">            :func:`.optimize_pulses`). This should be some kind of error</span>
+<span class="sd">            measure, e.g., the value of the functional $J_T$ that is being</span>
+<span class="sd">            minimized.</span>
+<span class="sd">        name (str or None): A name identifying the checked value, used for the</span>
+<span class="sd">            message returned by the `check_convergence` routine. Defaults to</span>
+<span class="sd">            ``str(spec)``.</span>
+<span class="sd">        **kwargs: Keyword arguments to pass to :func:`~glom.glom` (see Note)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        callable: A function ``check_convergence(result)`` that extracts the</span>
+<span class="sd">        value specified by `spec` from the :class:`.Result` object, and checks</span>
+<span class="sd">        it against `limit`. If the value is below the `limit`, it returns an</span>
+<span class="sd">        appropriate message string. Otherwise, it returns None.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The `spec` can be a callable that receives :class:`.Result` and returns</span>
+<span class="sd">        the value to check against the limit. You should also pass a `name`</span>
+<span class="sd">        like &#39;J_T&#39;, or &#39;error&#39; as a label for the value.</span>
+<span class="sd">        For more advanced use cases, `spec` can be a</span>
+<span class="sd">        :func:`~glom.glom`-specification that extracts the value to check from</span>
+<span class="sd">        the :class:`.Result` object as ``glom.glom(result, spec, **kwargs)``.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; check_convergence = value_below(</span>
+<span class="sd">        ...     limit=&#39;1e-4&#39;,</span>
+<span class="sd">        ...     spec=lambda r: r.info_vals[-1],  # same as the default spec</span>
+<span class="sd">        ...     name=&#39;J_T&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; r = krotov.result.Result()</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(1e-4)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)  # returns None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(9e-5)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)</span>
+<span class="sd">        &#39;J_T &lt; 1e-4&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># `limit` can be a string so that it shows up as e.g. `1e-4` in the</span>
+    <span class="c1"># resulting message, instead of some arbitrary formatting like `0.0001`</span>
+
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">glom</span><span class="o">.</span><span class="n">glom</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &lt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">check_convergence</span></div>
+
+
+<div class="viewcode-block" id="value_above"><a class="viewcode-back" href="../../API/krotov.convergence.html#krotov.convergence.value_above">[docs]</a><span class="k">def</span> <span class="nf">value_above</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="n">spec</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Constructor for routine that checks if a value is above `limit`</span>
+
+<span class="sd">    Like :func:`value_below`, but for checking whether an extracted value is</span>
+<span class="sd">    *above*, not below a value. By default, it looks at the last value in</span>
+<span class="sd">    :attr:`.Result.info_vals`, under the assumption that the `info_hook` passed</span>
+<span class="sd">    to :func:`.optimize_pulses` returns some figure of merit we expect to be</span>
+<span class="sd">    maximized, like a fidelity. Note that an `info_hook` is free to return an</span>
+<span class="sd">    arbitrary value, not necessarily the value of the functional $J_T$ that the</span>
+<span class="sd">    optimization is minimizing (specified implicitly via the `chi_constructor`</span>
+<span class="sd">    argument to :func:`.optimize_pulses`).</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; check_convergence = value_above(</span>
+<span class="sd">        ...     limit=&#39;0.999&#39;,</span>
+<span class="sd">        ...     spec=lambda r: r.info_vals[-1],</span>
+<span class="sd">        ...     name=&#39;Fidelity&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; r = krotov.result.Result()</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(0.9)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)  # returns None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(1 - 1e-6)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)</span>
+<span class="sd">        &#39;Fidelity &gt; 0.999&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">glom</span><span class="o">.</span><span class="n">glom</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">check_convergence</span></div>
+
+
+<div class="viewcode-block" id="delta_below"><a class="viewcode-back" href="../../API/krotov.convergence.html#krotov.convergence.delta_below">[docs]</a><span class="k">def</span> <span class="nf">delta_below</span><span class="p">(</span>
+    <span class="n">limit</span><span class="p">,</span>
+    <span class="n">spec1</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">spec0</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span>
+    <span class="n">absolute_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructor for a routine that checks if</span>
+<span class="sd">    $\Abs{v_1 - v_0} &lt; \varepsilon$</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        limit (float or str): A float value (or str-representation of a float)</span>
+<span class="sd">            for $\varepsilon$</span>
+<span class="sd">        spec1: A :func:`~glom.glom` specification of the :class:`.Result`</span>
+<span class="sd">            attribute from which to extract $v_1$. Defaults to a spec</span>
+<span class="sd">            extracting the last value in :attr:`.Result.info_vals`.</span>
+<span class="sd">        spec0: A :func:`~glom.glom` specification of the :class:`.Result`</span>
+<span class="sd">            attribute from which to extract $v_0$.  Defaults to a spec</span>
+<span class="sd">            extracting the last-but-one value in :attr:`.Result.info_vals`.</span>
+<span class="sd">        absolute_value (bool): If False, check for $v_1 - v_0 &lt; \varepsilon$,</span>
+<span class="sd">            instead of the absolute value.</span>
+<span class="sd">        name (str or None): A name identifying the delta, used for the</span>
+<span class="sd">            message returned by the `check_convergence` routine. Defaults to</span>
+<span class="sd">            ``&quot;Δ({spec1},{spec0}&quot;``.</span>
+<span class="sd">        **kwargs: Keyword arguments to pass to :func:`~glom.glom`</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        You can use :func:`delta_below` to implement a check for strict</span>
+<span class="sd">        monotonic convergence, e.g. when `info_hook` returns the optimization</span>
+<span class="sd">        error, by flipping `spec0` and `spec1`, setting `limit` to zero, and</span>
+<span class="sd">        setting `absolute_value` to False. See :func:`check_monotonic_error`.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; check_convergence = delta_below(limit=&#39;1e-4&#39;, name=&#39;ΔJ_T&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; r = krotov.result.Result()</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(9e-1)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(1e-1)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(4e-4)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(2e-4)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(1e-6)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(1e-7)</span>
+<span class="sd">        &gt;&gt;&gt; check_convergence(r)</span>
+<span class="sd">        &#39;ΔJ_T &lt; 1e-4&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Δ(</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">spec1</span><span class="p">,</span> <span class="n">spec0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">delayed_exc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">glom</span><span class="o">.</span><span class="n">glom</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">spec1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">GlomError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">delayed_exc</span> <span class="o">=</span> <span class="n">exc</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">v0</span> <span class="o">=</span> <span class="n">glom</span><span class="o">.</span><span class="n">glom</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">spec0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">GlomError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">v0</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">delayed_exc</span> <span class="o">=</span> <span class="n">exc</span>
+        <span class="k">if</span> <span class="n">xor</span><span class="p">((</span><span class="n">v1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="n">v0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)):</span>
+            <span class="c1"># After the first iteration, there may not be enough data to get</span>
+            <span class="c1"># *both* v1 and v0. In this case, we just pass the check...</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># ... However, if we can access neither v1 nor v0, then something</span>
+            <span class="c1"># is definitely wrong, and we should re-raise the original</span>
+            <span class="c1"># exception</span>
+            <span class="k">if</span> <span class="n">delayed_exc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">delayed_exc</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">-</span> <span class="n">v0</span>
+        <span class="k">if</span> <span class="n">absolute_value</span><span class="p">:</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">limit</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &lt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">check_convergence</span></div>
+
+
+<span class="n">_monotonic_convergence</span> <span class="o">=</span> <span class="n">delta_below</span><span class="p">(</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">spec1</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span>
+    <span class="n">spec0</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">absolute_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Loss of monotonic convergence; error decrease&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">_monotonic_fidelity</span> <span class="o">=</span> <span class="n">delta_below</span><span class="p">(</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">spec1</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">spec0</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;info_vals&#39;</span><span class="p">,</span> <span class="n">glom</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span>
+    <span class="n">absolute_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Loss of monotonic convergence; fidelity increase&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="check_monotonic_error"><a class="viewcode-back" href="../../API/krotov.convergence.html#krotov.convergence.check_monotonic_error">[docs]</a><span class="k">def</span> <span class="nf">check_monotonic_error</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check for monotonic convergence with respect to the error</span>
+
+<span class="sd">    Check that the last value in :attr:`.Result.info_vals` is</span>
+<span class="sd">    smaller than the last-but-one value. If yes, return None. If no, return an</span>
+<span class="sd">    appropriate error message.</span>
+
+<span class="sd">    This assumes that the `info_hook` passed to :func:`.optimize_pulses`</span>
+<span class="sd">    returns the value of the functional $J_T$ (or another quantity that we</span>
+<span class="sd">    expect to be minimized), which is then available in</span>
+<span class="sd">    :attr:`.Result.info_vals`.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; r = krotov.result.Result()</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(9e-1)</span>
+<span class="sd">        &gt;&gt;&gt; check_monotonic_error(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(1e-1)</span>
+<span class="sd">        &gt;&gt;&gt; check_monotonic_error(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(2e-1)</span>
+<span class="sd">        &gt;&gt;&gt; check_monotonic_error(r)</span>
+<span class="sd">        &#39;Loss of monotonic convergence; error decrease &lt; 0&#39;</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        Use :func:`check_monotonic_fidelity` for when `info_hook` returns a</span>
+<span class="sd">        &quot;fidelity&quot;, that is, a measure that should *increase* in each</span>
+<span class="sd">        iteration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This is a wrapper for `_monotonic_convergence` just so that we can have</span>
+    <span class="c1"># `check_monotonic_convergence` with a nice docstring.</span>
+    <span class="k">return</span> <span class="n">_monotonic_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_monotonic_fidelity"><a class="viewcode-back" href="../../API/krotov.convergence.html#krotov.convergence.check_monotonic_fidelity">[docs]</a><span class="k">def</span> <span class="nf">check_monotonic_fidelity</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check for monotonic convergence with respect to the fidelity</span>
+
+<span class="sd">    This is like :func:`check_monotonic_error`, but looking for a monotonic</span>
+<span class="sd">    *increase* in the values in :attr:`.Result.info_vals`. Thus, it is assumed</span>
+<span class="sd">    that the `info_hook` returns a fidelity (to be maximized), not an error</span>
+<span class="sd">    (like $J_T$, to be minimized).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; r = krotov.result.Result()</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(0.0)</span>
+<span class="sd">        &gt;&gt;&gt; check_monotonic_fidelity(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(0.2)</span>
+<span class="sd">        &gt;&gt;&gt; check_monotonic_fidelity(r)  # None</span>
+<span class="sd">        &gt;&gt;&gt; r.info_vals.append(0.15)</span>
+<span class="sd">        &gt;&gt;&gt; check_monotonic_fidelity(r)</span>
+<span class="sd">        &#39;Loss of monotonic convergence; fidelity increase &lt; 0&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_monotonic_fidelity</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dump_result"><a class="viewcode-back" href="../../API/krotov.convergence.html#krotov.convergence.dump_result">[docs]</a><span class="k">def</span> <span class="nf">dump_result</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">every</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a function for dumping the result every so many iterations</span>
+
+<span class="sd">    For long-running optimizations, it can be useful to dump the current state</span>
+<span class="sd">    of the optimization every once in a while, so that the result is not lost</span>
+<span class="sd">    in the event of a crash or unexpected shutdown. This function returns a</span>
+<span class="sd">    routine that can be passed as a `check_convergence` routine that does</span>
+<span class="sd">    nothing except to dump the current :class:`.Result` object to a file (cf.</span>
+<span class="sd">    :meth:`.Result.dump`). Failure to write the dump file stops the</span>
+<span class="sd">    optimization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): Name of file to dump to. This may include a field</span>
+<span class="sd">            ``{iter}`` which will be formatted with the most recent iteration</span>
+<span class="sd">            number, via :meth:`str.format`. Existing files will be overwritten.</span>
+<span class="sd">        every (int): dump the :class:`.Result` every so many iterations.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Choose `every` so that dumping does not happen more than once every few</span>
+<span class="sd">        minutes, at most. Dumping after every single iteration may slow down</span>
+<span class="sd">        the optimization due to I/O overhead.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        * dump every 10 iterations to the same file `oct_result.dump`::</span>
+
+<span class="sd">            &gt;&gt;&gt; check_convergence = dump_result(&#39;oct_result.dump&#39;)</span>
+
+<span class="sd">        * dump every 100 iterations to  files ``oct_result_000100.dump``,</span>
+<span class="sd">          ``oct_result_000200.dump``, etc.::</span>
+
+<span class="sd">            &gt;&gt;&gt; check_convergence = dump_result(</span>
+<span class="sd">            ...     &#39;oct_result_{iter:06d}.dump&#39;, every=100)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">every</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">every</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">every</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;every must be &gt; 0&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_dump_result</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="n">iteration</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">iters</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">iteration</span> <span class="o">%</span> <span class="n">every</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">outfile</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">iter</span><span class="o">=</span><span class="n">iteration</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">exc_info</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Could not store </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">_dump_result</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 15, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

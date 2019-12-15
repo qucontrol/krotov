@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.parallelization module &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="krotov.propagators module" href="krotov.propagators.html" />
+    <link rel="prev" title="krotov.optimize module" href="krotov.optimize.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="krotov.html">API of the Krotov package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="krotov.convergence.html">krotov.convergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.conversions.html">krotov.conversions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.info_hooks.html">krotov.info_hooks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.objectives.html">krotov.objectives module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.optimize.html">krotov.optimize module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.parallelization module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.propagators.html">krotov.propagators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.result.html">krotov.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.second_order.html">krotov.second_order module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.shapes.html">krotov.shapes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="krotov.html">krotov package</a> &raquo;</li>
+        
+      <li>krotov.parallelization module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-krotov.parallelization">
+<span id="krotov-parallelization-module"></span><h1>krotov.parallelization module<a class="headerlink" href="#module-krotov.parallelization" title="Permalink to this headline">¶</a></h1>
+<p>Support routines for running the optimization in parallel across the
+objectives</p>
+<p>The time-propagation that is the main numerical effort in an optimization with
+Krotov’s method can naturally be performed in parallel for the different
+objectives. There are three time-propagations that happen inside
+<a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>:</p>
+<ol class="arabic simple">
+<li><p>A forward propagation of the <a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> of each
+objective under the initial guess pulse.</p></li>
+<li><p>A backward propagation of the states <span class="math notranslate nohighlight">\(\ket{\chi_k}\)</span> constructed by the
+<cite>chi_constructor</cite> routine that is passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>, where
+the number of states is the same as the number of objectives.</p></li>
+<li><p>A forward propagation of the <a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> of each
+objective under the optimized pulse in each iteration. This can only
+be parallelized <em>per time step</em>, as the propagated states from each time
+step collectively determine the pulse update for the next time step, which
+is then used for the next propagation step. (In this sense Krotov’s method
+is “sequential”)</p></li>
+</ol>
+<p>The <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> routine has a parameter <cite>parallel_map</cite> that can
+receive a tuple of three “map” functions to enable parallelization,
+corresponding to the three propagation listed above. If not given,
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a> is used for all three propations, running in
+serial. Any alternative “map” must have the same interface as
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a>.</p>
+<p>It would be natural to assume that <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a> would be
+a good choice for parallel execution, using multiple CPUs on the same machine.
+However, this function is only a good choice for the propagation (1) and (2):
+these run in parallel over the entire time grid without any communication, and
+thus minimal overhead.  However, this is not true for the propagation (3),
+which must synchronize after each time step. In that case, the “naive” use of
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a> results in a communication overhead that
+completely dominates the propagation, and actually makes the optimization
+slower (potentially by more than an order of magnitude).</p>
+<p>The function <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step()</span></code></a> provided in this module is an
+appropriate alternative implementation that uses long-running processes,
+internal caching, and minimal inter-process communication to eliminate the
+communication overhead as much as possible. However, the internal caching is
+valid only under the assumption that the <cite>propagate</cite> function does not have
+side effects.</p>
+<p>In general,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parallel_map</span><span class="o">=</span><span class="p">(</span>
+    <span class="n">qutip</span><span class="o">.</span><span class="n">parallel_map</span><span class="p">,</span>
+    <span class="n">qutip</span><span class="o">.</span><span class="n">parallel_map</span><span class="p">,</span>
+    <span class="n">krotov</span><span class="o">.</span><span class="n">parallelization</span><span class="o">.</span><span class="n">parallel_map_fw_prop_step</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>is a decent choice for enabling parallelization for a typical multi-objective
+optimization.</p>
+<p>You may implement your own “map” functions to exploit parallelization paradigms
+other than Python’s built-in <a class="reference external" href="https://docs.python.org/3.7/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>, provided here. This
+includes distributed propagation, e.g. through <a class="reference external" href="https://ipyparallel.readthedocs.io/en/latest/">ipyparallel</a> clusters. To write
+your own <cite>parallel_map</cite> functions, review the source code of
+<a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> in detail.</p>
+<p>In most cases, it will be difficult to obtain a linear speedup from
+parallelization: even with carefully tuned manual interprocess communication,
+the communication overhead can be substantial. For best results, it would be
+necessary to use <cite>parallel_map</cite> functions implemented in Cython, where the GIL
+can be released and the entire propagation (and storage of propagated states)
+can be done in shared-memory with no overhead.</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Classes:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Consumer</span></code></a></p></td>
+<td><p>A process-based task consumer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#krotov.parallelization.FwPropStepTask" title="krotov.parallelization.FwPropStepTask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FwPropStepTask</span></code></a></p></td>
+<td><p>A task that performs a single forward-propagation step</p></td>
+</tr>
+</tbody>
+</table>
+<p>Functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step</span></code></a></p></td>
+<td><p><cite>parallel_map</cite> function for the forward-propagation by one time step</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Consumer</span></code></a>, <a class="reference internal" href="#krotov.parallelization.FwPropStepTask" title="krotov.parallelization.FwPropStepTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">FwPropStepTask</span></code></a>, <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step</span></code></a></p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="krotov.parallelization.Consumer">
+<em class="property">class </em><code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">Consumer</code><span class="sig-paren">(</span><em class="sig-param">task_queue</em>, <em class="sig-param">result_queue</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#Consumer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.Consumer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.context.Process</span></code></p>
+<p>A process-based task consumer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task_queue</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.JoinableQueue" title="(in Python v3.7)"><em>multiprocessing.JoinableQueue</em></a>) – A queue from which to read
+tasks.</p></li>
+<li><p><strong>result_queue</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.Queue" title="(in Python v3.7)"><em>multiprocessing.Queue</em></a>) – A queue where to put the results
+of a task</p></li>
+<li><p><strong>data</strong> – cached (in-process) data that will be passed to each task</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="krotov.parallelization.Consumer.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#Consumer.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.Consumer.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute all tasks on the <cite>task_queue</cite>.</p>
+<p>Each task must be a callable that takes <cite>data</cite> as its only argument.
+The return value of the task will be put on the <cite>result_queue</cite>. A None
+value on the <cite>task_queue</cite> acts as a “poison pill”, causing the
+<a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Consumer</span></code></a> process to shut down.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="krotov.parallelization.FwPropStepTask">
+<em class="property">class </em><code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">FwPropStepTask</code><span class="sig-paren">(</span><em class="sig-param">i_state</em>, <em class="sig-param">pulse_vals</em>, <em class="sig-param">time_index</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#FwPropStepTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.FwPropStepTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A task that performs a single forward-propagation step</p>
+<p>The task object is a callable, receiving the single tuple of the same
+form as <cite>task_args</cite> in <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step()</span></code></a> as input. This
+<cite>data</cite> is internally cached by the <a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Consumer</span></code></a> that will execute
+the task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i_state</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The index of the state to propagation. That is, the
+index of the objective from whose <a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a>
+the propagation started</p></li>
+<li><p><strong>pulse_vals</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – the values of the pulses at <cite>time_index</cite> to
+use.</p></li>
+<li><p><strong>time_index</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the index of the interval on the time grid covered by
+the propagation step</p></li>
+</ul>
+</dd>
+</dl>
+<p>The passed arguments update the internal state (<cite>data</cite>) of the
+<a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Consumer</span></code></a> executing the task; they are the minimal information that
+must be passed via inter-process communication to enable the forward
+propagation (assuming <cite>propagate</cite> in <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> has no
+side-effects)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="krotov.parallelization.parallel_map_fw_prop_step">
+<code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">parallel_map_fw_prop_step</code><span class="sig-paren">(</span><em class="sig-param">shared</em>, <em class="sig-param">values</em>, <em class="sig-param">task_args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#parallel_map_fw_prop_step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.parallel_map_fw_prop_step" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>parallel_map</cite> function for the forward-propagation by one time step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shared</strong> – A global object to which we can attach attributes for sharing
+data between different calls to <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step()</span></code></a>,
+allowing us to have long-running <a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Consumer</span></code></a> processes,
+avoiding process-management overhead.
+This happens to be a callable (the original internal routine for
+performing a forward-propagation), but here, it is (ab-)used as a
+storage object only.</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – a list 0..(N-1) where N is the number of objectives</p></li>
+<li><p><strong>task_args</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – <p>A tuple of 7 components:</p>
+<ol class="arabic simple">
+<li><p>A list of states to propagate, one for each objective.</p></li>
+<li><p>The list of objectives</p></li>
+<li><p>The list of optimized pulses (updated up to <cite>time_index</cite>)</p></li>
+<li><p>The “pulses mapping”, cf <a class="reference internal" href="krotov.conversions.html#krotov.conversions.extract_controls_mapping" title="krotov.conversions.extract_controls_mapping"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_controls_mapping()</span></code></a></p></li>
+<li><p>The list of time grid points</p></li>
+<li><p>The index of the interval on the time grid over which to
+propagate</p></li>
+<li><p>A list of <cite>propagate</cite> callables, as passed to
+<a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.  The propagators must not have
+side-effects in order for <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step()</span></code></a> to
+work correctly.</p></li>
+</ol>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="krotov.propagators.html" class="btn btn-neutral float-right" title="krotov.propagators module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="krotov.optimize.html" class="btn btn-neutral float-left" title="krotov.optimize module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 15, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

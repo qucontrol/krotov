@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.optimize module &mdash; Krotov 1.0.0-dev (2080a8b) documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="krotov.parallelization module" href="krotov.parallelization.html" />
+    <link rel="prev" title="krotov.objectives module" href="krotov.objectives.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0-dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="krotov.html">API of the Krotov package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="krotov.convergence.html">krotov.convergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.conversions.html">krotov.conversions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.info_hooks.html">krotov.info_hooks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.objectives.html">krotov.objectives module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.optimize module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.parallelization.html">krotov.parallelization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.propagators.html">krotov.propagators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.result.html">krotov.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.second_order.html">krotov.second_order module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.shapes.html">krotov.shapes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="krotov.html">krotov package</a> &raquo;</li>
+        
+      <li>krotov.optimize module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-krotov.optimize">
+<span id="krotov-optimize-module"></span><h1>krotov.optimize module<a class="headerlink" href="#module-krotov.optimize" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_pulses</span></code></a></p></td>
+<td><p>Use Krotov’s method to optimize towards the given <cite>objectives</cite>.</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses</span></code></a></p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="krotov.optimize.optimize_pulses">
+<code class="sig-prename descclassname">krotov.optimize.</code><code class="sig-name descname">optimize_pulses</code><span class="sig-paren">(</span><em class="sig-param">objectives</em>, <em class="sig-param">pulse_options</em>, <em class="sig-param">tlist</em>, <em class="sig-param">*</em>, <em class="sig-param">propagator</em>, <em class="sig-param">chi_constructor</em>, <em class="sig-param">mu=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">iter_start=0</em>, <em class="sig-param">iter_stop=5000</em>, <em class="sig-param">check_convergence=None</em>, <em class="sig-param">info_hook=None</em>, <em class="sig-param">modify_params_after_iter=None</em>, <em class="sig-param">storage='array'</em>, <em class="sig-param">parallel_map=None</em>, <em class="sig-param">store_all_pulses=False</em>, <em class="sig-param">continue_from=None</em>, <em class="sig-param">skip_initial_forward_propagation=False</em>, <em class="sig-param">norm=None</em>, <em class="sig-param">overlap=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/optimize.html#optimize_pulses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.optimize.optimize_pulses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use Krotov’s method to optimize towards the given <cite>objectives</cite>.</p>
+<p>Optimize all time-dependent controls found in the Hamiltonians or
+Liouvillians of the given <cite>objectives</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objectives</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><em>Objective</em></a><em>]</em>) – List of objectives</p></li>
+<li><p><strong>pulse_options</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – <p>Mapping of time-dependent controls found in the
+Hamiltonians of the objectives to a dictionary of options for that
+control. There must be options given for <em>every</em> control. As numpy
+arrays are unhashable and thus cannot be used as dict keys, the
+options for a control that is an array must be set using the key
+<code class="docutils literal notranslate"><span class="pre">id(control)</span></code> (see the example below). The options of any
+particular control <em>must</em> contain the following keys:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'lambda_a'</span></code>: the Krotov step size (float value). This governs
+the overall magnitude of the pulse update. Large values result in
+small updates. Small values may lead to sharp spikes and
+numerical instability.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'update_shape'</span></code> : Function S(t) in the range [0, 1] that
+scales the pulse update for the pulse value at t. This can be
+used to ensure boundary conditions (S(0) = S(T) = 0), and enforce
+smooth switch-on and switch-off. This can be a callable that
+takes a single argument <cite>t</cite>; or the values 1 or 0 for a constant
+update-shape. The value 0 disables the optimization of that
+particular control.</p></li>
+</ul>
+<p>In addition, the following keys <em>may</em> occur:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'args'</span></code>: If the control is a callable with arguments
+<code class="docutils literal notranslate"><span class="pre">(t,</span> <span class="pre">args)</span></code> (as required by QuTiP), a dict of argument values
+to pass as <cite>args</cite>. If <code class="docutils literal notranslate"><span class="pre">'args'</span></code> is not specified via the
+<cite>pulse_options</cite>, controls will be discretized using the default
+<code class="docutils literal notranslate"><span class="pre">args=None</span></code>.</p></li>
+</ul>
+<p>For example, for <cite>objectives</cite> that contain a Hamiltonian of the
+form <code class="docutils literal notranslate"><span class="pre">[H0,</span> <span class="pre">[H1,</span> <span class="pre">u],</span> <span class="pre">[H2,</span> <span class="pre">g]]</span></code>, where <code class="docutils literal notranslate"><span class="pre">H0</span></code>, <code class="docutils literal notranslate"><span class="pre">H1</span></code>, and <code class="docutils literal notranslate"><span class="pre">H2</span></code>
+are <a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Qobj</span></code></a> instances, <code class="docutils literal notranslate"><span class="pre">u</span></code> is a numpy array</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">g</span></code> is a control function</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">E0</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;E0&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">E0</span>
+</pre></div>
+</div>
+<p>then a possible value for <cite>pulse_options</cite> would look like this:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">krotov.shapes</span> <span class="kn">import</span> <span class="n">flattop</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pulse_options</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="nb">id</span><span class="p">(</span><span class="n">u</span><span class="p">):</span> <span class="p">{</span><span class="s1">&#39;lambda_a&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;update_shape&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="n">g</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">lambda_a</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">update_shape</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">flattop</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t_rise</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>        <span class="n">args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">E0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The use of <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> and the <code class="docutils literal notranslate"><span class="pre">{...}</span></code> syntax are completely
+equivalent, but <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> is better for nested indentation.</p>
+</p></li>
+<li><p><strong>tlist</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><em>numpy.ndarray</em></a>) – Array of time grid values, cf.
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">mesolve()</span></code></a></p></li>
+<li><p><strong>propagator</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>callable</em><em>]</em>) – Function that propagates the
+state backward or forwards in time by a single time step, between
+two points in <cite>tlist</cite>. Alternatively, a list of functions, one for
+each objective. If the propagator is stateful, it should be an
+instance of <a class="reference internal" href="krotov.propagators.html#krotov.propagators.Propagator" title="krotov.propagators.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">krotov.propagators.Propagator</span></code></a>. See
+<a class="reference internal" href="krotov.propagators.html#module-krotov.propagators" title="krotov.propagators"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.propagators</span></code></a> for details.</p></li>
+<li><p><strong>chi_constructor</strong> (<em>callable</em>) – Function that calculates the boundary
+condition for the backward propagation. This is where the
+final-time functional (indirectly) enters the optimization.
+See <a class="reference internal" href="krotov.functionals.html#module-krotov.functionals" title="krotov.functionals"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.functionals</span></code></a> for details.</p></li>
+<li><p><strong>mu</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><em>callable</em>) – Function that calculates the derivative
+<span class="math notranslate nohighlight">\(\frac{\partial H}{\partial\epsilon}\)</span> for an equation of motion
+<span class="math notranslate nohighlight">\(\dot{\phi}(t) = -i H[\phi(t)]\)</span> of an abstract operator <span class="math notranslate nohighlight">\(H\)</span> and an
+abstract state <span class="math notranslate nohighlight">\(\phi\)</span>. If None, defaults to
+<a class="reference internal" href="krotov.mu.html#krotov.mu.derivative_wrt_pulse" title="krotov.mu.derivative_wrt_pulse"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.mu.derivative_wrt_pulse()</span></code></a>, which covers the standard
+Schrödinger and master equations. See <a class="reference internal" href="krotov.mu.html#module-krotov.mu" title="krotov.mu"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.mu</span></code></a> for a
+full explanation of the role of <cite>mu</cite> in the optimization, and the
+required function signature.</p></li>
+<li><p><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference internal" href="krotov.second_order.html#krotov.second_order.Sigma" title="krotov.second_order.Sigma"><em>krotov.second_order.Sigma</em></a>) – Function (instance of a
+<a class="reference internal" href="krotov.second_order.html#krotov.second_order.Sigma" title="krotov.second_order.Sigma"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sigma</span></code></a> subclass) that calculates the
+second-order contribution. If None, the first-order Krotov method
+is used.</p></li>
+<li><p><strong>iter_start</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The formal iteration number at which to start the
+optimization</p></li>
+<li><p><strong>iter_stop</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The iteration number after which to end the
+optimization, whether or not convergence has been reached</p></li>
+<li><p><strong>check_convergence</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><em>callable</em>) – Function that determines whether
+the optimization has converged. If None, the optimization will only
+end when <cite>iter_stop</cite> is reached. See <a class="reference internal" href="krotov.convergence.html#module-krotov.convergence" title="krotov.convergence"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.convergence</span></code></a> for
+details.</p></li>
+<li><p><strong>info_hook</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><em>callable</em>) – Function that is called after each
+iteration of the optimization, for the purpose of analysis. Any
+value returned by <cite>info_hook</cite> (e.g. an evaluated functional
+<span class="math notranslate nohighlight">\(J_T\)</span>) will be stored, for each iteration, in the <cite>info_vals</cite>
+attribute of the returned <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>. The <cite>info_hook</cite> must
+have the same signature as
+<a class="reference internal" href="krotov.info_hooks.html#krotov.info_hooks.print_debug_information" title="krotov.info_hooks.print_debug_information"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.info_hooks.print_debug_information()</span></code></a>. It should not
+modify its arguments in any way, except for <cite>shared_data</cite>.</p></li>
+<li><p><strong>modify_params_after_iter</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><em>callable</em>) – Function that is called
+after each iteration, which may modify its arguments for certain
+advanced use cases, such as dynamically adjusting <cite>lambda_vals</cite>, or
+applying spectral filters to the <cite>optimized_pulses</cite>. It has the
+same interface as <cite>info_hook</cite> but should not return anything. The
+<cite>modify_params_after_iter</cite> function is called immediately before
+<cite>info_hook</cite>, and can transfer arbitrary data to any subsequent
+<cite>info_hook</cite> via the <cite>shared_data</cite> argument.</p></li>
+<li><p><strong>storage</strong> (<em>callable</em>) – Storage constructor for the storage of
+propagated states. Must accept an integer parameter <cite>N</cite> and return
+an empty array-like container of length <cite>N</cite>. The default value
+‘array’ is equivalent to
+<code class="docutils literal notranslate"><span class="pre">functools.partial(numpy.empty,</span> <span class="pre">dtype=object)</span></code>.</p></li>
+<li><p><strong>parallel_map</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Parallel function evaluator.
+If given as a callable, the argument must have the same
+specification as <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a>.
+A value of None is the same as passing
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a>. If given as a tuple, that tuple
+must contain three callables, each of which has the same
+specification as <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a>. These three
+callables are used to parallelize (1) the initial
+forward-propagation, (2) the backward-propagation under the guess
+pulses, and (3) the forward-propagation by a single time step under
+the optimized pulses. See <a class="reference internal" href="krotov.parallelization.html#module-krotov.parallelization" title="krotov.parallelization"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.parallelization</span></code></a> for
+details.</p></li>
+<li><p><strong>store_all_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether or not to store the optimized pulses
+from <em>all</em> iterations in <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</p></li>
+<li><p><strong>continue_from</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><em>Result</em></a>) – If given, continue an optimization from
+a previous <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>. The result must have identical
+<cite>objectives</cite>.</p></li>
+<li><p><strong>skip_initial_forward_propagation</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If given as <cite>True</cite> together
+with <cite>continue_from</cite>, skip the initial forward propagation (“zeroth
+iteration”), and take the forward-propagated states from
+<a class="reference internal" href="krotov.result.html#krotov.result.Result.states" title="krotov.result.Result.states"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.states</span></code></a> instead.</p></li>
+<li><p><strong>norm</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A single-argument function to calculate the
+norm of states. If None, delegate to the <a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj.norm" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">norm()</span></code></a>
+method of the states.</p></li>
+<li><p><strong>overlap</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A two-argument function to calculate the
+complex overlap of two states. If None, delegate to
+<a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj.overlap" title="(in QuTiP: Quantum Toolbox in Python v4.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">qutip.Qobj.overlap()</span></code></a> for Hilbert space states and to the
+Hilbert-Schmidt norm <span class="math notranslate nohighlight">\(\tr[\rho_1^\dagger \rho2]\)</span> for density
+matrices or operators.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The result of the optimization.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result">Result</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><strong>ValueError</strong></a> – If any controls are not real-valued, or if any update
+    shape is not a real-valued function in the range [0, 1]; if using
+    <cite>continue_from</cite> with a <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> with differing
+    <cite>objectives</cite>; if there are any required keys missing in
+    <cite>pulse_options</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="krotov.parallelization.html" class="btn btn-neutral float-right" title="krotov.parallelization module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="krotov.objectives.html" class="btn btn-neutral float-left" title="krotov.objectives module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 15, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
