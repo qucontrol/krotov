@@ -34,6 +34,16 @@ RX_BINDER_URL = re.compile(
     r'(?P<branch>[\w.-]+)(?P<path>\?filepath=[\w%/.-]+)'
 )
 
+RX_STABLE_DOCS_LINK = re.compile(
+    r'''
+    (?P<baseurl>
+      https://(?P<orgname>[\w-]+)\.github\.io/(?P<projname>[\w-]+)/)
+    (?P<version>v\d[\w.-]+)
+    (?P<path>/[\w%/.#-]+)
+    ''',
+    re.X,
+)
+
 
 def make_release(package_name, fast_test=False):
     """Interactively create and publish a new release for the package.
@@ -60,6 +70,7 @@ def make_release(package_name, fast_test=False):
     for filename in files_with_binder_links:
         set_binder_branch(filename, "v" + str(new_version))
     set_binder_package_version(version=new_version)
+    set_stable_docs_links(new_version, 'README.rst', 'docs/_README.patch')
     make_release_commit(new_version)
     make_notebooks(fast_test=fast_test)
     if not fast_test:
@@ -340,6 +351,35 @@ def set_binder_package_version(version=None, branch=None):
             out_fh.write(line)
     # fmt: on
     os.remove(filename + ".bak")
+
+
+def set_stable_docs_links(version, *files):
+    """Replace documentation-links in the given files to point to stable.
+
+    Replace all strings that match RX_STABLE_DOCS_LINK with the correct
+    projname with a URL that points to `version`.
+    """
+    projname = get_package_name()
+    for filename in files:
+        shutil.copyfile(filename, filename + '.bak')
+        with open(filename + '.bak') as in_fh, open(filename, 'w') as out_fh:
+            for line in in_fh:
+                replacements = {}
+                for m in RX_STABLE_DOCS_LINK.finditer(line):
+                    if m.group('projname') == projname:
+                        replacements[m.group(0)] = (
+                            m.group('baseurl')
+                            + 'v%s' % version
+                            + m.group('path')
+                        )
+                for url, replacement in replacements.items():
+                    click.echo(
+                        "In %s, replace '%s' → '%s'"
+                        % (filename, url, replacement)
+                    )
+                    line = line.replace(url, replacement)
+                out_fh.write(line)
+        os.remove(filename + ".bak")
 
 
 def edit_history(version):
