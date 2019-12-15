@@ -179,4 +179,4 @@ Then,
 
 See `Using Krotov with QuTiP <https://qucontrol.github.io/krotov/v0.5.0/08_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://qucontrol.github.io/krotov/v0.5.0/09_examples.html>`_ for details.
 
-.. _Jupyter notebook: http://jupyter.org
+.. _Jupyter notebook: https://jupyter.org
