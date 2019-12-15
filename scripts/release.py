@@ -80,7 +80,7 @@ def make_release(package_name, fast_test=False):
     manual_pdf = "./docs/pdf/krotov%s.pdf" % new_version
     make_manual_pdf(manual_pdf)
     make_manual_pdf_commit(manual_pdf)
-    squash_commits(n=3)
+    squash_commits(n=3, commit_msg="Release %s" % new_version)
     if not fast_test:
         make_upload(test=True)
         push_release_commits()
@@ -482,13 +482,20 @@ def make_manual_pdf_commit(manual_pdf):
     )
 
 
-def squash_commits(n):
+def squash_commits(n, commit_msg=None):
     """Squash release commits"""
-    click.confirm(
+    msg = (
         "Ready to squash %d release commits (change 'pick' to 's' for all "
-        "but first commit)?" % n,
-        default=True,
-        abort=True,
+        "but first commit)?" % n
+    )
+    if commit_msg:
+        msg = (
+            "Ready to squash %d release commits (change 'pick' to 's' for all "
+            "but first commit, use '%s' as the commmit message')?"
+            % (n, commit_msg)
+        )
+    click.confirm(
+        msg, default=True, abort=True,
     )
     run(['git', 'rebase', '--interactive', 'HEAD~%d' % n], check=True)
 
