@@ -5,20 +5,12 @@
 
 function warnOnLatestVersion() {
 
-  // We display the warning if the "release" in Sphinx conf.py contains "dev"
-  if (!window.DOCUMENTATION_OPTIONS.VERSION.includes("dev")) {
-    return;  // not latest, or not on RTD
-  }
-
   var warning = document.createElement('div');
   warning.setAttribute('class', 'admonition danger');
   warning.innerHTML = "<p class='first admonition-title'>Note</p> " +
     "<p class='last'> " +
-    "This document is for an <strong>unreleased development version</strong>. " +
-    "Documentation is available for the <a href='/en/stable/'>current stable release</a>, " +
-    "or for older versions through the &ldquo;v:&rdquo; menu at bottom left." +
+    "The documentation for the krotov package has moved and is now available at <a href='https://qucontrol.github.io/krotov/'>https://qucontrol.github.io/krotov/</a>" +
     "</p>";
-  warning.querySelector('a').href = window.location.pathname.replace('/latest', '/stable');
 
   var parent = document.querySelector('div.body')
     || document.querySelector('div.document')
