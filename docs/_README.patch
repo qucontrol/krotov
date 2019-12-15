@@ -1,5 +1,5 @@
---- README.rst	2019-12-15 00:23:49.000000000 -0500
-+++ _README.rst	2019-12-15 00:23:25.000000000 -0500
+--- README.rst	2019-12-15 17:48:58.000000000 -0500
++++ _README.rst	2019-12-15 17:48:43.000000000 -0500
 @@ -36,14 +36,14 @@
  
  This implementation follows the original implementation in the `QDYN Fortran library`_.
@@ -13,7 +13,7 @@
  __ Documentation_
  
 -If you use the ``krotov`` package in your research, please `cite it <https://qucontrol.github.io/krotov/v0.5.0/01_overview.html#citing-the-krotov-package>`_.
-+If you use the :mod:`krotov` package in your research, please `cite it <https://qucontrol.github.io/krotov/v0.5.0/01_overview.html#citing-the-krotov-package>`_.
++If you use the :mod:`krotov` package in your research, please :ref:`cite it <CitingKrotov>`.
  
  .. _QDYN Fortran library: https://www.qdyn-library.net
  .. _QuTiP: http://qutip.org
