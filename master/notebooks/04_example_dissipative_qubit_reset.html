@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Optimization of Dissipative Qubit Reset &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
+  <title>Optimization of Dissipative Qubit Reset &mdash; Krotov 1.0.0 documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-rc1+dev
+                1.0.0
               </div>
             
           
@@ -419,7 +419,7 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/09193fc03b64c085fc48179c0a6ac940909574ad/docs/notebooks/04_example_dissipative_qubit_reset.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/09193fc03b64c085fc48179c0a6ac940909574ad?filepath=docs/notebooks/04_example_dissipative_qubit_reset.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.0.0/docs/notebooks/04_example_dissipative_qubit_reset.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.0.0?filepath=docs/notebooks/04_example_dissipative_qubit_reset.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
 <div class="section" id="Optimization-of-Dissipative-Qubit-Reset">
 <h1>Optimization of Dissipative Qubit Reset<a class="headerlink" href="#Optimization-of-Dissipative-Qubit-Reset" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
@@ -445,12 +445,12 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-qutip            4.4.1
-scipy            1.3.1
 matplotlib       3.1.2
+qutip            4.4.1
+krotov           1.0.0
 numpy            1.17.2
 matplotlib.pylab 1.17.2
-krotov           1.0.0-rc1
+scipy            1.3.1
 CPython 3.7.3
 IPython 7.10.2
 </pre></div></div>
@@ -889,7 +889,7 @@ Iteration 0
     S(t) (ranges): [0.000000, 1.000000]
     iter_start: 0
     iter_stop: 5
-    duration: 0.5 secs (started at 2019-12-15 18:25:18)
+    duration: 0.6 secs (started at 2019-12-15 22:40:08)
     optimized pulses (ranges): [0.00, 2.00]
     ∫gₐ(t)dt: 0.00e+00
     λₐ: 1.00e-02
@@ -898,7 +898,7 @@ Iteration 0
     τ: (7.97e-01:0.00π)
     qubit error: 1.1e-01
 Iteration 1
-    duration: 2.4 secs (started at 2019-12-15 18:25:19)
+    duration: 4.0 secs (started at 2019-12-15 22:40:08)
     optimized pulses (ranges): [0.00, 2.06]
     ∫gₐ(t)dt: 7.72e-02
     λₐ: 1.00e-02
@@ -907,7 +907,7 @@ Iteration 1
     τ: (7.98e-01:0.00π)
     qubit error: 1.1e-01
 Iteration 2
-    duration: 2.5 secs (started at 2019-12-15 18:25:21)
+    duration: 3.6 secs (started at 2019-12-15 22:40:12)
     optimized pulses (ranges): [0.00, 2.23]
     ∫gₐ(t)dt: 5.72e-01
     λₐ: 1.00e-02
@@ -916,7 +916,7 @@ Iteration 2
     τ: (8.01e-01:0.00π)
     qubit error: 6.7e-02
 Iteration 3
-    duration: 2.5 secs (started at 2019-12-15 18:25:24)
+    duration: 3.4 secs (started at 2019-12-15 22:40:16)
     optimized pulses (ranges): [0.00, 2.33]
     ∫gₐ(t)dt: 8.11e-02
     λₐ: 1.00e-02
@@ -925,7 +925,7 @@ Iteration 3
     τ: (7.99e-01:0.00π)
     qubit error: 5.0e-02
 Iteration 4
-    duration: 2.8 secs (started at 2019-12-15 18:25:26)
+    duration: 3.0 secs (started at 2019-12-15 22:40:19)
     optimized pulses (ranges): [0.00, 2.19]
     ∫gₐ(t)dt: 2.16e-01
     λₐ: 1.00e-02
@@ -934,7 +934,7 @@ Iteration 4
     τ: (8.02e-01:0.00π)
     qubit error: 4.9e-02
 Iteration 5
-    duration: 2.6 secs (started at 2019-12-15 18:25:29)
+    duration: 3.6 secs (started at 2019-12-15 22:40:22)
     optimized pulses (ranges): [0.00, 2.15]
     ∫gₐ(t)dt: 6.38e-02
     λₐ: 1.00e-02
@@ -961,11 +961,11 @@ Iteration 5
 <div class="highlight"><pre>
 Krotov Optimization Result
 --------------------------
-- Started at 2019-12-15 18:25:18
+- Started at 2019-12-15 22:40:08
 - Number of objectives: 1
 - Number of iterations: 5
 - Reason for termination: Reached 5 iterations
-- Ended at 2019-12-15 18:25:32 (0:00:14)
+- Ended at 2019-12-15 22:40:26 (0:00:18)
 </pre></div></div>
 </div>
 </div>

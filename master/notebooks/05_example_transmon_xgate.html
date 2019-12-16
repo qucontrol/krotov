@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Optimization of an X-Gate for a Transmon Qubit &mdash; Krotov 1.0.0-rc1+dev (09193fc) documentation</title>
+  <title>Optimization of an X-Gate for a Transmon Qubit &mdash; Krotov 1.0.0 documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.0.0-rc1+dev
+                1.0.0
               </div>
             
           
@@ -418,7 +418,7 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/09193fc03b64c085fc48179c0a6ac940909574ad/docs/notebooks/05_example_transmon_xgate.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/09193fc03b64c085fc48179c0a6ac940909574ad?filepath=docs/notebooks/05_example_transmon_xgate.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.0.0/docs/notebooks/05_example_transmon_xgate.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.0.0?filepath=docs/notebooks/05_example_transmon_xgate.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
 <div class="section" id="Optimization-of-an-X-Gate-for-a-Transmon-Qubit">
 <h1>Optimization of an X-Gate for a Transmon Qubit<a class="headerlink" href="#Optimization-of-an-X-Gate-for-a-Transmon-Qubit" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
@@ -446,12 +446,12 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-matplotlib       3.1.2
-krotov           1.0.0-rc1
 scipy            1.3.1
-matplotlib.pylab 1.17.2
+krotov           1.0.0
 qutip            4.4.1
+matplotlib.pylab 1.17.2
 numpy            1.17.2
+matplotlib       3.1.2
 CPython 3.7.3
 IPython 7.10.2
 </pre></div></div>
@@ -748,12 +748,12 @@ Energy of qubit transition is 6.914
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 iter.      J_T    g_a_int          J  Delta J_T    Delta J  secs
-0     1.00e+00   0.00e+00   1.00e+00        n/a        n/a     2
-1     2.80e-01   3.41e-01   6.22e-01  -7.20e-01  -3.78e-01     5
-2     2.12e-01   3.06e-02   2.43e-01  -6.81e-02  -3.75e-02     5
-3     1.35e-01   3.28e-02   1.68e-01  -7.72e-02  -4.44e-02     5
-4     9.79e-02   1.56e-02   1.13e-01  -3.71e-02  -2.15e-02     5
-5     7.13e-02   1.11e-02   8.25e-02  -2.65e-02  -1.54e-02     5
+0     1.00e+00   0.00e+00   1.00e+00        n/a        n/a     4
+1     2.80e-01   3.41e-01   6.22e-01  -7.20e-01  -3.78e-01     7
+2     2.12e-01   3.06e-02   2.43e-01  -6.81e-02  -3.75e-02     6
+3     1.35e-01   3.28e-02   1.68e-01  -7.72e-02  -4.44e-02     6
+4     9.79e-02   1.56e-02   1.13e-01  -3.71e-02  -2.15e-02     6
+5     7.13e-02   1.11e-02   8.25e-02  -2.65e-02  -1.54e-02     6
 </pre></div></div>
 </div>
 <p>(this takes a while …)</p>

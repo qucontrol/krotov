@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.conversions &mdash; Krotov 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>krotov.conversions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for krotov.conversions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Routines for structural conversions.</span>
+
+<span class="sd">Conversion between between data structures used by QuTiP&#39;s</span>
+<span class="sd">:func:`~qutip.mesolve.mesolve` and data structures used internally in an</span>
+<span class="sd">optimization with Krotov&#39;s method. This includes the</span>
+<span class="sd">time discretization of control fields, and in particular converting between a</span>
+<span class="sd">discretization defined on the *points* of the time grid (&quot;controls&quot;) and</span>
+<span class="sd">piecewise-constant &quot;pulses&quot; defined on the *intervals* of the time grid.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;control_onto_interval&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;discretize&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;extract_controls&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;extract_controls_mapping&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;plug_in_pulse_values&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pulse_onto_tlist&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pulse_options_dict_to_list&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_nested_list_shallow_copy</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">l</span>
+
+
+<span class="k">def</span> <span class="nf">_tlist_midpoints</span><span class="p">(</span><span class="n">tlist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate array of midpoints in `tlist`&quot;&quot;&quot;</span>
+    <span class="n">tlist_midpoints</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">tlist_midpoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">tlist</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tlist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tlist_midpoints</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_find_in_list</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">list_to_search</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return index of `val` in `list_to_search`, or -1</span>
+
+<span class="sd">    Works even if `val` is a `numpy.ndarray`. In this case, comparison is by</span>
+<span class="sd">    object identity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list_to_search</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="n">val</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">list_to_search</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+
+<div class="viewcode-block" id="discretize"><a class="viewcode-back" href="../../API/krotov.conversions.html#krotov.conversions.discretize">[docs]</a><span class="k">def</span> <span class="nf">discretize</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,),</span> <span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Discretize the given `control` onto the `tlist` time grid</span>
+
+<span class="sd">    If `control` is a callable, return array of values for `control` evaluated</span>
+<span class="sd">    at all points in `tlist`.  If `control` is already discretized, check that</span>
+<span class="sd">    the discretization matches `tlist`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        control (callable or numpy.ndarray): control to be discretized. If</span>
+<span class="sd">            callable, must take time value `t` as its first argument.</span>
+<span class="sd">        tlist (numpy.ndarray): time grid to discretize one</span>
+<span class="sd">        args (tuple or list): If `control` is a callable, further positional</span>
+<span class="sd">            arguments to pass to `control`. The default passes a single value</span>
+<span class="sd">            None, to match the requirements for a callable control function in</span>
+<span class="sd">            QuTiP.</span>
+<span class="sd">        kwargs (None or dict): If `control` is callable, further keyword</span>
+<span class="sd">            arguments to pass to `control`. If None, no keyword arguments will</span>
+<span class="sd">            be passed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Discretized array of real `control` values, same length</span>
+<span class="sd">            as `tlist`</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If `control` is not a function that takes two arguments</span>
+<span class="sd">            (`t`, None), or a numpy array</span>
+<span class="sd">        ValueError: If `control` is numpy array of incorrect size.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ComplexWarning</span><span class="p">)</span>
+    <span class="c1"># see https://stackoverflow.com/q/54814133/152544</span>
+    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">control</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># relies on np.ComplexWarning being thrown as an error</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">control</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">],</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+        <span class="c1"># relies on np.ComplexWarning being thrown as an error</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">control</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tlist</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;If control is an array, it must of the same length as tlist&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">control</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;control must be either a callable func(t, args) or a numpy array&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="extract_controls"><a class="viewcode-back" href="../../API/krotov.conversions.html#krotov.conversions.extract_controls">[docs]</a><span class="k">def</span> <span class="nf">extract_controls</span><span class="p">(</span><span class="n">objectives</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract a list of (unique) controls from the `objectives`</span>
+
+<span class="sd">    Controls are unique if they are not the same object, cf.</span>
+<span class="sd">    `Python&#39;s is keyword`_.</span>
+
+<span class="sd">    .. _Python&#39;s is keyword: https://docs.python.org/3/reference/expressions.html#is</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        objectives (list): List of :class:`.Objective` instances</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list of controls in `objectives`</span>
+
+<span class="sd">    See :func:`extract_controls_mapping` for an example.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">controls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i_obj</span><span class="p">,</span> <span class="n">objective</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">objectives</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i_ham</span><span class="p">,</span> <span class="n">ham</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">objective</span><span class="o">.</span><span class="n">H</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ham</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+                <span class="n">control</span> <span class="o">=</span> <span class="n">ham</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">_find_in_list</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">controls</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">controls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">controls</span></div>
+
+
+<span class="k">def</span> <span class="nf">_control_indices_in_nested_list</span><span class="p">(</span><span class="n">nested_list</span><span class="p">,</span> <span class="n">control</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Given a nested list (QuTiP Hamiltonian), find the indices that contain</span>
+<span class="sd">    `control` and return them as a list&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="n">control</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<div class="viewcode-block" id="extract_controls_mapping"><a class="viewcode-back" href="../../API/krotov.conversions.html#krotov.conversions.extract_controls_mapping">[docs]</a><span class="k">def</span> <span class="nf">extract_controls_mapping</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">controls</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract a map of where `controls` are used in `objectives`</span>
+
+<span class="sd">    The result is a nested list where the first index relates to the</span>
+<span class="sd">    `objectives`, the second index relates to the Hamiltonian (0) or the</span>
+<span class="sd">    `c_ops` (1...), and the third index relates to the `controls`.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; import qutip</span>
+<span class="sd">        &gt;&gt;&gt; import krotov</span>
+<span class="sd">        &gt;&gt;&gt; X, Y, Z = qutip.Qobj(), qutip.Qobj(), qutip.Qobj() # dummy Hams</span>
+<span class="sd">        &gt;&gt;&gt; u1, u2 = np.array([]), np.array([])                # dummy controls</span>
+<span class="sd">        &gt;&gt;&gt; psi0, psi_tgt = qutip.Qobj(), qutip.Qobj()         # dummy states</span>
+
+<span class="sd">        &gt;&gt;&gt; H1 = [X, [Y, u1], [Z, u1]]  # ham for first objective</span>
+<span class="sd">        &gt;&gt;&gt; H2 = [X, [Y, u2]]           # ham for second objective</span>
+<span class="sd">        &gt;&gt;&gt; c_ops = [[[X, u1]], [[Y, u2]]]</span>
+<span class="sd">        &gt;&gt;&gt; objectives = [</span>
+<span class="sd">        ...     krotov.Objective(</span>
+<span class="sd">        ...         initial_state=psi0,</span>
+<span class="sd">        ...         target=psi_tgt,</span>
+<span class="sd">        ...         H=H1,</span>
+<span class="sd">        ...         c_ops=c_ops</span>
+<span class="sd">        ...     ),</span>
+<span class="sd">        ...     krotov.Objective(</span>
+<span class="sd">        ...         initial_state=psi0,</span>
+<span class="sd">        ...         target=psi_tgt,</span>
+<span class="sd">        ...         H=H2,</span>
+<span class="sd">        ...         c_ops=c_ops</span>
+<span class="sd">        ...     )</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; controls = extract_controls(objectives)</span>
+<span class="sd">        &gt;&gt;&gt; assert controls == [u1, u2]</span>
+
+<span class="sd">        &gt;&gt;&gt; controls_mapping = extract_controls_mapping(objectives, controls)</span>
+<span class="sd">        &gt;&gt;&gt; controls_mapping</span>
+<span class="sd">        [[[[1, 2], []], [[0], []], [[], [0]]], [[[], [1]], [[0], []], [[], [0]]]]</span>
+
+<span class="sd">        The structure should be read as follows:</span>
+
+<span class="sd">        * For the first objective (0), in the Hamiltonian (0), where is</span>
+<span class="sd">          the first pulse (0) used? (answer: in ``H1[1]`` and ``H1[2]``)</span>
+
+<span class="sd">            &gt;&gt;&gt; controls_mapping[0][0][0]</span>
+<span class="sd">            [1, 2]</span>
+
+<span class="sd">        * For the second objective (1), in the second ``c_ops`` (2), where is</span>
+<span class="sd">          the second pulse (1) used? (answer: in ``c_ops[1][0]``)</span>
+
+<span class="sd">            &gt;&gt;&gt; controls_mapping[1][2][1]</span>
+<span class="sd">            [0]</span>
+
+<span class="sd">        * For the second objective (1), in the Hamiltonian (0), where is the</span>
+<span class="sd">          first pulse (0) used? (answer: nowhere)</span>
+
+<span class="sd">            &gt;&gt;&gt; controls_mapping[1][0][0]</span>
+<span class="sd">            []</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">controls_mapping</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">objective</span> <span class="ow">in</span> <span class="n">objectives</span><span class="p">:</span>
+        <span class="n">controls_mapping</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">controls_mapping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">_control_indices_in_nested_list</span><span class="p">(</span><span class="n">objective</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">controls</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">c_op</span> <span class="ow">in</span> <span class="n">objective</span><span class="o">.</span><span class="n">c_ops</span><span class="p">:</span>
+            <span class="n">controls_mapping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">_control_indices_in_nested_list</span><span class="p">(</span><span class="n">c_op</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">controls</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">controls_mapping</span></div>
+
+
+<div class="viewcode-block" id="pulse_options_dict_to_list"><a class="viewcode-back" href="../../API/krotov.conversions.html#krotov.conversions.pulse_options_dict_to_list">[docs]</a><span class="k">def</span> <span class="nf">pulse_options_dict_to_list</span><span class="p">(</span><span class="n">pulse_options</span><span class="p">,</span> <span class="n">controls</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert `pulse_options` into a list</span>
+
+<span class="sd">    Given a dict `pulse_options` that contains an options-dict</span>
+<span class="sd">    for every control in `controls` (cf. :func:`.optimize_pulses`), return a</span>
+<span class="sd">    list of the options-dicts in the same order as `controls`.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: if `pulse_options` to not contain all of the `controls`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;krotov&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pulse_options</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">controls</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;pulse_options contains extra elements that are not in `controls`&quot;</span>
+        <span class="p">)</span>
+    <span class="n">pulse_options_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">controls</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">opts</span> <span class="o">=</span> <span class="n">pulse_options</span><span class="p">[</span><span class="n">control</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>  <span class="c1"># control is numpy array</span>
+                <span class="n">opts</span> <span class="o">=</span> <span class="n">pulse_options</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">control</span><span class="p">)]</span>
+            <span class="n">pulse_options_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;The control </span><span class="si">%s</span><span class="s2"> does not have any associated pulse options&quot;</span>
+                <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">pulse_options_list</span></div>
+
+
+<div class="viewcode-block" id="plug_in_pulse_values"><a class="viewcode-back" href="../../API/krotov.conversions.html#krotov.conversions.plug_in_pulse_values">[docs]</a><span class="k">def</span> <span class="nf">plug_in_pulse_values</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">time_index</span><span class="p">,</span> <span class="n">conjugate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plug pulse values into H</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        H (list): nested list for a QuTiP-time-dependent operator</span>
+<span class="sd">        pulses (list): list of pulses in array format</span>
+<span class="sd">        mapping (list): nested list: for each pulse, a list of indices in `H`</span>
+<span class="sd">            where pulse value should be inserted</span>
+<span class="sd">        time_index (int): Index of the value of each pulse that should be</span>
+<span class="sd">            plugged in</span>
+<span class="sd">        conjugate (bool): If True, use conjugate complex pulse values</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: a list with the same structure as `H` that contains the same</span>
+<span class="sd">        :class:`~qutip.Qobj` operators as `H`, but where every time dependency</span>
+<span class="sd">        is replaced by the value of the appropriate pulse at `time_index`.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; X, Y, Z = &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39; # dummy Hams, these would normally be Qobjs</span>
+<span class="sd">        &gt;&gt;&gt; u1, u2 = np.array([0, 10, 0]), np.array([0, 20, 0])</span>
+<span class="sd">        &gt;&gt;&gt; H = [X, [X, u1], [Y, u1], [Z, u2]]</span>
+<span class="sd">        &gt;&gt;&gt; pulses = [u1, u2]</span>
+<span class="sd">        &gt;&gt;&gt; mapping = [[1, 2], [3]]  # u1 is in H[1] and H[2], u2 is in H[3]</span>
+<span class="sd">        &gt;&gt;&gt; plug_in_pulse_values(H, pulses, mapping, time_index=1)</span>
+<span class="sd">        [&#39;X&#39;, [&#39;X&#39;, 10], [&#39;Y&#39;, 10], [&#39;Z&#39;, 20]]</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        It is of no consequence whether `H` contains the `pulses`, as long as</span>
+<span class="sd">        it has the right structure::</span>
+
+<span class="sd">            &gt;&gt;&gt; H = [X, [X, None], [Y, None], [Z, None]]</span>
+<span class="sd">            &gt;&gt;&gt; plug_in_pulse_values(H, pulses, mapping, time_index=1)</span>
+<span class="sd">            [&#39;X&#39;, [&#39;X&#39;, 10], [&#39;Y&#39;, 10], [&#39;Z&#39;, 20]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">_nested_list_shallow_copy</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">pulse_mapping</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pulses</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pulse_mapping</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">conjugate</span><span class="p">:</span>
+                <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">pulse</span><span class="p">[</span><span class="n">time_index</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pulse</span><span class="p">[</span><span class="n">time_index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">H</span></div>
+
+
+<div class="viewcode-block" id="control_onto_interval"><a class="viewcode-back" href="../../API/krotov.conversions.html#krotov.conversions.control_onto_interval">[docs]</a><span class="k">def</span> <span class="nf">control_onto_interval</span><span class="p">(</span><span class="n">control</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert control on time grid to control on time grid intervals</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        control (numpy.ndarray): values of controls on time grid</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: pulse defined on the intervals of the time grid</span>
+
+<span class="sd">    The value for the first and last interval will be identical to the values</span>
+<span class="sd">    at ``control[0]`` and ``control[-1]`` to ensure proper boundary conditions.</span>
+<span class="sd">    All other intervals are calculated such that the original values in</span>
+<span class="sd">    `control` are the average of the interval-values before and after that</span>
+<span class="sd">    point in time.</span>
+
+<span class="sd">    The :func:`pulse_onto_tlist` function calculates the inverse to this</span>
+<span class="sd">    transformation.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        For a callable `control`, call :func:`discretize` first.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">control</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>  <span class="c1"># must be 1D array</span>
+        <span class="n">pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">control</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="n">pulse</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">pulse</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">control</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pulse</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">pulse</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">control</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">pulse</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Not implemented: control type </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">control</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pulse_onto_tlist"><a class="viewcode-back" href="../../API/krotov.conversions.html#krotov.conversions.pulse_onto_tlist">[docs]</a><span class="k">def</span> <span class="nf">pulse_onto_tlist</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert `pulse` from time-grid intervals to time-grid points</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pulse (numpy.ndarray): values defined on the interval of a time grid</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: values of the control defined directly on the time grid</span>
+<span class="sd">        points. The size of the returned array is one greater than the size</span>
+<span class="sd">        of `pulse`.</span>
+
+<span class="sd">    Inverse of :func:`control_onto_interval`.</span>
+
+<span class="sd">    The first and last value are also the first and last value of the returned</span>
+<span class="sd">    control field. For all other points, the value is the average of the value</span>
+<span class="sd">    of the input values before and after the point.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pulse</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pulse</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+    <span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pulse</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">control</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">pulse</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pulse</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">control</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pulse</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">control</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 16, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>krotov.result module &mdash; Krotov 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="../_static/version-menu.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="krotov.second_order module" href="krotov.second_order.html" />
+    <link rel="prev" title="krotov.propagators module" href="krotov.propagators.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_bibliography.html">References</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="krotov.html">API of the Krotov package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="krotov.convergence.html">krotov.convergence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.conversions.html">krotov.conversions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.info_hooks.html">krotov.info_hooks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.objectives.html">krotov.objectives module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.optimize.html">krotov.optimize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.parallelization.html">krotov.parallelization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.propagators.html">krotov.propagators module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.result module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.second_order.html">krotov.second_order module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.shapes.html">krotov.shapes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="krotov.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="krotov.html">krotov package</a> &raquo;</li>
+        
+      <li>krotov.result module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-krotov.result">
+<span id="krotov-result-module"></span><h1>krotov.result module<a class="headerlink" href="#module-krotov.result" title="Permalink to this headline">¶</a></h1>
+<p>Module defining the <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object that is returned by
+<a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Classes:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></a></p></td>
+<td><p>Result of a Krotov optimization with <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a></p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="krotov.result.Result">
+<em class="property">class </em><code class="sig-prename descclassname">krotov.result.</code><code class="sig-name descname">Result</code><a class="reference internal" href="../_modules/krotov/result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.result.Result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of a Krotov optimization with <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p>
+<dl class="attribute">
+<dt id="krotov.result.Result.objectives">
+<code class="sig-name descname">objectives</code><a class="headerlink" href="#krotov.result.Result.objectives" title="Permalink to this definition">¶</a></dt>
+<dd><p>The control objectives</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective">Objective</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.tlist">
+<code class="sig-name descname">tlist</code><a class="headerlink" href="#krotov.result.Result.tlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>The time grid values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.iters">
+<code class="sig-name descname">iters</code><a class="headerlink" href="#krotov.result.Result.iters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iteration numbers, starting at 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.iter_seconds">
+<code class="sig-name descname">iter_seconds</code><a class="headerlink" href="#krotov.result.Result.iter_seconds" title="Permalink to this definition">¶</a></dt>
+<dd><p>for each iteration number, the number of
+seconds that were spent in the optimization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.info_vals">
+<code class="sig-name descname">info_vals</code><a class="headerlink" href="#krotov.result.Result.info_vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>For each iteration, the return value of <cite>info_hook</cite>,
+or None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.tau_vals">
+<code class="sig-name descname">tau_vals</code><a class="headerlink" href="#krotov.result.Result.tau_vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>for each iteration, a list of complex
+overlaps between the target state and the forward-propagated state
+for each objective, assuming <a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.target</span></code></a> contains the
+target state. If there is no target state, an empty list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#complex" title="(in Python v3.7)">complex</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.guess_controls">
+<code class="sig-name descname">guess_controls</code><a class="headerlink" href="#krotov.result.Result.guess_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of the guess controls in
+array format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)">numpy.ndarray</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.optimized_controls">
+<code class="sig-name descname">optimized_controls</code><a class="headerlink" href="#krotov.result.Result.optimized_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of the optimized control
+fields, in the order corresponding to <a class="reference internal" href="#krotov.result.Result.guess_controls" title="krotov.result.Result.guess_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">guess_controls</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)">numpy.ndarray</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.controls_mapping">
+<code class="sig-name descname">controls_mapping</code><a class="headerlink" href="#krotov.result.Result.controls_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>A nested list that indicates where in
+<a class="reference internal" href="#krotov.result.Result.objectives" title="krotov.result.Result.objectives"><code class="xref py py-attr docutils literal notranslate"><span class="pre">objectives</span></code></a> the <a class="reference internal" href="#krotov.result.Result.guess_controls" title="krotov.result.Result.guess_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">guess_controls</span></code></a> and
+<a class="reference internal" href="#krotov.result.Result.optimized_controls" title="krotov.result.Result.optimized_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">optimized_controls</span></code></a> are used (as returned by
+<a class="reference internal" href="krotov.conversions.html#krotov.conversions.extract_controls_mapping" title="krotov.conversions.extract_controls_mapping"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_controls_mapping()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.all_pulses">
+<code class="sig-name descname">all_pulses</code><a class="headerlink" href="#krotov.result.Result.all_pulses" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the optimization was performed with
+<code class="docutils literal notranslate"><span class="pre">store_all_pulses=True</span></code>, for each iteration, a list of the
+optimized pulses (in the order corresponding to
+<a class="reference internal" href="#krotov.result.Result.guess_controls" title="krotov.result.Result.guess_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">guess_controls</span></code></a>).
+These pulses are defined at midpoints of the <cite>tlist</cite> intervals.
+Empty list if <code class="docutils literal notranslate"><span class="pre">store_all_pulses=False</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.states">
+<code class="sig-name descname">states</code><a class="headerlink" href="#krotov.result.Result.states" title="Permalink to this definition">¶</a></dt>
+<dd><p>for each objective, a list of states
+for each value in <cite>tlist</cite>, obtained from propagation under the
+final optimized control fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.4)">qutip.Qobj</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.start_local_time">
+<code class="sig-name descname">start_local_time</code><a class="headerlink" href="#krotov.result.Result.start_local_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time stamp of when the
+optimization started</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/time.html#time.struct_time" title="(in Python v3.7)">time.struct_time</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.end_local_time">
+<code class="sig-name descname">end_local_time</code><a class="headerlink" href="#krotov.result.Result.end_local_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time stamp of when the optimization
+ended</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/time.html#time.struct_time" title="(in Python v3.7)">time.struct_time</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.message">
+<code class="sig-name descname">message</code><a class="headerlink" href="#krotov.result.Result.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of why <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> completed,
+E.g, “Reached 1000 iterations”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="krotov.result.Result.time_fmt">
+<code class="sig-name descname">time_fmt</code><em class="property"> = '%Y-%m-%d %H:%M:%S'</em><a class="headerlink" href="#krotov.result.Result.time_fmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format used in <a class="reference internal" href="#krotov.result.Result.start_local_time_str" title="krotov.result.Result.start_local_time_str"><code class="xref py py-attr docutils literal notranslate"><span class="pre">start_local_time_str</span></code></a> and
+<a class="reference internal" href="#krotov.result.Result.end_local_time_str" title="krotov.result.Result.end_local_time_str"><code class="xref py py-attr docutils literal notranslate"><span class="pre">end_local_time_str</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.result.Result.start_local_time_str">
+<em class="property">property </em><code class="sig-name descname">start_local_time_str</code><a class="headerlink" href="#krotov.result.Result.start_local_time_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#krotov.result.Result.start_local_time" title="krotov.result.Result.start_local_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">start_local_time</span></code></a> attribute formatted as a string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.result.Result.end_local_time_str">
+<em class="property">property </em><code class="sig-name descname">end_local_time_str</code><a class="headerlink" href="#krotov.result.Result.end_local_time_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#krotov.result.Result.end_local_time" title="krotov.result.Result.end_local_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">end_local_time</span></code></a> attribute formatted as a string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.result.Result.optimized_objectives">
+<em class="property">property </em><code class="sig-name descname">optimized_objectives</code><a class="headerlink" href="#krotov.result.Result.optimized_objectives" title="Permalink to this definition">¶</a></dt>
+<dd><p>A copy of the <a class="reference internal" href="#krotov.result.Result.objectives" title="krotov.result.Result.objectives"><code class="xref py py-attr docutils literal notranslate"><span class="pre">objectives</span></code></a> with the
+<a class="reference internal" href="#krotov.result.Result.optimized_controls" title="krotov.result.Result.optimized_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">optimized_controls</span></code></a> plugged in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective">Objective</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.result.Result.objectives_with_controls">
+<code class="sig-name descname">objectives_with_controls</code><span class="sig-paren">(</span><em class="sig-param">controls</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/result.html#Result.objectives_with_controls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.result.Result.objectives_with_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of objectives with the given <cite>controls</cite> plugged in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>controls</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><em>numpy.ndarray</em></a><em>]</em>) – A list of control fields, defined
+on the points of <a class="reference internal" href="#krotov.result.Result.tlist" title="krotov.result.Result.tlist"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tlist</span></code></a>. Must be of the same length as
+<a class="reference internal" href="#krotov.result.Result.guess_controls" title="krotov.result.Result.guess_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">guess_controls</span></code></a> and <a class="reference internal" href="#krotov.result.Result.optimized_controls" title="krotov.result.Result.optimized_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">optimized_controls</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A copy of <a class="reference internal" href="#krotov.result.Result.objectives" title="krotov.result.Result.objectives"><code class="xref py py-attr docutils literal notranslate"><span class="pre">objectives</span></code></a>, where all control
+fields are replaced by the elements of the <cite>controls</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective">Objective</a>]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><strong>ValueError</strong></a> – If <cite>controls</cite> does not have the same number controls as
+    <a class="reference internal" href="#krotov.result.Result.guess_controls" title="krotov.result.Result.guess_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">guess_controls</span></code></a> and <a class="reference internal" href="#krotov.result.Result.optimized_controls" title="krotov.result.Result.optimized_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">optimized_controls</span></code></a>, or if
+    any <cite>controls</cite> are not defined on the points of the time grid.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For plugging in the optimized controls, the
+<a class="reference internal" href="#krotov.result.Result.optimized_objectives" title="krotov.result.Result.optimized_objectives"><code class="xref py py-attr docutils literal notranslate"><span class="pre">optimized_objectives</span></code></a> attribute is equivalent to
+<code class="docutils literal notranslate"><span class="pre">result.objectives_with_controls(result.optimized_controls)</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.result.Result.load">
+<em class="property">classmethod </em><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">objectives=None</em>, <em class="sig-param">finalize=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/result.html#Result.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.result.Result.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object from a <a class="reference internal" href="#krotov.result.Result.dump" title="krotov.result.Result.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dump()</span></code></a> file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – The file from which to load the <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.
+Must be in the format created by <a class="reference internal" href="#krotov.result.Result.dump" title="krotov.result.Result.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dump()</span></code></a>.</p></li>
+<li><p><strong>objectives</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><em>Objective</em></a><em>]</em>) – If given, after loading
+<a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> from the given <cite>filename</cite>, overwrite
+<a class="reference internal" href="#krotov.result.Result.objectives" title="krotov.result.Result.objectives"><code class="xref py py-attr docutils literal notranslate"><span class="pre">objectives</span></code></a> with the given <cite>objectives</cite>. This is
+necessary because <a class="reference internal" href="#krotov.result.Result.dump" title="krotov.result.Result.dump"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dump()</span></code></a> does not preserve time-dependent
+controls that are Python functions.</p></li>
+<li><p><strong>finalize</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If given as True, make sure that the
+<a class="reference internal" href="#krotov.result.Result.optimized_controls" title="krotov.result.Result.optimized_controls"><code class="xref py py-attr docutils literal notranslate"><span class="pre">optimized_controls</span></code></a> are properly finalized. This allows
+to load a <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> that was dumped before
+<a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> finished, e.g. by
+<a class="reference internal" href="krotov.convergence.html#krotov.convergence.dump_result" title="krotov.convergence.dump_result"><code class="xref py py-func docutils literal notranslate"><span class="pre">dump_result()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> instance loaded from <cite>filename</cite></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result">Result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="krotov.result.Result.dump">
+<code class="sig-name descname">dump</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/result.html#Result.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.result.Result.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump the <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> to a binary <a class="reference external" href="https://docs.python.org/3.7/library/pickle.html#module-pickle" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> file.</p>
+<p>The original <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object can be restored from the resulting
+file using <a class="reference internal" href="#krotov.result.Result.load" title="krotov.result.Result.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a>. However, time-dependent control fields that
+are callables/functions will not be preserved, as they are not
+“pickleable”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of file to which to dump the <a class="reference internal" href="#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="krotov.second_order.html" class="btn btn-neutral float-right" title="krotov.second_order module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="krotov.propagators.html" class="btn btn-neutral float-left" title="krotov.propagators module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Dec 16, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
