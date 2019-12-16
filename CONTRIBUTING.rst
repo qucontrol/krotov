@@ -414,15 +414,44 @@ Deploy the documentation
 The documentation is automatically deployed to
 https://qucontrol.github.io/krotov/ (the gh-pages_ associated with the
 :mod:`krotov` package's Github repository) every time commits are pushed to
-Github. This is done via the Travis continuous integration service and Doctr_.
+Github. This is done via the Travis_ Continuous Integration service and Doctr_.
 The documentation for all versions of :mod:`krotov` is visible on the
-`gh-pages` git branch. Any changes that are committed and pushed from this
+``gh-pages`` git branch. Any changes that are committed and pushed from this
 branch will be deployed to the online documentation. Do not routinely perform
-manual edits on the `gh-pages` branch! Let Doctr_ do its job of automatically
+manual edits on the ``gh-pages`` branch! Let Doctr_ do its job of automatically
 deploying documentation instead.
 
+The deployment of the documentation is set up roughly as follows:
+
+* In ``.travis.yml``, there is "Docs" job set up that executes the
+  ``.travis/docs.sh`` script.
+* The ``.travis/docs.sh`` script builds the HTML documentation, as well as
+  downloadable versions of the documentation (tagged released only!). It then
+  calls ``doctr deploy`` to deploy to ``gh-pages``.
+* ``doctr deploy`` copies the built documentation to the appropriate subfolder
+  on ``gh-pages``. It then gets the script ``.travis/docs_post_process.py``
+  script from the release branch and executes it.
+* The ``.travis/docs_post_process.py`` script (using the
+  ``.travis/versions.py`` module) analyzes *all* folders on ``gh-pages`` and
+  generates a ``versions.json`` file on ``gh-pages``. This file contains all
+  the information required to render the navigation menu in the bottom left
+  corner of the online documentation. That menu is rendered by the javascript
+  in ``./docs/_static/version-menu.js`` (cf. ``html_js_files =
+  ["version-menu.js"]`` in ``docs/conf.py``). The
+  ``.travis/docs_post_process.py`` script also generates an ``index.html``
+  pointing to the most recent stable release.
+* ``doctr deploy`` commits the rendered documentation as well as the
+  ``versions.json`` and ``index.html`` files and pushes the ``gh-pages``
+  branch. It does this using the deploy key in ``./docs/doctr_deploy_key.enc``.
+  That file contains the private key matching the public ``doctr`` key in
+  https://github.com/qucontrol/krotov/settings/keys. The private key itself is
+  encrypted with `Travis' public key`_, so that only Travis can decrypt it with
+  their private key, and use it to authenticate while pushing to ``gh-pages``.
+
 .. _Doctr: https://drdoctr.github.io
+.. _Travis: https://travis-ci.org
 .. _gh-pages: https://pages.github.com
+.. _Travis' public key: https://docs.travis-ci.com/user/encryption-keys/
 
 .. _ContributeExamples:
 
