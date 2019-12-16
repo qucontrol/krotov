@@ -4,7 +4,7 @@
 
 // Insert a dynamic version-menu in the bottom of the sidebar for the
 // sphinx_rtd_theme. It reads data from a file versions.json in the gh-pages
-// root directory.
+// root directory. This is for Doctr-hosted documentation.
 
 function getCurrentFolder() {
   // Extract version folder under the assumpgion that the URL is of the form
@@ -75,15 +75,21 @@ function _addVersionsMenu(version_data) {
                        + "'>" + version_data["labels"][folder] + "</a></dd>";
     }
   }
-  if (version_data["downloads"][current_folder].length > 0){
+  var downloads = version_data["downloads"][current_folder];
+  if (downloads.length > 0){
     var inner_html = inner_html +
           "<dt>Downloads</dt>";
-    for (i in version_data["downloads"][current_folder]) {
-      var download_label = version_data["downloads"][current_folder][i][0];
-      var download_file = version_data["downloads"][current_folder][i][1];
-      var inner_html = inner_html + "<dd><a href='"
-                      + root_url + '/' + download_file
-                      + "'>" + download_label + "</a></dd>";
+    for (i in downloads) {
+      var download_label = downloads[i][0];
+      var download_url = downloads[i][1];
+      if (!(/^(https?|ftp):/.test(download_url))){
+          if (!download_url.startsWith('/')){
+              var download_url = '/' + download_url;
+          }
+          var download_url = root_url + download_url;
+      }
+      var inner_html = inner_html + "<dd><a href='" + download_url + "'>"
+                     + download_label + "</a></dd>";
     }
   }
   var github_project_url = getGithubProjectUrl();
