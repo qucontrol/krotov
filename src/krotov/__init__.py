@@ -13,7 +13,7 @@ estimators for second-order updates.
 """
 # fmt: off
 
-__version__ = '1.0.0-rc1'
+__version__ = '1.0.0-rc1+dev'
 
 __arxiv__ = '1902.11284'
 
