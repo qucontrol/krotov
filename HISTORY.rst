@@ -2,7 +2,7 @@
 History
 =======
 
-1.0.0 (2019-12-15)
+1.0.0 (2019-12-16)
 ------------------
 
 * Update: Citation info now points to `SciPost paper <https://scipost.org/SciPostPhys.7.6.080>`_ (`#61`_)
