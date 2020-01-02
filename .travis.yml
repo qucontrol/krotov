@@ -65,7 +65,6 @@ install:
   - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
   - travis_wait source .travis/texlive/texlive_install.sh
   - pip install tox
-  - pip install codecov
   - pip install --upgrade cython
   - pip freeze
   - printenv
@@ -84,4 +83,4 @@ script:
     fi
   - echo "DONE"
 after_success:
-  - if [[ "${DOCS}" != "true" ]]; then codecov; fi
+  - if [[ "${TOXENV}" =~ test ]]; then tox -e $(echo "${TOXENV}" | sed s/test/runcmd/) -- codecov; fi
