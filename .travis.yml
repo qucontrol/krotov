@@ -83,4 +83,4 @@ script:
     fi
   - echo "DONE"
 after_success:
-  - if [[ "${TOXENV}" =~ test ]]; then tox -e $(echo "${TOXENV}" | sed s/test/runcmd/) -- codecov; fi
+  - if [[ "${TOXENV}" =~ test ]]; then tox -c tox-pyenv.ini -e $(echo "${TOXENV}" | sed s/test/runcmd/) -- codecov; fi
