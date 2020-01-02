@@ -32,7 +32,7 @@ help:  ## show this help
 bootstrap: ## verify that tox is available and pre-commit hooks are active
 	python scripts/bootstrap.py
 
-clean:  ## remove all build, test, coverage, and Python artifacts, as well as environments
+clean: ## remove all build, test, coverage, and Python artifacts, as well as environments
 	python scripts/clean.py all
 
 clean-build: ## remove build artifacts
@@ -45,7 +45,7 @@ clean-venv: ## remove tox virtual environments
 	python scripts/clean.py venv
 
 clean-docs: ## remove documentation artifacts
-	python docs/clean.py
+	python scripts/clean.py docs
 
 flake8-check: bootstrap ## check style with flake8
 	$(TOX) -e run-flake8
