@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to the Krotov package’s documentation! &mdash; Krotov 1.0.0+dev (b2f9cb4) documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="_static/doctr-versions-menu.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Krotov Python Package" href="01_overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0+dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to the Krotov package’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="welcome-to-the-krotov-package-s-documentation">
+<h1>Welcome to the Krotov package’s documentation!<a class="headerlink" href="#welcome-to-the-krotov-package-s-documentation" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://github.com/qucontrol/krotov"><img alt="Source code on Github" src="https://img.shields.io/badge/github-qucontrol/krotov-blue.svg" /></a>
+<a class="reference external image-reference" href="https://qucontrol.github.io/krotov"><img alt="Documentation" src="https://img.shields.io/badge/docs-doctr-blue.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/krotov"><img alt="Krotov on the Python Package Index" src="https://img.shields.io/pypi/v/krotov.svg" /></a>
+<a class="reference external image-reference" href="https://gitter.im/qucontrol_krotov/Lobby?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img alt="Join the chat at https://gitter.im/qucontrol_krotov/Lobby" src="https://badges.gitter.im/qucontrol_krotov/Lobby.svg" /></a>
+<a class="reference external image-reference" href="https://travis-ci.org/qucontrol/krotov"><img alt="Travis Continuous Integration" src="https://img.shields.io/travis/qucontrol/krotov.svg" /></a>
+<a class="reference external image-reference" href="https://ci.appveyor.com/project/goerz/krotov"><img alt="AppVeyor Continuous Integration" src="https://ci.appveyor.com/api/projects/status/1cbm24w04jmxjpjh?svg=true" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/qucontrol/krotov"><img alt="Codecov" src="https://codecov.io/gh/qucontrol/krotov/branch/master/graph/badge.svg" /></a>
+<a class="reference external image-reference" href="https://opensource.org/licenses/BSD-3-Clause"><img alt="BSD License" src="https://img.shields.io/badge/License-BSD-green.svg" /></a>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.0.0?filepath=docs%2Fnotebooks"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.21468/SciPostPhys.7.6.080"><img alt="DOI" src="https://img.shields.io/badge/DOI-10.21468/SciPostPhys.7.6.080-blue.svg" /></a>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_overview.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_overview.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_overview.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_overview.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_overview.html#citing-the-krotov-package">Citing the Krotov Package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#report-bugs">Report Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#submit-feedback">Submit Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#development-prerequisites">Development Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#branching-model">Branching Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#commit-message-guidelines">Commit Message Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#write-documentation">Write Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#deploy-the-documentation">Deploy the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#contribute-examples">Contribute Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_contributing.html#developers-how-tos">Developers’ How-Tos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_authors.html#development-lead">Development Lead</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_authors.html#development-team">Development Team</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_authors.html#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_history.html">History</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_history.html#id1">1.0.0 (2019-12-16)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_history.html#id2">0.5.0 (2019-12-04)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_history.html#id3">0.4.1 (2019-10-11)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_history.html#id4">0.4.0 (2019-10-08)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_history.html#id5">0.3.0 (2019-03-01)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_history.html#id6">0.2.0 (2019-02-14)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_history.html#id7">0.1.0 (2018-12-24)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_krotovs_method.html">Krotov’s Method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#the-quantum-control-problem">The quantum control problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#optimization-functional">Optimization functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#iterative-control-update">Iterative control update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#first-order-update">First order update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#second-order-update">Second order update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#time-discretization">Time discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#pseudocode">Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#choice-of-a">Choice of λₐ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#complex-controls-and-the-rwa">Complex controls and the RWA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_krotovs_method.html#optimization-in-liouville-space">Optimization in Liouville space</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01_example_simple_state_to_state.html">Optimization of a State-to-State Transfer in a Two-Level-System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02_example_lambda_system_rwa_complex_pulse.html">Optimization of a State-to-State Transfer in a Lambda System in the RWA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03_example_lambda_system_rwa_non_hermitian.html">Optimization of a Dissipative State-to-State Transfer in a Lambda System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_example_dissipative_qubit_reset.html">Optimization of Dissipative Qubit Reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05_example_transmon_xgate.html">Optimization of an X-Gate for a Transmon Qubit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/06_example_3states.html">Optimization of a Dissipative Quantum Gate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/07_example_PE.html">Optimization towards a Perfect Entangler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_example_ensemble.html">Ensemble Optimization for Robust Pulses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/09_example_numpy.html">Optimization with numpy Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="10_howto.html">How-Tos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-optimize-towards-a-quantum-gate">How to optimize towards a quantum gate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-optimize-complex-valued-control-fields">How to optimize complex-valued control fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-use-args-in-time-dependent-control-fields">How to use <cite>args</cite> in time-dependent control fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-stop-the-optimization-when-the-error-crosses-some-threshold">How to stop the optimization when the error crosses some threshold</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-exclude-a-control-from-the-optimization">How to exclude a control from the optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-define-a-new-optimization-functional">How to define a new optimization functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-penalize-population-in-a-forbidden-subspace">How to penalize population in a forbidden subspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-optimize-towards-a-two-qubit-gate-up-to-single-qubit-corrections">How to optimize towards a two-qubit gate up to single-qubit corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-optimize-towards-an-arbitrary-perfect-entangler">How to optimize towards an arbitrary perfect entangler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-optimize-in-a-dissipative-system">How to optimize in a dissipative system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-optimize-for-robust-pulses">How to optimize for robust pulses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-apply-spectral-constraints">How to apply spectral constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-limit-the-amplitude-of-the-controls">How to limit the amplitude of the controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-parallelize-the-optimization">How to parallelize the optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-prevent-losing-an-optimization-result">How to prevent losing an optimization result</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-continue-from-a-previous-optimization">How to continue from a previous optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-maximize-numerical-efficiency">How to maximize numerical efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-deal-with-the-optimization-running-out-of-memory">How to deal with the optimization running out of memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_howto.html#how-to-avoid-the-overhead-of-qutip-objects">How to avoid the overhead of QuTiP objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="11_other_methods.html">Other Optimization Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="11_other_methods.html#iterative-schemes-from-variational-calculus">Iterative schemes from variational calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_other_methods.html#krotov-s-method">Krotov’s method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_other_methods.html#gradient-ascent-pulse-engineering-grape">GRadient Ascent Pulse Engineering (GRAPE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_other_methods.html#grape-in-qutip">GRAPE in QuTiP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_other_methods.html#gradient-free-optimization">Gradient-free optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_other_methods.html#choosing-an-optimization-method">Choosing an optimization method</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="12_related_software.html">Related Software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="12_related_software.html#other-implementations-of-quantum-control">Other implementations of quantum control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_related_software.html#accessories">Accessories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="01_overview.html" class="btn btn-neutral float-right" title="Krotov Python Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Michael Goerz et al.
+      <span class="lastupdated">
+        Last updated on Mar 14, 2020.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
