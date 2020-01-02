@@ -7,7 +7,9 @@ with <selection> being one of the following:
 
     tests: remove coverage and pytest caches
 
-    build: remove build/dist/egg/__pycache__ folders
+    build: remove build, dist, egg, __pycache__ folders
+
+    docs: remove built documentation
 
     venv: remove tox environments (.tox folder)
 
@@ -20,19 +22,34 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 
+DOCSDIR = ROOT / 'docs'
+
+DOCSBUILDDIR = DOCSDIR / '_build'
+
+# fmt: off
 FILES_TO_DELETE = {
-    'tests': [(ROOT, '.coverage*'), ROOT / 'htmlcov', ROOT / '.pytest_cache'],
+    'tests': [
+        (ROOT, '.coverage*'),
+        ROOT / 'htmlcov',
+        ROOT / '.pytest_cache'
+    ],
     'build': [
         ROOT / 'build',
         ROOT / 'dist',
         (ROOT / 'src', '*.egg-info'),
-        (ROOT / 'docs', '**/__pycache__'),
-        (ROOT / 'src', '**/__pycache__'),
-        (ROOT / 'tests', '**/__pycache__'),
-        (ROOT / 'scripts', '**/__pycache__'),
+        (ROOT, '[!.]*/**/__pycache__'),
+        (ROOT, '**/.DS_Store'),
     ],
-    'venv': [ROOT / '.tox'],
+    'docs': [
+        DOCSBUILDDIR,
+        (DOCSDIR / 'API', '*.rst'),
+    ],
+    'venv': [
+        ROOT / '.tox',
+        ROOT / '.venv'
+    ],
 }
+# fmt: on
 
 
 def main(selection):
