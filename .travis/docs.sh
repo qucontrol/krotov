@@ -3,9 +3,12 @@ echo "## Generate main html documentation"
 tox -c tox-pyenv.ini -e docs
 
 if [ ! -z "$TRAVIS_TAG" ]; then
-    echo "Deploying as TAG $TRAVIS_TAG"
+
+    echo "Building as tag '$TRAVIS_TAG'"
+
     echo "## Generate documentation downloads"
     mkdir docs/_build/download
+
     echo "### [htmlzip]"
     tox -c tox-pyenv.ini -e docs -- -b html _build_htmlzip
     cd docs || exit
@@ -13,8 +16,22 @@ if [ ! -z "$TRAVIS_TAG" ]; then
     zip -r krotov.html.zip ./krotov.html
     cd ../ || exit
     mv docs/krotov.html.zip docs/_build/download
+
 else
-    echo "Deploying as BRANCH $TRAVIS_BRANCH"
+
+    echo "Building as branch '$TRAVIS_BRANCH'"
+
+    tox -c tox-pyenv.ini -e docs -- -b latex _build/tex
+    cp docs/krotovscheme.pdf docs/oct_decision_tree.pdf docs/_build/tex/
+    tox -c tox-pyenv.ini -e run-cmd -- python docs/build_pdf.py
+    echo "Uploading log" # DEBUG
+    response=$(curl --upload-file "docs/_build/tex/krotov_final.log" "https://paste.c-net.org/") # DEBUG
+    echo "$response" # DEBUG
+    echo "Uploading pdf" # DEBUG
+    response=$(curl --upload-file "docs/_build/tex/krotov.pdf" "https://paste.c-net.org/") # DEBUG
+    echo "$response" # DEBUG
+    echo "Uploaded" # DEBUG
+
 fi
 
 

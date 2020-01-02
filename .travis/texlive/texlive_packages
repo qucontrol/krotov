@@ -10,10 +10,10 @@ collection-langeuropean
 collection-fontsrecommended
 
 # LuaTeX
-luaotfload
+luatexbase luaotfload luatex85 fontspec
 
 # texliveonfly does not detect the following packages automatically
-minted fvextra upquote lineno xstring framed caption
+minted fvextra upquote lineno xstring framed caption xcolor
 
 # project-specific
-cmap fncychap titlesec tabulary varwidth fancyvrb float wrapfig parskip capt-of needspace
+cmap fncychap titlesec tabulary varwidth fancyvrb float wrapfig parskip capt-of needspace emptypage tocloft

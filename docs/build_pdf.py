@@ -8,6 +8,7 @@ You must also have the DejaVu fonts installed on your system
 """
 
 import re
+import os
 import shutil
 import subprocess
 import sys
@@ -111,18 +112,47 @@ def patch_krotov_tex(texfile):
     texfile.write_text(tex, encoding='utf8')
 
 
-def lualatex(texfile):
-    """Run lualatex to compile the given texfile."""
-    subprocess.run(
-        [
-            'lualatex',
-            '--interaction=nonstopmode',
-            '--halt-on-error',
+def latex(
+    texfile,
+    executable='lualatex',
+    texliveonfly=None,
+    stdout=None,
+    log_filename=None,
+):
+    """Run lualatex to compile the given texfile.
+
+    Args:
+        texfile: path-like object pointing to tex file to compile
+        exectuable (str): one of pdflatex, lualatex
+        texliveonfly (bool or None): whether to use texliveonfly. If not given,
+            defaults to True when running on Travis, False otherwise
+    """
+    if texliveonfly is None:
+        if 'TRAVIS' in os.environ:
+            print("Running on Travis: using texliveonfly (%s)" % executable)
+            texliveonfly = True
+        else:
+            print("Not running on Travis: using %s" % executable)
+            texliveonfly = False
+    cmd = [
+        executable,
+        '--interaction=nonstopmode',
+        '--halt-on-error',
+        texfile.name,
+    ]
+    if texliveonfly:
+        cmd = [
+            'texliveonfly',
+            '--compiler=%s' % executable,
             texfile.name,
-        ],
-        cwd=texfile.parent,
-        check=True,
+        ]
+    print(" ".join(cmd))
+    res = subprocess.run(
+        cmd, cwd=texfile.parent, check=True, capture_output=True,
     )
+    if log_filename is not None:
+        with (texfile.parent / log_filename).open("wb") as out_fh:
+            out_fh.write(res.stdout)
 
 
 def main():
@@ -131,10 +161,14 @@ def main():
     if not texfile.is_file():
         print("%s does not exist" % texfile)
         sys.exit(1)
+    print("Patching %s..." % texfile)
     patch_krotov_tex_lines(texfile)
     patch_krotov_tex(texfile)
-    lualatex(texfile)
-    lualatex(texfile)
+    print("Compiling %s..." % texfile)
+    latex(texfile)
+    latex(texfile)
+    latex(texfile, texliveonfly=False, log_filename='krotov_final.log')  # DEBUG
+    print("Done compiling %s" % texfile)
     sys.exit(0)
 
 

@@ -16,7 +16,16 @@ if ! command -v texlua > /dev/null; then
   # Install a minimal system
   ./install-tl --profile=../.travis/texlive/texlive.profile
 
+  # Install fonts
+  #wget http://sourceforge.net/projects/dejavu/files/dejavu/2.37/
+
+  #tar -x --strip=2 -f dejavu-fonts-ttf-2.37.tar.bz2
+  #mkdir -p /tmp/texlive/texmf-dist/fonts/truetype
+  #mv *.ttf /tmp/texlive/texmf-dist/fonts/truetype/
+
   cd ..
+
+
 fi
 
 # Just including texlua so the cache check above works
