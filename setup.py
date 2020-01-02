@@ -31,6 +31,7 @@ requirements = ['glom', 'numpy', 'scipy', 'qutip>=4.3.1', 'uniseg']
 dev_requirements = [
     'better-apidoc==0.3.1',
     'click',
+    'codecov',
     'coverage<5.0',
     # https://github.com/computationalmodelling/nbval/issues/129
     'flake8',
