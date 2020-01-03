@@ -147,11 +147,23 @@ def latex(
             texfile.name,
         ]
     print(" ".join(cmd))
-    res = subprocess.run(
-        cmd, cwd=texfile.parent, check=True, capture_output=True,
-    )
+    try:
+        res = subprocess.run(
+            cmd,
+            cwd=texfile.parent,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as exc_info:
+        print("STDOUT:")
+        print(exc_info.stdout)
+        print("STDERR:")
+        print(exc_info.stderr)
+        print("ERROR: %s" % exc_info)
+        sys.exit(1)
     if log_filename is not None:
-        with (texfile.parent / log_filename).open("wb") as out_fh:
+        with (texfile.parent / log_filename).open("w") as out_fh:
             out_fh.write(res.stdout)
 
 

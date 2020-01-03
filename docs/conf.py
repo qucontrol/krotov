@@ -202,6 +202,8 @@ latex_elements = {
 \setmainfont{DejaVu Serif}
 \setsansfont{DejaVu Sans}
 \setmonofont{DejaVu Sans Mono}
+\usepackage{unicode-math}
+\setmathfont{Latin Modern Math}
 ''',
     'preamble': r'''
 \usepackage[titles]{tocloft}
@@ -235,8 +237,8 @@ latex_elements = {
 \newcommand{\avg}[1]{\langle#1\rangle}
 \newcommand{\Avg}[1]{\left\langle#1\right\rangle}
 \newcommand{\AbsSq}[1]{\left\vert#1\right\vert^2}
-\renewcommand{\Re}[0]{\operatorname{Re}}
-\renewcommand{\Im}[0]{\operatorname{Im}}
+\AtBeginDocument{\renewcommand{\Re}[0]{\operatorname{Re}}}
+\AtBeginDocument{\renewcommand{\Im}[0]{\operatorname{Im}}}
 ''',
     'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
     'printindex': r'\footnotesize\raggedright\printindex',
