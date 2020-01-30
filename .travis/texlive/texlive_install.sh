@@ -19,6 +19,8 @@ if ! command -v texlua > /dev/null; then
   cd ..
 fi
 
+tlmgr update --self
+
 # Just including texlua so the cache check above works
 tlmgr install luatex
 
