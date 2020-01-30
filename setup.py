@@ -32,8 +32,7 @@ dev_requirements = [
     'better-apidoc==0.3.1',
     'click',
     'codecov',
-    'coverage<5.0',
-    # https://github.com/computationalmodelling/nbval/issues/129
+    'coverage>5.0',
     'flake8',
     'gitpython',
     'isort',
