@@ -74,6 +74,8 @@ cache:
     - $HOME/.texlive
 script:
   - set -e
+  - if [[ "${TOXENV}" =~ test ]]; then tox -c tox-pyenv.ini -e $(echo "${TOXENV}" | sed s/test/runcmd/) -- pip uninstall -y nbval; fi
+  - if [[ "${TOXENV}" =~ test ]]; then tox -c tox-pyenv.ini -e $(echo "${TOXENV}" | sed s/test/runcmd/) -- pip install git+git://github.com/vidartf/nbval.git@cov#egg=nbval; fi
   - if [[ "${TOXENV}" == "py38dev-test" ]]; then travis_wait 40 tox -c tox-pyenv.ini -e py38dev-runcmd -- python --version; fi
   - |
     if [[ "${DOCS}" == "true" ]]; then
