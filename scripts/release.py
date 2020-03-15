@@ -74,12 +74,11 @@ def make_release(package_name, fast_test=False):
     set_stable_docs_links(new_version, 'README.rst', 'docs/_README.patch')
     make_release_commit(new_version)
     make_notebooks(fast_test=fast_test)
-    if not fast_test:
-        make_artifacts()
-        run_tests()
     make_notebooks_commit(new_version)
     squash_commits(n=2, commit_msg="Release %s" % new_version)
     if not fast_test:
+        make_artifacts()
+        run_tests()
         make_upload(test=True)
         push_release_commits()
         make_upload(test=False)
@@ -148,14 +147,14 @@ def get_version(filename):
 
 
 def edit(filename):
-    """Open filename in EDITOR"""
+    """Open filename in EDITOR."""
     editor = os.getenv('EDITOR', 'vi')
     if click.confirm("Open %s in %s?" % (filename, editor), default=True):
         run([editor, filename])
 
 
 def check_git_clean():
-    """Ensure that a given git.Repo is clean"""
+    """Ensure that a given git.Repo is clean."""
     repo = git.Repo(os.getcwd())
     if repo.is_dirty():
         run(['git', 'status'])
@@ -168,8 +167,18 @@ def check_git_clean():
 
 
 def run_tests():
-    """Run 'make test'"""
-    run(['make', 'test'], check=True)
+    """Run 'make test'."""
+    success = False
+    while not success:
+        try:
+            run(['make', 'test'], check=True)
+        except CalledProcessError as exc_info:
+            print("Failed tests: %s\n" % exc_info)
+            print("Fix the tests and ammend the release commit.")
+            print("Then continue.\n")
+            click.confirm("Continue?", default=True, abort=True)
+        else:
+            success = True
 
 
 def split_version(version, base=True):
