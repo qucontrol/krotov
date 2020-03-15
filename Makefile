@@ -65,8 +65,8 @@ test36: bootstrap ## run tests for Python 3.6
 test37: bootstrap ## run tests for Python 3.7
 	$(TOX) -e py37-test -- $(TESTS)
 
-test38: bootstrap ## run tests for Python 3.8 (dev)
-	$(TOX) -e py38dev-test -- $(TESTS)
+test38: bootstrap ## run tests for Python 3.8
+	$(TOX) -e py38-test -- $(TESTS)
 
 docs: bootstrap ## generate Sphinx HTML documentation, including API docs
 	$(TOX) -e docs

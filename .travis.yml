@@ -27,9 +27,12 @@ matrix:
     - name: Python 3.7
       python: 3.7
       env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py37-test TRAVISCMD=""
-    - name: Python 3.8-dev
-      python: 3.8-dev
-      env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py38dev-test TRAVISCMD=""
+    - name: Python 3.8
+      python: 3.8
+      env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py38-test TRAVISCMD=""
+    - name: Python 3.8 (QuTiP master)
+      python: 3.8
+      env: TOTEST="src tests README.rst docs/*.rst" TOXENV=py38qtm-test TRAVISCMD=""
     - name: Notebook 1 (State-to-State)
       python: 3.7
       env: TOTEST=docs/notebooks/01_example_simple_state_to_state.ipynb TOXENV=py37-test TRAVISCMD=""
@@ -58,7 +61,7 @@ matrix:
       python: 3.7
       env: TOTEST=docs/notebooks/09_example_numpy.ipynb TOXENV=py37-test TRAVISCMD=""
   allow_failures:
-    - name: Python 3.8-dev
+    - name: Python 3.8 (QuTiP master)
 before_install:
     - sudo apt-get -y install liblapack-dev libblas-dev gfortran
 install:
@@ -74,7 +77,6 @@ cache:
     - $HOME/.texlive
 script:
   - set -e
-  - if [[ "${TOXENV}" == "py38dev-test" ]]; then travis_wait 40 tox -c tox-pyenv.ini -e py38dev-runcmd -- python --version; fi
   - |
     if [[ "${DOCS}" == "true" ]]; then
       source .travis/docs.sh
