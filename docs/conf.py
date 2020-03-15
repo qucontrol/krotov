@@ -2,26 +2,34 @@
 from __future__ import unicode_literals
 
 import datetime
-from pathlib import Path
 import os
 import shutil
 import subprocess
 import sys
+from pathlib import Path
 from unittest import mock
 
-from pybtex.plugin import register_plugin as pybtex_register_plugin
+import git
 import pybtex.style.formatting
 import pybtex.style.formatting.unsrt
 import pybtex.style.template
-
-import git
+from pybtex.plugin import register_plugin as pybtex_register_plugin
+from sphinx.ext.autodoc import (
+    ClassLevelDocumenter,
+    InstanceAttributeDocumenter,
+)
 
 import krotov
 
-DOCS = Path(__file__).parent
-ROOT = DOCS / '..'
 
-sys.path.insert(0, str((DOCS / '_extensions').resolve()))
+DOCS = Path(__file__).parent
+ROOT = DOCS / ".."
+
+sys.path.insert(0, str((DOCS / "_extensions").resolve()))
+
+exclude_patterns = [
+    '_build',
+]
 
 # -- Generate API documentation ------------------------------------------------
 def run_apidoc(app):
@@ -31,81 +39,83 @@ def run_apidoc(app):
     better_apidoc.APP = app
     better_apidoc.main(
         [
-            'better-apidoc',
-            '-t',
-            str(DOCS / '_templates'),
-            '--force',
-            '--no-toc',
-            '--separate',
-            '-o',
-            str(DOCS / 'API'),
-            str(DOCS / '..' / 'src' / 'krotov'),
+            "better-apidoc",
+            "-t",
+            str(DOCS / "_templates"),
+            "--force",
+            "--no-toc",
+            "--separate",
+            "-o",
+            str(DOCS / "API"),
+            str(DOCS / ".." / "src" / "krotov"),
         ]
     )
 
 
 # -- Generate patched README documentation ------------------------------------
 def generate_patched_readme(_):
-    shutil.copyfile(DOCS / '..' / 'README.rst', DOCS / '_README.rst')
-    cmd = ['patch', str(DOCS / '_README.rst'), str(DOCS / '_README.patch')]
+    shutil.copyfile(DOCS / ".." / "README.rst", DOCS / "_README.rst")
+    cmd = ["patch", str(DOCS / "_README.rst"), str(DOCS / "_README.patch")]
     subprocess.run(cmd, check=True)
-    assert (DOCS / '_README.rst').is_file()
+    assert (DOCS / "_README.rst").is_file()
 
 
 # -- General configuration -----------------------------------------------------
 
 # Report broken links as warnings
 nitpicky = True
-nitpick_ignore = [('py:class', 'callable')]
+nitpick_ignore = [("py:class", "callable")]
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.extlinks',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.todo',
-    'dollarmath',
-    'nbsphinx',
-    'sphinx.ext.inheritance_diagram',
-    'sphinxcontrib.bibtex',
+    "doctr_versions_menu",
+    "nbsphinx",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
+    "sphinx.ext.extlinks",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.inheritance_diagram",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
+    "sphinx_copybutton",
+    "sphinxcontrib.bibtex",
+    "dollarmath",  # must be loaded after sphinx.ext.autodoc
 ]
-if os.getenv('SPELLCHECK'):
-    extensions += ('sphinxcontrib.spelling',)
+if os.getenv("SPELLCHECK"):
+    extensions += ("sphinxcontrib.spelling",)
     spelling_show_suggestions = True
-    spelling_lang = os.getenv('SPELLCHECK')
-    spelling_word_list_filename = 'spelling_wordlist.txt'
+    spelling_lang = os.getenv("SPELLCHECK")
+    spelling_word_list_filename = "spelling_wordlist.txt"
     spelling_ignore_pypi_package_names = True
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3.7', None),
-    'sympy': ('https://docs.sympy.org/latest/', None),
-    'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
-    'numpy': ('https://docs.scipy.org/doc/numpy/', None),
-    'matplotlib': ('https://matplotlib.org/', None),
-    'qutip': ('http://qutip.org/docs/latest/', None),
-    'glom': ('https://glom.readthedocs.io/en/latest/', None),
-    'weylchamber': ('https://weylchamber.readthedocs.io/en/latest/', None),
+    "python": ("https://docs.python.org/3.7", None),
+    "sympy": ("https://docs.sympy.org/latest/", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy/reference/", None),
+    "numpy": ("https://docs.scipy.org/doc/numpy/", None),
+    "matplotlib": ("https://matplotlib.org/", None),
+    "qutip": ("http://qutip.org/docs/latest/", None),
+    "glom": ("https://glom.readthedocs.io/en/latest/", None),
+    "weylchamber": ("https://weylchamber.readthedocs.io/en/latest/", None),
 }
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
-source_suffix = '.rst'
-master_doc = 'index'
-project = 'Krotov'
+source_suffix = ".rst"
+master_doc = "index"
+project = "Krotov"
 year = str(datetime.datetime.now().year)
-author = 'Michael Goerz'
-copyright = '{0}, {1}'.format(year, "Michael Goerz et al.")
+author = "Michael Goerz"
+copyright = "{0}, {1}".format(year, "Michael Goerz et al.")
 version = krotov.__version__
 release = version
 git_tag = "v%s" % version
-if version.endswith('dev'):
+if version.endswith("dev"):
     try:
         last_commit = str(git.Repo(ROOT).head.commit)[:7]
         release = "%s (%s)" % (version, last_commit)
@@ -114,96 +124,96 @@ if version.endswith('dev'):
         git_tag = "master"
 numfig = True
 
-html_extra_path = ['./pseudocode/krotov_pseudocode.pdf']
+html_extra_path = ["./pseudocode/krotov_pseudocode.pdf"]
 
-pygments_style = 'friendly'
+pygments_style = "friendly"
 extlinks = {
-    'issue': ('https://github.com/qucontrol/krotov/issues/%s', '#'),
-    'pr': ('https://github.com/agkoch/krotov/pull/%s', 'PR #'),
+    "issue": ("https://github.com/qucontrol/krotov/issues/%s", "#"),
+    "pr": ("https://github.com/agkoch/krotov/pull/%s", "PR #"),
 }
 
 # autodoc settings
-autoclass_content = 'both'
-autodoc_member_order = 'bysource'
+autoclass_content = "both"
+autodoc_member_order = "bysource"
 autodoc_mock_imports = [
-    'numpy',
-    'numpy.linalg',
-    'scipy',
-    'scipy.sparse',
-    'matplotlib',
-    'matplotlib.pyplot',
+    "numpy",
+    "numpy.linalg",
+    "scipy",
+    "scipy.sparse",
+    "matplotlib",
+    "matplotlib.pyplot",
 ]
 
 
-html_last_updated_fmt = '%b %d, %Y'
+html_last_updated_fmt = "%b %d, %Y"
 html_split_index = False
-html_sidebars = {'**': ['searchbox.html', 'globaltoc.html', 'sourcelink.html']}
-html_short_title = '%s-%s' % (project, version)
+html_sidebars = {"**": ["searchbox.html", "globaltoc.html", "sourcelink.html"]}
+html_short_title = "%s-%s" % (project, version)
 
 # Mathjax settings
 mathjax_path = (
-    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js'
+    "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
 )
 mathjax_config = {
-    'extensions': ['tex2jax.js'],
-    'jax': ['input/TeX', 'output/SVG'],
-    'TeX': {
-        'extensions': ["AMSmath.js", "AMSsymbols.js"],
-        'Macros': {
-            'tr': ['{\\operatorname{tr}}', 0],
-            'diag': ['{\\operatorname{diag}}', 0],
-            'abs': ['{\\operatorname{abs}}', 0],
-            'pop': ['{\\operatorname{pop}}', 0],
-            'ee': ['{\\text{e}}', 0],
-            'ii': ['{\\text{i}}', 0],
-            'aux': ['{\\text{aux}}', 0],
-            'opt': ['{\\text{opt}}', 0],
-            'tgt': ['{\\text{tgt}}', 0],
-            'init': ['{\\text{init}}', 0],
-            'lab': ['{\\text{lab}}', 0],
-            'rwa': ['{\\text{rwa}}', 0],
-            'bra': ['{\\langle#1\\vert}', 1],
-            'ket': ['{\\vert#1\\rangle}', 1],
-            'Bra': ['{\\left\\langle#1\\right\\vert}', 1],
-            'Braket': [
-                '{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}',
+    "extensions": ["tex2jax.js"],
+    "jax": ["input/TeX", "output/SVG"],
+    "TeX": {
+        "extensions": ["AMSmath.js", "AMSsymbols.js"],
+        "Macros": {
+            "tr": ["{\\operatorname{tr}}", 0],
+            "diag": ["{\\operatorname{diag}}", 0],
+            "abs": ["{\\operatorname{abs}}", 0],
+            "pop": ["{\\operatorname{pop}}", 0],
+            "ee": ["{\\text{e}}", 0],
+            "ii": ["{\\text{i}}", 0],
+            "aux": ["{\\text{aux}}", 0],
+            "opt": ["{\\text{opt}}", 0],
+            "tgt": ["{\\text{tgt}}", 0],
+            "init": ["{\\text{init}}", 0],
+            "lab": ["{\\text{lab}}", 0],
+            "rwa": ["{\\text{rwa}}", 0],
+            "bra": ["{\\langle#1\\vert}", 1],
+            "ket": ["{\\vert#1\\rangle}", 1],
+            "Bra": ["{\\left\\langle#1\\right\\vert}", 1],
+            "Braket": [
+                "{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}",
                 2,
             ],
-            'ketbra': ['{\\vert#1\\rangle\\!\\langle#2\\vert}', 2],
-            'Ket': ['{\\left\\vert#1\\right\\rangle}', 1],
-            'mat': ['{\\mathbf{#1}}', 1],
-            'op': ['{\\hat{#1}}', 1],
-            'Op': ['{\\hat{#1}}', 1],
-            'dd': ['{\\,\\text{d}}', 0],
-            'daggered': ['{^{\\dagger}}', 0],
-            'transposed': ['{^{\\text{T}}}', 0],
-            'Liouville': ['{\\mathcal{L}}', 0],
-            'DynMap': ['{\\mathcal{E}}', 0],
-            'identity': ['{\\mathbf{1}}', 0],
-            'Norm': ['{\\left\\lVert#1\\right\\rVert}', 1],
-            'norm': ['{\\lVert#1\\rVert}', 1],
-            'Abs': ['{\\left\\vert#1\\right\\vert}', 1],
-            'avg': ['{\\langle#1\\rangle}', 1],
-            'Avg': ['{\\left\langle#1\\right\\rangle}', 1],
-            'AbsSq': ['{\\left\\vert#1\\right\\vert^2}', 1],
-            'Re': ['{\\operatorname{Re}}', 0],
-            'Im': ['{\\operatorname{Im}}', 0],
-            'Real': ['{\\mathbb{R}}', 0],
-            'Complex': ['{\\mathbb{C}}', 0],
-            'Integer': ['{\\mathbb{N}}', 0],
+            "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2],
+            "Ket": ["{\\left\\vert#1\\right\\rangle}", 1],
+            "mat": ["{\\mathbf{#1}}", 1],
+            "op": ["{\\hat{#1}}", 1],
+            "Op": ["{\\hat{#1}}", 1],
+            "dd": ["{\\,\\text{d}}", 0],
+            "daggered": ["{^{\\dagger}}", 0],
+            "transposed": ["{^{\\text{T}}}", 0],
+            "Liouville": ["{\\mathcal{L}}", 0],
+            "DynMap": ["{\\mathcal{E}}", 0],
+            "identity": ["{\\mathbf{1}}", 0],
+            "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1],
+            "norm": ["{\\lVert#1\\rVert}", 1],
+            "Abs": ["{\\left\\vert#1\\right\\vert}", 1],
+            "avg": ["{\\langle#1\\rangle}", 1],
+            "Avg": ["{\\left\langle#1\\right\\rangle}", 1],
+            "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1],
+            "Re": ["{\\operatorname{Re}}", 0],
+            "Im": ["{\\operatorname{Im}}", 0],
+            "Real": ["{\\mathbb{R}}", 0],
+            "Complex": ["{\\mathbb{C}}", 0],
+            "Integer": ["{\\mathbb{N}}", 0],
         },
     },
 }
 
 # LaTeX settings
-latex_engine = 'lualatex'
+latex_engine = "lualatex"
 latex_elements = {
-    'fontpkg': r'''
+    "fontpkg": r"""
 \setmainfont{DejaVu Serif}
 \setsansfont{DejaVu Sans}
 \setmonofont{DejaVu Sans Mono}
-''',
-    'preamble': r'''
+""",
+    "preamble": r"""
 \usepackage[titles]{tocloft}
 \cftsetpnumwidth {1.25cm}\cftsetrmarg{1.5cm}
 \setlength{\cftchapnumwidth}{0.75cm}
@@ -237,12 +247,12 @@ latex_elements = {
 \newcommand{\AbsSq}[1]{\left\vert#1\right\vert^2}
 \renewcommand{\Re}[0]{\operatorname{Re}}
 \renewcommand{\Im}[0]{\operatorname{Im}}
-''',
-    'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
-    'printindex': r'\footnotesize\raggedright\printindex',
-    'babel': '',
+""",
+    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
+    "printindex": r"\footnotesize\raggedright\printindex",
+    "babel": "",
 }
-latex_show_urls = 'no'
+latex_show_urls = "no"
 
 
 # Napoleon settings
@@ -259,8 +269,8 @@ napoleon_use_rtype = True
 
 
 # Sphinxcontrib-bibtex
-pybtex.style.formatting.unsrt.date = pybtex.style.template.words(sep='')[
-    '(', pybtex.style.template.field('year'), ')'
+pybtex.style.formatting.unsrt.date = pybtex.style.template.words(sep="")[
+    "(", pybtex.style.template.field("year"), ")"
 ]
 
 
@@ -290,7 +300,7 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
         formatted_title = pybtex.style.template.field(
             which_field, apply_func=lambda text: text.capitalize()
         )
-        formatted_title = pybtex.style.template.tag('em')[formatted_title]
+        formatted_title = pybtex.style.template.tag("em")[formatted_title]
         if as_sentence:
             return pybtex.style.template.sentence[formatted_title]
         else:
@@ -301,30 +311,30 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
             # volume and pages
             pybtex.style.template.optional[
                 pybtex.style.template.join[
-                    ' ',
-                    pybtex.style.template.tag('strong')[
-                        pybtex.style.template.field('volume')
+                    " ",
+                    pybtex.style.template.tag("strong")[
+                        pybtex.style.template.field("volume")
                     ],
-                    ', ',
+                    ", ",
                     pybtex.style.template.field(
-                        'pages',
+                        "pages",
                         apply_func=pybtex.style.formatting.unsrt.dashify,
                     ),
                 ],
             ],
             # pages only
             pybtex.style.template.words[
-                'pages',
+                "pages",
                 pybtex.style.template.field(
-                    'pages', apply_func=pybtex.style.formatting.unsrt.dashify
+                    "pages", apply_func=pybtex.style.formatting.unsrt.dashify
                 ),
             ],
         ]
         template = pybtex.style.formatting.toplevel[
-            self.format_names('author'),
-            self.format_title(e, 'title'),
+            self.format_names("author"),
+            self.format_title(e, "title"),
             pybtex.style.template.sentence(sep=" ")[
-                pybtex.style.template.field('journal'),
+                pybtex.style.template.field("journal"),
                 pybtex.style.template.optional[volume_and_pages],
                 pybtex.style.formatting.unsrt.date,
             ],
@@ -335,12 +345,12 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
     def get_book_template(self, e):
         template = pybtex.style.formatting.toplevel[
             self.format_author_or_editor(e),
-            self.format_btitle(e, 'title'),
+            self.format_btitle(e, "title"),
             self.format_volume_and_series(e),
             pybtex.style.template.sentence(sep=" ")[
                 pybtex.style.template.sentence(add_period=False)[
-                    pybtex.style.template.field('publisher'),
-                    pybtex.style.template.optional_field('address'),
+                    pybtex.style.template.field("publisher"),
+                    pybtex.style.template.optional_field("address"),
                     self.format_edition(e),
                 ],
                 pybtex.style.formatting.unsrt.date,
@@ -349,7 +359,7 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
                 pybtex.style.template.sentence[self.format_isbn(e)]
             ],
             pybtex.style.template.sentence[
-                pybtex.style.template.optional_field('note')
+                pybtex.style.template.optional_field("note")
             ],
             self.format_web_refs(e),
         ]
@@ -357,23 +367,23 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
 
     def get_incollection_template(self, e):
         template = pybtex.style.formatting.toplevel[
-            pybtex.style.template.sentence[self.format_names('author')],
-            self.format_title(e, 'title'),
+            pybtex.style.template.sentence[self.format_names("author")],
+            self.format_title(e, "title"),
             pybtex.style.template.words[
-                'In',
+                "In",
                 pybtex.style.template.sentence[
                     pybtex.style.template.optional[
                         self.format_editor(e, as_sentence=False)
                     ],
-                    self.format_btitle(e, 'booktitle', as_sentence=False),
+                    self.format_btitle(e, "booktitle", as_sentence=False),
                     self.format_volume_and_series(e, as_sentence=False),
                     self.format_chapter_and_pages(e),
                 ],
             ],
             pybtex.style.template.sentence(sep=" ")[
                 pybtex.style.template.sentence(add_period=False)[
-                    pybtex.style.template.optional_field('publisher'),
-                    pybtex.style.template.optional_field('address'),
+                    pybtex.style.template.optional_field("publisher"),
+                    pybtex.style.template.optional_field("address"),
                     self.format_edition(e),
                 ],
                 pybtex.style.formatting.unsrt.date,
@@ -383,15 +393,10 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
         return template
 
 
-pybtex_register_plugin('pybtex.style.formatting', 'apsstyle', ApsStyle)
+pybtex_register_plugin("pybtex.style.formatting", "apsstyle", ApsStyle)
 
 
 # -- Monkeypatch for instance attribs (sphinx bug #2044) -----------------------
-
-from sphinx.ext.autodoc import (
-    ClassLevelDocumenter,
-    InstanceAttributeDocumenter,
-)
 
 
 def iad_add_directive_header(self, sig):
@@ -404,7 +409,7 @@ InstanceAttributeDocumenter.add_directive_header = iad_add_directive_header
 
 # on_rtd is whether we are on readthedocs.org, this line of code grabbed from
 # docs.readthedocs.org
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -419,9 +424,9 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    'collapse_navigation': True,
-    'display_version': True,
-    'navigation_depth': 4,
+    "collapse_navigation": True,
+    "display_version": True,
+    "navigation_depth": 4,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -446,10 +451,10 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # JavaScript filenames, relative to html_static_path
-html_js_files = ["version-menu.js"]
+html_js_files = []
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -504,11 +509,11 @@ nbsphinx_prolog = r"""
 
     :raw-html:`<a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/<<GIT_TAG>>/{{ docname }}" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/<<GIT_TAG>>?filepath={{ docname }}" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>`
 """.replace(
-    '<<GIT_TAG>>', git_tag
+    "<<GIT_TAG>>", git_tag
 )
 
 
 # -----------------------------------------------------------------------------
 def setup(app):
-    app.connect('builder-inited', run_apidoc)
-    app.connect('builder-inited', generate_patched_readme)
+    app.connect("builder-inited", run_apidoc)
+    app.connect("builder-inited", generate_patched_readme)

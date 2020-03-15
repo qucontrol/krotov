@@ -12,6 +12,7 @@ import urllib.parse
 import urllib.request
 from os.path import join
 from subprocess import DEVNULL, CalledProcessError, run
+from textwrap import dedent
 
 import click
 import git
@@ -73,19 +74,16 @@ def make_release(package_name, fast_test=False):
     set_stable_docs_links(new_version, 'README.rst', 'docs/_README.patch')
     make_release_commit(new_version)
     make_notebooks(fast_test=fast_test)
-    if not fast_test:
-        check_docs()
-        run_tests()
     make_notebooks_commit(new_version)
-    manual_pdf = "./docs/pdf/krotov%s.pdf" % new_version
-    make_manual_pdf(manual_pdf)
-    make_manual_pdf_commit(manual_pdf)
-    squash_commits(n=3, commit_msg="Release %s" % new_version)
+    squash_commits(n=2, commit_msg="Release %s" % new_version)
     if not fast_test:
+        make_artifacts()
+        run_tests()
         make_upload(test=True)
         push_release_commits()
         make_upload(test=False)
         make_and_push_tag(new_version)
+    upload_artifacts(new_version)
     # release is finished; go back to a dev state
     next_dev_version = new_version + '+dev'
     set_version(
@@ -149,14 +147,14 @@ def get_version(filename):
 
 
 def edit(filename):
-    """Open filename in EDITOR"""
+    """Open filename in EDITOR."""
     editor = os.getenv('EDITOR', 'vi')
     if click.confirm("Open %s in %s?" % (filename, editor), default=True):
         run([editor, filename])
 
 
 def check_git_clean():
-    """Ensure that a given git.Repo is clean"""
+    """Ensure that a given git.Repo is clean."""
     repo = git.Repo(os.getcwd())
     if repo.is_dirty():
         run(['git', 'status'])
@@ -169,8 +167,18 @@ def check_git_clean():
 
 
 def run_tests():
-    """Run 'make test'"""
-    run(['make', 'test'], check=True)
+    """Run 'make test'."""
+    success = False
+    while not success:
+        try:
+            run(['make', 'test'], check=True)
+        except CalledProcessError as exc_info:
+            print("Failed tests: %s\n" % exc_info)
+            print("Fix the tests and ammend the release commit.")
+            print("Then continue.\n")
+            click.confirm("Continue?", default=True, abort=True)
+        else:
+            success = True
 
 
 def split_version(version, base=True):
@@ -422,14 +430,17 @@ def make_notebooks(fast_test=False):
         return False
 
 
-def check_docs():
-    """Verify the documentation (interactively)"""
+def make_artifacts():
+    """Verify the documentation (interactively)."""
     click.echo("Making the documentation....")
-    run(['make', 'docs'], check=True, stdout=DEVNULL)
+    run(['make', 'docs-artifacts'], check=True, stdout=DEVNULL)
     click.echo(
         "Check documentation in file://"
         + os.getcwd()
-        + "/docs/_build/index.html"
+        + "/docs/_build/html/index.html"
+        + " and the artifacts in "
+        + os.getcwd()
+        + "/docs/_build/artifacs"
     )
     click.confirm(
         "Does the documentation look correct?", default=True, abort=True
@@ -462,22 +473,6 @@ def make_notebooks_commit(version):
             '-m',
             "Reevaluate notebooks for version %s" % version,
         ],
-        check=True,
-    )
-
-
-def make_manual_pdf(outfile):
-    """Create the PDF manual"""
-    run(['make', 'docs-pdf'], check=True)
-    shutil.copyfile('./docs/_build/tex/krotov.pdf', outfile)
-
-
-def make_manual_pdf_commit(manual_pdf):
-    """Commit 'Add pdf manual ...'"""
-    click.confirm("Make commit for PDF manual?", default=True, abort=True)
-    run(['git', 'add', manual_pdf], check=True)
-    run(
-        ['git', 'commit', '-m', "Add PDF manual in %s" % manual_pdf],
         check=True,
     )
 
@@ -532,7 +527,7 @@ def make_upload(test=True):
 
 
 def push_release_commits():
-    """Push local commits to origin"""
+    """Push local commits to origin."""
     click.confirm("Push release commit to origin?", default=True, abort=True)
     run(['git', 'push', 'origin', 'master'], check=True)
     click.confirm(
@@ -543,7 +538,7 @@ def push_release_commits():
 
 
 def make_and_push_tag(version):
-    """Tag the current commit and push that tag to origin"""
+    """Tag the current commit and push that tag to origin."""
     click.confirm(
         "Push tag '%s' to origin?" % version, default=True, abort=True
     )
@@ -551,8 +546,28 @@ def make_and_push_tag(version):
     run(['git', 'push', '--tags', 'origin'], check=True)
 
 
+def upload_artifacts(version):
+    """Prompt for manually uploading documentation artifacts."""
+    # fmt: off
+    click.echo(dedent(r'''
+    You must now manually create a release on Github and upload the
+    documentation artifacs from docs/_build/artifacts.
+
+    * Go to https://github.com/qucontrol/krotov/releases
+    * Find and click on the tag 'v{version}'
+    * Click on "Edit tag"
+    * Use "Release {version}" as the Release title
+    * Add release notes in markdown format
+    * Attach the documentation artifacs as binary files
+    * Click "Publish release"
+
+    '''.format(version=version)))
+    # fmt: on
+    click.confirm("Release published on Github?", default=True)
+
+
 def make_next_dev_version_commit(version):
-    """Commit 'Bump version to xxx'"""
+    """Commit 'Bump version to xxx'."""
     click.confirm(
         "Make commit for bumping to %s?" % version, default=True, abort=True
     )

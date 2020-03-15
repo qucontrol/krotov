@@ -34,6 +34,8 @@ dev_requirements = [
     'codecov',
     'coverage<5.0',
     # https://github.com/computationalmodelling/nbval/issues/129
+    'doctr',
+    'doctr-versions-menu',
     'flake8',
     'gitpython',
     'isort',
@@ -49,16 +51,17 @@ dev_requirements = [
     'pytest-xdist',
     'sphinx',
     'sphinx-autobuild',
+    'sphinx-copybutton',
     'sphinx_rtd_theme',
     'sphinxcontrib-bibtex',
     'twine',
     'watermark',
     'weylchamber>=0.3.2',
     'wheel',
-    'doctr',
 ]
 if sys.version_info >= (3, 6):
     dev_requirements.append('black')
+    dev_requirements.append('zip-files')
 
 # some recommended packages that make development nicer
 dev_extras = ['jupyterlab', 'pdbpp']

@@ -173,8 +173,7 @@ Integration testing::
     $ git push -u origin issue1
 
 Commit early and often! At the same time, try to keep your topic branch
-as clean and organized as possible. If you have not yet pushed your topic
-branch to the "origin" remote:
+as clean and organized as possible.
 
 * Avoid having a series of meaningless granular commits like "start bugfix",
   "continue development", "add more work on bugfix", "fix typos", and so forth.
@@ -192,34 +191,22 @@ branch to the "origin" remote:
   current master (``git rebase master``). Avoid merging ``master`` into your
   topic branch. See `Merging vs. Rebasing`_.
 
-If you have already pushed your topic branch to the remote origin, you have to
-be a bit more careful. If you are sure that you are the only one working on
-that topic branch, you can still follow the above guidelines, and force-push
-the issue branch (``git push --force``). This also applies if you are an
-external contributor preparing a pull request in your own clone of the project.
-If you are collaborating with others on the topic branch, coordinate with them
-whether they are OK with rewriting the history. If not, merge instead of
-rebasing. You must never rewrite history on the ``master`` branch (nor will you
-be able to, as the ``master`` branch is "protected" and can only be force-pushed to
-in coordination with the project maintainer).  If something goes wrong with any
-advanced "history rewriting", there is always `"git reflog"`_ as a safety net
--- you will never lose work that was committed before.
+If you have already pushed your topic branch to the remote origin, you can
+force-push the issue branch (``git push --force``). If you are collaborating
+with others on the branch, coordinate with them before force pushing. A
+force-push rewrites history. You must never rewrite history on the ``master``
+branch (nor will you be able to, as the ``master`` branch is "protected" and
+can only be force-pushed to in coordination with the project maintainer).  If
+something goes wrong with any advanced "history rewriting", there is always
+`"git reflog"`_ as a safety net -- you will never lose work that was committed
+before.
 
 When you are done with a topic branch (the issue has been fixed), finish up by
-merging the topic branch back into ``master``::
+creating a pull-request for merging the branch into ``master`` (follow the
+propmts on the Github website).
 
-    $ git checkout master
-    $ git merge --no-ff issue1
+Summarize the changes of the branch relative to ``master`` in the pull request.
 
-The ``--no-ff`` option is critical, so that an explicit merge commit is created
-(especially if you rebased).  Summarize the changes of the branch relative to
-``master`` in the commit message.
-
-Then, you can push master and delete the topic branch both locally and on Github::
-
-    $ git push origin master
-    $ git push --delete origin issue1
-    $ git branch -D issue1
 
 .. _"Rewriting History" section of Pro Git book: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
 .. _Merging vs. Rebasing: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
@@ -425,21 +412,12 @@ The deployment of the documentation is set up roughly as follows:
 
 * In ``.travis.yml``, there is "Docs" job set up that executes the
   ``.travis/docs.sh`` script.
-* The ``.travis/docs.sh`` script builds the HTML documentation, as well as
-  downloadable versions of the documentation (tagged released only!). It then
+* The ``.travis/docs.sh`` script builds the HTML documentation. It then
   calls ``doctr deploy`` to deploy to ``gh-pages``.
 * ``doctr deploy`` copies the built documentation to the appropriate subfolder
-  on ``gh-pages``. It then gets the script ``.travis/docs_post_process.py``
-  script from the release branch and executes it.
-* The ``.travis/docs_post_process.py`` script (using the
-  ``.travis/versions.py`` module) analyzes *all* folders on ``gh-pages`` and
-  generates a ``versions.json`` file on ``gh-pages``. This file contains all
-  the information required to render the navigation menu in the bottom left
-  corner of the online documentation. That menu is rendered by the javascript
-  in ``./docs/_static/version-menu.js`` (cf. ``html_js_files =
-  ["version-menu.js"]`` in ``docs/conf.py``). The
-  ``.travis/docs_post_process.py`` script also generates an ``index.html``
-  pointing to the most recent stable release.
+  on ``gh-pages``. `Doctr Versions Menu`_ atomatically provides a dynamically
+  rendered menu for switching between versions. It does this by creating a file
+  ``versions.json`` on the ``gh-pages`` branch.
 * ``doctr deploy`` commits the rendered documentation as well as the
   ``versions.json`` and ``index.html`` files and pushes the ``gh-pages``
   branch. It does this using the deploy key in ``./docs/doctr_deploy_key.enc``.
@@ -449,9 +427,11 @@ The deployment of the documentation is set up roughly as follows:
   their private key, and use it to authenticate while pushing to ``gh-pages``.
 
 .. _Doctr: https://drdoctr.github.io
+.. _Doctr Versions Menu: https://goerz.github.io/doctr_versions_menu
 .. _Travis: https://travis-ci.org
 .. _gh-pages: https://pages.github.com
 .. _Travis' public key: https://docs.travis-ci.com/user/encryption-keys/
+
 
 .. _ContributeExamples:
 
@@ -593,17 +573,29 @@ installing the package through pip_ may use the original version specification
 as well as the normalized one (or any other variation that normalizes to the
 same result).
 
-When making a release via
+
+Making a Release
+----------------
+
+Relesases can only be made by administrators of the Krotov Github repo who are
+also listed as Maintainers on https://pypi.org/project/krotov/.
+
+They must have GPG set up to allow for signed commits, and be able to locally
+produce documentation artifacts (``make docs-artifacts``).
+
+A release is made by running
 
 .. code-block:: shell
 
     $ make release
 
-the above versioning conventions will be taken into account automatically.
+which executes ``scripts/release.py``. Follow all the prompts.
 
 Releases must be tagged in git, using the version string prefixed by "v",
-e.g. ``v1.0.0-dev1`` and ``v1.0.0``. This makes them available at
-https://github.com/qucontrol/krotov/releases.
+e.g. ``v1.0.0-dev1`` and ``v1.0.0``. As prompted for by the release script,
+after pushing the tag, an official Github-release must be created manually at
+https://github.com/qucontrol/krotov/releases, with the proper release notes and
+the documentation artifacts as binary attachments.
 
 .. _Semantic Versioning: https://semver.org
 .. _"local version identifier": https://www.python.org/dev/peps/pep-0440/#local-version-identifiers

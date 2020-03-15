@@ -70,16 +70,24 @@ test38: bootstrap ## run tests for Python 3.8 (dev)
 
 docs: bootstrap ## generate Sphinx HTML documentation, including API docs
 	$(TOX) -e docs
-	@echo "open docs/_build/index.html"
+	@echo "open docs/_build/html/index.html"
 
 docs-pdf: bootstrap  ## generate a PDF version of the documentation
-	$(TOX) -e docs -- _build/tex -b latex
+	$(TOX) -e docs -- _build/tex -b latex -d _build/doctree
 	cp docs/krotovscheme.pdf docs/oct_decision_tree.pdf docs/_build/tex/
 	$(TOX) -e run-cmd -- python docs/build_pdf.py
 
+KROTOV_VERSION = $(shell grep __version__ src/krotov/__init__.py | sed "s/__version__ = '//g" | sed "s/'//g")
+
+docs-artifacts: docs docs-pdf  ## create the documentation artifacts for a release
+	mkdir -p docs/_build/artifacts
+	$(TOX) -e run-cmd -- zip-folder docs/_build/html --root-folder=krotov-v$(KROTOV_VERSION) --outfile docs/_build/artifacts/krotov-v$(KROTOV_VERSION).zip
+	cp docs/_build/tex/krotov.pdf docs/_build/artifacts/krotov-v$(KROTOV_VERSION).pdf
+
+
 spellcheck: bootstrap ## check spelling in docs
 	$(TOX) -e run-cmd -- pip install sphinxcontrib-spelling
-	SPELLCHECK=en_US $(TOX) -e docs -- _build -b spelling
+	SPELLCHECK=en_US $(TOX) -e docs -- _build/spell -b spelling -d _build/doctree
 
 black-check: bootstrap ## Check all src and test files for complience to "black" code style
 	$(TOX) -e run-blackcheck
@@ -106,7 +114,9 @@ upload: bootstrap clean-build dist ## package and upload a release to pypi.org
 	$(TOX) -e run-cmd -- twine upload dist/*
 
 release: bootstrap ## Create a new version, package and upload it
-	python3.7 ./scripts/release.py
+	python3.7 -m venv .venv/release
+	.venv/release/bin/python -m pip install click gitpython pytest
+	.venv/release/bin/python ./scripts/release.py
 
 dist: bootstrap ## builds source and wheel package
 	$(TOX) -e run-cmd -- python setup.py sdist
