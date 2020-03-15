@@ -27,6 +27,10 @@ ROOT = DOCS / ".."
 
 sys.path.insert(0, str((DOCS / "_extensions").resolve()))
 
+exclude_patterns = [
+    '_build',
+]
+
 # -- Generate API documentation ------------------------------------------------
 def run_apidoc(app):
     """Generage API documentation"""

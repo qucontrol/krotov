@@ -29,7 +29,7 @@ if [ ! -z "$TRAVIS" ] && [ "$TRAVIS_EVENT_TYPE" != "pull_request" ]; then
     if [ ! -z "$DEPLOY_DIR" ]; then
         python -m doctr deploy --key-path docs/doctr_deploy_key.enc \
             --command=doctr-versions-menu \
-            --built-docs docs/_build --no-require-master --build-tags "$DEPLOY_DIR"
+            --built-docs docs/_build/html --no-require-master --build-tags "$DEPLOY_DIR"
     fi
 else
     echo "Not deploying to gh-pages (PR or not on Travis)"
