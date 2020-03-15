@@ -20,6 +20,11 @@ if [ ! -z "$TRAVIS" ] && [ "$TRAVIS_EVENT_TYPE" != "pull_request" ]; then
     echo "## doctr deploy"
     if [ ! -z "$TRAVIS_TAG" ]; then
         DEPLOY_DIR="$TRAVIS_TAG"
+        # Download links are generated under the assumption that the prompts in
+        # the release script are followed and that the documentation artifacts
+        # will be uploaded to the Github release
+        echo "[pdf]: https://github.com/qucontrol/krotov/releases/download/$TRAVIS_TAG/$TRAVIS_TAG.pdf" > docs/_build/html/_downloads
+        echo "[html]: https://github.com/qucontrol/krotov/releases/download/$TRAVIS_TAG/$TRAVIS_TAG.zip" >> docs/_build/html/_downloads
     else
         case "$TRAVIS_BRANCH" in
             master|doctr) DEPLOY_DIR="$TRAVIS_BRANCH";;
