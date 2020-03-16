@@ -10,6 +10,12 @@ from qutip import ket
 import krotov
 
 
+try:
+    import qutip.qip.gates as qutip_gates
+except ImportError:
+    import qutip.qip.operations.gates as qutip_gates
+
+
 @pytest.fixture
 def canonical_basis():
     return [ket('00'), ket('01'), ket('10'), ket('11')]
@@ -18,7 +24,7 @@ def canonical_basis():
 @pytest.fixture
 def sqrt_SWAP_basis(canonical_basis):
     return krotov.functionals.mapped_basis(
-        qutip.gates.sqrtswap(), canonical_basis
+        qutip_gates.sqrtswap(), canonical_basis
     )
 
 
@@ -26,7 +32,7 @@ def sqrt_SWAP_basis(canonical_basis):
 def cphase_objectives(canonical_basis):
     H = qutip.Qobj()  # dummy Hamiltonian (won't be used)
     return krotov.objectives.gate_objectives(
-        canonical_basis, gate=qutip.gates.cphase(np.pi), H=H
+        canonical_basis, gate=qutip_gates.cphase(np.pi), H=H
     )
 
 
@@ -35,7 +41,7 @@ def cphase_lv_full_objectives(canonical_basis):
     L = qutip.Qobj()  # dummy Liouvillian (won't be used)
     return krotov.objectives.gate_objectives(
         canonical_basis,
-        gate=qutip.gates.cphase(np.pi),
+        gate=qutip_gates.cphase(np.pi),
         H=L,
         liouville_states_set='full',
     )
@@ -45,7 +51,7 @@ def cphase_lv_full_objectives(canonical_basis):
 def iswap_state_objectives(canonical_basis):
     H = qutip.Qobj()  # dummy Hamiltonian (won't be used)
     objectives = krotov.gate_objectives(
-        canonical_basis, qutip.gates.sqrtiswap(), H
+        canonical_basis, qutip_gates.sqrtiswap(), H
     )
     return objectives
 
@@ -63,7 +69,7 @@ def transmon_3states_objectives():
     weights = [20, 1, 1]
     objectives = krotov.gate_objectives(
         basis,
-        qutip.gates.sqrtiswap(),
+        qutip_gates.sqrtiswap(),
         L,
         liouville_states_set='3states',
         weights=weights,
@@ -75,7 +81,7 @@ def test_mapped_basis_preserves_hs_structure():
     """Test that mapped_basis preserves the hilbert space structure of the
     input basis."""
     basis = [ket(nums) for nums in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-    states = krotov.functionals.mapped_basis(qutip.gates.cnot(), basis)
+    states = krotov.functionals.mapped_basis(qutip_gates.cnot(), basis)
     for state in states:
         assert isinstance(state, qutip.Qobj)
         assert state.dims == basis[0].dims
@@ -300,7 +306,7 @@ def test_F_avg_psi(sqrt_SWAP_basis, canonical_basis):
     F = krotov.functionals.F_avg(
         fw_states_T=sqrt_SWAP_basis,
         basis_states=canonical_basis,
-        gate=qutip.gates.cphase(np.pi),
+        gate=qutip_gates.cphase(np.pi),
     )
     assert abs(F - 0.3) < 1e-14
 
@@ -313,6 +319,6 @@ def test_F_avg_rho(sqrt_SWAP_basis, canonical_basis):
     F = krotov.functionals.F_avg(
         fw_states_T=fw_states_T,
         basis_states=canonical_basis,
-        gate=qutip.gates.cphase(np.pi),
+        gate=qutip_gates.cphase(np.pi),
     )
     assert abs(F - 0.3) < 1e-14

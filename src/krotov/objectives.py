@@ -793,13 +793,17 @@ def gate_objectives(
 
         * A two-qubit gate, up to single-qubit operation ("local invariants"):
 
+            >>> CNOT = qutip.Qobj(
+            ...     [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]],
+            ...     dims=[[2, 2], [2, 2]]
+            ... )
             >>> objectives = gate_objectives(
-            ...     basis, qutip.gates.cnot(), H, local_invariants=True
+            ...     basis, CNOT, H, local_invariants=True
             ... )
             >>> for i in range(4):
             ...     assert objectives[i] == Objective(
             ...        initial_state=bell_basis(basis)[i],
-            ...        target=qutip.gates.cnot(),
+            ...        target=CNOT,
             ...        H=H
             ...     )
 
@@ -810,7 +814,7 @@ def gate_objectives(
             ...     tensor(sigmam(), identity(2)),
             ...     tensor(identity(2), sigmam())])
             >>> objectives = gate_objectives(
-            ...     basis, qutip.gates.cnot(), L,
+            ...     basis, CNOT, L,
             ...     liouville_states_set='3states',
             ...     weights=[20, 1, 1]
             ... )
@@ -854,7 +858,7 @@ def gate_objectives(
           pure-state density matrices::
 
             >>> objectives = gate_objectives(
-            ...     basis, qutip.gates.cnot(), L,
+            ...     basis, CNOT, L,
             ...     liouville_states_set='d+1'
             ... )
 
@@ -875,7 +879,7 @@ def gate_objectives(
           Liouville space basis::
 
             >>> objectives = gate_objectives(
-            ...     basis, qutip.gates.cnot(), L,
+            ...     basis, CNOT, L,
             ...     liouville_states_set='full'
             ... )
 

@@ -14,6 +14,12 @@ from qutip import identity, ket, sigmam, sigmap, sigmax, sigmay, sigmaz, tensor
 import krotov
 
 
+try:
+    import qutip.qip.gates as qutip_gates
+except ImportError:
+    import qutip.qip.operations.gates as qutip_gates
+
+
 @pytest.fixture
 def transmon_ham_and_states(Ec=0.386, EjEc=45, nstates=2, ng=0.0, T=10.0):
     """Transmon Hamiltonian"""
@@ -404,7 +410,7 @@ def test_gate_objectives_3states(two_qubit_liouvillian):
     """Test the initialization of the "3states" objectives"""
     L = two_qubit_liouvillian
     basis = [qutip.ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-    CNOT = qutip.gates.cnot()
+    CNOT = qutip_gates.cnot()
     objectives = krotov.objectives.gate_objectives(
         basis, CNOT, L, liouville_states_set='3states'
     )
@@ -456,7 +462,7 @@ def test_gate_objectives_5states(two_qubit_liouvillian):
     """Test the initialization of the "d + 1" objectives"""
     L = two_qubit_liouvillian
     basis = [qutip.ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-    CNOT = qutip.gates.cnot()
+    CNOT = qutip_gates.cnot()
     objectives = krotov.objectives.gate_objectives(
         basis, CNOT, L, liouville_states_set='d+1'
     )
@@ -492,7 +498,7 @@ def test_gate_objectives_16states(two_qubit_liouvillian):
     """Test the initialization of the "full" objectives"""
     L = two_qubit_liouvillian
     basis = [qutip.ket(n) for n in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-    CNOT = qutip.gates.cnot()
+    CNOT = qutip_gates.cnot()
     objectives = krotov.objectives.gate_objectives(
         basis, CNOT, L, liouville_states_set='full'
     )
@@ -538,7 +544,7 @@ def test_transmon_3states_objectives():
     weights = [20, 1, 1]
     objectives = krotov.gate_objectives(
         basis,
-        qutip.gates.sqrtiswap(),
+        qutip_gates.sqrtiswap(),
         L,
         liouville_states_set='3states',
         weights=weights,

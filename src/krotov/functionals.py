@@ -494,7 +494,7 @@ def F_avg(
         basis_states (list[qutip.Qobj]): The $N$ Hilbert space logical basis
             states
         gate (qutip.Qobj): The $N \times N$ quantum gate in the logical
-            subspace, e.g. :func:`qutip.qip.gates.cnot()`.
+            subspace, e.g. :func:`qutip.qip.operations.cnot()`.
         mapped_basis_states (None or list[qutip.Qobj]): If given, the result of
             applying gate to `basis_states`. If not given, this will be
             calculated internally via :func:`mapped_basis`. It is recommended
@@ -574,9 +574,13 @@ def gate(basis_states, fw_states_T):
 
         >>> from qutip import ket
         >>> basis = [ket(nums) for nums in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-        >>> fw_states_T = mapped_basis(qutip.gates.cnot(), basis)
+        >>> CNOT = qutip.Qobj(
+        ...     [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]],
+        ...     dims=[[2, 2], [2, 2]]
+        ... )
+        >>> fw_states_T = mapped_basis(CNOT, basis)
         >>> U = gate(basis, fw_states_T)
-        >>> assert (U - qutip.gates.cnot()).norm() < 1e-15
+        >>> assert (U - CNOT).norm() < 1e-15
     """
     N = len(basis_states)
     U = np.zeros((N, N), dtype=np.complex128)
@@ -588,13 +592,17 @@ def gate(basis_states, fw_states_T):
 
 
 def mapped_basis(O, basis_states):
-    """Result of applying the gate `O` to `basis_states`
+    """Apply the gate `O` to `basis_states`.
 
     Example:
 
         >>> from qutip import ket
         >>> basis = [ket(nums) for nums in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-        >>> states = mapped_basis(qutip.gates.cnot(), basis)
+        >>> CNOT = qutip.Qobj(
+        ...     [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]],
+        ...     dims=[[2, 2], [2, 2]]
+        ... )
+        >>> states = mapped_basis(CNOT, basis)
         >>> assert (states[0] - ket((0, 0))).norm() < 1e-15
         >>> assert (states[1] - ket((0, 1))).norm() < 1e-15
         >>> assert (states[2] - ket((1, 1))).norm() < 1e-15  # swap (1, 1) ...
