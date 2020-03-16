@@ -2,6 +2,14 @@
 History
 =======
 
+
+(next release)
+--------------
+
+* Added: Support for Python 3.8
+* Added: Support for QuTiP 4.5.0
+
+
 1.0.0 (2019-12-16)
 ------------------
 
@@ -11,6 +19,7 @@ History
 * Added: parameter `keep_original_objectives` to ``krotov.objectives.ensemble_objectives`` (`#67`_)
 * Added: "Related Software" in the documentation
 * Update: Documentation is now hosted on gh-pages_ and deployed by Doctr_ (`#68`_)
+
 
 0.5.0 (2019-12-04)
 ------------------
