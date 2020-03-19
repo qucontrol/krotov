@@ -50,8 +50,8 @@ In general,
 .. code-block:: python
 
     parallel_map=(
-        qutip.parallel_map,
-        qutip.parallel_map,
+        krotov.parallelization.parallel_map,
+        krotov.parallelization.parallel_map,
         krotov.parallelization.parallel_map_fw_prop_step,
     )
 
@@ -74,15 +74,87 @@ can be done in shared-memory with no overhead.
 .. _ipyparallel: https://ipyparallel.readthedocs.io/en/latest/
 """
 import multiprocessing
+import warnings
+
+from loky.process_executor import ProcessPoolExecutor
+from qutip.parallel import serial_map
+from qutip.ui.progressbar import BaseProgressBar, TextProgressBar
 
 from .conversions import plug_in_pulse_values
 
 
-__all__ = ['Consumer', 'FwPropStepTask', 'parallel_map_fw_prop_step']
+try:
+    from loky import get_reusable_executor as Executor
+except ImportError:
+    from concurrent.futures import ProcessPoolExecutor as Executor
 
 
+__all__ = [
+    'parallel_map',
+    'serial_map',
+    'Consumer',
+    'FwPropStepTask',
+    'parallel_map_fw_prop_step',
+]
+
+
+def parallel_map(
+    task,
+    values,
+    task_args=None,
+    task_kwargs=None,
+    num_cpus=None,
+    progress_bar=None,
+):
+    """Map function `task` onto `values`, in parallel.
+
+    This function's interface is identical to
+    :func:`qutip.parallel.parallel_map`, but it uses :mod:`loky` as a backend
+    (if available) to support a wider range of parameters. In
+    particular, `task` can be a function defined in a Jupyter notebook,
+    something that is not possible for a pickle-based version of
+    :func:`~qutip.parallel.parallel_map` on Platforms that use "spawn" for
+    :mod:`multiprocessing` (Windows, macOS for Python >= 3.8).
+    """
+    if task_args is None:
+        task_args = ()
+    if task_kwargs is None:
+        task_kwargs = {}
+
+    if num_cpus is None:
+        num_cpus = multiprocessing.cpu_count()
+
+    if progress_bar is None:
+        progress_bar = BaseProgressBar()
+    if progress_bar is True:
+        progress_bar = TextProgressBar()
+
+    progress_bar.start(len(values))
+    nfinished = [0]
+
+    def _update_progress_bar(x):
+        nfinished[0] += 1
+        progress_bar.update(nfinished[0])
+
+    with Executor(max_workers=num_cpus) as executor:
+        jobs = []
+        try:
+            for value in values:
+                args = (value,) + tuple(task_args)
+                job = executor.submit(task, *args, **task_kwargs)
+                job.add_done_callback(_update_progress_bar)
+                jobs.append(job)
+            res = [job.result() for job in jobs]
+        except KeyboardInterrupt as e:
+            raise e
+
+    progress_bar.finished()
+    return res
+
+
+# TODO: deprecate
 class Consumer(multiprocessing.Process):
-    """A process-based task consumer
+    """A process-based task consumer.
 
     Args:
         task_queue (multiprocessing.JoinableQueue): A queue from which to read
@@ -93,6 +165,10 @@ class Consumer(multiprocessing.Process):
     """
 
     def __init__(self, task_queue, result_queue, data):
+        warnings.warn(
+            "Consumer is deprecated and will be removed in version 2.0",
+            warnings.DeprecationWarning,
+        )
         super().__init__()
         self.task_queue = task_queue
         self.result_queue = result_queue
@@ -118,7 +194,7 @@ class Consumer(multiprocessing.Process):
 
 
 class FwPropStepTask:
-    """A task that performs a single forward-propagation step
+    """A task that performs a single forward-propagation step.
 
     The task object is a callable, receiving the single tuple of the same
     form as `task_args` in :func:`parallel_map_fw_prop_step` as input. This
@@ -145,6 +221,10 @@ class FwPropStepTask:
         # The task object itself gets send to the Consumer via IPC (pickling).
         # Since this is only a few scalar values, we largely avoid
         # communication overhead
+        warnings.warn(
+            "FwPropStepTask is deprecated and will be removed in version 2.0",
+            warnings.DeprecationWarning,
+        )
         self.i_state = i_state
         self.pulse_vals = pulse_vals
         self.time_index = time_index
@@ -187,7 +267,7 @@ class FwPropStepTask:
         return states[i_state]
 
 
-def parallel_map_fw_prop_step(shared, values, task_args):
+def parallel_map_fw_prop_step_old(shared, values, task_args):
     """`parallel_map` function for the forward-propagation by one time step
 
     Args:
@@ -213,7 +293,8 @@ def parallel_map_fw_prop_step(shared, values, task_args):
                side-effects in order for :func:`parallel_map_fw_prop_step` to
                work correctly.
     """
-    # `shared` is the original task function, but here we abuse it
+    # `shared` is the original task function
+    # (krotov.optimize._forward_propagation_step), but here we abuse it
     # as a shared namespace, between calls to `my_map`, by setting custom
     # data attributes on it
     tlist = task_args[4]
@@ -247,3 +328,120 @@ def parallel_map_fw_prop_step(shared, values, task_args):
             shared.tasks[i].put(None)  # add poison pill
             shared.tasks[i].join()  # wait to finish
     return res
+
+
+def parallel_map_fw_prop_step(shared, values, task_args):
+    """`parallel_map` function for the forward-propagation by one time step.
+
+    Args:
+        shared: A global object to which we can temporarily attach attributes
+            for sharing data between different calls to
+            :func:`parallel_map_fw_prop_step`, allowing us to have long-running
+            task executor, avoiding process-management overhead.
+        values (list): a list 0..(N-1) where N is the number of objectives
+        task_args (tuple): A tuple of 7 components:
+
+            1. A list of states to propagate, one for each objective.
+            2. The list of objectives
+            3. The list of optimized pulses (updated up to `time_index`)
+            4. The "pulses mapping", cf :func:`.extract_controls_mapping`
+            5. The list of time grid points
+            6. The index of the interval on the time grid over which to
+               propagate
+            7. A list of `propagate` callables, as passed to
+               :func:`.optimize_pulses`.  The propagators must not have
+               side-effects in order for :func:`parallel_map_fw_prop_step` to
+               work correctly.
+    """
+    # The way this function is called in optimize_pulses, `shared` will be the
+    # function krotov.optimize._forward_propagation_step
+
+    tlist = task_args[4]
+    pulses = task_args[2]
+    time_index = task_args[5]
+    n = len(values)
+    if time_index == 0:
+        # we only send the full task_args through IPC once, for the first time
+        # step. Subsequent time steps will reuse the data
+        shared.executors = [
+            ProcessPoolExecutor(
+                max_workers=1,
+                initializer=_pmfw_initializer,
+                initargs=(
+                    state_index,
+                    task_args[0][state_index],  # initial_state
+                    task_args[1][state_index],  # objective
+                    task_args[2],  # pulses
+                    task_args[3],  # pulses_mapping
+                    task_args[4],  # tlist
+                    task_args[6][state_index],  # propagator
+                ),
+            )
+            for state_index in range(n)
+        ]
+
+    pulse_vals = [pulses[i][time_index] for i in range(len(pulses))]
+
+    res = []
+    jobs = []
+    for i_state in values:
+        jobs.append(
+            shared.executors[i_state].submit(
+                _pmfw_forward_prop_step, pulse_vals, time_index
+            )
+        )
+    res = [job.result() for job in jobs]
+
+    if time_index == len(tlist) - 2:  # end of time grid
+        del shared.executors
+
+    return res
+
+
+def _pmfw_initializer(
+    state_index,
+    initial_state,
+    objective,
+    pulses,
+    pulses_mapping,
+    tlist,
+    propagator,
+):
+    """Copy `task_args` into a process-local global variable."""
+    # for internal use in parallel_map_fw_prop_step
+    global _pmfw_data
+    _pmfw_data = dict(
+        state_index=state_index,
+        state=initial_state,
+        objective=objective,
+        pulses=pulses,
+        pulses_mapping=pulses_mapping,
+        tlist=tlist,
+        propagator=propagator,
+    )
+
+
+def _pmfw_forward_prop_step(pulse_vals, time_index):
+    """Propagate a single step, with minimal non-local data.
+
+    Most of the data taken from the process-local global storage set by the
+    initializer.
+    """
+    # for internal use in parallel_map_fw_prop_step
+    global _pmfw_data
+    i_state = _pmfw_data['state_index']
+    pulses = _pmfw_data['pulses']
+    for (pulse, pulse_val) in zip(pulses, pulse_vals):
+        pulse[time_index] = pulse_val
+    mapping = _pmfw_data['pulses_mapping'][i_state]
+    obj = _pmfw_data['objective']
+    H = plug_in_pulse_values(obj.H, pulses, mapping[0], time_index)
+    c_ops = [
+        plug_in_pulse_values(c_op, pulses, mapping[ic + 1], time_index)
+        for (ic, c_op) in enumerate(obj.c_ops)
+    ]
+    tlist = _pmfw_data['tlist']
+    dt = tlist[time_index + 1] - tlist[time_index]
+    next_state = _pmfw_data['propagator'](H, _pmfw_data['state'], dt, c_ops)
+    _pmfw_data['state'] = next_state
+    return next_state

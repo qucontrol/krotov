@@ -1,5 +1,7 @@
 """Tests for krotov.Objective in isolation"""
 import copy
+import copyreg
+import io
 import os
 import pickle
 from collections import OrderedDict
@@ -693,7 +695,15 @@ def test_objective_pickle(objective_with_c_ops):
     callable controls (which are not pickleable) are replaced by a
     placeholder"""
     obj1 = objective_with_c_ops
-    obj2 = pickle.loads(pickle.dumps(obj1))
+    with io.BytesIO() as buffer:
+        pickler = pickle.Pickler(buffer)
+        pickler.dispatch_table = copyreg.dispatch_table.copy()
+        pickler.dispatch_table[
+            krotov.objectives.Objective
+        ] = krotov.objectives._Objective_reduce
+        pickler.dump(obj1)
+        buffer.seek(0)
+        obj2 = pickle.load(buffer)
     assert obj2 is not obj1
     assert obj2 != obj1
     assert str(obj2) != str(obj1)
@@ -714,7 +724,15 @@ def test_objective_pickle(objective_with_c_ops):
 
     obj2.weight = 0.5
     obj2.xxx = 'something'
-    obj3 = pickle.loads(pickle.dumps(obj2))
+    with io.BytesIO() as buffer:
+        pickler = pickle.Pickler(buffer)
+        pickler.dispatch_table = copyreg.dispatch_table.copy()
+        pickler.dispatch_table[
+            krotov.objectives.Objective
+        ] = krotov.objectives._Objective_reduce
+        pickler.dump(obj2)
+        buffer.seek(0)
+        obj3 = pickle.load(buffer)
     assert hasattr(obj3, 'weight')
     assert hasattr(obj3, 'xxx')
     assert obj3 == obj2

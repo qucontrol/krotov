@@ -577,20 +577,41 @@ class Objective:
     def __repr__(self):
         return "%s[%s]" % (self.__class__.__name__, str(self))
 
-    def __getstate__(self):
-        # Return data for the pickle serialization of an objective.
-        #
-        # This may not preserve time-dependent controls, and is only to enable
-        # the serialization of :class:`.Result` objects.
-        state = copy.copy(self.__dict__)
-        # Remove the unpicklable entries.
-        state['H'] = _remove_functions_from_nested_list(state['H'])
-        state['c_ops'] = _remove_functions_from_nested_list(state['c_ops'])
-        return state
+
+def _Objective_reduce_init(initial_state, H, target, c_ops):
+    # args-only version of Objective.__init__, for _Objective_reduce
+    return Objective(
+        initial_state=initial_state, H=H, target=target, c_ops=c_ops
+    )
+
+
+def _Objective_reduce(obj):
+    """Reduce :class:`Objective` for pickling.
+
+    This is a reduction function for customized pickling, see
+    :func:`copyreg.pickle`. It is used in :meth:`.Result.dump`.
+
+    In the standard-library-pickle, lambdas are not pickleable, so we replace
+    those non-pickleable entries with a placeholder.
+    """
+    return (
+        _Objective_reduce_init,
+        (
+            obj.initial_state,
+            _remove_functions_from_nested_list(obj.H),
+            obj.target,
+            _remove_functions_from_nested_list(obj.c_ops),
+        ),
+        {
+            k: v
+            for (k, v) in obj.__dict__.items()
+            if k not in obj._default_attribs
+        },
+    )
 
 
 class _ControlPlaceholder:
-    """Placeholder for a control function, for pickling"""
+    """Placeholder for a control function, for pickling."""
 
     def __init__(self, id):
         self.id = id
