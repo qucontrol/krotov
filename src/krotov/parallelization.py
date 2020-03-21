@@ -1,5 +1,5 @@
 r"""Support routines for running the optimization in parallel across the
-objectives
+objectives.
 
 The time-propagation that is the main numerical effort in an optimization with
 Krotov's method can naturally be performed in parallel for the different
@@ -24,19 +24,20 @@ objectives. There are three time-propagations that happen inside
 The :func:`.optimize_pulses` routine has a parameter `parallel_map` that can
 receive a tuple of three "map" functions to enable parallelization,
 corresponding to the three propagation listed above. If not given,
-:func:`qutip.parallel.serial_map` is used for all three propations, running in
-serial. Any alternative "map" must have the same interface as
+:func:`qutip.parallel.serial_map` is used for all three propagations, running
+in serial. Any alternative "map" must have the same interface as
 :func:`qutip.parallel.serial_map`.
 
-It would be natural to assume that :func:`qutip.parallel.parallel_map` would be
-a good choice for parallel execution, using multiple CPUs on the same machine.
-However, this function is only a good choice for the propagation (1) and (2):
-these run in parallel over the entire time grid without any communication, and
-thus minimal overhead.  However, this is not true for the propagation (3),
-which must synchronize after each time step. In that case, the "naive" use of
-:func:`qutip.parallel.parallel_map` results in a communication overhead that
-completely dominates the propagation, and actually makes the optimization
-slower (potentially by more than an order of magnitude).
+It would be natural to assume that :func:`qutip.parallel.parallel_map`
+respectively the slightly improved :func:`parallel_map` provided in this module
+would be a good choice for parallel execution, using multiple CPUs on the same
+machine.  However, this function is only a good choice for the propagation (1)
+and (2): these run in parallel over the entire time grid without any
+communication, and thus minimal overhead.  However, this is not true for the
+propagation (3), which must synchronize after each time step. In that case, the
+"naive" use of :func:`qutip.parallel.parallel_map` results in a communication
+overhead that completely dominates the propagation, and actually makes the
+optimization slower (potentially by more than an order of magnitude).
 
 The function :func:`parallel_map_fw_prop_step` provided in this module is an
 appropriate alternative implementation that uses long-running processes,
@@ -71,12 +72,32 @@ necessary to use `parallel_map` functions implemented in Cython, where the GIL
 can be released and the entire propagation (and storage of propagated states)
 can be done in shared-memory with no overhead.
 
+Also note that the overhead of multi-process parallelization is
+platform-dependent. On Linux, subprocesses are "forked" which causes them to
+inherit the current state of the parent process without any explicit (and
+expensive) inter-process communication (IPC). On other platforms, most notably
+Windows and the combination of macOS with Python 3.8, subprocesses are
+"spawned" instead of "forked": The subprocesses start from a clean slate, and
+all objects must be transfered from the parent process via IPC. This is very
+slow, and you should not expect to be able to achieve any speedup from
+parallelization on such platforms.
+
+Another caveat on platforms using "spawn" is that certain objects by default
+cannot be transferred via IPC, due to limitations of the :mod:`pickle`
+protocol. This affects :ref:`lambda` and functions defined in
+Jupyter notebooks, in particular. The third-party :mod:`loky` library provides
+an alternative implementation for multi-processes parallelization that does not
+have these restrictions, but causes even more overhead.
+
+You may attempt to use the various options to :func:`set_parallelization` in
+order to find a combination of settings that minimizes the runtime in your
+particular environment.
+
 .. _ipyparallel: https://ipyparallel.readthedocs.io/en/latest/
 """
 import multiprocessing
-import warnings
+from concurrent.futures import ProcessPoolExecutor
 
-from loky.process_executor import ProcessPoolExecutor
 from qutip.parallel import serial_map
 from qutip.ui.progressbar import BaseProgressBar, TextProgressBar
 
@@ -84,18 +105,86 @@ from .conversions import plug_in_pulse_values
 
 
 try:
-    from loky import get_reusable_executor as Executor
+
+    import loky
+    from loky import get_reusable_executor as LokyReusableExecutor
+    from loky.process_executor import (
+        ProcessPoolExecutor as LokyProcessPoolExecutor,
+    )
+
+    _HAS_LOKY = True
+
 except ImportError:
-    from concurrent.futures import ProcessPoolExecutor as Executor
+
+    _HAS_LOKY = False
+
+USE_LOKY = False
+"""Whether to use :mod:`loky` instead of :mod:`multiprocessing`.
+
+Set by :func:`set_parallelization`.
+"""
 
 
 __all__ = [
+    'set_parallelization',
     'parallel_map',
     'serial_map',
     'Consumer',
     'FwPropStepTask',
     'parallel_map_fw_prop_step',
 ]
+
+
+def set_parallelization(
+    use_loky=False, start_method=None, loky_pickler=None
+):  # pragma: nocover
+    """Configure multi-process parallelization.
+
+    Args:
+        use_loky (bool): whether to use the :mod:`loky` library.
+        start_method (None or str): One of 'fork', 'spawn', and 'forkserver',
+            see :func:`multiprocessing.set_start_method`. If ``use_loky=True``,
+            also 'loky' and 'loky_int_main', see :mod:`loky`. If None, a
+            platform and version-dependent default will be chosen automatically
+            (e.g., 'fork' on Linux, 'spawn' on Windows, 'loky' if
+            ``use_loky=True``)
+        loky_pickler (None or str): Serialization module to use for
+            :mod:`loky`. One of 'cloudpickle', 'pickle'. This forces the
+            serialization for *all* objects. The default value None chooses the
+            serialization automatically depending of the type of object. Using
+            'cloudpickle' is signficiantly slower than 'pickle' (but 'pickle'
+            cannot serialize all objects, such as lambda functions or functions
+            defined in a Jupyter notebook).
+
+    Raises:
+        ImportError: if ``use_loky=True`` but :mod:`loky` is not installed.
+
+    Note:
+        When working in Jupyter notebooks on systems that use the 'spawn'
+        `start_method` (Windows, or macOS with Python >= 3.8), you may have to
+        use :mod:`loky` (``use_loky=True``). This will incur a signficiant
+        increase in multi-processing overhead. Use Linux if you can.
+
+    Warning:
+        This function should only be called once per script/notebook, at its
+        very beginning.
+    """
+    global USE_LOKY
+    start_methods = ['fork', 'spawn', 'forkserver']
+    if use_loky:
+        start_methods.extend(['loky', 'loky_int_main'])
+    if start_method is not None:
+        if start_method not in start_methods:
+            raise ValueError("start_method not in %s" % str(start_methods))
+    if use_loky:
+        if not _HAS_LOKY:
+            raise ImportError("The loky library is not installed.")
+        USE_LOKY = True
+        loky.backend.context.set_start_method(start_method)
+        if loky_pickler is not None:
+            loky.set_loky_pickler(loky_pickler)
+    else:
+        multiprocessing.set_start_method(start_method)
 
 
 def parallel_map(
@@ -109,12 +198,8 @@ def parallel_map(
     """Map function `task` onto `values`, in parallel.
 
     This function's interface is identical to
-    :func:`qutip.parallel.parallel_map`, but it uses :mod:`loky` as a backend
-    (if available) to support a wider range of parameters. In
-    particular, `task` can be a function defined in a Jupyter notebook,
-    something that is not possible for a pickle-based version of
-    :func:`~qutip.parallel.parallel_map` on Platforms that use "spawn" for
-    :mod:`multiprocessing` (Windows, macOS for Python >= 3.8).
+    :func:`qutip.parallel.parallel_map`, but has the option of using
+    :mod:`loky` as a backend (see :func:`set_parallelization`).
     """
     if task_args is None:
         task_args = ()
@@ -136,6 +221,11 @@ def parallel_map(
         nfinished[0] += 1
         progress_bar.update(nfinished[0])
 
+    if USE_LOKY:
+        Executor = LokyReusableExecutor
+    else:
+        Executor = ProcessPoolExecutor
+
     with Executor(max_workers=num_cpus) as executor:
         jobs = []
         try:
@@ -152,9 +242,10 @@ def parallel_map(
     return res
 
 
-# TODO: deprecate
 class Consumer(multiprocessing.Process):
     """A process-based task consumer.
+
+    This is for internal use in :func:`parallel_map_fw_prop_step`.
 
     Args:
         task_queue (multiprocessing.JoinableQueue): A queue from which to read
@@ -165,10 +256,6 @@ class Consumer(multiprocessing.Process):
     """
 
     def __init__(self, task_queue, result_queue, data):
-        warnings.warn(
-            "Consumer is deprecated and will be removed in version 2.0",
-            warnings.DeprecationWarning,
-        )
         super().__init__()
         self.task_queue = task_queue
         self.result_queue = result_queue
@@ -201,6 +288,8 @@ class FwPropStepTask:
     `data` is internally cached by the :class:`Consumer` that will execute
     the task.
 
+    This is for internal use in :func:`parallel_map_fw_prop_step`.
+
     Args:
         i_state (int): The index of the state to propagation. That is, the
             index of the objective from whose :attr:`~.Objective.initial_state`
@@ -221,10 +310,10 @@ class FwPropStepTask:
         # The task object itself gets send to the Consumer via IPC (pickling).
         # Since this is only a few scalar values, we largely avoid
         # communication overhead
-        warnings.warn(
-            "FwPropStepTask is deprecated and will be removed in version 2.0",
-            warnings.DeprecationWarning,
-        )
+        # warnings.warn(
+        #    "FwPropStepTask is deprecated and will be removed in version 2.0",
+        #    warnings.DeprecationWarning,
+        # )
         self.i_state = i_state
         self.pulse_vals = pulse_vals
         self.time_index = time_index
@@ -267,8 +356,8 @@ class FwPropStepTask:
         return states[i_state]
 
 
-def parallel_map_fw_prop_step_old(shared, values, task_args):
-    """`parallel_map` function for the forward-propagation by one time step
+def parallel_map_fw_prop_step(shared, values, task_args):
+    """`parallel_map` function for the forward-propagation by one time step.
 
     Args:
         shared: A global object to which we can attach attributes for sharing
@@ -297,6 +386,8 @@ def parallel_map_fw_prop_step_old(shared, values, task_args):
     # (krotov.optimize._forward_propagation_step), but here we abuse it
     # as a shared namespace, between calls to `my_map`, by setting custom
     # data attributes on it
+    if USE_LOKY:
+        return _parallel_map_fw_prop_step_loky(shared, values, task_args)
     tlist = task_args[4]
     pulses = task_args[2]
     time_index = task_args[5]
@@ -330,32 +421,8 @@ def parallel_map_fw_prop_step_old(shared, values, task_args):
     return res
 
 
-def parallel_map_fw_prop_step(shared, values, task_args):
-    """`parallel_map` function for the forward-propagation by one time step.
-
-    Args:
-        shared: A global object to which we can temporarily attach attributes
-            for sharing data between different calls to
-            :func:`parallel_map_fw_prop_step`, allowing us to have long-running
-            task executor, avoiding process-management overhead.
-        values (list): a list 0..(N-1) where N is the number of objectives
-        task_args (tuple): A tuple of 7 components:
-
-            1. A list of states to propagate, one for each objective.
-            2. The list of objectives
-            3. The list of optimized pulses (updated up to `time_index`)
-            4. The "pulses mapping", cf :func:`.extract_controls_mapping`
-            5. The list of time grid points
-            6. The index of the interval on the time grid over which to
-               propagate
-            7. A list of `propagate` callables, as passed to
-               :func:`.optimize_pulses`.  The propagators must not have
-               side-effects in order for :func:`parallel_map_fw_prop_step` to
-               work correctly.
-    """
-    # The way this function is called in optimize_pulses, `shared` will be the
-    # function krotov.optimize._forward_propagation_step
-
+def _parallel_map_fw_prop_step_loky(shared, values, task_args):
+    """Loky-based implementation of :func:`parallel_map_fw_prop_step`."""
     tlist = task_args[4]
     pulses = task_args[2]
     time_index = task_args[5]
@@ -364,7 +431,7 @@ def parallel_map_fw_prop_step(shared, values, task_args):
         # we only send the full task_args through IPC once, for the first time
         # step. Subsequent time steps will reuse the data
         shared.executors = [
-            ProcessPoolExecutor(
+            LokyProcessPoolExecutor(
                 max_workers=1,
                 initializer=_pmfw_initializer,
                 initargs=(
@@ -408,7 +475,7 @@ def _pmfw_initializer(
     propagator,
 ):
     """Copy `task_args` into a process-local global variable."""
-    # for internal use in parallel_map_fw_prop_step
+    # for internal use in _parallel_map_fw_prop_step_loky
     global _pmfw_data
     _pmfw_data = dict(
         state_index=state_index,
@@ -427,7 +494,7 @@ def _pmfw_forward_prop_step(pulse_vals, time_index):
     Most of the data taken from the process-local global storage set by the
     initializer.
     """
-    # for internal use in parallel_map_fw_prop_step
+    # for internal use in _parallel_map_fw_prop_step_loky
     global _pmfw_data
     i_state = _pmfw_data['state_index']
     pulses = _pmfw_data['pulses']

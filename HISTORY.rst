@@ -8,6 +8,8 @@ History
 
 * Added: Support for Python 3.8
 * Added: Support for QuTiP 4.5.0
+* Added: Support for parallelization with loky_ (`#72`_)
+* Added: ``krotov.parallelization.set_parallelization`` function.
 
 
 1.0.0 (2019-12-16)
@@ -94,6 +96,7 @@ History
 * Support for state-to-state and gate optimization, for both closed and open systems
 
 
+.. _loky: https://loky.readthedocs.io/
 .. _gh-pages: https://qucontrol.github.io/krotov
 .. _Doctr: https://drdoctr.github.io
 .. _@uiofgh: https://github.com/uiofgh
@@ -123,3 +126,4 @@ History
 .. _#66: https://github.com/qucontrol/krotov/issues/66
 .. _#67: https://github.com/qucontrol/krotov/issues/67
 .. _#68: https://github.com/qucontrol/krotov/issues/68
+.. _#72: https://github.com/qucontrol/krotov/issues/72
