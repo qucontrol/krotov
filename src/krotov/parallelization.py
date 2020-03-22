@@ -57,7 +57,8 @@ In general,
     )
 
 is a decent choice for enabling parallelization for a typical multi-objective
-optimization.
+optimization (but don't expect wonders: general pure-python parallelization is
+an unsolved problem.)
 
 You may implement your own "map" functions to exploit parallelization paradigms
 other than Python's built-in :mod:`multiprocessing`, provided here. This
@@ -95,11 +96,14 @@ particular environment.
 
 .. _ipyparallel: https://ipyparallel.readthedocs.io/en/latest/
 """
+import contextlib
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
+from functools import partial
 
 from qutip.parallel import serial_map
 from qutip.ui.progressbar import BaseProgressBar, TextProgressBar
+from threadpoolctl import threadpool_limits
 
 from .conversions import plug_in_pulse_values
 
@@ -124,6 +128,33 @@ USE_LOKY = False
 Set by :func:`set_parallelization`.
 """
 
+USE_THREADPOOL_LIMITS = True
+"""Whether to limit the number of low-level BLAS/OpenMP threads.
+
+When using multi-process parallelization, *nested parallelization* must be
+avoided. That is, low-level numerical routines e.g. in :mod:`numpy` should not
+be allowed to use multiple threads. This would lead to over-subscribing CPUs
+and can slow down the entire program by orders of magnitude.
+
+If True, threadpoolctl_ will be used internally to attempt to eliminate any
+nested threads.
+
+.. note::
+
+    Alternatively (or in addition), you may want to consider setting the
+    following environment variables in your shell:
+
+    .. code-block:: shell
+
+        export MKL_NUM_THREADS=1
+        export NUMEXPR_NUM_THREADS=1
+        export OMP_NUM_THREADS=1
+
+.. _threadpoolctl: https://github.com/joblib/threadpoolctl
+
+Set by :func:`set_parallelization`.
+"""
+
 
 __all__ = [
     'set_parallelization',
@@ -135,13 +166,23 @@ __all__ = [
 ]
 
 
+@contextlib.contextmanager
+def _no_threadpool_limits(*args, **kwargs):  # pragma: nocover
+    """No-op replacement for :func:`threadpool_limits`."""
+    # this is just an empty context manager that does nothing.
+    yield None
+
+
 def set_parallelization(
-    use_loky=False, start_method=None, loky_pickler=None
+    use_loky=False,
+    start_method=None,
+    loky_pickler=None,
+    use_threadpool_limits=True,
 ):  # pragma: nocover
     """Configure multi-process parallelization.
 
     Args:
-        use_loky (bool): whether to use the :mod:`loky` library.
+        use_loky (bool): Value for :obj:`USE_LOKY`.
         start_method (None or str): One of 'fork', 'spawn', and 'forkserver',
             see :func:`multiprocessing.set_start_method`. If ``use_loky=True``,
             also 'loky' and 'loky_int_main', see :mod:`loky`. If None, a
@@ -155,6 +196,7 @@ def set_parallelization(
             'cloudpickle' is signficiantly slower than 'pickle' (but 'pickle'
             cannot serialize all objects, such as lambda functions or functions
             defined in a Jupyter notebook).
+        use_threadpool_limits (bool): Value for :obj:`USE_THREADPOOL_LIMITS`.
 
     Raises:
         ImportError: if ``use_loky=True`` but :mod:`loky` is not installed.
@@ -167,7 +209,8 @@ def set_parallelization(
 
     Warning:
         This function should only be called once per script/notebook, at its
-        very beginning.
+        very beginning. The :obj:`USE_LOKY` and :obj:`USE_THREADPOOL_LIMITS`
+        variables may be set at any time.
     """
     global USE_LOKY
     start_methods = ['fork', 'spawn', 'forkserver']
@@ -198,9 +241,13 @@ def parallel_map(
     """Map function `task` onto `values`, in parallel.
 
     This function's interface is identical to
-    :func:`qutip.parallel.parallel_map`, but has the option of using
-    :mod:`loky` as a backend (see :func:`set_parallelization`).
+    :func:`qutip.parallel.parallel_map` as of QuTiP 4.5.0, but has the option
+    of using :mod:`loky` as a backend (see :func:`set_parallelization`). It
+    also eliminates internal threads, according to
+    :obj:`USE_THREADPOOL_LIMITS`.
     """
+    # TODO: if QuTiP's parallel_map catches up, we can remove this function,
+    # and put QuTiP's parallel_map into __all__ to maintain krotov's interface.
     if task_args is None:
         task_args = ()
     if task_kwargs is None:
@@ -223,23 +270,45 @@ def parallel_map(
 
     if USE_LOKY:
         Executor = LokyReusableExecutor
+        if USE_THREADPOOL_LIMITS:
+            Executor = partial(
+                LokyReusableExecutor,
+                initializer=_process_threadpool_limits_initializier,
+            )
     else:
         Executor = ProcessPoolExecutor
 
-    with Executor(max_workers=num_cpus) as executor:
-        jobs = []
-        try:
-            for value in values:
-                args = (value,) + tuple(task_args)
-                job = executor.submit(task, *args, **task_kwargs)
-                job.add_done_callback(_update_progress_bar)
-                jobs.append(job)
-            res = [job.result() for job in jobs]
-        except KeyboardInterrupt as e:
-            raise e
+    _threadpool_limits = _no_threadpool_limits
+    if USE_THREADPOOL_LIMITS:
+        _threadpool_limits = threadpool_limits
+
+    with _threadpool_limits(limits=1):
+        with Executor(max_workers=num_cpus) as executor:
+            jobs = []
+            try:
+                for value in values:
+                    args = (value,) + tuple(task_args)
+                    job = executor.submit(task, *args, **task_kwargs)
+                    job.add_done_callback(_update_progress_bar)
+                    jobs.append(job)
+                res = [job.result() for job in jobs]
+            except KeyboardInterrupt as e:
+                raise e
 
     progress_bar.finished()
     return res
+
+
+def _process_threadpool_limits_initializier():
+    """Initializer for settings threadpool limits.
+
+    This is an initializer for :mod:`loky` Executors that deactivates threads
+    in the spawned sub-processes.
+    """
+    import numpy  # required for loky's autodetection
+    from threadpoolctl import threadpool_limits
+
+    threadpool_limits(limits=1)
 
 
 class Consumer(multiprocessing.Process):
@@ -269,13 +338,18 @@ class Consumer(multiprocessing.Process):
         value on the `task_queue` acts as a "poison pill", causing the
         :class:`Consumer` process to shut down.
         """
+        _threadpool_limits = _no_threadpool_limits
+        if USE_THREADPOOL_LIMITS:
+            _threadpool_limits = threadpool_limits
+
         while True:
             next_task = self.task_queue.get()
             if next_task is None:
                 # Poison pill means shutdown
                 self.task_queue.task_done()
                 break
-            answer = next_task(self.data)
+            with _threadpool_limits(limits=1):
+                answer = next_task(self.data)
             self.task_queue.task_done()
             self.result_queue.put(answer)
 
@@ -433,7 +507,9 @@ def _parallel_map_fw_prop_step_loky(shared, values, task_args):
         shared.executors = [
             LokyProcessPoolExecutor(
                 max_workers=1,
-                initializer=_pmfw_initializer,
+                initializer=partial(
+                    _pmfw_initializer, limit_thread_pool=USE_THREADPOOL_LIMITS
+                ),
                 initargs=(
                     state_index,
                     task_args[0][state_index],  # initial_state
@@ -473,10 +549,18 @@ def _pmfw_initializer(
     pulses_mapping,
     tlist,
     propagator,
+    limit_thread_pool=True,
 ):
     """Copy `task_args` into a process-local global variable."""
     # for internal use in _parallel_map_fw_prop_step_loky
     global _pmfw_data
+
+    if limit_thread_pool:
+        import numpy  # required for loky's autodetection
+        from threadpoolctl import threadpool_limits
+
+        threadpool_limits(limits=1)
+
     _pmfw_data = dict(
         state_index=state_index,
         state=initial_state,
@@ -496,6 +580,9 @@ def _pmfw_forward_prop_step(pulse_vals, time_index):
     """
     # for internal use in _parallel_map_fw_prop_step_loky
     global _pmfw_data
+    _threadpool_limits = _no_threadpool_limits
+    if USE_THREADPOOL_LIMITS:
+        _threadpool_limits = threadpool_limits
     i_state = _pmfw_data['state_index']
     pulses = _pmfw_data['pulses']
     for (pulse, pulse_val) in zip(pulses, pulse_vals):
@@ -509,6 +596,9 @@ def _pmfw_forward_prop_step(pulse_vals, time_index):
     ]
     tlist = _pmfw_data['tlist']
     dt = tlist[time_index + 1] - tlist[time_index]
-    next_state = _pmfw_data['propagator'](H, _pmfw_data['state'], dt, c_ops)
+    with _threadpool_limits(limits=1):
+        next_state = _pmfw_data['propagator'](
+            H, _pmfw_data['state'], dt, c_ops
+        )
     _pmfw_data['state'] = next_state
     return next_state

@@ -5,6 +5,7 @@ import time
 from functools import partial
 
 import numpy as np
+import threadpoolctl
 from qutip import Qobj
 from qutip.parallel import serial_map
 
@@ -19,6 +20,7 @@ from .conversions import (
 )
 from .info_hooks import chain
 from .mu import derivative_wrt_pulse
+from .parallelization import USE_THREADPOOL_LIMITS
 from .propagators import Propagator, expm
 from .result import Result
 from .second_order import _overlap
@@ -48,7 +50,8 @@ def optimize_pulses(
     continue_from=None,
     skip_initial_forward_propagation=False,
     norm=None,
-    overlap=None
+    overlap=None,
+    limit_thread_pool=None
 ):
     r"""Use Krotov's method to optimize towards the given `objectives`.
 
@@ -204,6 +207,14 @@ def optimize_pulses(
             :meth:`qutip.Qobj.overlap` for Hilbert space states and to the
             Hilbert-Schmidt norm $\tr[\rho_1^\dagger \rho2]$ for density
             matrices or operators.
+        limit_thread_pool (bool or None): If True, try to eliminate
+            multi-threading in low-level numerical routines like :mod:`numpy`,
+            via the use of the ``threadpoolctl`` package. Single-threaded
+            execution is usually faster, but if you know what you are doing and
+            can benchmark multi-threaded execution, you may set this to False
+            to place no restrictions on multi-threading. The default value
+            (None) delegates to
+            :obj:`krotov.parallelization.USE_THREADPOOL_LIMITS`.
 
     Returns:
         Result: The result of the optimization.
@@ -219,6 +230,12 @@ def optimize_pulses(
 
     # Initialization
     logger.info("Initializing optimization with Krotov's method")
+    thread_pool_limiter = None
+    if limit_thread_pool is None:
+        limit_thread_pool = USE_THREADPOOL_LIMITS
+    if limit_thread_pool:
+        logger.debug("Setting threadpoolctrl.threadpool_limits")
+        thread_pool_limiter = threadpoolctl.threadpool_limits(limits=1)
     if mu is None:
         mu = derivative_wrt_pulse
     second_order = sigma is not None
@@ -344,7 +361,7 @@ def optimize_pulses(
             iteration=0,
             info_vals=[],
             shared_data={},
-            **info_hook_static_args
+            **info_hook_static_args,
         )
 
     # Initialize Result object
@@ -506,7 +523,7 @@ def optimize_pulses(
                 info_vals=result.info_vals,
                 shared_data={},
                 iteration=krotov_iteration,
-                **info_hook_static_args
+                **info_hook_static_args,
             )
         # Update optimization `result` with info from finished iteration
         result.iters.append(krotov_iteration)
@@ -565,6 +582,9 @@ def optimize_pulses(
     result.end_local_time = time.localtime()
     for i, pulse in enumerate(optimized_pulses):
         result.optimized_controls[i] = pulse_onto_tlist(pulse)
+    if thread_pool_limiter is not None:
+        logger.debug("Unsetting threadpoolctrl.threadpool_limits")
+        thread_pool_limiter.unregister()
     return result
 
 

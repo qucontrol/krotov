@@ -66,6 +66,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 import qutip
 import scipy
+import threadpoolctl
 from qutip.cy.spconvert import dense2D_to_fastcsr_fmode
 from qutip.cy.spmatfuncs import spmvpy_csr
 from qutip.superoperator import mat2vec, vec2mat
@@ -75,12 +76,14 @@ __all__ = ['expm', 'Propagator', 'DensityMatrixODEPropagator']
 
 
 def expm(H, state, dt, c_ops=None, backwards=False, initialize=False):
-    """Propagate using matrix exponentiation
+    """Propagate using matrix exponentiation.
 
     This supports `H` being a Hamiltonian (for a Hilbert space `state`) or a
     Liouvillian (for `state` being a density matrix) in nested-list format.
     Collapse operators `c_ops` are not supported. The propagator is not
-    stateful, thus `initialize` is ignored.
+    stateful, thus `initialize` is ignored. The matrix exponentiation is
+    evaluated in single-threaded mode, to prevent accidental nested
+    parallelization.
     """
     if c_ops is None:
         c_ops = []
@@ -109,7 +112,8 @@ def expm(H, state, dt, c_ops=None, backwards=False, initialize=False):
         state.type in ['ket', 'bra'] and A.type == 'oper'
     )
     if ok_types:
-        return ((A * dt).expm())(state)
+        with threadpoolctl.threadpool_limits(limits=1):
+            return ((A * dt).expm())(state)
     else:
         raise NotImplementedError(
             "Cannot handle argument types A:%s, state:%s"

@@ -25,7 +25,14 @@ except OSError:
     history = ''
 
 # requirements for use
-requirements = ['glom', 'numpy', 'scipy', 'qutip>=4.3.1', 'uniseg']
+requirements = [
+    'glom',
+    'numpy',
+    'scipy',
+    'qutip>=4.3.1',
+    'threadpoolctl',
+    'uniseg',
+]
 if sys.platform != 'linux':
     requirements.append('loky')
 

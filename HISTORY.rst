@@ -9,7 +9,9 @@ History
 * Added: Support for Python 3.8
 * Added: Support for QuTiP 4.5.0
 * Added: Support for parallelization with loky_ (`#72`_)
-* Added: ``krotov.parallelization.set_parallelization`` function.
+* Added: ``krotov.parallelization.set_parallelization`` function
+* Added: `limit_thread_pool` option to ``krotov.optimize_pulses``
+* Changed: ``krotov.propagators.expm`` now guarantees single-threaded execution
 
 
 1.0.0 (2019-12-16)
