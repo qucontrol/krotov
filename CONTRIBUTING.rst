@@ -79,23 +79,23 @@ documentation. See :ref:`DevelopmentPrerequisites` for details.
 There is also a ``Makefile`` that wraps around tox, for
 convenience on Unix-based systems. In your checked-out clone, run
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ make help
+    make help
 
 to see the available make targets. If you cannot use ``make``, but want to use
 ``tox`` directly (e.g., on Windows), run
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ tox -av
+    tox -av
 
 to see a list of tox environments and a description. For the initial
 configuration of tox environments, you may have to run
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ tox -e bootstrap
+    tox -e bootstrap
 
 in order to set up the ``tox.ini`` configuration file.
 
@@ -164,13 +164,13 @@ able to run.
 
 To create a topic-branch named ``issue1``::
 
-    $ git branch issue1
-    $ git checkout issue1
+    git branch issue1
+    git checkout issue1
 
 You can then make commits, and push them to Github to trigger Continuous
 Integration testing::
 
-    $ git push -u origin issue1
+    git push -u origin issue1
 
 Commit early and often! At the same time, try to keep your topic branch
 as clean and organized as possible.
@@ -256,15 +256,15 @@ The Krotov package includes a full test-suite using pytest_. We strive for a `te
 
 From a checkout of the ``krotov`` repository, you can use
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ make test
+    make test
 
 to run the entire test suite, or
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ tox -e py35-test,py36-test,py37-test
+    tox -e py35-test,py36-test,py37-test
 
 if ``make`` is not available.
 
@@ -372,15 +372,15 @@ You may use the BibTeX_ plugin for citations.
 
 At any point, from a checkout of the ``krotov`` repository, you may run
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ make docs
+    make docs
 
 or
 
-.. code-block:: console
+.. code-block:: shell
 
-   $ tox -e docs
+   tox -e docs
 
 to generate the documentation locally.
 
@@ -464,21 +464,21 @@ tests. For this to work properly, the following steps must be taken:
 * Before committing, re-evaluate all example notebooks in a well-defined
   virtual environment by running
 
-    .. code-block:: console
+    .. code-block:: shell
 
-        $ make notebooks
+        make notebooks
 
 * Check that the examples can be verified across different Python version by running
 
-    .. code-block:: console
+    .. code-block:: shell
 
-        $ make test
+        make test
 
 * You may also verify that the example is properly integrated in the documentation by running
 
-    .. code-block:: console
+    .. code-block:: shell
 
-        $ make docs
+        make docs
 
 
 .. _math-in-example-notebooks:
@@ -587,7 +587,7 @@ A release is made by running
 
 .. code-block:: shell
 
-    $ make release
+    make release
 
 which executes ``scripts/release.py``. Follow all the prompts.
 
@@ -619,11 +619,11 @@ How to run a jupyter notebook server for working on the example notebooks
 
 A notebook server that is isolated to the proper testing environment can be started via the Makefile::
 
-    $ make jupyter-notebook
+    make jupyter-notebook
 
 This is equivalent to::
 
-    $ tox -e run-cmd -- jupyter notebook --config=/dev/null
+    tox -e run-cmd -- jupyter notebook --config=/dev/null
 
 You may run this with your own options, if you prefer. The
 ``--config=/dev/null`` guarantees that the notebook server is completely
@@ -633,7 +633,7 @@ course, if you know what you're doing, you may want this.
 
 If you prefer, you may also use the newer jupyterlab::
 
-    $ make jupyter-lab
+    make jupyter-lab
 
 How to convert an example notebook to a script for easier debugging
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -642,10 +642,12 @@ Interactive debugging in notebooks is difficult. It becomes much easier if
 you convert the notebook to a script first.  To convert a notebook to an
 (I)Python script and run it with automatic debugging, execute e.g.::
 
-    $ tox -e run-cmd -- jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
-    $ tox -e run-cmd -- ipython --pdb debug.py
+    tox -e run-cmd -- jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
+    tox -e run-cmd -- ipython --pdb debug.py
 
-You can then also set a manual breakpoint by inserting the following line anywhere in the code::
+You can then also set a manual breakpoint by inserting the following line anywhere in the code:
+
+.. code-block:: python
 
     from IPython.terminal.debugger import set_trace; set_trace() # DEBUG
 
@@ -694,31 +696,34 @@ How to run a subset of tests
 
 To run e.g. only the tests defined in ``tests/test_krotov.py``, use any of the following::
 
-    $ make test TESTS=tests/test_krotov.py
+    make test TESTS=tests/test_krotov.py
 
-    $ tox -e py37-test -- tests/test_krotov.py
+    tox -e py37-test -- tests/test_krotov.py
 
-    $ tox -e run-cmd -- pytest tests/test_krotov.py
+    tox -e run-cmd -- pytest tests/test_krotov.py
 
-    $ .tox/py37/bin/pytest tests/test_krotov.py
+    .tox/py37/bin/pytest tests/test_krotov.py
 
 See the `pytest test selection docs`_ for details.
+
 
 How to run only as single test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Decorate the test with e.g. ``@pytest.mark.xxx``, and then run, e.g::
 
-    $ tox -e run-cmd -- pytest -m xxx tests/
+    tox -e run-cmd -- pytest -m xxx tests/
 
 See the `pytest documentation on markers`_ for details.
+
 
 How to run only the doctests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run the following::
 
-$ tox -e run-cmd -- pytest --doctest-modules src
+    tox -e run-cmd -- pytest --doctest-modules src
+
 
 How to go into an interactive debugger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -726,7 +731,7 @@ How to go into an interactive debugger
 Optionally, install the `pdbpp` package into the testing environment, for a
 better experience::
 
-    $ tox -e run-cmd -- pip install pdbpp
+    tox -e run-cmd -- pip install pdbpp
 
 Then:
 
@@ -736,7 +741,7 @@ Then:
 
 - Run ``pytest`` with the option ``-s``, e.g.::
 
-    $ tox -e run-cmd -- pytest -m xxx -s tests/
+    tox -e run-cmd -- pytest -m xxx -s tests/
 
 You may also see the `pytest documentation on automatic debugging`_.
 

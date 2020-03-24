@@ -25,9 +25,9 @@
 +To install the latest released version of :mod:`krotov` into your current (conda)
  environment, run this command in your terminal:
  
- .. code-block:: console
+ .. code-block:: shell
  
-     $ python -m pip install krotov
+     python -m pip install krotov
  
 -This is the preferred method to install the ``krotov`` package, as it will always install the most recent stable release.
 +This is the preferred method to install the :mod:`krotov` package, as it will always install the most recent stable release.
@@ -41,7 +41,7 @@
 -To install the latest development version of ``krotov`` from `Github`_:
 +To install the latest development version of :mod:`krotov` from `Github`_:
  
- .. code-block:: console
+ .. code-block:: shell
  
 @@ -166,17 +166,11 @@
  Then,

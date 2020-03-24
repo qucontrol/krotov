@@ -103,12 +103,12 @@ Assuming ``conda`` is installed (e.g. through `Miniconda`_), the following
 commands set up a virtual (conda) environment into which the Krotov package can
 then be installed:
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ conda create -n qucontrolenv python=3.7
-    $ conda activate qucontrolenv
-    $ conda config --append channels conda-forge
-    $ conda install qutip
+    conda create -n qucontrolenv "python=3.7"
+    conda activate qucontrolenv
+    conda config --append channels conda-forge
+    conda install qutip
 
 .. _core packages of the Python scientific ecosystem: https://www.scipy.org
 .. _QuTiP's installation instructions: http://qutip.org/docs/latest/installation.html
@@ -124,17 +124,17 @@ Installation
 To install the latest released version of ``krotov`` into your current (conda)
 environment, run this command in your terminal:
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ python -m pip install krotov
+    python -m pip install krotov
 
 This is the preferred method to install the ``krotov`` package, as it will always install the most recent stable release.
 
 You may also do
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ python -m pip install krotov[dev,extras]
+    python -m pip install krotov[dev,extras]
 
 to install additional development dependencies, including packages required to run the example notebooks.
 
@@ -148,9 +148,9 @@ you through the process.
 
 To install the latest development version of ``krotov`` from `Github`_:
 
-.. code-block:: console
+.. code-block:: shell
 
-    $ python -m pip install git+https://github.com/qucontrol/krotov.git@master#egg=krotov
+    python -m pip install git+https://github.com/qucontrol/krotov.git@master#egg=krotov
 
 .. _Github: https://github.com/qucontrol/krotov
 
