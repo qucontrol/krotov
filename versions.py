@@ -25,11 +25,17 @@ DVMVERSION:
 """
 # This script is intended to be placed in the root of a project's gh-pages
 # branch
+import os
 import shutil
 import subprocess
 import sys
 import venv
 from pathlib import Path
+
+
+DOCTR_VERSIONS_ENV_VARS = {}  # set by doctr-versions-menu
+
+DVM_REPO = 'git+https://github.com/goerz/doctr_versions_menu.git'
 
 
 def main(argv=None):
@@ -43,10 +49,12 @@ def main(argv=None):
     if not argv[-1].endswith('versions.py') and not argv[-1].startswith('--'):
         dvm_version = argv.pop()
     if dvm_version.endswith('=master'):
-        dvm_version = 'git+https://github.com/goerz/doctr_versions_menu.git@master#egg=doctr_versions_menu'
+        dvm_version = DVM_REPO + '@master#egg=doctr_versions_menu'
     venvdir = Path(__file__).parent / '.venv'
     builder = venv.EnvBuilder(with_pip=True)
     builder.create(venvdir)
+    env = DOCTR_VERSIONS_ENV_VARS.copy()
+    env.update(os.environ)  # overrides DOCTR_VERSIONS_ENV_VARS
     try:
         subprocess.run(
             [Path('.venv') / 'bin' / 'pip', 'install', dvm_version],
@@ -57,6 +65,7 @@ def main(argv=None):
             [Path('.venv') / 'bin' / 'doctr-versions-menu', '--debug'],
             cwd=venvdir.parent,
             check=True,
+            env=env,
         )
         return 0
     except subprocess.CalledProcessError:
