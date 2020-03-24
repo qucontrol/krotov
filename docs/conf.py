@@ -93,7 +93,10 @@ if os.getenv("SPELLCHECK"):
     spelling_ignore_pypi_package_names = True
 
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3.7", None),
+    # Note: the inventory "python37.inv" was patched to include a reference
+    # for :class:`multiprocessing.context.Process`. The patched files was
+    # created with the help of https://sphobjinv.readthedocs.io/
+    "python": ("https://docs.python.org/3.7", "python37.inv"),
     "sympy": ("https://docs.sympy.org/latest/", None),
     "scipy": ("https://docs.scipy.org/doc/scipy/reference/", None),
     "numpy": ("https://docs.scipy.org/doc/numpy/", None),

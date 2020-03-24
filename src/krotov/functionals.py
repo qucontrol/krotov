@@ -494,7 +494,7 @@ def F_avg(
         basis_states (list[qutip.Qobj]): The $N$ Hilbert space logical basis
             states
         gate (qutip.Qobj): The $N \times N$ quantum gate in the logical
-            subspace, e.g. :func:`qutip.qip.operations.cnot()`.
+            subspace, e.g. :func:`qutip.qip.gates.cnot`.
         mapped_basis_states (None or list[qutip.Qobj]): If given, the result of
             applying gate to `basis_states`. If not given, this will be
             calculated internally via :func:`mapped_basis`. It is recommended
