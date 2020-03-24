@@ -42,6 +42,7 @@ def _patch_line(line):
         r'\sphinxurl{krotov\_pseudocode.pdf}',
         r'\url{https://qucontrol.github.io/krotov/master/krotov_pseudocode.pdf}',
     )
+    line = line.replace(r'\sphinxhyphen{}', '-')
     if line.startswith(r'\(\newcommand'):
         return None
     if line == r'\begin{split}\begin{equation}' + "\n":

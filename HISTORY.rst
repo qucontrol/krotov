@@ -3,13 +3,15 @@ History
 =======
 
 
-(next release)
---------------
+1.1.0 (2020-03-24)
+------------------
 
 * Added: Support for Python 3.8
 * Added: Support for QuTiP 4.5.0
 * Added: Support for parallelization with loky_ (`#72`_)
 * Added: ``krotov.parallelization.set_parallelization`` function
+* Added: ``krotov.parallelization.parallel_map`` function (improved implementation of QuTiP's ``parallel_map``)
+* Added: Ability to use threadpoolctl_ to limit unwanted threading
 * Added: `limit_thread_pool` option to ``krotov.optimize_pulses``
 * Changed: ``krotov.propagators.expm`` now guarantees single-threaded execution
 
@@ -101,6 +103,7 @@ History
 .. _loky: https://loky.readthedocs.io/
 .. _gh-pages: https://qucontrol.github.io/krotov
 .. _Doctr: https://drdoctr.github.io
+.. _threadpoolctl: https://github.com/joblib/threadpoolctl
 .. _@uiofgh: https://github.com/uiofgh
 .. _@TejasAvinashShetty: https://github.com/TejasAvinashShetty
 .. _@timohillmann: https://github.com/timohillmann

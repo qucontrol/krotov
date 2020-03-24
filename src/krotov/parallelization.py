@@ -139,6 +139,8 @@ and can slow down the entire program by orders of magnitude.
 If True, threadpoolctl_ will be used internally to attempt to eliminate any
 nested threads.
 
+Set by :func:`set_parallelization`.
+
 .. note::
 
     Alternatively (or in addition), you may want to consider setting the
@@ -151,8 +153,6 @@ nested threads.
         export OMP_NUM_THREADS=1
 
 .. _threadpoolctl: https://github.com/joblib/threadpoolctl
-
-Set by :func:`set_parallelization`.
 """
 
 
