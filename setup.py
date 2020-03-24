@@ -25,7 +25,16 @@ except OSError:
     history = ''
 
 # requirements for use
-requirements = ['glom', 'numpy', 'scipy', 'qutip>=4.3.1', 'uniseg']
+requirements = [
+    'glom',
+    'numpy',
+    'scipy',
+    'qutip>=4.3.1',
+    'threadpoolctl',
+    'uniseg',
+]
+if sys.platform != 'linux':
+    requirements.append('loky')
 
 # requirements for development (testing, generating docs)
 dev_requirements = [
@@ -40,6 +49,7 @@ dev_requirements = [
     'gitpython',
     'isort',
     'jupyter',
+    'loky',
     'matplotlib',
     'nbsphinx',
     'nbval',

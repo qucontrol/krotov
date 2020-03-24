@@ -101,6 +101,7 @@ intersphinx_mapping = {
     "qutip": ("http://qutip.org/docs/latest/", None),
     "glom": ("https://glom.readthedocs.io/en/latest/", None),
     "weylchamber": ("https://weylchamber.readthedocs.io/en/latest/", None),
+    "loky": ("https://loky.readthedocs.io/en/stable/", None),
 }
 
 # Add any paths that contain templates here, relative to this directory.

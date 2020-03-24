@@ -1,6 +1,7 @@
 """Module defining the :class:`Result` object that is returned by
 :func:`.optimize_pulses`.
 """
+import copyreg
 import datetime
 import logging
 import pickle
@@ -8,7 +9,7 @@ import time
 from textwrap import dedent
 
 from .conversions import _nested_list_shallow_copy, pulse_onto_tlist
-from .objectives import Objective, _ControlPlaceholder
+from .objectives import Objective, _ControlPlaceholder, _Objective_reduce
 
 
 __all__ = ['Result']
@@ -252,7 +253,10 @@ class Result:
             filename (str): Name of file to which to dump the :class:`Result`.
         """
         with open(filename, 'wb') as dump_fh:
-            pickle.dump(self, dump_fh)
+            pickler = pickle.Pickler(dump_fh)
+            pickler.dispatch_table = copyreg.dispatch_table.copy()
+            pickler.dispatch_table[Objective] = _Objective_reduce
+            pickler.dump(self)
 
 
 def _contains_control_placeholders(lst):

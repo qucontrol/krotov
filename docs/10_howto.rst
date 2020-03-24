@@ -535,6 +535,61 @@ Krotov's method is inherently parallel across different objectives. See
 :mod:`krotov.parallelization`, and the
 :ref:`/notebooks/05_example_transmon_xgate.ipynb` for an example.
 
+It is exceedingly important to ensure that you do not use any accidental nested
+parallelization. The :mod:`numpy` library is often eager to run in a
+multi-threaded mode that does not combine well with the process-based
+parallelization in :mod:`krotov.parallelization`. See
+:ref:`HowtoLimitThreadpool`.
+
+
+.. _HowtoLimitThreadpool:
+
+How to avoid over-subscribing the CPU when using parallelization
+----------------------------------------------------------------
+
+A common caveat of parallelization is that the number of numerically intensive
+threads or processes should not be larger than the number of CPUs on the
+machine. "Oversubscribing" the CPUs can make a parallelized program run slower
+by order of magnitudes compared to a serial program!
+
+One consequence of this realization is that *nested parallelizaton* must be
+tightly controlled: If your program used process-based parallelization (and
+assuming each process can tax a CPU core at 100%), then you must prevent
+multiple threads within each process. Depending on how they were compiled, some
+of Python's low-level numerical libraries (:mod:`numpy` in particular) are
+eager to run in a multi-threaded mode, and it can be surprisingly difficult to
+convince them not to do this. In general, you can
+`set environment variables to force low-level numerical code into single-threaded mode`_:
+
+.. code-block:: shell
+
+    export MKL_NUM_THREADS=1
+    export NUMEXPR_NUM_THREADS=1
+    export OMP_NUM_THREADS=1
+
+It may be a good idea to set these variables in your ``.bashrc`` (or the
+equivalent for whatever shell you are using), and only change their values when
+you specifically want to enable multi-threaded execution. You can sometimes set
+these variables inside a Python script or notebook, but you must do so before
+importing :mod:`numpy`.
+
+The threadpoolctl_ python package is another alternative of eliminating
+unexpected multi-threading. The functions in :mod:`krotov.parallelization` use
+this package internally to suppress low-level threads. For example, when using
+:func:`krotov.parallelization.parallel_map`, you can expected the execution to
+be limited to the given `num_cpus`. Also, :func:`.optimize_pulses` by
+defaults limits multi-threading, cf. the `limit_thread_pool` argument. Lastly,
+:func:`krotov.propagators.expm` ensures that the matrix exponentiation is
+calculated single-threadedly.
+
+Always monitor your processes in a tool like htop_ to watch out for unexpected
+CPU usage.
+
+.. _set environment variables to force low-level numerical code into single-threaded mode: https://stackoverflow.com/questions/30791550/limit-number-of-threads-in-numpy/31622299#31622299
+.. _threadpoolctl: https://github.com/joblib/threadpoolctl
+.. _htop: https://hisham.hm/htop/
+
+
 .. _HowtoStoreResult:
 
 How to prevent losing an optimization result

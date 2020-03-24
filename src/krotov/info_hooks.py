@@ -223,9 +223,13 @@ def print_debug_information(
         "    ∫gₐ(t)dt: %s\n" % (", ".join(["%.2e" % v for v in g_a_integrals]))
     )
     out.write("    λₐ: %s\n" % (", ".join(["%.2e" % λ for λ in lambda_vals])))
-    MB_per_timeslot = sum(_qobj_nbytes(state) for state in fw_states_T) / (
-        1024 ** 2
-    )
+    try:
+        MB_per_timeslot = sum(_qobj_nbytes(state) for state in fw_states_T) / (
+            1024 ** 2
+        )
+    except AttributeError:
+        # e.g. fw_states_T = None (skip_initial_forward_propagation)
+        MB_per_timeslot = 0
     out.write("    storage (bw, fw, fw0): ")
     if backward_states is None:
         out.write("None, ")
@@ -266,10 +270,14 @@ def print_debug_information(
                 len(forward_states0[0]) * MB_per_timeslot,
             )
         )
-    out.write(
-        "    fw_states_T norm: %s\n"
-        % (", ".join(["%f" % state.norm() for state in fw_states_T]))
-    )
+    try:
+        out.write(
+            "    fw_states_T norm: %s\n"
+            % (", ".join(["%f" % state.norm() for state in fw_states_T]))
+        )
+    except AttributeError:
+        # e.g. fw_states_T = None (skip_initial_forward_propagation)
+        pass
     if not np.any(tau_vals == None):  # noqa
         out.write(
             "    τ: %s\n"
