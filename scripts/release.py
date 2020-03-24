@@ -177,6 +177,8 @@ def run_tests():
             print("Fix the tests and ammend the release commit.")
             print("Then continue.\n")
             click.confirm("Continue?", default=True, abort=True)
+            if not click.confirm("Retry?", default=True):
+                break
         else:
             success = True
 
@@ -440,7 +442,7 @@ def make_artifacts():
         + "/docs/_build/html/index.html"
         + " and the artifacts in "
         + os.getcwd()
-        + "/docs/_build/artifacs"
+        + "/docs/_build/artifacts"
     )
     click.confirm(
         "Does the documentation look correct?", default=True, abort=True
