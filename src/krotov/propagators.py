@@ -46,12 +46,13 @@ The arguments are as follows (cf. :class:`Propagator`):
   may assume that the input `state` is the result of the previous call to
   `propagator`.
 
-The routines in this module are provided with no guarantee to be either
-general or efficient. The :func:`expm` propagator is exact to machine
-precision, but generally extremely slow.  For "production use", it is
-recommended to supply a problem-specific `propagator` that is highly optimized
-for speed. You might consider the use of Cython_. This is key to minimize the
-runtime of the optimization.
+.. warning::
+    The routines in this module are provided with no guarantee to be either
+    general or efficient. The :func:`expm` propagator is exact to machine
+    precision, but generally extremely slow.  For "production use", it is
+    recommended to supply a problem-specific `propagator` that is highly
+    optimized for speed. You might consider the use of Cython_. This is key to
+    minimize the runtime of the optimization.
 
 The `initialize` flag enables "stateful" propagators that cache data between
 calls. This can significantly improve numerical efficiency.
