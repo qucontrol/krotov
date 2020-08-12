@@ -47,7 +47,7 @@ dev_requirements = [
     'doctr-versions-menu',
     'flake8',
     'gitpython',
-    'isort',
+    'isort==4.3.*',
     'jupyter',
     'loky',
     'matplotlib',
