@@ -31,7 +31,7 @@ requirements = [
     'scipy',
     'qutip>=4.3.1',
     'threadpoolctl',
-    'uniseg',
+    'grapheme',
 ]
 if sys.platform != 'linux':
     requirements.append('loky')
