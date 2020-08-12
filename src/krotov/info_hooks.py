@@ -2,8 +2,8 @@
 import sys
 import time
 
+import grapheme
 import numpy as np
-from uniseg.graphemecluster import grapheme_clusters
 
 
 __all__ = ['chain', 'print_debug_information', 'print_table']
@@ -294,7 +294,7 @@ def print_debug_information(
 
 
 def _grapheme_len(text, fail_with_zero=False):
-    """Number of graphemes in `text`.
+    """Return the number of graphemes in `text`.
 
     This is the length of the `text` when printed::
 
@@ -305,10 +305,13 @@ def _grapheme_len(text, fail_with_zero=False):
         1
 
     If `fail_with_zero` is given a True, return 0 if `text` is not a string,
-    instead of throwing a TypeError.
+    instead of throwing a TypeError::
+
+        >>> _grapheme_len(None, fail_with_zero=True)
+        0
     """
     try:
-        return len(list(grapheme_clusters(text)))
+        return grapheme.length(text)
     except TypeError:
         if fail_with_zero:
             return 0
