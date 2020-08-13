@@ -34,9 +34,9 @@ def chain(*hooks):
 
     Note:
 
-        Functions that are connected via :func:`chain` may use the
-        `shared_data` share the same `shared_data` argument, which they can use
-        to communicate down the chain.
+        Functions that are connected via :func:`chain` may share the same
+        `shared_data` argument, which they can use to communicate down the
+        chain.
     """
 
     def info_hook(**kwargs):
