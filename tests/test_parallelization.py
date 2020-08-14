@@ -133,8 +133,8 @@ def test_parallel_map_fw_prop_step_loky(transmon_xgate_system):
     )
     tau1_loky = abs(opt_result_loky.tau_vals[0][0])
     tau2_loky = abs(opt_result_loky.tau_vals[0][1])
-    assert abs(tau1_loky - 0.9692) < 1e-3
-    assert abs(tau2_loky - 0.7733) < 1e-3
+    assert abs(tau1_loky - 0.9693) < 1e-3
+    assert abs(tau2_loky - 0.7743) < 1e-3
 
     krotov.parallelization.USE_LOKY = False
     # in order to be pickleable, all functions must be defined in a module

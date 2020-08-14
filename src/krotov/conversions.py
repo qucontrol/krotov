@@ -33,7 +33,7 @@ def _nested_list_shallow_copy(l):
 
 
 def _tlist_midpoints(tlist):
-    """Calculate array of midpoints in `tlist`"""
+    """Calculate array of midpoints in `tlist`."""
     tlist_midpoints = []
     for i in range(len(tlist) - 1):
         tlist_midpoints.append(0.5 * (tlist[i + 1] + tlist[i]))
@@ -41,7 +41,7 @@ def _tlist_midpoints(tlist):
 
 
 def _find_in_list(val, list_to_search):
-    """Return index of `val` in `list_to_search`, or -1
+    """Return index of `val` in `list_to_search`, or -1.
 
     Works even if `val` is a `numpy.ndarray`. In this case, comparison is by
     object identity.
@@ -58,12 +58,12 @@ def _find_in_list(val, list_to_search):
             return -1
 
 
-def discretize(control, tlist, args=(None,), kwargs=None):
-    """Discretize the given `control` onto the `tlist` time grid
+def discretize(control, tlist, args=(None,), kwargs=None, via_midpoints=False):
+    """Discretize the given `control` onto the `tlist` time grid.
 
     If `control` is a callable, return array of values for `control` evaluated
-    at all points in `tlist`.  If `control` is already discretized, check that
-    the discretization matches `tlist`
+    for all points in `tlist`.  If `control` is already discretized, check that
+    the discretization matches `tlist` (by size).
 
     Args:
         control (callable or numpy.ndarray): control to be discretized. If
@@ -76,14 +76,28 @@ def discretize(control, tlist, args=(None,), kwargs=None):
         kwargs (None or dict): If `control` is callable, further keyword
             arguments to pass to `control`. If None, no keyword arguments will
             be passed.
+        via_midpoints (bool): If True, sample `control` at the midpoints of
+            `tlist` (except for the initial and final values which are
+            evaluated at ``tlist[0]`` and ``tlist[1]`` to preseve exact
+            boundary conditions) and then un-average via
+            :func:`pulse_onto_tlist` to fit onto `tlist`. If False, evaluate
+            directly on `tlist`.
+
+    Note:
+        If ``via_midpoints=True``, the discretized values are generally not
+        *exactly* the result of evaluating `control` at the values of `tlist`.
+        Instead, the values are adjusted slightly to guarantee numerical
+        stability when converting between a sampling on the time grid and a
+        sampling on the mid points of the time grid intervals, as required by
+        Krotov's method, see :ref:`TimeDiscretization`.
 
     Returns:
         numpy.ndarray: Discretized array of real `control` values, same length
-            as `tlist`
+        as `tlist`
 
     Raises:
         TypeError: If `control` is not a function that takes two arguments
-            (`t`, None), or a numpy array
+            (`t`, `args`), or a numpy array
         ValueError: If `control` is numpy array of incorrect size.
     """
     warnings.filterwarnings(action="error", category=np.ComplexWarning)
@@ -91,11 +105,24 @@ def discretize(control, tlist, args=(None,), kwargs=None):
     if callable(control):
         if kwargs is None:
             kwargs = {}
-        # relies on np.ComplexWarning being thrown as an error
-        return np.array(
-            [float(control(t, *args, **kwargs)) for t in tlist],
-            dtype=np.float64,
-        )
+        if via_midpoints:
+            tlist_midpoints = (tlist + 0.5 * (tlist[1] - tlist[0]))[:-1]
+            tlist_midpoints[0] = tlist[0]
+            tlist_midpoints[-1] = tlist[-1]
+            pulse_on_midpoints = discretize(
+                control,
+                tlist_midpoints,
+                args=args,
+                kwargs=kwargs,
+                via_midpoints=False,
+            )
+            return pulse_onto_tlist(pulse_on_midpoints)
+        else:
+            # relies on np.ComplexWarning being thrown as an error
+            return np.array(
+                [float(control(t, *args, **kwargs)) for t in tlist],
+                dtype=np.float64,
+            )
     elif isinstance(control, (np.ndarray, list)):
         # relies on np.ComplexWarning being thrown as an error
         control = np.array([float(v) for v in control], dtype=np.float64)
@@ -111,7 +138,7 @@ def discretize(control, tlist, args=(None,), kwargs=None):
 
 
 def extract_controls(objectives):
-    """Extract a list of (unique) controls from the `objectives`
+    """Extract a list of (unique) controls from the `objectives`.
 
     Controls are unique if they are not the same object, cf.
     `Python's is keyword`_.
@@ -150,7 +177,7 @@ def _control_indices_in_nested_list(nested_list, control):
 
 
 def extract_controls_mapping(objectives, controls):
-    """Extract a map of where `controls` are used in `objectives`
+    """Extract a map of where `controls` are used in `objectives`.
 
     The result is a nested list where the first index relates to the
     `objectives`, the second index relates to the Hamiltonian (0) or the
@@ -228,7 +255,7 @@ def extract_controls_mapping(objectives, controls):
 
 
 def pulse_options_dict_to_list(pulse_options, controls):
-    """Convert `pulse_options` into a list
+    """Convert `pulse_options` into a list.
 
     Given a dict `pulse_options` that contains an options-dict
     for every control in `controls` (cf. :func:`.optimize_pulses`), return a
@@ -259,7 +286,7 @@ def pulse_options_dict_to_list(pulse_options, controls):
 
 
 def plug_in_pulse_values(H, pulses, mapping, time_index, conjugate=False):
-    """Plug pulse values into H
+    """Plug pulse values into H.
 
     Args:
         H (list): nested list for a QuTiP-time-dependent operator
@@ -304,7 +331,7 @@ def plug_in_pulse_values(H, pulses, mapping, time_index, conjugate=False):
 
 
 def control_onto_interval(control):
-    """Convert control on time grid to control on time grid intervals
+    """Convert control on time grid to control on time grid intervals.
 
     Args:
         control (numpy.ndarray): values of controls on time grid
@@ -339,7 +366,7 @@ def control_onto_interval(control):
 
 
 def pulse_onto_tlist(pulse):
-    """Convert `pulse` from time-grid intervals to time-grid points
+    """Convert `pulse` from time-grid intervals to time-grid points.
 
     Args:
         pulse (numpy.ndarray): values defined on the interval of a time grid

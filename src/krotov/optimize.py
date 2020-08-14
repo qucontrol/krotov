@@ -638,7 +638,7 @@ def _check_propagators_interface(propagators, logger):
 
 def _initialize_krotov_controls(objectives, pulse_options, tlist):
     """Extract discretized guess controls and pulses from `objectives`, and
-    return them with the associated mapping and option data"""
+    return them with the associated mapping and option data."""
     guess_controls = extract_controls(objectives)
     pulses_mapping = extract_controls_mapping(objectives, guess_controls)
     options_list = pulse_options_dict_to_list(pulse_options, guess_controls)
@@ -648,6 +648,7 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
                 control,
                 tlist,
                 args=(pulse_options[control].get('args', None),),
+                via_midpoints=True,
             )
             for control in guess_controls
         ]
@@ -674,7 +675,10 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
     for options in options_list:
         try:
             S = discretize(
-                _shape_val_to_callable(options['update_shape']), tlist, args=()
+                _shape_val_to_callable(options['update_shape']),
+                tlist,
+                args=(),
+                via_midpoints=True,
             )
         except KeyError:
             raise ValueError(
