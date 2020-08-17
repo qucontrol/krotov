@@ -5,7 +5,7 @@ History
 1.2.0 (2020-08-17)
 ------------------
 
-* Added: ``via_midpoints`` argument to ``krotov.converersions.discretize`` function
+* Added: ``via_midpoints`` argument to ``krotov.conversions.discretize`` function
 * Changed: Controls and update shapes are now discretized in a way that ensures numerical stability (`#74`_, thanks to `@zachmanson`_)
 * Changed: Replaced ``uniseg`` dependency with ``grapheme`` (`#76`_)
 
