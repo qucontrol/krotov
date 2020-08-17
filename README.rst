@@ -27,7 +27,7 @@ Krotov Python Package
    :target: https://opensource.org/licenses/BSD-3-Clause
 .. image:: https://mybinder.org/badge_logo.svg
    :alt: Launch Binder
-   :target: https://mybinder.org/v2/gh/qucontrol/krotov/v1.1.0?filepath=docs%2Fnotebooks
+   :target: https://mybinder.org/v2/gh/qucontrol/krotov/v1.2.0?filepath=docs%2Fnotebooks
 .. image:: https://img.shields.io/badge/DOI-10.21468/SciPostPhys.7.6.080-blue.svg
    :alt: DOI
    :target: https://doi.org/10.21468/SciPostPhys.7.6.080
@@ -43,7 +43,7 @@ Development happens on `Github`_. You can read the full documentation `online`__
 .. _Documentation: https://qucontrol.github.io/krotov
 __ Documentation_
 
-If you use the ``krotov`` package in your research, please `cite it <https://qucontrol.github.io/krotov/v1.1.0/01_overview.html#citing-the-krotov-package>`_.
+If you use the ``krotov`` package in your research, please `cite it <https://qucontrol.github.io/krotov/v1.2.0/01_overview.html#citing-the-krotov-package>`_.
 
 .. _QDYN Fortran library: https://www.qdyn-library.net
 .. _QuTiP: http://qutip.org
@@ -172,11 +172,11 @@ Then,
    number of control fields over all the objectives.
 
 .. |krotov.Objective| replace:: ``krotov.Objective``
-.. _krotov.Objective: https://qucontrol.github.io/krotov/v1.1.0/API/krotov.objectives.html#krotov.objectives.Objective
+.. _krotov.Objective: https://qucontrol.github.io/krotov/v1.2.0/API/krotov.objectives.html#krotov.objectives.Objective
 
 .. |krotov.optimize_pulses| replace:: ``krotov.optimize_pulses``
-.. _krotov.optimize_pulses: https://qucontrol.github.io/krotov/v1.1.0/API/krotov.optimize.html#krotov.optimize.optimize_pulses
+.. _krotov.optimize_pulses: https://qucontrol.github.io/krotov/v1.2.0/API/krotov.optimize.html#krotov.optimize.optimize_pulses
 
-See `Using Krotov with QuTiP <https://qucontrol.github.io/krotov/v1.1.0/08_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://qucontrol.github.io/krotov/v1.1.0/09_examples.html>`_ for details.
+See `Using Krotov with QuTiP <https://qucontrol.github.io/krotov/v1.2.0/08_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://qucontrol.github.io/krotov/v1.2.0/09_examples.html>`_ for details.
 
 .. _Jupyter notebook: https://jupyter.org

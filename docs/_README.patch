@@ -12,7 +12,7 @@
  .. _Documentation: https://qucontrol.github.io/krotov
  __ Documentation_
  
--If you use the ``krotov`` package in your research, please `cite it <https://qucontrol.github.io/krotov/v1.1.0/01_overview.html#citing-the-krotov-package>`_.
+-If you use the ``krotov`` package in your research, please `cite it <https://qucontrol.github.io/krotov/v1.2.0/01_overview.html#citing-the-krotov-package>`_.
 +If you use the :mod:`krotov` package in your research, please :ref:`cite it <CitingKrotov>`.
  
  .. _QDYN Fortran library: https://www.qdyn-library.net
@@ -55,12 +55,12 @@
     number of control fields over all the objectives.
  
 -.. |krotov.Objective| replace:: ``krotov.Objective``
--.. _krotov.Objective: https://qucontrol.github.io/krotov/v1.1.0/API/krotov.objectives.html#krotov.objectives.Objective
+-.. _krotov.Objective: https://qucontrol.github.io/krotov/v1.2.0/API/krotov.objectives.html#krotov.objectives.Objective
  
 -.. |krotov.optimize_pulses| replace:: ``krotov.optimize_pulses``
--.. _krotov.optimize_pulses: https://qucontrol.github.io/krotov/v1.1.0/API/krotov.optimize.html#krotov.optimize.optimize_pulses
+-.. _krotov.optimize_pulses: https://qucontrol.github.io/krotov/v1.2.0/API/krotov.optimize.html#krotov.optimize.optimize_pulses
 -
--See `Using Krotov with QuTiP <https://qucontrol.github.io/krotov/v1.1.0/08_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://qucontrol.github.io/krotov/v1.1.0/09_examples.html>`_ for details.
+-See `Using Krotov with QuTiP <https://qucontrol.github.io/krotov/v1.2.0/08_qutip_usage.html#using-krotov-with-qutip>`_ and `Examples <https://qucontrol.github.io/krotov/v1.2.0/09_examples.html>`_ for details.
 +See :ref:`using-krotov-with-qutip` and :ref:`krotov-example-notebooks` for details.
  
  .. _Jupyter notebook: https://jupyter.org

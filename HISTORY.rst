@@ -2,6 +2,15 @@
 History
 =======
 
+1.2.0 (2020-08-17)
+------------------
+
+* Added: ``via_midpoints`` argument to ``krotov.converersions.discretize`` function
+* Changed: Controls and update shapes are now discretized in a way that ensures numerical stability (`#74`_, thanks to `@zachmanson`_)
+* Changed: Replaced ``uniseg`` dependency with ``grapheme`` (`#76`_)
+
+Note: due to the changes in the time discretization of the controls and update shapes, this version will generally not reproduce optimization results from previous versions to machine precision.
+
 
 1.1.0 (2020-03-24)
 ------------------
@@ -108,6 +117,7 @@ History
 .. _@TejasAvinashShetty: https://github.com/TejasAvinashShetty
 .. _@timohillmann: https://github.com/timohillmann
 .. _@nathanshammah: https://github.com/nathanshammah
+.. _@zachmanson: https://github.com/zachmanson
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
@@ -132,3 +142,5 @@ History
 .. _#67: https://github.com/qucontrol/krotov/issues/67
 .. _#68: https://github.com/qucontrol/krotov/issues/68
 .. _#72: https://github.com/qucontrol/krotov/issues/72
+.. _#74: https://github.com/qucontrol/krotov/issues/74
+.. _#76: https://github.com/qucontrol/krotov/issues/76
