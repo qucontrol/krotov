@@ -62,7 +62,7 @@ def test_discretize():
 
 
 def test_discretization_as_float():
-    """"Test that a control function that returns an int still gets discretized
+    """Test that a control function that returns an int still gets discretized
     as a float (#41)"""
     H = [qutip.Qobj(), [qutip.Qobj(), lambda t, args: 0]]
     u = H[1][1]
