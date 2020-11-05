@@ -351,7 +351,7 @@ string message)</p>
 
 <dl class="py function">
 <dt id="krotov.convergence.value_below">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_below</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec</span><span class="o">=</span><span class="default_value">'info_vals', T[- 1]</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_below" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_below</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec</span><span class="o">=</span><span class="default_value">('info_vals', T[- 1])</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_below" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor for routine that checks if a value is below <cite>limit</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -368,7 +368,7 @@ minimized.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A name identifying the checked value, used for the
 message returned by the <cite>check_convergence</cite> routine. Defaults to
 <code class="docutils literal notranslate"><span class="pre">str(spec)</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> (see Note)</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> (see Note)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -387,7 +387,7 @@ appropriate message string. Otherwise, it returns None.</p>
 the value to check against the limit. You should also pass a <cite>name</cite>
 like ‘J_T’, or ‘error’ as a label for the value.
 For more advanced use cases, <cite>spec</cite> can be a
-<a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a>-specification that extracts the value to check from
+<a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a>-specification that extracts the value to check from
 the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object as <code class="docutils literal notranslate"><span class="pre">glom.glom(result,</span> <span class="pre">spec,</span> <span class="pre">**kwargs)</span></code>.</p>
 </div>
 <p class="rubric">Example</p>
@@ -408,7 +408,7 @@ the <a class="reference internal" href="krotov.result.html#krotov.result.Result"
 
 <dl class="py function">
 <dt id="krotov.convergence.value_above">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_above</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec</span><span class="o">=</span><span class="default_value">'info_vals', T[- 1]</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_above"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_above" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_above</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec</span><span class="o">=</span><span class="default_value">('info_vals', T[- 1])</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_above"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_above" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor for routine that checks if a value is above <cite>limit</cite></p>
 <p>Like <a class="reference internal" href="#krotov.convergence.value_below" title="krotov.convergence.value_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_below()</span></code></a>, but for checking whether an extracted value is
 <em>above</em>, not below a value. By default, it looks at the last value in
@@ -436,7 +436,7 @@ argument to <a class="reference internal" href="krotov.optimize.html#krotov.opti
 
 <dl class="py function">
 <dt id="krotov.convergence.delta_below">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">delta_below</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec1</span><span class="o">=</span><span class="default_value">'info_vals', T[- 1]</span></em>, <em class="sig-param"><span class="n">spec0</span><span class="o">=</span><span class="default_value">'info_vals', T[- 2]</span></em>, <em class="sig-param"><span class="n">absolute_value</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#delta_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.delta_below" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">delta_below</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec1</span><span class="o">=</span><span class="default_value">('info_vals', T[- 1])</span></em>, <em class="sig-param"><span class="n">spec0</span><span class="o">=</span><span class="default_value">('info_vals', T[- 2])</span></em>, <em class="sig-param"><span class="n">absolute_value</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#delta_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.delta_below" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor for a routine that checks if
 <span class="math notranslate nohighlight">\(\Abs{v_1 - v_0} &lt; \varepsilon\)</span></p>
 <dl class="field-list simple">
@@ -444,10 +444,10 @@ argument to <a class="reference internal" href="krotov.optimize.html#krotov.opti
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A float value (or str-representation of a float)
 for <span class="math notranslate nohighlight">\(\varepsilon\)</span></p></li>
-<li><p><strong>spec1</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
+<li><p><strong>spec1</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
 attribute from which to extract <span class="math notranslate nohighlight">\(v_1\)</span>. Defaults to a spec
 extracting the last value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p></li>
-<li><p><strong>spec0</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
+<li><p><strong>spec0</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
 attribute from which to extract <span class="math notranslate nohighlight">\(v_0\)</span>.  Defaults to a spec
 extracting the last-but-one value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p></li>
 <li><p><strong>absolute_value</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If False, check for <span class="math notranslate nohighlight">\(v_1 - v_0 &lt; \varepsilon\)</span>,
@@ -455,7 +455,7 @@ instead of the absolute value.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A name identifying the delta, used for the
 message returned by the <cite>check_convergence</cite> routine. Defaults to
 <code class="docutils literal notranslate"><span class="pre">&quot;Δ({spec1},{spec0}&quot;</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a></p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -607,7 +607,7 @@ the optimization due to I/O overhead.</p>
         
         &copy; Copyright 2020, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Oct 29, 2020.
+        Last updated on Nov 05, 2020.
       </span>
 
     </p>

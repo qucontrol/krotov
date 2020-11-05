@@ -396,9 +396,9 @@ time step.</p>
 <p>By default, the propagator is not “re-entrant”. That is, you cannot use
 more than one instance of <a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a> in the
 same process at the same time. This limitation is due to
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.5.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> with the “zvode” integrator not being
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.5.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> with the “zvode” integrator not being
 re-entrant. Passing <code class="docutils literal notranslate"><span class="pre">reentrant=True</span></code> side-steps this problem by
-re-initializating <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.5.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> in every time step. This
+re-initializating <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.5.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> in every time step. This
 makes it possible to use <a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a> in the
 optimization of multiple objectives, but creates a significant
 overhead.</p>
@@ -468,7 +468,7 @@ and <cite>state</cite> internally.</p></li>
         
         &copy; Copyright 2020, Michael Goerz et al.
       <span class="lastupdated">
-        Last updated on Oct 29, 2020.
+        Last updated on Nov 05, 2020.
       </span>
 
     </p>
