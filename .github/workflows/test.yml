@@ -1,0 +1,126 @@
+name: Tests
+
+on: [push, pull_request]
+
+
+jobs:
+
+  run_tests:
+    name:  ${{ matrix.title }} (Python ${{ matrix.python }} on ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    env:
+      tox: tox -c tox-pyenv.ini
+      default_tests: src tests README.rst docs/*.rst
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - title: Codestyle and Main Tests
+            os: ubuntu-18.04
+            python: 3.7
+            commands: |
+              $tox -e run-blackcheck,run-isortcheck
+              $tox -e py37-test -- $default_tests
+            coverage: true
+          - title: Oldest supported Python
+            os: ubuntu-18.04
+            python: 3.5
+            commands: $tox -e py35-test -- $default_tests
+            coverage: false
+          - title: QuTiP master
+            os: ubuntu-18.04
+            python: 3.8
+            commands: $tox -e py38qtm-test --  $default_tests
+            continue-on-error: true  # experimental
+            coverage: false
+          - title: Windows / Conda
+            os: windows-latest
+            python: 3.6
+            commands: tox -c tox-conda.ini -e py36-test -- src tests README.rst docs\notebooks\01_example_simple_state_to_state.ipynb docs\notebooks\05_example_transmon_xgate.ipynb
+            coverage: false
+          - title: MacOS
+            os: macos-latest
+            python: 3.7
+            commands: $tox -e py37-test -- $default_tests  docs/notebooks/01_example_simple_state_to_state.ipynb
+            coverage: true
+          - title: Notebook 1 (State-to-State)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/01_example_simple_state_to_state.ipynb
+            coverage: true
+          - title: Notebook 2 (RWA)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb
+            coverage: true
+          - title: Notebook 3 (Non-Hermitian)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb
+            coverage: true
+          - title: Notebook 4 (Density Matrix)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/04_example_dissipative_qubit_reset.ipynb
+            coverage: true
+          - title: Notebook 5 (Quantum Gate)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/05_example_transmon_xgate.ipynb
+            coverage: true
+          - title: Notebook 6 (3 States)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/06_example_3states.ipynb
+            coverage: true
+          - title: Notebook 7 (Perfect Entanglers)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/07_example_PE.ipynb
+            coverage: true
+          - title: Notebook 8 (Ensemble Optimization)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/08_example_ensemble.ipynb
+            coverage: true
+          - title: Notebook 9 (NumPy)
+            os: ubuntu-18.04
+            python: 3.7
+            commands: $tox -e py37-test -- docs/notebooks/09_example_numpy.ipynb
+            coverage: true
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        name: Install Python ${{ matrix.python }}
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install required apt packages
+        if: runner.os == 'Linux'
+        run: sudo apt-get install pandoc pandoc-citeproc liblapack-dev libblas-dev gfortran
+
+      - name: Install miniconda
+        if: runner.os == 'Windows'
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.python }}
+
+      - name: Install Tox
+        run: pip install tox
+
+      - name: Run Commands
+        run: ${{ matrix.commands }}
+
+      - name: Convert coverage data to xml
+        if: matrix.coverage == 'true'
+        shell: bash
+        run: |
+          runenv=$(echo "${{ matrix.python }}" | sed 's/\([2-3]\)\.\([0-9]\)/py\1\2-runcmd/')
+          $tox -e $runenv -- python -m coverage xml
+
+      - uses: codecov/codecov-action@v1
+        if: ${{ matrix.coverage }} == true
+        with:
+          verbose: false

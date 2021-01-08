@@ -211,13 +211,12 @@ mathjax_config = {
 
 # LaTeX settings
 latex_engine = "lualatex"
-latex_elements = {
-    "fontpkg": r"""
+latex_fontpkg = r"""
 \setmainfont{DejaVu Serif}
 \setsansfont{DejaVu Sans}
 \setmonofont{DejaVu Sans Mono}
-""",
-    "preamble": r"""
+"""
+latex_preamble = r"""
 \usepackage[titles]{tocloft}
 \cftsetpnumwidth {1.25cm}\cftsetrmarg{1.5cm}
 \setlength{\cftchapnumwidth}{0.75cm}
@@ -251,9 +250,14 @@ latex_elements = {
 \newcommand{\AbsSq}[1]{\left\vert#1\right\vert^2}
 \renewcommand{\Re}[0]{\operatorname{Re}}
 \renewcommand{\Im}[0]{\operatorname{Im}}
-""",
-    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
-    "printindex": r"\footnotesize\raggedright\printindex",
+"""
+latex_printindex = r"\footnotesize\raggedright\printindex"
+latex_fncychap = r"\usepackage[Bjornstrup]{fncychap}"
+latex_elements = {
+    "fontpkg": latex_fontpkg,
+    "preamble": latex_preamble,
+    "fncychap": latex_fncychap,
+    "printindex": latex_printindex,
     "babel": "",
 }
 latex_show_urls = "no"
@@ -500,6 +504,8 @@ html_show_sourcelink = False
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = None
+
+doctr_versions_menu_conf = {'menu_title': 'Docs'}
 
 # -- Options for nbsphinx -0---------------------------------------------------
 
