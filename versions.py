@@ -21,7 +21,7 @@ DVMVERSION:
     'git+https://github.com/goerz/doctr_versions_menu.git@master#egg=doctr_versions_menu'
     as the last command line argument to specify another version. The latter
     example for using the master version can also be achieved by specifying
-    `doctr-versions-menu==master`
+    `doctr-versions-menu==master`.
 """
 # This script is intended to be placed in the root of a project's gh-pages
 # branch
