@@ -114,13 +114,13 @@ jobs:
         run: ${{ matrix.commands }}
 
       - name: Convert coverage data to xml
-        if: matrix.coverage == 'true'
+        if: matrix.coverage == true
         shell: bash
         run: |
           runenv=$(echo "${{ matrix.python }}" | sed 's/\([2-3]\)\.\([0-9]\)/py\1\2-runcmd/')
           $tox -e $runenv -- python -m coverage xml
 
       - uses: codecov/codecov-action@v1
-        if: ${{ matrix.coverage }} == true
+        if: matrix.coverage == true
         with:
           verbose: false
