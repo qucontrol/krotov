@@ -1,6 +1,6 @@
---- README.rst	2019-12-15 17:48:58.000000000 -0500
-+++ _README.rst	2019-12-15 17:48:43.000000000 -0500
-@@ -36,14 +36,14 @@
+--- _README.rst	2021-01-09 12:03:18.000000000 -0500
++++ _README.rst	2021-01-09 12:03:18.000000000 -0500
+@@ -37,14 +37,14 @@
  
  This implementation follows the original implementation in the `QDYN Fortran library`_.
  
@@ -17,7 +17,7 @@
  
  .. _QDYN Fortran library: https://www.qdyn-library.net
  .. _QuTiP: http://qutip.org
-@@ -121,14 +121,14 @@
+@@ -122,14 +122,14 @@
  
  Installation
  ------------
@@ -34,7 +34,7 @@
  
  You may also do
  
-@@ -146,7 +146,7 @@
+@@ -147,7 +147,7 @@
  .. _Python Packaging User Guide: https://packaging.python.org/tutorials/installing-packages/
  
  
@@ -43,7 +43,7 @@
  
  .. code-block:: shell
  
-@@ -166,17 +166,11 @@
+@@ -167,17 +167,11 @@
  Then,
  
  1. define the necessary quantum operators and states using `QuTiP`_.
