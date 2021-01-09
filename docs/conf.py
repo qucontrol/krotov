@@ -277,6 +277,7 @@ napoleon_use_rtype = True
 
 
 # Sphinxcontrib-bibtex
+bibtex_bibfiles = ['refs.bib']
 pybtex.style.formatting.unsrt.date = pybtex.style.template.words(sep="")[
     "(", pybtex.style.template.field("year"), ")"
 ]
