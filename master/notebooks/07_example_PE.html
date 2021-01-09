@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Optimization towards a Perfect Entangler &mdash; Krotov 1.2.0+dev (95efe4f) documentation</title>
+  <title>Optimization towards a Perfect Entangler &mdash; Krotov 1.2.1 documentation</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.2.0+dev
+                1.2.1
               </div>
             
           
@@ -473,7 +473,7 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/95efe4f00ac64d034d11bc8b8d9ebc0430db03c1/docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/95efe4f00ac64d034d11bc8b8d9ebc0430db03c1?filepath=docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.2.1/docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.2.1?filepath=docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
 <div class="section" id="Optimization-towards-a-Perfect-Entangler">
 <h1>Optimization towards a Perfect Entangler<a class="headerlink" href="#Optimization-towards-a-Perfect-Entangler" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
@@ -503,15 +503,17 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-qutip            4.5.0
-numpy            1.17.2
-weylchamber      0.3.2
-matplotlib.pylab 1.17.2
-krotov           1.2.0
-scipy            1.3.1
-matplotlib       3.3.1
-CPython 3.7.6
-IPython 7.17.0
+Python implementation: CPython
+Python version       : 3.7.6
+IPython version      : 7.19.0
+
+numpy      : 1.17.2
+matplotlib : 3.3.3
+krotov     : 1.2.1
+scipy      : 1.3.1
+weylchamber: 0.3.2
+qutip      : 4.5.0
+
 </pre></div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2} \mid #2\vphantom{#1}\right\rangle} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}}\)</span></p>
@@ -1019,7 +1021,7 @@ Iteration 0
     S(t) (ranges): [0.000000, 1.000000]
     iter_start: 0
     iter_stop: 20
-    duration: 6.2 secs (started at 2020-08-17 10:48:05)
+    duration: 1.7 secs (started at 2021-01-13 14:20:34)
     optimized pulses (ranges): [0.00, 0.30]
     ∫gₐ(t)dt: 0.00e+00
     λₐ: 1.00e+02
@@ -1028,7 +1030,7 @@ Iteration 0
     F_PE: 1.447335
     gate conc.: 0.479492
 Iteration 1
-    duration: 12.4 secs (started at 2020-08-17 10:48:11)
+    duration: 5.1 secs (started at 2021-01-13 14:20:36)
     optimized pulses (ranges): [0.00, 0.32]
     ∫gₐ(t)dt: 2.57e-03
     λₐ: 1.00e+02
@@ -1037,7 +1039,7 @@ Iteration 1
     F_PE: 0.998102
     gate conc.: 0.645579
 Iteration 2
-    duration: 13.2 secs (started at 2020-08-17 10:48:24)
+    duration: 5.0 secs (started at 2021-01-13 14:20:41)
     optimized pulses (ranges): [0.00, 0.34]
     ∫gₐ(t)dt: 2.19e-03
     λₐ: 1.00e+02
@@ -1046,7 +1048,7 @@ Iteration 2
     F_PE: 0.582566
     gate conc.: 0.784635
 Iteration 3
-    duration: 14.7 secs (started at 2020-08-17 10:48:37)
+    duration: 4.9 secs (started at 2021-01-13 14:20:46)
     optimized pulses (ranges): [0.00, 0.35]
     ∫gₐ(t)dt: 1.45e-03
     λₐ: 1.00e+02
@@ -1055,7 +1057,7 @@ Iteration 3
     F_PE: 0.304191
     gate conc.: 0.892999
 Iteration 4
-    duration: 13.0 secs (started at 2020-08-17 10:48:52)
+    duration: 4.8 secs (started at 2021-01-13 14:20:51)
     optimized pulses (ranges): [0.00, 0.37]
     ∫gₐ(t)dt: 7.69e-04
     λₐ: 1.00e+02
@@ -1064,7 +1066,7 @@ Iteration 4
     F_PE: 0.153498
     gate conc.: 0.951891
 Iteration 5
-    duration: 13.4 secs (started at 2020-08-17 10:49:05)
+    duration: 4.8 secs (started at 2021-01-13 14:20:55)
     optimized pulses (ranges): [0.00, 0.37]
     ∫gₐ(t)dt: 3.86e-04
     λₐ: 1.00e+02
@@ -1073,7 +1075,7 @@ Iteration 5
     F_PE: 0.076100
     gate conc.: 0.980700
 Iteration 6
-    duration: 13.0 secs (started at 2020-08-17 10:49:18)
+    duration: 4.8 secs (started at 2021-01-13 14:21:00)
     optimized pulses (ranges): [0.00, 0.38]
     ∫gₐ(t)dt: 2.02e-04
     λₐ: 1.00e+02
@@ -1082,7 +1084,7 @@ Iteration 6
     F_PE: 0.035062
     gate conc.: 0.993840
 Iteration 7
-    duration: 12.1 secs (started at 2020-08-17 10:49:31)
+    duration: 4.8 secs (started at 2021-01-13 14:21:05)
     optimized pulses (ranges): [0.00, 0.39]
     ∫gₐ(t)dt: 1.13e-04
     λₐ: 1.00e+02
@@ -1091,7 +1093,7 @@ Iteration 7
     F_PE: 0.012118
     gate conc.: 0.998971
 Iteration 8
-    duration: 11.9 secs (started at 2020-08-17 10:49:43)
+    duration: 4.7 secs (started at 2021-01-13 14:21:10)
     optimized pulses (ranges): [0.00, 0.39]
     ∫gₐ(t)dt: 6.65e-05
     λₐ: 1.00e+02
@@ -1118,11 +1120,11 @@ Iteration 8
 <div class="highlight"><pre>
 Krotov Optimization Result
 --------------------------
-- Started at 2020-08-17 10:48:05
+- Started at 2021-01-13 14:20:34
 - Number of objectives: 4
 - Number of iterations: 8
 - Reason for termination: Reached convergence: achieved perfect entangler
-- Ended at 2020-08-17 10:49:55 (0:01:50)
+- Ended at 2021-01-13 14:21:15 (0:00:41)
 </pre></div></div>
 </div>
 <p>We can visualize how each iteration of the optimization brings the dynamics closer to the polyhedron of perfect entanglers (using the Weyl chamber coordinates that we calculated in the <code class="docutils literal notranslate"><span class="pre">info_hook</span></code> routine <code class="docutils literal notranslate"><span class="pre">print_fidelity</span></code>, and that were stored in <code class="docutils literal notranslate"><span class="pre">Result.info_vals</span></code>).</p>
@@ -1193,7 +1195,7 @@ Krotov Optimization Result
     <p>
         &#169; Copyright 2021, Michael Goerz et al..
       <span class="lastupdated">
-        Last updated on Jan 08, 2021.
+        Last updated on Jan 13, 2021.
       </span>
 
     </p>

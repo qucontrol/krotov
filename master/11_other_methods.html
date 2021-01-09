@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Other Optimization Methods &mdash; Krotov 1.2.0+dev (95efe4f) documentation</title>
+  <title>Other Optimization Methods &mdash; Krotov 1.2.1 documentation</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.2.0+dev
+                1.2.1
               </div>
             
           
@@ -236,10 +236,10 @@ compatible with the equation of motion under the control fields
 optimization problem into an unconstrained one, the equation of motion
 is included in the functional with the co-states <span class="math notranslate nohighlight">\(\ket{\chi_k(t)}\)</span>
 as Lagrange
-multipliers <a class="bibtex reference internal" href="99_bibliography.html#kosloffcp1989" id="id1">[61]</a><a class="bibtex reference internal" href="99_bibliography.html#shijcp1990" id="id2">[62]</a><a class="bibtex reference internal" href="99_bibliography.html#shicpc1991" id="id3">[63]</a><a class="bibtex reference internal" href="99_bibliography.html#tannor91" id="id4">[64]</a>.</p>
+multipliers <span id="id1">[<a class="reference internal" href="99_bibliography.html#id38"><span>61</span></a>,<a class="reference internal" href="99_bibliography.html#id71"><span>62</span></a>,<a class="reference internal" href="99_bibliography.html#id72"><span>63</span></a>,<a class="reference internal" href="99_bibliography.html#id33"><span>64</span></a>]</span>.</p>
 <p>The necessary condition for an extremum becomes <span class="math notranslate nohighlight">\(\delta J = 0\)</span> for
 this extended functional. Evaluation of the extremum condition results
-in <a class="bibtex reference internal" href="99_bibliography.html#tannor91" id="id5">[64]</a></p>
+in <span id="id2">[<a class="reference internal" href="99_bibliography.html#id33"><span>64</span></a>]</span></p>
 <div class="math notranslate nohighlight" id="equation-variational-update">
 <span class="eqno">(19)<a class="headerlink" href="#equation-variational-update" title="Permalink to this equation">¶</a></span>\[\Delta \epsilon_l(t) \propto \frac{\delta J}{\delta \epsilon_l} \propto
     \Im \big\langle
@@ -258,7 +258,7 @@ states <span class="math notranslate nohighlight">\(\ket{\phi_k(t)}\)</span>, <s
 Eq. <a class="reference internal" href="#equation-variational-update">(19)</a> thus requires
 an iterative scheme and a choice of time discretization.</p>
 <p>The most intuitive time-discretization yields a <em>concurrent</em> update
-scheme <a class="bibtex reference internal" href="99_bibliography.html#tannor91" id="id6">[64]</a><a class="bibtex reference internal" href="99_bibliography.html#tannor92" id="id7">[5]</a><a class="bibtex reference internal" href="99_bibliography.html#somloicp1993" id="id8">[44]</a>,</p>
+scheme <span id="id3">[<a class="reference internal" href="99_bibliography.html#id33"><span>64</span></a>,<a class="reference internal" href="99_bibliography.html#id34"><span>5</span></a>,<a class="reference internal" href="99_bibliography.html#id4"><span>44</span></a>]</span>,</p>
 <div class="math notranslate nohighlight" id="equation-concurrent-update">
 <span class="eqno">(20)<a class="headerlink" href="#equation-concurrent-update" title="Permalink to this equation">¶</a></span>\[\Delta \epsilon_l^{(i)}(t) \propto
     \Im \big\langle
@@ -276,15 +276,15 @@ determined entirely by information from the previous iteration and can
 be evaluated at each point <span class="math notranslate nohighlight">\(t\)</span> independently. However, this scheme
 does not guarantee monotonic convergence, and requires a line search to
 determine the appropriate magnitude of the pulse
-update <a class="bibtex reference internal" href="99_bibliography.html#tannor91" id="id9">[64]</a>.</p>
+update <span id="id4">[<a class="reference internal" href="99_bibliography.html#id33"><span>64</span></a>]</span>.</p>
 <p>A further ad-hoc modification of the
-functional <a class="bibtex reference internal" href="99_bibliography.html#zhujcp98" id="id10">[65]</a> allows to formulate a family of
+functional <span id="id5">[<a class="reference internal" href="99_bibliography.html#id87"><span>65</span></a>]</span> allows to formulate a family of
 update schemes that do guarantee monotonic
-convergence <a class="bibtex reference internal" href="99_bibliography.html#madayjcp2003" id="id11">[66]</a><a class="bibtex reference internal" href="99_bibliography.html#ohtsukijcp2004" id="id12">[67]</a>. These
+convergence <span id="id6">[<a class="reference internal" href="99_bibliography.html#id90"><span>66</span></a>,<a class="reference internal" href="99_bibliography.html#id91"><span>67</span></a>]</span>. These
 schemes introduce separate fields <span class="math notranslate nohighlight">\(\{\epsilon_l(t)\}\)</span> and
 <span class="math notranslate nohighlight">\(\{\tilde\epsilon_l(t)\}\)</span> for the forward and backward
 propagation, respectively, and use the update
-scheme <a class="bibtex reference internal" href="99_bibliography.html#werschnikjpb2007" id="id13">[68]</a></p>
+scheme <span id="id7">[<a class="reference internal" href="99_bibliography.html#id89"><span>68</span></a>]</span></p>
 <div class="math notranslate nohighlight" id="equation-zhu-rabitz-update">
 <span class="eqno">(21)<a class="headerlink" href="#equation-zhu-rabitz-update" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     \epsilon_l^{(i)}(t)
@@ -309,14 +309,14 @@ scheme <a class="bibtex reference internal" href="99_bibliography.html#werschni
 <p>with <span class="math notranslate nohighlight">\(\delta, \eta \in [0, 2]\)</span> and an arbitrary step width
 <span class="math notranslate nohighlight">\(\alpha\)</span>. For the control of wavepacket dynamics, an
 implementation of this generalized class of algorithms is available in
-the <a class="reference external" href="https://sourceforge.net/p/wavepacket/wiki/Home/">WavePacket Matlab package</a> <a class="bibtex reference internal" href="99_bibliography.html#schmidtcpc2018" id="id14">[69]</a>.</p>
+the <a class="reference external" href="https://sourceforge.net/p/wavepacket/wiki/Home/">WavePacket Matlab package</a> <span id="id8">[<a class="reference internal" href="99_bibliography.html#id88"><span>69</span></a>]</span>.</p>
 </div>
 <div class="section" id="krotov-s-method">
 <span id="comparisonkrotov"></span><h2>Krotov’s method<a class="headerlink" href="#krotov-s-method" title="Permalink to this headline">¶</a></h2>
 <p>The method developed by
-Krotov <a class="bibtex reference internal" href="99_bibliography.html#krotovec1983" id="id15">[40]</a><a class="bibtex reference internal" href="99_bibliography.html#krotovcc1988" id="id16">[41]</a><a class="bibtex reference internal" href="99_bibliography.html#krotov-book" id="id17">[42]</a><a class="bibtex reference internal" href="99_bibliography.html#konnovarc99" id="id18">[43]</a>
+Krotov <span id="id9">[<a class="reference internal" href="99_bibliography.html#id105"><span>40</span></a>,<a class="reference internal" href="99_bibliography.html#id106"><span>41</span></a>,<a class="reference internal" href="99_bibliography.html#id5"><span>42</span></a>,<a class="reference internal" href="99_bibliography.html#id6"><span>43</span></a>]</span>
 and later translated to the language of quantum control by Tannor and
-coworkers <a class="bibtex reference internal" href="99_bibliography.html#tannor92" id="id19">[5]</a><a class="bibtex reference internal" href="99_bibliography.html#somloicp1993" id="id20">[44]</a><a class="bibtex reference internal" href="99_bibliography.html#bartanajcp1997" id="id21">[45]</a><a class="bibtex reference internal" href="99_bibliography.html#sklarzpra2002" id="id22">[46]</a><a class="bibtex reference internal" href="99_bibliography.html#reichjcp12" id="id23">[22]</a>
+coworkers <span id="id10">[<a class="reference internal" href="99_bibliography.html#id34"><span>5</span></a>,<a class="reference internal" href="99_bibliography.html#id4"><span>44</span></a>,<a class="reference internal" href="99_bibliography.html#id76"><span>45</span></a>,<a class="reference internal" href="99_bibliography.html#id10"><span>46</span></a>,<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span>
 takes a somewhat unintuitive approach to disentangle the interdependence
 of field and states by adding a zero to the functional. This allows to
 <em>construct</em> an updated control field that is guaranteed to lower the
@@ -348,21 +348,21 @@ limiting case of the monotonically convergent class of algorithms in
 Eq. <a class="reference internal" href="#equation-zhu-rabitz-update">(21)</a>, for
 <span class="math notranslate nohighlight">\(\delta = 1\)</span>, <span class="math notranslate nohighlight">\(\eta = 0\)</span>. This may explain why parts of the
 quantum control community consider <em>any</em> sequential update scheme as
-“Krotov’s method” <a class="bibtex reference internal" href="99_bibliography.html#schirmernjp2011" id="id24">[70]</a><a class="bibtex reference internal" href="99_bibliography.html#machnespra11" id="id25">[71]</a>.
+“Krotov’s method” <span id="id11">[<a class="reference internal" href="99_bibliography.html#id110"><span>70</span></a>,<a class="reference internal" href="99_bibliography.html#id50"><span>71</span></a>]</span>.
 However, following Krotov’s
-construction <a class="bibtex reference internal" href="99_bibliography.html#krotovec1983" id="id26">[40]</a><a class="bibtex reference internal" href="99_bibliography.html#krotovcc1988" id="id27">[41]</a><a class="bibtex reference internal" href="99_bibliography.html#krotov-book" id="id28">[42]</a><a class="bibtex reference internal" href="99_bibliography.html#konnovarc99" id="id29">[43]</a>
+construction <span id="id12">[<a class="reference internal" href="99_bibliography.html#id105"><span>40</span></a>,<a class="reference internal" href="99_bibliography.html#id106"><span>41</span></a>,<a class="reference internal" href="99_bibliography.html#id5"><span>42</span></a>,<a class="reference internal" href="99_bibliography.html#id6"><span>43</span></a>]</span>
 requires no ad-hoc modification of the functional and can thus be
 applied more generally. In particular, as discussed in
 <a class="reference internal" href="07_krotovs_method.html#secondorderupdate"><span class="std std-ref">Second order update</span></a>, a second-order construction can address non-convex
 functionals.</p>
 <p>In all its
-variants <a class="bibtex reference internal" href="99_bibliography.html#tannor92" id="id30">[5]</a><a class="bibtex reference internal" href="99_bibliography.html#somloicp1993" id="id31">[44]</a><a class="bibtex reference internal" href="99_bibliography.html#bartanajcp1997" id="id32">[45]</a><a class="bibtex reference internal" href="99_bibliography.html#sklarzpra2002" id="id33">[46]</a><a class="bibtex reference internal" href="99_bibliography.html#reichjcp12" id="id34">[22]</a>,
+variants <span id="id13">[<a class="reference internal" href="99_bibliography.html#id34"><span>5</span></a>,<a class="reference internal" href="99_bibliography.html#id4"><span>44</span></a>,<a class="reference internal" href="99_bibliography.html#id76"><span>45</span></a>,<a class="reference internal" href="99_bibliography.html#id10"><span>46</span></a>,<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span>,
 Krotov’s method is a first-order gradient with respect to the control
 fields (even in the second-order construction which is second order only
 with respect to the states). As the optimization approaches the optimum,
 this gradient can become very small, resulting in slow convergence. It
 is possible to extend Krotov’s method to take into account information
-from the quasi-Hessian <a class="bibtex reference internal" href="99_bibliography.html#eitanpra11" id="id35">[23]</a>. However, this
+from the quasi-Hessian <span id="id14">[<a class="reference internal" href="99_bibliography.html#id79"><span>23</span></a>]</span>. However, this
 “K-BFGS” variant of Krotov’s method is a substantial extension to the
 procedure as described in <a class="reference internal" href="07_krotovs_method.html#krotovsmethod"><span class="std std-ref">Krotov’s Method</span></a>, and is currently not
 supported by the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package.</p>
@@ -372,7 +372,7 @@ the <a class="reference internal" href="#iterativeschemes"><span class="std std-
 on the <em>pulse fluence</em> is used instead. Formally, this is also
 compatible with Krotov’s method, by choosing
 <span class="math notranslate nohighlight">\(\epsilon_{l, \text{ref}}^{(i)}(t) \equiv 0\)</span> in
-Eq. <a class="reference internal" href="07_krotovs_method.html#equation-g-a">(2)</a> <a class="bibtex reference internal" href="99_bibliography.html#palaoprl2002" id="id36">[72]</a>. It turns
+Eq. <a class="reference internal" href="07_krotovs_method.html#equation-g-a">(2)</a> <span id="id15">[<a class="reference internal" href="99_bibliography.html#id101"><span>72</span></a>]</span>. It turns
 the <em>update</em> equations <a class="reference internal" href="#equation-sequential-update">(22)</a>, <a class="reference internal" href="#equation-concurrent-update">(20)</a>
 into <em>replacement</em> equations, with <span class="math notranslate nohighlight">\(\epsilon_l^{(i)}(t)\)</span> on the
 left-hand side instead of <span class="math notranslate nohighlight">\(\Delta\epsilon_l^{(i)}(t)\)</span>,
@@ -380,7 +380,7 @@ cf. Eq. <a class="reference internal" href="#equation-zhu-rabitz-update">(21)<
 <span class="math notranslate nohighlight">\(\delta = 1\)</span>, <span class="math notranslate nohighlight">\(\eta = 0\)</span>. In our experience, this leads to
 numerical instability and should be avoided. A mixture of <em>update</em> and
 <em>replacement</em> is possible when a penalty of the pulse fluence is
-necessary <a class="bibtex reference internal" href="99_bibliography.html#goerzphd2015" id="id37">[73]</a>.</p>
+necessary <span id="id16">[<a class="reference internal" href="99_bibliography.html#id2"><span>73</span></a>]</span>.</p>
 </div>
 <div class="section" id="gradient-ascent-pulse-engineering-grape">
 <span id="grape"></span><h2>GRadient Ascent Pulse Engineering (GRAPE)<a class="headerlink" href="#gradient-ascent-pulse-engineering-grape" title="Permalink to this headline">¶</a></h2>
@@ -410,7 +410,7 @@ multiple control fields indexed by <span class="math notranslate nohighlight">\(
 <p>The GRAPE method looks at the direct gradient
 <span class="math notranslate nohighlight">\(\partial J/\partial \epsilon_n\)</span> and updates each control
 parameter in the direction of that
-gradient <a class="bibtex reference internal" href="99_bibliography.html#khanejajmr05" id="id38">[21]</a>. The step width must be
+gradient <span id="id17">[<a class="reference internal" href="99_bibliography.html#id12"><span>21</span></a>]</span>. The step width must be
 determined by a line search.</p>
 <p>Typically, only the final time functional <span class="math notranslate nohighlight">\(J_T\)</span> has a nontrivial
 gradient. For simplicity, we assume that <span class="math notranslate nohighlight">\(J_T\)</span> can be expressed in
@@ -451,28 +451,28 @@ right-hand side of Eq. <a class="reference internal" href="#equation-gradient">
 <span class="math notranslate nohighlight">\(\langle \chi_k^{(i-1)}(t_{n+1})
 \vert \partial_\epsilon U_n^{(i-1)} \vert \phi_k^{(i)}(t_n)\rangle\)</span>.
 That is, the states <span class="math notranslate nohighlight">\(\{\ket{\phi_k(t)}\}\)</span> are forward-propagated
-under the optimized field <a class="bibtex reference internal" href="99_bibliography.html#schirmerjmo2009" id="id39">[74]</a>. This can
+under the optimized field <span id="id18">[<a class="reference internal" href="99_bibliography.html#id94"><span>74</span></a>]</span>. This can
 be generalized to “hybrid” schemes that interleave concurrent and
-sequential calculation of the gradient <a class="bibtex reference internal" href="99_bibliography.html#machnespra11" id="id40">[71]</a>.
+sequential calculation of the gradient <span id="id19">[<a class="reference internal" href="99_bibliography.html#id50"><span>71</span></a>]</span>.
 An implementation of the concurrent/sequential/hybrid gradient is
-available in the <a class="reference external" href="https://github.com/shaimach/Dynamo">DYNAMO Matlab package</a> <a class="bibtex reference internal" href="99_bibliography.html#machnespra11" id="id41">[71]</a>.
+available in the <a class="reference external" href="https://github.com/shaimach/Dynamo">DYNAMO Matlab package</a> <span id="id20">[<a class="reference internal" href="99_bibliography.html#id50"><span>71</span></a>]</span>.
 The sequential gradient scheme is sometimes referred to as
-“Krotov-type” <a class="bibtex reference internal" href="99_bibliography.html#machnespra11" id="id42">[71]</a><a class="bibtex reference internal" href="99_bibliography.html#floethernjp12" id="id43">[75]</a>. To avoid
+“Krotov-type” <span id="id21">[<a class="reference internal" href="99_bibliography.html#id50"><span>71</span></a>,<a class="reference internal" href="99_bibliography.html#id95"><span>75</span></a>]</span>. To avoid
 confusion with the specific method defined in
 <a class="reference internal" href="07_krotovs_method.html#krotovsmethod"><span class="std std-ref">Krotov’s Method</span></a>, we prefer the name “sequential GRAPE”.</p>
 <p>GRAPE does not give a guarantee of monotonic convergence. As the
 optimization approaches the minimum of the functional, the first order
 gradient is generally insufficient to drive the optimization
-further <a class="bibtex reference internal" href="99_bibliography.html#eitanpra11" id="id44">[23]</a>. To remedy this, a numerical
+further <span id="id22">[<a class="reference internal" href="99_bibliography.html#id79"><span>23</span></a>]</span>. To remedy this, a numerical
 estimate of the Hessian <span class="math notranslate nohighlight">\(\partial^2 J_T/\partial
 \epsilon_j \partial \epsilon_{j^\prime}\)</span> should also be included in the
 calculation of the update. The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html">L-BFGS-B</a> quasi-Newton
-method <a class="bibtex reference internal" href="99_bibliography.html#byrdsjsc1995" id="id45">[76]</a><a class="bibtex reference internal" href="99_bibliography.html#zhuatms97" id="id46">[77]</a> is most commonly used
+method <span id="id23">[<a class="reference internal" href="99_bibliography.html#id22"><span>76</span></a>,<a class="reference internal" href="99_bibliography.html#id23"><span>77</span></a>]</span> is most commonly used
 for this purpose, resulting in the “Second-order
-GRAPE” <a class="bibtex reference internal" href="99_bibliography.html#fouquieresjmr2011" id="id47">[78]</a> or “GRAPE-LBFGS” method.
+GRAPE” <span id="id24">[<a class="reference internal" href="99_bibliography.html#id92"><span>78</span></a>]</span> or “GRAPE-LBFGS” method.
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html">L-BFGS-B</a> is implemented as a Fortran
-library <a class="bibtex reference internal" href="99_bibliography.html#zhuatms97" id="id48">[77]</a> and widely available, e.g. wrapped
-in optimization toolboxes like <a class="reference external" href="https://www.scipy.org">SciPy</a> <a class="bibtex reference internal" href="99_bibliography.html#scipy" id="id49">[79]</a>. This
+library <span id="id25">[<a class="reference internal" href="99_bibliography.html#id23"><span>77</span></a>]</span> and widely available, e.g. wrapped
+in optimization toolboxes like <a class="reference external" href="https://www.scipy.org">SciPy</a> <span id="id26">[<a class="reference internal" href="99_bibliography.html#id93"><span>79</span></a>]</span>. This
 means that it can be easily added as a “black box” to an existing
 gradient optimization. As a result, augmenting GRAPE with a
 quasi-Hessian is essentially “for free”. Thus, we always mean GRAPE to
@@ -483,7 +483,7 @@ Krotov’s method can generally be used interchangeably. Historically,
 Krotov’s method has been used primarily in the control of molecular
 dynamics, while GRAPE has been popular in the NMR community. Some
 potential benefits of Krotov’s method compared to GRAPE
-are <a class="bibtex reference internal" href="99_bibliography.html#eitanpra11" id="id50">[23]</a>:</p>
+are <span id="id27">[<a class="reference internal" href="99_bibliography.html#id79"><span>23</span></a>]</span>:</p>
 <ul class="simple">
 <li><p>Krotov’s method mathematically guarantees monotonic convergence in
 the continuous-time limit. There is no line-search required for the
@@ -491,20 +491,20 @@ step width <span class="math notranslate nohighlight">\(1 / \lambda_{a, l}\)</sp
 <li><p>The sequential nature of Krotov’s update scheme, with information
 from earlier times entering the update at later times within the same
 iteration, results in faster convergence than the concurrent update
-in GRAPE <a class="bibtex reference internal" href="99_bibliography.html#machnespra11" id="id51">[71]</a><a class="bibtex reference internal" href="99_bibliography.html#jaegerpra14" id="id52">[80]</a>. This advantage
+in GRAPE <span id="id28">[<a class="reference internal" href="99_bibliography.html#id50"><span>71</span></a>,<a class="reference internal" href="99_bibliography.html#id83"><span>80</span></a>]</span>. This advantage
 disappears as the optimization approaches the
-optimum <a class="bibtex reference internal" href="99_bibliography.html#eitanpra11" id="id53">[23]</a>.</p></li>
+optimum <span id="id29">[<a class="reference internal" href="99_bibliography.html#id79"><span>23</span></a>]</span>.</p></li>
 <li><p>The choice of functional <span class="math notranslate nohighlight">\(J_T\)</span> in Krotov’s method only enters
 in the boundary condition for the backward-propagated states,
 Eq. <a class="reference internal" href="07_krotovs_method.html#equation-chi-boundary">(15)</a>, while the update
 equation stays the same otherwise. In contrast, for functionals
 <span class="math notranslate nohighlight">\(J_T\)</span> that do not depend trivially on the
-overlaps <a class="bibtex reference internal" href="99_bibliography.html#nevesjmr2009" id="id54">[81]</a><a class="bibtex reference internal" href="99_bibliography.html#nguyenjmr2017" id="id55">[82]</a><a class="bibtex reference internal" href="99_bibliography.html#anselpra2017" id="id56">[83]</a><a class="bibtex reference internal" href="99_bibliography.html#spindlerjmr2012" id="id57">[84]</a><a class="bibtex reference internal" href="99_bibliography.html#tosneracie2018" id="id58">[85]</a>,
+overlaps <span id="id30">[<a class="reference internal" href="99_bibliography.html#id111"><span>81</span></a>,<a class="reference internal" href="99_bibliography.html#id112"><span>82</span></a>,<a class="reference internal" href="99_bibliography.html#id113"><span>83</span></a>,<a class="reference internal" href="99_bibliography.html#id114"><span>84</span></a>,<a class="reference internal" href="99_bibliography.html#id115"><span>85</span></a>]</span>,
 the evaluation of the gradient in GRAPE may deviate significantly
 from its usual form, requiring a problem-specific implementation from
 scratch. This may be mitigated by the use of automatic
 differentiation in future
-implementations <a class="bibtex reference internal" href="99_bibliography.html#leungpra2017" id="id59">[86]</a><a class="bibtex reference internal" href="99_bibliography.html#abdelhafezpra2019" id="id60">[87]</a>.</p></li>
+implementations <span id="id31">[<a class="reference internal" href="99_bibliography.html#id58"><span>86</span></a>,<a class="reference internal" href="99_bibliography.html#id59"><span>87</span></a>]</span>.</p></li>
 </ul>
 <p>GRAPE has a significant advantage if the controls are not
 time-continuous, but are <em>physically</em> piecewise constant (“bang-bang
@@ -520,15 +520,15 @@ This is often relevant to design control fields that meet experimental
 constraints. One possible realization is to calculate the gradients for
 the control parameters from the gradients of the time-discrete control
 amplitudes via the chain
-rule <a class="bibtex reference internal" href="99_bibliography.html#winckelip2008" id="id61">[88]</a><a class="bibtex reference internal" href="99_bibliography.html#skinnerjmr2010" id="id62">[89]</a><a class="bibtex reference internal" href="99_bibliography.html#motzoipra2011" id="id63">[90]</a><a class="bibtex reference internal" href="99_bibliography.html#lucarellipra2018" id="id64">[91]</a>.
+rule <span id="id32">[<a class="reference internal" href="99_bibliography.html#id120"><span>88</span></a>,<a class="reference internal" href="99_bibliography.html#id107"><span>89</span></a>,<a class="reference internal" href="99_bibliography.html#id116"><span>90</span></a>,<a class="reference internal" href="99_bibliography.html#id121"><span>91</span></a>]</span>.
 This approach
 has recently been named “GRadient Optimization Using Parametrization”
-(GROUP) <a class="bibtex reference internal" href="99_bibliography.html#sorensenpra2018" id="id65">[92]</a>.
+(GROUP) <span id="id33">[<a class="reference internal" href="99_bibliography.html#id108"><span>92</span></a>]</span>.
 An implementation of several variants of GROUP is available in the
-QEngine C++ library <a class="bibtex reference internal" href="99_bibliography.html#sorensencpc2019" id="id66">[93]</a>.
+QEngine C++ library <span id="id34">[<a class="reference internal" href="99_bibliography.html#id122"><span>93</span></a>]</span>.
 An alternative for a
 moderate number of control parameters is “gradient-optimization of
-analytic controls” (GOAT) <a class="bibtex reference internal" href="99_bibliography.html#machnesprl2018" id="id67">[94]</a>. GOAT
+analytic controls” (GOAT) <span id="id35">[<a class="reference internal" href="99_bibliography.html#id96"><span>94</span></a>]</span>. GOAT
 evaluates the relevant gradient with forward-mode differentiation; that
 is, <span class="math notranslate nohighlight">\({\partial \tau_k}/{\partial \epsilon_n}\)</span> is directly
 evaluated alongside <span class="math notranslate nohighlight">\(\tau_k\)</span>. For <span class="math notranslate nohighlight">\(N = \Abs{\{\epsilon_m\}}\)</span>
@@ -541,7 +541,7 @@ space enlarged by a factor <span class="math notranslate nohighlight">\(N\)</spa
 piggy-back on the piecewise-constant discretization of the control
 field, and thus may avoid the associated numerical error. This allows to
 optimize to extremely high fidelities as required for some error
-correction protocols <a class="bibtex reference internal" href="99_bibliography.html#machnesprl2018" id="id68">[94]</a>.</p>
+correction protocols <span id="id36">[<a class="reference internal" href="99_bibliography.html#id96"><span>94</span></a>]</span>.</p>
 </div>
 <div class="section" id="grape-in-qutip">
 <span id="grapeinqutip"></span><h2>GRAPE in QuTiP<a class="headerlink" href="#grape-in-qutip" title="Permalink to this headline">¶</a></h2>
@@ -583,7 +583,7 @@ this package complement each other, but will not compare directly.</p>
 number of control parameters (typically less than <span class="math notranslate nohighlight">\(\approx20\)</span>,
 although this number may be pushed to <span class="math notranslate nohighlight">\(\approx50\)</span> by sequential
 increase of the number of parameters and
-re-parametrization <a class="bibtex reference internal" href="99_bibliography.html#rachpra2015" id="id69">[95]</a><a class="bibtex reference internal" href="99_bibliography.html#goetzpra2016" id="id70">[96]</a>),
+re-parametrization <span id="id37">[<a class="reference internal" href="99_bibliography.html#id78"><span>95</span></a>,<a class="reference internal" href="99_bibliography.html#id80"><span>96</span></a>]</span>),
 gradient-free optimization becomes feasible. The most straightforward
 use case are controls with an analytic shape (e.g. due to the
 constraints of an experimental setup), with just a few free parameters.
@@ -592,9 +592,9 @@ shape, so that the only free parameters are peak amplitude, pulse width
 and delay. The control parameters are not required to be parameters of a
 time-dependent control, but may also be static parameters in the
 Hamiltonian, e.g. the polarization of the laser beams utilized in an
-experiment <a class="bibtex reference internal" href="99_bibliography.html#hornnjp2018" id="id71">[97]</a>.</p>
+experiment <span id="id38">[<a class="reference internal" href="99_bibliography.html#id77"><span>97</span></a>]</span>.</p>
 <p>A special case of gradient-free optimization is the Chopped RAndom Basis
-(CRAB) method <a class="bibtex reference internal" href="99_bibliography.html#doriaprl11" id="id72">[98]</a><a class="bibtex reference internal" href="99_bibliography.html#canevapra2011" id="id73">[99]</a>. The essence
+(CRAB) method <span id="id39">[<a class="reference internal" href="99_bibliography.html#id15"><span>98</span></a>,<a class="reference internal" href="99_bibliography.html#id14"><span>99</span></a>]</span>. The essence
 of CRAB is in the specific choice of the parametrization in terms of a
 low-dimensional <em>random</em> basis, as the name implies. Thus, it can be
 used when the parametrization is not pre-defined as in the case of
@@ -608,7 +608,7 @@ interface as the GRAPE method discussed above (<a class="reference internal" hre
 same limitations.
 CRAB is prone to getting stuck in local minima of the optimization landscape.
 To remedy this, a variant of CRAB, “dressed CRAB” (DCRAB) has been
-developed <a class="bibtex reference internal" href="99_bibliography.html#rachpra2015" id="id74">[95]</a> that re-parametrizes the controls when this
+developed <span id="id40">[<a class="reference internal" href="99_bibliography.html#id78"><span>95</span></a>]</span> that re-parametrizes the controls when this
 happens.</p>
 <p>Gradient-free optimization does not require backward propagation, only
 forward propagation of the initial states and evaluation of the
@@ -626,7 +626,7 @@ faster convergence. For only a few parameters, however, it can be highly
 efficient. This makes gradient-free optimization useful for
 “pre-optimization”, that is, for finding guess controls that are then
 further optimized with a gradient-based
-method <a class="bibtex reference internal" href="99_bibliography.html#goerzepjqt2015" id="id75">[32]</a>.</p>
+method <span id="id41">[<a class="reference internal" href="99_bibliography.html#id24"><span>32</span></a>]</span>.</p>
 <p>Generally, gradient-free optimization can be easily realized directly in
 QuTiP or any other software package for the simulation of quantum
 dynamics:</p>
@@ -642,14 +642,14 @@ optimization.</p></li>
 <p>The implementation in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.6.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a> allows to choose between
 different optimization methods, with Nelder-Mead simplex being the
 default. There exist also more advanced optimization methods available
-in packages like <a class="reference external" href="https://nlopt.readthedocs.io/">NLopt</a> <a class="bibtex reference internal" href="99_bibliography.html#nlopt" id="id76">[100]</a> or
-<a class="reference external" href="https://github.com/facebookresearch/nevergrad">Nevergrad</a> <a class="bibtex reference internal" href="99_bibliography.html#nevergrad" id="id77">[101]</a> that may be worth exploring for
+in packages like <a class="reference external" href="https://nlopt.readthedocs.io/">NLopt</a> <span id="id42">[<a class="reference internal" href="99_bibliography.html#id57"><span>100</span></a>]</span> or
+<a class="reference external" href="https://github.com/facebookresearch/nevergrad">Nevergrad</a> <span id="id43">[<a class="reference internal" href="99_bibliography.html#id117"><span>101</span></a>]</span> that may be worth exploring for
 improvements in numerical efficiency and additional functionality such
 as support for non-linear constraints.</p>
 </div>
 <div class="section" id="choosing-an-optimization-method">
-<span id="id78"></span><h2>Choosing an optimization method<a class="headerlink" href="#choosing-an-optimization-method" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="id90">
+<span id="id44"></span><h2>Choosing an optimization method<a class="headerlink" href="#choosing-an-optimization-method" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id52">
 <span id="figoctdecisiontree"></span><a class="reference internal image-reference" href="_images/oct_decision_tree.svg"><img alt="OCT decision tree." src="_images/oct_decision_tree.svg" width="100%" /></a>
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Decision tree for the choice of a numerical open-loop
 optimization method.
@@ -665,14 +665,14 @@ control parameters are the coefficients for those spectral
 components. Each method in the diagram is meant to include all its
 variants, a multitude of gradient-free methods and e.g. DCRAB for
 CRAB, GRAPE-LBFGS and sequential/hybrid gradient-descent for GRAPE,
-and K-BFGS for Krotov’s method, see text for detail.</span><a class="headerlink" href="#id90" title="Permalink to this image">¶</a></p>
+and K-BFGS for Krotov’s method, see text for detail.</span><a class="headerlink" href="#id52" title="Permalink to this image">¶</a></p>
 </div>
 <p>In the following, we discuss some of the concerns in the choice of
 optimization methods. The discussion is limited to iterative open-loop
 methods, where the optimization is based on a numerical simulation of
 the dynamics. It excludes analytical control methods such as geometric
 control, closed-loop methods, or coherent feedback control; see
-Ref. <a class="bibtex reference internal" href="99_bibliography.html#petersenietcta2010" id="id79">[102]</a> for an overview.</p>
+Ref. <span id="id45">[<a class="reference internal" href="99_bibliography.html#id97"><span>102</span></a>]</span> for an overview.</p>
 <p>Whether to use a gradient-free optimization method, GRAPE, or Krotov’s
 method depends on the size of the problem, the requirements on the
 control fields, and the mathematical properties of the optimization
@@ -681,7 +681,7 @@ independent control parameters is smaller than <span class="math notranslate noh
 the functional is of a form that does not allow to calculate gradients
 easily. It is always a good idea to use a gradient-free method to obtain
 improved guess pulses for use with a gradient-based
-method <a class="bibtex reference internal" href="99_bibliography.html#goerzepjqt2015" id="id80">[32]</a>.</p>
+method <span id="id46">[<a class="reference internal" href="99_bibliography.html#id24"><span>32</span></a>]</span>.</p>
 <p>GRAPE or its variants should be used if the control parameters are
 discrete, such as on a coarse-grained time grid, and the derivative of
 <span class="math notranslate nohighlight">\(J\)</span> with respect to each control parameter is easily computable.
@@ -690,8 +690,8 @@ state-to-state transitions and quantum gates, even though the method is
 generally applicable to a wider range of objectives.</p>
 <p>When the control parameters are general analytic coefficients instead of
 time-discrete amplitudes, the
-GROUP <a class="bibtex reference internal" href="99_bibliography.html#skinnerjmr2010" id="id81">[89]</a><a class="bibtex reference internal" href="99_bibliography.html#motzoipra2011" id="id82">[90]</a><a class="bibtex reference internal" href="99_bibliography.html#sorensenpra2018" id="id83">[92]</a> or
-GOAT <a class="bibtex reference internal" href="99_bibliography.html#machnesprl2018" id="id84">[94]</a> variant of gradient-ascent may
+GROUP <span id="id47">[<a class="reference internal" href="99_bibliography.html#id107"><span>89</span></a>,<a class="reference internal" href="99_bibliography.html#id116"><span>90</span></a>,<a class="reference internal" href="99_bibliography.html#id108"><span>92</span></a>]</span> or
+GOAT <span id="id48">[<a class="reference internal" href="99_bibliography.html#id96"><span>94</span></a>]</span> variant of gradient-ascent may
 be a suitable choice. GOAT in particular can avoid the numerical error
 associated with time discretization. However, as the method scales
 linearly in memory and/or CPU with the number of control parameters,
@@ -701,7 +701,7 @@ time-continuous, and if the derivative of <span class="math notranslate nohighli
 the states, Eq. <a class="reference internal" href="07_krotovs_method.html#equation-chi-boundary">(15)</a>, can be
 calculated. When these conditions are met, Krotov’s method gives
 excellent convergence. The general family of monotonically convergent
-iteration schemes <a class="bibtex reference internal" href="99_bibliography.html#madayjcp2003" id="id85">[66]</a> may also be used.</p>
+iteration schemes <span id="id49">[<a class="reference internal" href="99_bibliography.html#id90"><span>66</span></a>]</span> may also be used.</p>
 <p>The decision tree in <a class="reference internal" href="#figoctdecisiontree"><span class="std std-numref">Fig. 2</span></a> can guide the
 choice of an optimization method. The key deciding factors are the
 number of control parameters (<span class="math notranslate nohighlight">\(n\)</span>) and whether the controls are time-discrete.
@@ -712,9 +712,9 @@ exploration of the full physical optimization landscape. At the other
 end of the spectrum, arbitrary time-continuous controls such as those
 assumed in Krotov’s method have no inherent constraints and are
 especially useful for more fundamental tasks, such as mapping the design
-landscape of a particular system <a class="bibtex reference internal" href="99_bibliography.html#goerznpjqi2017" id="id86">[103]</a> or
+landscape of a particular system <span id="id50">[<a class="reference internal" href="99_bibliography.html#id98"><span>103</span></a>]</span> or
 determining the quantum speed limit, i.e., the minimum time in which the
-system can reach a given target <a class="bibtex reference internal" href="99_bibliography.html#canevaprl09" id="id87">[104]</a><a class="bibtex reference internal" href="99_bibliography.html#goerzjpb11" id="id88">[105]</a><a class="bibtex reference internal" href="99_bibliography.html#sorensennat16" id="id89">[15]</a>.</p>
+system can reach a given target <span id="id51">[<a class="reference internal" href="99_bibliography.html#id99"><span>104</span></a>,<a class="reference internal" href="99_bibliography.html#id100"><span>105</span></a>,<a class="reference internal" href="99_bibliography.html#id43"><span>15</span></a>]</span>.</p>
 </div>
 </div>
 
@@ -734,7 +734,7 @@ system can reach a given target <a class="bibtex reference internal" href="99_b
     <p>
         &#169; Copyright 2021, Michael Goerz et al..
       <span class="lastupdated">
-        Last updated on Jan 08, 2021.
+        Last updated on Jan 13, 2021.
       </span>
 
     </p>

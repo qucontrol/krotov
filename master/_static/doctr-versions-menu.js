@@ -48,7 +48,7 @@ function _addVersionsMenu(version_data) {
   menu.setAttribute('aria-label', 'versions');
   var inner_html =
     "<span class='rst-current-version' data-toggle='rst-current-version'>" +
-      "<span class='fa fa-book'> Doctr </span>" +
+      "<span class='fa fa-book'> Docs </span>" +
       "<span>" + current_version + " </span>" +
       "<span class='fa fa-caret-down'></span>" +
     "</span>" +

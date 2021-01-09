@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Optimization of a Dissipative Quantum Gate &mdash; Krotov 1.2.0+dev (95efe4f) documentation</title>
+  <title>Optimization of a Dissipative Quantum Gate &mdash; Krotov 1.2.1 documentation</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.2.0+dev
+                1.2.1
               </div>
             
           
@@ -474,7 +474,7 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/95efe4f00ac64d034d11bc8b8d9ebc0430db03c1/docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/95efe4f00ac64d034d11bc8b8d9ebc0430db03c1?filepath=docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.2.1/docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.2.1?filepath=docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
 <div class="section" id="Optimization-of-a-Dissipative-Quantum-Gate">
 <h1>Optimization of a Dissipative Quantum Gate<a class="headerlink" href="#Optimization-of-a-Dissipative-Quantum-Gate" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
@@ -504,14 +504,18 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-krotov           1.2.0
-qutip            4.5.0
-matplotlib       3.3.1
-matplotlib.pylab 1.17.2
-numpy            1.17.2
-scipy            1.3.1
-CPython 3.7.6
-IPython 7.17.0
+Python implementation: CPython
+Python version       : 3.7.6
+IPython version      : 7.19.0
+
+matplotlib: 3.3.3
+scipy     : 1.3.1
+numpy     : 1.17.2
+krotov    : 1.2.1
+qutip     : 4.5.0
+sys       : 3.7.6 (default, Jan  6 2020, 00:53:52)
+[Clang 11.0.0 (clang-1100.0.33.16)]
+
 </pre></div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{int}[0]{\text{int}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2}\mid{#2}\vphantom{#1}\right\rangle} \newcommand{ketbra}[2]{\vert#1\rangle\!\langle#2\vert} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}}\)</span></p>
@@ -945,10 +949,10 @@ F_avg = 0.344
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 iter.      J_T   ∑∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs
-0     1.22e-01    0.00e+00   1.22e-01        n/a        n/a    11
-1     7.49e-02    2.26e-02   9.75e-02  -4.67e-02  -2.41e-02    36
-2     7.41e-02    3.98e-04   7.45e-02  -8.12e-04  -4.14e-04    33
-3     7.33e-02    3.70e-04   7.37e-02  -7.55e-04  -3.85e-04    31
+0     1.22e-01    0.00e+00   1.22e-01        n/a        n/a    17
+1     7.49e-02    2.26e-02   9.75e-02  -4.67e-02  -2.41e-02    48
+2     7.41e-02    3.98e-04   7.45e-02  -8.12e-04  -4.14e-04    35
+3     7.33e-02    3.70e-04   7.37e-02  -7.55e-04  -3.85e-04    36
 </pre></div></div>
 </div>
 <p>(this takes a while)…</p>
@@ -1155,7 +1159,7 @@ F_avg = 0.977
     <p>
         &#169; Copyright 2021, Michael Goerz et al..
       <span class="lastupdated">
-        Last updated on Jan 08, 2021.
+        Last updated on Jan 13, 2021.
       </span>
 
     </p>

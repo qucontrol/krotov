@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Contributing &mdash; Krotov 1.2.0+dev (95efe4f) documentation</title>
+  <title>Contributing &mdash; Krotov 1.2.1 documentation</title>
   
 
   
@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                1.2.0+dev
+                1.2.1
               </div>
             
           
@@ -280,7 +280,7 @@ are welcome :)</p></li>
 <li><p>If the pull request adds functionality, the docs should be updated. Put
 your new functionality into a function with a docstring, and add the
 feature to the list in <code class="docutils literal notranslate"><span class="pre">docs/04_features.rst</span></code> and/or <code class="docutils literal notranslate"><span class="pre">HISTORY.rst</span></code>.</p></li>
-<li><p>Check <a class="reference external" href="https://travis-ci.org/qucontrol/krotov/pull_requests">https://travis-ci.org/qucontrol/krotov/pull_requests</a>
+<li><p>Check <a class="reference external" href="https://github.com/qucontrol/krotov/actions">https://github.com/qucontrol/krotov/actions</a>
 and make sure that the tests pass for all supported Python versions.</p></li>
 </ol>
 </div>
@@ -532,30 +532,16 @@ Do not use <code class="docutils literal notranslate"><span class="pre">\langle<
 <p>The documentation is automatically deployed to
 <a class="reference external" href="https://qucontrol.github.io/krotov/">https://qucontrol.github.io/krotov/</a> (the <a class="reference external" href="https://pages.github.com">gh-pages</a> associated with the
 <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package’s Github repository) every time commits are pushed to
-Github. This is done via the <a class="reference external" href="https://travis-ci.org">Travis</a> Continuous Integration service and <a class="reference external" href="https://drdoctr.github.io">Doctr</a>.
+Github. This is done via
+<a class="reference external" href="https://github.com/qucontrol/krotov/actions?query=workflow%3ADocs">Github Actions</a>
+as configured in the
+<a class="reference external" href="https://github.com/qucontrol/krotov/blob/master/.github/workflows/docs.yml">workflow file</a>
+at <code class="docutils literal notranslate"><span class="pre">.github/workflows/docs.yml</span></code>.
 The documentation for all versions of <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> is visible on the
 <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> git branch. Any changes that are committed and pushed from this
 branch will be deployed to the online documentation. Do not routinely perform
-manual edits on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch! Let <a class="reference external" href="https://drdoctr.github.io">Doctr</a> do its job of automatically
-deploying documentation instead.</p>
-<p>The deployment of the documentation is set up roughly as follows:</p>
-<ul class="simple">
-<li><p>In <code class="docutils literal notranslate"><span class="pre">.travis.yml</span></code>, there is “Docs” job set up that executes the
-<code class="docutils literal notranslate"><span class="pre">.travis/docs.sh</span></code> script.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">.travis/docs.sh</span></code> script builds the HTML documentation. It then
-calls <code class="docutils literal notranslate"><span class="pre">doctr</span> <span class="pre">deploy</span></code> to deploy to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">doctr</span> <span class="pre">deploy</span></code> copies the built documentation to the appropriate subfolder
-on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>. <a class="reference external" href="https://goerz.github.io/doctr_versions_menu">Doctr Versions Menu</a> atomatically provides a dynamically
-rendered menu for switching between versions. It does this by creating a file
-<code class="docutils literal notranslate"><span class="pre">versions.json</span></code> on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">doctr</span> <span class="pre">deploy</span></code> commits the rendered documentation as well as the
-<code class="docutils literal notranslate"><span class="pre">versions.json</span></code> and <code class="docutils literal notranslate"><span class="pre">index.html</span></code> files and pushes the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>
-branch. It does this using the deploy key in <code class="docutils literal notranslate"><span class="pre">./docs/doctr_deploy_key.enc</span></code>.
-That file contains the private key matching the public <code class="docutils literal notranslate"><span class="pre">doctr</span></code> key in
-<a class="reference external" href="https://github.com/qucontrol/krotov/settings/keys">https://github.com/qucontrol/krotov/settings/keys</a>. The private key itself is
-encrypted with <a class="reference external" href="https://docs.travis-ci.com/user/encryption-keys/">Travis’ public key</a>, so that only Travis can decrypt it with
-their private key, and use it to authenticate while pushing to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p></li>
-</ul>
+manual edits on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch! Let Github Actions do its job of
+automatically deploying documentation instead.</p>
 </div>
 <div class="section" id="contribute-examples">
 <span id="contributeexamples"></span><h2>Contribute Examples<a class="headerlink" href="#contribute-examples" title="Permalink to this headline">¶</a></h2>
@@ -862,7 +848,7 @@ messages with time stamps:</p>
     <p>
         &#169; Copyright 2021, Michael Goerz et al..
       <span class="lastupdated">
-        Last updated on Jan 08, 2021.
+        Last updated on Jan 13, 2021.
       </span>
 
     </p>
