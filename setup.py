@@ -63,7 +63,7 @@ dev_requirements = [
     'sphinx-autobuild',
     'sphinx-copybutton',
     'sphinx_rtd_theme',
-    'sphinxcontrib-bibtex<2.0',
+    'sphinxcontrib-bibtex',
     'twine',
     'watermark',
     'weylchamber>=0.3.2',
