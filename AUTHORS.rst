@@ -30,10 +30,12 @@ We thank
 `@TejasAvinasShetty`_,
 `@nathanshammah`_,
 `@timohillmann`_,
+`@loganbvh`_,
 `@uiofgh`_, and
 `@zachmanson`_,
 for reporting bugs and suggesting improvements.
 
+.. _@loganbvh: https://github.com/loganbvh
 .. _@zachmanson: https://github.com/zachmanson
 .. _@TejasAvinasShetty: https://github.com/TejasAvinashShetty
 .. _@nathanshammah: https://github.com/nathanshammah

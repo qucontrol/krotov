@@ -2,6 +2,11 @@
 History
 =======
 
+(next release)
+--------------
+
+* Bugfix: Crash when initializing discretized numpy-array controls (`#79`_, thanks to `@loganbvh`_)
+
 1.2.0 (2020-08-17)
 ------------------
 
@@ -118,6 +123,7 @@ Note: due to the changes in the time discretization of the controls and update s
 .. _@timohillmann: https://github.com/timohillmann
 .. _@nathanshammah: https://github.com/nathanshammah
 .. _@zachmanson: https://github.com/zachmanson
+.. _@loganbvh: https://github.com/loganbvh
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
@@ -144,3 +150,4 @@ Note: due to the changes in the time discretization of the controls and update s
 .. _#72: https://github.com/qucontrol/krotov/issues/72
 .. _#74: https://github.com/qucontrol/krotov/issues/74
 .. _#76: https://github.com/qucontrol/krotov/issues/76
+.. _#79: https://github.com/qucontrol/krotov/issues/79
