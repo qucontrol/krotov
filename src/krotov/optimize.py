@@ -647,10 +647,10 @@ def _initialize_krotov_controls(objectives, pulse_options, tlist):
             discretize(
                 control,
                 tlist,
-                args=(pulse_options[control].get('args', None),),
+                args=(options_list[i].get('args', None),),
                 via_midpoints=True,
             )
-            for control in guess_controls
+            for (i, control) in enumerate(guess_controls)
         ]
     except (TypeError, np.ComplexWarning) as exc_info:
         raise ValueError(
