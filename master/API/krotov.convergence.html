@@ -1,102 +1,55 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>krotov.convergence module &mdash; Krotov 1.2.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>krotov.convergence module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script src="../_static/doctr-versions-menu.js"></script>
+        <script src="../_static/docs-versions-menu.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="krotov.conversions module" href="krotov.conversions.html" />
     <link rel="prev" title="krotov package" href="krotov.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> Krotov
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            Krotov
           </a>
-
-          
-            
-            
               <div class="version">
-                1.2.1
+                1.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
@@ -136,28 +89,17 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Krotov</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -210,32 +152,8 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="module-krotov.convergence">
+             
+  <div class="section" id="module-krotov.convergence">
 <span id="krotov-convergence-module"></span><h1>krotov.convergence module<a class="headerlink" href="#module-krotov.convergence" title="Permalink to this headline">¶</a></h1>
 <p>Routines for <cite>check_convergence</cite> in <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.optimize.optimize_pulses()</span></code></a></p>
 <p>A <cite>check_convergence</cite> function may be used to determine whether an optimization
@@ -332,7 +250,7 @@ of a crash.</p>
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="krotov.convergence.Or">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">Or</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">funcs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#Or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.Or" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.convergence.</span></code><code class="sig-name descname"><span class="pre">Or</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">funcs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#Or"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.convergence.Or" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chain multiple <cite>check_convergence</cite> functions together in a logical Or.</p>
 <p>Each parameter must be a function suitable to pass to
 <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> as <cite>check_convergence</cite>. It
@@ -353,7 +271,7 @@ string message)</p>
 
 <dl class="py function">
 <dt id="krotov.convergence.value_below">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_below</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec</span><span class="o">=</span><span class="default_value">('info_vals', T[- 1])</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_below" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.convergence.</span></code><code class="sig-name descname"><span class="pre">value_below</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('info_vals',</span> <span class="pre">T[-</span> <span class="pre">1])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_below"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.convergence.value_below" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor for routine that checks if a value is below <cite>limit</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -370,7 +288,7 @@ minimized.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A name identifying the checked value, used for the
 message returned by the <cite>check_convergence</cite> routine. Defaults to
 <code class="docutils literal notranslate"><span class="pre">str(spec)</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> (see Note)</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v23.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> (see Note)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -389,7 +307,7 @@ appropriate message string. Otherwise, it returns None.</p>
 the value to check against the limit. You should also pass a <cite>name</cite>
 like ‘J_T’, or ‘error’ as a label for the value.
 For more advanced use cases, <cite>spec</cite> can be a
-<a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a>-specification that extracts the value to check from
+<a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v23.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a>-specification that extracts the value to check from
 the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object as <code class="docutils literal notranslate"><span class="pre">glom.glom(result,</span> <span class="pre">spec,</span> <span class="pre">**kwargs)</span></code>.</p>
 </div>
 <p class="rubric">Example</p>
@@ -410,7 +328,7 @@ the <a class="reference internal" href="krotov.result.html#krotov.result.Result"
 
 <dl class="py function">
 <dt id="krotov.convergence.value_above">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">value_above</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec</span><span class="o">=</span><span class="default_value">('info_vals', T[- 1])</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_above"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.value_above" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.convergence.</span></code><code class="sig-name descname"><span class="pre">value_above</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('info_vals',</span> <span class="pre">T[-</span> <span class="pre">1])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#value_above"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.convergence.value_above" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor for routine that checks if a value is above <cite>limit</cite></p>
 <p>Like <a class="reference internal" href="#krotov.convergence.value_below" title="krotov.convergence.value_below"><code class="xref py py-func docutils literal notranslate"><span class="pre">value_below()</span></code></a>, but for checking whether an extracted value is
 <em>above</em>, not below a value. By default, it looks at the last value in
@@ -438,7 +356,7 @@ argument to <a class="reference internal" href="krotov.optimize.html#krotov.opti
 
 <dl class="py function">
 <dt id="krotov.convergence.delta_below">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">delta_below</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit</span></em>, <em class="sig-param"><span class="n">spec1</span><span class="o">=</span><span class="default_value">('info_vals', T[- 1])</span></em>, <em class="sig-param"><span class="n">spec0</span><span class="o">=</span><span class="default_value">('info_vals', T[- 2])</span></em>, <em class="sig-param"><span class="n">absolute_value</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#delta_below"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.delta_below" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.convergence.</span></code><code class="sig-name descname"><span class="pre">delta_below</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('info_vals',</span> <span class="pre">T[-</span> <span class="pre">1])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('info_vals',</span> <span class="pre">T[-</span> <span class="pre">2])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#delta_below"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.convergence.delta_below" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor for a routine that checks if
 <span class="math notranslate nohighlight">\(\Abs{v_1 - v_0} &lt; \varepsilon\)</span></p>
 <dl class="field-list simple">
@@ -446,10 +364,10 @@ argument to <a class="reference internal" href="krotov.optimize.html#krotov.opti
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A float value (or str-representation of a float)
 for <span class="math notranslate nohighlight">\(\varepsilon\)</span></p></li>
-<li><p><strong>spec1</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
+<li><p><strong>spec1</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v23.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
 attribute from which to extract <span class="math notranslate nohighlight">\(v_1\)</span>. Defaults to a spec
 extracting the last value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p></li>
-<li><p><strong>spec0</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
+<li><p><strong>spec0</strong> – A <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v23.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a> specification of the <a class="reference internal" href="krotov.result.html#krotov.result.Result" title="krotov.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>
 attribute from which to extract <span class="math notranslate nohighlight">\(v_0\)</span>.  Defaults to a spec
 extracting the last-but-one value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>.</p></li>
 <li><p><strong>absolute_value</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If False, check for <span class="math notranslate nohighlight">\(v_1 - v_0 &lt; \varepsilon\)</span>,
@@ -457,7 +375,7 @@ instead of the absolute value.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A name identifying the delta, used for the
 message returned by the <cite>check_convergence</cite> routine. Defaults to
 <code class="docutils literal notranslate"><span class="pre">&quot;Δ({spec1},{spec0}&quot;</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v20.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a></p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to <a class="reference external" href="https://glom.readthedocs.io/en/latest/api.html#glom.glom" title="(in glom v23.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">glom()</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -490,7 +408,7 @@ setting <cite>absolute_value</cite> to False. See <a class="reference internal" 
 
 <dl class="py function">
 <dt id="krotov.convergence.check_monotonic_error">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">check_monotonic_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#check_monotonic_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.check_monotonic_error" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.convergence.</span></code><code class="sig-name descname"><span class="pre">check_monotonic_error</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#check_monotonic_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.convergence.check_monotonic_error" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check for monotonic convergence with respect to the error</p>
 <p>Check that the last value in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a> is
 smaller than the last-but-one value. If yes, return None. If no, return an
@@ -520,7 +438,7 @@ iteration.</p>
 
 <dl class="py function">
 <dt id="krotov.convergence.check_monotonic_fidelity">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">check_monotonic_fidelity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#check_monotonic_fidelity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.check_monotonic_fidelity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.convergence.</span></code><code class="sig-name descname"><span class="pre">check_monotonic_fidelity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#check_monotonic_fidelity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.convergence.check_monotonic_fidelity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check for monotonic convergence with respect to the fidelity</p>
 <p>This is like <a class="reference internal" href="#krotov.convergence.check_monotonic_error" title="krotov.convergence.check_monotonic_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_monotonic_error()</span></code></a>, but looking for a monotonic
 <em>increase</em> in the values in <a class="reference internal" href="krotov.result.html#krotov.result.Result.info_vals" title="krotov.result.Result.info_vals"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Result.info_vals</span></code></a>. Thus, it is assumed
@@ -541,7 +459,7 @@ that the <cite>info_hook</cite> returns a fidelity (to be maximized), not an err
 
 <dl class="py function">
 <dt id="krotov.convergence.dump_result">
-<code class="sig-prename descclassname">krotov.convergence.</code><code class="sig-name descname">dump_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">every</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#dump_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.convergence.dump_result" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.convergence.</span></code><code class="sig-name descname"><span class="pre">dump_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/convergence.html#dump_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.convergence.dump_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a function for dumping the result every so many iterations</p>
 <p>For long-running optimizations, it can be useful to dump the current state
 of the optimization every once in a while, so that the result is not lost
@@ -588,53 +506,35 @@ the optimization due to I/O overhead.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="krotov.conversions.html" class="btn btn-neutral float-right" title="krotov.conversions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="krotov.html" class="btn btn-neutral float-left" title="krotov package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="krotov.conversions.html" class="btn btn-neutral float-right" title="krotov.conversions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Michael Goerz et al..
-      <span class="lastupdated">
-        Last updated on Jan 13, 2021.
-      </span>
-
-    </p>
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

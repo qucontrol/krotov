@@ -1,102 +1,55 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>krotov.parallelization module &mdash; Krotov 1.2.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>krotov.parallelization module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script src="../_static/doctr-versions-menu.js"></script>
+        <script src="../_static/docs-versions-menu.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="krotov.propagators module" href="krotov.propagators.html" />
     <link rel="prev" title="krotov.optimize module" href="krotov.optimize.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> Krotov
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            Krotov
           </a>
-
-          
-            
-            
               <div class="version">
-                1.2.1
+                1.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
@@ -136,28 +89,17 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Krotov</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -210,32 +152,8 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="module-krotov.parallelization">
+             
+  <div class="section" id="module-krotov.parallelization">
 <span id="krotov-parallelization-module"></span><h1>krotov.parallelization module<a class="headerlink" href="#module-krotov.parallelization" title="Permalink to this headline">¶</a></h1>
 <p>Support routines for running the optimization in parallel across the
 objectives.</p>
@@ -259,17 +177,17 @@ is “sequential”)</p></li>
 <p>The <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> routine has a parameter <cite>parallel_map</cite> that can
 receive a tuple of three “map” functions to enable parallelization,
 corresponding to the three propagation listed above. If not given,
-<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a> is used for all three propagations, running
+<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a> is used for all three propagations, running
 in serial. Any alternative “map” must have the same interface as
-<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a>.</p>
-<p>It would be natural to assume that <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a>
+<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.serial_map()</span></code></a>.</p>
+<p>It would be natural to assume that <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a>
 respectively the slightly improved <a class="reference internal" href="#krotov.parallelization.parallel_map" title="krotov.parallelization.parallel_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map()</span></code></a> provided in this module
 would be a good choice for parallel execution, using multiple CPUs on the same
 machine.  However, this function is only a good choice for the propagation (1)
 and (2): these run in parallel over the entire time grid without any
 communication, and thus minimal overhead.  However, this is not true for the
 propagation (3), which must synchronize after each time step. In that case, the
-“naive” use of <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a> results in a communication
+“naive” use of <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a> results in a communication
 overhead that completely dominates the propagation, and actually makes the
 optimization slower (potentially by more than an order of magnitude).</p>
 <p>The function <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step()</span></code></a> provided in this module is an
@@ -312,7 +230,7 @@ parallelization on such platforms.</p>
 <p>Another caveat on platforms using “spawn” is that certain objects by default
 cannot be transferred via IPC, due to limitations of the <a class="reference external" href="https://docs.python.org/3.7/library/pickle.html#module-pickle" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a>
 protocol. This affects <a class="reference external" href="https://docs.python.org/3.7/reference/expressions.html#lambda" title="(in Python v3.7)"><span>Lambdas</span></a> and functions defined in
-Jupyter notebooks, in particular. The third-party <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v2.4.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> library provides
+Jupyter notebooks, in particular. The third-party <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> library provides
 an alternative implementation for multi-processes parallelization that does not
 have these restrictions, but causes even more overhead.</p>
 <p>You may attempt to use the various options to <a class="reference internal" href="#krotov.parallelization.set_parallelization" title="krotov.parallelization.set_parallelization"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_parallelization()</span></code></a> in
@@ -353,13 +271,13 @@ particular environment.</p>
 </tr>
 </tbody>
 </table>
-<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Consumer</span></code></a>, <a class="reference internal" href="#krotov.parallelization.FwPropStepTask" title="krotov.parallelization.FwPropStepTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">FwPropStepTask</span></code></a>, <a class="reference internal" href="#krotov.parallelization.parallel_map" title="krotov.parallelization.parallel_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map</span></code></a>, <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step</span></code></a>, <a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">serial_map</span></code></a>, <a class="reference internal" href="#krotov.parallelization.set_parallelization" title="krotov.parallelization.set_parallelization"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_parallelization</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.parallelization.Consumer" title="krotov.parallelization.Consumer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Consumer</span></code></a>, <a class="reference internal" href="#krotov.parallelization.FwPropStepTask" title="krotov.parallelization.FwPropStepTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">FwPropStepTask</span></code></a>, <a class="reference internal" href="#krotov.parallelization.parallel_map" title="krotov.parallelization.parallel_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map</span></code></a>, <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step</span></code></a>, <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.parallel.serial_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">serial_map</span></code></a>, <a class="reference internal" href="#krotov.parallelization.set_parallelization" title="krotov.parallelization.set_parallelization"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_parallelization</span></code></a></p>
 </div>
 <div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="krotov.parallelization.set_parallelization">
-<code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">set_parallelization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">use_loky</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">start_method</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">loky_pickler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_threadpool_limits</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#set_parallelization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.set_parallelization" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.parallelization.</span></code><code class="sig-name descname"><span class="pre">set_parallelization</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_loky</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loky_pickler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_threadpool_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#set_parallelization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.parallelization.set_parallelization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure multi-process parallelization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -367,12 +285,12 @@ particular environment.</p>
 <li><p><strong>use_loky</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Value for <a class="reference internal" href="#krotov.parallelization.USE_LOKY" title="krotov.parallelization.USE_LOKY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">USE_LOKY</span></code></a>.</p></li>
 <li><p><strong>start_method</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – One of ‘fork’, ‘spawn’, and ‘forkserver’,
 see <a class="reference external" href="https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.set_start_method" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">multiprocessing.set_start_method()</span></code></a>. If <code class="docutils literal notranslate"><span class="pre">use_loky=True</span></code>,
-also ‘loky’ and ‘loky_int_main’, see <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v2.4.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a>. If None, a
+also ‘loky’ and ‘loky_int_main’, see <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a>. If None, a
 platform and version-dependent default will be chosen automatically
 (e.g., ‘fork’ on Linux, ‘spawn’ on Windows, ‘loky’ if
 <code class="docutils literal notranslate"><span class="pre">use_loky=True</span></code>)</p></li>
 <li><p><strong>loky_pickler</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Serialization module to use for
-<a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v2.4.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a>. One of ‘cloudpickle’, ‘pickle’. This forces the
+<a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a>. One of ‘cloudpickle’, ‘pickle’. This forces the
 serialization for <em>all</em> objects. The default value None chooses the
 serialization automatically depending of the type of object. Using
 ‘cloudpickle’ is signficiantly slower than ‘pickle’ (but ‘pickle’
@@ -382,14 +300,14 @@ defined in a Jupyter notebook).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ImportError" title="(in Python v3.7)"><strong>ImportError</strong></a> – if <code class="docutils literal notranslate"><span class="pre">use_loky=True</span></code> but <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v2.4.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> is not installed.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ImportError" title="(in Python v3.7)"><strong>ImportError</strong></a> – if <code class="docutils literal notranslate"><span class="pre">use_loky=True</span></code> but <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> is not installed.</p>
 </dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When working in Jupyter notebooks on systems that use the ‘spawn’
 <cite>start_method</cite> (Windows, or macOS with Python &gt;= 3.8), you may have to
-use <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v2.4.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> (<code class="docutils literal notranslate"><span class="pre">use_loky=True</span></code>). This will incur a signficiant
+use <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> (<code class="docutils literal notranslate"><span class="pre">use_loky=True</span></code>). This will incur a signficiant
 increase in multi-processing overhead. Use Linux if you can.</p>
 </div>
 <div class="admonition warning">
@@ -402,18 +320,18 @@ variables may be set at any time.</p>
 
 <dl class="py function">
 <dt id="krotov.parallelization.parallel_map">
-<code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">parallel_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">values</span></em>, <em class="sig-param"><span class="n">task_args</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">task_kwargs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_cpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">progress_bar</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#parallel_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.parallel_map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.parallelization.</span></code><code class="sig-name descname"><span class="pre">parallel_map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#parallel_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.parallelization.parallel_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map function <cite>task</cite> onto <cite>values</cite>, in parallel.</p>
 <p>This function’s interface is identical to
-<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a> as of QuTiP 4.5.0, but has the option
-of using <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v2.4.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> as a backend (see <a class="reference internal" href="#krotov.parallelization.set_parallelization" title="krotov.parallelization.set_parallelization"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_parallelization()</span></code></a>). It
+<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.parallel.parallel_map" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.parallel.parallel_map()</span></code></a> as of QuTiP 4.5.0, but has the option
+of using <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> as a backend (see <a class="reference internal" href="#krotov.parallelization.set_parallelization" title="krotov.parallelization.set_parallelization"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_parallelization()</span></code></a>). It
 also eliminates internal threads, according to
 <a class="reference internal" href="#krotov.parallelization.USE_THREADPOOL_LIMITS" title="krotov.parallelization.USE_THREADPOOL_LIMITS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">USE_THREADPOOL_LIMITS</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="krotov.parallelization.Consumer">
-<em class="property">class </em><code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">Consumer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_queue</span></em>, <em class="sig-param"><span class="n">result_queue</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#Consumer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.Consumer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">krotov.parallelization.</span></code><code class="sig-name descname"><span class="pre">Consumer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_queue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_queue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#Consumer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.parallelization.Consumer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.Process" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.context.Process</span></code></a></p>
 <p>A process-based task consumer.</p>
 <p>This is for internal use in <a class="reference internal" href="#krotov.parallelization.parallel_map_fw_prop_step" title="krotov.parallelization.parallel_map_fw_prop_step"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel_map_fw_prop_step()</span></code></a>.</p>
@@ -430,7 +348,7 @@ of a task</p></li>
 </dl>
 <dl class="py method">
 <dt id="krotov.parallelization.Consumer.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#Consumer.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.Consumer.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#Consumer.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.parallelization.Consumer.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute all tasks on the <cite>task_queue</cite>.</p>
 <p>Each task must be a callable that takes <cite>data</cite> as its only argument.
 The return value of the task will be put on the <cite>result_queue</cite>. A None
@@ -442,7 +360,7 @@ value on the <cite>task_queue</cite> acts as a “poison pill”, causing the
 
 <dl class="py class">
 <dt id="krotov.parallelization.FwPropStepTask">
-<em class="property">class </em><code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">FwPropStepTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i_state</span></em>, <em class="sig-param"><span class="n">pulse_vals</span></em>, <em class="sig-param"><span class="n">time_index</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#FwPropStepTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.FwPropStepTask" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">krotov.parallelization.</span></code><code class="sig-name descname"><span class="pre">FwPropStepTask</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#FwPropStepTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.parallelization.FwPropStepTask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A task that performs a single forward-propagation step.</p>
 <p>The task object is a callable, receiving the single tuple of the same
@@ -472,7 +390,7 @@ side-effects)</p>
 
 <dl class="py function">
 <dt id="krotov.parallelization.parallel_map_fw_prop_step">
-<code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">parallel_map_fw_prop_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shared</span></em>, <em class="sig-param"><span class="n">values</span></em>, <em class="sig-param"><span class="n">task_args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#parallel_map_fw_prop_step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.parallelization.parallel_map_fw_prop_step" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.parallelization.</span></code><code class="sig-name descname"><span class="pre">parallel_map_fw_prop_step</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/parallelization.html#parallel_map_fw_prop_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.parallelization.parallel_map_fw_prop_step" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>parallel_map</cite> function for the forward-propagation by one time step.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -507,17 +425,17 @@ work correctly.</p></li>
 
 <dl class="py data">
 <dt id="krotov.parallelization.USE_LOKY">
-<code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">USE_LOKY</code><em class="property"> = False</em><a class="headerlink" href="#krotov.parallelization.USE_LOKY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Whether to use <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v2.4.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> instead of <a class="reference external" href="https://docs.python.org/3.7/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>.</p>
+<code class="sig-prename descclassname"><span class="pre">krotov.parallelization.</span></code><code class="sig-name descname"><span class="pre">USE_LOKY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#krotov.parallelization.USE_LOKY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to use <a class="reference external" href="https://loky.readthedocs.io/en/stable/API.html#module-loky" title="(in loky v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loky</span></code></a> instead of <a class="reference external" href="https://docs.python.org/3.7/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>.</p>
 <p>Set by <a class="reference internal" href="#krotov.parallelization.set_parallelization" title="krotov.parallelization.set_parallelization"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_parallelization()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt id="krotov.parallelization.USE_THREADPOOL_LIMITS">
-<code class="sig-prename descclassname">krotov.parallelization.</code><code class="sig-name descname">USE_THREADPOOL_LIMITS</code><em class="property"> = True</em><a class="headerlink" href="#krotov.parallelization.USE_THREADPOOL_LIMITS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.parallelization.</span></code><code class="sig-name descname"><span class="pre">USE_THREADPOOL_LIMITS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#krotov.parallelization.USE_THREADPOOL_LIMITS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether to limit the number of low-level BLAS/OpenMP threads.</p>
 <p>When using multi-process parallelization, <em>nested parallelization</em> must be
-avoided. That is, low-level numerical routines e.g. in <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v1.19)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> should not
+avoided. That is, low-level numerical routines e.g. in <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v1.26)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> should not
 be allowed to use multiple threads. This would lead to over-subscribing CPUs
 and can slow down the entire program by orders of magnitude.</p>
 <p>If True, <a class="reference external" href="https://github.com/joblib/threadpoolctl">threadpoolctl</a> will be used internally to attempt to eliminate any
@@ -527,9 +445,9 @@ nested threads.</p>
 <p class="admonition-title">Note</p>
 <p>Alternatively (or in addition), you may want to consider setting the
 following environment variables in your shell:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
-<span class="nb">export</span> <span class="nv">NUMEXPR_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
-<span class="nb">export</span> <span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">NUMEXPR_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>
 </pre></div>
 </div>
 </div>
@@ -540,53 +458,35 @@ following environment variables in your shell:</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="krotov.propagators.html" class="btn btn-neutral float-right" title="krotov.propagators module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="krotov.optimize.html" class="btn btn-neutral float-left" title="krotov.optimize module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="krotov.propagators.html" class="btn btn-neutral float-right" title="krotov.propagators module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Michael Goerz et al..
-      <span class="lastupdated">
-        Last updated on Jan 13, 2021.
-      </span>
-
-    </p>
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

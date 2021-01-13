@@ -1,102 +1,53 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>krotov.conversions module &mdash; Krotov 1.2.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>krotov.conversions module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script src="../_static/doctr-versions-menu.js"></script>
+        <script src="../_static/docs-versions-menu.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="krotov.functionals module" href="krotov.functionals.html" />
     <link rel="prev" title="krotov.convergence module" href="krotov.convergence.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> Krotov
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            Krotov
           </a>
-
-          
-            
-            
               <div class="version">
-                1.2.1
+                1.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
@@ -136,28 +87,17 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Krotov</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -210,36 +150,12 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="module-krotov.conversions">
+             
+  <div class="section" id="module-krotov.conversions">
 <span id="krotov-conversions-module"></span><h1>krotov.conversions module<a class="headerlink" href="#module-krotov.conversions" title="Permalink to this headline">¶</a></h1>
 <p>Routines for structural conversions.</p>
 <p>Conversion between between data structures used by QuTiP’s
-<a class="reference external" href="http://qutip.org/docs/latest/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">mesolve()</span></code></a> and data structures used internally in an
+<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">mesolve()</span></code></a> and data structures used internally in an
 optimization with Krotov’s method. This includes the
 time discretization of control fields, and in particular converting between a
 discretization defined on the <em>points</em> of the time grid (“controls”) and
@@ -282,17 +198,17 @@ piecewise-constant “pulses” defined on the <em>intervals</em> of the time gr
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="krotov.conversions.control_onto_interval">
-<code class="sig-prename descclassname">krotov.conversions.</code><code class="sig-name descname">control_onto_interval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">control</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#control_onto_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.conversions.control_onto_interval" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">control_onto_interval</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#control_onto_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.control_onto_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert control on time grid to control on time grid intervals.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>control</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – values of controls on time grid</p>
+<dd class="field-odd"><p><strong>control</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – values of controls on time grid</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>pulse defined on the intervals of the time grid</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)">numpy.ndarray</a></p>
 </dd>
 </dl>
 <p>The value for the first and last interval will be identical to the values
@@ -310,7 +226,7 @@ transformation.</p>
 
 <dl class="py function">
 <dt id="krotov.conversions.discretize">
-<code class="sig-prename descclassname">krotov.conversions.</code><code class="sig-name descname">discretize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">control</span></em>, <em class="sig-param"><span class="n">tlist</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">(None)</span></em>, <em class="sig-param"><span class="n">kwargs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">via_midpoints</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#discretize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.conversions.discretize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">discretize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">via_midpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#discretize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.discretize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discretize the given <cite>control</cite> onto the <cite>tlist</cite> time grid.</p>
 <p>If <cite>control</cite> is a callable, return array of values for <cite>control</cite> evaluated
 for all points in <cite>tlist</cite>.  If <cite>control</cite> is already discretized, check that
@@ -318,9 +234,9 @@ the discretization matches <cite>tlist</cite> (by size).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>control</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – control to be discretized. If
+<li><p><strong>control</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – control to be discretized. If
 callable, must take time value <cite>t</cite> as its first argument.</p></li>
-<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – time grid to discretize one</p></li>
+<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – time grid to discretize one</p></li>
 <li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – If <cite>control</cite> is a callable, further positional
 arguments to pass to <cite>control</cite>. The default passes a single value
 None, to match the requirements for a callable control function in
@@ -352,7 +268,7 @@ Krotov’s method, see <a class="reference internal" href="../07_krotovs_method.
 as <cite>tlist</cite></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)">numpy.ndarray</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)">numpy.ndarray</a></p>
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><ul class="simple">
@@ -366,7 +282,7 @@ as <cite>tlist</cite></p>
 
 <dl class="py function">
 <dt id="krotov.conversions.extract_controls">
-<code class="sig-prename descclassname">krotov.conversions.</code><code class="sig-name descname">extract_controls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objectives</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.conversions.extract_controls" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">extract_controls</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.extract_controls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract a list of (unique) controls from the <cite>objectives</cite>.</p>
 <p>Controls are unique if they are not the same object, cf.
 <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#is">Python’s is keyword</a>.</p>
@@ -383,7 +299,7 @@ as <cite>tlist</cite></p>
 
 <dl class="py function">
 <dt id="krotov.conversions.extract_controls_mapping">
-<code class="sig-prename descclassname">krotov.conversions.</code><code class="sig-name descname">extract_controls_mapping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objectives</span></em>, <em class="sig-param"><span class="n">controls</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.conversions.extract_controls_mapping" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">extract_controls_mapping</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.extract_controls_mapping" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract a map of where <cite>controls</cite> are used in <cite>objectives</cite>.</p>
 <p>The result is a nested list where the first index relates to the
 <cite>objectives</cite>, the second index relates to the Hamiltonian (0) or the
@@ -450,7 +366,7 @@ first pulse (0) used? (answer: nowhere)</p>
 
 <dl class="py function">
 <dt id="krotov.conversions.plug_in_pulse_values">
-<code class="sig-prename descclassname">krotov.conversions.</code><code class="sig-name descname">plug_in_pulse_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">H</span></em>, <em class="sig-param"><span class="n">pulses</span></em>, <em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">time_index</span></em>, <em class="sig-param"><span class="n">conjugate</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#plug_in_pulse_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.conversions.plug_in_pulse_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">plug_in_pulse_values</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conjugate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#plug_in_pulse_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.plug_in_pulse_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plug pulse values into H.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -466,7 +382,7 @@ plugged in</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>a list with the same structure as <cite>H</cite> that contains the same
-<a class="reference external" href="http://qutip.org/docs/latest/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Qobj</span></code></a> operators as <cite>H</cite>, but where every time dependency
+<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Qobj</span></code></a> operators as <cite>H</cite>, but where every time dependency
 is replaced by the value of the appropriate pulse at <cite>time_index</cite>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
@@ -497,11 +413,11 @@ it has the right structure:</p>
 
 <dl class="py function">
 <dt id="krotov.conversions.pulse_onto_tlist">
-<code class="sig-prename descclassname">krotov.conversions.</code><code class="sig-name descname">pulse_onto_tlist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pulse</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_onto_tlist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.conversions.pulse_onto_tlist" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">pulse_onto_tlist</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_onto_tlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.pulse_onto_tlist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert <cite>pulse</cite> from time-grid intervals to time-grid points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pulse</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – values defined on the interval of a time grid</p>
+<dd class="field-odd"><p><strong>pulse</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – values defined on the interval of a time grid</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>values of the control defined directly on the time grid
@@ -509,7 +425,7 @@ points. The size of the returned array is one greater than the size
 of <cite>pulse</cite>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)">numpy.ndarray</a></p>
 </dd>
 </dl>
 <p>Inverse of <a class="reference internal" href="#krotov.conversions.control_onto_interval" title="krotov.conversions.control_onto_interval"><code class="xref py py-func docutils literal notranslate"><span class="pre">control_onto_interval()</span></code></a>.</p>
@@ -520,7 +436,7 @@ of the input values before and after the point.</p>
 
 <dl class="py function">
 <dt id="krotov.conversions.pulse_options_dict_to_list">
-<code class="sig-prename descclassname">krotov.conversions.</code><code class="sig-name descname">pulse_options_dict_to_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pulse_options</span></em>, <em class="sig-param"><span class="n">controls</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_options_dict_to_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.conversions.pulse_options_dict_to_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">pulse_options_dict_to_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse_options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_options_dict_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.pulse_options_dict_to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert <cite>pulse_options</cite> into a list.</p>
 <p>Given a dict <cite>pulse_options</cite> that contains an options-dict
 for every control in <cite>controls</cite> (cf. <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>), return a
@@ -537,53 +453,35 @@ list of the options-dicts in the same order as <cite>controls</cite>.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="krotov.functionals.html" class="btn btn-neutral float-right" title="krotov.functionals module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="krotov.convergence.html" class="btn btn-neutral float-left" title="krotov.convergence module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="krotov.functionals.html" class="btn btn-neutral float-right" title="krotov.functionals module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Michael Goerz et al..
-      <span class="lastupdated">
-        Last updated on Jan 13, 2021.
-      </span>
-
-    </p>
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

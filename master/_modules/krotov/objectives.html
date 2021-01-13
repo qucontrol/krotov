@@ -1,100 +1,60 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>krotov.objectives &mdash; Krotov 1.2.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>krotov.objectives &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
-        <script src="../../_static/doctr-versions-menu.js"></script>
+        <script src="../../_static/docs-versions-menu.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> Krotov
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            Krotov
           </a>
-
-          
-            
-            
               <div class="version">
-                1.2.1
+                1.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
@@ -115,28 +75,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../API/krotov.html">API of the Krotov package</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Krotov</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -181,7 +130,7 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for krotov.objectives</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Routines for formulating objectives.</span>
 
@@ -234,7 +183,7 @@
 
 
 <span class="k">def</span> <span class="nf">_adjoint</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculate adjoint of an object, specifically an operator in QuTiP</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate adjoint of an object, specifically an operator in QuTiP</span>
 <span class="sd">    nested-list format.</span>
 
 <span class="sd">    Controls are not modified.</span>
@@ -279,7 +228,7 @@
 
 
 <div class="viewcode-block" id="Objective"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective">[docs]</a><span class="k">class</span> <span class="nc">Objective</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;A single objective for optimization with Krotov&#39;s method.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single objective for optimization with Krotov&#39;s method.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        initial_state (qutip.Qobj): value for :attr:`initial_state`</span>
@@ -333,11 +282,11 @@
     <span class="n">_default_attribs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;initial_state&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;c_ops&#39;</span><span class="p">]</span>
 
     <span class="n">str_use_unicode</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="sd">&quot;&quot;&quot;Whether the string representation of an :class:`Objective` may use</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether the string representation of an :class:`Objective` may use</span>
 <span class="sd">    unicode symbols, cf. :meth:`summarize` (class attribute).&quot;&quot;&quot;</span>
 
     <span class="n">type_checking</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="sd">&quot;&quot;&quot;By default, instantiating :class:`Objective` with invalid types raises a</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;By default, instantiating :class:`Objective` with invalid types raises a</span>
 <span class="sd">    :exc:`ValueError`. Setting this to False disables type checks in the</span>
 <span class="sd">    initializer, allowing certain advanced use cases such as using plain numpy</span>
 <span class="sd">    objects instead of QuTiP objects (class attribute).&quot;&quot;&quot;</span>
@@ -423,7 +372,7 @@
             <span class="k">return</span> <span class="ow">not</span> <span class="n">result</span>
 
 <div class="viewcode-block" id="Objective.adjoint"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective.adjoint">[docs]</a>    <span class="k">def</span> <span class="nf">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The :class:`Objective` containing the adjoint of all components.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :class:`Objective` containing the adjoint of all components.</span>
 
 <span class="sd">        This does not affect the controls in :attr:`H`: these are</span>
 <span class="sd">        assumed to be real-valued. Also, :attr:`.Objective.target` will be left</span>
@@ -451,9 +400,9 @@
         <span class="n">c_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">e_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run :func:`qutip.mesolve.mesolve` on the system of the objective.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run :func:`qutip.mesolve.mesolve` on the system of the objective.</span>
 
 <span class="sd">        Solve the dynamics for the :attr:`H` and :attr:`c_ops` of the</span>
 <span class="sd">        objective, starting from the objective&#39;s :attr:`initial_state`, by</span>
@@ -517,7 +466,7 @@
             <span class="n">e_ops</span><span class="o">=</span><span class="n">e_ops</span><span class="p">,</span>
             <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
             <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">kwargs</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Objective.propagate"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective.propagate">[docs]</a>    <span class="k">def</span> <span class="nf">propagate</span><span class="p">(</span>
@@ -530,9 +479,9 @@
         <span class="n">c_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">e_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">expect</span><span class="o">=</span><span class="n">qutip</span><span class="o">.</span><span class="n">expect</span>
+        <span class="n">expect</span><span class="o">=</span><span class="n">qutip</span><span class="o">.</span><span class="n">expect</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Propagate the system of the objective over the entire time grid.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Propagate the system of the objective over the entire time grid.</span>
 
 <span class="sd">        Solve the dynamics for the `H` and `c_ops` of the objective. If `rho0`</span>
 <span class="sd">        is not given, the `initial_state` will be propagated. This is similar</span>
@@ -619,7 +568,7 @@
 
 <div class="viewcode-block" id="Objective.reset_symbol_counters"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective.reset_symbol_counters">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">reset_symbol_counters</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reset the internal symbol counters used for printing objectives.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the internal symbol counters used for printing objectives.</span>
 
 <span class="sd">        See :meth:`summarize`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -628,7 +577,7 @@
         <span class="bp">cls</span><span class="o">.</span><span class="n">_count_cache</span> <span class="o">=</span> <span class="p">{}</span></div>
 
 <div class="viewcode-block" id="Objective.summarize"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.Objective.summarize">[docs]</a>    <span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reset_symbol_counters</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a one-line summary of the objective as a string.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a one-line summary of the objective as a string.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            use_unicode(bool): If False, only use ascii symbols in the output</span>
@@ -771,7 +720,7 @@
 
 
 <span class="k">def</span> <span class="nf">_Objective_reduce</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reduce :class:`Objective` for pickling.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reduce :class:`Objective` for pickling.</span>
 
 <span class="sd">    This is a reduction function for customized pickling, see</span>
 <span class="sd">    :func:`copyreg.pickle`. It is used in :meth:`.Result.dump`.</span>
@@ -796,7 +745,7 @@
 
 
 <span class="k">class</span> <span class="nc">_ControlPlaceholder</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Placeholder for a control function, for pickling.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Placeholder for a control function, for pickling.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
@@ -815,14 +764,14 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">_remove_functions_from_nested_list</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">_ControlPlaceholder</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">lst</span>
 
 
 <span class="k">def</span> <span class="nf">_plug_in_array_controls_as_func</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">controls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert array controls to piece-wise constant functions</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert array controls to piece-wise constant functions</span>
 
 <span class="sd">    It uses the piece-wise constant convention of mesolve: pulses switch in the</span>
 <span class="sd">    middle between to `tlist` points.</span>
@@ -858,7 +807,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rho1</span><span class="p">(</span><span class="n">basis_states</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State ρ₁ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;State ρ₁ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>  <span class="c1"># dimension of logical subspace</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
         <span class="p">[</span>
@@ -870,7 +819,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rho2</span><span class="p">(</span><span class="n">basis_states</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State ρ₂ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;State ρ₂ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>  <span class="c1"># dimension of logical subspace</span>
     <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span>
         <span class="p">[</span>
@@ -881,7 +830,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rho3</span><span class="p">(</span><span class="n">basis_states</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State ρ₃ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;State ρ₃ from the &quot;3states&quot; functional&quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span>  <span class="c1"># dimension of logical subspace</span>
     <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">psi</span> <span class="o">*</span> <span class="n">psi</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span> <span class="k">for</span> <span class="n">psi</span> <span class="ow">in</span> <span class="n">basis_states</span><span class="p">])</span>
 
@@ -895,9 +844,9 @@
     <span class="n">local_invariants</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">liouville_states_set</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">normalize_weights</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">normalize_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a list of objectives for optimizing towards a quantum gate</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a list of objectives for optimizing towards a quantum gate</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        basis_states (list[qutip.Qobj]): A list of $n$ canonical basis states</span>
@@ -1218,7 +1167,7 @@
 
 
 <span class="k">def</span> <span class="nf">_gate_objectives_li_pe</span><span class="p">(</span><span class="n">basis_states</span><span class="p">,</span> <span class="n">gate</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Objectives for two-qubit local-invariants or perfect-entangler</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Objectives for two-qubit local-invariants or perfect-entangler</span>
 <span class="sd">    optimizaton&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_states</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -1237,7 +1186,7 @@
 
 
 <div class="viewcode-block" id="ensemble_objectives"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.ensemble_objectives">[docs]</a><span class="k">def</span> <span class="nf">ensemble_objectives</span><span class="p">(</span><span class="n">objectives</span><span class="p">,</span> <span class="n">Hs</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">keep_original_objectives</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extend `objectives` for an &quot;ensemble optimization&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extend `objectives` for an &quot;ensemble optimization&quot;</span>
 
 <span class="sd">    This creates a list of objectives for an optimization for robustness with</span>
 <span class="sd">    respect to variations in some parameter of the Hamiltonian. The trick is to</span>
@@ -1280,7 +1229,7 @@
 
 
 <div class="viewcode-block" id="liouvillian"><a class="viewcode-back" href="../../API/krotov.objectives.html#krotov.objectives.liouvillian">[docs]</a><span class="k">def</span> <span class="nf">liouvillian</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert Hamiltonian and Lindblad operators into a Liouvillian.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Hamiltonian and Lindblad operators into a Liouvillian.</span>
 
 <span class="sd">    This is like :func:`qutip.superoperator.liouvillian`, but `H` may be a</span>
 <span class="sd">    time-dependent Hamiltonian in nested-list format. `H` is assumed to contain</span>
@@ -1307,14 +1256,14 @@
 
 
 <span class="k">def</span> <span class="nf">_obj_str_pattern</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">use_unicode</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;For a given `obj` return a &quot;string pattern&quot; to be used summerizing that</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For a given `obj` return a &quot;string pattern&quot; to be used summerizing that</span>
 <span class="sd">    `obj` as the component of an Objective.</span>
 
 <span class="sd">    The resulting string should be formatted with the keys ``count`` (a unique</span>
 <span class="sd">    str counter for the `obj` in its category), and ``dims`` with a str summary</span>
 <span class="sd">    of the shape/dimensions of `obj`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s1">&#39;op&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;u</span><span class="si">{count}</span><span class="s1">(t)&#39;</span>  <span class="c1"># control</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1357,7 +1306,7 @@
 
 
 <span class="k">def</span> <span class="nf">_obj_dims_str</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">use_unicode</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a string that summarizes the shape/dimensions of the given obj&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a string that summarizes the shape/dimensions of the given obj&quot;&quot;&quot;</span>
     <span class="n">tensor</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
     <span class="k">if</span> <span class="n">use_unicode</span><span class="p">:</span>
         <span class="n">tensor</span> <span class="o">=</span> <span class="s1">&#39;⊗&#39;</span>
@@ -1388,7 +1337,7 @@
 <span class="k">def</span> <span class="nf">_summarize_component</span><span class="p">(</span>
     <span class="n">obj</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">counter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">count_cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a string for an `obj` that appears as a component when</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a string for an `obj` that appears as a component when</span>
 <span class="sd">    summarizing an Objective.</span>
 
 
@@ -1477,7 +1426,7 @@
 
 
 <span class="k">def</span> <span class="nf">_summarize_nested_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">count_cache</span><span class="p">,</span> <span class="n">use_unicode</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Recursively call :func:`summarize_components` for the nested lists that</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursively call :func:`summarize_components` for the nested lists that</span>
 <span class="sd">    qutip uses for time-dependent operators</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
@@ -1495,7 +1444,7 @@
 
 
 <span class="k">def</span> <span class="nf">_recursive_eq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Recursively compare `a` and `b`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursively compare `a` and `b`.</span>
 
 <span class="sd">    The parameters `a` and `b` are assumed to be attributes of</span>
 <span class="sd">    :class:`Objective`, so we&#39;re making some assumptions about these either</span>
@@ -1530,49 +1479,32 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Michael Goerz et al..
-      <span class="lastupdated">
-        Last updated on Jan 13, 2021.
-      </span>
-
-    </p>
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

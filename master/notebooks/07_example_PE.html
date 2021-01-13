@@ -1,102 +1,62 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Optimization towards a Perfect Entangler &mdash; Krotov 1.2.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Optimization towards a Perfect Entangler &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script src="../_static/doctr-versions-menu.js"></script>
+        <script src="../_static/docs-versions-menu.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Ensemble Optimization for Robust Pulses" href="08_example_ensemble.html" />
     <link rel="prev" title="Optimization of a Dissipative Quantum Gate" href="06_example_3states.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> Krotov
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            Krotov
           </a>
-
-          
-            
-            
               <div class="version">
-                1.2.1
+                1.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
@@ -134,28 +94,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../API/krotov.html">API of the Krotov package</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Krotov</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -202,286 +151,15 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS for nbsphinx extension */
-
-/* remove conflicting styling from Sphinx themes */
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt *,
-div.nbinput.container div.input_area pre,
-div.nboutput.container div.output_area pre,
-div.nbinput.container div.input_area .highlight,
-div.nboutput.container div.output_area .highlight {
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-}
-
-div.nbinput.container > div[class*=highlight],
-div.nboutput.container > div[class*=highlight] {
-    margin: 0;
-}
-
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt * {
-    background: none;
-}
-
-div.nboutput.container div.output_area .highlight,
-div.nboutput.container div.output_area pre {
-    background: unset;
-}
-
-div.nboutput.container div.output_area div.highlight {
-    color: unset;  /* override Pygments text color */
-}
-
-/* avoid gaps between output lines */
-div.nboutput.container div[class*=highlight] pre {
-    line-height: normal;
-}
-
-/* input/output containers */
-div.nbinput.container,
-div.nboutput.container {
-    display: -webkit-flex;
-    display: flex;
-    align-items: flex-start;
-    margin: 0;
-    width: 100%;
-}
-@media (max-width: 540px) {
-    div.nbinput.container,
-    div.nboutput.container {
-        flex-direction: column;
-    }
-}
-
-/* input container */
-div.nbinput.container {
-    padding-top: 5px;
-}
-
-/* last container */
-div.nblast.container {
-    padding-bottom: 5px;
-}
-
-/* input prompt */
-div.nbinput.container div.prompt pre {
-    color: #307FC1;
-}
-
-/* output prompt */
-div.nboutput.container div.prompt pre {
-    color: #BF5B3D;
-}
-
-/* all prompts */
-div.nbinput.container div.prompt,
-div.nboutput.container div.prompt {
-    width: 4.5ex;
-    padding-top: 5px;
-    position: relative;
-    user-select: none;
-}
-
-div.nbinput.container div.prompt > div,
-div.nboutput.container div.prompt > div {
-    position: absolute;
-    right: 0;
-    margin-right: 0.3ex;
-}
-
-@media (max-width: 540px) {
-    div.nbinput.container div.prompt,
-    div.nboutput.container div.prompt {
-        width: unset;
-        text-align: left;
-        padding: 0.4em;
-    }
-    div.nboutput.container div.prompt.empty {
-        padding: 0;
-    }
-
-    div.nbinput.container div.prompt > div,
-    div.nboutput.container div.prompt > div {
-        position: unset;
-    }
-}
-
-/* disable scrollbars on prompts */
-div.nbinput.container div.prompt pre,
-div.nboutput.container div.prompt pre {
-    overflow: hidden;
-}
-
-/* input/output area */
-div.nbinput.container div.input_area,
-div.nboutput.container div.output_area {
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: auto;
-}
-@media (max-width: 540px) {
-    div.nbinput.container div.input_area,
-    div.nboutput.container div.output_area {
-        width: 100%;
-    }
-}
-
-/* input area */
-div.nbinput.container div.input_area {
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    /*background: #f5f5f5;*/
-}
-
-/* override MathJax center alignment in output cells */
-div.nboutput.container div[class*=MathJax] {
-    text-align: left !important;
-}
-
-/* override sphinx.ext.imgmath center alignment in output cells */
-div.nboutput.container div.math p {
-    text-align: left;
-}
-
-/* standard error */
-div.nboutput.container div.output_area.stderr {
-    background: #fdd;
-}
-
-/* ANSI colors */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-default-inverse-fg { color: #FFFFFF; }
-.ansi-default-inverse-bg { background-color: #000000; }
-
-.ansi-bold { font-weight: bold; }
-.ansi-underline { text-decoration: underline; }
-
-
-div.nbinput.container div.input_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight].math,
-div.nboutput.container div.output_area.rendered_html,
-div.nboutput.container div.output_area > div.output_javascript,
-div.nboutput.container div.output_area:not(.rendered_html) > img{
-    padding: 5px;
-    margin: 0;
-}
-
-/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
-div.nbinput.container div.input_area > div[class^='highlight'],
-div.nboutput.container div.output_area > div[class^='highlight']{
-    overflow-y: hidden;
-}
-
-/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
-    display: none;
-}
-
-/* Some additional styling taken form the Jupyter notebook CSS */
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-div.rendered_html th {
-  font-weight: bold;
-}
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.2.1/docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.2.1?filepath=docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+             
+  <p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.3.0/docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.3.0?filepath=docs/notebooks/07_example_PE.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
 <div class="section" id="Optimization-towards-a-Perfect-Entangler">
 <h1>Optimization towards a Perfect Entangler<a class="headerlink" href="#Optimization-towards-a-Perfect-Entangler" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
 <span class="o">%</span><span class="k">load_ext</span> watermark
 <span class="kn">import</span> <span class="nn">qutip</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -504,15 +182,15 @@ div.rendered_html tbody tr:hover {
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Python implementation: CPython
-Python version       : 3.7.6
-IPython version      : 7.19.0
+Python version       : 3.8.16
+IPython version      : 8.12.3
 
-numpy      : 1.17.2
-matplotlib : 3.3.3
-krotov     : 1.2.1
-scipy      : 1.3.1
-weylchamber: 0.3.2
-qutip      : 4.5.0
+qutip      : 4.7.6
+krotov     : 1.3.0
+weylchamber: 0.4.0
+scipy      : 1.10.1
+matplotlib : 3.7.5
+numpy      : 1.24.4
 
 </pre></div></div>
 </div>
@@ -554,8 +232,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">w1</span> <span class="o">=</span> <span class="mf">1.1</span>  <span class="c1"># qubit 1 level splitting</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w1</span> <span class="o">=</span> <span class="mf">1.1</span>  <span class="c1"># qubit 1 level splitting</span>
 <span class="n">w2</span> <span class="o">=</span> <span class="mf">2.1</span>  <span class="c1"># qubit 2 level splitting</span>
 <span class="n">J</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># effective qubit coupling</span>
 <span class="n">u0</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># initial driving strength</span>
@@ -573,8 +250,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">eps0</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eps0</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">u0</span> <span class="o">*</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">flattop</span><span class="p">(</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">t_rise</span><span class="o">=</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="mi">20</span><span class="p">),</span> <span class="n">t_fall</span><span class="o">=</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="mi">20</span><span class="p">),</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;sinsq&#39;</span>
     <span class="p">)</span>
@@ -585,10 +261,9 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">plot_pulse</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_pulse</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">tlist</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
         <span class="n">pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">])</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span> <span class="n">pulse</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
@@ -601,8 +276,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">plot_pulse</span><span class="p">(</span><span class="n">eps0</span><span class="p">,</span> <span class="n">tlist</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_pulse</span><span class="p">(</span><span class="n">eps0</span><span class="p">,</span> <span class="n">tlist</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -618,9 +292,8 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">(</span><span class="n">w1</span><span class="o">=</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="o">=</span><span class="n">w2</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="n">J</span><span class="p">,</span> <span class="n">la</span><span class="o">=</span><span class="n">la</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="n">u0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Two qubit Hamiltonian</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">(</span><span class="n">w1</span><span class="o">=</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="o">=</span><span class="n">w2</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="n">J</span><span class="p">,</span> <span class="n">la</span><span class="o">=</span><span class="n">la</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="n">u0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Two qubit Hamiltonian</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        w1 (float): energy separation of the first qubit levels</span>
@@ -663,8 +336,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">psi_00</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi_00</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])))</span>
 <span class="n">psi_01</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])))</span>
 <span class="n">psi_10</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])))</span>
 <span class="n">psi_11</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])))</span>
@@ -676,8 +348,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">proj_00</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi_00</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj_00</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi_00</span><span class="p">)</span>
 <span class="n">proj_01</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi_01</span><span class="p">)</span>
 <span class="n">proj_10</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi_10</span><span class="p">)</span>
 <span class="n">proj_11</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">ket2dm</span><span class="p">(</span><span class="n">psi_11</span><span class="p">)</span>
@@ -698,8 +369,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">objectives</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">gate_objectives</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">objectives</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">gate_objectives</span><span class="p">(</span>
     <span class="n">basis_states</span><span class="o">=</span><span class="p">[</span><span class="n">psi_00</span><span class="p">,</span> <span class="n">psi_01</span><span class="p">,</span> <span class="n">psi_10</span><span class="p">,</span> <span class="n">psi_11</span><span class="p">],</span> <span class="n">gate</span><span class="o">=</span><span class="s2">&quot;PE&quot;</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span>
 <span class="p">)</span>
 </pre></div>
@@ -709,8 +379,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">objectives</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">objectives</span>
 </pre></div>
 </div>
 </div>
@@ -731,8 +400,7 @@ qutip      : 4.5.0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
 <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objectives</span><span class="p">:</span>
     <span class="n">display</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">initial_state</span><span class="p">)</span>
 </pre></div>
@@ -743,28 +411,28 @@ qutip      : 4.5.0
 </div>
 <div class="output_area docutils container">
 <div class="math notranslate nohighlight">
-Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}0.707\\0.0\\0.0\\0.707\\\end{array}\right)\end{equation*}</div></div>
+Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket $ \\ \left(\begin{matrix}0.707\\0.0\\0.0\\0.707\\\end{matrix}\right)$</div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="math notranslate nohighlight">
-Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}0.0\\0.707j\\0.707j\\0.0\\\end{array}\right)\end{equation*}</div></div>
+Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket $ \\ \left(\begin{matrix}0.0\\0.707j\\0.707j\\0.0\\\end{matrix}\right)$</div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="math notranslate nohighlight">
-Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}0.0\\0.707\\-0.707\\0.0\\\end{array}\right)\end{equation*}</div></div>
+Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket $ \\ \left(\begin{matrix}0.0\\0.707\\-0.707\\0.0\\\end{matrix}\right)$</div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="math notranslate nohighlight">
-Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket\begin{equation*}\left(\begin{array}{*{11}c}0.707j\\0.0\\0.0\\-0.707j\\\end{array}\right)\end{equation*}</div></div>
+Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket $ \\ \left(\begin{matrix}0.707j\\0.0\\0.0\\-0.707j\\\end{matrix}\right)$</div></div>
 </div>
 <p>Since we don’t know <em>which</em> perfect entangler the optimization result will implement, we cannot associate any “target state” with each objective, and the <code class="docutils literal notranslate"><span class="pre">target</span></code> attribute is set to the string ‘PE’.</p>
 <p>We can treat the above objectives as a “black box”; the only important consideration is that the <code class="docutils literal notranslate"><span class="pre">chi_constructor</span></code> that we will pass to <code class="docutils literal notranslate"><span class="pre">optimize_pulses</span></code> to calculating the boundary condition for the backwards propagation,</p>
@@ -777,8 +445,7 @@ Quantum object: dims = [[4], [1]], shape = (4, 1), type = ket\begin{equation*}\l
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">perfect_entanglers</span><span class="o">.</span><span class="n">make_PE_krotov_chi_constructor</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">perfect_entanglers</span><span class="o">.</span><span class="n">make_PE_krotov_chi_constructor</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -842,8 +509,7 @@ make_PE_krotov_chi_constructor(canonical_basis, unitarity_weight=0)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">chi_constructor</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">perfect_entanglers</span><span class="o">.</span><span class="n">make_PE_krotov_chi_constructor</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi_constructor</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">perfect_entanglers</span><span class="o">.</span><span class="n">make_PE_krotov_chi_constructor</span><span class="p">(</span>
     <span class="p">[</span><span class="n">psi_00</span><span class="p">,</span> <span class="n">psi_01</span><span class="p">,</span> <span class="n">psi_10</span><span class="p">,</span> <span class="n">psi_11</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
@@ -890,8 +556,7 @@ make_PE_krotov_chi_constructor(canonical_basis, unitarity_weight=0)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">sigma</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">second_order</span><span class="o">.</span><span class="n">Sigma</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">sigma</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">second_order</span><span class="o">.</span><span class="n">Sigma</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">epsA</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">epsA</span> <span class="o">=</span> <span class="n">epsA</span>
@@ -930,9 +595,8 @@ make_PE_krotov_chi_constructor(canonical_basis, unitarity_weight=0)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Shape function for the field update&quot;&quot;&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shape function for the field update&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">flattop</span><span class="p">(</span>
         <span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">t_rise</span><span class="o">=</span><span class="n">T</span> <span class="o">/</span> <span class="mi">20</span><span class="p">,</span> <span class="n">t_fall</span><span class="o">=</span><span class="n">T</span> <span class="o">/</span> <span class="mi">20</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;sinsq&#39;</span>
     <span class="p">)</span>
@@ -947,8 +611,7 @@ each iteration, in <code class="docutils literal notranslate"><span class="pre">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
     <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">initial_state</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
     <span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;fw_states_T&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
     <span class="n">U</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">gates</span><span class="o">.</span><span class="n">gate</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
@@ -966,8 +629,7 @@ each iteration, in <code class="docutils literal notranslate"><span class="pre">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">check_PE</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_PE</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
     <span class="c1"># extract F_PE from (F_PE, [c1, c2, c3])</span>
     <span class="n">F_PE</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">info_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">F_PE</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -981,8 +643,7 @@ each iteration, in <code class="docutils literal notranslate"><span class="pre">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">opt_result</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize_pulses</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt_result</span> <span class="o">=</span> <span class="n">krotov</span><span class="o">.</span><span class="n">optimize_pulses</span><span class="p">(</span>
     <span class="n">objectives</span><span class="p">,</span>
     <span class="n">pulse_options</span><span class="o">=</span><span class="n">pulse_options</span><span class="p">,</span>
     <span class="n">tlist</span><span class="o">=</span><span class="n">tlist</span><span class="p">,</span>
@@ -1021,7 +682,7 @@ Iteration 0
     S(t) (ranges): [0.000000, 1.000000]
     iter_start: 0
     iter_stop: 20
-    duration: 1.7 secs (started at 2021-01-13 14:20:34)
+    duration: 1.7 secs (started at 2024-06-03 12:38:39)
     optimized pulses (ranges): [0.00, 0.30]
     ∫gₐ(t)dt: 0.00e+00
     λₐ: 1.00e+02
@@ -1030,72 +691,72 @@ Iteration 0
     F_PE: 1.447335
     gate conc.: 0.479492
 Iteration 1
-    duration: 5.1 secs (started at 2021-01-13 14:20:36)
+    duration: 4.3 secs (started at 2024-06-03 12:38:40)
     optimized pulses (ranges): [0.00, 0.32]
-    ∫gₐ(t)dt: 2.57e-03
+    ∫gₐ(t)dt: 2.58e-01
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
     F_PE: 0.998102
     gate conc.: 0.645579
 Iteration 2
-    duration: 5.0 secs (started at 2021-01-13 14:20:41)
+    duration: 4.4 secs (started at 2024-06-03 12:38:45)
     optimized pulses (ranges): [0.00, 0.34]
-    ∫gₐ(t)dt: 2.19e-03
+    ∫gₐ(t)dt: 2.20e-01
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
     F_PE: 0.582566
     gate conc.: 0.784635
 Iteration 3
-    duration: 4.9 secs (started at 2021-01-13 14:20:46)
+    duration: 4.3 secs (started at 2024-06-03 12:38:49)
     optimized pulses (ranges): [0.00, 0.35]
-    ∫gₐ(t)dt: 1.45e-03
+    ∫gₐ(t)dt: 1.46e-01
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
     F_PE: 0.304191
     gate conc.: 0.892999
 Iteration 4
-    duration: 4.8 secs (started at 2021-01-13 14:20:51)
+    duration: 4.4 secs (started at 2024-06-03 12:38:53)
     optimized pulses (ranges): [0.00, 0.37]
-    ∫gₐ(t)dt: 7.69e-04
+    ∫gₐ(t)dt: 7.72e-02
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
     F_PE: 0.153498
     gate conc.: 0.951891
 Iteration 5
-    duration: 4.8 secs (started at 2021-01-13 14:20:55)
+    duration: 4.3 secs (started at 2024-06-03 12:38:58)
     optimized pulses (ranges): [0.00, 0.37]
-    ∫gₐ(t)dt: 3.86e-04
+    ∫gₐ(t)dt: 3.88e-02
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
     F_PE: 0.076100
     gate conc.: 0.980700
 Iteration 6
-    duration: 4.8 secs (started at 2021-01-13 14:21:00)
+    duration: 4.3 secs (started at 2024-06-03 12:39:02)
     optimized pulses (ranges): [0.00, 0.38]
-    ∫gₐ(t)dt: 2.02e-04
+    ∫gₐ(t)dt: 2.03e-02
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
     F_PE: 0.035062
     gate conc.: 0.993840
 Iteration 7
-    duration: 4.8 secs (started at 2021-01-13 14:21:05)
+    duration: 4.3 secs (started at 2024-06-03 12:39:06)
     optimized pulses (ranges): [0.00, 0.39]
-    ∫gₐ(t)dt: 1.13e-04
+    ∫gₐ(t)dt: 1.13e-02
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
     F_PE: 0.012118
     gate conc.: 0.998971
 Iteration 8
-    duration: 4.7 secs (started at 2021-01-13 14:21:10)
+    duration: 4.3 secs (started at 2024-06-03 12:39:11)
     optimized pulses (ranges): [0.00, 0.39]
-    ∫gₐ(t)dt: 6.65e-05
+    ∫gₐ(t)dt: 6.68e-03
     λₐ: 1.00e+02
     storage (bw, fw, fw0): [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB), [4 * ndarray(250)] (0.5 MB)
     fw_states_T norm: 1.000000, 1.000000, 1.000000, 1.000000
@@ -1107,8 +768,7 @@ Iteration 8
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">opt_result</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt_result</span>
 </pre></div>
 </div>
 </div>
@@ -1120,11 +780,11 @@ Iteration 8
 <div class="highlight"><pre>
 Krotov Optimization Result
 --------------------------
-- Started at 2021-01-13 14:20:34
+- Started at 2024-06-03 12:38:39
 - Number of objectives: 4
 - Number of iterations: 8
 - Reason for termination: Reached convergence: achieved perfect entangler
-- Ended at 2021-01-13 14:21:15 (0:00:41)
+- Ended at 2024-06-03 12:39:15 (0:00:36)
 </pre></div></div>
 </div>
 <p>We can visualize how each iteration of the optimization brings the dynamics closer to the polyhedron of perfect entanglers (using the Weyl chamber coordinates that we calculated in the <code class="docutils literal notranslate"><span class="pre">info_hook</span></code> routine <code class="docutils literal notranslate"><span class="pre">print_fidelity</span></code>, and that were stored in <code class="docutils literal notranslate"><span class="pre">Result.info_vals</span></code>).</p>
@@ -1132,8 +792,7 @@ Krotov Optimization Result
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WeylChamber</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WeylChamber</span><span class="p">()</span>
 <span class="n">c1c2c3</span> <span class="o">=</span> <span class="p">[</span><span class="n">opt_result</span><span class="o">.</span><span class="n">info_vals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">iters</span><span class="p">))]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">iters</span><span class="p">)):</span>
     <span class="n">w</span><span class="o">.</span><span class="n">add_point</span><span class="p">(</span><span class="n">c1c2c3</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">c1c2c3</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">c1c2c3</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
@@ -1146,10 +805,10 @@ Krotov Optimization Result
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/Users/goerz/Documents/Programming/github/krotov/.tox/py37/lib/python3.7/site-packages/weylchamber/visualize.py:318: UserWarning: FixedFormatter should only be used together with FixedLocator
-  ax.set_yticklabels([&#39;0&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, r&#39;$\pi/2$&#39;])
-/Users/goerz/Documents/Programming/github/krotov/.tox/py37/lib/python3.7/site-packages/weylchamber/visualize.py:319: UserWarning: FixedFormatter should only be used together with FixedLocator
-  ax.set_zticklabels([&#39;0&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, r&#39;$\pi/2$&#39;])
+WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmtt10&#39;] not found. Falling back to DejaVu Sans.
+WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmb10&#39;] not found. Falling back to DejaVu Sans.
+WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmss10&#39;] not found. Falling back to DejaVu Sans.
+WARNING:matplotlib.font_manager:findfont: Font family [&#39;DejaVu Sans Display&#39;] not found. Falling back to DejaVu Sans.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1164,8 +823,7 @@ Krotov Optimization Result
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">plot_pulse</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tlist</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_pulse</span><span class="p">(</span><span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_controls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tlist</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1181,53 +839,35 @@ Krotov Optimization Result
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="08_example_ensemble.html" class="btn btn-neutral float-right" title="Ensemble Optimization for Robust Pulses" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="06_example_3states.html" class="btn btn-neutral float-left" title="Optimization of a Dissipative Quantum Gate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="08_example_ensemble.html" class="btn btn-neutral float-right" title="Ensemble Optimization for Robust Pulses" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Michael Goerz et al..
-      <span class="lastupdated">
-        Last updated on Jan 13, 2021.
-      </span>
-
-    </p>
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

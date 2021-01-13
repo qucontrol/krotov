@@ -1,102 +1,55 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>krotov.info_hooks module &mdash; Krotov 1.2.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>krotov.info_hooks module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script src="../_static/doctr-versions-menu.js"></script>
+        <script src="../_static/docs-versions-menu.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="krotov.mu module" href="krotov.mu.html" />
     <link rel="prev" title="krotov.functionals module" href="krotov.functionals.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> Krotov
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            Krotov
           </a>
-
-          
-            
-            
               <div class="version">
-                1.2.1
+                1.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
@@ -136,28 +89,17 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Krotov</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -210,32 +152,8 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="module-krotov.info_hooks">
+             
+  <div class="section" id="module-krotov.info_hooks">
 <span id="krotov-info-hooks-module"></span><h1>krotov.info_hooks module<a class="headerlink" href="#module-krotov.info_hooks" title="Permalink to this headline">¶</a></h1>
 <p>Routines that can be passed as <cite>info_hook</cite> to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a></p>
 <div class="section" id="summary">
@@ -264,7 +182,7 @@
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="krotov.info_hooks.chain">
-<code class="sig-prename descclassname">krotov.info_hooks.</code><code class="sig-name descname">chain</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">hooks</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#chain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.info_hooks.chain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></code><code class="sig-name descname"><span class="pre">chain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">hooks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.chain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chain multiple <cite>info_hook</cite> or <cite>modify_params_after_iter</cite> callables
 together.</p>
 <p class="rubric">Example</p>
@@ -284,7 +202,7 @@ chain.</p>
 
 <dl class="py function">
 <dt id="krotov.info_hooks.print_debug_information">
-<code class="sig-prename descclassname">krotov.info_hooks.</code><code class="sig-name descname">print_debug_information</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">objectives</em>, <em class="sig-param">adjoint_objectives</em>, <em class="sig-param">backward_states</em>, <em class="sig-param">forward_states</em>, <em class="sig-param">forward_states0</em>, <em class="sig-param">guess_pulses</em>, <em class="sig-param">optimized_pulses</em>, <em class="sig-param">g_a_integrals</em>, <em class="sig-param">lambda_vals</em>, <em class="sig-param">shape_arrays</em>, <em class="sig-param">fw_states_T</em>, <em class="sig-param">tlist</em>, <em class="sig-param">tau_vals</em>, <em class="sig-param">start_time</em>, <em class="sig-param">stop_time</em>, <em class="sig-param">iteration</em>, <em class="sig-param">info_vals</em>, <em class="sig-param">shared_data</em>, <em class="sig-param">propagator</em>, <em class="sig-param">chi_constructor</em>, <em class="sig-param">mu</em>, <em class="sig-param">sigma</em>, <em class="sig-param">iter_start</em>, <em class="sig-param">iter_stop</em>, <em class="sig-param">out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='UTF-8'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_debug_information"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.info_hooks.print_debug_information" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></code><code class="sig-name descname"><span class="pre">print_debug_information</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">objectives</span></em>, <em class="sig-param"><span class="pre">adjoint_objectives</span></em>, <em class="sig-param"><span class="pre">backward_states</span></em>, <em class="sig-param"><span class="pre">forward_states</span></em>, <em class="sig-param"><span class="pre">forward_states0</span></em>, <em class="sig-param"><span class="pre">guess_pulses</span></em>, <em class="sig-param"><span class="pre">optimized_pulses</span></em>, <em class="sig-param"><span class="pre">g_a_integrals</span></em>, <em class="sig-param"><span class="pre">lambda_vals</span></em>, <em class="sig-param"><span class="pre">shape_arrays</span></em>, <em class="sig-param"><span class="pre">fw_states_T</span></em>, <em class="sig-param"><span class="pre">tlist</span></em>, <em class="sig-param"><span class="pre">tau_vals</span></em>, <em class="sig-param"><span class="pre">start_time</span></em>, <em class="sig-param"><span class="pre">stop_time</span></em>, <em class="sig-param"><span class="pre">iteration</span></em>, <em class="sig-param"><span class="pre">info_vals</span></em>, <em class="sig-param"><span class="pre">shared_data</span></em>, <em class="sig-param"><span class="pre">propagator</span></em>, <em class="sig-param"><span class="pre">chi_constructor</span></em>, <em class="sig-param"><span class="pre">mu</span></em>, <em class="sig-param"><span class="pre">sigma</span></em>, <em class="sig-param"><span class="pre">iter_start</span></em>, <em class="sig-param"><span class="pre">iter_stop</span></em>, <em class="sig-param"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_debug_information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.print_debug_information" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print full debug information about the current Krotov iteration.</p>
 <p>This routine is intended to be passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> as
 <cite>info_hook</cite>, and it exemplifies the full signature of a routine suitable
@@ -302,9 +220,9 @@ the optimized pulses. None otherwise.</p></li>
 <li><p><strong>forward_states0</strong> – If available (second order only), for each objective,
 an array-like object containing the forward-propagated states under
 the guess pulses. None otherwise.</p></li>
-<li><p><strong>guess_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a><em>]</em>) – list of guess pulses</p></li>
-<li><p><strong>optimized_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a><em>]</em>) – list of optimized pulses</p></li>
-<li><p><strong>g_a_integrals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – array of values
+<li><p><strong>guess_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a><em>]</em>) – list of guess pulses</p></li>
+<li><p><strong>optimized_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a><em>]</em>) – list of optimized pulses</p></li>
+<li><p><strong>g_a_integrals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – array of values
 <span class="math notranslate nohighlight">\(\int_0^T g_a(t) \dd t = \int_0^T \frac{\lambda_a}{S(t)}
 \Abs{\Delta \epsilon(t)}^2 \dd t\)</span>, for each pulse <span class="math notranslate nohighlight">\(\epsilon(t)\)</span>.
 The pulse updates <span class="math notranslate nohighlight">\(\Delta \epsilon(t)\)</span> are the differences of the
@@ -318,14 +236,14 @@ up in <span class="math notranslate nohighlight">\(\int_0^T g_a(t) \dd t\)</span
 is increasing or decreasing between iterations gives an indication
 whether the optimization is “speeding up” or “slowing down”, and
 thus whether convergence is reached (negligible pulse updates).</p></li>
-<li><p><strong>lambda_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – for each pulse, the value of the
+<li><p><strong>lambda_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – for each pulse, the value of the
 <span class="math notranslate nohighlight">\(\lambda_a\)</span> parameter</p></li>
-<li><p><strong>shape_arrays</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a><em>]</em>) – for each pulse, the array of
+<li><p><strong>shape_arrays</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a><em>]</em>) – for each pulse, the array of
 update-shape values <span class="math notranslate nohighlight">\(S(t)\)</span></p></li>
 <li><p><strong>fw_states_T</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – for each objective, the forward-propagated state</p></li>
-<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – array of time grid values on which the states
+<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – array of time grid values on which the states
 are defined</p></li>
-<li><p><strong>tau_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><em>numpy.ndarray</em></a>) – for each objective, the complex overlap for
+<li><p><strong>tau_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – for each objective, the complex overlap for
 the target state with the forward-propagated state, or None if no
 target state is defined.</p></li>
 <li><p><strong>start_time</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – The time at which the iteration started, in epoch
@@ -375,7 +293,7 @@ prints (and stores) the value of the real-part gate fidelity:</p>
 
 <dl class="py function">
 <dt id="krotov.info_hooks.print_table">
-<code class="sig-prename descclassname">krotov.info_hooks.</code><code class="sig-name descname">print_table</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">J_T</em>, <em class="sig-param">show_g_a_int_per_pulse=False</em>, <em class="sig-param">J_T_prev=None</em>, <em class="sig-param">unicode=True</em>, <em class="sig-param">col_formats=('%d'</em>, <em class="sig-param">'%.2e'</em>, <em class="sig-param">'%.2e'</em>, <em class="sig-param">'%.2e'</em>, <em class="sig-param">'%.2e'</em>, <em class="sig-param">'%.2e'</em>, <em class="sig-param">'%.2e'</em>, <em class="sig-param">'%d')</em>, <em class="sig-param">col_headers=None</em>, <em class="sig-param">out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='UTF-8'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#krotov.info_hooks.print_table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></code><code class="sig-name descname"><span class="pre">print_table</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">J_T</span></em>, <em class="sig-param"><span class="pre">show_g_a_int_per_pulse=False</span></em>, <em class="sig-param"><span class="pre">J_T_prev=None</span></em>, <em class="sig-param"><span class="pre">unicode=True</span></em>, <em class="sig-param"><span class="pre">col_formats=('%d'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%d')</span></em>, <em class="sig-param"><span class="pre">col_headers=None</span></em>, <em class="sig-param"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.print_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a tabular overview of the functional values in the iteration.</p>
 <p>An example output is:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">iter.      J_T    ∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs</span>
@@ -483,53 +401,35 @@ of the column headers and the length of the formatted values.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="krotov.mu.html" class="btn btn-neutral float-right" title="krotov.mu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="krotov.functionals.html" class="btn btn-neutral float-left" title="krotov.functionals module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="krotov.mu.html" class="btn btn-neutral float-right" title="krotov.mu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Michael Goerz et al..
-      <span class="lastupdated">
-        Last updated on Jan 13, 2021.
-      </span>
-
-    </p>
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

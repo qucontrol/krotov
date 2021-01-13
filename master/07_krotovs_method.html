@@ -1,102 +1,55 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Krotov’s Method &mdash; Krotov 1.2.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Krotov’s Method &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
-        <script src="_static/doctr-versions-menu.js"></script>
+        <script src="_static/docs-versions-menu.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Using Krotov with QuTiP" href="08_qutip_usage.html" />
     <link rel="prev" title="Introduction" href="06_introduction.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home"> Krotov
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            Krotov
           </a>
-
-          
-            
-            
               <div class="version">
-                1.2.1
+                1.3.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
@@ -129,28 +82,17 @@
 <li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Krotov</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -195,32 +137,8 @@
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="krotovs-method">
+             
+  <div class="section" id="krotovs-method">
 <span id="krotovsmethod"></span><h1>Krotov’s Method<a class="headerlink" href="#krotovs-method" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-quantum-control-problem">
 <h2>The quantum control problem<a class="headerlink" href="#the-quantum-control-problem" title="Permalink to this headline">¶</a></h2>
@@ -251,11 +169,11 @@ The most direct example of a control problem is a state-to-state transition.
 The objective is for a known quantum state <span class="math notranslate nohighlight">\(\ket{\phi}\)</span> at time
 zero to evolve to a specific target state <span class="math notranslate nohighlight">\(\ket{\phi^\tgt}\)</span> at
 final time <span class="math notranslate nohighlight">\(T\)</span>, controlling, e.g. a chemical
-reaction <span id="id1">[<a class="reference internal" href="99_bibliography.html#id68"><span>37</span></a>]</span>.
+reaction <span id="id1">[<a class="reference internal" href="99_bibliography.html#id68" title="D. J. Tannor and S. A. Rice. Control of selectivity of chemical reaction via control of wave packet evolution. J. Chem. Phys.  83, 5013 (1985). doi:10.1063/1.449767.">37</a>]</span>.
 Another example is the
 realization of quantum gates, the building blocks of a quantum computer.
 In this case, the states forming a computational basis must transform
-according to a unitary transformation <span id="id2">[<a class="reference internal" href="99_bibliography.html#id31"><span>2</span></a>]</span>,
+according to a unitary transformation <span id="id2">[<a class="reference internal" href="99_bibliography.html#id31" title="M. A. Nielsen and I. L. Chuang. Quantum Computation and Quantum Information. Cambridge University Press (2000).">2</a>]</span>,
 see <a class="reference internal" href="10_howto.html#howtogateoptimization"><span class="std std-ref">How to optimize towards a quantum gate</span></a>. Thus, the
 control problem involves not just the time evolution of a single state,
 but a set of states <span class="math notranslate nohighlight">\(\{\ket{\phi_k(t)}\}\)</span>. Generalizing even
@@ -271,12 +189,12 @@ involved in the dynamics, these may correspond e.g., to different color
 lasers used in the excitation of a Rydberg atom, or different
 polarization components of an electric field.</p>
 <p>The quantum control methods build on a rich field of classical control
-theory <span id="id3">[<a class="reference internal" href="99_bibliography.html#id66"><span>38</span></a>,<a class="reference internal" href="99_bibliography.html#id67"><span>39</span></a>]</span>. This includes
-Krotov’s method <span id="id4">[<a class="reference internal" href="99_bibliography.html#id105"><span>40</span></a>,<a class="reference internal" href="99_bibliography.html#id106"><span>41</span></a>,<a class="reference internal" href="99_bibliography.html#id5"><span>42</span></a>,<a class="reference internal" href="99_bibliography.html#id6"><span>43</span></a>]</span>,
+theory <span id="id3">[<a class="reference internal" href="99_bibliography.html#id66" title="R. Bellman. Dynamic Programming. Princeton University Press, Princeton, NJ (1957).">38</a>, <a class="reference internal" href="99_bibliography.html#id67" title="L. S. Pontryagin, V. G. Boltyanskii, G. R. V., and E. F. Mishchenko. The Mathematical Theory of Optimal Processes. Interscience, New York, NY (1962).">39</a>]</span>. This includes
+Krotov’s method <span id="id4">[<a class="reference internal" href="99_bibliography.html#id105" title="V. F. Krotov and I. N. Fel'dman. An iterative method for solving optimal-control problems. Engrg. Cybernetics  21, 123 (1983). doi:.">40</a>, <a class="reference internal" href="99_bibliography.html#id106" title="V. F. Krotov. A technique of global bounds in optimal control theory. Control and Cybernetics  17, 115 (1988). doi:.">41</a>, <a class="reference internal" href="99_bibliography.html#id5" title="V. Krotov. Global Methods in Optimal Control Theory. CRC Press (1995).">42</a>, <a class="reference internal" href="99_bibliography.html#id6" title="A.I. Konnov and V. F. Krotov. On global methods of successive improvement of controlled processes. Autom. Rem. Contr.  60, 1427 (1999).">43</a>]</span>,
 which was originally formulated to optimize the soft landing of a
 spacecraft from orbit to the surface of a planet, before being applied
 to quantum mechanical
-problems <span id="id5">[<a class="reference internal" href="99_bibliography.html#id34"><span>5</span></a>,<a class="reference internal" href="99_bibliography.html#id4"><span>44</span></a>,<a class="reference internal" href="99_bibliography.html#id76"><span>45</span></a>,<a class="reference internal" href="99_bibliography.html#id10"><span>46</span></a>,<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span>.
+problems <span id="id5">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>, <a class="reference internal" href="99_bibliography.html#id4" title="J. Somlói, V. A. Kazakov, and D. J. Tannor. Controlled dissociation of I2 via optical transitions between the X and B electronic states. Chem. Phys.  172, 85 (1993). doi:10.1016/0301-0104(93)80108-L.">44</a>, <a class="reference internal" href="99_bibliography.html#id76" title="A. Bartana, R. Kosloff, and D. J. Tannor. Laser cooling of internal degrees of freedom. II. J. Chem. Phys.  106, 1435 (1997). doi:10.1063/1.473973.">45</a>, <a class="reference internal" href="99_bibliography.html#id10" title="S. E. Sklarz and D. J. Tannor. Loading a Bose-Einstein condensate onto an optical lattice: an application of optimal control theory to the nonlinear Schrödinger equation. Phys. Rev. A  66, 053619 (2002). doi:10.1103/PhysRevA.66.053619.">46</a>]</span>.
 Fundamentally, they rely on the variational principle, that is, the
 minimization of a functional
 <span class="math notranslate nohighlight">\(J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}]\)</span> that
@@ -284,7 +202,7 @@ includes any required constraints via Lagrange multipliers. The
 condition for minimizing <span class="math notranslate nohighlight">\(J\)</span> is then
 <span class="math notranslate nohighlight">\(\nabla_{\phi_k, \epsilon_l} J = 0\)</span>. In rare cases, the
 variational calculus can be solved in closed form, based on Pontryagin’s
-maximum principle <span id="id6">[<a class="reference internal" href="99_bibliography.html#id67"><span>39</span></a>]</span>. Numerical methods
+maximum principle <span id="id6">[<a class="reference internal" href="99_bibliography.html#id67" title="L. S. Pontryagin, V. G. Boltyanskii, G. R. V., and E. F. Mishchenko. The Mathematical Theory of Optimal Processes. Interscience, New York, NY (1962).">39</a>]</span>. Numerical methods
 are required in any other case. These start from an initial guess
 control (or set of guess controls, if there are multiple controls), and
 calculate an update to these controls that will decrease the value of
@@ -295,7 +213,7 @@ sufficiently small, or convergence is reached.</p>
 <div class="section" id="optimization-functional">
 <h2>Optimization functional<a class="headerlink" href="#optimization-functional" title="Permalink to this headline">¶</a></h2>
 <p>Mathematically, Krotov’s method, when applied to quantum
-systems <span id="id7">[<a class="reference internal" href="99_bibliography.html#id34"><span>5</span></a>,<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span>, minimizes a functional
+systems <span id="id7">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>]</span>, minimizes a functional
 of the most general form</p>
 <div class="math notranslate nohighlight" id="equation-functional">
 <span class="eqno">(1)<a class="headerlink" href="#equation-functional" title="Permalink to this equation">¶</a></span>\[J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}]
@@ -320,7 +238,7 @@ functional, and we can usually think of <span class="math notranslate nohighligh
 auxiliary functional in the optimization of <span class="math notranslate nohighlight">\(J_T\)</span>.</p></li>
 <li><p>A running cost on the control fields, <span class="math notranslate nohighlight">\(g_a\)</span>. The most commonly
 used expression (and the only one currently supported by the
-<a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package) is <span id="id8">[<a class="reference internal" href="99_bibliography.html#id9"><span>47</span></a>]</span></p>
+<a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package) is <span id="id8">[<a class="reference internal" href="99_bibliography.html#id9" title="J. P. Palao and R. Kosloff. Optimal control theory for unitary transformations. Phys. Rev. A  68, 062308 (2003). doi:10.1103/PhysRevA.68.062308.">47</a>]</span></p>
 <div class="math notranslate nohighlight" id="equation-g-a">
 <span class="eqno">(2)<a class="headerlink" href="#equation-g-a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
     g_a(\epsilon_l^{(i)}(t))
@@ -343,8 +261,8 @@ iteration <span class="math notranslate nohighlight">\((i)\)</span>.</p>
 </li>
 <li><p>An optional state-dependent running cost, <span class="math notranslate nohighlight">\(g_b\)</span>. This may be
 used to encode time-dependent control
-targets <span id="id9">[<a class="reference internal" href="99_bibliography.html#id102"><span>48</span></a>,<a class="reference internal" href="99_bibliography.html#id103"><span>49</span></a>]</span>, or to penalize population in a
-subspace <span id="id10">[<a class="reference internal" href="99_bibliography.html#id8"><span>50</span></a>]</span>. The presence of a
+targets <span id="id9">[<a class="reference internal" href="99_bibliography.html#id102" title="A. Kaiser and V. May. Optimal control theory for a target state distributed in time: optimizing the probe-pulse signal of a pump-probe-scheme. J. Chem. Phys.  121, 2528 (2004). doi:10.1063/1.1769370.">48</a>, <a class="reference internal" href="99_bibliography.html#id103" title="I. Serban, J. Werschnik, and E. K. U. Gross. Optimal control of time-dependent targets. Phys. Rev. A  71, 053810 (2005). doi:10.1103/PhysRevA.71.053810.">49</a>]</span>, or to penalize population in a
+subspace <span id="id10">[<a class="reference internal" href="99_bibliography.html#id8" title="J. P. Palao, R. Kosloff, and C. P. Koch. Protecting coherence in optimal control theory: state-dependent constraint approach. Phys. Rev. A  77, 063412 (2008). doi:10.1103/PhysRevA.77.063412.">50</a>]</span>. The presence of a
 state-dependent constraint in the functional entails an inhomogeneous
 term in the backward propagation in the calculation of the control
 updates in each iteration of Krotov’s method, see Eq. <a class="reference internal" href="#equation-bw-eqm">(14)</a>, and is
@@ -371,7 +289,7 @@ final-time states under the given control. Thus,</p>
 overlaps, taking into account that any optimization functional <span class="math notranslate nohighlight">\(J_T\)</span> must
 be real. They differ by the way they treat the phases <span class="math notranslate nohighlight">\(\varphi_k\)</span> in the
 physical optimization goal <span class="math notranslate nohighlight">\(\ket{\phi_k(T)} \overset{!}{=}
-e^{i\varphi_k}\ket{\phi_k^{\tgt}}\)</span> <span id="id11">[<a class="reference internal" href="99_bibliography.html#id9"><span>47</span></a>]</span>:</p>
+e^{i\varphi_k}\ket{\phi_k^{\tgt}}\)</span> <span id="id11">[<a class="reference internal" href="99_bibliography.html#id9" title="J. P. Palao and R. Kosloff. Optimal control theory for unitary transformations. Phys. Rev. A  68, 062308 (2003). doi:10.1103/PhysRevA.68.062308.">47</a>]</span>:</p>
 <ul>
 <li><p>Optimize for simultaneous state-to-state transitions, with completely
 arbitrary phases <span class="math notranslate nohighlight">\(\varphi_k\)</span>,</p>
@@ -466,7 +384,7 @@ These details are not necessary to <em>use</em> the <a class="reference internal
 calculating the updated fields <span class="math notranslate nohighlight">\(\{\epsilon_l^{(i)}(t)\}\)</span> such that
 <span class="math notranslate nohighlight">\(J(\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}) \leq
 J(\{\ket{\phi_k^{(i-1)}(t)}\}, \{\epsilon_l^{(i-1)}(t)\})\)</span> is true <em>by
-construction</em> <span id="id12">[<a class="reference internal" href="99_bibliography.html#id5"><span>42</span></a>,<a class="reference internal" href="99_bibliography.html#id6"><span>43</span></a>,<a class="reference internal" href="99_bibliography.html#id9"><span>47</span></a>,<a class="reference internal" href="99_bibliography.html#id10"><span>46</span></a>,<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span>.
+construction</em> <span id="id12">[<a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>, <a class="reference internal" href="99_bibliography.html#id5" title="V. Krotov. Global Methods in Optimal Control Theory. CRC Press (1995).">42</a>, <a class="reference internal" href="99_bibliography.html#id6" title="A.I. Konnov and V. F. Krotov. On global methods of successive improvement of controlled processes. Autom. Rem. Contr.  60, 1427 (1999).">43</a>, <a class="reference internal" href="99_bibliography.html#id10" title="S. E. Sklarz and D. J. Tannor. Loading a Bose-Einstein condensate onto an optical lattice: an application of optimal control theory to the nonlinear Schrödinger equation. Phys. Rev. A  66, 053619 (2002). doi:10.1103/PhysRevA.66.053619.">46</a>, <a class="reference internal" href="99_bibliography.html#id9" title="J. P. Palao and R. Kosloff. Optimal control theory for unitary transformations. Phys. Rev. A  68, 062308 (2003). doi:10.1103/PhysRevA.68.062308.">47</a>]</span>.
 For a general functional of the form in
 Eq. <a class="reference internal" href="#equation-functional">(1)</a>, with a convex final-time
 functional <span class="math notranslate nohighlight">\(J_T\)</span>, the condition for monotonic convergence is</p>
@@ -478,7 +396,7 @@ functional <span class="math notranslate nohighlight">\(J_T\)</span>, the condit
       (i)} \Bigg)
       \Bigg\vert \phi_k^{(i)}(t) \Bigg\rangle
     \right]\,,\]</div>
-<p>see Ref. <span id="id13">[<a class="reference internal" href="99_bibliography.html#id9"><span>47</span></a>]</span>.
+<p>see Ref. <span id="id13">[<a class="reference internal" href="99_bibliography.html#id9" title="J. P. Palao and R. Kosloff. Optimal control theory for unitary transformations. Phys. Rev. A  68, 062308 (2003). doi:10.1103/PhysRevA.68.062308.">47</a>]</span>.
 The notation for the derivative on the right hand side being evaluated
 at <span class="math notranslate nohighlight">\({(i)}\)</span> should be understood to apply when the control
 Hamiltonian is not linear so that
@@ -490,7 +408,7 @@ multiple controls, Eq. <a class="reference internal" href="#equation-krotov-fir
 holds for every control field <span class="math notranslate nohighlight">\(\epsilon_l(t)\)</span> independently.</p>
 <p>For <span class="math notranslate nohighlight">\(g_a\)</span> as in Eq. <a class="reference internal" href="#equation-g-a">(2)</a>, this results in an
 <em>update</em>
-equation <span id="id14">[<a class="reference internal" href="99_bibliography.html#id34"><span>5</span></a>,<a class="reference internal" href="99_bibliography.html#id9"><span>47</span></a>,<a class="reference internal" href="99_bibliography.html#id10"><span>46</span></a>]</span>,</p>
+equation <span id="id14">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id10" title="S. E. Sklarz and D. J. Tannor. Loading a Bose-Einstein condensate onto an optical lattice: an application of optimal control theory to the nonlinear Schrödinger equation. Phys. Rev. A  66, 053619 (2002). doi:10.1103/PhysRevA.66.053619.">46</a>, <a class="reference internal" href="99_bibliography.html#id9" title="J. P. Palao and R. Kosloff. Optimal control theory for unitary transformations. Phys. Rev. A  68, 062308 (2003). doi:10.1103/PhysRevA.68.062308.">47</a>]</span>,</p>
 <div class="math notranslate nohighlight" id="equation-krotov-first-order-update">
 <span class="eqno">(12)<a class="headerlink" href="#equation-krotov-first-order-update" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_l(t)
   = \frac{S_l(t)}{\lambda_{a,l}} \Im \left[\,
@@ -536,6 +454,10 @@ a single state-to-state transition (<span class="math notranslate nohighlight">\
 \end{split}\end{split}\]</div>
 <p>cf. <a class="reference internal" href="API/krotov.functionals.html#krotov.functionals.chis_ss" title="krotov.functionals.chis_ss"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.functionals.chis_ss()</span></code></a> and the <a class="reference internal" href="API/krotov.functionals.html#module-krotov.functionals" title="krotov.functionals"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.functionals</span></code></a> module
 in general.</p>
+<p>More precisely, the right hand side of Eq. <a class="reference internal" href="#equation-chi-boundary">(15)</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Wirtinger_derivatives">Wirtinger derivative</a>. That is, if the j’th component of <span class="math notranslate nohighlight">\(\ket{\phi_k(T)}\)</span> is the complex number <span class="math notranslate nohighlight">\(x_j + \ii y_j\)</span> then the j’th component of <span class="math notranslate nohighlight">\(\ket{\chi_k(T)}\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-wirtinger-deriv">
+<span class="eqno">(16)<a class="headerlink" href="#equation-wirtinger-deriv" title="Permalink to this equation">¶</a></span>\[ \chi_j = - \frac{1}{2} \left(\frac{\partial J_T}{\partial x_j} + \ii \frac{\partial J_T}{\partial y_j} \right)\,.\]</div>
+<p>Generally, though, the state <span class="math notranslate nohighlight">\(\ket{\chi_k(T)}\)</span> can be calculated simply by fully expanding <span class="math notranslate nohighlight">\(J_T\)</span> and treating co-states as independent variables, as in the example for <span class="math notranslate nohighlight">\(J_{T,ss}\)</span> above. Hence the intuitive notation in Eq. <a class="reference internal" href="#equation-chi-boundary">(15)</a>.</p>
 </div>
 <div class="section" id="second-order-update">
 <span id="secondorderupdate"></span><h2>Second order update<a class="headerlink" href="#second-order-update" title="Permalink to this headline">¶</a></h2>
@@ -547,10 +469,10 @@ depend on the states <span class="math notranslate nohighlight">\(\ket{\phi_k(t)
 (<span class="math notranslate nohighlight">\(g_b\equiv 0\)</span>). When any of these conditions are not fulfilled,
 it is still possible to derive an optimization algorithm with monotonic
 convergence via a “second order” term in
-Eqs. <a class="reference internal" href="#equation-krotov-first-order-proto-update">(11)</a>, <a class="reference internal" href="#equation-krotov-first-order-update">(12)</a> <span id="id15">[<a class="reference internal" href="99_bibliography.html#id6"><span>43</span></a>,<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span>,</p>
+Eqs. <a class="reference internal" href="#equation-krotov-first-order-proto-update">(11)</a>, <a class="reference internal" href="#equation-krotov-first-order-update">(12)</a> <span id="id15">[<a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>, <a class="reference internal" href="99_bibliography.html#id6" title="A.I. Konnov and V. F. Krotov. On global methods of successive improvement of controlled processes. Autom. Rem. Contr.  60, 1427 (1999).">43</a>]</span>,</p>
 <p>The full update equation then reads</p>
 <div class="math notranslate nohighlight" id="equation-krotov-second-order-update">
-<span class="eqno">(16)<a class="headerlink" href="#equation-krotov-second-order-update" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(17)<a class="headerlink" href="#equation-krotov-second-order-update" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
   \Delta\epsilon^{(i)}_l(t)
     &amp;= \frac{S_l(t)}{\lambda_{a,l}} \Im \left[\,
         \sum_{k=1}^{N} \Bigg\langle \chi_k^{(i-1)}(t) \Bigg\vert \Bigg(
@@ -569,19 +491,19 @@ Eqs. <a class="reference internal" href="#equation-krotov-first-order-proto-upd
 <div class="math notranslate nohighlight">
 \[\ket{\Delta \phi_k^{(i)}(t)}
   \equiv \ket{\phi_k^{(i)}(t)} - \ket{\phi_k^{(i-1)}(t)}\,,\]</div>
-<p>see Ref. <span id="id16">[<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span> for the full construction of
+<p>see Ref. <span id="id16">[<a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>]</span> for the full construction of
 the second-order condition.
-In Eq. <a class="reference internal" href="#equation-krotov-second-order-update">(16)</a>,
+In Eq. <a class="reference internal" href="#equation-krotov-second-order-update">(17)</a>,
 <span class="math notranslate nohighlight">\(\sigma(t)\)</span> is a scalar function that must be properly chosen to
 ensure monotonic convergence.</p>
-<p>In Refs. <span id="id17">[<a class="reference internal" href="99_bibliography.html#id16"><span>28</span></a>,<a class="reference internal" href="99_bibliography.html#id17"><span>29</span></a>]</span>, a non-convex
+<p>In Refs. <span id="id17">[<a class="reference internal" href="99_bibliography.html#id16" title="P. Watts, J. Vala, M. M. Müller, T. Calarco, K. B. Whaley, D. M. Reich, M. H. Goerz, and C. P. Koch. Optimizing for an arbitrary perfect entangler: I. Functionals. Phys. Rev. A  91, 062306 (2015). doi:10.1103/PhysRevA.91.062306.">28</a>, <a class="reference internal" href="99_bibliography.html#id17" title="M. H. Goerz, G. Gualdi, D. M. Reich, C. P. Koch, F. Motzoi, K. B. Whaley, J. Vala, M. M. Müller, S. Montangero, and T. Calarco. Optimizing for an arbitrary perfect entangler. II. Application. Phys. Rev. A  91, 062307 (2015). doi:10.1103/PhysRevA.91.062307.">29</a>]</span>, a non-convex
 final-time functional for the optimization towards an arbitrary perfect
 entangler is considered. For this specific example, a suitable choice is</p>
 <div class="math notranslate nohighlight">
 \[\sigma(t) \equiv -\max\left(\varepsilon_A,2A+\varepsilon_A\right)\,,\]</div>
 <p>where <span class="math notranslate nohighlight">\(\varepsilon_A\)</span> is a small non-negative number. The optimal
 value for <span class="math notranslate nohighlight">\(A\)</span> in each iteration can be approximated numerically
-as <span id="id18">[<a class="reference internal" href="99_bibliography.html#id7"><span>22</span></a>]</span></p>
+as <span id="id18">[<a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\label{eq:numericalA}
   A = \frac{
@@ -628,7 +550,7 @@ control, so that <span class="math notranslate nohighlight">\(\partial \Op{H} / 
 time-dependent. The scheme proceeds as follows:</p>
 <ol class="arabic">
 <li><p>Construct the states <span class="math notranslate nohighlight">\(\{\ket{\chi^{(i-1)}_k(T)}\}\)</span> according to
-Eq. <a class="reference internal" href="#equation-chi-boundary">(15)</a>. For most functionals,
+Wirtinger derivative in Eq. <a class="reference internal" href="#equation-chi-boundary">(15)</a>. For most functionals,
 specifically any that are more than linear in the overlaps
 <span class="math notranslate nohighlight">\(\tau_k\)</span> defined in Eq. <a class="reference internal" href="#equation-tauk">(4)</a>, the states
 <span class="math notranslate nohighlight">\(\{\ket{\chi^{(i-1)}_k(T)}\}\)</span> depend on the states
@@ -643,7 +565,7 @@ must be stored in memory.</p></li>
 <span class="math notranslate nohighlight">\(\{\ket{\phi_k}\} = \{\ket{\phi_k(t=t_0=0)}\}\)</span>, calculate the pulse
 update for the first time step according to</p>
 <div class="math notranslate nohighlight" id="equation-update-discretized0">
-<span class="eqno">(17)<a class="headerlink" href="#equation-update-discretized0" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_1
+<span class="eqno">(18)<a class="headerlink" href="#equation-update-discretized0" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_1
       \equiv \Delta\epsilon^{(i)}(\tilde{t}_0)
       = \frac{S(\tilde{t}_0)}{\lambda_{a}} \Im \left[\,
           \sum_{k=1}^{N} \bigg\langle \chi_k^{(i-1)}(t_0) \bigg\vert
@@ -662,7 +584,7 @@ Eq. <a class="reference internal" href="#equation-fw-eqm">(13)</a> as the equat
 updates then proceed sequentially, using the discretized update
 equation</p>
 <div class="math notranslate nohighlight" id="equation-update-discretized">
-<span class="eqno">(18)<a class="headerlink" href="#equation-update-discretized" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_{n+1}
+<span class="eqno">(19)<a class="headerlink" href="#equation-update-discretized" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_{n+1}
       \equiv \Delta\epsilon^{(i)}(\tilde{t}_n)
       = \frac{S(\tilde{t}_n)}{\lambda_{a}} \Im \left[\,
           \sum_{k=1}^{N} \bigg\langle \chi_k^{(i-1)}(t_n) \bigg\vert
@@ -682,16 +604,16 @@ improvement of <span class="math notranslate nohighlight">\(J_T\)</span> is to b
 </ol>
 <p>Eq. <a class="reference internal" href="#equation-krotov-first-order-update">(12)</a>
 re-emerges as the continuous limit of the time-discretized update
-equation <a class="reference internal" href="#equation-update-discretized">(18)</a>, i.e.,
+equation <a class="reference internal" href="#equation-update-discretized">(19)</a>, i.e.,
 <span class="math notranslate nohighlight">\(\dd t \rightarrow 0\)</span> so that <span class="math notranslate nohighlight">\(\tilde{t}_n \rightarrow t_n\)</span>.
-Note that Eq. <a class="reference internal" href="#equation-update-discretized">(18)</a>
+Note that Eq. <a class="reference internal" href="#equation-update-discretized">(19)</a>
 resolves the seeming contradiction in the time-continuous
 Eq. <a class="reference internal" href="#equation-krotov-first-order-update">(12)</a>
 that the calculation of <span class="math notranslate nohighlight">\(\epsilon^{(i)}(t)\)</span> requires knowledge of
 the states <span class="math notranslate nohighlight">\(\ket{\phi_k^{(i)}(t)}\)</span> which would have to be obtained
 from a propagation under <span class="math notranslate nohighlight">\(\epsilon^{(i)}(t)\)</span>. By having the time
 argument <span class="math notranslate nohighlight">\(\tilde{t}_n\)</span> on the left-hand-side of
-Eq. <a class="reference internal" href="#equation-update-discretized">(18)</a>, and
+Eq. <a class="reference internal" href="#equation-update-discretized">(19)</a>, and
 <span class="math notranslate nohighlight">\(t_n &lt; \tilde{t}_n\)</span> on the right-hand-side (with
 <span class="math notranslate nohighlight">\(S(\tilde{t}_n)\)</span> known at all times), the update for each interval
 only depends on “past” information.</p>
@@ -792,61 +714,43 @@ states is, written in the form <span class="math notranslate nohighlight">\(\mat
 cf. Eq. <a class="reference internal" href="#equation-fw-eqm">(13)</a>. See <a class="reference internal" href="API/krotov.mu.html#module-krotov.mu" title="krotov.mu"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.mu</span></code></a> for details.</p>
 <p>Note also that the backward propagation Eq. <a class="reference internal" href="#equation-bw-eqm">(14)</a>
 uses the adjoint <span class="math notranslate nohighlight">\(H\)</span>, which is relevant both for a dissipative
-Liouvillian <span id="id19">[<a class="reference internal" href="99_bibliography.html#id75"><span>51</span></a>,<a class="reference internal" href="99_bibliography.html#id74"><span>52</span></a>,<a class="reference internal" href="99_bibliography.html#id19"><span>27</span></a>]</span> and a non-Hermitian
-Hamiltonian <span id="id20">[<a class="reference internal" href="99_bibliography.html#id11"><span>25</span></a>,<a class="reference internal" href="99_bibliography.html#id73"><span>53</span></a>]</span>.</p>
+Liouvillian <span id="id19">[<a class="reference internal" href="99_bibliography.html#id19" title="M. H. Goerz, D. M. Reich, and C. P. Koch. Optimal control theory for a unitary operation under dissipative evolution. New J. Phys.  16, 055012 (2014). doi:10.1088/1367-2630/16/5/055012.">27</a>, <a class="reference internal" href="99_bibliography.html#id75" title="A. Bartana, R. Kosloff, and D. J. Tannor. Laser cooling of molecular internal degrees of freedom by a series of shaped pulses. J. Chem. Phys.  99, 196 (1993). doi:10.1063/1.465797.">51</a>, <a class="reference internal" href="99_bibliography.html#id74" title="Y. Ohtsuki, W. Zhu, and H. Rabitz. Monotonically convergent algorithm for quantum optimal control with dissipation. J. Chem. Phys.  110, 9825 (1999). doi:10.1063/1.478036.">52</a>]</span> and a non-Hermitian
+Hamiltonian <span id="id20">[<a class="reference internal" href="99_bibliography.html#id11" title="M. M. Müller, H. Haakh, T. Calarco, C. P. Koch, and C. Henkel. Prospects for fast Rydberg gates on an atom chip. Quantum Inf. Process.  10, 771 (2011). doi:10.1007/s11128-011-0296-0.">25</a>, <a class="reference internal" href="99_bibliography.html#id73" title="M. H. Goerz and K. Jacobs. Efficient optimization of state preparation in quantum networks using quantum trajectories. Quantum Sci. Technol.  3, 045005 (2018). doi:10.1088/2058-9565/aace16.">53</a>]</span>.</p>
 <p>See the <a class="reference internal" href="notebooks/04_example_dissipative_qubit_reset.html"><span class="std std-ref">Optimization of Dissipative Qubit Reset</span></a> for an example.</p>
 </div>
 </div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="08_qutip_usage.html" class="btn btn-neutral float-right" title="Using Krotov with QuTiP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="06_introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="08_qutip_usage.html" class="btn btn-neutral float-right" title="Using Krotov with QuTiP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Michael Goerz et al..
-      <span class="lastupdated">
-        Last updated on Jan 13, 2021.
-      </span>
-
-    </p>
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
