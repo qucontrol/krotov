@@ -13,20 +13,21 @@ Development Team
 
 * Daniel Basilewitsch <basilewitsch@physik.uni-kassel.de>
 * Fernando Gago Encinas <fernando.gago@fu-berlin.de>
-* Matthias Krauss <matthias.krauss@physik.uni-kassel.de>
+* Matthias Krauß <matthias.krauss@physik.uni-kassel.de>
 * Karl Horn <karlhorn@physik.uni-kassel.de>
 * `Daniel Reich`_ <danreich@zedat.fu-berlin.de>
 * `Christiane Koch`_ <christiane.koch@fu-berlin.de>
 
 .. _Michael Goerz: https://michaelgoerz.net
-.. _Daniel Reich: https://www.uni-kassel.de/fb10/en/institutes/physics/research-groups/quantum-dynamics-and-control/group-members/dr-daniel-reich.html
-.. _Christiane Koch: https://www.uni-kassel.de/fb10/en/institutes/physics/research-groups/quantum-dynamics-and-control/homepage.html
+.. _Daniel Reich: https://www.physik.fu-berlin.de/en/einrichtungen/ag/ag-koch/Mitarbeiterinnen/reich/index.html
+.. _Christiane Koch: https://www.physik.fu-berlin.de/en/einrichtungen/ag/ag-koch/index.html
 
 
 Acknowledgements
 ----------------
 
 We thank
+`Alberto Castro`_,
 `@TejasAvinasShetty`_,
 `@nathanshammah`_,
 `@timohillmann`_,
@@ -35,6 +36,7 @@ We thank
 `@zachmanson`_,
 for reporting bugs and suggesting improvements.
 
+.. _Alberto Castro: https://www.bifi.es/~acastro/
 .. _@loganbvh: https://github.com/loganbvh
 .. _@zachmanson: https://github.com/zachmanson
 .. _@TejasAvinasShetty: https://github.com/TejasAvinashShetty

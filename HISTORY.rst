@@ -2,10 +2,12 @@
 History
 =======
 
-(next release)
---------------
+1.2.1 (2021-01-13)
+------------------
 
 * Bugfix: Crash when initializing discretized numpy-array controls (`#79`_, thanks to `@loganbvh`_)
+* Bugfix: Corrected definition of co-states in Dissipative Qubit Reset example (`#80`_, thanks to `Alberto Castro`_)
+* Update: Switched Testing and Documentation deployment from Travis to Github Actions (`#82`_)
 
 1.2.0 (2020-08-17)
 ------------------
@@ -124,6 +126,7 @@ Note: due to the changes in the time discretization of the controls and update s
 .. _@nathanshammah: https://github.com/nathanshammah
 .. _@zachmanson: https://github.com/zachmanson
 .. _@loganbvh: https://github.com/loganbvh
+.. _Alberto Castro: https://www.bifi.es/~acastro/
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32
@@ -151,3 +154,5 @@ Note: due to the changes in the time discretization of the controls and update s
 .. _#74: https://github.com/qucontrol/krotov/issues/74
 .. _#76: https://github.com/qucontrol/krotov/issues/76
 .. _#79: https://github.com/qucontrol/krotov/issues/79
+.. _#80: https://github.com/qucontrol/krotov/issues/80
+.. _#82: https://github.com/qucontrol/krotov/issues/82
