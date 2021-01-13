@@ -1,0 +1,886 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Contributing &mdash; Krotov 1.2.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/doctr-versions-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Credits" href="03_authors.html" />
+    <link rel="prev" title="Krotov Python Package" href="01_overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Krotov
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#report-bugs">Report Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submit-feedback">Submit Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-prerequisites">Development Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#branching-model">Branching Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commit-message-guidelines">Commit Message Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-documentation">Write Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploy-the-documentation">Deploy the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contribute-examples">Contribute Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#math-in-example-notebooks">Math in Example Notebooks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-a-release">Making a Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developers-how-tos">Developers’ How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-run-a-jupyter-notebook-server-for-working-on-the-example-notebooks">How to run a jupyter notebook server for working on the example notebooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-convert-an-example-notebook-to-a-script-for-easier-debugging">How to convert an example notebook to a script for easier debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-make-git-diff-work-for-notebooks">How to make <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> work for notebooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-commit-failing-tests-or-example-notebooks">How to commit failing tests or example notebooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-run-a-subset-of-tests">How to run a subset of tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-run-only-as-single-test">How to run only as single test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-run-only-the-doctests">How to run only the doctests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-go-into-an-interactive-debugger">How to go into an interactive debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-see-the-debug-logger-output-in-the-example-notebooks">How to see the debug logger output in the example notebooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-quantum-mechanical-tex-macros">How to use quantum mechanical tex macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Krotov</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Contributing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>Contributions are welcome, and they are greatly appreciated! Every little bit
+helps, and credit will always be given.</p>
+<div class="section" id="code-of-conduct">
+<h2>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Permalink to this headline">¶</a></h2>
+<p>Everyone interacting in the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> project’s code base,
+issue tracker, and any communication channels is expected to follow the
+<a class="reference external" href="https://www.pypa.io/en/latest/code-of-conduct/">PyPA Code of Conduct</a>.</p>
+</div>
+<div class="section" id="report-bugs">
+<h2>Report Bugs<a class="headerlink" href="#report-bugs" title="Permalink to this headline">¶</a></h2>
+<p>Report bugs at <a class="reference external" href="https://github.com/qucontrol/krotov/issues">https://github.com/qucontrol/krotov/issues</a>.</p>
+<p>If you are reporting a bug, please include:</p>
+<ul class="simple">
+<li><p>Your operating system name and version.</p></li>
+<li><p>Any details about your local setup that might be helpful in troubleshooting.</p></li>
+<li><p>Detailed steps to reproduce the bug.</p></li>
+</ul>
+</div>
+<div class="section" id="submit-feedback">
+<h2>Submit Feedback<a class="headerlink" href="#submit-feedback" title="Permalink to this headline">¶</a></h2>
+<p>The best way to send feedback is to file an issue at <a class="reference external" href="https://github.com/qucontrol/krotov/issues">https://github.com/qucontrol/krotov/issues</a>.</p>
+<p>If you are proposing a feature:</p>
+<ul class="simple">
+<li><p>Explain in detail how it would work.</p></li>
+<li><p>Keep the scope as narrow as possible, to make it easier to implement.</p></li>
+<li><p>Remember that this is a volunteer-driven project, and that contributions
+are welcome :)</p></li>
+</ul>
+</div>
+<div class="section" id="pull-request-guidelines">
+<h2>Pull Request Guidelines<a class="headerlink" href="#pull-request-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>Before you submit a pull request, check that it meets these guidelines:</p>
+<ol class="arabic simple">
+<li><p>The pull request should include tests.</p></li>
+<li><p>If the pull request adds functionality, the docs should be updated. Put
+your new functionality into a function with a docstring, and add the
+feature to the list in <code class="docutils literal notranslate"><span class="pre">docs/04_features.rst</span></code> and/or <code class="docutils literal notranslate"><span class="pre">HISTORY.rst</span></code>.</p></li>
+<li><p>Check <a class="reference external" href="https://github.com/qucontrol/krotov/actions">https://github.com/qucontrol/krotov/actions</a>
+and make sure that the tests pass for all supported Python versions.</p></li>
+</ol>
+</div>
+<div class="section" id="get-started">
+<h2>Get Started!<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<p>Ready to contribute? Follow <a class="reference external" href="https://www.asmeurer.com/git-workflow/">Aaron Meurer’s Git Workflow Notes</a> (with <code class="docutils literal notranslate"><span class="pre">qucontrol/krotov</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sympy/sympy</span></code>)</p>
+<p>In short, if you are not a member of the <a class="reference external" href="https://github.com/qucontrol">qucontrol organization</a>,</p>
+<ol class="arabic simple">
+<li><p>Clone the repository from <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:qucontrol/krotov.git</span></code></p></li>
+<li><p>Fork the repo on GitHub to your personal account.</p></li>
+<li><p>Add your fork as a remote.</p></li>
+<li><p>Pull in the latest changes from the master branch.</p></li>
+<li><p>Create a topic branch.</p></li>
+<li><p>Make your changes and commit them (testing locally).</p></li>
+<li><p>Push changes to the topic branch on <em>your</em> remote.</p></li>
+<li><p>Make a pull request against the base master branch through the Github website of your fork.</p></li>
+</ol>
+<p>The project uses <a class="reference external" href="https://tox.readthedocs.io">tox</a> for automated testing accross multiple versions of Python
+and for various development tasks such as linting and generating the
+documentation. See <a class="reference internal" href="#developmentprerequisites"><span class="std std-ref">Development Prerequisites</span></a> for details.</p>
+<p>There is also a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> that wraps around tox, for
+convenience on Unix-based systems. In your checked-out clone, run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make <span class="nb">help</span>
+</pre></div>
+</div>
+<p>to see the available make targets. If you cannot use <code class="docutils literal notranslate"><span class="pre">make</span></code>, but want to use
+<code class="docutils literal notranslate"><span class="pre">tox</span></code> directly (e.g., on Windows), run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -av
+</pre></div>
+</div>
+<p>to see a list of tox environments and a description. For the initial
+configuration of tox environments, you may have to run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e bootstrap
+</pre></div>
+</div>
+<p>in order to set up the <code class="docutils literal notranslate"><span class="pre">tox.ini</span></code> configuration file.</p>
+<p>If you are a member of the <a class="reference external" href="https://github.com/qucontrol">qucontrol organization</a>, there is no need to fork
+<code class="docutils literal notranslate"><span class="pre">krotov</span></code> - you can directly pull and push to <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:qucontrol/krotov.git</span></code>.</p>
+</div>
+<div class="section" id="development-prerequisites">
+<span id="developmentprerequisites"></span><h2>Development Prerequisites<a class="headerlink" href="#development-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Contributing to the package’s developments requires that you have Python 3.7
+and <a class="reference external" href="https://tox.readthedocs.io">tox</a> installed. It is strongly recommended that you also have installations
+of all other supported Python versions. The recommended way to install multiple
+versions of Python at the same time is through <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a> (or <a class="reference external" href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> on
+Windows).</p>
+<p>Alternatively, you may install <a class="reference external" href="https://conda.io/docs/">conda</a> (via the <a class="reference external" href="https://www.anaconda.com/distribution/">Anaconda</a> or <a class="reference external" href="https://conda.io/en/latest/miniconda.html">Miniconda</a>
+distributions, or also through <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a>). As <code class="docutils literal notranslate"><span class="pre">conda</span></code> can create environments
+with any version of Python (independent of which Python version <code class="docutils literal notranslate"><span class="pre">conda</span></code> was
+originally installed with), this alleviates the need for managing multiple
+versions.
+The advantage of using <a class="reference external" href="https://conda.io/docs/">conda</a> is that you may be able to avoid installing the
+compilers necessary for Python extension packages. The disadvantage is that
+environment creation is slower and the resulting environments are bigger, and
+that you may run into occasional binary incompatibilities between conda packages.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you want to use <cite>conda</cite>, you must use the <code class="docutils literal notranslate"><span class="pre">tox-conda.ini</span></code> configuration
+file. That is, run all <code class="docutils literal notranslate"><span class="pre">make</span></code> comands as e.g.
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">TOXINI=tox-conda.ini</span> <span class="pre">test</span></code> and <code class="docutils literal notranslate"><span class="pre">tox</span></code> commands as e.g.
+<code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-c</span> <span class="pre">tox-conda.ini</span> <span class="pre">-e</span> <span class="pre">py35-test,py36-test,py37-test</span></code>. Alternatively,
+make <code class="docutils literal notranslate"><span class="pre">tox-conda.ini</span></code> the default by copying it to <code class="docutils literal notranslate"><span class="pre">tox.ini</span></code>.</p>
+</div>
+</div>
+<div class="section" id="branching-model">
+<span id="branchingmodel"></span><h2>Branching Model<a class="headerlink" href="#branching-model" title="Permalink to this headline">¶</a></h2>
+<p>For developers with direct access to the repository,
+<code class="docutils literal notranslate"><span class="pre">krotov</span></code> uses a simple branching model where all
+developments happens directly on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch. Releases are tags on
+<code class="docutils literal notranslate"><span class="pre">master</span></code>. All commits on <code class="docutils literal notranslate"><span class="pre">master</span></code> <em>should</em> pass all tests and be
+well-documented. This is so that <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">bisect</span></code> can be effective. For any
+non-trivial issue, it is recommended to create a topic branch, instead of
+working on <code class="docutils literal notranslate"><span class="pre">master</span></code>. There are no restrictions on commits on topic branches,
+they do not need to contain complete documentation, pass any tests, or even be
+able to run.</p>
+<p>To create a topic-branch named <code class="docutils literal notranslate"><span class="pre">issue1</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git branch issue1
+git checkout issue1
+</pre></div>
+</div>
+<p>You can then make commits, and push them to Github to trigger Continuous
+Integration testing:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git push -u origin issue1
+</pre></div>
+</div>
+<p>Commit early and often! At the same time, try to keep your topic branch
+as clean and organized as possible.</p>
+<ul class="simple">
+<li><p>Avoid having a series of meaningless granular commits like “start bugfix”,
+“continue development”, “add more work on bugfix”, “fix typos”, and so forth.
+Instead, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code> to add to your previous commit. This is
+the ideal way to “commit early and often”. You do not have to wait until a
+commit is “perfect”; it is a good idea to make hourly/daily “snapshots” of
+work in progress. Amending a commit also allows you to change the commit
+message of your last commit.</p></li>
+<li><p>You can combine multiple existing commits by “squashing” them. For example,
+use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span> <span class="pre">HEAD~4</span></code> to combined the previous four commits into one.
+See the <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">“Rewriting History” section of Pro Git book</a> for details (if you
+feel this is too far outside of your git comfort zone, just skip it).</p></li>
+<li><p>If you work on a topic branch for a long time, and there is significant work
+on <code class="docutils literal notranslate"><span class="pre">master</span></code> in the meantime, periodically rebase your topic branch on the
+current master (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">master</span></code>). Avoid merging <code class="docutils literal notranslate"><span class="pre">master</span></code> into your
+topic branch. See <a class="reference external" href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing">Merging vs. Rebasing</a>.</p></li>
+</ul>
+<p>If you have already pushed your topic branch to the remote origin, you can
+force-push the issue branch (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span></code>). If you are collaborating
+with others on the branch, coordinate with them before force pushing. A
+force-push rewrites history. You must never rewrite history on the <code class="docutils literal notranslate"><span class="pre">master</span></code>
+branch (nor will you be able to, as the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch is “protected” and
+can only be force-pushed to in coordination with the project maintainer).  If
+something goes wrong with any advanced “history rewriting”, there is always
+<a class="reference external" href="https://www.atlassian.com/git/tutorials/rewriting-history/git-reflog">“git reflog”</a> as a safety net – you will never lose work that was committed
+before.</p>
+<p>When you are done with a topic branch (the issue has been fixed), finish up by
+creating a pull-request for merging the branch into <code class="docutils literal notranslate"><span class="pre">master</span></code> (follow the
+propmts on the Github website).</p>
+<p>Summarize the changes of the branch relative to <code class="docutils literal notranslate"><span class="pre">master</span></code> in the pull request.</p>
+</div>
+<div class="section" id="commit-message-guidelines">
+<h2>Commit Message Guidelines<a class="headerlink" href="#commit-message-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>Write commit messages according to this template:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Short (50 chars or less) summary (&quot;subject line&quot;)
+
+More detailed explanatory text. Wrap it to 72 characters. The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely).
+
+Write your subject line in the imperative: &quot;Fix bug&quot; and not &quot;Fixed
+bug&quot; or &quot;Fixes bug.&quot; This convention matches up with commit messages
+generated by commands like git merge and git revert. A properly formed
+git commit subject line should always be able to complete the sentence
+&quot;If applied, this commit will &lt;your subject line here&gt;&quot;.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too.
+- Typically a hyphen or asterisk is used for the bullet, followed by a
+  single space. Use a hanging indent.
+
+You should reference any issue that is being addressed in the commit, as
+e.g. &quot;#1&quot; for issue #1. If the commit closes an issue, state this on the
+last line of the message (see below). This will automatically close the
+issue on Github as soon as the commit is pushed there.
+
+Closes #1
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://help.github.com/articles/closing-issues-using-keywords/">Closing issues using keywords</a> for details on references to issues that
+Github will understand.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>The Krotov package includes a full test-suite using <a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a>. We strive for a <a class="reference external" href="https://codecov.io/gh/qucontrol/krotov">test coverage</a> above 90%.</p>
+<p>From a checkout of the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> repository, you can use</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make <span class="nb">test</span>
+</pre></div>
+</div>
+<p>to run the entire test suite, or</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e py35-test,py36-test,py37-test
+</pre></div>
+</div>
+<p>if <code class="docutils literal notranslate"><span class="pre">make</span></code> is not available.</p>
+<p>The tests are organized in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> subfolder. It includes python scripts
+whose name start with <code class="docutils literal notranslate"><span class="pre">test_</span></code>, which contain functions whose names also start
+with <code class="docutils literal notranslate"><span class="pre">test_</span></code>. Any such functions in any such files are picked up by <a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a>
+for testing. In addition, <a class="reference external" href="https://docs.python.org/3.7/library/doctest.html">doctests</a> from any docstring or any documentation
+file (<code class="docutils literal notranslate"><span class="pre">*.rst</span></code>) are picked up (by the <a class="reference external" href="https://docs.pytest.org/en/latest/doctest.html">pytest doctest plugin</a>). Lastly, all
+<a class="reference internal" href="#contributeexamples"><span class="std std-ref">example notebooks</span></a> are validated as a test, through
+the <a class="reference external" href="https://nbval.readthedocs.io/en/latest/">nbval plugin</a>.</p>
+</div>
+<div class="section" id="code-style">
+<h2>Code Style<a class="headerlink" href="#code-style" title="Permalink to this headline">¶</a></h2>
+<p>All code must be compatible with <span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a>. The line length limit
+is 79 characters, although exceptions are permissible if this improves
+readability significantly.</p>
+<p>Beyond <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a>, this project adopts the <a class="reference external" href="https://github.com/ambv/black/#the-black-code-style">Black code style</a>, with
+<code class="docutils literal notranslate"><span class="pre">--skip-string-normalization</span> <span class="pre">--line-length</span> <span class="pre">79</span></code>. You can
+run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">black-check</span></code> or <code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">run-blackcheck</span></code> to check adherence to the
+code style, and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">black</span></code> or <code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">run-black</span></code> to apply it.</p>
+<p>Imports within python modules must be sorted according to the <a class="reference external" href="https://github.com/timothycrosley/isort#readme">isort</a>
+configuration in <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>. The command <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">isort-check</span></code> or <code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span>
+<span class="pre">run-isortcheck</span></code> checks whether all imports are sorted correctly, and <code class="docutils literal notranslate"><span class="pre">make</span>
+<span class="pre">isort</span></code> or <code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">run-isort</span></code> modifies all Python modules in-place with the
+proper sorting.</p>
+<p>The code style is enforced as part of the test suite, as well as through git
+pre-commit hooks that prevent committing code not does not meet the
+requirements. These hooks are managed through the <a class="reference external" href="https://pre-commit.com">pre-commit framework</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>After cloning the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> repository, you should run
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">bootstrap</span></code>, <code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">bootstrap</span></code>, or <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">scripts/bootstrap.py</span></code>
+from within the project root folder. These set up <code class="docutils literal notranslate"><span class="pre">tox</span></code>, and the
+pre-commit hooks</p>
+</div>
+<p>You may use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">flake8-check</span></code> or <code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">run-flake8</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span>
+<span class="pre">pylint-check</span></code> or <code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">run-pylint</span></code> for additional checks on the code with
+<a class="reference external" href="http://flake8.pycqa.org">flake8</a> and <a class="reference external" href="http://pylint.pycqa.org">pylint</a>, but there is no strict requirement for a perfect score
+with either one of these linters. They only serve as a guideline for code that
+might be improved.</p>
+</div>
+<div class="section" id="write-documentation">
+<span id="id1"></span><h2>Write Documentation<a class="headerlink" href="#write-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">krotov</span></code> package could always use more documentation, whether
+as part of the official docs, in docstrings, or even on the web in blog posts,
+articles, and such.</p>
+<p>The package documentation is generated with <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>, the
+documentation (and docstrings) are formatted using the
+<a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">Restructured Text markup language</a> (file extension <code class="docutils literal notranslate"><span class="pre">rst</span></code>).
+See also the <a class="reference external" href="https://matplotlib.org/sampledoc/cheatsheet.html">Matplotlib Sphinx cheat sheet</a> for some helpful tips.</p>
+<p>Each function or class must have a <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">docstring</a>; this docstring must
+be written in the <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/extensions/example_google.html#example-google">“Google Style” format</a> (as implemented by
+Sphinx’ <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">napoleon extension</a>). Docstrings and any other part of the
+documentation can include <a class="reference external" href="http://www.sphinx-doc.org/en/1.6/ext/math.html">mathematical formulas in LaTeX syntax</a>
+(using <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/extensions/math.html#module-sphinx.ext.mathjax">mathjax</a>). In addition to Sphinx’ normal syntax for inline math
+(<code class="docutils literal notranslate"><span class="pre">:math:`x`</span></code>), you may also use easier-to-read dollar signs (<code class="docutils literal notranslate"><span class="pre">$x$</span></code>).
+The Krotov package defines some custom tex macros for quantum mechanics, which
+you are strongly encouraged to use. These include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">\bra</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">$\bra{\Psi}$</span></code> for <span class="math notranslate nohighlight">\(\bra{\Psi}\)</span> (or <code class="docutils literal notranslate"><span class="pre">\\Bra{}</span></code> for auto-resizing).
+Do not use <code class="docutils literal notranslate"><span class="pre">\langle</span></code>/<code class="docutils literal notranslate"><span class="pre">\rangle</span></code>/<code class="docutils literal notranslate"><span class="pre">\vert</span></code> manually!</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\ket</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">$\ket{\Psi}$</span></code> for <span class="math notranslate nohighlight">\(\ket{\Psi}\)</span> (or <code class="docutils literal notranslate"><span class="pre">\Ket{}</span></code> for auto-resizing).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\Braket</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">$\Braket{\Phi}{\Psi}$</span></code> for <span class="math notranslate nohighlight">\(\Braket{\Phi}{\Psi}\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\Op</span></code> for quantum operators, e.g. <code class="docutils literal notranslate"><span class="pre">$\Op{H}$</span></code> for <span class="math notranslate nohighlight">\(\Op{H}\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\Abs</span></code> for absolute values, e.g. <code class="docutils literal notranslate"><span class="pre">$\Abs{x}$</span></code> for <span class="math notranslate nohighlight">\(\Abs{x}\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\AbsSq</span></code>  for the absolute-square, e.g. <code class="docutils literal notranslate"><span class="pre">$\AbsSq{\Braket{\Phi}{\Psi}}$</span></code> for <span class="math notranslate nohighlight">\(\AbsSq{\Braket{\Phi}{\Psi}}\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\avg</span></code> for the expectation values, e.g. <code class="docutils literal notranslate"><span class="pre">$\avg{\Op{H}}$</span></code> for <span class="math notranslate nohighlight">\(\avg{\Op{H}}\)</span> (or <code class="docutils literal notranslate"><span class="pre">\Avg{}</span></code> for auto-resizing).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\Norm</span></code> for the norm, e.g. <code class="docutils literal notranslate"><span class="pre">$\Norm{\ket{\Psi}}$</span></code> for <span class="math notranslate nohighlight">\(\Norm{\ket{\Psi}}\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\identity</span></code> for the identity operator, <span class="math notranslate nohighlight">\(\identity\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\Liouville</span></code> for the Liouvillian symbol, <span class="math notranslate nohighlight">\(\Liouville\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\DynMap</span></code> for the symbolic dynamical map, <span class="math notranslate nohighlight">\(\DynMap\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\dd</span></code> for the differential, e.g. <code class="docutils literal notranslate"><span class="pre">$\int</span> <span class="pre">f(x)</span> <span class="pre">\dd</span> <span class="pre">x$</span></code> for <span class="math notranslate nohighlight">\(\int f(x) \dd x\)</span>.</p></li>
+<li><p>Function names / mathematical operators <code class="docutils literal notranslate"><span class="pre">\tr</span></code>, <code class="docutils literal notranslate"><span class="pre">\diag</span></code>, <code class="docutils literal notranslate"><span class="pre">\abs</span></code>, <code class="docutils literal notranslate"><span class="pre">\pop</span></code>.</p></li>
+<li><p>Text labels <code class="docutils literal notranslate"><span class="pre">\aux</span></code>, <code class="docutils literal notranslate"><span class="pre">\opt</span></code>, <code class="docutils literal notranslate"><span class="pre">\tgt</span></code>, <code class="docutils literal notranslate"><span class="pre">\init</span></code>, <code class="docutils literal notranslate"><span class="pre">\lab</span></code>, <code class="docutils literal notranslate"><span class="pre">\rwa</span></code>.</p></li>
+</ul>
+<p>Also see <a class="reference internal" href="#math-in-example-notebooks"><span class="std std-ref">Math in Example Notebooks</span></a>.</p>
+<p>You may use the <a class="reference external" href="https://sphinxcontrib-bibtex.readthedocs.io/en/latest/">BibTeX</a> plugin for citations.</p>
+<p>At any point, from a checkout of the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> repository, you may run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make docs
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e docs
+</pre></div>
+</div>
+<p>to generate the documentation locally.</p>
+</div>
+<div class="section" id="deploy-the-documentation">
+<h2>Deploy the documentation<a class="headerlink" href="#deploy-the-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The documentation is automatically deployed to
+<a class="reference external" href="https://qucontrol.github.io/krotov/">https://qucontrol.github.io/krotov/</a> (the <a class="reference external" href="https://pages.github.com">gh-pages</a> associated with the
+<a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package’s Github repository) every time commits are pushed to
+Github. This is done via
+<a class="reference external" href="https://github.com/qucontrol/krotov/actions?query=workflow%3ADocs">Github Actions</a>
+as configured in the
+<a class="reference external" href="https://github.com/qucontrol/krotov/blob/master/.github/workflows/docs.yml">workflow file</a>
+at <code class="docutils literal notranslate"><span class="pre">.github/workflows/docs.yml</span></code>.
+The documentation for all versions of <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> is visible on the
+<code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> git branch. Any changes that are committed and pushed from this
+branch will be deployed to the online documentation. Do not routinely perform
+manual edits on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch! Let Github Actions do its job of
+automatically deploying documentation instead.</p>
+</div>
+<div class="section" id="contribute-examples">
+<span id="contributeexamples"></span><h2>Contribute Examples<a class="headerlink" href="#contribute-examples" title="Permalink to this headline">¶</a></h2>
+<p>Examples should be contributed in the form of <a class="reference external" href="https://jupyter.readthedocs.io/en/latest/index.html">Jupyter notebooks</a>.</p>
+<p>Example notebooks are automatically rendered as part of the documentation
+(<a class="reference internal" href="09_examples.html#krotov-example-notebooks"><span class="std std-ref">Examples</span></a>), and they are also verified by the automated
+tests. For this to work properly, the following steps must be taken:</p>
+<ul>
+<li><p>Put all imports near the top of the notebook, with <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">NBVAL_IGNORE_OUTPUT</span></code>
+as the first line. Use the <a class="reference external" href="https://github.com/rasbt/watermark">watermark</a> package to print out the versions of
+imported packages. For example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
+%load_ext watermark
+import qutip
+import numpy as np
+import scipy
+import matplotlib
+import matplotlib.pylab as plt
+%watermark -v --iversions
+</pre></div>
+</div>
+</li>
+<li><p>Put the notebook in the folder <code class="docutils literal notranslate"><span class="pre">docs/notebooks/</span></code>.</p></li>
+<li><p>Before committing, re-evaluate all example notebooks in a well-defined
+virtual environment by running</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make notebooks
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Check that the examples can be verified across different Python version by running</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make <span class="nb">test</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>You may also verify that the example is properly integrated in the documentation by running</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make docs
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="math-in-example-notebooks">
+<span id="id2"></span><h3>Math in Example Notebooks<a class="headerlink" href="#math-in-example-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>You may use the same tex macros described in the <a class="reference internal" href="#write-documentation"><span class="std std-ref">Write Documentation</span></a> section.
+However, for the macros to work when viewing the notebook by itself, they must
+be redefined locally. To this end, add a markdown cell underneath the top cell
+that contains the imported packages (see above). The cell must contain the following:</p>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span><span class="s">$</span><span class="nv">\newcommand</span><span class="nb">{tr}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\operatorname</span><span class="nb">{tr}}</span>
+<span class="nv">\newcommand</span><span class="nb">{diag}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\operatorname</span><span class="nb">{diag}}</span>
+<span class="nv">\newcommand</span><span class="nb">{abs}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\operatorname</span><span class="nb">{abs}}</span>
+<span class="nv">\newcommand</span><span class="nb">{pop}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\operatorname</span><span class="nb">{pop}}</span>
+<span class="nv">\newcommand</span><span class="nb">{aux}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\text</span><span class="nb">{aux}}</span>
+<span class="nv">\newcommand</span><span class="nb">{opt}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\text</span><span class="nb">{opt}}</span>
+<span class="nv">\newcommand</span><span class="nb">{tgt}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\text</span><span class="nb">{tgt}}</span>
+<span class="nv">\newcommand</span><span class="nb">{init}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\text</span><span class="nb">{init}}</span>
+<span class="nv">\newcommand</span><span class="nb">{lab}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\text</span><span class="nb">{lab}}</span>
+<span class="nv">\newcommand</span><span class="nb">{rwa}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\text</span><span class="nb">{rwa}}</span>
+<span class="nv">\newcommand</span><span class="nb">{bra}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\langle</span><span class="nb">#</span><span class="m">1</span><span class="nv">\vert</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{ket}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\vert</span><span class="nb">#</span><span class="m">1</span><span class="nv">\rangle</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{Bra}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\left\langle</span><span class="nb">#</span><span class="m">1</span><span class="nv">\right\vert</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{Ket}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\left\vert</span><span class="nb">#</span><span class="m">1</span><span class="nv">\right\rangle</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{Braket}</span><span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="nb">{</span><span class="nv">\left\langle</span><span class="nb"> #</span><span class="m">1</span><span class="nv">\vphantom</span><span class="nb">{#</span><span class="m">2</span><span class="nb">} </span><span class="nv">\mid</span><span class="nb"> #</span><span class="m">2</span><span class="nv">\vphantom</span><span class="nb">{#</span><span class="m">1</span><span class="nb">}</span><span class="nv">\right\rangle</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{op}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\hat</span><span class="nb">{#</span><span class="m">1</span><span class="nb">}}</span>
+<span class="nv">\newcommand</span><span class="nb">{Op}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\hat</span><span class="nb">{#</span><span class="m">1</span><span class="nb">}}</span>
+<span class="nv">\newcommand</span><span class="nb">{dd}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\,\text</span><span class="nb">{d}}</span>
+<span class="nv">\newcommand</span><span class="nb">{Liouville}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\mathcal</span><span class="nb">{L}}</span>
+<span class="nv">\newcommand</span><span class="nb">{DynMap}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\mathcal</span><span class="nb">{E}}</span>
+<span class="nv">\newcommand</span><span class="nb">{identity}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\mathbf</span><span class="nb">{</span><span class="m">1</span><span class="nb">}}</span>
+<span class="nv">\newcommand</span><span class="nb">{Norm}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\lVert</span><span class="nb">#</span><span class="m">1</span><span class="nv">\rVert</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{Abs}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\left\vert</span><span class="nb">#</span><span class="m">1</span><span class="nv">\right\vert</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{avg}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\langle</span><span class="nb">#</span><span class="m">1</span><span class="nv">\rangle</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{Avg}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\left\langle</span><span class="nb">#</span><span class="m">1</span><span class="nv">\right\rangle</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{AbsSq}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">{</span><span class="nv">\left\vert</span><span class="nb">#</span><span class="m">1</span><span class="nv">\right\vert</span><span class="nb">^</span><span class="m">2</span><span class="nb">}</span>
+<span class="nv">\newcommand</span><span class="nb">{Re}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\operatorname</span><span class="nb">{Re}}</span>
+<span class="nv">\newcommand</span><span class="nb">{Im}</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nb">{</span><span class="nv">\operatorname</span><span class="nb">{Im}}</span><span class="s">$</span>
+</pre></div>
+</div>
+<p>Upon executing the cell the definitions will be hidden, but the defined macros
+will be available in any cell in the rest of the notebook.</p>
+</div>
+</div>
+<div class="section" id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+<p>Releases should follow <a class="reference external" href="https://semver.org">Semantic Versioning</a>, and version numbers published to
+<a class="reference external" href="http://pypi.org">PyPI</a> must be compatible with <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0440"><strong>PEP 440</strong></a>.</p>
+<p>In short, versions number follow the pattern <cite>major.minor.patch</cite>, e.g.
+<code class="docutils literal notranslate"><span class="pre">0.1.0</span></code> for the first release, and <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code> for the first <em>stable</em> release.
+If necessary, pre-release versions might be published as e.g:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1.0.0-dev1  # developer&#39;s preview 1 for release 1.0.0
+1.0.0-rc1   # release candidate 1 for 1.0.0
+</pre></div>
+</div>
+<p>Errors in the release metadata or documentation only may be fixed in a
+post-release, e.g.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1.0.0.post1  # first post-release after 1.0.0
+</pre></div>
+</div>
+<p>Post-releases should be used sparingly, but they are acceptable even though
+they are not supported by the <a class="reference external" href="https://semver.org">Semantic Versioning</a> specification.</p>
+<p>The current version is available through the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> attribute of the
+<a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">krotov</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">krotov</span><span class="o">.</span><span class="n">__version__</span>   
+</pre></div>
+</div>
+<p>Between releases, <code class="docutils literal notranslate"><span class="pre">__version__</span></code> on the master branch should either be the
+version number of the last release, with “+dev” appended (as a
+<a class="reference external" href="https://www.python.org/dev/peps/pep-0440/#local-version-identifiers">“local version identifier”</a>), or the version number of the next planned
+release, with “-dev” appended (<a class="reference external" href="https://www.python.org/dev/peps/pep-0440/#pre-releases">“pre-release identifier”</a> with extra dash).
+The version string “1.0.0-dev1+dev” is a valid value after the “1.0.0-dev1”
+pre-release. The “+dev” suffix must never be included in a release to <a class="reference external" href="http://pypi.org">PyPI</a>.</p>
+<p>Note that <a class="reference external" href="https://twine.readthedocs.io/en/latest/">twine</a> applies <a class="reference external" href="https://legacy.python.org/dev/peps/pep-0440/#id29">normalization</a> to the above recommended forms to
+make them strictly compatible with <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0440"><strong>PEP 440</strong></a>, before uploading to <a class="reference external" href="http://pypi.org">PyPI</a>. Users
+installing the package through <a class="reference external" href="https://pip.readthedocs.io/en/stable/">pip</a> may use the original version specification
+as well as the normalized one (or any other variation that normalizes to the
+same result).</p>
+</div>
+<div class="section" id="making-a-release">
+<h2>Making a Release<a class="headerlink" href="#making-a-release" title="Permalink to this headline">¶</a></h2>
+<p>Relesases can only be made by administrators of the Krotov Github repo who are
+also listed as Maintainers on <a class="reference external" href="https://pypi.org/project/krotov/">https://pypi.org/project/krotov/</a>.</p>
+<p>They must have GPG set up to allow for signed commits, and be able to locally
+produce documentation artifacts (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-artifacts</span></code>).</p>
+<p>A release is made by running</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make release
+</pre></div>
+</div>
+<p>which executes <code class="docutils literal notranslate"><span class="pre">scripts/release.py</span></code>. Follow all the prompts.</p>
+<p>Releases must be tagged in git, using the version string prefixed by “v”,
+e.g. <code class="docutils literal notranslate"><span class="pre">v1.0.0-dev1</span></code> and <code class="docutils literal notranslate"><span class="pre">v1.0.0</span></code>. As prompted for by the release script,
+after pushing the tag, an official Github-release must be created manually at
+<a class="reference external" href="https://github.com/qucontrol/krotov/releases">https://github.com/qucontrol/krotov/releases</a>, with the proper release notes and
+the documentation artifacts as binary attachments.</p>
+</div>
+<div class="section" id="developers-how-tos">
+<h2>Developers’ How-Tos<a class="headerlink" href="#developers-how-tos" title="Permalink to this headline">¶</a></h2>
+<p>The following assumes your current working directory is a checkout of
+<code class="docutils literal notranslate"><span class="pre">krotov</span></code>, and that you have successfully run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> (which creates
+the tox environments that development relies on).</p>
+<div class="section" id="how-to-run-a-jupyter-notebook-server-for-working-on-the-example-notebooks">
+<h3>How to run a jupyter notebook server for working on the example notebooks<a class="headerlink" href="#how-to-run-a-jupyter-notebook-server-for-working-on-the-example-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>A notebook server that is isolated to the proper testing environment can be started via the Makefile:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make jupyter-notebook
+</pre></div>
+</div>
+<p>This is equivalent to:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e run-cmd -- jupyter notebook --config<span class="o">=</span>/dev/null
+</pre></div>
+</div>
+<p>You may run this with your own options, if you prefer. The
+<code class="docutils literal notranslate"><span class="pre">--config=/dev/null</span></code> guarantees that the notebook server is completely
+isolated. Otherwise, configuration files from your home directly (see
+<a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html#jupyter-s-common-configuration-system">Jupyter’s Common Configuration system</a>)  may influence the server. Of
+course, if you know what you’re doing, you may want this.</p>
+<p>If you prefer, you may also use the newer jupyterlab:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make jupyter-lab
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-convert-an-example-notebook-to-a-script-for-easier-debugging">
+<h3>How to convert an example notebook to a script for easier debugging<a class="headerlink" href="#how-to-convert-an-example-notebook-to-a-script-for-easier-debugging" title="Permalink to this headline">¶</a></h3>
+<p>Interactive debugging in notebooks is difficult. It becomes much easier if
+you convert the notebook to a script first.  To convert a notebook to an
+(I)Python script and run it with automatic debugging, execute e.g.:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e run-cmd -- jupyter nbconvert --to<span class="o">=</span>python --stdout docs/notebooks/01_example_transmon_xgate.ipynb &gt; debug.py
+tox -e run-cmd -- ipython --pdb debug.py
+</pre></div>
+</div>
+<p>You can then also set a manual breakpoint by inserting the following line anywhere in the code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.terminal.debugger</span> <span class="kn">import</span> <span class="n">set_trace</span><span class="p">;</span> <span class="n">set_trace</span><span class="p">()</span> <span class="c1"># DEBUG</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-make-git-diff-work-for-notebooks">
+<h3>How to make <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> work for notebooks<a class="headerlink" href="#how-to-make-git-diff-work-for-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>Install <a class="reference external" href="https://nbdime.readthedocs.io/en/latest/index.html">nbdime</a> and run <code class="docutils literal notranslate"><span class="pre">nbdime</span> <span class="pre">config-git</span> <span class="pre">--enable</span> <span class="pre">--global</span></code> to <a class="reference external" href="https://nbdime.readthedocs.io/en/latest/index.html#git-integration-quickstart">enable the git integration</a>.</p>
+</div>
+<div class="section" id="how-to-commit-failing-tests-or-example-notebooks">
+<h3>How to commit failing tests or example notebooks<a class="headerlink" href="#how-to-commit-failing-tests-or-example-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>The test-suite on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch should always pass without error. If you
+would like to commit any example notebooks or tests that currently fail, as a
+form of <a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven development</a>, you have two options:</p>
+<ul>
+<li><p>Push onto a topic branch (which are allowed to have failing tests), see
+the <a class="reference internal" href="#branchingmodel"><span class="std std-ref">Branching Model</span></a>. The failing tests can then be fixed by
+adding commits to the same branch.</p></li>
+<li><p>Mark the test as failing. For normal tests, add a decorator:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>@pytest.mark.xfail
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://docs.pytest.org/en/latest/skipping.html">pytest documentation on skip and xfail</a> for details.</p>
+<p>For notebooks, the equivalent to the decorator is to add a comment to the
+first line of the failing cell, either:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_RAISES_EXCEPTION</span>
+</pre></div>
+</div>
+<p>(preferably), or:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_SKIP</span>
+</pre></div>
+</div>
+<p>(this may affect subsequent cells, as the marked cell is not executed at all).
+See the <a class="reference external" href="https://nbval.readthedocs.io/en/latest/#Skipping-specific-cells">documentation of the nbval pluging on skipping and exceptions</a> for details.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="how-to-run-a-subset-of-tests">
+<h3>How to run a subset of tests<a class="headerlink" href="#how-to-run-a-subset-of-tests" title="Permalink to this headline">¶</a></h3>
+<p>To run e.g. only the tests defined in <code class="docutils literal notranslate"><span class="pre">tests/test_krotov.py</span></code>, use any of the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make <span class="nb">test</span> <span class="nv">TESTS</span><span class="o">=</span>tests/test_krotov.py
+
+tox -e py37-test -- tests/test_krotov.py
+
+tox -e run-cmd -- pytest tests/test_krotov.py
+
+.tox/py37/bin/pytest tests/test_krotov.py
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests">pytest test selection docs</a> for details.</p>
+</div>
+<div class="section" id="how-to-run-only-as-single-test">
+<h3>How to run only as single test<a class="headerlink" href="#how-to-run-only-as-single-test" title="Permalink to this headline">¶</a></h3>
+<p>Decorate the test with e.g. <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.xxx</span></code>, and then run, e.g:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e run-cmd -- pytest -m xxx tests/
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://docs.pytest.org/en/latest/example/markers.html">pytest documentation on markers</a> for details.</p>
+</div>
+<div class="section" id="how-to-run-only-the-doctests">
+<h3>How to run only the doctests<a class="headerlink" href="#how-to-run-only-the-doctests" title="Permalink to this headline">¶</a></h3>
+<p>Run the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e run-cmd -- pytest --doctest-modules src
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-go-into-an-interactive-debugger">
+<h3>How to go into an interactive debugger<a class="headerlink" href="#how-to-go-into-an-interactive-debugger" title="Permalink to this headline">¶</a></h3>
+<p>Optionally, install the <cite>pdbpp</cite> package into the testing environment, for a
+better experience:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e run-cmd -- pip install pdbpp
+</pre></div>
+</div>
+<p>Then:</p>
+<ul>
+<li><p>before the line where you went to enter the debugger, insert a line:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from IPython.terminal.debugger import set_trace<span class="p">;</span> set_trace<span class="o">()</span> <span class="c1"># DEBUG</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">pytest</span></code> with the option <code class="docutils literal notranslate"><span class="pre">-s</span></code>, e.g.:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tox -e run-cmd -- pytest -m xxx -s tests/
+</pre></div>
+</div>
+</li>
+</ul>
+<p>You may also see the <a class="reference external" href="https://docs.pytest.org/en/latest/usage.html#dropping-to-pdb-python-debugger-on-failures">pytest documentation on automatic debugging</a>.</p>
+</div>
+<div class="section" id="how-to-see-the-debug-logger-output-in-the-example-notebooks">
+<h3>How to see the debug logger output in the example notebooks<a class="headerlink" href="#how-to-see-the-debug-logger-output-in-the-example-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> routine generates some logger messages for
+debugging purposes. To see these messages, set the level of “krotov” logger to
+INFO or DEBUG:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;krotov&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also configure the logger with custom formatters, e.g. to show the
+messages with time stamps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># disable root handlers</span>
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://docs.python.org/3/howto/logging.html#configuring-logging">Configure Logging</a> section of the Python documentation for more details.</p>
+</div>
+<div class="section" id="how-to-use-quantum-mechanical-tex-macros">
+<h3>How to use quantum mechanical tex macros<a class="headerlink" href="#how-to-use-quantum-mechanical-tex-macros" title="Permalink to this headline">¶</a></h3>
+<p>For docstrings or <code class="docutils literal notranslate"><span class="pre">*.rst</span></code> files, see <a class="reference internal" href="#write-documentation"><span class="std std-ref">Write Documentation</span></a>. For notebooks, see <a class="reference internal" href="#math-in-example-notebooks"><span class="std std-ref">Math in Example Notebooks</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="03_authors.html" class="btn btn-neutral float-right" title="Credits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="01_overview.html" class="btn btn-neutral float-left" title="Krotov Python Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Michael Goerz et al..
+      <span class="lastupdated">
+        Last updated on Jan 13, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
