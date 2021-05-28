@@ -38,13 +38,12 @@ if sys.platform != 'linux':
 
 # requirements for development (testing, generating docs)
 dev_requirements = [
-    'better-apidoc==0.3.1',
+    'better-apidoc==0.3.2',
     'click',
     'codecov',
     'coverage<5.0',
     # https://github.com/computationalmodelling/nbval/issues/129
-    'doctr',
-    'doctr-versions-menu',
+    'docs-versions-menu',
     'flake8',
     'gitpython',
     'isort==4.3.*',
@@ -59,7 +58,7 @@ dev_requirements = [
     'pytest',
     'pytest-cov<=2.6.1',
     'pytest-xdist',
-    'sphinx',
+    'sphinx<4.0',
     'sphinx-autobuild',
     'sphinx-copybutton',
     'sphinx_rtd_theme',
@@ -87,10 +86,10 @@ setup(
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Framework :: Jupyter',
         'Natural Language :: English',
         'Operating System :: OS Independent',
@@ -100,7 +99,7 @@ setup(
     description=(
         "Python implementation of Krotov's method for quantum optimal control"
     ),
-    python_requires='~=3.5',
+    python_requires='~=3.6',
     install_requires=requirements,
     extras_require={'dev': dev_requirements, 'extras': dev_extras},
     license="BSD license",

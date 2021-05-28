@@ -67,7 +67,7 @@ nitpicky = True
 nitpick_ignore = [("py:class", "callable")]
 
 extensions = [
-    "doctr_versions_menu",
+    "docs_versions_menu",
     "nbsphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
@@ -506,7 +506,7 @@ html_show_sourcelink = False
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = None
 
-doctr_versions_menu_conf = {'menu_title': 'Docs'}
+docs_versions_menu_conf = {'menu_title': 'Docs'}
 
 # -- Options for nbsphinx -0---------------------------------------------------
 

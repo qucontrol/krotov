@@ -116,7 +116,7 @@ If you are a member of the `qucontrol organization`_, there is no need to fork
 Development Prerequisites
 -------------------------
 
-Contributing to the package's developments requires that you have Python 3.7
+Contributing to the package's developments requires that you have Python 3.8
 and tox_ installed. It is strongly recommended that you also have installations
 of all other supported Python versions. The recommended way to install multiple
 versions of Python at the same time is through pyenv_ (or pyenv-win_ on
@@ -136,7 +136,7 @@ that you may run into occasional binary incompatibilities between conda packages
    If you want to use `conda`, you must use the ``tox-conda.ini`` configuration
    file. That is, run all ``make`` comands as e.g.
    ``make TOXINI=tox-conda.ini test`` and ``tox`` commands as e.g.
-   ``tox -c tox-conda.ini -e py35-test,py36-test,py37-test``. Alternatively,
+   ``tox -c tox-conda.ini -e py38-test``. Alternatively,
    make ``tox-conda.ini`` the default by copying it to ``tox.ini``.
 
 .. _pyenv: https://github.com/pyenv/pyenv
@@ -264,7 +264,7 @@ to run the entire test suite, or
 
 .. code-block:: shell
 
-    tox -e py35-test,py36-test,py37-test
+    tox -e py38-test
 
 if ``make`` is not available.
 
@@ -278,7 +278,7 @@ the `nbval plugin`_.
 
 .. _test coverage: https://codecov.io/gh/qucontrol/krotov
 .. _pytest: https://docs.pytest.org/en/latest/
-.. _doctests: https://docs.python.org/3.7/library/doctest.html
+.. _doctests: https://docs.python.org/3.8/library/doctest.html
 .. _pytest doctest plugin: https://docs.pytest.org/en/latest/doctest.html
 .. _nbval plugin: https://nbval.readthedocs.io/en/latest/
 
@@ -680,11 +680,11 @@ To run e.g. only the tests defined in ``tests/test_krotov.py``, use any of the f
 
     make test TESTS=tests/test_krotov.py
 
-    tox -e py37-test -- tests/test_krotov.py
+    tox -e py38-test -- tests/test_krotov.py
 
     tox -e run-cmd -- pytest tests/test_krotov.py
 
-    .tox/py37/bin/pytest tests/test_krotov.py
+    .tox/py38/bin/pytest tests/test_krotov.py
 
 See the `pytest test selection docs`_ for details.
 
