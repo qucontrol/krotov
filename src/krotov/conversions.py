@@ -13,6 +13,8 @@ import warnings
 
 import numpy as np
 
+from .parametrization import ParametrizedArray
+
 
 __all__ = [
     'control_onto_interval',
@@ -116,25 +118,28 @@ def discretize(control, tlist, args=(None,), kwargs=None, via_midpoints=False):
                 kwargs=kwargs,
                 via_midpoints=False,
             )
-            return pulse_onto_tlist(pulse_on_midpoints)
+            result = pulse_onto_tlist(pulse_on_midpoints)
         else:
             # relies on np.ComplexWarning being thrown as an error
-            return np.array(
+            result = np.array(
                 [float(control(t, *args, **kwargs)) for t in tlist],
                 dtype=np.float64,
             )
     elif isinstance(control, (np.ndarray, list)):
         # relies on np.ComplexWarning being thrown as an error
-        control = np.array([float(v) for v in control], dtype=np.float64)
-        if len(control) != len(tlist):
+        result = np.array([float(v) for v in control], dtype=np.float64)
+        if len(result) != len(tlist):
             raise ValueError(
                 "If control is an array, it must of the same length as tlist"
             )
-        return control
     else:
         raise TypeError(
             "control must be either a callable func(t, args) or a numpy array"
         )
+    if hasattr(control, 'parametrization'):
+        return ParametrizedArray(result, control.parametrization)
+    else:
+        return result
 
 
 def extract_controls(objectives):
@@ -354,6 +359,8 @@ def control_onto_interval(control):
     if isinstance(control, np.ndarray):
         assert len(control.shape) == 1  # must be 1D array
         pulse = np.zeros(len(control) - 1, dtype=control.dtype.type)
+        if hasattr(control, 'parametrization'):
+            pulse = ParametrizedArray(pulse, control.parametrization)
         pulse[0] = control[0]
         for i in range(1, len(control) - 1):
             pulse[i] = 2.0 * control[i] - pulse[i - 1]
@@ -383,6 +390,8 @@ def pulse_onto_tlist(pulse):
     of the input values before and after the point.
     """
     control = np.zeros(len(pulse) + 1, dtype=pulse.dtype.type)
+    if hasattr(pulse, 'parametrization'):
+        control = ParametrizedArray(control, pulse.parametrization)
     control[0] = pulse[0]
     for i in range(1, len(control) - 1):
         control[i] = 0.5 * (pulse[i - 1] + pulse[i])

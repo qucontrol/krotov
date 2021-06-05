@@ -137,4 +137,7 @@ def derivative_wrt_pulse(
             raise NotImplementedError(
                 "Time-dependent collapse operators not implemented"
             )
+    if hasattr(pulses[i_pulse], 'parametrization'):
+        ϵ = pulses[i_pulse][time_index]
+        mu *= pulses[i_pulse].parametrization.derivative(ϵ)
     return mu
