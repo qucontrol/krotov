@@ -39,15 +39,18 @@ for functionals defined in Hilbert space, or
 
 in Liouville space, using the abstract
 Hilbert-Schmidt notation :math:`\langle\!\langle a \vert b \rangle\!\rangle
-\equiv \tr[a^\dagger b]`.
-Passing a specific `chi_constructor` results in the minimization of the final
-time functional from which that `chi_constructor` was derived.
+\equiv \tr[a^\dagger b]`. The notation on the right hand side is a `Wirtinger
+derivative`_, see Eq. :eq:`wirtinger_deriv`. Passing a specific
+`chi_constructor` results in the minimization of the final time functional from
+which that `chi_constructor` was derived.
 
 The functions in this module that evaluate functionals are intended for use
 inside a function that is passed as an `info_hook` to :func:`.optimize_pulses`.
 Thus, they calculate $J_T$ from the same keyword arguments as the `info_hook`.
 The values for $J_T$ may be used in a convergence analysis, see
 :mod:`krotov.convergence`.
+
+.. _Wirtinger derivative: https://en.wikipedia.org/wiki/Wirtinger_derivatives
 """
 import logging
 

@@ -415,6 +415,18 @@ a single state-to-state transition (:math:`N=1`),
 cf. :func:`krotov.functionals.chis_ss` and the :mod:`krotov.functionals` module
 in general.
 
+More precisely, the right hand side of Eq. :eq:`chi_boundary` is a `Wirtinger derivative`_. That is, if the j'th component of $\ket{\phi_k(T)}$ is the complex number $x_j + \ii y_j$ then the j'th component of $\ket{\chi_k(T)}$ is
+
+.. math::
+   :label: wirtinger_deriv
+
+    \chi_j = - \frac{1}{2} \left(\frac{\partial J_T}{\partial x_j} + \ii \frac{\partial J_T}{\partial y_j} \right)\,.
+
+Generally, though, the state $\ket{\chi_k(T)}$ can be calculated simply by fully expanding $J_T$ and treating co-states as independent variables, as in the example for $J_{T,ss}$ above. Hence the intuitive notation in Eq. :eq:`chi_boundary`.
+
+
+.. _Wirtinger derivative: https://en.wikipedia.org/wiki/Wirtinger_derivatives
+
 
 
 .. _SecondOrderUpdate:
@@ -535,7 +547,7 @@ control, so that :math:`\partial \Op{H} / \partial \epsilon(t)` is not
 time-dependent. The scheme proceeds as follows:
 
 #. Construct the states :math:`\{\ket{\chi^{(i-1)}_k(T)}\}` according to
-   Eq. :eq:`chi_boundary`. For most functionals,
+   Wirtinger derivative in Eq. :eq:`chi_boundary`. For most functionals,
    specifically any that are more than linear in the overlaps
    :math:`\tau_k` defined in Eq. :eq:`tauk`, the states
    :math:`\{\ket{\chi^{(i-1)}_k(T)}\}` depend on the states
