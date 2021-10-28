@@ -45,6 +45,7 @@ from . import (
     mu,
     objectives,
     parallelization,
+    parametrization,
     propagators,
     result,
     second_order,

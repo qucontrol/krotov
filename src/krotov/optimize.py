@@ -21,6 +21,7 @@ from .conversions import (
 from .info_hooks import chain
 from .mu import derivative_wrt_pulse
 from .parallelization import USE_THREADPOOL_LIMITS
+from .parametrization import ParametrizedArray
 from .propagators import Propagator, expm
 from .result import Result
 from .second_order import _overlap
@@ -441,7 +442,7 @@ def optimize_pulses(
         if second_order:
             for i_obj in range(len(objectives)):
                 forward_states[i_obj][0] = objectives[i_obj].initial_state
-        delta_eps = [
+        delta_u = [
             np.zeros(len(tlist) - 1, dtype=np.complex128) for _ in guess_pulses
         ]
         optimized_pulses = copy.deepcopy(guess_pulses)
@@ -467,12 +468,12 @@ def optimize_pulses(
                     update *= chi_norms[i_obj]
                     if second_order:
                         update += 0.5 * σ * overlap(delta_phis[i_obj], μ(Ψ))
-                    delta_eps[i_pulse][time_index] += update
+                    delta_u[i_pulse][time_index] += update
                 λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
-                Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag  # ∈ ℝ
-                g_a_integrals[i_pulse] += abs(Δϵ) ** 2 * dt  # dt may vary!
-                optimized_pulses[i_pulse][time_index] += Δϵ
+                Δu = (S_t / λₐ) * delta_u[i_pulse][time_index].imag  # ∈ ℝ
+                g_a_integrals[i_pulse] += abs(Δu) ** 2 * dt  # dt may vary!
+                _add_update(optimized_pulses[i_pulse], time_index, Δu)
             # forward propagation
             fw_states = parallel_map[2](
                 _forward_propagation_step,
@@ -882,6 +883,16 @@ def _backward_propagation(
         storage_array[time_index] = state
     logger.info("Finished backward propagation of state %d", i_state)
     return storage_array
+
+
+def _add_update(pulse, time_index, Δu):
+    if isinstance(pulse, ParametrizedArray):
+        ϵ = pulse[time_index]
+        u = pulse.parametrization.parametrize(ϵ)
+        pulse[time_index] = pulse.parametrization.unparametrize(u + Δu)
+    else:
+        # ϵ = u  ⇒  Δϵ = Δu
+        pulse[time_index] += Δu
 
 
 def _forward_propagation_step(
