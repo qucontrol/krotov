@@ -470,8 +470,10 @@ def optimize_pulses(
                     delta_eps[i_pulse][time_index] += update
                 λₐ = lambda_vals[i_pulse]
                 S_t = shape_arrays[i_pulse][time_index]
-                Δϵ = (S_t / λₐ) * delta_eps[i_pulse][time_index].imag  # ∈ ℝ
-                g_a_integrals[i_pulse] += abs(Δϵ) ** 2 * dt  # dt may vary!
+                Δϵ_1 = delta_eps[i_pulse][time_index].imag  # for "step size" 1
+                Δϵ = (S_t / λₐ) * Δϵ_1  # ∈ ℝ
+                g_a_integrals[i_pulse] += (S_t / λₐ) * abs(Δϵ_1) ** 2 * dt
+                # dt may vary! -- hence we've included it in each summand
                 optimized_pulses[i_pulse][time_index] += Δϵ
             # forward propagation
             fw_states = parallel_map[2](
