@@ -2,6 +2,13 @@
 History
 =======
 
+
+(next version)
+--------------
+
+* Bugfix: `∫gₐdt` and total functional were reported incorrectly (`#96`_, thanks to `@daviehh`_)
+
+
 1.2.1 (2021-01-13)
 ------------------
 
@@ -126,6 +133,7 @@ Note: due to the changes in the time discretization of the controls and update s
 .. _@nathanshammah: https://github.com/nathanshammah
 .. _@zachmanson: https://github.com/zachmanson
 .. _@loganbvh: https://github.com/loganbvh
+.. _@daviehh: https://github.com/daviehh
 .. _Alberto Castro: https://www.bifi.es/~acastro/
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
@@ -156,3 +164,4 @@ Note: due to the changes in the time discretization of the controls and update s
 .. _#79: https://github.com/qucontrol/krotov/issues/79
 .. _#80: https://github.com/qucontrol/krotov/issues/80
 .. _#82: https://github.com/qucontrol/krotov/issues/82
+.. _#96: https://github.com/qucontrol/krotov/issues/96

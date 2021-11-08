@@ -11,7 +11,7 @@ Development Lead
 Development Team
 ----------------
 
-* Daniel Basilewitsch <basilewitsch@physik.uni-kassel.de>
+* Daniel Basilewitsch <daniel.basilewitsch@uibk.ac.at>
 * Fernando Gago Encinas <fernando.gago@fu-berlin.de>
 * Matthias Krauß <matthias.krauss@physik.uni-kassel.de>
 * Karl Horn <karlhorn@physik.uni-kassel.de>
@@ -28,6 +28,7 @@ Acknowledgements
 
 We thank
 `Alberto Castro`_,
+`@daviehh`_,
 `@TejasAvinasShetty`_,
 `@nathanshammah`_,
 `@timohillmann`_,
@@ -43,3 +44,4 @@ for reporting bugs and suggesting improvements.
 .. _@nathanshammah: https://github.com/nathanshammah
 .. _@timohillmann: https://github.com/timohillmann
 .. _@uiofgh: https://github.com/uiofgh
+.. _@daviehh: https://github.com/daviehh
