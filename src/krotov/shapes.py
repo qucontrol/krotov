@@ -58,7 +58,7 @@ def flattop(t, t_start, t_stop, t_rise, t_fall=None, func='blackman'):
     down to 0 again during `t_fall`.
 
     Args:
-        t (float): Time  point or time grid
+        t (float): Time  point
         t_start (float): Start of flattop window
         t_stop (float): Stop of flattop window
         t_rise (float): Duration of ramp-up, starting at `t_start`
