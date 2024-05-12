@@ -29,7 +29,7 @@ requirements = [
     'glom',
     'numpy',
     'scipy',
-    'qutip>=4.3.1',
+    'qutip>=4.3.1,<5.0',
     'threadpoolctl',
     'grapheme',
 ]
