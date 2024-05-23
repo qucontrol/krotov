@@ -257,11 +257,10 @@ def parallel_map(
         num_cpus = multiprocessing.cpu_count()
 
     if progress_bar is None:
-        progress_bar = BaseProgressBar()
+        progress_bar = BaseProgressBar(len(values))
     if progress_bar is True:
-        progress_bar = TextProgressBar()
+        progress_bar = TextProgressBar(len(values))
 
-    progress_bar.start(len(values))
     nfinished = [0]
 
     def _update_progress_bar(x):
