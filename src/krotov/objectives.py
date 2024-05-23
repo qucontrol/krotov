@@ -15,6 +15,11 @@ from functools import partial
 
 import numpy as np
 import qutip
+from packaging.version import parse as parse_version
+if parse_version(qutip.__version__) < parse_version("5"):
+    is_qutip5 = False
+else:
+    is_qutip5 = True
 from qutip.solver import Options as QutipSolverOptions
 from qutip.solver import Result as QutipSolverResult
 
@@ -380,7 +385,15 @@ class Objective:
             e_ops = []
         if args is None:
             args = {}
-        result = QutipSolverResult()
+        if is_qutip5:
+            result_options = {
+                "store_final_state": False,
+                "store_states": None,
+                "normalize_output": False,
+            }
+            result = QutipSolverResult(e_ops=e_ops, options=result_options)
+        else:
+            result = QutipSolverResult()
         try:
             result.solver = propagator.__name__
         except AttributeError:
@@ -388,21 +401,24 @@ class Objective:
                 result.solver = propagator.__class__.__name__
             except AttributeError:
                 result.solver = 'n/a'
-        result.times = np.array(tlist)
-        result.states = []
-        result.expect = []
-        result.num_expect = len(e_ops)
-        result.num_collapse = len(c_ops)
-        for _ in e_ops:
-            result.expect.append([])
         state = rho0
         if state is None:
             state = self.initial_state
-        if len(e_ops) == 0:
-            result.states.append(state)
+        if is_qutip5:
+            result.add(0., state)
         else:
-            for (i, oper) in enumerate(e_ops):
-                result.expect[i].append(expect(oper, state))
+            result.times = np.array(tlist)
+            result.states = []
+            result.expect = []
+            result.num_expect = len(e_ops)
+            result.num_collapse = len(c_ops)
+            for _ in e_ops:
+                result.expect.append([])
+            if len(e_ops) == 0:
+                result.states.append(state)
+            else:
+                for (i, oper) in enumerate(e_ops):
+                    result.expect[i].append(expect(oper, state))
         controls = extract_controls([self])
         pulses_mapping = extract_controls_mapping([self], controls)
         mapping = pulses_mapping[0]  # "first objective" (dummy structure)
@@ -424,12 +440,16 @@ class Objective:
                 c_ops_at_t,
                 initialize=True,  # initialize=(time_index == 0)
             )
-            if len(e_ops) == 0:
-                result.states.append(state)
+            if is_qutip5:
+                result.add(tlist[time_index + 1], state)
             else:
-                for (i, oper) in enumerate(e_ops):
-                    result.expect[i].append(expect(oper, state))
-        result.expect = [np.array(a) for a in result.expect]
+                if len(e_ops) == 0:
+                    result.states.append(state)
+                else:
+                    for (i, oper) in enumerate(e_ops):
+                        result.expect[i].append(expect(oper, state))
+        if not is_qutip5:
+            result.expect = [np.array(a) for a in result.expect]
         return result
 
     @classmethod

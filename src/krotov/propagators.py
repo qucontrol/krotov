@@ -75,6 +75,7 @@ if parse_version(qutip.__version__) < parse_version("5"):
     from qutip.cy.spmatfuncs import spmvpy_csr
     from qutip.superoperator import mat2vec, vec2mat
 else:
+    is_qutip5 = True
     from qutip.core.superoperator import stack_columns, unstack_columns
 
 
