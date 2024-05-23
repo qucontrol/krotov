@@ -8,11 +8,10 @@ import pytest
 import qutip
 from qutip import ket
 
-
 try:
-    import qutip.qip.gates as qutip_gates
+    import qutip.core.gates as qutip_gates  # qutip5
 except ImportError:
-    import qutip.qip.operations.gates as qutip_gates
+    import qutip.qip.operations.gates as qutip_gates  # qutip4
 
 
 @pytest.fixture
@@ -60,10 +59,10 @@ def transmon_3states_objectives():
     # see also test_objectives:test_transmon_3states_objectives
     L = qutip.Qobj()  # dummy Liouvillian (won't be used)
     n_qubit = 3
-    ket00 = qutip.ket((0, 0), dim=(n_qubit, n_qubit))
-    ket01 = qutip.ket((0, 1), dim=(n_qubit, n_qubit))
-    ket10 = qutip.ket((1, 0), dim=(n_qubit, n_qubit))
-    ket11 = qutip.ket((1, 1), dim=(n_qubit, n_qubit))
+    ket00 = qutip.ket((0, 0), dim=[n_qubit, n_qubit])
+    ket01 = qutip.ket((0, 1), dim=[n_qubit, n_qubit])
+    ket10 = qutip.ket((1, 0), dim=[n_qubit, n_qubit])
+    ket11 = qutip.ket((1, 1), dim=[n_qubit, n_qubit])
     basis = [ket00, ket01, ket10, ket11]
     weights = [20, 1, 1]
     objectives = krotov.gate_objectives(
@@ -169,10 +168,10 @@ def test_J_T_hs_unitary(
 def test_chi_hs_transmon(transmon_3states_objectives):
     objectives = transmon_3states_objectives
     n_qubit = objectives[0].initial_state.dims[0][0]
-    ket00 = qutip.ket((0, 0), dim=(n_qubit, n_qubit))
-    ket01 = qutip.ket((0, 1), dim=(n_qubit, n_qubit))
-    ket10 = qutip.ket((1, 0), dim=(n_qubit, n_qubit))
-    ket11 = qutip.ket((1, 1), dim=(n_qubit, n_qubit))
+    ket00 = qutip.ket((0, 0), dim=[n_qubit, n_qubit])
+    ket01 = qutip.ket((0, 1), dim=[n_qubit, n_qubit])
+    ket10 = qutip.ket((1, 0), dim=[n_qubit, n_qubit])
+    ket11 = qutip.ket((1, 1), dim=[n_qubit, n_qubit])
     ρ_mixed = 0.25 * (
         ket00 * ket00.dag()
         + ket01 * ket01.dag()
