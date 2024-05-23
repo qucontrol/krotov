@@ -101,7 +101,7 @@ import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
 
-from qutip.parallel import serial_map
+from qutip import serial_map
 from qutip.ui.progressbar import BaseProgressBar, TextProgressBar
 from threadpoolctl import threadpool_limits
 

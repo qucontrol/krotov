@@ -7,7 +7,7 @@ from functools import partial
 import numpy as np
 import threadpoolctl
 from qutip import Qobj
-from qutip.parallel import serial_map
+from qutip import serial_map
 
 from .conversions import (
     control_onto_interval,
