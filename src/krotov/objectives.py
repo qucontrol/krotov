@@ -325,10 +325,6 @@ class Objective:
                 for (ic, c_op) in enumerate(self.c_ops)
             ]
 
-        # local instantations for `options` is to work around
-        # https://github.com/qutip/qutip/issues/1061
-        options = kwargs.pop('options', QutipSolverOptions())
-
         return qutip.mesolve(
             H=H,
             rho0=rho0,
@@ -336,8 +332,7 @@ class Objective:
             c_ops=c_ops,
             e_ops=e_ops,
             args=args,
-            options=options,
-            **kwargs,
+            **kwargs
         )
 
     def propagate(
