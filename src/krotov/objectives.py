@@ -405,7 +405,7 @@ class Objective:
         if state is None:
             state = self.initial_state
         if is_qutip5:
-            result.add(0., state)
+            result.add(tlist[0], state)
         else:
             result.times = np.array(tlist)
             result.states = []
