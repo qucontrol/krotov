@@ -1,9 +1,8 @@
 """Test using numpy controls."""
+import krotov
 import numpy as np
 import pytest
 import qutip
-
-import krotov
 
 
 @pytest.fixture

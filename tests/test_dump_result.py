@@ -2,14 +2,18 @@
 import copy
 import os
 
-import pytest
-
 import krotov
+import pytest
 
 
 def incl_range(a, b, step=1):
     e = 1 if step > 0 else -1
     return range(a, b + e, step)
+
+
+# Note: The `oct_result.dump` file was manually created from
+# docs/notebooks/01_example_simple_state_to_state.ipynb (the `opt_result`
+# variable)
 
 
 @pytest.fixture

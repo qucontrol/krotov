@@ -12,12 +12,12 @@ import urllib.parse
 import urllib.request
 from os.path import join
 from subprocess import DEVNULL, CalledProcessError, run
-from textwrap import dedent
 
 import click
+
 import git
 import pytest
-from pkg_resources import parse_version
+from packaging.version import parse as parse_version
 
 
 RX_VERSION = re.compile(
@@ -64,33 +64,32 @@ def make_release(package_name, fast_test=False):
             "Fix errors manually! Continue?", default=True, abort=True
         )
     files_with_binder_links = [
-        'README.rst',
+        'README.md',
         join('docs', '09_examples.rst'),
         join('docs', 'index.rst'),
     ]
     for filename in files_with_binder_links:
         set_binder_branch(filename, "v" + str(new_version))
     set_binder_package_version(version=new_version)
-    set_stable_docs_links(new_version, 'README.rst', 'docs/_README.patch')
+    set_stable_docs_links(new_version, 'README.md')
     make_release_commit(new_version)
     make_notebooks(fast_test=fast_test)
     make_notebooks_commit(new_version)
     squash_commits(n=2, commit_msg="Release %s" % new_version)
     if not fast_test:
-        make_artifacts()
+        check_documentation()
         run_tests()
         make_upload(test=True)
         push_release_commits()
         make_upload(test=False)
         make_and_push_tag(new_version)
-    upload_artifacts(new_version)
     # release is finished; go back to a dev state
     next_dev_version = new_version + '+dev'
     set_version(
         join('.', 'src', package_name, '__init__.py'), next_dev_version
     )
     files_with_released_binder_links = [
-        'README.rst',
+        'README.md',
         join('docs', 'index.rst'),
     ]
     for filename in files_with_binder_links:
@@ -432,7 +431,7 @@ def make_notebooks(fast_test=False):
         return False
 
 
-def make_artifacts():
+def check_documentation():
     """Verify the documentation (interactively)."""
     click.echo("Making the documentation....")
     run(['make', 'docs-artifacts'], check=True, stdout=DEVNULL)
@@ -440,9 +439,6 @@ def make_artifacts():
         "Check documentation in file://"
         + os.getcwd()
         + "/docs/_build/html/index.html"
-        + " and the artifacts in "
-        + os.getcwd()
-        + "/docs/_build/artifacts"
     )
     click.confirm(
         "Does the documentation look correct?", default=True, abort=True
@@ -492,7 +488,9 @@ def squash_commits(n, commit_msg=None):
             % (n, commit_msg)
         )
     click.confirm(
-        msg, default=True, abort=True,
+        msg,
+        default=True,
+        abort=True,
     )
     run(['git', 'rebase', '--interactive', 'HEAD~%d' % n], check=True)
 
@@ -546,26 +544,6 @@ def make_and_push_tag(version):
     )
     run(['git', 'tag', "-s", "v%s" % version], check=True)
     run(['git', 'push', '--tags', 'origin'], check=True)
-
-
-def upload_artifacts(version):
-    """Prompt for manually uploading documentation artifacts."""
-    # fmt: off
-    click.echo(dedent(r'''
-    You must now manually create a release on Github and upload the
-    documentation artifacs from docs/_build/artifacts.
-
-    * Go to https://github.com/qucontrol/krotov/releases
-    * Find and click on the tag 'v{version}'
-    * Click on "Edit tag"
-    * Use "Release {version}" as the Release title
-    * Add release notes in markdown format
-    * Attach the documentation artifacs as binary files
-    * Click "Publish release"
-
-    '''.format(version=version)))
-    # fmt: on
-    click.confirm("Release published on Github?", default=True)
 
 
 def make_next_dev_version_commit(version):

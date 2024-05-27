@@ -82,7 +82,7 @@ def print_debug_information(
     sigma,
     iter_start,
     iter_stop,
-    out=sys.stdout
+    out=sys.stdout,
 ):
     r"""Print full debug information about the current Krotov iteration.
 
@@ -225,7 +225,7 @@ def print_debug_information(
     out.write("    λₐ: %s\n" % (", ".join(["%.2e" % λ for λ in lambda_vals])))
     try:
         MB_per_timeslot = sum(_qobj_nbytes(state) for state in fw_states_T) / (
-            1024 ** 2
+            1024**2
         )
     except AttributeError:
         # e.g. fw_states_T = None (skip_initial_forward_propagation)
@@ -357,7 +357,7 @@ def print_table(
     unicode=True,
     col_formats=('%d', '%.2e', '%.2e', '%.2e', '%.2e', '%.2e', '%.2e', '%d'),
     col_headers=None,
-    out=sys.stdout
+    out=sys.stdout,
 ):
     r"""Print a tabular overview of the functional values in the iteration.
 

@@ -1,8 +1,7 @@
 """Tests for krotov.mu"""
+import krotov
 import pytest
 from qutip import ket, sigmam, sigmap, sigmax, sigmaz
-
-import krotov
 
 
 @pytest.fixture

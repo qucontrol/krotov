@@ -2,11 +2,10 @@
 import logging
 from functools import partial
 
+import krotov
 import numpy as np
 import pytest
 import qutip
-
-import krotov
 from krotov.conversions import (
     discretize,
     extract_controls,

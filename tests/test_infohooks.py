@@ -4,10 +4,9 @@ import io
 import os
 from pathlib import Path
 
+import krotov
 import numpy as np
 import pytest
-
-import krotov
 from krotov.info_hooks import print_table
 from test_krotov import simple_state_to_state_system
 from test_objectives import transmon_ham_and_states

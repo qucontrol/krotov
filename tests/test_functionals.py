@@ -2,12 +2,11 @@
 import copy
 from itertools import product
 
+import krotov
 import numpy as np
 import pytest
 import qutip
 from qutip import ket
-
-import krotov
 
 
 try:

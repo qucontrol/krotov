@@ -2,7 +2,6 @@
 from functools import partial
 
 import pytest
-
 from krotov.shapes import flattop
 
 

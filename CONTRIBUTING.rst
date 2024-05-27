@@ -72,38 +72,25 @@ In short, if you are not a member of the `qucontrol organization`_,
 7. Push changes to the topic branch on *your* remote.
 8. Make a pull request against the base master branch through the Github website of your fork.
 
-The project uses tox_ for automated testing accross multiple versions of Python
+The project uses hatch_ for automated testing accross multiple versions of Python
 and for various development tasks such as linting and generating the
 documentation. See :ref:`DevelopmentPrerequisites` for details.
 
-There is also a ``Makefile`` that wraps around tox, for
+There is also a ``Makefile`` that wraps around ``hatch``, for
 convenience on Unix-based systems. In your checked-out clone, run
 
 .. code-block:: shell
 
     make help
 
-to see the available make targets. If you cannot use ``make``, but want to use
-``tox`` directly (e.g., on Windows), run
-
-.. code-block:: shell
-
-    tox -av
-
-to see a list of tox environments and a description. For the initial
-configuration of tox environments, you may have to run
-
-.. code-block:: shell
-
-    tox -e bootstrap
-
-in order to set up the ``tox.ini`` configuration file.
-
+to see the available make targets. If you cannot use ``make``, the ``Makefile``
+still provides a convenient reference for ``hatch`` commands that are useful
+for development.
 
 If you are a member of the `qucontrol organization`_, there is no need to fork
 ``krotov`` - you can directly pull and push to ``git@github.com:qucontrol/krotov.git``.
 
-.. _tox: https://tox.readthedocs.io
+.. _hatch: https://hatch.pypa.io/latest/
 
 .. _Aaron Meurer's Git Workflow Notes:  https://www.asmeurer.com/git-workflow/
 
@@ -117,33 +104,13 @@ Development Prerequisites
 -------------------------
 
 Contributing to the package's developments requires that you have Python 3.8
-and tox_ installed. It is strongly recommended that you also have installations
-of all other supported Python versions. The recommended way to install multiple
-versions of Python at the same time is through pyenv_ (or pyenv-win_ on
-Windows).
-
-Alternatively, you may install conda_ (via the Anaconda_ or Miniconda_
-distributions, or also through pyenv_). As ``conda`` can create environments
-with any version of Python (independent of which Python version ``conda`` was
-originally installed with), this alleviates the need for managing multiple
-versions.
-The advantage of using conda_ is that you may be able to avoid installing the
-compilers necessary for Python extension packages. The disadvantage is that
-environment creation is slower and the resulting environments are bigger, and
-that you may run into occasional binary incompatibilities between conda packages.
-
-.. warning::
-   If you want to use `conda`, you must use the ``tox-conda.ini`` configuration
-   file. That is, run all ``make`` comands as e.g.
-   ``make TOXINI=tox-conda.ini test`` and ``tox`` commands as e.g.
-   ``tox -c tox-conda.ini -e py38-test``. Alternatively,
-   make ``tox-conda.ini`` the default by copying it to ``tox.ini``.
+and hatch_ installed (tested with Hatch 1.11). It is strongly recommended that
+you also have installations of all other supported Python versions. The
+recommended way to install multiple versions of Python at the same time is
+through pyenv_ (or pyenv-win_ on Windows).
 
 .. _pyenv: https://github.com/pyenv/pyenv
 .. _pyenv-win: https://github.com/pyenv-win/pyenv-win
-.. _conda: https://conda.io/docs/
-.. _Anaconda: https://www.anaconda.com/distribution/
-.. _Miniconda: https://conda.io/en/latest/miniconda.html
 .. _QuTiP: http://qutip.org
 
 
@@ -264,7 +231,7 @@ to run the entire test suite, or
 
 .. code-block:: shell
 
-    tox -e py38-test
+    hatch run test
 
 if ``make`` is not available.
 
@@ -292,16 +259,16 @@ readability significantly.
 
 Beyond :pep:`8`, this project adopts the `Black code style`_, with
 ``--skip-string-normalization --line-length 79``. You can
-run ``make black-check`` or ``tox -e run-blackcheck`` to check adherence to the
-code style, and ``make black`` or ``tox -e run-black`` to apply it.
+run ``make black-check`` or ``hatch run lint:black-check`` to check adherence to the
+code style, and ``make black`` or ``hatch run lint:black`` to apply it.
 
 .. _Black code style: https://github.com/ambv/black/#the-black-code-style
 
 Imports within python modules must be sorted according to the isort_
-configuration in ``setup.cfg``. The command ``make isort-check`` or ``tox -e
-run-isortcheck`` checks whether all imports are sorted correctly, and ``make
-isort`` or ``tox -e run-isort`` modifies all Python modules in-place with the
-proper sorting.
+configuration in ``pyproject.toml``. The command ``make isort-check`` or
+``hatch run lint:isort-check`` checks whether all imports are sorted correctly,
+and ``make isort`` or ``hatch run lint:isort`` modifies all Python modules
+in-place with the proper sorting.
 
 .. _isort: https://github.com/timothycrosley/isort#readme
 
@@ -311,14 +278,13 @@ requirements. These hooks are managed through the `pre-commit framework`_.
 
 .. warning::
    After cloning the ``krotov`` repository, you should run
-   ``make bootstrap``, ``tox -e bootstrap``, or ``python scripts/bootstrap.py``
-   from within the project root folder. These set up ``tox``, and the
-   pre-commit hooks
+   ``make init``, or ``pre-commit install``
+   from within the project root folder.
 
 .. _pre-commit framework: https://pre-commit.com
 
-You may use ``make flake8-check`` or ``tox -e run-flake8`` and ``make
-pylint-check`` or ``tox -e run-pylint`` for additional checks on the code with
+You may use ``make flake8-check`` or ``hatch run lint:flake8`` and ``make
+pylint-check`` or ``hatch run lint:pylint`` for additional checks on the code with
 flake8_ and pylint_, but there is no strict requirement for a perfect score
 with either one of these linters. They only serve as a guideline for code that
 might be improved.
@@ -380,7 +346,7 @@ or
 
 .. code-block:: shell
 
-   tox -e docs
+   hatch run docs:build
 
 to generate the documentation locally.
 
@@ -592,8 +558,7 @@ Developers' How-Tos
 -------------------
 
 The following assumes your current working directory is a checkout of
-``krotov``, and that you have successfully run ``make test`` (which creates
-the tox environments that development relies on).
+``krotov``, and that have ``hatch`` installed on your system.
 
 
 How to run a jupyter notebook server for working on the example notebooks
@@ -605,7 +570,7 @@ A notebook server that is isolated to the proper testing environment can be star
 
 This is equivalent to::
 
-    tox -e run-cmd -- jupyter notebook --config=/dev/null
+    hatch run -- jupyter lab
 
 You may run this with your own options, if you prefer. The
 ``--config=/dev/null`` guarantees that the notebook server is completely
@@ -624,8 +589,8 @@ Interactive debugging in notebooks is difficult. It becomes much easier if
 you convert the notebook to a script first.  To convert a notebook to an
 (I)Python script and run it with automatic debugging, execute e.g.::
 
-    tox -e run-cmd -- jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
-    tox -e run-cmd -- ipython --pdb debug.py
+    hatch run  -- jupyter nbconvert --to=python --stdout docs/notebooks/01_example_transmon_xgate.ipynb > debug.py
+    hatch run -- ipython --pdb debug.py
 
 You can then also set a manual breakpoint by inserting the following line anywhere in the code:
 
@@ -680,13 +645,13 @@ To run e.g. only the tests defined in ``tests/test_krotov.py``, use any of the f
 
     make test TESTS=tests/test_krotov.py
 
-    tox -e py38-test -- tests/test_krotov.py
+    hatch run test -- tests/test_krotov.py
 
-    tox -e run-cmd -- pytest tests/test_krotov.py
+    hatch -e py38 run test -- test/test_krotov.py
 
-    .tox/py38/bin/pytest tests/test_krotov.py
-
-See the `pytest test selection docs`_ for details.
+See the `pytest test selection docs`_ for details. The ``-e py38`` selects the
+Python version to run the tests under. You may replace this with an equivalent
+name for any supported Python versions.
 
 
 How to run only as single test
@@ -694,7 +659,7 @@ How to run only as single test
 
 Decorate the test with e.g. ``@pytest.mark.xxx``, and then run, e.g::
 
-    tox -e run-cmd -- pytest -m xxx tests/
+    hatch run -- pytest -m xxx tests/
 
 See the `pytest documentation on markers`_ for details.
 
@@ -704,7 +669,7 @@ How to run only the doctests
 
 Run the following::
 
-    tox -e run-cmd -- pytest --doctest-modules src
+    hatch run -- pytest --doctest-modules src
 
 
 How to go into an interactive debugger
@@ -713,7 +678,7 @@ How to go into an interactive debugger
 Optionally, install the `pdbpp` package into the testing environment, for a
 better experience::
 
-    tox -e run-cmd -- pip install pdbpp
+    hatch run -- pip install pdbpp
 
 Then:
 
@@ -723,7 +688,7 @@ Then:
 
 - Run ``pytest`` with the option ``-s``, e.g.::
 
-    tox -e run-cmd -- pytest -m xxx -s tests/
+    hatch run -- pytest -m xxx -s tests/
 
 You may also see the `pytest documentation on automatic debugging`_.
 

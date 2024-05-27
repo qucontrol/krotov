@@ -214,7 +214,7 @@ def delta_below(
     spec0=('info_vals', glom.T[-2]),
     absolute_value=True,
     name=None,
-    **kwargs
+    **kwargs,
 ):
     r"""Constructor for a routine that checks if
     $\Abs{v_1 - v_0} < \varepsilon$
