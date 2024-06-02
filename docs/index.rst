@@ -12,13 +12,10 @@ Welcome to the Krotov package's documentation!
    .. image:: https://img.shields.io/pypi/v/krotov.svg
       :alt: Krotov on the Python Package Index
       :target: https://pypi.python.org/pypi/krotov
-   .. image:: https://badges.gitter.im/qucontrol_krotov/Lobby.svg
-      :alt: Join the chat at https://gitter.im/qucontrol_krotov/Lobby
-      :target: https://gitter.im/qucontrol_krotov/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-   .. image:: https://github.com/qucontrol/krotov/workflows/Docs/badge.svg?branch=master
+   .. image:: https://github.com/qucontrol/krotov/actions/workflows/docs.yml/badge.svg?branch=master
       :alt: Docs
       :target: https://github.com/qucontrol/krotov/actions?query=workflow%3ADocs
-   .. image:: https://github.com/qucontrol/krotov/workflows/Tests/badge.svg?branch=master
+   .. image:: https://github.com/qucontrol/krotov/actions/workflows/test.yml/badge.svg?branch=master
       :alt: Tests
       :target: https://github.com/qucontrol/krotov/actions?query=workflow%3ATests
    .. image:: https://codecov.io/gh/qucontrol/krotov/branch/master/graph/badge.svg
