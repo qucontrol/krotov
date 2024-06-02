@@ -67,6 +67,7 @@ def make_release(package_name, fast_test=False):
         'README.md',
         join('docs', '09_examples.rst'),
         join('docs', 'index.rst'),
+        join('docs', 'overview.rst'),
     ]
     for filename in files_with_binder_links:
         set_binder_branch(filename, "v" + str(new_version))
@@ -91,10 +92,12 @@ def make_release(package_name, fast_test=False):
     files_with_released_binder_links = [
         'README.md',
         join('docs', 'index.rst'),
+        join('docs', 'overview.rst'),
     ]
     for filename in files_with_binder_links:
         if filename in files_with_released_binder_links:
-            # README and index always link to the latest released version
+            # README, index, and overview always link to the latest released
+            # version
             continue
         set_binder_branch(filename, 'master')
     set_binder_package_version(branch='master')

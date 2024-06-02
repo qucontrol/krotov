@@ -2,33 +2,37 @@
 Krotov Python Package
 =====================
 
-.. image:: https://img.shields.io/badge/github-qucontrol/krotov-blue.svg
-   :alt: Source code on Github
-   :target: https://github.com/qucontrol/krotov
-.. image:: https://img.shields.io/badge/docs-gh--pages-blue.svg
-   :alt: Documentation
-   :target: https://qucontrol.github.io/krotov
-.. image:: https://img.shields.io/pypi/v/krotov.svg
-   :alt: Krotov on the Python Package Index
-   :target: https://pypi.python.org/pypi/krotov
-.. image:: https://github.com/qucontrol/krotov/workflows/Docs/badge.svg?branch=master
-   :alt: Docs
-   :target: https://github.com/qucontrol/krotov/actions?query=workflow%3ADocs
-.. image:: https://github.com/qucontrol/krotov/workflows/Tests/badge.svg?branch=master
-   :alt: Tests
-   :target: https://github.com/qucontrol/krotov/actions?query=workflow%3ATests
-.. image:: https://codecov.io/gh/qucontrol/krotov/branch/master/graph/badge.svg
-   :alt: Codecov
-   :target: https://codecov.io/gh/qucontrol/krotov
-.. image:: https://img.shields.io/badge/License-BSD-green.svg
-   :alt: BSD License
-   :target: https://opensource.org/licenses/BSD-3-Clause
-.. image:: https://mybinder.org/badge_logo.svg
-   :alt: Launch Binder
-   :target: https://mybinder.org/v2/gh/qucontrol/krotov/v1.2.1?filepath=docs%2Fnotebooks
-.. image:: https://img.shields.io/badge/DOI-10.21468/SciPostPhys.7.6.080-blue.svg
-   :alt: DOI
-   :target: https://doi.org/10.21468/SciPostPhys.7.6.080
+.. only:: html
+
+   .. image:: https://img.shields.io/badge/github-qucontrol/krotov-blue.svg
+      :alt: Source code on Github
+      :target: https://github.com/qucontrol/krotov
+   .. image:: https://img.shields.io/badge/docs-gh--pages-blue.svg
+      :alt: Documentation
+      :target: https://qucontrol.github.io/krotov
+   .. image:: https://img.shields.io/pypi/v/krotov.svg
+      :alt: Krotov on the Python Package Index
+      :target: https://pypi.python.org/pypi/krotov
+   .. image:: https://github.com/qucontrol/krotov/actions/workflows/docs.yml/badge.svg?branch=master
+      :alt: Docs
+      :target: https://github.com/qucontrol/krotov/actions?query=workflow%3ADocs
+   .. image:: https://github.com/qucontrol/krotov/actions/workflows/test.yml/badge.svg?branch=master
+      :alt: Tests
+      :target: https://github.com/qucontrol/krotov/actions?query=workflow%3ATests
+   .. image:: https://codecov.io/gh/qucontrol/krotov/branch/master/graph/badge.svg
+      :alt: Codecov
+      :target: https://codecov.io/gh/qucontrol/krotov
+   .. image:: https://img.shields.io/badge/License-BSD-green.svg
+      :alt: BSD License
+      :target: https://opensource.org/licenses/BSD-3-Clause
+   .. image:: https://mybinder.org/badge_logo.svg
+      :alt: Launch Binder
+      :target: https://mybinder.org/v2/gh/qucontrol/krotov/v1.2.1?filepath=docs%2Fnotebooks
+   .. image:: https://img.shields.io/badge/DOI-10.21468/SciPostPhys.7.6.080-blue.svg
+      :alt: DOI
+      :target: https://doi.org/10.21468/SciPostPhys.7.6.080
+
+
 
 Python implementation of Krotov's method for quantum optimal control.
 
