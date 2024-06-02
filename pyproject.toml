@@ -52,7 +52,6 @@ dev = [
   "pytest-cov<=2.6.1",
   "pytest-xdist",
   "nbval==0.11.0",
-  "watermark~=2.4",
   "weylchamber>=0.3.2",
   "ipython",
 ]
@@ -70,6 +69,7 @@ docs = [
   "Jinja2==3.0.3",
   "docutils<=0.17",
   "matplotlib==3.7.5",
+  "watermark~=2.4",
   "zip-files==0.4.1",
   "ipython",
 ]
@@ -103,6 +103,7 @@ cov-html = [
 description = "Generate the docs (Python 3.8)"
 template = "docs"
 features = [
+  "dev",
   "docs",
 ]
 python = "3.8"

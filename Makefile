@@ -33,13 +33,14 @@ clean-docs: ## remove documentation artifacts
 
 distclean: clean  ## Restore to a clean checkout state
 	rm -f .git/hooks/pre-commit
+	rm -f docs/notebooks/*.log
 	hatch env prune
 
 test: init ## Run the tests (with coverage)
-	hatch run cov -- $(TESTS)
+	hatch run default:cov -- $(TESTS)
 
 coverage: ## Generate coverage report in ./htmlcov (after `make test`)
-	hatch run cov-html
+	hatch run default:cov-html
 	@echo "open htmlcov/index.html"
 
 black-check: ## Check all src and test files for complience to "black" code style

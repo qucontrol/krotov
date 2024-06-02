@@ -67,7 +67,7 @@ def make_release(package_name, fast_test=False):
         'README.md',
         join('docs', '09_examples.rst'),
         join('docs', 'index.rst'),
-        join('docs', 'overview.rst'),
+        join('docs', '01_overview.rst'),
     ]
     for filename in files_with_binder_links:
         set_binder_branch(filename, "v" + str(new_version))
@@ -92,7 +92,7 @@ def make_release(package_name, fast_test=False):
     files_with_released_binder_links = [
         'README.md',
         join('docs', 'index.rst'),
-        join('docs', 'overview.rst'),
+        join('docs', '01_overview.rst'),
     ]
     for filename in files_with_binder_links:
         if filename in files_with_released_binder_links:
@@ -173,13 +173,13 @@ def run_tests():
     success = False
     while not success:
         try:
-            run(['make', 'test'], check=True)
+            run(['hatch', 'run', 'default:test'], check=True)
         except CalledProcessError as exc_info:
             print("Failed tests: %s\n" % exc_info)
             print("Fix the tests and ammend the release commit.")
             print("Then continue.\n")
             click.confirm("Continue?", default=True, abort=True)
-            if not click.confirm("Retry?", default=True):
+            if not click.confirm("Retry? If 'no', wil continue without testing", default=True):
                 break
         else:
             success = True
@@ -437,7 +437,7 @@ def make_notebooks(fast_test=False):
 def check_documentation():
     """Verify the documentation (interactively)."""
     click.echo("Making the documentation....")
-    run(['make', 'docs-artifacts'], check=True, stdout=DEVNULL)
+    run(['make', 'docs'], check=True, stdout=DEVNULL)
     click.echo(
         "Check documentation in file://"
         + os.getcwd()
