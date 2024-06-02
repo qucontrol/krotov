@@ -1,11 +1,10 @@
 name: krotov
 channels:
-  - defaults
   - conda-forge
 dependencies:
-  - python=3.7
-  - qutip=4.4.1
+  - python=3.8
+  - qutip=4.7.6
+  - matplotlib
   - pip:
-    - matplotlib
     - watermark
     - git+https://github.com/qucontrol/krotov.git@master#egg=krotov
