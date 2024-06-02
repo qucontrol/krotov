@@ -3,10 +3,14 @@ History
 =======
 
 
-(next version)
---------------
+1.3.0-dev (unreleased)
+----------------------
 
 * Bugfix: `∫gₐdt` and total functional were reported incorrectly (`#96`_, thanks to `@daviehh`_)
+* Bugfix: Restrict `qutip` to version 4. Support for `qutip 5.0` will be added in a later release
+* Changed: Dropped support for Python 3.5 and Python 3.6
+* Changed: The documentation will no longer be provided in PDF format
+* Changed: Development is now organized around hatch_ instead of tox_
 
 
 1.2.1 (2021-01-13)
@@ -135,6 +139,8 @@ Note: due to the changes in the time discretization of the controls and update s
 .. _@loganbvh: https://github.com/loganbvh
 .. _@daviehh: https://github.com/daviehh
 .. _Alberto Castro: https://www.bifi.es/~acastro/
+.. _hatch: https://hatch.pypa.io/latest/
+.. _tox: https://tox.wiki/en/latest/
 .. _#26: https://github.com/qucontrol/krotov/issues/26
 .. _#29: https://github.com/qucontrol/krotov/issues/29
 .. _#32: https://github.com/qucontrol/krotov/issues/32

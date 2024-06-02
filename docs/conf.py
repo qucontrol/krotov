@@ -10,6 +10,7 @@ from pathlib import Path
 from unittest import mock
 
 import git
+import krotov
 import pybtex.style.formatting
 import pybtex.style.formatting.unsrt
 import pybtex.style.template
@@ -18,8 +19,6 @@ from sphinx.ext.autodoc import (
     ClassLevelDocumenter,
     InstanceAttributeDocumenter,
 )
-
-import krotov
 
 
 DOCS = Path(__file__).parent
@@ -50,14 +49,6 @@ def run_apidoc(app):
             str(DOCS / ".." / "src" / "krotov"),
         ]
     )
-
-
-# -- Generate patched README documentation ------------------------------------
-def generate_patched_readme(_):
-    shutil.copyfile(DOCS / ".." / "README.rst", DOCS / "_README.rst")
-    cmd = ["patch", str(DOCS / "_README.rst"), str(DOCS / "_README.patch")]
-    subprocess.run(cmd, check=True)
-    assert (DOCS / "_README.rst").is_file()
 
 
 # -- General configuration -----------------------------------------------------
@@ -101,7 +92,7 @@ intersphinx_mapping = {
     "scipy": ("https://docs.scipy.org/doc/scipy/reference/", None),
     "numpy": ("https://docs.scipy.org/doc/numpy/", None),
     "matplotlib": ("https://matplotlib.org/", None),
-    "qutip": ("http://qutip.org/docs/latest/", None),
+    "qutip": ("https://qutip.org/docs/4.5/", None),
     "glom": ("https://glom.readthedocs.io/en/latest/", None),
     "weylchamber": ("https://weylchamber.readthedocs.io/en/latest/", None),
     "loky": ("https://loky.readthedocs.io/en/stable/", None),
@@ -223,7 +214,7 @@ latex_preamble = r"""
 \setlength{\cftsecindent}{\cftchapnumwidth}
 \setlength{\cftsecnumwidth}{1.25cm}
 \usepackage{emptypage}
-\usepackage{braket}
+\usepackage{braket} \newcommand{\ii}{\textnormal{i}} % imaginary i
 \newcommand{\tr}[0]{\operatorname{tr}}
 \newcommand{\diag}[0]{\operatorname{diag}}
 \newcommand{\abs}[0]{\operatorname{abs}}
@@ -293,7 +284,7 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
         sorting_style=None,
         abbreviate_names=True,
         min_crossrefs=2,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(
             label_style=label_style,
@@ -301,7 +292,7 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
             sorting_style=sorting_style,
             abbreviate_names=abbreviate_names,
             min_crossrefs=min_crossrefs,
-            **kwargs
+            **kwargs,
         )
 
     def format_title(self, e, which_field, as_sentence=True):
@@ -527,4 +518,3 @@ nbsphinx_prolog = r"""
 # -----------------------------------------------------------------------------
 def setup(app):
     app.connect("builder-inited", run_apidoc)
-    app.connect("builder-inited", generate_patched_readme)

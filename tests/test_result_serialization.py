@@ -1,12 +1,21 @@
 """Test that we can serialize a Resuls object"""
-
+import copy
 import logging
 import os
 import pickle
 
 import numpy as np
-
+import pytest
 from krotov.result import Result
+
+
+def incl_range(a, b, step=1):
+    e = 1 if step > 0 else -1
+    return range(a, b + e, step)
+
+
+# Note: The `oct_result.dump` file is a copy of
+# ../docs/notebooks/3states_opt_result.dump
 
 
 def test_serialization_roundtrip(request, tmpdir, caplog):
@@ -26,9 +35,22 @@ def test_serialization_roundtrip(request, tmpdir, caplog):
         _check_recursive_equality(val1, val2)
 
 
-def test_serialization_finalize(request, caplog):
+@pytest.fixture
+def dumpfile_unfinalized(request, tmpdir, caplog):
     testdir = os.path.splitext(request.module.__file__)[0]
-    dumpfile = os.path.join(testdir, 'oct_result_incomplete.dump')
+    with caplog.at_level(logging.WARNING):
+        result = Result.load(os.path.join(testdir, 'oct_result.dump'))
+    assert len(result.optimized_controls) == 1
+    result.optimized_controls[0] = np.concatenate(
+        (result.optimized_controls[0][0:-2], [0.0])
+    )
+    dumpfile = str(tmpdir.join('oct_result_incomplete.dump'))
+    result.dump(dumpfile)
+    return dumpfile
+
+
+def test_serialization_finalize(dumpfile_unfinalized, caplog):
+    dumpfile = dumpfile_unfinalized
     with caplog.at_level(logging.WARNING):
         result = Result.load(dumpfile)
     assert "not finalized" in caplog.text
@@ -38,9 +60,20 @@ def test_serialization_finalize(request, caplog):
     assert len(result.optimized_controls[0]) == nt
 
 
-def test_serialization_broken(request, caplog):
+@pytest.fixture
+def dumpfile_broken(request, tmpdir, caplog):
     testdir = os.path.splitext(request.module.__file__)[0]
-    dumpfile = os.path.join(testdir, 'oct_result_broken.dump')
+    with caplog.at_level(logging.WARNING):
+        result = Result.load(os.path.join(testdir, 'oct_result.dump'))
+    assert len(result.optimized_controls) == 1
+    result.optimized_controls[0] = np.array([0.0, 0.0])
+    dumpfile = str(tmpdir.join('oct_result_broken.dump'))
+    result.dump(dumpfile)
+    return dumpfile
+
+
+def test_serialization_broken(dumpfile_broken, caplog):
+    dumpfile = dumpfile_broken
     with caplog.at_level(logging.ERROR):
         Result.load(dumpfile)
     assert "incongruent" in caplog.text

@@ -1,9 +1,8 @@
 """Tests of PulseOptions"""
+import krotov
 import numpy as np
 import pytest
 import qutip
-
-import krotov
 from krotov.optimize import _initialize_krotov_controls
 
 

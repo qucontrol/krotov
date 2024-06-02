@@ -6,10 +6,9 @@ doctests without distracting import statements in the doctest.
 import inspect
 from collections import OrderedDict
 
+import krotov
 import numpy
 import pytest
-
-import krotov
 
 
 @pytest.fixture(autouse=True)

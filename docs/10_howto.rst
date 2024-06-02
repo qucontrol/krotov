@@ -532,8 +532,7 @@ How to parallelize the optimization
 -----------------------------------
 
 Krotov's method is inherently parallel across different objectives. See
-:mod:`krotov.parallelization`, and the
-:ref:`/notebooks/05_example_transmon_xgate.ipynb` for an example.
+:mod:`krotov.parallelization`.
 
 It is exceedingly important to ensure that you do not use any accidental nested
 parallelization. The :mod:`numpy` library is often eager to run in a

@@ -4,11 +4,10 @@ form.
 This needs to be in a module so that all the functions are pickleable
 
 """
+import krotov
 import numpy as np
 import qutip
 import scipy
-
-import krotov
 
 
 def eps0(t, args):

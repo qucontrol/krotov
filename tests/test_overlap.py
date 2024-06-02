@@ -1,8 +1,7 @@
+import krotov
 import numpy as np
 import qutip
 from qutip import ket
-
-import krotov
 
 
 def test_overlap():

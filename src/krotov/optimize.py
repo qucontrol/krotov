@@ -51,7 +51,7 @@ def optimize_pulses(
     skip_initial_forward_propagation=False,
     norm=None,
     overlap=None,
-    limit_thread_pool=None
+    limit_thread_pool=None,
 ):
     r"""Use Krotov's method to optimize towards the given `objectives`.
 

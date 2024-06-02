@@ -266,7 +266,7 @@ class Objective:
         c_ops=None,
         e_ops=None,
         args=None,
-        **kwargs
+        **kwargs,
     ):
         """Run :func:`qutip.mesolve.mesolve` on the system of the objective.
 
@@ -332,7 +332,7 @@ class Objective:
             e_ops=e_ops,
             args=args,
             options=options,
-            **kwargs
+            **kwargs,
         )
 
     def propagate(
@@ -345,7 +345,7 @@ class Objective:
         c_ops=None,
         e_ops=None,
         args=None,
-        expect=qutip.expect
+        expect=qutip.expect,
     ):
         """Propagate the system of the objective over the entire time grid.
 
@@ -710,7 +710,7 @@ def gate_objectives(
     local_invariants=False,
     liouville_states_set=None,
     weights=None,
-    normalize_weights=True
+    normalize_weights=True,
 ):
     r"""Construct a list of objectives for optimizing towards a quantum gate
 

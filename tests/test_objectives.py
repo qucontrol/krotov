@@ -7,13 +7,12 @@ import pickle
 from collections import OrderedDict
 from itertools import product
 
+import krotov
 import numpy as np
 import pytest
 import qutip
 import scipy
 from qutip import identity, ket, sigmam, sigmap, sigmax, sigmay, sigmaz, tensor
-
-import krotov
 
 
 try:

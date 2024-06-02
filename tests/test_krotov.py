@@ -6,12 +6,12 @@ import os
 from copy import deepcopy
 from shutil import copyfile
 
-import numpy as np
-import pytest
-import qutip
 from pkg_resources import parse_version
 
 import krotov
+import numpy as np
+import pytest
+import qutip
 
 
 def test_valid_version():

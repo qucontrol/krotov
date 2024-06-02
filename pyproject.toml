@@ -1,0 +1,219 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "krotov"
+dynamic = ["version"]
+description = "Python implementation of Krotov's method for quantum optimal control"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Michael Goerz", email = "mail@michaelgoerz.net"}
+]
+requires-python = ">=3.7"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Education",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: BSD License",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Framework :: Jupyter",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Physics"
+]
+dependencies = [
+  "glom",
+  "numpy",
+  "scipy",
+  "qutip>=4.3.1,<5.0",
+  "threadpoolctl",
+  "grapheme"
+]
+
+[tool.hatch.version]
+path = "src/krotov/__init__.py"
+
+[project.urls]
+Documentation = "https://qucontrol.github.io/krotov/"
+Issues = "https://github.com/qucontrol/krotov/issues"
+Source = "https://github.com/qucontrol/krotov"
+
+[project.optional-dependencies]
+dev = [
+  "codecov",
+  "coverage<5.0",
+  "jupyter",
+  "loky~=2.9",
+  "pytest==7.4.4",
+  "pytest-cov<=2.6.1",
+  "pytest-xdist",
+  "nbval==0.11.0",
+  "watermark~=2.4",
+  "weylchamber>=0.3.2",
+  "ipython",
+]
+docs = [
+  "pybtex==0.24.0",
+  "gitpython==3.1.43",
+  "better-apidoc==0.3.2",
+  "docs-versions-menu==0.5.2",
+  "sphinx<4.0",
+  "sphinx-autobuild",
+  "sphinx-copybutton",
+  "sphinx_rtd_theme",
+  "sphinxcontrib-bibtex",
+  "nbsphinx==0.9.3",
+  "Jinja2==3.0.3",
+  "docutils<=0.17",
+  "matplotlib==3.7.5",
+  "zip-files==0.4.1",
+  "ipython",
+]
+lint = [
+  "flake8",
+  "flake8-pyproject",
+  "isort==4.3.*",
+  "pylint~=2.6.0",
+  "black==22.1.0",
+  "click==8.0.4",
+]
+
+[tool.hatch.envs.default]
+description = "Testing and other dev tasks (Python 3.8)"
+features = [
+    "dev",
+    "docs",
+    "lint",
+]
+python = "3.8"
+
+[tool.hatch.envs.default.scripts]
+test = "pytest -vvv --doctest-modules --nbval --nbval-cell-timeout=3000 --sanitize-with docs/nbval_sanitize.cfg --ignore docs/_build/ --ignore docs/conf.py --durations=10 -x -s {args:src tests docs}"
+cov = "pytest -vvv --doctest-modules --cov=krotov --nbval --nbval-cell-timeout=3000 --sanitize-with docs/nbval_sanitize.cfg --ignore docs/_build/ --ignore docs/conf.py --durations=10 -x -s {args:src tests docs}"
+cov-html = [
+  "coverage html",
+]
+
+
+[tool.hatch.envs.docs]
+description = "Generate the docs (Python 3.8)"
+template = "docs"
+features = [
+  "docs",
+]
+python = "3.8"
+
+[tool.hatch.envs.docs.scripts]
+build = [
+    """python -c 'import shutil; from pathlib import Path; shutil.rmtree(Path("docs")/ "notebooks" / ".ipynb_checkpoints", ignore_errors=True)'""",
+    "sphinx-build -v -W -b html docs docs/_build/html -d docs/_build/doctree",
+]
+serve = "python -m http.server -d docs/_build/html"
+
+
+[tool.hatch.envs.lint]
+description = "Lint the code (Python 3.8)"
+template = "lint"
+features = ["lint"]
+skip-install = true
+python = "3.8"
+
+[tool.hatch.envs.lint.scripts]
+flake8 = "python -m flake8 {args:src tests}"
+pylint = "python -m pylint -j 0 {args:src}"
+black = "python -m black {args:src tests}"
+black-check = "python -m black --check --diff {args:src tests}"
+isort = "python -m isort --recursive {args:src tests}"
+isort-check = "python -m isort --recursive --check-only --diff {args:src tests}"
+
+
+[tool.hatch.envs.release]
+description = "Release tools (Python 3.8)"
+template = "release"
+features = []
+dependencies = [
+  "click==8.0.4",
+  "gitpython==3.1.43",
+  "packaging==24.0",
+  "pytest==7.4.4",
+  "twine",
+]
+skip-install = true
+python = "3.8"
+
+
+[tool.hatch.envs.py37]
+description = "Testing on Python 3.7"
+features = ["dev"]
+python = "3.7"
+
+[tool.hatch.envs.py38]
+description = "Testing on Python 3.8"
+features = []
+dependencies = [
+  "numpy==1.20.3",
+  "scipy==1.6.3",
+  "qutip==4.6.1",
+  "krotov[dev]",
+]
+python = "3.8"
+
+[tool.hatch.envs.py39]
+description = "Testing on Python 3.9"
+features = ["dev"]
+python = "3.9"
+
+[tool.hatch.envs.py310]
+description = "Testing on Python 3.10"
+features = ["dev"]
+python = "3.10"
+
+[tool.hatch.envs.py311]
+description = "Testing on Python 3.11"
+features = ["dev"]
+python = "3.11"
+
+[tool.hatch.envs.py312]
+description = "Testing on Python 3.12"
+features = ["dev"]
+python = "3.12"
+
+
+[tool.flake8]
+exclude = ["docs"]
+max-line-length = 79
+extend-ignore = [
+    # See https://github.com/PyCQA/pycodestyle/issues/373
+    "E203",
+    # don't care about "ambiguous variable names"
+    "E741",
+    # when I use lambdas, I know what I'm doing
+    "E731",
+]
+
+[tool.pytest.ini_options]
+collect_ignore = ["setup.py"]
+
+[tool.rstcheck]
+ignore_directives = ["doctest"]
+ignore_messages = ["Hyperlink target \"[^\"]+\" is not referenced\\.$"]
+ignore_roles = ["cite"]
+
+[tool.isort]
+known_first_party = ["krotov"]
+force_single_line = false
+lines_after_imports = 2
+line_length = 79
+use_parentheses = true
+multi_line_output = 3
+include_trailing_comma = true
+skip = ["src/krotov/__init__.py"]
+
+[tool.black]
+line-length = 79
+skip-string-normalization = true
+target-version = ["py37", "py38", "py39", "py310"]

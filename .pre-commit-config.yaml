@@ -15,11 +15,11 @@ repos:
         language: script
     -   id: black
         name: black
-        entry: ./scripts/pre-commit.py black
+        entry: hatch run lint:black-check --
         types: [python]
-        language: script
+        language: system
     -   id: isort
         name: isort
-        entry: ./scripts/pre-commit.py isort
+        entry: hatch run lint:isort-check --
         types: [python]
-        language: script
+        language: system

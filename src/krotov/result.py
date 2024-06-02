@@ -2,10 +2,10 @@
 :func:`.optimize_pulses`.
 """
 import copyreg
-import datetime
 import logging
 import pickle
 import time
+from datetime import datetime, timedelta
 from textwrap import dedent
 
 from .conversions import _nested_list_shallow_copy, pulse_onto_tlist
@@ -78,6 +78,14 @@ class Result:
         self.message = ''
 
     def __str__(self):
+        time_delta = ""
+        try:
+            start_dt = datetime(*self.start_local_time[:6])
+            end_dt = datetime(*self.end_local_time[:6])
+            delta = timedelta(seconds=(end_dt - start_dt).total_seconds())
+            time_delta = f" ({delta})"
+        except:
+            pass
         return dedent(
             r'''
         Krotov Optimization Result
@@ -86,18 +94,13 @@ class Result:
         - Number of objectives: {n_objectives}
         - Number of iterations: {n_iters}
         - Reason for termination: {message}
-        - Ended at {end_local_time} ({time_delta})
+        - Ended at {end_local_time}{time_delta}
         '''.format(
                 start_local_time=self.start_local_time_str,
                 n_objectives=len(self.objectives),
                 n_iters=len(self.iters) - 1,  # do not count zero iteration
                 end_local_time=self.end_local_time_str,
-                time_delta=str(
-                    datetime.timedelta(
-                        seconds=time.mktime(self.end_local_time)
-                        - time.mktime(self.start_local_time)
-                    )
-                ),
+                time_delta=time_delta,
                 message=self.message,
             )
         ).strip()
