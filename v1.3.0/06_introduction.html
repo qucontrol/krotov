@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/docs-versions-menu.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Krotov’s Method" href="07_krotovs_method.html" />
+    <link rel="prev" title="History" href="05_history.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Krotov
+          </a>
+              <div class="version">
+                1.3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_history.html">History</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_krotovs_method.html">Krotov’s Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_qutip_usage.html">Using Krotov with QuTiP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_howto.html">How-Tos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_other_methods.html">Other Optimization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_related_software.html">Related Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_bibliography.html">References</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API/krotov.html">API of the Krotov package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Krotov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Quantum information science has changed our perception of quantum
+physics from passive understanding to a source of technological
+advances <span id="id1">[<a class="reference internal" href="99_bibliography.html#id41" title="A. Acín, I. Bloch, H. Buhrman, T. Calarco, C. Eichler, J. Eisert, D. Esteve, N. Gisin, S. J. Glaser, F. Jelezko, S. Kuhr, M. Lewenstein, M. F. Riedel, P. O. Schmidt, R. Thew, A. Wallraff, I. Walmsley, and F. K. Wilhelm. The quantum technologies roadmap: a European community view. New J. Phys.  20, 080201 (2018). doi:10.1088/1367-2630/aad1ea.">1</a>]</span>. By way of actively exploiting
+the two essential elements of quantum physics, coherence and
+entanglement, technologies such as quantum
+computing <span id="id2">[<a class="reference internal" href="99_bibliography.html#id31" title="M. A. Nielsen and I. L. Chuang. Quantum Computation and Quantum Information. Cambridge University Press (2000).">2</a>]</span> or quantum
+sensing <span id="id3">[<a class="reference internal" href="99_bibliography.html#id32" title="C. L. Degen, F. Reinhard, and P. Cappellaro. Quantum sensing. Rev. Mod. Phys.  89, 035002 (2017). doi:10.1103/RevModPhys.89.035002.">3</a>]</span> hold the promise for solving
+computationally hard problems or reaching unprecedented sensitivity.
+These technologies rely on the ability to accurately perform quantum
+operations for increasingly complex quantum systems. Quantum optimal
+control allows to address this challenge by providing a set of tools to
+devise and implement shapes of external fields that accomplish a given
+task in the best way possible <span id="id4">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>]</span>.
+Originally developed in the context of molecular
+physics <span id="id5">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id35" title="P. Gross, D. Neuhauser, and H. Rabitz. Optimal control of curve-crossing systems. J. Chem. Phys.  96, 2834 (1992). doi:10.1063/1.461980.">6</a>]</span> and nuclear magnetic
+resonance <span id="id6">[<a class="reference internal" href="99_bibliography.html#id36" title="J. B. Murdoch, A. H. Lent, and M. R. Kritzer. Computer-optimized narrowband pulses for multislice imaging. J. Magnet. Res.  74, 226 (1987). doi:10.1016/0022-2364(87)90336-2.">7</a>, <a class="reference internal" href="99_bibliography.html#id37" title="S. J. Glaser and G. P. Drobny. The tailored TOCSY experiment: Chemical shift selective coherence transfer. Chem. Phys. Lett.  164, 456 (1989). doi:10.1016/0009-2614(89)85238-8.">8</a>]</span>, quantum optimal
+control theory has been adapted to the specific needs of quantum
+information science in recent
+years <span id="id7">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>, <a class="reference internal" href="99_bibliography.html#id30" title="C. P. Koch. Controlling open quantum systems: tools, achievements, and limitations. J. Phys.: Condens. Matter  28, 213001 (2016). doi:10.1088/0953-8984/28/21/213001.">9</a>]</span>. Calculation of
+optimized external field shapes for tasks such as state preparation or
+quantum gate implementation have thus become
+standard <span id="id8">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>]</span>, even for large Hilbert
+space dimensions as encountered in e.g. Rydberg
+atoms <span id="id9">[<a class="reference internal" href="99_bibliography.html#id40" title="J. Cui, R. van Bijnen, T. Pohl, S. Montangero, and T. Calarco. Optimal control of Rydberg lattice gases. Quantum Sci. Technol.  2, 035006 (2017). doi:10.1088/2058-9565/aa7daf.">10</a>, <a class="reference internal" href="99_bibliography.html#id39" title="S. Patsch, D. M. Reich, J.-M. Raimond, M. Brune, S. Gleyzes, and C. P. Koch. Fast and accurate circularization of a Rydberg atom. Phys. Rev. A  97, 053418 (2018). doi:10.1103/PhysRevA.97.053418.">11</a>]</span>. Experimental
+implementation of the calculated field shapes, using arbitrary waveform
+generators, has been eased by the latter becoming available
+commercially. Successful demonstration of quantum operations in various
+experiments <span id="id10">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>, <a class="reference internal" href="99_bibliography.html#id44" title="C. Lovecchio, F. Schäfer, S. Cherukattil, M. Alí Khan, I. Herrera, F. S. Cataliotti, T. Calarco, S. Montangero, and F. Caruso. Optimal preparation of quantum states on an atom-chip device. Phys. Rev. A  93, 010304 (2016). doi:10.1103/PhysRevA.93.010304.">12</a>, <a class="reference internal" href="99_bibliography.html#id45" title="S. van Frank, M. Bonneau, J. Schmiedmayer, S. Hild, C. Gross, M. Cheneau, I. Bloch, T. Pichler, A. Negretti, T. Calarco, and S. Montangero. Optimal control of complex atomic quantum systems. Sci. Rep.  6, 34187 (2016). doi:10.1038/srep34187.">13</a>, <a class="reference internal" href="99_bibliography.html#id46" title="N. Ofek, A. Petrenko, R. Heeres, P. Reinhold, Z. Leghtas, B. Vlastakis, Y. Liu, L. Frunzio, S. M. Girvin, L. Jiang, M. Mirrahimi, M. H. Devoret, and R. J. Schoelkopf. Extending the lifetime of a quantum bit with error correction in superconducting circuits. Nature  536, 441 (2016). doi:10.1038/nature18949.">14</a>, <a class="reference internal" href="99_bibliography.html#id43" title="J. J. W. H. Sørensen, M. K. Pedersen, M. Munch, P. Haikka, J. H. Jensen, T. Planke, M. G. Andreasen, M. Gajdacz, K. Mølmer, A. Lieberoth, J. F. Sherson, and Q. M. players. Exploring the quantum speed limit with computer games. Nature  532, 210 (2016). doi:10.1038/nature17620.">15</a>, <a class="reference internal" href="99_bibliography.html#id47" title="R. W. Heeres, P. Reinhold, N. Ofek, L. Frunzio, L. Jiang, and Michel H. Devoret, and R. J. Schoelkopf. Implementing a universal gate set on a logical qubit encoded in an oscillator. Nature Commun.  8, 94 (2017). doi:10.1038/s41467-017-00045-1.">16</a>, <a class="reference internal" href="99_bibliography.html#id42" title="R. Heck, O. Vuculescu, J. J. Sørensen, J. Zoller, M. G. Andreasen, M. G. Bason, P. Ejlertsen, O. Elíasson, P. Haikka, J. S. Laustsen, L. L. Nielsen, A. Mao, R. Müller, M. Napolitano, M. K. Pedersen, A. R. Thorsen, C. Bergenholtz, T. Calarco, S. Montangero, and J. F. Sherson. Remote optimization of an ultracold atoms experiment by experts and citizen scientists. Proc. Nat. Acad. Sci.  115, E11231 (2018). doi:10.1073/pnas.1716869115.">17</a>, <a class="reference internal" href="99_bibliography.html#id48" title="G. Feng, F. H. Cho, H. Katiyar, J. Li, D. Lu, J. Baugh, and R. Laflamme. Gradient-based closed-loop quantum optimal control in a solid-state two-qubit system. Phys. Rev. A  98, 052341 (2018). doi:10.1103/PhysRevA.98.052341.">18</a>, <a class="reference internal" href="99_bibliography.html#id119" title="A. Omran, H. Levine, A. Keesling, G. Semeghini, T. T. Wang, S. Ebadi, H. Bernien, A. S. Zibrov, H. Pichler, S. Choi, J. Cui, M. Rossignolo, P. Rembold, S. Montangero, T. Calarco, M. Endres, M. Greiner, V. Vuletić, and M. D. Lukin. Generation and manipulation of Schrödinger cat states in Rydberg atom arrays. Science  365, 570 (2019). doi:10.1126/science.aax9743.">19</a>, <a class="reference internal" href="99_bibliography.html#id49" title="A. Larrouy, S. Patsch, and others. in preparation.">20</a>]</span>
+attests to the level of maturity that quantum optimal control in quantum
+technologies has reached.</p>
+<p>In order to calculate optimized external field shapes, two choices need to be
+made – about the optimization functional and about the optimization method.
+The functional consists of the desired figure of merit, such as a gate or state
+preparation error, as well as additional constraints, such as amplitude or
+bandwidth restrictions <span id="id11">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>, <a class="reference internal" href="99_bibliography.html#id30" title="C. P. Koch. Controlling open quantum systems: tools, achievements, and limitations. J. Phys.: Condens. Matter  28, 213001 (2016). doi:10.1088/0953-8984/28/21/213001.">9</a>]</span>.
+Optimal control methods in general can be classified into gradient-free and
+gradient-based algorithms that either evaluate the optimization functional
+alone or together with its gradient <span id="id12">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>]</span>.
+Gradient-based methods typically converge faster, unless the number of
+optimization parameters can be kept small.
+Most gradient-based methods rely on the iterative solution of a set of coupled
+equations that include forward propagation of initial states, backward
+propagation of adjoint states, and the control update <span id="id13">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>]</span>.
+A popular representative of concurrent update methods is GRadient Ascent Pulse
+Engineering (GRAPE) <span id="id14">[<a class="reference internal" href="99_bibliography.html#id12" title="N. Khaneja, T. Reiss, C. Kehlet, T. Schulte-Herbrüggen, and S. J. Glaser. Optimal control of coupled spin dynamics: design of NMR pulse sequences by gradient ascent algorithms. J. Magnet. Res.  172, 296 (2005). doi:10.1016/j.jmr.2004.11.004.">21</a>]</span>.
+Krotov’s method, in contrast, requires sequential
+updates <span id="id15">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>]</span>.
+This comes with the advantage of guaranteed monotonic convergence and
+obviates the need for a line search in the direction of the
+gradient <span id="id16">[<a class="reference internal" href="99_bibliography.html#id79" title="R. Eitan, M. Mundt, and D. J. Tannor. Optimal control with accelerated convergence: combining the Krotov and quasi-Newton methods. Phys. Rev. A  83, 053426 (2011). doi:10.1103/PhysRevA.83.053426.">23</a>]</span>.</p>
+<p>The choice of Python as an implementation language is due to Python’s
+easy-to-learn syntax, expressiveness, and immense popularity in the
+scientific community. Moreover, the <a class="reference external" href="http://qutip.org">QuTiP library</a> exists,
+providing a general purpose tool to numerically describe quantum systems
+and their dynamics. QuTiP already includes basic versions of other
+popular quantum control algorithms such as GRAPE and the gradient-free
+CRAB <span id="id17">[<a class="reference internal" href="99_bibliography.html#id51" title="T. Caneva, T. Calarco, and S. Montangero. Chopped random-basis quantum optimization. Phys. Rev. A  84, 022326 (2011). doi:10.1103/PhysRevA.84.022326.">24</a>]</span>. The <a class="reference external" href="https://jupyter.org">Jupyter notebook</a> framework is available to provide an ideal
+platform for the interactive exploration of the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package’s
+capabilities, and to facilitate reproducible research workflows.</p>
+<p>The <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package targets both students wishing to
+enter the field of quantum optimal control, and researchers in the
+field. By providing a comprehensive set of <a class="reference internal" href="09_examples.html#krotov-example-notebooks"><span class="std std-ref">Examples</span></a>, we
+enable users of
+our package to explore the formulation of typical control problems, and
+to understand how Krotov’s method can solve them. These examples are
+inspired by recent
+publications <span id="id18">[<a class="reference internal" href="99_bibliography.html#id11" title="M. M. Müller, H. Haakh, T. Calarco, C. P. Koch, and C. Henkel. Prospects for fast Rydberg gates on an atom chip. Quantum Inf. Process.  10, 771 (2011). doi:10.1007/s11128-011-0296-0.">25</a>, <a class="reference internal" href="99_bibliography.html#id18" title="M. H. Goerz, E. J. Halperin, J. M. Aytac, C. P. Koch, and K. B. Whaley. Robustness of high-fidelity Rydberg gates with single-site addressability. Phys. Rev. A  90, 032329 (2014). doi:10.1103/PhysRevA.90.032329.">26</a>, <a class="reference internal" href="99_bibliography.html#id19" title="M. H. Goerz, D. M. Reich, and C. P. Koch. Optimal control theory for a unitary operation under dissipative evolution. New J. Phys.  16, 055012 (2014). doi:10.1088/1367-2630/16/5/055012.">27</a>, <a class="reference internal" href="99_bibliography.html#id16" title="P. Watts, J. Vala, M. M. Müller, T. Calarco, K. B. Whaley, D. M. Reich, M. H. Goerz, and C. P. Koch. Optimizing for an arbitrary perfect entangler: I. Functionals. Phys. Rev. A  91, 062306 (2015). doi:10.1103/PhysRevA.91.062306.">28</a>, <a class="reference internal" href="99_bibliography.html#id17" title="M. H. Goerz, G. Gualdi, D. M. Reich, C. P. Koch, F. Motzoi, K. B. Whaley, J. Vala, M. M. Müller, S. Montangero, and T. Calarco. Optimizing for an arbitrary perfect entangler. II. Application. Phys. Rev. A  91, 062307 (2015). doi:10.1103/PhysRevA.91.062307.">29</a>, <a class="reference internal" href="99_bibliography.html#id61" title="D. Basilewitsch, R. Schmidt, D. Sugny, S. Maniscalco, and C. P. Koch. Beating the limits with initial correlations. New J. Phys.  19, 113042 (2017). doi:10.1088/1367-2630/aa96f8.">30</a>]</span>,
+and thus show the use of the method in the purview of current research.
+In particular, the package is not restricted to closed quantum systems,
+but can fully address open system dynamics, and thus aide in the
+development of Noisy Intermediate-Scale Quantum (NISQ)
+technology <span id="id19">[<a class="reference internal" href="99_bibliography.html#id118" title="J. Preskill. Quantum computing in the NISQ era and beyond. Quantum  2, 79 (2018). doi:10.22331/q-2018-08-06-79.">31</a>]</span>. Optimal control is also
+increasingly important in the design of
+experiments <span id="id20">[<a class="reference internal" href="99_bibliography.html#id28" title="S. J. Glaser, U. Boscain, T. Calarco, C. P. Koch, W. Köckenberger, R. Kosloff, I. Kuprov, B. Luy, S. Schirmer, T. Schulte-Herbrüggen, D. Sugny, and F. K. Wilhelm. Training Schrödinger's cat: quantum optimal control. Eur. Phys. J. D  69, 279 (2015). doi:10.1140/epjd/e2015-60464-1.">4</a>, <a class="reference internal" href="99_bibliography.html#id44" title="C. Lovecchio, F. Schäfer, S. Cherukattil, M. Alí Khan, I. Herrera, F. S. Cataliotti, T. Calarco, S. Montangero, and F. Caruso. Optimal preparation of quantum states on an atom-chip device. Phys. Rev. A  93, 010304 (2016). doi:10.1103/PhysRevA.93.010304.">12</a>, <a class="reference internal" href="99_bibliography.html#id45" title="S. van Frank, M. Bonneau, J. Schmiedmayer, S. Hild, C. Gross, M. Cheneau, I. Bloch, T. Pichler, A. Negretti, T. Calarco, and S. Montangero. Optimal control of complex atomic quantum systems. Sci. Rep.  6, 34187 (2016). doi:10.1038/srep34187.">13</a>, <a class="reference internal" href="99_bibliography.html#id46" title="N. Ofek, A. Petrenko, R. Heeres, P. Reinhold, Z. Leghtas, B. Vlastakis, Y. Liu, L. Frunzio, S. M. Girvin, L. Jiang, M. Mirrahimi, M. H. Devoret, and R. J. Schoelkopf. Extending the lifetime of a quantum bit with error correction in superconducting circuits. Nature  536, 441 (2016). doi:10.1038/nature18949.">14</a>, <a class="reference internal" href="99_bibliography.html#id43" title="J. J. W. H. Sørensen, M. K. Pedersen, M. Munch, P. Haikka, J. H. Jensen, T. Planke, M. G. Andreasen, M. Gajdacz, K. Mølmer, A. Lieberoth, J. F. Sherson, and Q. M. players. Exploring the quantum speed limit with computer games. Nature  532, 210 (2016). doi:10.1038/nature17620.">15</a>, <a class="reference internal" href="99_bibliography.html#id47" title="R. W. Heeres, P. Reinhold, N. Ofek, L. Frunzio, L. Jiang, and Michel H. Devoret, and R. J. Schoelkopf. Implementing a universal gate set on a logical qubit encoded in an oscillator. Nature Commun.  8, 94 (2017). doi:10.1038/s41467-017-00045-1.">16</a>, <a class="reference internal" href="99_bibliography.html#id42" title="R. Heck, O. Vuculescu, J. J. Sørensen, J. Zoller, M. G. Andreasen, M. G. Bason, P. Ejlertsen, O. Elíasson, P. Haikka, J. S. Laustsen, L. L. Nielsen, A. Mao, R. Müller, M. Napolitano, M. K. Pedersen, A. R. Thorsen, C. Bergenholtz, T. Calarco, S. Montangero, and J. F. Sherson. Remote optimization of an ultracold atoms experiment by experts and citizen scientists. Proc. Nat. Acad. Sci.  115, E11231 (2018). doi:10.1073/pnas.1716869115.">17</a>, <a class="reference internal" href="99_bibliography.html#id48" title="G. Feng, F. H. Cho, H. Katiyar, J. Li, D. Lu, J. Baugh, and R. Laflamme. Gradient-based closed-loop quantum optimal control in a solid-state two-qubit system. Phys. Rev. A  98, 052341 (2018). doi:10.1103/PhysRevA.98.052341.">18</a>, <a class="reference internal" href="99_bibliography.html#id119" title="A. Omran, H. Levine, A. Keesling, G. Semeghini, T. T. Wang, S. Ebadi, H. Bernien, A. S. Zibrov, H. Pichler, S. Choi, J. Cui, M. Rossignolo, P. Rembold, S. Montangero, T. Calarco, M. Endres, M. Greiner, V. Vuletić, and M. D. Lukin. Generation and manipulation of Schrödinger cat states in Rydberg atom arrays. Science  365, 570 (2019). doi:10.1126/science.aax9743.">19</a>, <a class="reference internal" href="99_bibliography.html#id49" title="A. Larrouy, S. Patsch, and others. in preparation.">20</a>]</span>,
+and we hope that the availability of an easy-to-use implementation of
+Krotov’s method will facilitate this further.</p>
+<p>Large Hilbert space
+dimensions <span id="id21">[<a class="reference internal" href="99_bibliography.html#id40" title="J. Cui, R. van Bijnen, T. Pohl, S. Montangero, and T. Calarco. Optimal control of Rydberg lattice gases. Quantum Sci. Technol.  2, 035006 (2017). doi:10.1088/2058-9565/aa7daf.">10</a>, <a class="reference internal" href="99_bibliography.html#id39" title="S. Patsch, D. M. Reich, J.-M. Raimond, M. Brune, S. Gleyzes, and C. P. Koch. Fast and accurate circularization of a Rydberg atom. Phys. Rev. A  97, 053418 (2018). doi:10.1103/PhysRevA.97.053418.">11</a>, <a class="reference internal" href="99_bibliography.html#id24" title="M. H. Goerz, K. B. Whaley, and C. P. Koch. Hybrid optimization schemes for quantum control. EPJ Quantum Technol.  2, 21 (2015). doi:10.1140/epjqt/s40507-015-0034-0.">32</a>, <a class="reference internal" href="99_bibliography.html#id56" title="M. H. Goerz, F. Motzoi, K. B. Whaley, and C. P. Koch. Charting the circuit-QED design landscape using optimal control theory. npj Quantum Inf.  3, 37 (2017). doi:10.1038/s41534-017-0036-0.">33</a>]</span>
+and open quantum systems <span id="id22">[<a class="reference internal" href="99_bibliography.html#id19" title="M. H. Goerz, D. M. Reich, and C. P. Koch. Optimal control theory for a unitary operation under dissipative evolution. New J. Phys.  16, 055012 (2014). doi:10.1088/1367-2630/16/5/055012.">27</a>]</span> in particular
+require considerable numerical effort to optimize. Compared to the
+Fortran and C/C++ languages traditionally used for scientific computing,
+and more recently Julia <span id="id23">[<a class="reference internal" href="99_bibliography.html#id63" title="J. Bezanson, A. Edelman, S. Karpinski, and V. Shah. Julia: a fresh approach to numerical computing. SIAM Rev.  59, 65 (2017). doi:10.1137/141000671.">34</a>]</span>, pure
+Python code usually performs slower by two to three orders of
+magnitude <span id="id24">[<a class="reference internal" href="99_bibliography.html#id64" title="J. Akeret, L. Gamper, A. Amara, and A. Refregier. HOPE: a Python just-in-time compiler for astrophysical computations. Astron. Comput.  10, 1 (2015). doi:10.1016/j.ascom.2014.12.001.">35</a>, <a class="reference internal" href="99_bibliography.html#id65" title="H. Eichhorn, J. L. Cano, F. McLean, and R. Anderl. A comparative study of programming languages for next-generation astrodynamics systems. CEAS Space J.  10, 115 (2018). doi:10.1007/s12567-017-0170-8.">36</a>]</span>. Thus, for
+hard optimization problems that require several thousand iterations to
+converge, the Python implementation provided by the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package
+may not be sufficiently fast. In this case, it may be desirable to
+implement the entire optimization and time propagation in a single, more
+efficient (compiled) language. Our Python implementation of Krotov’s
+method puts an emphasis on clarity, and the documentation provides
+detailed explanations of all necessary concepts, especially the correct
+<a class="reference internal" href="07_krotovs_method.html#timediscretization"><span class="std std-ref">Time discretization</span></a> and the possibility to parallelize the optimization.
+Thus, the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package can serve as a reference implementation,
+leveraging Python’s reputation as “executable pseudocode”, and as a foundation
+against which to test other implementations.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="05_history.html" class="btn btn-neutral float-left" title="History" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="07_krotovs_method.html" class="btn btn-neutral float-right" title="Krotov’s Method" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Jun 03, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
