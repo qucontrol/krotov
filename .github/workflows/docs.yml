@@ -16,21 +16,21 @@ jobs:
 
   build_docs:
     name: Build Sphinx docs
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v2
-        name: Install Python 3.8
+      - uses: actions/setup-python@v5
+        name: Install Python 3.12
         with:
-          python-version: 3.8
+          python-version: 3.12
 
       - name: Install zip-files
         run: pip install zip-files
 
       - name: Install apt packages
-        run: sudo apt-get install graphviz imagemagick pandoc pandoc-citeproc
+        run: sudo apt-get install graphviz imagemagick pandoc
 
       - name: Install Hatch
         uses: pypa/hatch@install
@@ -47,7 +47,7 @@ jobs:
       - name: Zip the HTML documentation
         run: zip-folder --debug --auto-root --outfile "krotov-docs-${{ steps.get_version.outputs.VERSION }}.zip" docs/_build/html
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         name: Upload documentation artifacts
         with:
           name: krotov-docs
@@ -60,14 +60,14 @@ jobs:
   deploy_gh_pages:
     name: Deploy documentation to gh-pages
     if: always() && needs.build_docs.result == 'success' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [build_docs]
     steps:
 
-      - uses: actions/setup-python@v2
-        name: Install Python 3.8
+      - uses: actions/setup-python@v5
+        name: Install Python 3.12
         with:
-          python-version: 3.8
+          python-version: 3.12
 
       - name: Install deploy requirements
         run: pip install docs-versions-menu
@@ -79,7 +79,7 @@ jobs:
           echo "BRANCH_NAME=$(echo ${GITHUB_REF##*/} | tr / -)" >> $GITHUB_ENV
           cat $GITHUB_ENV
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         name: Check out gh-pages branch (full history)
         with:
           ref: gh-pages

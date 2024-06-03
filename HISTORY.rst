@@ -3,6 +3,12 @@ History
 =======
 
 
+2.0.0-dev (unreleased)
+----------------------
+
+* Changed: minimum supported Python version is Python 3.10 (drop support for Python 3.7-3.9)
+
+
 1.3.0 (2024-06-03)
 ------------------
 

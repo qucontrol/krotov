@@ -103,7 +103,7 @@ If you are a member of the `qucontrol organization`_, there is no need to fork
 Development Prerequisites
 -------------------------
 
-Contributing to the package's developments requires that you have Python 3.8
+Contributing to the package's developments requires that you have Python 3.12
 and hatch_ installed (tested with Hatch 1.11). It is strongly recommended that
 you also have installations of all other supported Python versions. The
 recommended way to install multiple versions of Python at the same time is

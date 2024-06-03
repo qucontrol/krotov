@@ -11,15 +11,16 @@ license = {file = "LICENSE"}
 authors = [
   {name = "Michael Goerz", email = "mail@michaelgoerz.net"}
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Education",
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: BSD License",
   "Natural Language :: English",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Framework :: Jupyter",
   "Operating System :: OS Independent",
   "Topic :: Scientific/Engineering",
@@ -52,7 +53,7 @@ dev = [
   "pytest-cov<=2.6.1",
   "pytest-xdist",
   "nbval==0.11.0",
-  "weylchamber>=0.3.2",
+  "weylchamber>=0.5.0",
   "ipython",
 ]
 docs = [
@@ -60,20 +61,21 @@ docs = [
   "gitpython==3.1.43",
   "better-apidoc==0.3.2",
   "docs-versions-menu==0.5.2",
-  "sphinx<4.0",
-  "sphinx-autobuild",
-  "sphinx-copybutton",
-  "sphinx_rtd_theme",
-  "sphinxcontrib-bibtex",
-  "nbsphinx==0.9.3",
-  "Jinja2==3.0.3",
-  "docutils<=0.17",
-  "matplotlib==3.7.5",
-  "watermark~=2.4",
+  "sphinx==7.3.7",
+  "sphinx-autobuild==2024.4.16",
+  "sphinx-copybutton==0.5.2",
+  "sphinx_rtd_theme==2.0.0",
+  "sphinxcontrib-bibtex==2.6.2",
+  "nbsphinx==0.9.4",
+  "Jinja2==3.1.4",
+  "docutils==0.20.1",
+  "matplotlib==3.9.0",
+  "watermark==2.4.3",
   "zip-files==0.4.1",
   "ipython",
 ]
 lint = [
+  'setuptools; python_version >= "3.12"',
   "flake8",
   "flake8-pyproject",
   "isort==4.3.*",
@@ -83,13 +85,13 @@ lint = [
 ]
 
 [tool.hatch.envs.default]
-description = "Testing and other dev tasks (Python 3.8)"
+description = "Testing and other dev tasks (Python 3.12)"
 features = [
     "dev",
     "docs",
     "lint",
 ]
-python = "3.8"
+python = "3.12"
 
 [tool.hatch.envs.default.scripts]
 test = "pytest -vvv --doctest-modules --nbval --nbval-cell-timeout=3000 --sanitize-with docs/nbval_sanitize.cfg --ignore docs/_build/ --ignore docs/conf.py --durations=10 -x -s {args:src tests docs}"
@@ -100,13 +102,13 @@ cov-html = [
 
 
 [tool.hatch.envs.docs]
-description = "Generate the docs (Python 3.8)"
+description = "Generate the docs (Python 3.12)"
 template = "docs"
 features = [
   "dev",
   "docs",
 ]
-python = "3.8"
+python = "3.12"
 
 [tool.hatch.envs.docs.scripts]
 build = [
@@ -117,11 +119,11 @@ serve = "python -m http.server -d docs/_build/html"
 
 
 [tool.hatch.envs.lint]
-description = "Lint the code (Python 3.8)"
+description = "Lint the code (Python 3.12)"
 template = "lint"
 features = ["lint"]
 skip-install = true
-python = "3.8"
+python = "3.12"
 
 [tool.hatch.envs.lint.scripts]
 flake8 = "python -m flake8 {args:src tests}"
@@ -133,7 +135,7 @@ isort-check = "python -m isort --recursive --check-only --diff {args:src tests}"
 
 
 [tool.hatch.envs.release]
-description = "Release tools (Python 3.8)"
+description = "Release tools (Python 3.12)"
 template = "release"
 features = []
 dependencies = [
@@ -144,33 +146,18 @@ dependencies = [
   "twine",
 ]
 skip-install = true
-python = "3.8"
+python = "3.12"
 
-
-[tool.hatch.envs.py37]
-description = "Testing on Python 3.7"
-features = ["dev"]
-python = "3.7"
-
-[tool.hatch.envs.py38]
-description = "Testing on Python 3.8"
-features = []
-dependencies = [
-  "numpy==1.20.3",
-  "scipy==1.6.3",
-  "qutip==4.6.1",
-  "krotov[dev]",
-]
-python = "3.8"
-
-[tool.hatch.envs.py39]
-description = "Testing on Python 3.9"
-features = ["dev"]
-python = "3.9"
 
 [tool.hatch.envs.py310]
 description = "Testing on Python 3.10"
-features = ["dev"]
+features = []
+dependencies = [
+  "numpy",
+  "scipy",
+  "qutip",
+  "krotov[dev]",
+]
 python = "3.10"
 
 [tool.hatch.envs.py311]
@@ -183,6 +170,8 @@ description = "Testing on Python 3.12"
 features = ["dev"]
 python = "3.12"
 
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.flake8]
 exclude = ["docs"]
@@ -217,4 +206,4 @@ skip = ["src/krotov/__init__.py"]
 [tool.black]
 line-length = 79
 skip-string-normalization = true
-target-version = ["py37", "py38", "py39", "py310"]
+target-version = ["py310"]

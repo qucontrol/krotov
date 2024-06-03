@@ -15,10 +15,6 @@ import pybtex.style.formatting
 import pybtex.style.formatting.unsrt
 import pybtex.style.template
 from pybtex.plugin import register_plugin as pybtex_register_plugin
-from sphinx.ext.autodoc import (
-    ClassLevelDocumenter,
-    InstanceAttributeDocumenter,
-)
 
 
 DOCS = Path(__file__).parent
@@ -395,15 +391,6 @@ class ApsStyle(pybtex.style.formatting.unsrt.Style):
 
 pybtex_register_plugin("pybtex.style.formatting", "apsstyle", ApsStyle)
 
-
-# -- Monkeypatch for instance attribs (sphinx bug #2044) -----------------------
-
-
-def iad_add_directive_header(self, sig):
-    ClassLevelDocumenter.add_directive_header(self, sig)
-
-
-InstanceAttributeDocumenter.add_directive_header = iad_add_directive_header
 
 # -- Options for HTML output ---------------------------------------------------
 
