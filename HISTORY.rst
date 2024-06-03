@@ -3,11 +3,11 @@ History
 =======
 
 
-1.3.0-dev (unreleased)
-----------------------
+1.3.0 (2024-06-03)
+------------------
 
 * Bugfix: `∫gₐdt` and total functional were reported incorrectly (`#96`_, thanks to `@daviehh`_)
-* Bugfix: Restrict `qutip` to version 4. Support for `qutip 5.0` will be added in a later release
+* Bugfix: Restrict ``qutip`` to version 4. Support for ``qutip 5.0`` will be added in a later release
 * Changed: Dropped support for Python 3.5 and Python 3.6
 * Changed: The documentation will no longer be provided in PDF format
 * Changed: Development is now organized around hatch_ instead of tox_

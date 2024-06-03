@@ -65,7 +65,7 @@ listenvs: ## Show all hatch environments
 	hatch env show
 
 shell: ## Open a shell with all development tools
-	hatch shell
+	hatch -e default shell
 
 upload: dist ## Package and upload a release to pypi.org
 	hatch publish
@@ -95,7 +95,7 @@ uninstall:  ## uninstall the package from the active Python's site-packages
 # How to execute notebook files
 %.ipynb.log: %.ipynb
 	@echo ""
-	hatch run -- jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.kernel_name='python3'  --ExecutePreprocessor.timeout=-1 --config=/dev/null $< 2>&1 | tee $@
+	hatch -e default run -- jupyter nbconvert --to notebook --execute --inplace --allow-errors --ExecutePreprocessor.kernel_name='python3'  --ExecutePreprocessor.timeout=-1 --config=/dev/null $< 2>&1 | tee $@
 
 NOTEBOOKFILES = $(shell find docs/notebooks -maxdepth 1 -iname '*.ipynb')
 NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))
@@ -103,7 +103,7 @@ NOTEBOOKLOGS = $(patsubst %.ipynb,%.ipynb.log,$(NOTEBOOKFILES))
 notebooks: $(NOTEBOOKLOGS)  ## re-evaluate the notebooks
 	@echo ""
 	@echo "All notebook are now up to date; the were executed using the python3 kernel"
-	hatch run -- jupyter kernelspec list | grep python3
+	hatch -e default run -- jupyter kernelspec list | grep python3
 
 jupyter-lab:  ## Run a Jupyterlab server for editing the examples
-	hatch run -- jupyter lab
+	hatch -e default run -- jupyter lab

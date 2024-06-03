@@ -7,7 +7,7 @@
 [![Tests](https://github.com/qucontrol/krotov/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/qucontrol/krotov/actions?query=workflow%3ATests)
 [![Codecov](https://codecov.io/gh/qucontrol/krotov/branch/master/graph/badge.svg)](https://codecov.io/gh/qucontrol/krotov)
 [![BSD License](https://img.shields.io/badge/License-BSD-green.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qucontrol/krotov/v1.2.1?filepath=docs%2Fnotebooks)
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qucontrol/krotov/v1.3.0?filepath=docs%2Fnotebooks)
 [![DOI](https://img.shields.io/badge/DOI-10.21468/SciPostPhys.7.6.080-blue.svg)](https://doi.org/10.21468/SciPostPhys.7.6.080)
 
 Python implementation of Krotov's method for quantum optimal control.
@@ -22,7 +22,7 @@ You can read the full documentation
 [online](https://qucontrol.github.io/krotov).
 
 If you use the `krotov` package in your research, please [cite
-it](https://qucontrol.github.io/krotov/v1.2.1/01_overview.html#citing-the-krotov-package).
+it](https://qucontrol.github.io/krotov/v1.3.0/01_overview.html#citing-the-krotov-package).
 
 ## Purpose
 
