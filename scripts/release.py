@@ -116,6 +116,8 @@ def get_package_name():
     for name in os.listdir('src'):
         if 'egg-info' in name:
             continue
+        if '__pycache__' in name:
+            continue
         if os.path.isdir(os.path.join('src', name)):
             return name
     raise ReleaseError("Cannot find package name")

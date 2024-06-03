@@ -68,10 +68,10 @@ shell: ## Open a shell with all development tools
 	hatch -e default shell
 
 upload: dist ## Package and upload a release to pypi.org
-	hatch publish
+	hatch run release:twine upload dist/*
 
 test-upload: dist ## Package and upload a release to test.pypi.org
-	hatch publish --repo test
+	hatch run release:twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 release: ## Create a new version, package and upload it
 	hatch -e release run -- python ./scripts/release.py
