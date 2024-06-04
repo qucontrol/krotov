@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>krotov.functionals module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <title>krotov.functionals module &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,7 +46,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -50,7 +56,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -72,7 +78,24 @@
 <li class="toctree-l2"><a class="reference internal" href="krotov.conversions.html">krotov.conversions module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.functionals module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.f_tau"><code class="docutils literal notranslate"><span class="pre">f_tau()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.F_ss"><code class="docutils literal notranslate"><span class="pre">F_ss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.J_T_ss"><code class="docutils literal notranslate"><span class="pre">J_T_ss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.chis_ss"><code class="docutils literal notranslate"><span class="pre">chis_ss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.F_sm"><code class="docutils literal notranslate"><span class="pre">F_sm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.J_T_sm"><code class="docutils literal notranslate"><span class="pre">J_T_sm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.chis_sm"><code class="docutils literal notranslate"><span class="pre">chis_sm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.F_re"><code class="docutils literal notranslate"><span class="pre">F_re()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.J_T_re"><code class="docutils literal notranslate"><span class="pre">J_T_re()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.chis_re"><code class="docutils literal notranslate"><span class="pre">chis_re()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.J_T_hs"><code class="docutils literal notranslate"><span class="pre">J_T_hs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.chis_hs"><code class="docutils literal notranslate"><span class="pre">chis_hs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.F_avg"><code class="docutils literal notranslate"><span class="pre">F_avg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.gate"><code class="docutils literal notranslate"><span class="pre">gate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.functionals.mapped_basis"><code class="docutils literal notranslate"><span class="pre">mapped_basis()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="krotov.info_hooks.html">krotov.info_hooks module</a></li>
@@ -153,8 +176,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-krotov.functionals">
-<span id="krotov-functionals-module"></span><h1>krotov.functionals module<a class="headerlink" href="#module-krotov.functionals" title="Permalink to this headline">¶</a></h1>
+  <section id="module-krotov.functionals">
+<span id="krotov-functionals-module"></span><h1>krotov.functionals module<a class="headerlink" href="#module-krotov.functionals" title="Link to this heading">¶</a></h1>
 <p>Functionals and <cite>chi_constructor</cite> routines.</p>
 <p>Any <cite>chi_constructor</cite> routine passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> must take the
 following keyword-arguments:</p>
@@ -197,14 +220,10 @@ inside a function that is passed as an <cite>info_hook</cite> to <a class="refer
 Thus, they calculate <span class="math notranslate nohighlight">\(J_T\)</span> from the same keyword arguments as the <cite>info_hook</cite>.
 The values for <span class="math notranslate nohighlight">\(J_T\)</span> may be used in a convergence analysis, see
 <a class="reference internal" href="krotov.convergence.html#module-krotov.convergence" title="krotov.convergence"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.convergence</span></code></a>.</p>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
 <p>Functions:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#krotov.functionals.F_avg" title="krotov.functionals.F_avg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">F_avg</span></code></a></p></td>
 <td><p>Average gate fidelity</p></td>
@@ -254,12 +273,12 @@ The values for <span class="math notranslate nohighlight">\(J_T\)</span> may be 
 </tbody>
 </table>
 <p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.functionals.F_avg" title="krotov.functionals.F_avg"><code class="xref py py-func docutils literal notranslate"><span class="pre">F_avg</span></code></a>, <a class="reference internal" href="#krotov.functionals.F_re" title="krotov.functionals.F_re"><code class="xref py py-func docutils literal notranslate"><span class="pre">F_re</span></code></a>, <a class="reference internal" href="#krotov.functionals.F_sm" title="krotov.functionals.F_sm"><code class="xref py py-func docutils literal notranslate"><span class="pre">F_sm</span></code></a>, <a class="reference internal" href="#krotov.functionals.F_ss" title="krotov.functionals.F_ss"><code class="xref py py-func docutils literal notranslate"><span class="pre">F_ss</span></code></a>, <a class="reference internal" href="#krotov.functionals.J_T_hs" title="krotov.functionals.J_T_hs"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_hs</span></code></a>, <a class="reference internal" href="#krotov.functionals.J_T_re" title="krotov.functionals.J_T_re"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_re</span></code></a>, <a class="reference internal" href="#krotov.functionals.J_T_sm" title="krotov.functionals.J_T_sm"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_sm</span></code></a>, <a class="reference internal" href="#krotov.functionals.J_T_ss" title="krotov.functionals.J_T_ss"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_ss</span></code></a>, <a class="reference internal" href="#krotov.functionals.chis_hs" title="krotov.functionals.chis_hs"><code class="xref py py-func docutils literal notranslate"><span class="pre">chis_hs</span></code></a>, <a class="reference internal" href="#krotov.functionals.chis_re" title="krotov.functionals.chis_re"><code class="xref py py-func docutils literal notranslate"><span class="pre">chis_re</span></code></a>, <a class="reference internal" href="#krotov.functionals.chis_sm" title="krotov.functionals.chis_sm"><code class="xref py py-func docutils literal notranslate"><span class="pre">chis_sm</span></code></a>, <a class="reference internal" href="#krotov.functionals.chis_ss" title="krotov.functionals.chis_ss"><code class="xref py py-func docutils literal notranslate"><span class="pre">chis_ss</span></code></a>, <a class="reference internal" href="#krotov.functionals.f_tau" title="krotov.functionals.f_tau"><code class="xref py py-func docutils literal notranslate"><span class="pre">f_tau</span></code></a>, <a class="reference internal" href="#krotov.functionals.gate" title="krotov.functionals.gate"><code class="xref py py-func docutils literal notranslate"><span class="pre">gate</span></code></a>, <a class="reference internal" href="#krotov.functionals.mapped_basis" title="krotov.functionals.mapped_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">mapped_basis</span></code></a></p>
-</div>
-<div class="section" id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt id="krotov.functionals.f_tau">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">f_tau</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#f_tau"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.f_tau" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.f_tau">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">f_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#f_tau"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.f_tau" title="Link to this definition">¶</a></dt>
 <dd><p>Average complex overlaps of the target states with the <cite>fw_states_T</cite>.</p>
 <p>That is,</p>
 <div class="math notranslate nohighlight">
@@ -288,8 +307,8 @@ using <a class="reference internal" href="#krotov.functionals.J_T_hs" title="kro
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.F_ss">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">F_ss</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_ss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_ss" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.F_ss">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">F_ss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_ss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_ss" title="Link to this definition">¶</a></dt>
 <dd><p>State-to-state phase-insensitive fidelity</p>
 <div class="math notranslate nohighlight">
 \[F_{\text{ss}} = \frac{1}{N} \sum_{k=1}^{N} w_k \Abs{\tau_k}^2
@@ -300,8 +319,8 @@ using <a class="reference internal" href="#krotov.functionals.J_T_hs" title="kro
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.J_T_ss">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">J_T_ss</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_ss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_ss" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.J_T_ss">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">J_T_ss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_ss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_ss" title="Link to this definition">¶</a></dt>
 <dd><p>State-to-state phase-insensitive functional  <span class="math notranslate nohighlight">\(J_{T,\text{ss}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[J_{T,\text{ss}} = 1 - F_{\text{ss}} \quad\in [0, 1].\]</div>
@@ -309,8 +328,8 @@ using <a class="reference internal" href="#krotov.functionals.J_T_hs" title="kro
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.chis_ss">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">chis_ss</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_ss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_ss" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.chis_ss">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">chis_ss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_ss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_ss" title="Link to this definition">¶</a></dt>
 <dd><p>States <span class="math notranslate nohighlight">\(\ket{\chi_k}\)</span> for functional <span class="math notranslate nohighlight">\(J_{T,\text{ss}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\Ket{\chi_k}
@@ -320,8 +339,8 @@ using <a class="reference internal" href="#krotov.functionals.J_T_hs" title="kro
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.F_sm">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">F_sm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_sm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_sm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.F_sm">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">F_sm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_sm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_sm" title="Link to this definition">¶</a></dt>
 <dd><p>Square-modulus fidelity</p>
 <div class="math notranslate nohighlight">
 \[F_{\text{sm}} = \Abs{f_{\tau}}^2 \quad\in [0, 1].\]</div>
@@ -329,8 +348,8 @@ using <a class="reference internal" href="#krotov.functionals.J_T_hs" title="kro
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.J_T_sm">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">J_T_sm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_sm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_sm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.J_T_sm">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">J_T_sm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_sm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_sm" title="Link to this definition">¶</a></dt>
 <dd><p>Square-modulus functional  <span class="math notranslate nohighlight">\(J_{T,\text{sm}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[J_{T,\text{sm}} = 1 - F_{\text{sm}} \quad\in [0, 1]\]</div>
@@ -339,8 +358,8 @@ in <a class="reference internal" href="#krotov.functionals.F_sm" title="krotov.f
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.chis_sm">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">chis_sm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_sm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_sm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.chis_sm">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">chis_sm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_sm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_sm" title="Link to this definition">¶</a></dt>
 <dd><p>States <span class="math notranslate nohighlight">\(\ket{\chi_k}\)</span> for functional <span class="math notranslate nohighlight">\(J_{T,\text{sm}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\Ket{\chi_k}
@@ -351,8 +370,8 @@ given, the weights should generally sum to <span class="math notranslate nohighl
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.F_re">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">F_re</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_re"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_re" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.F_re">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">F_re</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_re"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_re" title="Link to this definition">¶</a></dt>
 <dd><p>Real-part fidelity</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}F_{\text{re}} = \Re[f_{\tau}] \quad\in \begin{cases}
@@ -363,8 +382,8 @@ given, the weights should generally sum to <span class="math notranslate nohighl
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.J_T_re">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">J_T_re</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_re"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_re" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.J_T_re">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">J_T_re</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_re"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_re" title="Link to this definition">¶</a></dt>
 <dd><p>Real-part functional <span class="math notranslate nohighlight">\(J_{T,\text{re}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}J_{T,\text{re}} = 1 - F_{\text{re}} \quad\in \begin{cases}
@@ -383,8 +402,8 @@ using <a class="reference internal" href="#krotov.functionals.J_T_hs" title="kro
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.chis_re">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">chis_re</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_re"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_re" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.chis_re">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">chis_re</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_re"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_re" title="Link to this definition">¶</a></dt>
 <dd><p>States <span class="math notranslate nohighlight">\(\ket{\chi_k}\)</span> for functional <span class="math notranslate nohighlight">\(J_{T,\text{re}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\Ket{\chi_k}
@@ -397,8 +416,8 @@ the <cite>chi_constructor</cite> interface.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.J_T_hs">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">J_T_hs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_hs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_hs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.J_T_hs">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">J_T_hs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#J_T_hs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.J_T_hs" title="Link to this definition">¶</a></dt>
 <dd><p>Hilbert-Schmidt distance measure functional <span class="math notranslate nohighlight">\(J_{T,\text{hs}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}J_{T,\text{hs}}
@@ -441,8 +460,8 @@ the overall magnitude of the pulse updates (given in <cite>pulse_options</cite> 
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.chis_hs">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">chis_hs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_hs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_hs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.chis_hs">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">chis_hs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#chis_hs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.chis_hs" title="Link to this definition">¶</a></dt>
 <dd><p>States <span class="math notranslate nohighlight">\(\Op{\chi}_k\)</span> for functional <span class="math notranslate nohighlight">\(J_{T,\text{hs}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\Op{\chi}_k
@@ -476,8 +495,8 @@ the <cite>chi_constructor</cite> interface.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.F_avg">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">F_avg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapped_basis_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_avg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_avg" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.F_avg">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">F_avg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapped_basis_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#F_avg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.F_avg" title="Link to this definition">¶</a></dt>
 <dd><p>Average gate fidelity</p>
 <div class="math notranslate nohighlight">
 \[F_{\text{avg}}
@@ -515,7 +534,7 @@ Hilbert space.</p>
 <p>where <span class="math notranslate nohighlight">\(\Op{U}\)</span> the gate that maps <cite>basis_states</cite> to the result of a forward
 propagation of those basis states, stored in <cite>fw_states_T</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fw_states_T</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em>]</em>) – The forward propagated states. For
 dissipative dynamics, this must be the forward propagation of the
@@ -526,7 +545,7 @@ For unitary dynamics, the <span class="math notranslate nohighlight">\(N\)</span
 states</p></li>
 <li><p><strong>gate</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a>) – The <span class="math notranslate nohighlight">\(N \times N\)</span> quantum gate in the logical
 subspace, e.g. <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.qip.gates.cnot" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.qip.gates.cnot()</span></code></a>.</p></li>
-<li><p><strong>mapped_basis_states</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em>]</em>) – If given, the result of
+<li><p><strong>mapped_basis_states</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em>]</em>) – If given, the result of
 applying gate to <cite>basis_states</cite>. If not given, this will be
 calculated internally via <a class="reference internal" href="#krotov.functionals.mapped_basis" title="krotov.functionals.mapped_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">mapped_basis()</span></code></a>. It is recommended
 to pass pre-calculated <cite>mapped_basis_states</cite> when evaluating
@@ -541,11 +560,11 @@ imaginary part. We assert that this imaginary part is below <cite>prec</cite>.</
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.gate">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">gate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#gate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.gate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.gate">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">gate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#gate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.gate" title="Link to this definition">¶</a></dt>
 <dd><p>Gate that maps <cite>basis_states</cite> to <cite>fw_states_T</cite></p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">ket</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="k">for</span> <span class="n">nums</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CNOT</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
@@ -559,11 +578,11 @@ imaginary part. We assert that this imaginary part is below <cite>prec</cite>.</
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.functionals.mapped_basis">
-<code class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></code><code class="sig-name descname"><span class="pre">mapped_basis</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">O</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#mapped_basis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.mapped_basis" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.functionals.mapped_basis">
+<span class="sig-prename descclassname"><span class="pre">krotov.functionals.</span></span><span class="sig-name descname"><span class="pre">mapped_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">O</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/functionals.html#mapped_basis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.functionals.mapped_basis" title="Link to this definition">¶</a></dt>
 <dd><p>Apply the gate <cite>O</cite> to <cite>basis_states</cite>.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">ket</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="k">for</span> <span class="n">nums</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CNOT</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
@@ -578,8 +597,8 @@ imaginary part. We assert that this imaginary part is below <cite>prec</cite>.</
 </div>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -592,8 +611,8 @@ imaginary part. We assert that this imaginary part is below <cite>prec</cite>.</
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

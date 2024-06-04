@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Optimization of a Dissipative Quantum Gate &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <title>Optimization of a Dissipative Quantum Gate &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,7 +47,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -56,7 +57,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -152,26 +153,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.3.0/docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.3.0?filepath=docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
-<div class="section" id="Optimization-of-a-Dissipative-Quantum-Gate">
-<h1>Optimization of a Dissipative Quantum Gate<a class="headerlink" href="#Optimization-of-a-Dissipative-Quantum-Gate" title="Permalink to this headline">¶</a></h1>
+  <p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/341cb5cbacdebd34f8d91bcb04b6019e1aeaf85f//home/runner/work/krotov/krotov/docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/341cb5cbacdebd34f8d91bcb04b6019e1aeaf85f?filepath=/home/runner/work/krotov/krotov/docs/notebooks/06_example_3states.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<section id="Optimization-of-a-Dissipative-Quantum-Gate">
+<h1>Optimization of a Dissipative Quantum Gate<a class="headerlink" href="#Optimization-of-a-Dissipative-Quantum-Gate" title="Link to this heading">¶</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
 <span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">qutip</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">krotov</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">qutip</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">krotov</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
 <span class="o">%</span><span class="k">watermark</span> -v --iversions
 </pre></div>
 </div>
@@ -182,16 +183,15 @@
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Python implementation: CPython
-Python version       : 3.8.16
-IPython version      : 8.12.3
+Python version       : 3.12.0
+IPython version      : 8.25.0
 
-numpy     : 1.24.4
 qutip     : 4.7.6
-scipy     : 1.10.1
+krotov    : 1.3.0+dev
+sys       : 3.12.0 (main, Jun  3 2024, 09:08:56) [Clang 15.0.0 (clang-1500.3.9.4)]
 matplotlib: 3.7.5
-krotov    : 1.3.0
-sys       : 3.8.16 (default, May 26 2024, 19:41:26)
-[GCC 12.2.0]
+numpy     : 1.26.4
+scipy     : 1.12.0
 
 </pre></div></div>
 </div>
@@ -199,17 +199,17 @@ sys       : 3.8.16 (default, May 26 2024, 19:41:26)
 <p>This example illustrates the optimization for a quantum gate in an open quantum system, where the dynamics is governed by the Liouville-von Neumann equation. A naive extension of a gate optimization to Liouville space would seem to imply that it is necessary to optimize over the full basis of Liouville space (16 matrices, for a two-qubit gate). However, <a class="reference external" href="https://michaelgoerz.net/research/Goerz_NJP2014.pdf">Goerz et al., New J. Phys. 16, 055012 (2014)</a> showed that is not necessary, but that a
 set of 3 density matrices is sufficient to track the optimization.</p>
 <p>This example reproduces the “Example II” from that paper, considering the optimization towards a <span class="math notranslate nohighlight">\(\sqrt{\text{iSWAP}}\)</span> two-qubit gate on a system of two transmons with a shared transmission line resonator.</p>
-<div class="section" id="The-two-transmon-system">
-<h2>The two-transmon system<a class="headerlink" href="#The-two-transmon-system" title="Permalink to this headline">¶</a></h2>
+<section id="The-two-transmon-system">
+<h2>The two-transmon system<a class="headerlink" href="#The-two-transmon-system" title="Link to this heading">¶</a></h2>
 <p>We consider the Hamiltonian from Eq (17) in the paper, in the rotating wave approximation, together with spontaneous decay and dephasing of each qubit. Alltogether, we define the Liouvillian as follows:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">two_qubit_transmon_liouvillian</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">two_qubit_transmon_liouvillian</span><span class="p">(</span>
     <span class="n">ω1</span><span class="p">,</span> <span class="n">ω2</span><span class="p">,</span> <span class="n">ωd</span><span class="p">,</span> <span class="n">δ1</span><span class="p">,</span> <span class="n">δ2</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">q1T1</span><span class="p">,</span> <span class="n">q2T1</span><span class="p">,</span> <span class="n">q1T2</span><span class="p">,</span> <span class="n">q2T2</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Omega</span><span class="p">,</span> <span class="n">n_qubit</span>
 <span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">destroy</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">destroy</span>
 
     <span class="n">b1</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="n">n_qubit</span><span class="p">),</span> <span class="n">destroy</span><span class="p">(</span><span class="n">n_qubit</span><span class="p">))</span>
     <span class="n">b2</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">(</span><span class="n">destroy</span><span class="p">(</span><span class="n">n_qubit</span><span class="p">),</span> <span class="n">identity</span><span class="p">(</span><span class="n">n_qubit</span><span class="p">))</span>
@@ -291,7 +291,7 @@ set of 3 density matrices is sufficient to track the optimization.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Omega</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Omega</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
     <span class="n">E0</span> <span class="o">=</span> <span class="mf">35.0</span> <span class="o">*</span> <span class="n">MHz</span>
     <span class="k">return</span> <span class="n">E0</span> <span class="o">*</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">flattop</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">t_rise</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="n">ns</span><span class="p">),</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;sinsq&#39;</span><span class="p">)</span>
 </pre></div>
@@ -302,7 +302,7 @@ set of 3 density matrices is sufficient to track the optimization.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ZeroPulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ZeroPulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
     <span class="k">return</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
@@ -323,7 +323,7 @@ set of 3 density matrices is sufficient to track the optimization.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_pulse</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">xlimit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_pulse</span><span class="p">(</span><span class="n">pulse</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">xlimit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">pulse</span><span class="p">):</span>
         <span class="n">pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">])</span>
@@ -351,9 +351,9 @@ set of 3 density matrices is sufficient to track the optimization.</p>
 <img alt="../_images/notebooks_06_example_3states_22_0.png" src="../_images/notebooks_06_example_3states_22_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="Optimization-objectives">
-<h2>Optimization objectives<a class="headerlink" href="#Optimization-objectives" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Optimization-objectives">
+<h2>Optimization objectives<a class="headerlink" href="#Optimization-objectives" title="Link to this heading">¶</a></h2>
 <p>Our target gate is <span class="math notranslate nohighlight">\(\Op{O} = \sqrt{\text{iSWAP}}\)</span>:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -433,9 +433,9 @@ set of 3 density matrices is sufficient to track the optimization.</p>
 </pre></div></div>
 </div>
 <p>The use of <code class="docutils literal notranslate"><span class="pre">normalize_weights=False</span></code> is because we have included the purities in the weights, as discussed above.</p>
-</div>
-<div class="section" id="Dynamics-under-the-Guess-Pulse">
-<h2>Dynamics under the Guess Pulse<a class="headerlink" href="#Dynamics-under-the-Guess-Pulse" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Dynamics-under-the-Guess-Pulse">
+<h2>Dynamics under the Guess Pulse<a class="headerlink" href="#Dynamics-under-the-Guess-Pulse" title="Link to this heading">¶</a></h2>
 <p>For numerical efficiency, both for the analysis of the guess/optimized controls, we will use a stateful density matrix propagator:</p>
 <p>A true physical measure for the success of the optimization is the “average gate fidelity”. Evaluating the fidelity requires to simulate the dynamics of the full basis of Liouville space:</p>
 <div class="nbinput nblast docutils container">
@@ -451,7 +451,7 @@ set of 3 density matrices is sufficient to track the optimization.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">propagate_guess</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">propagate_guess</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mesolve</span><span class="p">(</span>
         <span class="n">tlist</span><span class="p">,</span>
         <span class="n">rho0</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
@@ -497,7 +497,7 @@ F_avg = 0.344
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">propagate_guess_for_expvals</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">propagate_guess_for_expvals</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">propagate</span><span class="p">(</span>
         <span class="n">tlist</span><span class="p">,</span>
         <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">DensityMatrixODEPropagator</span><span class="p">(),</span>
@@ -511,7 +511,7 @@ F_avg = 0.344
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_population_dynamics</span><span class="p">(</span><span class="n">dyn00</span><span class="p">,</span> <span class="n">dyn01</span><span class="p">,</span> <span class="n">dyn10</span><span class="p">,</span> <span class="n">dyn11</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_population_dynamics</span><span class="p">(</span><span class="n">dyn00</span><span class="p">,</span> <span class="n">dyn01</span><span class="p">,</span> <span class="n">dyn10</span><span class="p">,</span> <span class="n">dyn11</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
     <span class="n">axs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">axs</span><span class="p">)</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;00&#39;</span><span class="p">,</span> <span class="s1">&#39;01&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;11&#39;</span><span class="p">]</span>
@@ -542,9 +542,9 @@ F_avg = 0.344
 <img alt="../_images/notebooks_06_example_3states_47_0.png" src="../_images/notebooks_06_example_3states_47_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="Optimization">
-<h2>Optimization<a class="headerlink" href="#Optimization" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Optimization">
+<h2>Optimization<a class="headerlink" href="#Optimization" title="Link to this heading">¶</a></h2>
 <p>We now define the optimization parameters for the controls, the Krotov step size <span class="math notranslate nohighlight">\(\lambda_a\)</span> and the update-shape that will ensure that the pulse switch-on and switch-off stays intact.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -584,10 +584,10 @@ F_avg = 0.344
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 iter.      J_T   ∑∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs
-0     1.22e-01    0.00e+00   1.22e-01        n/a        n/a     6
-1     7.49e-02    2.34e-02   9.83e-02  -4.67e-02  -2.33e-02    20
-2     7.41e-02    4.06e-04   7.45e-02  -8.12e-04  -4.06e-04    20
-3     7.33e-02    3.78e-04   7.37e-02  -7.55e-04  -3.77e-04    21
+0     1.22e-01    0.00e+00   1.22e-01        n/a        n/a     4
+1     7.49e-02    2.34e-02   9.83e-02  -4.67e-02  -2.33e-02    11
+2     7.41e-02    4.06e-04   7.45e-02  -8.12e-04  -4.06e-04    11
+3     7.33e-02    3.78e-04   7.37e-02  -7.55e-04  -3.77e-04    11
 </pre></div></div>
 </div>
 <p>(this takes a while)…</p>
@@ -636,9 +636,9 @@ Krotov Optimization Result
 - Ended at 2024-06-02 09:36:53 (12:53:06)
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Optimization-result">
-<h2>Optimization result<a class="headerlink" href="#Optimization-result" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Optimization-result">
+<h2>Optimization result<a class="headerlink" href="#Optimization-result" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
@@ -666,7 +666,7 @@ Krotov Optimization Result
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">propagate_opt</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">propagate_opt</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">propagate</span><span class="p">(</span>
         <span class="n">tlist</span><span class="p">,</span>
         <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">DensityMatrixODEPropagator</span><span class="p">(),</span>
@@ -703,7 +703,7 @@ F_avg = 0.977
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">propagate_opt_for_expvals</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">propagate_opt_for_expvals</span><span class="p">(</span><span class="n">initial_state</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">opt_result</span><span class="o">.</span><span class="n">optimized_objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">propagate</span><span class="p">(</span>
         <span class="n">tlist</span><span class="p">,</span>
         <span class="n">propagator</span><span class="o">=</span><span class="n">krotov</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">DensityMatrixODEPropagator</span><span class="p">(),</span>
@@ -735,7 +735,7 @@ F_avg = 0.977
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">iters</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">info_vals</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;OCT iteration&#39;</span><span class="p">)</span>
@@ -752,26 +752,15 @@ F_avg = 0.977
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmtt10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmb10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmss10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;DejaVu Sans Display&#39;] not found. Falling back to DejaVu Sans.
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_example_3states_66_1.png" src="../_images/notebooks_06_example_3states_66_1.png" />
+<img alt="../_images/notebooks_06_example_3states_66_0.png" src="../_images/notebooks_06_example_3states_66_0.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -784,8 +773,8 @@ WARNING:matplotlib.font_manager:findfont: Font family [&#39;DejaVu Sans Display&
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

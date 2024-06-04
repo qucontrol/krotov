@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Optimization of a Dissipative State-to-State Transfer in a Lambda System &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <title>Optimization of a Dissipative State-to-State Transfer in a Lambda System &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -43,7 +47,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -53,7 +57,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -148,26 +152,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.3.0/docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.3.0?filepath=docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
-<div class="section" id="Optimization-of-a-Dissipative-State-to-State-Transfer-in-a-Lambda-System">
-<h1>Optimization of a Dissipative State-to-State Transfer in a Lambda System<a class="headerlink" href="#Optimization-of-a-Dissipative-State-to-State-Transfer-in-a-Lambda-System" title="Permalink to this headline">¶</a></h1>
+  <p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/341cb5cbacdebd34f8d91bcb04b6019e1aeaf85f//home/runner/work/krotov/krotov/docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/341cb5cbacdebd34f8d91bcb04b6019e1aeaf85f?filepath=/home/runner/work/krotov/krotov/docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<section id="Optimization-of-a-Dissipative-State-to-State-Transfer-in-a-Lambda-System">
+<h1>Optimization of a Dissipative State-to-State Transfer in a Lambda System<a class="headerlink" href="#Optimization-of-a-Dissipative-State-to-State-Transfer-in-a-Lambda-System" title="Link to this heading">¶</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_IGNORE_OUTPUT</span>
 <span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">qutip</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">krotov</span>
-<span class="kn">import</span> <span class="nn">qutip</span>
-<span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">Qobj</span>
-<span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">qutip</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">krotov</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">qutip</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qobj</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 <span class="o">%</span><span class="k">watermark</span> -v --iversions
 </pre></div>
 </div>
@@ -178,24 +182,24 @@
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Python implementation: CPython
-Python version       : 3.8.16
-IPython version      : 8.12.3
+Python version       : 3.12.0
+IPython version      : 8.25.0
 
-krotov    : 1.3.0
-qutip     : 4.7.6
+numpy     : 1.26.4
 matplotlib: 3.7.5
-numpy     : 1.24.4
-scipy     : 1.10.1
+qutip     : 4.7.6
+scipy     : 1.12.0
+krotov    : 1.3.0+dev
 
 </pre></div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2}\mid{#2}\vphantom{#1}\right\rangle} \newcommand{ketbra}[2]{\vert#1\rangle\!\langle#2\vert} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}} \newcommand{toP}[0]{\omega_{12}} \newcommand{toS}[0]{\omega_{23}}\)</span></p>
 <p>This example illustrates the use of Krotov’s method with a non-Hermitian Hamiltonian. It considers the same system as the <a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html"><span class="doc">previous example</span></a>, a transition <span class="math notranslate nohighlight">\(\ket{1} \rightarrow \ket{3}\)</span> in a three-level system in a <span class="math notranslate nohighlight">\(\Lambda\)</span>-configuration. However, here we add a non-Hermitian decay term to model loss from the intermediary level <span class="math notranslate nohighlight">\(\ket{2}\)</span>. At a technical level, this examples also illustrates how to use <code class="docutils literal notranslate"><span class="pre">args</span></code> in
 time-dependent control fields (“QuTiP style”), as opposed to hard-coding parameters or setting them through a closure, as was done in the previous examples.</p>
-<div class="section" id="The-effective-Hamiltonian">
-<h2>The effective Hamiltonian<a class="headerlink" href="#The-effective-Hamiltonian" title="Permalink to this headline">¶</a></h2>
+<section id="The-effective-Hamiltonian">
+<h2>The effective Hamiltonian<a class="headerlink" href="#The-effective-Hamiltonian" title="Link to this heading">¶</a></h2>
 <p>We consider the system as in the following diagram:</p>
-<p><img alt="Lambda system considered in this notebook" src="../_images/energylevels.png" /></p>
+<img alt="Lambda system considered in this notebook" src="../_images/energylevels.png" />
 <p>with the Hamiltonian</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\Op{H}_{\text{lab}} = \begin{pmatrix}
@@ -236,7 +240,7 @@ population in a subspace.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Omega_P1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Omega_P1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Guess for the real part of the pump pulse.</span>
 
 <span class="sd">    Blackman shape with amplitude `Ω0` from `t0P` to `t0P` + `ΔTP`, with</span>
@@ -247,12 +251,12 @@ population in a subspace.</p>
     <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;Ω0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="n">t0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">Omega_P2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Omega_P2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Guess for the imaginary part of the pump pulse (zero).&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mf">0.0</span>
 
 
-<span class="k">def</span> <span class="nf">Omega_S1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Omega_S1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Guess for the real part of the Stokes pulse.</span>
 
 <span class="sd">    Blackman shape with amplitude `Ω0` from `t0S` to `t0S` + `ΔTS`, with</span>
@@ -263,7 +267,7 @@ population in a subspace.</p>
     <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;Ω0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">krotov</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">blackman</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_start</span><span class="o">=</span><span class="n">t0</span><span class="p">,</span> <span class="n">t_stop</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">Omega_S2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Omega_S2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Guess for the imaginary part of the Stokes pulse (zero).&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mf">0.0</span>
 </pre></div>
@@ -274,7 +278,7 @@ population in a subspace.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hamiltonian</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Lambda-system Hamiltonian in the RWA&quot;&quot;&quot;</span>
     <span class="n">E1</span><span class="p">,</span> <span class="n">E2</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">ΩP</span><span class="p">,</span> <span class="n">ΩS</span><span class="p">,</span> <span class="n">γ</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="s1">&#39;E1 E2 E3 ΩP ΩS γ&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 
@@ -356,9 +360,9 @@ H0 is Hermitian: False
 H1 is Hermitian: True
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Define-the-optimization-target">
-<h2>Define the optimization target<a class="headerlink" href="#Define-the-optimization-target" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Define-the-optimization-target">
+<h2>Define the optimization target<a class="headerlink" href="#Define-the-optimization-target" title="Link to this heading">¶</a></h2>
 <p>We optimize for the phase-sensitive transition <span class="math notranslate nohighlight">\(\ket{1} \rightarrow \ket{3}\)</span>. As we are working in the rotating frame, the target state must be adjusted with an appropriate phase factor:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -368,7 +372,7 @@ H1 is Hermitian: True
 <span class="n">ket2</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
 <span class="n">ket3</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
 
-<span class="k">def</span> <span class="nf">rwa_target_state</span><span class="p">(</span><span class="n">ket3</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">E2</span><span class="p">,</span> <span class="n">ΩS</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rwa_target_state</span><span class="p">(</span><span class="n">ket3</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">E2</span><span class="p">,</span> <span class="n">ΩS</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">E2</span> <span class="o">-</span> <span class="n">ΩS</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">ket3</span>
 
 <span class="n">psi_target</span> <span class="o">=</span> <span class="n">rwa_target_state</span><span class="p">(</span><span class="n">ket3</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">ARGS</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="s1">&#39;E2 ΩS T&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()})</span>
@@ -394,9 +398,9 @@ H1 is Hermitian: True
 [Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [A₀[3,3], [H₁[3,3], u₁(t)], [H₂[3,3], u₂(t)], [H₃[3,3], u₃(t)], [H₄[3,3], u₄(t)]]]]
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Simulate-dynamics-under-the-guess-field">
-<h2>Simulate dynamics under the guess field<a class="headerlink" href="#Simulate-dynamics-under-the-guess-field" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Simulate-dynamics-under-the-guess-field">
+<h2>Simulate dynamics under the guess field<a class="headerlink" href="#Simulate-dynamics-under-the-guess-field" title="Link to this heading">¶</a></h2>
 <p>We use a time grid with 500 steps between <span class="math notranslate nohighlight">\(t=0\)</span> and <span class="math notranslate nohighlight">\(T=5\)</span>:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -431,7 +435,7 @@ H1 is Hermitian: True
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_population</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_population</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
@@ -444,7 +448,7 @@ H1 is Hermitian: True
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">plot_norm</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_norm</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
 
     <span class="n">state_norm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
     <span class="n">states_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">state_norm</span><span class="p">)</span>
@@ -481,9 +485,9 @@ H1 is Hermitian: True
 </div>
 </div>
 <p>The population dynamics and the norm-plot show the effect the non-Hermitian term in the Hamiltonian, resulting in a 30% loss.</p>
-</div>
-<div class="section" id="Optimize">
-<h2>Optimize<a class="headerlink" href="#Optimize" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Optimize">
+<h2>Optimize<a class="headerlink" href="#Optimize" title="Link to this heading">¶</a></h2>
 <p>For each control, we define the update shape and the <span class="math notranslate nohighlight">\(\lambda_a\)</span> parameter that determines the magnitude of the update:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -521,7 +525,7 @@ H1 is Hermitian: True
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">F_re</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;tau_vals&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   F = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">F_re</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">F_re</span>
@@ -595,7 +599,7 @@ H1 is Hermitian: True
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_pulse_amplitude_and_phase</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">,</span> <span class="n">pulse_imaginary</span><span class="p">,</span><span class="n">tlist</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_pulse_amplitude_and_phase</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">,</span> <span class="n">pulse_imaginary</span><span class="p">,</span><span class="n">tlist</span><span class="p">):</span>
     <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
     <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
     <span class="n">amplitudes</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pulse_real</span><span class="p">,</span><span class="n">pulse_imaginary</span><span class="p">)]</span>
@@ -724,7 +728,7 @@ Final fidelity: 0.966
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">iters</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">info_vals</span><span class="p">))</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;OCT iteration&#39;</span><span class="p">)</span>
@@ -742,22 +746,11 @@ Final fidelity: 0.966
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmtt10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmb10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmss10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;DejaVu Sans Display&#39;] not found. Falling back to DejaVu Sans.
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_example_lambda_system_rwa_non_hermitian_41_1.png" src="../_images/notebooks_03_example_lambda_system_rwa_non_hermitian_41_1.png" />
+<img alt="../_images/notebooks_03_example_lambda_system_rwa_non_hermitian_41_0.png" src="../_images/notebooks_03_example_lambda_system_rwa_non_hermitian_41_0.png" />
 </div>
 </div>
 <p>We have used here that the return value of the routine <code class="docutils literal notranslate"><span class="pre">print_fidelity</span></code> that was passed to the <code class="docutils literal notranslate"><span class="pre">optimize_pulses</span></code> routine as an <code class="docutils literal notranslate"><span class="pre">info_hook</span></code> is automatically accumulated in <code class="docutils literal notranslate"><span class="pre">result.info_vals</span></code>.</p>
@@ -845,7 +838,7 @@ Stokes pulse amplitude and phase:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_physical_field</span><span class="p">(</span><span class="n">pulse_re</span><span class="p">,</span> <span class="n">pulse_im</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_physical_field</span><span class="p">(</span><span class="n">pulse_re</span><span class="p">,</span> <span class="n">pulse_im</span><span class="p">,</span> <span class="n">tlist</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="s1">&#39;pump&#39;</span><span class="p">:</span>
         <span class="n">w</span> <span class="o">=</span> <span class="mf">9.5</span>
@@ -906,8 +899,8 @@ Physical electric Stokes pulse in the lab frame:
 <img alt="../_images/notebooks_03_example_lambda_system_rwa_non_hermitian_47_3.png" src="../_images/notebooks_03_example_lambda_system_rwa_non_hermitian_47_3.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -920,8 +913,8 @@ Physical electric Stokes pulse in the lab frame:
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

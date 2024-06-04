@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Krotov’s Method &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <title>Krotov’s Method &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/clipboard.min.js"></script>
-        <script src="_static/copybutton.js"></script>
-        <script src="_static/docs-versions-menu.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2624feb1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,7 +46,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -50,7 +56,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
@@ -138,10 +144,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="krotovs-method">
-<span id="krotovsmethod"></span><h1>Krotov’s Method<a class="headerlink" href="#krotovs-method" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="the-quantum-control-problem">
-<h2>The quantum control problem<a class="headerlink" href="#the-quantum-control-problem" title="Permalink to this headline">¶</a></h2>
+  <section id="krotovs-method">
+<span id="krotovsmethod"></span><h1>Krotov’s Method<a class="headerlink" href="#krotovs-method" title="Link to this heading">¶</a></h1>
+<section id="the-quantum-control-problem">
+<h2>The quantum control problem<a class="headerlink" href="#the-quantum-control-problem" title="Link to this heading">¶</a></h2>
 <p>Quantum optimal control methods formalize the problem of finding
 “control fields” that steer the time evolution of a quantum system in
 some desired way. For closed systems, described by a Hilbert space state
@@ -209,14 +215,14 @@ calculate an update to these controls that will decrease the value of
 the functional. The updated controls then become the guess for the next
 iteration of the algorithm, until the value of the functional is
 sufficiently small, or convergence is reached.</p>
-</div>
-<div class="section" id="optimization-functional">
-<h2>Optimization functional<a class="headerlink" href="#optimization-functional" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="optimization-functional">
+<h2>Optimization functional<a class="headerlink" href="#optimization-functional" title="Link to this heading">¶</a></h2>
 <p>Mathematically, Krotov’s method, when applied to quantum
 systems <span id="id7">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>]</span>, minimizes a functional
 of the most general form</p>
 <div class="math notranslate nohighlight" id="equation-functional">
-<span class="eqno">(1)<a class="headerlink" href="#equation-functional" title="Permalink to this equation">¶</a></span>\[J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}]
+<span class="eqno">(1)<a class="headerlink" href="#equation-functional" title="Link to this equation">¶</a></span>\[J[\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}]
     = J_T(\{\ket{\phi_k^{(i)}(T)}\})
         + \sum_l \int_0^T g_a(\epsilon_l^{(i)}(t)) \dd t
         + \int_0^T g_b(\{\phi^{(i)}_k(t)\}) \dd t\,,\]</div>
@@ -240,7 +246,7 @@ auxiliary functional in the optimization of <span class="math notranslate nohigh
 used expression (and the only one currently supported by the
 <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package) is <span id="id8">[<a class="reference internal" href="99_bibliography.html#id9" title="J. P. Palao and R. Kosloff. Optimal control theory for unitary transformations. Phys. Rev. A  68, 062308 (2003). doi:10.1103/PhysRevA.68.062308.">47</a>]</span></p>
 <div class="math notranslate nohighlight" id="equation-g-a">
-<span class="eqno">(2)<a class="headerlink" href="#equation-g-a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(2)<a class="headerlink" href="#equation-g-a" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
     g_a(\epsilon_l^{(i)}(t))
     &amp;= \frac{\lambda_{a,l}}{S_l(t)} \left(
         \epsilon_l^{(i)}(t) - \epsilon_{l, \text{ref}}^{(i)}(t)
@@ -253,7 +259,7 @@ used expression (and the only one currently supported by the
 <p>with the inverse “step width” <span class="math notranslate nohighlight">\(\lambda_{a,l} &gt; 0\)</span>, the “update
 shape” function <span class="math notranslate nohighlight">\(S_{l}(t) \in [0, 1]\)</span>, and the <a class="reference internal" href="#iterativecontrolupdate"><span class="std std-ref">Iterative control update</span></a></p>
 <div class="math notranslate nohighlight" id="equation-update">
-<span class="eqno">(3)<a class="headerlink" href="#equation-update" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon_l^{(i)}(t)
+<span class="eqno">(3)<a class="headerlink" href="#equation-update" title="Link to this equation">¶</a></span>\[\Delta\epsilon_l^{(i)}(t)
 \equiv \epsilon_l^{(i)}(t) - \epsilon_l^{(i-1)}(t)\,,\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon_l^{(i-1)}(t)\)</span> is the optimized control of the
 previous iteration – that is, the guess control of the current
@@ -278,7 +284,7 @@ set of target states <span class="math notranslate nohighlight">\(\{\ket{\phi_k^
 be expressed in terms of the complex overlaps of the target states with the
 final-time states under the given control. Thus,</p>
 <div class="math notranslate nohighlight" id="equation-tauk">
-<span class="eqno">(4)<a class="headerlink" href="#equation-tauk" title="Permalink to this equation">¶</a></span>\[  \tau_k = \Braket{\phi_k^\tgt}{\phi_k(T)}\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-tauk" title="Link to this equation">¶</a></span>\[  \tau_k = \Braket{\phi_k^\tgt}{\phi_k(T)}\]</div>
 <p>in Hilbert space, or</p>
 <div class="math notranslate nohighlight">
 \[\tau_k
@@ -294,32 +300,32 @@ e^{i\varphi_k}\ket{\phi_k^{\tgt}}\)</span> <span id="id11">[<a class="reference 
 <li><p>Optimize for simultaneous state-to-state transitions, with completely
 arbitrary phases <span class="math notranslate nohighlight">\(\varphi_k\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-jtss">
-<span class="eqno">(5)<a class="headerlink" href="#equation-jtss" title="Permalink to this equation">¶</a></span>\[J_{T,\text{ss}} = 1- \frac{1}{N} \sum_{k=1}^{N} \Abs{\tau_k}^2\,,\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-jtss" title="Link to this equation">¶</a></span>\[J_{T,\text{ss}} = 1- \frac{1}{N} \sum_{k=1}^{N} \Abs{\tau_k}^2\,,\]</div>
 <p>cf. <a class="reference internal" href="API/krotov.functionals.html#krotov.functionals.J_T_ss" title="krotov.functionals.J_T_ss"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_ss()</span></code></a>.</p>
 </li>
 <li><p>Optimize for simultaneous state-to-state transitions, with an arbitrary
 <em>global</em> phase, i.e., <span class="math notranslate nohighlight">\(\varphi_k = \varphi_{\text{global}}\)</span> for all
 <span class="math notranslate nohighlight">\(k\)</span> with arbitrary <span class="math notranslate nohighlight">\(\varphi_{\text{global}}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-jtsm">
-<span class="eqno">(6)<a class="headerlink" href="#equation-jtsm" title="Permalink to this equation">¶</a></span>\[J_{T,\text{sm}} = 1- \frac{1}{N^2} \Abs{\sum_{k=1}^{N} \tau_k}^2
+<span class="eqno">(6)<a class="headerlink" href="#equation-jtsm" title="Link to this equation">¶</a></span>\[J_{T,\text{sm}} = 1- \frac{1}{N^2} \Abs{\sum_{k=1}^{N} \tau_k}^2
         = 1- \frac{1}{N^2} \sum_{k=1}^{N} \sum_{k'=1}^{N} \tau_{k'}^* \tau_{k}\,,\]</div>
 <p>cf. <a class="reference internal" href="API/krotov.functionals.html#krotov.functionals.J_T_sm" title="krotov.functionals.J_T_sm"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_sm()</span></code></a>.</p>
 </li>
 <li><p>Optimize for simultaneous state-to-state transitions, with a global phase of zero, i.e.,
 <span class="math notranslate nohighlight">\(\varphi_k = 0\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-jtre">
-<span class="eqno">(7)<a class="headerlink" href="#equation-jtre" title="Permalink to this equation">¶</a></span>\[J_{T,\text{re}} = 1-\frac{1}{N} \Re \left[\, \sum_{k=1}^{N} \tau_k \,\right]\,,\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-jtre" title="Link to this equation">¶</a></span>\[J_{T,\text{re}} = 1-\frac{1}{N} \Re \left[\, \sum_{k=1}^{N} \tau_k \,\right]\,,\]</div>
 <p>cf. <a class="reference internal" href="API/krotov.functionals.html#krotov.functionals.J_T_re" title="krotov.functionals.J_T_re"><code class="xref py py-func docutils literal notranslate"><span class="pre">J_T_re()</span></code></a>.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="iterative-control-update">
-<span id="iterativecontrolupdate"></span><h2>Iterative control update<a class="headerlink" href="#iterative-control-update" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="iterative-control-update">
+<span id="iterativecontrolupdate"></span><h2>Iterative control update<a class="headerlink" href="#iterative-control-update" title="Link to this heading">¶</a></h2>
 <p>Starting from the initial guess control <span class="math notranslate nohighlight">\(\epsilon_l^{(0)}(t)\)</span>, the
 optimized field <span class="math notranslate nohighlight">\(\epsilon_l^{(i)}(t)\)</span> in iteration <span class="math notranslate nohighlight">\(i &gt; 0\)</span>
 is the result of applying a control update,</p>
 <div class="math notranslate nohighlight" id="equation-eps-update">
-<span class="eqno">(8)<a class="headerlink" href="#equation-eps-update" title="Permalink to this equation">¶</a></span>\[\epsilon_l^{(i)}(t)
+<span class="eqno">(8)<a class="headerlink" href="#equation-eps-update" title="Link to this equation">¶</a></span>\[\epsilon_l^{(i)}(t)
 = \epsilon_l^{(i-1)}(t) + \Delta\epsilon_l^{(i)}(t)\,.\]</div>
 <p>Krotov’s method is a clever construction of a particular
 <span class="math notranslate nohighlight">\(\Delta\epsilon_l^{(i)}(t)\)</span> that ensures</p>
@@ -348,7 +354,7 @@ around <span class="math notranslate nohighlight">\(t=0\)</span> and <span class
 optimization. A typical example for an update shape is</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-flattop">
-<span class="eqno">(9)<a class="headerlink" href="#equation-flattop" title="Permalink to this equation">¶</a></span>\[\begin{split}S_l(t) = \begin{cases}
+<span class="eqno">(9)<a class="headerlink" href="#equation-flattop" title="Link to this equation">¶</a></span>\[\begin{split}S_l(t) = \begin{cases}
       B(t; t_0=0, t_1=2 t_{\text{on}})
         &amp; \text{for} \quad 0 &lt; t &lt; t_{\text{on}} \\
       1 &amp; \text{for} \quad t_{\text{on}} \le t \le T - t_{\text{off}} \\
@@ -357,7 +363,7 @@ optimization. A typical example for an update shape is</p>
     \end{cases}\end{split}\]</div>
 <p>cf. <a class="reference internal" href="API/krotov.shapes.html#krotov.shapes.flattop" title="krotov.shapes.flattop"><code class="xref py py-func docutils literal notranslate"><span class="pre">krotov.shapes.flattop()</span></code></a>, with the <a class="reference external" href="https://en.wikipedia.org/wiki/Window_function#Blackman_window">Blackman shape</a></p>
 <div class="math notranslate nohighlight" id="equation-blackman">
-<span class="eqno">(10)<a class="headerlink" href="#equation-blackman" title="Permalink to this equation">¶</a></span>\[B(t; t_0, t_1) =
+<span class="eqno">(10)<a class="headerlink" href="#equation-blackman" title="Link to this equation">¶</a></span>\[B(t; t_0, t_1) =
       \frac{1}{2}\left(
         1 - a - \cos\left(2\pi \frac{t - t_0}{t_1 - t_0}\right)
         + a \cos\left(4\pi \frac{t - t_0}{t_1 - t_0}\right)
@@ -377,9 +383,9 @@ These details are not necessary to <em>use</em> the <a class="reference internal
 “black box” optimization tool, so you may skip ahead to
 <a class="reference internal" href="08_qutip_usage.html#using-krotov-with-qutip"><span class="std std-ref">Using Krotov with QuTiP</span></a> and come back at a later time.</p>
 </div>
-</div>
-<div class="section" id="first-order-update">
-<span id="firstorderupdate"></span><h2>First order update<a class="headerlink" href="#first-order-update" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="first-order-update">
+<span id="firstorderupdate"></span><h2>First order update<a class="headerlink" href="#first-order-update" title="Link to this heading">¶</a></h2>
 <p>Krotov’s method is based on a rigorous examination of the conditions for
 calculating the updated fields <span class="math notranslate nohighlight">\(\{\epsilon_l^{(i)}(t)\}\)</span> such that
 <span class="math notranslate nohighlight">\(J(\{\ket{\phi_k^{(i)}(t)}\}, \{\epsilon_l^{(i)}(t)\}) \leq
@@ -389,7 +395,7 @@ For a general functional of the form in
 Eq. <a class="reference internal" href="#equation-functional">(1)</a>, with a convex final-time
 functional <span class="math notranslate nohighlight">\(J_T\)</span>, the condition for monotonic convergence is</p>
 <div class="math notranslate nohighlight" id="equation-krotov-first-order-proto-update">
-<span class="eqno">(11)<a class="headerlink" href="#equation-krotov-first-order-proto-update" title="Permalink to this equation">¶</a></span>\[\frac{\partial g_a}{\partial \epsilon_l(t)}\bigg\vert_{(i)}
+<span class="eqno">(11)<a class="headerlink" href="#equation-krotov-first-order-proto-update" title="Link to this equation">¶</a></span>\[\frac{\partial g_a}{\partial \epsilon_l(t)}\bigg\vert_{(i)}
   =  2 \Im \left[\,
       \sum_{k=1}^{N} \Bigg\langle \chi_k^{(i-1)}(t) \Bigg\vert \Bigg(
       \frac{\partial \Op{H}}{\partial \epsilon_l(t)}\bigg\vert_{
@@ -410,7 +416,7 @@ holds for every control field <span class="math notranslate nohighlight">\(\epsi
 <em>update</em>
 equation <span id="id14">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id10" title="S. E. Sklarz and D. J. Tannor. Loading a Bose-Einstein condensate onto an optical lattice: an application of optimal control theory to the nonlinear Schrödinger equation. Phys. Rev. A  66, 053619 (2002). doi:10.1103/PhysRevA.66.053619.">46</a>, <a class="reference internal" href="99_bibliography.html#id9" title="J. P. Palao and R. Kosloff. Optimal control theory for unitary transformations. Phys. Rev. A  68, 062308 (2003). doi:10.1103/PhysRevA.68.062308.">47</a>]</span>,</p>
 <div class="math notranslate nohighlight" id="equation-krotov-first-order-update">
-<span class="eqno">(12)<a class="headerlink" href="#equation-krotov-first-order-update" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_l(t)
+<span class="eqno">(12)<a class="headerlink" href="#equation-krotov-first-order-update" title="Link to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_l(t)
   = \frac{S_l(t)}{\lambda_{a,l}} \Im \left[\,
       \sum_{k=1}^{N} \Bigg\langle \chi_k^{(i-1)}(t) \Bigg\vert \Bigg(
       \frac{\partial \Op{H}}{\partial \epsilon_l(t)}
@@ -421,18 +427,18 @@ equation <span id="id14">[<a class="reference internal" href="99_bibliography.h
 <span class="math notranslate nohighlight">\(\ket{\phi_k^{(i)}}\)</span> under the optimized controls
 <span class="math notranslate nohighlight">\(\{\epsilon_l^{(i)}(t)\}\)</span> of the iteration <span class="math notranslate nohighlight">\((i)\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-fw-eqm">
-<span class="eqno">(13)<a class="headerlink" href="#equation-fw-eqm" title="Permalink to this equation">¶</a></span>\[\frac{\partial}{\partial t} \Ket{\phi_k^{(i)}(t)}
+<span class="eqno">(13)<a class="headerlink" href="#equation-fw-eqm" title="Link to this equation">¶</a></span>\[\frac{\partial}{\partial t} \Ket{\phi_k^{(i)}(t)}
    = -\frac{\mathrm{i}}{\hbar} \Op{H}^{(i)} \Ket{\phi_k^{(i)}(t)}\,.\]</div>
 <p>The co-states <span class="math notranslate nohighlight">\(\ket{\chi_k^{(i-1)}(t)}\)</span> are propagated backwards
 in time under the guess controls of iteration <span class="math notranslate nohighlight">\((i)\)</span>, i.e., the
 optimized controls from the previous iteration <span class="math notranslate nohighlight">\((i-1)\)</span>, as</p>
 <div class="math notranslate nohighlight" id="equation-bw-eqm">
-<span class="eqno">(14)<a class="headerlink" href="#equation-bw-eqm" title="Permalink to this equation">¶</a></span>\[\frac{\partial}{\partial t} \Ket{\chi_k^{(i-1)}(t)}
+<span class="eqno">(14)<a class="headerlink" href="#equation-bw-eqm" title="Link to this equation">¶</a></span>\[\frac{\partial}{\partial t} \Ket{\chi_k^{(i-1)}(t)}
   = -\frac{\mathrm{i}}{\hbar} \Op{H}^{\dagger\,(i-1)} \Ket{\chi_k^{(i-1)}(t)}
     + \left.\frac{\partial g_b}{\partial \Bra{\phi_k}}\right\vert_{(i-1)}\,,\]</div>
 <p>with the boundary condition</p>
 <div class="math notranslate nohighlight" id="equation-chi-boundary">
-<span class="eqno">(15)<a class="headerlink" href="#equation-chi-boundary" title="Permalink to this equation">¶</a></span>\[\Ket{\chi_k^{(i-1)}(T)}
+<span class="eqno">(15)<a class="headerlink" href="#equation-chi-boundary" title="Link to this equation">¶</a></span>\[\Ket{\chi_k^{(i-1)}(T)}
   = - \left.\frac{\partial J_T}{\partial \Bra{\phi_k(T)}}
     \right\vert_{(i-1)}\,,\]</div>
 <p>where the right-hand-side is evaluated for the set of states
@@ -456,11 +462,11 @@ a single state-to-state transition (<span class="math notranslate nohighlight">\
 in general.</p>
 <p>More precisely, the right hand side of Eq. <a class="reference internal" href="#equation-chi-boundary">(15)</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Wirtinger_derivatives">Wirtinger derivative</a>. That is, if the j’th component of <span class="math notranslate nohighlight">\(\ket{\phi_k(T)}\)</span> is the complex number <span class="math notranslate nohighlight">\(x_j + \ii y_j\)</span> then the j’th component of <span class="math notranslate nohighlight">\(\ket{\chi_k(T)}\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-wirtinger-deriv">
-<span class="eqno">(16)<a class="headerlink" href="#equation-wirtinger-deriv" title="Permalink to this equation">¶</a></span>\[ \chi_j = - \frac{1}{2} \left(\frac{\partial J_T}{\partial x_j} + \ii \frac{\partial J_T}{\partial y_j} \right)\,.\]</div>
+<span class="eqno">(16)<a class="headerlink" href="#equation-wirtinger-deriv" title="Link to this equation">¶</a></span>\[ \chi_j = - \frac{1}{2} \left(\frac{\partial J_T}{\partial x_j} + \ii \frac{\partial J_T}{\partial y_j} \right)\,.\]</div>
 <p>Generally, though, the state <span class="math notranslate nohighlight">\(\ket{\chi_k(T)}\)</span> can be calculated simply by fully expanding <span class="math notranslate nohighlight">\(J_T\)</span> and treating co-states as independent variables, as in the example for <span class="math notranslate nohighlight">\(J_{T,ss}\)</span> above. Hence the intuitive notation in Eq. <a class="reference internal" href="#equation-chi-boundary">(15)</a>.</p>
-</div>
-<div class="section" id="second-order-update">
-<span id="secondorderupdate"></span><h2>Second order update<a class="headerlink" href="#second-order-update" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="second-order-update">
+<span id="secondorderupdate"></span><h2>Second order update<a class="headerlink" href="#second-order-update" title="Link to this heading">¶</a></h2>
 <p>The update
 Eq. <a class="reference internal" href="#equation-krotov-first-order-update">(12)</a>
 assumes that the equation of motion is linear (<span class="math notranslate nohighlight">\(\Op{H}\)</span> does not
@@ -472,7 +478,7 @@ convergence via a “second order” term in
 Eqs. <a class="reference internal" href="#equation-krotov-first-order-proto-update">(11)</a>, <a class="reference internal" href="#equation-krotov-first-order-update">(12)</a> <span id="id15">[<a class="reference internal" href="99_bibliography.html#id7" title="D. M. Reich, M. Ndong, and C. P. Koch. Monotonically convergent optimization in quantum control using Krotov's method. J. Chem. Phys.  136, 104103 (2012). doi:10.1063/1.3691827.">22</a>, <a class="reference internal" href="99_bibliography.html#id6" title="A.I. Konnov and V. F. Krotov. On global methods of successive improvement of controlled processes. Autom. Rem. Contr.  60, 1427 (1999).">43</a>]</span>,</p>
 <p>The full update equation then reads</p>
 <div class="math notranslate nohighlight" id="equation-krotov-second-order-update">
-<span class="eqno">(17)<a class="headerlink" href="#equation-krotov-second-order-update" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(17)<a class="headerlink" href="#equation-krotov-second-order-update" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
   \Delta\epsilon^{(i)}_l(t)
     &amp;= \frac{S_l(t)}{\lambda_{a,l}} \Im \left[\,
         \sum_{k=1}^{N} \Bigg\langle \chi_k^{(i-1)}(t) \Bigg\vert \Bigg(
@@ -525,13 +531,15 @@ more numerical resources (calculation and storage of the states
 <span class="math notranslate nohighlight">\(\ket{\Delta\phi_k(t)}\)</span>), you should always try the optimization with
 the first-order update equation first.</p>
 </div>
-</div>
-<div class="section" id="time-discretization">
-<span id="timediscretization"></span><h2>Time discretization<a class="headerlink" href="#time-discretization" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="id21">
+</section>
+<section id="time-discretization">
+<span id="timediscretization"></span><h2>Time discretization<a class="headerlink" href="#time-discretization" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="id21">
 <span id="figkrotovscheme"></span><a class="reference internal image-reference" href="_images/krotovscheme.svg"><img alt="Sequential update scheme in Krotov’s method on a time grid." src="_images/krotovscheme.svg" width="100%" /></a>
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Sequential update scheme in Krotov’s method on a time grid.</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Sequential update scheme in Krotov’s method on a time grid.</span><a class="headerlink" href="#id21" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>The derivation of Krotov’s method assumes time-continuous control
 fields. Only in this case, monotonic convergence is mathematically
 guaranteed. However, for practical numerical applications, we have to
@@ -565,7 +573,7 @@ must be stored in memory.</p></li>
 <span class="math notranslate nohighlight">\(\{\ket{\phi_k}\} = \{\ket{\phi_k(t=t_0=0)}\}\)</span>, calculate the pulse
 update for the first time step according to</p>
 <div class="math notranslate nohighlight" id="equation-update-discretized0">
-<span class="eqno">(18)<a class="headerlink" href="#equation-update-discretized0" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_1
+<span class="eqno">(18)<a class="headerlink" href="#equation-update-discretized0" title="Link to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_1
       \equiv \Delta\epsilon^{(i)}(\tilde{t}_0)
       = \frac{S(\tilde{t}_0)}{\lambda_{a}} \Im \left[\,
           \sum_{k=1}^{N} \bigg\langle \chi_k^{(i-1)}(t_0) \bigg\vert
@@ -584,7 +592,7 @@ Eq. <a class="reference internal" href="#equation-fw-eqm">(13)</a> as the equat
 updates then proceed sequentially, using the discretized update
 equation</p>
 <div class="math notranslate nohighlight" id="equation-update-discretized">
-<span class="eqno">(19)<a class="headerlink" href="#equation-update-discretized" title="Permalink to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_{n+1}
+<span class="eqno">(19)<a class="headerlink" href="#equation-update-discretized" title="Link to this equation">¶</a></span>\[\Delta\epsilon^{(i)}_{n+1}
       \equiv \Delta\epsilon^{(i)}(\tilde{t}_n)
       = \frac{S(\tilde{t}_n)}{\lambda_{a}} \Im \left[\,
           \sum_{k=1}^{N} \bigg\langle \chi_k^{(i-1)}(t_n) \bigg\vert
@@ -623,14 +631,14 @@ in Eq. <a class="reference internal" href="#equation-krotov-first-order-update
 details. For a second-order update, the forward propagated states from step 4,
 both for the current iteration and the previous iteration, must be stored in
 memory over the entire time grid.</p>
-</div>
-<div class="section" id="pseudocode">
-<h2>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="pseudocode">
+<h2>Pseudocode<a class="headerlink" href="#pseudocode" title="Link to this heading">¶</a></h2>
 <p>A complete pseudocode for Krotov’s method as described in the previous section
 <a class="reference internal" href="#timediscretization"><span class="std std-ref">Time discretization</span></a> is available in PDF format: <a class="reference external" href="krotov_pseudocode.pdf">krotov_pseudocode.pdf</a>.</p>
-</div>
-<div class="section" id="choice-of-a">
-<span id="choiceoflambdaa"></span><h2>Choice of λₐ<a class="headerlink" href="#choice-of-a" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="choice-of-a">
+<span id="choiceoflambdaa"></span><h2>Choice of λₐ<a class="headerlink" href="#choice-of-a" title="Link to this heading">¶</a></h2>
 <p>The monotonic convergence of Krotov’s method is only guaranteed in the
 continuous limit; a coarse
 time step must be compensated by larger values of the inverse step size
@@ -670,9 +678,9 @@ rate of convergence, via the <cite>modify_params_after_iter</cite> argument to
 <span class="math notranslate nohighlight">\(\lambda_{a,l}\)</span> requires some trial and error, but once a suitable value
 has been found, it does not have to be adjusted further. In particular, it is
 not necessary to perform a line search over <span class="math notranslate nohighlight">\(\lambda_{a,l}\)</span>.</p>
-</div>
-<div class="section" id="complex-controls-and-the-rwa">
-<h2>Complex controls and the RWA<a class="headerlink" href="#complex-controls-and-the-rwa" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="complex-controls-and-the-rwa">
+<h2>Complex controls and the RWA<a class="headerlink" href="#complex-controls-and-the-rwa" title="Link to this heading">¶</a></h2>
 <p>When using the rotating wave approximation (RWA), it is important to remember
 that the target states are usually defined in the lab frame, not in the
 rotating frame. This is relevant for the construction of
@@ -700,9 +708,9 @@ control field. For example,</p>
 <span class="math notranslate nohighlight">\(\epsilon_{\text{im}}(t) = \Im[\epsilon(t)]\)</span>.</p>
 <p>See the <a class="reference internal" href="notebooks/02_example_lambda_system_rwa_complex_pulse.html"><span class="std std-ref">Optimization of a State-to-State Transfer in a Lambda System in the RWA</span></a> for an
 example.</p>
-</div>
-<div class="section" id="optimization-in-liouville-space">
-<h2>Optimization in Liouville space<a class="headerlink" href="#optimization-in-liouville-space" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="optimization-in-liouville-space">
+<h2>Optimization in Liouville space<a class="headerlink" href="#optimization-in-liouville-space" title="Link to this heading">¶</a></h2>
 <p>The coupled equations <a class="reference internal" href="#equation-krotov-first-order-update">(12)</a>–<a class="reference internal" href="#equation-bw-eqm">(14)</a> can be
 generalized to open system dynamics by replacing Hilbert space states with
 density matrices, <span class="math notranslate nohighlight">\(\Op{H}\)</span> with <span class="math notranslate nohighlight">\(\mathrm{i} \Liouville\)</span>, and brakets (inner products) with Hilbert-Schmidt products,
@@ -717,8 +725,8 @@ uses the adjoint <span class="math notranslate nohighlight">\(H\)</span>, which 
 Liouvillian <span id="id19">[<a class="reference internal" href="99_bibliography.html#id19" title="M. H. Goerz, D. M. Reich, and C. P. Koch. Optimal control theory for a unitary operation under dissipative evolution. New J. Phys.  16, 055012 (2014). doi:10.1088/1367-2630/16/5/055012.">27</a>, <a class="reference internal" href="99_bibliography.html#id75" title="A. Bartana, R. Kosloff, and D. J. Tannor. Laser cooling of molecular internal degrees of freedom by a series of shaped pulses. J. Chem. Phys.  99, 196 (1993). doi:10.1063/1.465797.">51</a>, <a class="reference internal" href="99_bibliography.html#id74" title="Y. Ohtsuki, W. Zhu, and H. Rabitz. Monotonically convergent algorithm for quantum optimal control with dissipation. J. Chem. Phys.  110, 9825 (1999). doi:10.1063/1.478036.">52</a>]</span> and a non-Hermitian
 Hamiltonian <span id="id20">[<a class="reference internal" href="99_bibliography.html#id11" title="M. M. Müller, H. Haakh, T. Calarco, C. P. Koch, and C. Henkel. Prospects for fast Rydberg gates on an atom chip. Quantum Inf. Process.  10, 771 (2011). doi:10.1007/s11128-011-0296-0.">25</a>, <a class="reference internal" href="99_bibliography.html#id73" title="M. H. Goerz and K. Jacobs. Efficient optimization of state preparation in quantum networks using quantum trajectories. Quantum Sci. Technol.  3, 045005 (2018). doi:10.1088/2058-9565/aace16.">53</a>]</span>.</p>
 <p>See the <a class="reference internal" href="notebooks/04_example_dissipative_qubit_reset.html"><span class="std std-ref">Optimization of Dissipative Qubit Reset</span></a> for an example.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -731,8 +739,8 @@ Hamiltonian <span id="id20">[<a class="reference internal" href="99_bibliograph
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

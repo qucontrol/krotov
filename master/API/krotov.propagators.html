@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>krotov.propagators module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <title>krotov.propagators module &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,7 +46,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -50,7 +56,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -78,7 +84,12 @@
 <li class="toctree-l2"><a class="reference internal" href="krotov.parallelization.html">krotov.parallelization module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.propagators module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.propagators.expm"><code class="docutils literal notranslate"><span class="pre">expm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.propagators.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator"><code class="docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="krotov.result.html">krotov.result module</a></li>
@@ -153,8 +164,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-krotov.propagators">
-<span id="krotov-propagators-module"></span><h1>krotov.propagators module<a class="headerlink" href="#module-krotov.propagators" title="Permalink to this headline">¶</a></h1>
+  <section id="module-krotov.propagators">
+<span id="krotov-propagators-module"></span><h1>krotov.propagators module<a class="headerlink" href="#module-krotov.propagators" title="Link to this heading">¶</a></h1>
 <p>Routines that can be passed as <cite>propagator</cite> to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a></p>
 <p>The numerical effort involved in the optimization is almost entirely within the
 simulation of the system dynamics. In every iteration and for every objective,
@@ -215,14 +226,10 @@ calls. This can significantly improve numerical efficiency.
 <a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a> is an example for such a propagator. In
 general, any stateful <cite>propagator</cite> should be an instance of
 <a class="reference internal" href="#krotov.propagators.Propagator" title="krotov.propagators.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Propagator</span></code></a>.</p>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
 <p>Classes:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a></p></td>
 <td><p>Propagator for density matrix evolution under a Lindbladian</p></td>
@@ -233,11 +240,7 @@ general, any stateful <cite>propagator</cite> should be an instance of
 </tbody>
 </table>
 <p>Functions:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#krotov.propagators.expm" title="krotov.propagators.expm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expm</span></code></a></p></td>
 <td><p>Propagate using matrix exponentiation.</p></td>
@@ -245,12 +248,12 @@ general, any stateful <cite>propagator</cite> should be an instance of
 </tbody>
 </table>
 <p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a>, <a class="reference internal" href="#krotov.propagators.Propagator" title="krotov.propagators.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Propagator</span></code></a>, <a class="reference internal" href="#krotov.propagators.expm" title="krotov.propagators.expm"><code class="xref py py-func docutils literal notranslate"><span class="pre">expm</span></code></a></p>
-</div>
-<div class="section" id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt id="krotov.propagators.expm">
-<code class="sig-prename descclassname"><span class="pre">krotov.propagators.</span></code><code class="sig-name descname"><span class="pre">expm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#expm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.expm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.propagators.expm">
+<span class="sig-prename descclassname"><span class="pre">krotov.propagators.</span></span><span class="sig-name descname"><span class="pre">expm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#expm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.expm" title="Link to this definition">¶</a></dt>
 <dd><p>Propagate using matrix exponentiation.</p>
 <p>This supports <cite>H</cite> being a Hamiltonian (for a Hilbert space <cite>state</cite>) or a
 Liouvillian (for <cite>state</cite> being a density matrix) in nested-list format.
@@ -261,16 +264,16 @@ parallelization.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="krotov.propagators.Propagator">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">krotov.propagators.</span></code><code class="sig-name descname"><span class="pre">Propagator</span></code><a class="reference internal" href="../_modules/krotov/propagators.html#Propagator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.Propagator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dt class="sig sig-object py" id="krotov.propagators.Propagator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">krotov.propagators.</span></span><span class="sig-name descname"><span class="pre">Propagator</span></span><a class="reference internal" href="../_modules/krotov/propagators.html#Propagator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.Propagator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>Abstract base class for stateful propagators</p>
 <dl class="py method">
-<dt id="krotov.propagators.Propagator.__call__">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#Propagator.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.Propagator.__call__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.propagators.Propagator.__call__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#Propagator.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.Propagator.__call__" title="Link to this definition">¶</a></dt>
 <dd><p>Evaluation of a single propagation step</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>H</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – A Hamiltonian or Liouvillian in qutip’s nested-list
 format, with a scalar value in the place of a time-dependency.
@@ -280,7 +283,7 @@ a time-dependent control evaluated for a particular point in
 time.</p></li>
 <li><p><strong>state</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a>) – The state to propagate</p></li>
 <li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – The time step over which to propagate</p></li>
-<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A list of Lindblad operators. Using explicit
+<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>None</em>) – A list of Lindblad operators. Using explicit
 Lindblad operators should be avoided: it is usually more
 efficient to convert them into a Lindbladian, passed as <cite>H</cite></p></li>
 <li><p><strong>backwards</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether the propagation is forward in time or
@@ -304,9 +307,9 @@ result of the previous call to the propagator.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="krotov.propagators.DensityMatrixODEPropagator">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">krotov.propagators.</span></code><code class="sig-name descname"><span class="pre">DensityMatrixODEPropagator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'adams'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsteps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reentrant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#DensityMatrixODEPropagator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.DensityMatrixODEPropagator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#krotov.propagators.Propagator" title="krotov.propagators.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">krotov.propagators.Propagator</span></code></a></p>
+<dt class="sig sig-object py" id="krotov.propagators.DensityMatrixODEPropagator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">krotov.propagators.</span></span><span class="sig-name descname"><span class="pre">DensityMatrixODEPropagator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'adams'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsteps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reentrant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#DensityMatrixODEPropagator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.DensityMatrixODEPropagator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#krotov.propagators.Propagator" title="krotov.propagators.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Propagator</span></code></a></p>
 <p>Propagator for density matrix evolution under a Lindbladian</p>
 <p>See <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.solver.Options" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">qutip.solver.Options</span></code></a> for all arguments except <cite>reentrant</cite>.
 Passing True for the <cite>reentrant</cite> re-initializes the propagator in every
@@ -316,19 +319,19 @@ time step.</p>
 <p>By default, the propagator is not “re-entrant”. That is, you cannot use
 more than one instance of <a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a> in the
 same process at the same time. This limitation is due to
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> with the “zvode” integrator not being
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.15.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> with the “zvode” integrator not being
 re-entrant. Passing <code class="docutils literal notranslate"><span class="pre">reentrant=True</span></code> side-steps this problem by
-re-initializating <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> in every time step. This
+re-initializating <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html#scipy.integrate.ode" title="(in SciPy v1.15.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.integrate.ode</span></code></a> in every time step. This
 makes it possible to use <a class="reference internal" href="#krotov.propagators.DensityMatrixODEPropagator" title="krotov.propagators.DensityMatrixODEPropagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">DensityMatrixODEPropagator</span></code></a> in the
 optimization of multiple objectives, but creates a significant
 overhead.</p>
 </div>
 <dl class="py method">
-<dt id="krotov.propagators.DensityMatrixODEPropagator.__call__">
-<code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#DensityMatrixODEPropagator.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.DensityMatrixODEPropagator.__call__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.propagators.DensityMatrixODEPropagator.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backwards</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/propagators.html#DensityMatrixODEPropagator.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.propagators.DensityMatrixODEPropagator.__call__" title="Link to this definition">¶</a></dt>
 <dd><p>Evaluation of a single propagation step</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>H</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – A Liouvillian superoperator in qutip’s nested-list
 format, with a scalar value in the place of a time-dependency.
@@ -344,7 +347,7 @@ Otherwise, it is assumed that <cite>state</cite> matches the (internally
 stored) state that was the result from the previous propagation
 step.</p></li>
 <li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – The time step over which to propagate</p></li>
-<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – An empty list, or None. Since this propagator
+<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>None</em>) – An empty list, or None. Since this propagator
 assumes a full Liouvillian, it cannot be combined with Lindblad
 operators.</p></li>
 <li><p><strong>backwards</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether the propagation is forward in time or
@@ -362,8 +365,8 @@ and <cite>state</cite> internally.</p></li>
 
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -376,8 +379,8 @@ and <cite>state</cite> internally.</p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

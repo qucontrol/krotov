@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>krotov.conversions module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <title>krotov.conversions module &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -38,7 +44,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -48,7 +54,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -69,7 +75,16 @@
 <li class="toctree-l2"><a class="reference internal" href="krotov.convergence.html">krotov.convergence module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.conversions module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.conversions.control_onto_interval"><code class="docutils literal notranslate"><span class="pre">control_onto_interval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.conversions.discretize"><code class="docutils literal notranslate"><span class="pre">discretize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.conversions.extract_controls"><code class="docutils literal notranslate"><span class="pre">extract_controls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.conversions.extract_controls_mapping"><code class="docutils literal notranslate"><span class="pre">extract_controls_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.conversions.plug_in_pulse_values"><code class="docutils literal notranslate"><span class="pre">plug_in_pulse_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.conversions.pulse_onto_tlist"><code class="docutils literal notranslate"><span class="pre">pulse_onto_tlist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.conversions.pulse_options_dict_to_list"><code class="docutils literal notranslate"><span class="pre">pulse_options_dict_to_list()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
@@ -151,8 +166,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-krotov.conversions">
-<span id="krotov-conversions-module"></span><h1>krotov.conversions module<a class="headerlink" href="#module-krotov.conversions" title="Permalink to this headline">¶</a></h1>
+  <section id="module-krotov.conversions">
+<span id="krotov-conversions-module"></span><h1>krotov.conversions module<a class="headerlink" href="#module-krotov.conversions" title="Link to this heading">¶</a></h1>
 <p>Routines for structural conversions.</p>
 <p>Conversion between between data structures used by QuTiP’s
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">mesolve()</span></code></a> and data structures used internally in an
@@ -160,14 +175,10 @@ optimization with Krotov’s method. This includes the
 time discretization of control fields, and in particular converting between a
 discretization defined on the <em>points</em> of the time grid (“controls”) and
 piecewise-constant “pulses” defined on the <em>intervals</em> of the time grid.</p>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
 <p>Functions:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#krotov.conversions.control_onto_interval" title="krotov.conversions.control_onto_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_onto_interval</span></code></a></p></td>
 <td><p>Convert control on time grid to control on time grid intervals.</p></td>
@@ -193,22 +204,22 @@ piecewise-constant “pulses” defined on the <em>intervals</em> of the time gr
 </tbody>
 </table>
 <p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.conversions.control_onto_interval" title="krotov.conversions.control_onto_interval"><code class="xref py py-func docutils literal notranslate"><span class="pre">control_onto_interval</span></code></a>, <a class="reference internal" href="#krotov.conversions.discretize" title="krotov.conversions.discretize"><code class="xref py py-func docutils literal notranslate"><span class="pre">discretize</span></code></a>, <a class="reference internal" href="#krotov.conversions.extract_controls" title="krotov.conversions.extract_controls"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_controls</span></code></a>, <a class="reference internal" href="#krotov.conversions.extract_controls_mapping" title="krotov.conversions.extract_controls_mapping"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_controls_mapping</span></code></a>, <a class="reference internal" href="#krotov.conversions.plug_in_pulse_values" title="krotov.conversions.plug_in_pulse_values"><code class="xref py py-func docutils literal notranslate"><span class="pre">plug_in_pulse_values</span></code></a>, <a class="reference internal" href="#krotov.conversions.pulse_onto_tlist" title="krotov.conversions.pulse_onto_tlist"><code class="xref py py-func docutils literal notranslate"><span class="pre">pulse_onto_tlist</span></code></a>, <a class="reference internal" href="#krotov.conversions.pulse_options_dict_to_list" title="krotov.conversions.pulse_options_dict_to_list"><code class="xref py py-func docutils literal notranslate"><span class="pre">pulse_options_dict_to_list</span></code></a></p>
-</div>
-<div class="section" id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt id="krotov.conversions.control_onto_interval">
-<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">control_onto_interval</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#control_onto_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.control_onto_interval" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.conversions.control_onto_interval">
+<span class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></span><span class="sig-name descname"><span class="pre">control_onto_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#control_onto_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.control_onto_interval" title="Link to this definition">¶</a></dt>
 <dd><p>Convert control on time grid to control on time grid intervals.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>control</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – values of controls on time grid</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>control</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – values of controls on time grid</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>pulse defined on the intervals of the time grid</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)">numpy.ndarray</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)">numpy.ndarray</a></p>
 </dd>
 </dl>
 <p>The value for the first and last interval will be identical to the values
@@ -225,23 +236,23 @@ transformation.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.conversions.discretize">
-<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">discretize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">via_midpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#discretize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.discretize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.conversions.discretize">
+<span class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></span><span class="sig-name descname"><span class="pre">discretize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">via_midpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#discretize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.discretize" title="Link to this definition">¶</a></dt>
 <dd><p>Discretize the given <cite>control</cite> onto the <cite>tlist</cite> time grid.</p>
 <p>If <cite>control</cite> is a callable, return array of values for <cite>control</cite> evaluated
 for all points in <cite>tlist</cite>.  If <cite>control</cite> is already discretized, check that
 the discretization matches <cite>tlist</cite> (by size).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>control</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – control to be discretized. If
+<li><p><strong>control</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – control to be discretized. If
 callable, must take time value <cite>t</cite> as its first argument.</p></li>
-<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – time grid to discretize one</p></li>
+<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – time grid to discretize one</p></li>
 <li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – If <cite>control</cite> is a callable, further positional
 arguments to pass to <cite>control</cite>. The default passes a single value
 None, to match the requirements for a callable control function in
 QuTiP.</p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – If <cite>control</cite> is callable, further keyword
+<li><p><strong>kwargs</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – If <cite>control</cite> is callable, further keyword
 arguments to pass to <cite>control</cite>. If None, no keyword arguments will
 be passed.</p></li>
 <li><p><strong>via_midpoints</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, sample <cite>control</cite> at the midpoints of
@@ -263,14 +274,14 @@ sampling on the mid points of the time grid intervals, as required by
 Krotov’s method, see <a class="reference internal" href="../07_krotovs_method.html#timediscretization"><span class="std std-ref">Time discretization</span></a>.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Discretized array of real <cite>control</cite> values, same length
 as <cite>tlist</cite></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)">numpy.ndarray</a></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)">numpy.ndarray</a></p>
 </dd>
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#TypeError" title="(in Python v3.7)"><strong>TypeError</strong></a> – If <cite>control</cite> is not a function that takes two arguments
     (<cite>t</cite>, <cite>args</cite>), or a numpy array</p></li>
@@ -281,16 +292,16 @@ as <cite>tlist</cite></p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.conversions.extract_controls">
-<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">extract_controls</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.extract_controls" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.conversions.extract_controls">
+<span class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></span><span class="sig-name descname"><span class="pre">extract_controls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.extract_controls" title="Link to this definition">¶</a></dt>
 <dd><p>Extract a list of (unique) controls from the <cite>objectives</cite>.</p>
 <p>Controls are unique if they are not the same object, cf.
 <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#is">Python’s is keyword</a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>objectives</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – List of <a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> instances</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of controls in <cite>objectives</cite></p>
 </dd>
 </dl>
@@ -298,15 +309,15 @@ as <cite>tlist</cite></p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.conversions.extract_controls_mapping">
-<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">extract_controls_mapping</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.extract_controls_mapping" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.conversions.extract_controls_mapping">
+<span class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></span><span class="sig-name descname"><span class="pre">extract_controls_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#extract_controls_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.extract_controls_mapping" title="Link to this definition">¶</a></dt>
 <dd><p>Extract a map of where <cite>controls</cite> are used in <cite>objectives</cite>.</p>
 <p>The result is a nested list where the first index relates to the
 <cite>objectives</cite>, the second index relates to the Hamiltonian (0) or the
 <cite>c_ops</cite> (1…), and the third index relates to the <cite>controls</cite>.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">qutip</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">krotov</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">qutip</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">krotov</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(),</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(),</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">()</span> <span class="c1"># dummy Hams</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u1</span><span class="p">,</span> <span class="n">u2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>                <span class="c1"># dummy controls</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span><span class="p">,</span> <span class="n">psi_tgt</span> <span class="o">=</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">(),</span> <span class="n">qutip</span><span class="o">.</span><span class="n">Qobj</span><span class="p">()</span>         <span class="c1"># dummy states</span>
@@ -365,11 +376,11 @@ first pulse (0) used? (answer: nowhere)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.conversions.plug_in_pulse_values">
-<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">plug_in_pulse_values</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conjugate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#plug_in_pulse_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.plug_in_pulse_values" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.conversions.plug_in_pulse_values">
+<span class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></span><span class="sig-name descname"><span class="pre">plug_in_pulse_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conjugate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#plug_in_pulse_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.plug_in_pulse_values" title="Link to this definition">¶</a></dt>
 <dd><p>Plug pulse values into H.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>H</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – nested list for a QuTiP-time-dependent operator</p></li>
 <li><p><strong>pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – list of pulses in array format</p></li>
@@ -380,12 +391,12 @@ plugged in</p></li>
 <li><p><strong>conjugate</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, use conjugate complex pulse values</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>a list with the same structure as <cite>H</cite> that contains the same
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Qobj</span></code></a> operators as <cite>H</cite>, but where every time dependency
 is replaced by the value of the appropriate pulse at <cite>time_index</cite>.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </dd>
 </dl>
@@ -412,20 +423,20 @@ it has the right structure:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.conversions.pulse_onto_tlist">
-<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">pulse_onto_tlist</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_onto_tlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.pulse_onto_tlist" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.conversions.pulse_onto_tlist">
+<span class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></span><span class="sig-name descname"><span class="pre">pulse_onto_tlist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_onto_tlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.pulse_onto_tlist" title="Link to this definition">¶</a></dt>
 <dd><p>Convert <cite>pulse</cite> from time-grid intervals to time-grid points.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pulse</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – values defined on the interval of a time grid</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pulse</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – values defined on the interval of a time grid</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>values of the control defined directly on the time grid
 points. The size of the returned array is one greater than the size
 of <cite>pulse</cite>.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)">numpy.ndarray</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)">numpy.ndarray</a></p>
 </dd>
 </dl>
 <p>Inverse of <a class="reference internal" href="#krotov.conversions.control_onto_interval" title="krotov.conversions.control_onto_interval"><code class="xref py py-func docutils literal notranslate"><span class="pre">control_onto_interval()</span></code></a>.</p>
@@ -435,21 +446,21 @@ of the input values before and after the point.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.conversions.pulse_options_dict_to_list">
-<code class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></code><code class="sig-name descname"><span class="pre">pulse_options_dict_to_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse_options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_options_dict_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.pulse_options_dict_to_list" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.conversions.pulse_options_dict_to_list">
+<span class="sig-prename descclassname"><span class="pre">krotov.conversions.</span></span><span class="sig-name descname"><span class="pre">pulse_options_dict_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pulse_options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/conversions.html#pulse_options_dict_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.conversions.pulse_options_dict_to_list" title="Link to this definition">¶</a></dt>
 <dd><p>Convert <cite>pulse_options</cite> into a list.</p>
 <p>Given a dict <cite>pulse_options</cite> that contains an options-dict
 for every control in <cite>controls</cite> (cf. <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>), return a
 list of the options-dicts in the same order as <cite>controls</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><strong>ValueError</strong></a> – if <cite>pulse_options</cite> to not contain all of the <cite>controls</cite></p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -462,8 +473,8 @@ list of the options-dicts in the same order as <cite>controls</cite>.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

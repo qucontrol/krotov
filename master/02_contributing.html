@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributing &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <title>Contributing &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/clipboard.min.js"></script>
-        <script src="_static/copybutton.js"></script>
-        <script src="_static/docs-versions-menu.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2624feb1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,7 +46,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -50,7 +56,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
@@ -159,18 +165,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="contributing">
-<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+  <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">¶</a></h1>
 <p>Contributions are welcome, and they are greatly appreciated! Every little bit
 helps, and credit will always be given.</p>
-<div class="section" id="code-of-conduct">
-<h2>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Permalink to this headline">¶</a></h2>
+<section id="code-of-conduct">
+<h2>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Link to this heading">¶</a></h2>
 <p>Everyone interacting in the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> project’s code base,
 issue tracker, and any communication channels is expected to follow the
 <a class="reference external" href="https://www.pypa.io/en/latest/code-of-conduct/">PyPA Code of Conduct</a>.</p>
-</div>
-<div class="section" id="report-bugs">
-<h2>Report Bugs<a class="headerlink" href="#report-bugs" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="report-bugs">
+<h2>Report Bugs<a class="headerlink" href="#report-bugs" title="Link to this heading">¶</a></h2>
 <p>Report bugs at <a class="reference external" href="https://github.com/qucontrol/krotov/issues">https://github.com/qucontrol/krotov/issues</a>.</p>
 <p>If you are reporting a bug, please include:</p>
 <ul class="simple">
@@ -178,9 +184,9 @@ issue tracker, and any communication channels is expected to follow the
 <li><p>Any details about your local setup that might be helpful in troubleshooting.</p></li>
 <li><p>Detailed steps to reproduce the bug.</p></li>
 </ul>
-</div>
-<div class="section" id="submit-feedback">
-<h2>Submit Feedback<a class="headerlink" href="#submit-feedback" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="submit-feedback">
+<h2>Submit Feedback<a class="headerlink" href="#submit-feedback" title="Link to this heading">¶</a></h2>
 <p>The best way to send feedback is to file an issue at <a class="reference external" href="https://github.com/qucontrol/krotov/issues">https://github.com/qucontrol/krotov/issues</a>.</p>
 <p>If you are proposing a feature:</p>
 <ul class="simple">
@@ -189,9 +195,9 @@ issue tracker, and any communication channels is expected to follow the
 <li><p>Remember that this is a volunteer-driven project, and that contributions
 are welcome :)</p></li>
 </ul>
-</div>
-<div class="section" id="pull-request-guidelines">
-<h2>Pull Request Guidelines<a class="headerlink" href="#pull-request-guidelines" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="pull-request-guidelines">
+<h2>Pull Request Guidelines<a class="headerlink" href="#pull-request-guidelines" title="Link to this heading">¶</a></h2>
 <p>Before you submit a pull request, check that it meets these guidelines:</p>
 <ol class="arabic simple">
 <li><p>The pull request should include tests.</p></li>
@@ -201,9 +207,9 @@ feature to the list in <code class="docutils literal notranslate"><span class="p
 <li><p>Check <a class="reference external" href="https://github.com/qucontrol/krotov/actions">https://github.com/qucontrol/krotov/actions</a>
 and make sure that the tests pass for all supported Python versions.</p></li>
 </ol>
-</div>
-<div class="section" id="get-started">
-<h2>Get Started!<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="get-started">
+<h2>Get Started!<a class="headerlink" href="#get-started" title="Link to this heading">¶</a></h2>
 <p>Ready to contribute? Follow <a class="reference external" href="https://www.asmeurer.com/git-workflow/">Aaron Meurer’s Git Workflow Notes</a> (with <code class="docutils literal notranslate"><span class="pre">qucontrol/krotov</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sympy/sympy</span></code>)</p>
 <p>In short, if you are not a member of the <a class="reference external" href="https://github.com/qucontrol">qucontrol organization</a>,</p>
 <ol class="arabic simple">
@@ -229,17 +235,17 @@ still provides a convenient reference for <code class="docutils literal notransl
 for development.</p>
 <p>If you are a member of the <a class="reference external" href="https://github.com/qucontrol">qucontrol organization</a>, there is no need to fork
 <code class="docutils literal notranslate"><span class="pre">krotov</span></code> - you can directly pull and push to <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:qucontrol/krotov.git</span></code>.</p>
-</div>
-<div class="section" id="development-prerequisites">
-<span id="developmentprerequisites"></span><h2>Development Prerequisites<a class="headerlink" href="#development-prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>Contributing to the package’s developments requires that you have Python 3.8
+</section>
+<section id="development-prerequisites">
+<span id="developmentprerequisites"></span><h2>Development Prerequisites<a class="headerlink" href="#development-prerequisites" title="Link to this heading">¶</a></h2>
+<p>Contributing to the package’s developments requires that you have Python 3.12
 and <a class="reference external" href="https://hatch.pypa.io/latest/">hatch</a> installed (tested with Hatch 1.11). It is strongly recommended that
 you also have installations of all other supported Python versions. The
 recommended way to install multiple versions of Python at the same time is
 through <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a> (or <a class="reference external" href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> on Windows).</p>
-</div>
-<div class="section" id="branching-model">
-<span id="branchingmodel"></span><h2>Branching Model<a class="headerlink" href="#branching-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="branching-model">
+<span id="branchingmodel"></span><h2>Branching Model<a class="headerlink" href="#branching-model" title="Link to this heading">¶</a></h2>
 <p>For developers with direct access to the repository,
 <code class="docutils literal notranslate"><span class="pre">krotov</span></code> uses a simple branching model where all
 developments happens directly on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch. Releases are tags on
@@ -291,9 +297,9 @@ before.</p>
 creating a pull-request for merging the branch into <code class="docutils literal notranslate"><span class="pre">master</span></code> (follow the
 propmts on the Github website).</p>
 <p>Summarize the changes of the branch relative to <code class="docutils literal notranslate"><span class="pre">master</span></code> in the pull request.</p>
-</div>
-<div class="section" id="commit-message-guidelines">
-<h2>Commit Message Guidelines<a class="headerlink" href="#commit-message-guidelines" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="commit-message-guidelines">
+<h2>Commit Message Guidelines<a class="headerlink" href="#commit-message-guidelines" title="Link to this heading">¶</a></h2>
 <p>Write commit messages according to this template:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Short (50 chars or less) summary (&quot;subject line&quot;)
 
@@ -323,9 +329,9 @@ Closes #1
 </div>
 <p>See <a class="reference external" href="https://help.github.com/articles/closing-issues-using-keywords/">Closing issues using keywords</a> for details on references to issues that
 Github will understand.</p>
-</div>
-<div class="section" id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
 <p>The Krotov package includes a full test-suite using <a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a>. We strive for a <a class="reference external" href="https://codecov.io/gh/qucontrol/krotov">test coverage</a> above 90%.</p>
 <p>From a checkout of the <code class="docutils literal notranslate"><span class="pre">krotov</span></code> repository, you can use</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
@@ -343,13 +349,13 @@ for testing. In addition, <a class="reference external" href="https://docs.pytho
 file (<code class="docutils literal notranslate"><span class="pre">*.rst</span></code>) are picked up (by the <a class="reference external" href="https://docs.pytest.org/en/latest/doctest.html">pytest doctest plugin</a>). Lastly, all
 <a class="reference internal" href="#contributeexamples"><span class="std std-ref">example notebooks</span></a> are validated as a test, through
 the <a class="reference external" href="https://nbval.readthedocs.io/en/latest/">nbval plugin</a>.</p>
-</div>
-<div class="section" id="code-style">
-<h2>Code Style<a class="headerlink" href="#code-style" title="Permalink to this headline">¶</a></h2>
-<p>All code must be compatible with <span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a>. The line length limit
+</section>
+<section id="code-style">
+<h2>Code Style<a class="headerlink" href="#code-style" title="Link to this heading">¶</a></h2>
+<p>All code must be compatible with <span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0008/"><strong>PEP 8</strong></a>. The line length limit
 is 79 characters, although exceptions are permissible if this improves
 readability significantly.</p>
-<p>Beyond <span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a>, this project adopts the <a class="reference external" href="https://github.com/ambv/black/#the-black-code-style">Black code style</a>, with
+<p>Beyond <span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.python.org/pep-0008/"><strong>PEP 8</strong></a>, this project adopts the <a class="reference external" href="https://github.com/ambv/black/#the-black-code-style">Black code style</a>, with
 <code class="docutils literal notranslate"><span class="pre">--skip-string-normalization</span> <span class="pre">--line-length</span> <span class="pre">79</span></code>. You can
 run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">black-check</span></code> or <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">run</span> <span class="pre">lint:black-check</span></code> to check adherence to the
 code style, and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">black</span></code> or <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">run</span> <span class="pre">lint:black</span></code> to apply it.</p>
@@ -372,9 +378,9 @@ from within the project root folder.</p>
 <a class="reference external" href="http://flake8.pycqa.org">flake8</a> and <a class="reference external" href="http://pylint.pycqa.org">pylint</a>, but there is no strict requirement for a perfect score
 with either one of these linters. They only serve as a guideline for code that
 might be improved.</p>
-</div>
-<div class="section" id="write-documentation">
-<span id="id1"></span><h2>Write Documentation<a class="headerlink" href="#write-documentation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="write-documentation">
+<span id="id1"></span><h2>Write Documentation<a class="headerlink" href="#write-documentation" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">krotov</span></code> package could always use more documentation, whether
 as part of the official docs, in docstrings, or even on the web in blog posts,
 articles, and such.</p>
@@ -418,9 +424,9 @@ Do not use <code class="docutils literal notranslate"><span class="pre">\langle<
 </pre></div>
 </div>
 <p>to generate the documentation locally.</p>
-</div>
-<div class="section" id="deploy-the-documentation">
-<h2>Deploy the documentation<a class="headerlink" href="#deploy-the-documentation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="deploy-the-documentation">
+<h2>Deploy the documentation<a class="headerlink" href="#deploy-the-documentation" title="Link to this heading">¶</a></h2>
 <p>The documentation is automatically deployed to
 <a class="reference external" href="https://qucontrol.github.io/krotov/">https://qucontrol.github.io/krotov/</a> (the <a class="reference external" href="https://pages.github.com">gh-pages</a> associated with the
 <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package’s Github repository) every time commits are pushed to
@@ -434,9 +440,9 @@ The documentation for all versions of <a class="reference internal" href="API/kr
 branch will be deployed to the online documentation. Do not routinely perform
 manual edits on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch! Let Github Actions do its job of
 automatically deploying documentation instead.</p>
-</div>
-<div class="section" id="contribute-examples">
-<span id="contributeexamples"></span><h2>Contribute Examples<a class="headerlink" href="#contribute-examples" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="contribute-examples">
+<span id="contributeexamples"></span><h2>Contribute Examples<a class="headerlink" href="#contribute-examples" title="Link to this heading">¶</a></h2>
 <p>Examples should be contributed in the form of <a class="reference external" href="https://jupyter.readthedocs.io/en/latest/index.html">Jupyter notebooks</a>.</p>
 <p>Example notebooks are automatically rendered as part of the documentation
 (<a class="reference internal" href="09_examples.html#krotov-example-notebooks"><span class="std std-ref">Examples</span></a>), and they are also verified by the automated
@@ -480,8 +486,8 @@ virtual environment by running</p>
 </div></blockquote>
 </li>
 </ul>
-<div class="section" id="math-in-example-notebooks">
-<span id="id2"></span><h3>Math in Example Notebooks<a class="headerlink" href="#math-in-example-notebooks" title="Permalink to this headline">¶</a></h3>
+<section id="math-in-example-notebooks">
+<span id="id2"></span><h3>Math in Example Notebooks<a class="headerlink" href="#math-in-example-notebooks" title="Link to this heading">¶</a></h3>
 <p>You may use the same tex macros described in the <a class="reference internal" href="#write-documentation"><span class="std std-ref">Write Documentation</span></a> section.
 However, for the macros to work when viewing the notebook by itself, they must
 be redefined locally. To this end, add a markdown cell underneath the top cell
@@ -518,12 +524,12 @@ that contains the imported packages (see above). The cell must contain the follo
 </div>
 <p>Upon executing the cell the definitions will be hidden, but the defined macros
 will be available in any cell in the rest of the notebook.</p>
-</div>
-</div>
-<div class="section" id="versioning">
-<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">¶</a></h2>
 <p>Releases should follow <a class="reference external" href="https://semver.org">Semantic Versioning</a>, and version numbers published to
-<a class="reference external" href="http://pypi.org">PyPI</a> must be compatible with <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0440"><strong>PEP 440</strong></a>.</p>
+<a class="reference external" href="http://pypi.org">PyPI</a> must be compatible with <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0440/"><strong>PEP 440</strong></a>.</p>
 <p>In short, versions number follow the pattern <cite>major.minor.patch</cite>, e.g.
 <code class="docutils literal notranslate"><span class="pre">0.1.0</span></code> for the first release, and <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code> for the first <em>stable</em> release.
 If necessary, pre-release versions might be published as e.g:</p>
@@ -540,7 +546,7 @@ post-release, e.g.:</p>
 they are not supported by the <a class="reference external" href="https://semver.org">Semantic Versioning</a> specification.</p>
 <p>The current version is available through the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> attribute of the
 <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package:</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">krotov</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">krotov</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">krotov</span><span class="o">.</span><span class="n">__version__</span>   
 </pre></div>
 </div>
@@ -551,13 +557,13 @@ release, with “-dev” appended (<a class="reference external" href="https://w
 The version string “1.0.0-dev1+dev” is a valid value after the “1.0.0-dev1”
 pre-release. The “+dev” suffix must never be included in a release to <a class="reference external" href="http://pypi.org">PyPI</a>.</p>
 <p>Note that <a class="reference external" href="https://twine.readthedocs.io/en/latest/">twine</a> applies <a class="reference external" href="https://legacy.python.org/dev/peps/pep-0440/#id29">normalization</a> to the above recommended forms to
-make them strictly compatible with <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0440"><strong>PEP 440</strong></a>, before uploading to <a class="reference external" href="http://pypi.org">PyPI</a>. Users
+make them strictly compatible with <span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-0440/"><strong>PEP 440</strong></a>, before uploading to <a class="reference external" href="http://pypi.org">PyPI</a>. Users
 installing the package through <a class="reference external" href="https://pip.readthedocs.io/en/stable/">pip</a> may use the original version specification
 as well as the normalized one (or any other variation that normalizes to the
 same result).</p>
-</div>
-<div class="section" id="making-a-release">
-<h2>Making a Release<a class="headerlink" href="#making-a-release" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="making-a-release">
+<h2>Making a Release<a class="headerlink" href="#making-a-release" title="Link to this heading">¶</a></h2>
 <p>Relesases can only be made by administrators of the Krotov Github repo who are
 also listed as Maintainers on <a class="reference external" href="https://pypi.org/project/krotov/">https://pypi.org/project/krotov/</a>.</p>
 <p>They must have GPG set up to allow for signed commits, and be able to locally
@@ -572,13 +578,13 @@ e.g. <code class="docutils literal notranslate"><span class="pre">v1.0.0-dev1</s
 after pushing the tag, an official Github-release must be created manually at
 <a class="reference external" href="https://github.com/qucontrol/krotov/releases">https://github.com/qucontrol/krotov/releases</a>, with the proper release notes and
 the documentation artifacts as binary attachments.</p>
-</div>
-<div class="section" id="developers-how-tos">
-<h2>Developers’ How-Tos<a class="headerlink" href="#developers-how-tos" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="developers-how-tos">
+<h2>Developers’ How-Tos<a class="headerlink" href="#developers-how-tos" title="Link to this heading">¶</a></h2>
 <p>The following assumes your current working directory is a checkout of
 <code class="docutils literal notranslate"><span class="pre">krotov</span></code>, and that have <code class="docutils literal notranslate"><span class="pre">hatch</span></code> installed on your system.</p>
-<div class="section" id="how-to-run-a-jupyter-notebook-server-for-working-on-the-example-notebooks">
-<h3>How to run a jupyter notebook server for working on the example notebooks<a class="headerlink" href="#how-to-run-a-jupyter-notebook-server-for-working-on-the-example-notebooks" title="Permalink to this headline">¶</a></h3>
+<section id="how-to-run-a-jupyter-notebook-server-for-working-on-the-example-notebooks">
+<h3>How to run a jupyter notebook server for working on the example notebooks<a class="headerlink" href="#how-to-run-a-jupyter-notebook-server-for-working-on-the-example-notebooks" title="Link to this heading">¶</a></h3>
 <p>A notebook server that is isolated to the proper testing environment can be started via the Makefile:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>jupyter-notebook
 </pre></div>
@@ -596,9 +602,9 @@ course, if you know what you’re doing, you may want this.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>jupyter-lab
 </pre></div>
 </div>
-</div>
-<div class="section" id="how-to-convert-an-example-notebook-to-a-script-for-easier-debugging">
-<h3>How to convert an example notebook to a script for easier debugging<a class="headerlink" href="#how-to-convert-an-example-notebook-to-a-script-for-easier-debugging" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-convert-an-example-notebook-to-a-script-for-easier-debugging">
+<h3>How to convert an example notebook to a script for easier debugging<a class="headerlink" href="#how-to-convert-an-example-notebook-to-a-script-for-easier-debugging" title="Link to this heading">¶</a></h3>
 <p>Interactive debugging in notebooks is difficult. It becomes much easier if
 you convert the notebook to a script first.  To convert a notebook to an
 (I)Python script and run it with automatic debugging, execute e.g.:</p>
@@ -607,16 +613,16 @@ hatch<span class="w"> </span>run<span class="w"> </span>--<span class="w"> </spa
 </pre></div>
 </div>
 <p>You can then also set a manual breakpoint by inserting the following line anywhere in the code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.terminal.debugger</span> <span class="kn">import</span> <span class="n">set_trace</span><span class="p">;</span> <span class="n">set_trace</span><span class="p">()</span> <span class="c1"># DEBUG</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.terminal.debugger</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_trace</span><span class="p">;</span> <span class="n">set_trace</span><span class="p">()</span> <span class="c1"># DEBUG</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="how-to-make-git-diff-work-for-notebooks">
-<h3>How to make <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> work for notebooks<a class="headerlink" href="#how-to-make-git-diff-work-for-notebooks" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-make-git-diff-work-for-notebooks">
+<h3>How to make <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> work for notebooks<a class="headerlink" href="#how-to-make-git-diff-work-for-notebooks" title="Link to this heading">¶</a></h3>
 <p>Install <a class="reference external" href="https://nbdime.readthedocs.io/en/latest/index.html">nbdime</a> and run <code class="docutils literal notranslate"><span class="pre">nbdime</span> <span class="pre">config-git</span> <span class="pre">--enable</span> <span class="pre">--global</span></code> to <a class="reference external" href="https://nbdime.readthedocs.io/en/latest/index.html#git-integration-quickstart">enable the git integration</a>.</p>
-</div>
-<div class="section" id="how-to-commit-failing-tests-or-example-notebooks">
-<h3>How to commit failing tests or example notebooks<a class="headerlink" href="#how-to-commit-failing-tests-or-example-notebooks" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-commit-failing-tests-or-example-notebooks">
+<h3>How to commit failing tests or example notebooks<a class="headerlink" href="#how-to-commit-failing-tests-or-example-notebooks" title="Link to this heading">¶</a></h3>
 <p>The test-suite on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch should always pass without error. If you
 would like to commit any example notebooks or tests that currently fail, as a
 form of <a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">test-driven development</a>, you have two options:</p>
@@ -642,9 +648,9 @@ first line of the failing cell, either:</p>
 See the <a class="reference external" href="https://nbval.readthedocs.io/en/latest/#Skipping-specific-cells">documentation of the nbval pluging on skipping and exceptions</a> for details.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="how-to-run-a-subset-of-tests">
-<h3>How to run a subset of tests<a class="headerlink" href="#how-to-run-a-subset-of-tests" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-run-a-subset-of-tests">
+<h3>How to run a subset of tests<a class="headerlink" href="#how-to-run-a-subset-of-tests" title="Link to this heading">¶</a></h3>
 <p>To run e.g. only the tests defined in <code class="docutils literal notranslate"><span class="pre">tests/test_krotov.py</span></code>, use any of the following:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="nv">TESTS</span><span class="o">=</span>tests/test_krotov.py
 
@@ -656,24 +662,24 @@ hatch<span class="w"> </span>-e<span class="w"> </span>py38<span class="w"> </sp
 <p>See the <a class="reference external" href="https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests">pytest test selection docs</a> for details. The <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">py38</span></code> selects the
 Python version to run the tests under. You may replace this with an equivalent
 name for any supported Python versions.</p>
-</div>
-<div class="section" id="how-to-run-only-as-single-test">
-<h3>How to run only as single test<a class="headerlink" href="#how-to-run-only-as-single-test" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-run-only-as-single-test">
+<h3>How to run only as single test<a class="headerlink" href="#how-to-run-only-as-single-test" title="Link to this heading">¶</a></h3>
 <p>Decorate the test with e.g. <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.xxx</span></code>, and then run, e.g:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>hatch<span class="w"> </span>run<span class="w"> </span>--<span class="w"> </span>pytest<span class="w"> </span>-m<span class="w"> </span>xxx<span class="w"> </span>tests/
 </pre></div>
 </div>
 <p>See the <a class="reference external" href="https://docs.pytest.org/en/latest/example/markers.html">pytest documentation on markers</a> for details.</p>
-</div>
-<div class="section" id="how-to-run-only-the-doctests">
-<h3>How to run only the doctests<a class="headerlink" href="#how-to-run-only-the-doctests" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-run-only-the-doctests">
+<h3>How to run only the doctests<a class="headerlink" href="#how-to-run-only-the-doctests" title="Link to this heading">¶</a></h3>
 <p>Run the following:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>hatch<span class="w"> </span>run<span class="w"> </span>--<span class="w"> </span>pytest<span class="w"> </span>--doctest-modules<span class="w"> </span>src
 </pre></div>
 </div>
-</div>
-<div class="section" id="how-to-go-into-an-interactive-debugger">
-<h3>How to go into an interactive debugger<a class="headerlink" href="#how-to-go-into-an-interactive-debugger" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-go-into-an-interactive-debugger">
+<h3>How to go into an interactive debugger<a class="headerlink" href="#how-to-go-into-an-interactive-debugger" title="Link to this heading">¶</a></h3>
 <p>Optionally, install the <cite>pdbpp</cite> package into the testing environment, for a
 better experience:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>hatch<span class="w"> </span>run<span class="w"> </span>--<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pdbpp
@@ -693,13 +699,13 @@ better experience:</p>
 </li>
 </ul>
 <p>You may also see the <a class="reference external" href="https://docs.pytest.org/en/latest/usage.html#dropping-to-pdb-python-debugger-on-failures">pytest documentation on automatic debugging</a>.</p>
-</div>
-<div class="section" id="how-to-see-the-debug-logger-output-in-the-example-notebooks">
-<h3>How to see the debug logger output in the example notebooks<a class="headerlink" href="#how-to-see-the-debug-logger-output-in-the-example-notebooks" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-see-the-debug-logger-output-in-the-example-notebooks">
+<h3>How to see the debug logger output in the example notebooks<a class="headerlink" href="#how-to-see-the-debug-logger-output-in-the-example-notebooks" title="Link to this heading">¶</a></h3>
 <p>The <a class="reference internal" href="API/krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> routine generates some logger messages for
 debugging purposes. To see these messages, set the level of “krotov” logger to
 INFO or DEBUG:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;krotov&#39;</span><span class="p">)</span>
 <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 </pre></div>
@@ -715,13 +721,13 @@ messages with time stamps:</p>
 </pre></div>
 </div>
 <p>See the <a class="reference external" href="https://docs.python.org/3/howto/logging.html#configuring-logging">Configure Logging</a> section of the Python documentation for more details.</p>
-</div>
-<div class="section" id="how-to-use-quantum-mechanical-tex-macros">
-<h3>How to use quantum mechanical tex macros<a class="headerlink" href="#how-to-use-quantum-mechanical-tex-macros" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-use-quantum-mechanical-tex-macros">
+<h3>How to use quantum mechanical tex macros<a class="headerlink" href="#how-to-use-quantum-mechanical-tex-macros" title="Link to this heading">¶</a></h3>
 <p>For docstrings or <code class="docutils literal notranslate"><span class="pre">*.rst</span></code> files, see <a class="reference internal" href="#write-documentation"><span class="std std-ref">Write Documentation</span></a>. For notebooks, see <a class="reference internal" href="#math-in-example-notebooks"><span class="std std-ref">Math in Example Notebooks</span></a>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -734,8 +740,8 @@ messages with time stamps:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Other Optimization Methods &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <title>Other Optimization Methods &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/clipboard.min.js"></script>
-        <script src="_static/copybutton.js"></script>
-        <script src="_static/docs-versions-menu.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2624feb1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -40,7 +46,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -50,7 +56,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_contributing.html">Contributing</a></li>
@@ -134,14 +140,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="other-optimization-methods">
-<h1>Other Optimization Methods<a class="headerlink" href="#other-optimization-methods" title="Permalink to this headline">¶</a></h1>
+  <section id="other-optimization-methods">
+<h1>Other Optimization Methods<a class="headerlink" href="#other-optimization-methods" title="Link to this heading">¶</a></h1>
 <p>In the following, we compare Krotov’s method to other numerical
 optimization methods that have been used widely in quantum control, with
 an emphasis on methods that have been implemented as open source
 software.</p>
-<div class="section" id="iterative-schemes-from-variational-calculus">
-<span id="iterativeschemes"></span><h2>Iterative schemes from variational calculus<a class="headerlink" href="#iterative-schemes-from-variational-calculus" title="Permalink to this headline">¶</a></h2>
+<section id="iterative-schemes-from-variational-calculus">
+<span id="iterativeschemes"></span><h2>Iterative schemes from variational calculus<a class="headerlink" href="#iterative-schemes-from-variational-calculus" title="Link to this heading">¶</a></h2>
 <p>Gradient-based optimal control methods derive the condition for the
 optimal control field from the application of the variational principle
 to the optimization functional in
@@ -159,7 +165,7 @@ multipliers <span id="id1">[<a class="reference internal" href="99_bibliography
 this extended functional. Evaluation of the extremum condition results
 in <span id="id2">[<a class="reference internal" href="99_bibliography.html#id33" title="D. J. Tannor and Y. Jin. Design of femtosecond pulse sequences to control photochemical products. In Mode Selective Chemistry, pages 333–345. Springer (1991).">64</a>]</span></p>
 <div class="math notranslate nohighlight" id="equation-variational-update">
-<span class="eqno">(20)<a class="headerlink" href="#equation-variational-update" title="Permalink to this equation">¶</a></span>\[\Delta \epsilon_l(t) \propto \frac{\delta J}{\delta \epsilon_l} \propto
+<span class="eqno">(20)<a class="headerlink" href="#equation-variational-update" title="Link to this equation">¶</a></span>\[\Delta \epsilon_l(t) \propto \frac{\delta J}{\delta \epsilon_l} \propto
     \Im \big\langle
     \chi_k(t)
     \big\vert
@@ -178,7 +184,7 @@ an iterative scheme and a choice of time discretization.</p>
 <p>The most intuitive time-discretization yields a <em>concurrent</em> update
 scheme <span id="id3">[<a class="reference internal" href="99_bibliography.html#id34" title="D.J. Tannor, V. Kazakov, and V. Orlov. Control of photochemical branching: novel procedures for finding optimal pulses and global upper bounds. In J. Broeckhove and L. Lathouwers, editors, Time-dependent quantum molecular dynamics, pages 347-360. Plenum (1992).">5</a>, <a class="reference internal" href="99_bibliography.html#id4" title="J. Somlói, V. A. Kazakov, and D. J. Tannor. Controlled dissociation of I2 via optical transitions between the X and B electronic states. Chem. Phys.  172, 85 (1993). doi:10.1016/0301-0104(93)80108-L.">44</a>, <a class="reference internal" href="99_bibliography.html#id33" title="D. J. Tannor and Y. Jin. Design of femtosecond pulse sequences to control photochemical products. In Mode Selective Chemistry, pages 333–345. Springer (1991).">64</a>]</span>,</p>
 <div class="math notranslate nohighlight" id="equation-concurrent-update">
-<span class="eqno">(21)<a class="headerlink" href="#equation-concurrent-update" title="Permalink to this equation">¶</a></span>\[\Delta \epsilon_l^{(i)}(t) \propto
+<span class="eqno">(21)<a class="headerlink" href="#equation-concurrent-update" title="Link to this equation">¶</a></span>\[\Delta \epsilon_l^{(i)}(t) \propto
     \Im \big\langle
     \chi_k^{(i-1)}(t)
     \big\vert
@@ -204,7 +210,7 @@ schemes introduce separate fields <span class="math notranslate nohighlight">\(\
 propagation, respectively, and use the update
 scheme <span id="id7">[<a class="reference internal" href="99_bibliography.html#id89" title="J. Werschnik and E. K. U. Gross. Quantum optimal control theory. J. Phys. B  40, R175 (2007). doi:10.1088/0953-4075/40/18/r01.">68</a>]</span></p>
 <div class="math notranslate nohighlight" id="equation-zhu-rabitz-update">
-<span class="eqno">(22)<a class="headerlink" href="#equation-zhu-rabitz-update" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(22)<a class="headerlink" href="#equation-zhu-rabitz-update" title="Link to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     \epsilon_l^{(i)}(t)
       &amp; = (1-\delta) \tilde\epsilon_l^{(i-1)}(t) - \frac{\delta}{\alpha}
       \Im \big\langle
@@ -228,9 +234,9 @@ scheme <span id="id7">[<a class="reference internal" href="99_bibliography.html
 <span class="math notranslate nohighlight">\(\alpha\)</span>. For the control of wavepacket dynamics, an
 implementation of this generalized class of algorithms is available in
 the <a class="reference external" href="https://sourceforge.net/p/wavepacket/wiki/Home/">WavePacket Matlab package</a> <span id="id8">[<a class="reference internal" href="99_bibliography.html#id88" title="B. Schmidt and C. Hartmann. WavePacket: a Matlab package for numerical quantum dynamics. II: open quantum systems, optimal control, and model reduction. Comput. Phys. Commun.  228, 229 (2018). doi:10.1016/j.cpc.2018.02.022.">69</a>]</span>.</p>
-</div>
-<div class="section" id="krotov-s-method">
-<span id="comparisonkrotov"></span><h2>Krotov’s method<a class="headerlink" href="#krotov-s-method" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="krotov-s-method">
+<span id="comparisonkrotov"></span><h2>Krotov’s method<a class="headerlink" href="#krotov-s-method" title="Link to this heading">¶</a></h2>
 <p>The method developed by
 Krotov <span id="id9">[<a class="reference internal" href="99_bibliography.html#id105" title="V. F. Krotov and I. N. Fel'dman. An iterative method for solving optimal-control problems. Engrg. Cybernetics  21, 123 (1983). doi:.">40</a>, <a class="reference internal" href="99_bibliography.html#id106" title="V. F. Krotov. A technique of global bounds in optimal control theory. Control and Cybernetics  17, 115 (1988). doi:.">41</a>, <a class="reference internal" href="99_bibliography.html#id5" title="V. Krotov. Global Methods in Optimal Control Theory. CRC Press (1995).">42</a>, <a class="reference internal" href="99_bibliography.html#id6" title="A.I. Konnov and V. F. Krotov. On global methods of successive improvement of controlled processes. Autom. Rem. Contr.  60, 1427 (1999).">43</a>]</span>
 and later translated to the language of quantum control by Tannor and
@@ -243,7 +249,7 @@ method is described in <a class="reference internal" href="07_krotovs_method.htm
 can be boiled down to the update in each iteration <span class="math notranslate nohighlight">\((i)\)</span>,
 Eq. <a class="reference internal" href="07_krotovs_method.html#equation-update">(3)</a>, taking the form</p>
 <div class="math notranslate nohighlight" id="equation-sequential-update">
-<span class="eqno">(23)<a class="headerlink" href="#equation-sequential-update" title="Permalink to this equation">¶</a></span>\[\Delta \epsilon_l^{(i)}(t) \propto
+<span class="eqno">(23)<a class="headerlink" href="#equation-sequential-update" title="Link to this equation">¶</a></span>\[\Delta \epsilon_l^{(i)}(t) \propto
     \Im \big\langle
     \chi_k^{(i-1)}(t)
     \big\vert
@@ -299,9 +305,9 @@ cf. Eq. <a class="reference internal" href="#equation-zhu-rabitz-update">(22)<
 numerical instability and should be avoided. A mixture of <em>update</em> and
 <em>replacement</em> is possible when a penalty of the pulse fluence is
 necessary <span id="id16">[<a class="reference internal" href="99_bibliography.html#id2" title="M. Goerz. Optimizing Robust Quantum Gates in Open Quantum Systems. PhD thesis, Universität Kassel, (2015). URL: https://kobra.bibliothek.uni-kassel.de/handle/urn:nbn:de:hebis:34-2015052748381.">73</a>]</span>.</p>
-</div>
-<div class="section" id="gradient-ascent-pulse-engineering-grape">
-<span id="grape"></span><h2>GRadient Ascent Pulse Engineering (GRAPE)<a class="headerlink" href="#gradient-ascent-pulse-engineering-grape" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="gradient-ascent-pulse-engineering-grape">
+<span id="grape"></span><h2>GRadient Ascent Pulse Engineering (GRAPE)<a class="headerlink" href="#gradient-ascent-pulse-engineering-grape" title="Link to this heading">¶</a></h2>
 <p>While the monotonically convergent methods based on variational calculus
 must “guess” the appropriate time discretization, and Krotov’s method
 finds the sequential time discretization by a clever construction, the
@@ -314,7 +320,7 @@ the initial states <span class="math notranslate nohighlight">\(\{\ket{\phi_k}\}
 <span class="math notranslate nohighlight">\(\epsilon^{(i-1)}_n\)</span> in iteration <span class="math notranslate nohighlight">\((i)\)</span> of the optimization
 are obtained as</p>
 <div class="math notranslate nohighlight" id="equation-discrete-time-evolution">
-<span class="eqno">(24)<a class="headerlink" href="#equation-discrete-time-evolution" title="Permalink to this equation">¶</a></span>\[\ket{\phi^{(i-1)}_k(T)} = \Op{U}^{(i-1)}_{N_T} \dots
+<span class="eqno">(24)<a class="headerlink" href="#equation-discrete-time-evolution" title="Link to this equation">¶</a></span>\[\ket{\phi^{(i-1)}_k(T)} = \Op{U}^{(i-1)}_{N_T} \dots
 \Op{U}^{(i-1)}_{n} \dots \Op{U}^{(i-1)}_{1} \big\vert \phi_k \big\rangle\,,\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Op{U}^{(i-1)}_{n}\)</span> is the time evolution operator on the
 time interval <span class="math notranslate nohighlight">\(n\)</span> in Hilbert space,</p>
@@ -338,7 +344,7 @@ states <span class="math notranslate nohighlight">\(\{\ket{\phi_k^{\tgt}}\}\)</s
 Eqs. <a class="reference internal" href="07_krotovs_method.html#equation-jtss">(5)</a>, <a class="reference internal" href="07_krotovs_method.html#equation-jtre">(7)</a>. Using Eq. <a class="reference internal" href="#equation-discrete-time-evolution">(24)</a>
 leads to</p>
 <div class="math notranslate nohighlight" id="equation-gradient">
-<span class="eqno">(25)<a class="headerlink" href="#equation-gradient" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+<span class="eqno">(25)<a class="headerlink" href="#equation-gradient" title="Link to this equation">¶</a></span>\[\begin{split}\begin{split}
   \frac{\partial \tau_k}{\partial \epsilon_n} &amp;= \frac{\partial}{\partial
   \epsilon_n} \big\langle \phi_k^{\tgt} \big\vert \Op{U}^{(i-1)}_{N_T} \dots
   \Op{U}^{(i-1)}_{n} \dots \Op{U}^{(i-1)}_{1} \big\vert \phi_k \big\rangle \\
@@ -460,9 +466,9 @@ piggy-back on the piecewise-constant discretization of the control
 field, and thus may avoid the associated numerical error. This allows to
 optimize to extremely high fidelities as required for some error
 correction protocols <span id="id36">[<a class="reference internal" href="99_bibliography.html#id96" title="S. Machnes, E. Assémat, D. Tannor, and F. K. Wilhelm. Tunable, flexible, and efficient optimization of control pulses for practical qubits. Phys. Rev. Lett.  120, 150401 (2018). doi:10.1103/PhysRevLett.120.150401.">94</a>]</span>.</p>
-</div>
-<div class="section" id="grape-in-qutip">
-<span id="grapeinqutip"></span><h2>GRAPE in QuTiP<a class="headerlink" href="#grape-in-qutip" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="grape-in-qutip">
+<span id="grapeinqutip"></span><h2>GRAPE in QuTiP<a class="headerlink" href="#grape-in-qutip" title="Link to this heading">¶</a></h2>
 <p>An implementation of GRAPE is included in QuTiP, see the <a class="reference external" href="http://qutip.org/docs/latest/guide/guide-control.html">section on Quantum
 Optimal Control in the QuTiP docs</a>.  It is used via the
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.control.pulseoptim.optimize_pulse" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.control.pulseoptim.optimize_pulse()</span></code></a> function.
@@ -494,9 +500,9 @@ time-propagation. Supplying a problem-specific propagator is not possible.</p></
 </ul>
 <p>Thus, QuTiP’s GRAPE implementation and the implementation of Krotov’s method in
 this package complement each other, but will not compare directly.</p>
-</div>
-<div class="section" id="gradient-free-optimization">
-<span id="gradientfreeoptimization"></span><h2>Gradient-free optimization<a class="headerlink" href="#gradient-free-optimization" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="gradient-free-optimization">
+<span id="gradientfreeoptimization"></span><h2>Gradient-free optimization<a class="headerlink" href="#gradient-free-optimization" title="Link to this heading">¶</a></h2>
 <p>In situations where the problem can be reduced to a relatively small
 number of control parameters (typically less than <span class="math notranslate nohighlight">\(\approx20\)</span>,
 although this number may be pushed to <span class="math notranslate nohighlight">\(\approx50\)</span> by sequential
@@ -557,19 +563,20 @@ figure of merit (like the overlap with a target state).</p></li>
 <li><p>Pass the function to scipy.optimize.minimize for gradient-free
 optimization.</p></li>
 </ul>
-<p>The implementation in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.13.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a> allows to choose between
+<p>The implementation in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.15.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a> allows to choose between
 different optimization methods, with Nelder-Mead simplex being the
 default. There exist also more advanced optimization methods available
 in packages like <a class="reference external" href="https://nlopt.readthedocs.io/">NLopt</a> <span id="id42">[<a class="reference internal" href="99_bibliography.html#id57" title="S. G. Johnson. The NLopt nonlinear-optimization package. http://ab-initio.mit.edu/nlopt.">100</a>]</span> or
 <a class="reference external" href="https://github.com/facebookresearch/nevergrad">Nevergrad</a> <span id="id43">[<a class="reference internal" href="99_bibliography.html#id117" title="J. Rapin and O. Teytaud. Nevergrad - A gradient-free optimization platform. https://GitHub.com/FacebookResearch/Nevergrad, (2018).">101</a>]</span> that may be worth exploring for
 improvements in numerical efficiency and additional functionality such
 as support for non-linear constraints.</p>
-</div>
-<div class="section" id="choosing-an-optimization-method">
-<span id="id44"></span><h2>Choosing an optimization method<a class="headerlink" href="#choosing-an-optimization-method" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="id52">
+</section>
+<section id="choosing-an-optimization-method">
+<span id="id44"></span><h2>Choosing an optimization method<a class="headerlink" href="#choosing-an-optimization-method" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="id52">
 <span id="figoctdecisiontree"></span><a class="reference internal image-reference" href="_images/oct_decision_tree.svg"><img alt="OCT decision tree." src="_images/oct_decision_tree.svg" width="100%" /></a>
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Decision tree for the choice of a numerical open-loop
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Decision tree for the choice of a numerical open-loop
 optimization method.
 The choice of control method is most directly associated with the number of
 control parameters (<span class="math notranslate nohighlight">\(n\)</span>).
@@ -583,8 +590,9 @@ control parameters are the coefficients for those spectral
 components. Each method in the diagram is meant to include all its
 variants, a multitude of gradient-free methods and e.g. DCRAB for
 CRAB, GRAPE-LBFGS and sequential/hybrid gradient-descent for GRAPE,
-and K-BFGS for Krotov’s method, see text for detail.</span><a class="headerlink" href="#id52" title="Permalink to this image">¶</a></p>
-</div>
+and K-BFGS for Krotov’s method, see text for detail.</span><a class="headerlink" href="#id52" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>In the following, we discuss some of the concerns in the choice of
 optimization methods. The discussion is limited to iterative open-loop
 methods, where the optimization is based on a numerical simulation of
@@ -633,8 +641,8 @@ especially useful for more fundamental tasks, such as mapping the design
 landscape of a particular system <span id="id50">[<a class="reference internal" href="99_bibliography.html#id98" title="M. H. Goerz, F. Motzoi, K. B. Whaley, and C. P. Koch. Charting the circuit QED design landscape using optimal control theory. npj Quantum Information  3, 37 (2017). doi:10.1038/s41534-017-0036-0.">103</a>]</span> or
 determining the quantum speed limit, i.e., the minimum time in which the
 system can reach a given target <span id="id51">[<a class="reference internal" href="99_bibliography.html#id43" title="J. J. W. H. Sørensen, M. K. Pedersen, M. Munch, P. Haikka, J. H. Jensen, T. Planke, M. G. Andreasen, M. Gajdacz, K. Mølmer, A. Lieberoth, J. F. Sherson, and Q. M. players. Exploring the quantum speed limit with computer games. Nature  532, 210 (2016). doi:10.1038/nature17620.">15</a>, <a class="reference internal" href="99_bibliography.html#id99" title="T. Caneva, M. Murphy, T. Calarco, R. Fazio, S. Montangero, V. Giovannetti, and G. E. Santoro. Optimal control at the quantum speed limit. Phys. Rev. Lett.  103, 240501 (2009). doi:10.1103/PhysRevLett.103.240501.">104</a>, <a class="reference internal" href="99_bibliography.html#id100" title="M. H. Goerz, T. Calarco, and C. P. Koch. The quantum speed limit of optimal controlled phasegates for trapped neutral atoms. J. Phys. B  44, 154011 (2011). doi:10.1088/0953-4075/44/15/154011.">105</a>]</span>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -647,8 +655,8 @@ system can reach a given target <span id="id51">[<a class="reference internal" 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

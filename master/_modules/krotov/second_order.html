@@ -1,32 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>krotov.second_order &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <title>krotov.second_order &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="../../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
-        <script src="../../_static/docs-versions-menu.js"></script>
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -45,7 +41,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -55,7 +51,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../02_contributing.html">Contributing</a></li>
@@ -133,14 +129,16 @@
              
   <h1>Source code for krotov.second_order</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Support functions for the second-order update equation&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sigma&#39;</span><span class="p">,</span> <span class="s1">&#39;numerical_estimate_A&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="Sigma"><a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.Sigma">[docs]</a><span class="k">class</span> <span class="nc">Sigma</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="Sigma">
+<a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.Sigma">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Sigma</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function σ(t) for the second order update equation.</span>
 
 <span class="sd">    This is an abstract bases class. For any optimization that requires the</span>
@@ -156,13 +154,18 @@
 <span class="sd">    :func:`.optimize_pulses`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Sigma.__call__"><a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.Sigma.__call__">[docs]</a>    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>  <span class="c1"># pragma: nocover</span>
+<div class="viewcode-block" id="Sigma.__call__">
+<a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.Sigma.__call__">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>  <span class="c1"># pragma: nocover</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate σ(t)&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Sigma.refresh"><a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.Sigma.refresh">[docs]</a>    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Sigma.refresh">
+<a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.Sigma.refresh">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">refresh</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">forward_states</span><span class="p">,</span>
         <span class="n">forward_states0</span><span class="p">,</span>
@@ -197,10 +200,12 @@
 <span class="sd">            result (Result): The result object, up-to-date for the current</span>
 <span class="sd">                iteration</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+</div>
 
 
-<span class="k">def</span> <span class="nf">_overlap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">complex</span><span class="p">]:</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_overlap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">complex</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Complex overlap of two quantum objects.</span>
 
 <span class="sd">    If `a`, `b` are not quantum objects or are not compatible, return None.</span>
@@ -217,7 +222,9 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="numerical_estimate_A"><a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.numerical_estimate_A">[docs]</a><span class="k">def</span> <span class="nf">numerical_estimate_A</span><span class="p">(</span>
+<div class="viewcode-block" id="numerical_estimate_A">
+<a class="viewcode-back" href="../../API/krotov.second_order.html#krotov.second_order.numerical_estimate_A">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_estimate_A</span><span class="p">(</span>
     <span class="n">forward_states</span><span class="p">,</span> <span class="n">forward_states0</span><span class="p">,</span> <span class="n">chi_states</span><span class="p">,</span> <span class="n">chi_norms</span><span class="p">,</span> <span class="n">Delta_J_T</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Update the second-order parameter $A$.</span>
@@ -273,6 +280,7 @@
         <span class="k">return</span> <span class="n">numer</span> <span class="o">/</span> <span class="n">denom</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span></div>
+
 </pre></div>
 
            </div>
@@ -282,8 +290,8 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

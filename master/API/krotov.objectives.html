@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>krotov.objectives module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <title>krotov.objectives module &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,7 +46,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -50,7 +56,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -75,7 +81,14 @@
 <li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.objectives module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.objectives.Objective"><code class="docutils literal notranslate"><span class="pre">Objective</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.objectives.gate_objectives"><code class="docutils literal notranslate"><span class="pre">gate_objectives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.objectives.ensemble_objectives"><code class="docutils literal notranslate"><span class="pre">ensemble_objectives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.objectives.liouvillian"><code class="docutils literal notranslate"><span class="pre">liouvillian()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.objectives.FIX_QUTIP_932"><code class="docutils literal notranslate"><span class="pre">FIX_QUTIP_932</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="krotov.optimize.html">krotov.optimize module</a></li>
@@ -153,8 +166,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-krotov.objectives">
-<span id="krotov-objectives-module"></span><h1>krotov.objectives module<a class="headerlink" href="#module-krotov.objectives" title="Permalink to this headline">¶</a></h1>
+  <section id="module-krotov.objectives">
+<span id="krotov-objectives-module"></span><h1>krotov.objectives module<a class="headerlink" href="#module-krotov.objectives" title="Link to this heading">¶</a></h1>
 <p>Routines for formulating objectives.</p>
 <p>Objectives, represented as an <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> instance, describe the
 <em>physical</em> objective of an optimization, e.g. a state-to-state transformation,
@@ -162,29 +175,21 @@ or a quantum gate. This is distinct from the <em>mathematical</em> formulation o
 optimization functional (<a class="reference internal" href="krotov.functionals.html#module-krotov.functionals" title="krotov.functionals"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov.functionals</span></code></a>). For the same physical
 objective, there are usually several different functionals whose minimization
 achieve that objective.</p>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
 <p>Classes:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Objective</span></code></a></p></td>
-<td><p>A single objective for optimization with Krotov’s method.</p></td>
+<td><p>A single objective for optimization with Krotov's method.</p></td>
 </tr>
 </tbody>
 </table>
 <p>Functions:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#krotov.objectives.ensemble_objectives" title="krotov.objectives.ensemble_objectives"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble_objectives</span></code></a></p></td>
-<td><p>Extend <cite>objectives</cite> for an “ensemble optimization”</p></td>
+<td><p>Extend <cite>objectives</cite> for an &quot;ensemble optimization&quot;</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gate_objectives</span></code></a></p></td>
 <td><p>Construct a list of objectives for optimizing towards a quantum gate</p></td>
@@ -195,21 +200,21 @@ achieve that objective.</p>
 </tbody>
 </table>
 <p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a>, <a class="reference internal" href="#krotov.objectives.ensemble_objectives" title="krotov.objectives.ensemble_objectives"><code class="xref py py-func docutils literal notranslate"><span class="pre">ensemble_objectives</span></code></a>, <a class="reference internal" href="#krotov.objectives.gate_objectives" title="krotov.objectives.gate_objectives"><code class="xref py py-func docutils literal notranslate"><span class="pre">gate_objectives</span></code></a>, <a class="reference internal" href="#krotov.objectives.liouvillian" title="krotov.objectives.liouvillian"><code class="xref py py-func docutils literal notranslate"><span class="pre">liouvillian</span></code></a></p>
-</div>
-<div class="section" id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <dl class="py class">
-<dt id="krotov.objectives.Objective">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></code><code class="sig-name descname"><span class="pre">Objective</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></span><span class="sig-name descname"><span class="pre">Objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A single objective for optimization with Krotov’s method.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>initial_state</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a></p></li>
 <li><p><strong>H</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a></p></li>
-<li><p><strong>target</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a></p></li>
-<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – value for <a class="reference internal" href="#krotov.objectives.Objective.c_ops" title="krotov.objectives.Objective.c_ops"><code class="xref py py-attr docutils literal notranslate"><span class="pre">c_ops</span></code></a></p></li>
+<li><p><strong>target</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em> or </em><em>None</em>) – value for <a class="reference internal" href="#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target</span></code></a></p></li>
+<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>None</em>) – value for <a class="reference internal" href="#krotov.objectives.Objective.c_ops" title="krotov.objectives.Objective.c_ops"><code class="xref py py-attr docutils literal notranslate"><span class="pre">c_ops</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -225,7 +230,7 @@ achieve that objective.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><strong>ValueError</strong></a> – If any arguments have an invalid type or structure. This
     can be surpressed by setting the <a class="reference internal" href="#krotov.objectives.Objective.type_checking" title="krotov.objectives.Objective.type_checking"><code class="xref py py-attr docutils literal notranslate"><span class="pre">type_checking</span></code></a> class
     attribute to False.</p>
@@ -239,33 +244,33 @@ explicitly. It is strongly recommended to set <a class="reference internal" href
 operator instead, see <a class="reference internal" href="#krotov.objectives.liouvillian" title="krotov.objectives.liouvillian"><code class="xref py py-func docutils literal notranslate"><span class="pre">liouvillian()</span></code></a>.</p>
 </div>
 <dl class="py attribute">
-<dt id="krotov.objectives.Objective.H">
-<code class="sig-name descname"><span class="pre">H</span></code><a class="headerlink" href="#krotov.objectives.Objective.H" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.H">
+<span class="sig-name descname"><span class="pre">H</span></span><a class="headerlink" href="#krotov.objectives.Objective.H" title="Link to this definition">¶</a></dt>
 <dd><p>The (time-dependent) Hamiltonian or
 Liouvillian in nested-list format, cf.
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a>. This includes the control fields.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)">qutip.Qobj</a> or <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="krotov.objectives.Objective.initial_state">
-<code class="sig-name descname"><span class="pre">initial_state</span></code><a class="headerlink" href="#krotov.objectives.Objective.initial_state" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.initial_state">
+<span class="sig-name descname"><span class="pre">initial_state</span></span><a class="headerlink" href="#krotov.objectives.Objective.initial_state" title="Link to this definition">¶</a></dt>
 <dd><p>The initial state, as a Hilbert space
 state, or a density matrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)">qutip.Qobj</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="krotov.objectives.Objective.target">
-<code class="sig-name descname"><span class="pre">target</span></code><a class="headerlink" href="#krotov.objectives.Objective.target" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.target">
+<span class="sig-name descname"><span class="pre">target</span></span><a class="headerlink" href="#krotov.objectives.Objective.target" title="Link to this definition">¶</a></dt>
 <dd><p>An object describing the “target” of the optimization, for the
 dynamics starting from <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a>. Usually, this will be
 the target state (the state into which <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> should
@@ -275,28 +280,28 @@ passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimi
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="krotov.objectives.Objective.c_ops">
-<code class="sig-name descname"><span class="pre">c_ops</span></code><a class="headerlink" href="#krotov.objectives.Objective.c_ops" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.c_ops">
+<span class="sig-name descname"><span class="pre">c_ops</span></span><a class="headerlink" href="#krotov.objectives.Objective.c_ops" title="Link to this definition">¶</a></dt>
 <dd><p>List of collapse operators, cf.
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">mesolve()</span></code></a>, in lieu of <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a> being a
 Liouvillian.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a> or <a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)">None</a></p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a> or None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="krotov.objectives.Objective.str_use_unicode">
-<code class="sig-name descname"><span class="pre">str_use_unicode</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#krotov.objectives.Objective.str_use_unicode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.str_use_unicode">
+<span class="sig-name descname"><span class="pre">str_use_unicode</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#krotov.objectives.Objective.str_use_unicode" title="Link to this definition">¶</a></dt>
 <dd><p>Whether the string representation of an <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> may use
 unicode symbols, cf. <a class="reference internal" href="#krotov.objectives.Objective.summarize" title="krotov.objectives.Objective.summarize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">summarize()</span></code></a> (class attribute).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="krotov.objectives.Objective.type_checking">
-<code class="sig-name descname"><span class="pre">type_checking</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#krotov.objectives.Objective.type_checking" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.type_checking">
+<span class="sig-name descname"><span class="pre">type_checking</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#krotov.objectives.Objective.type_checking" title="Link to this definition">¶</a></dt>
 <dd><p>By default, instantiating <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> with invalid types raises a
 <a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>. Setting this to False disables type checks in the
 initializer, allowing certain advanced use cases such as using plain numpy
@@ -304,8 +309,8 @@ objects instead of QuTiP objects (class attribute).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="krotov.objectives.Objective.adjoint">
-<code class="sig-name descname"><span class="pre">adjoint</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.adjoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.adjoint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.adjoint">
+<span class="sig-name descname"><span class="pre">adjoint</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.adjoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.adjoint" title="Link to this definition">¶</a></dt>
 <dd><p>The <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a> containing the adjoint of all components.</p>
 <p>This does not affect the controls in <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a>: these are
 assumed to be real-valued. Also, <a class="reference internal" href="#krotov.objectives.Objective.target" title="krotov.objectives.Objective.target"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Objective.target</span></code></a> will be left
@@ -314,8 +319,8 @@ state).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="krotov.objectives.Objective.mesolve">
-<code class="sig-name descname"><span class="pre">mesolve</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tlist</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.mesolve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.mesolve" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.mesolve">
+<span class="sig-name descname"><span class="pre">mesolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tlist</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.mesolve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.mesolve" title="Link to this definition">¶</a></dt>
 <dd><p>Run <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a> on the system of the objective.</p>
 <p>Solve the dynamics for the <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a> and <a class="reference internal" href="#krotov.objectives.Objective.c_ops" title="krotov.objectives.Objective.c_ops"><code class="xref py py-attr docutils literal notranslate"><span class="pre">c_ops</span></code></a> of the
 objective, starting from the objective’s <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a>, by
@@ -323,39 +328,39 @@ delegating to <a class="reference external" href="https://qutip.org/docs/4.5/api
 the dynamical generator for the propagation can be overridden by
 passing <cite>rho0</cite> and <cite>H</cite>/<cite>c_ops</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – array of time grid points on which the
+<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – array of time grid points on which the
 states are defined</p></li>
-<li><p><strong>rho0</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – The initial state for the propagation.
+<li><p><strong>rho0</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em> or </em><em>None</em>) – The initial state for the propagation.
 If None, the <a class="reference internal" href="#krotov.objectives.Objective.initial_state" title="krotov.objectives.Objective.initial_state"><code class="xref py py-attr docutils literal notranslate"><span class="pre">initial_state</span></code></a> attribute is used.</p></li>
-<li><p><strong>H</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – The dynamical generator (Hamiltonian or
+<li><p><strong>H</strong> (<a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em> or </em><em>None</em>) – The dynamical generator (Hamiltonian or
 Liouvillian) for the propagation. If None, the <a class="reference internal" href="#krotov.objectives.Objective.H" title="krotov.objectives.Objective.H"><code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code></a>
 attribute is used.</p></li>
-<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – List of collapse (Lindblad) operators. If
+<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>None</em>) – List of collapse (Lindblad) operators. If
 None, the <a class="reference internal" href="#krotov.objectives.Objective.c_ops" title="krotov.objectives.Objective.c_ops"><code class="xref py py-attr docutils literal notranslate"><span class="pre">c_ops</span></code></a> attribute is used.</p></li>
-<li><p><strong>e_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A list of operators whose expectation values
+<li><p><strong>e_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>None</em>) – A list of operators whose expectation values
 to calculate, for every point in <cite>tlist</cite>. See
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a>.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – dictionary of parameters for time-dependent
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em> or </em><em>None</em>) – dictionary of parameters for time-dependent
 Hamiltonians and collapse operators</p></li>
 <li><p><strong>**kwargs</strong> – All further arguments will be passed to
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Result of the propagation, see
 <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.mesolve.mesolve" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.mesolve.mesolve()</span></code></a> for details.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.solver.Result" title="(in QuTiP: Quantum Toolbox in Python v4.5)">qutip.solver.Result</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="krotov.objectives.Objective.propagate">
-<code class="sig-name descname"><span class="pre">propagate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tlist</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">propagator</span></em>, <em class="sig-param"><span class="pre">rho0=None</span></em>, <em class="sig-param"><span class="pre">H=None</span></em>, <em class="sig-param"><span class="pre">c_ops=None</span></em>, <em class="sig-param"><span class="pre">e_ops=None</span></em>, <em class="sig-param"><span class="pre">args=None</span></em>, <em class="sig-param"><span class="pre">expect=&lt;function</span> <span class="pre">expect&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.propagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.propagate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.propagate">
+<span class="sig-name descname"><span class="pre">propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">propagator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho0=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_ops=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expect=&lt;function</span> <span class="pre">expect&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.propagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.propagate" title="Link to this definition">¶</a></dt>
 <dd><p>Propagate the system of the objective over the entire time grid.</p>
 <p>Solve the dynamics for the <cite>H</cite> and <cite>c_ops</cite> of the objective. If <cite>rho0</cite>
 is not given, the <cite>initial_state</cite> will be propagated. This is similar
@@ -375,29 +380,29 @@ state, and must returnd the expectation value of the operator.</p>
 estimate the “time discretization error”. If the error is significant,
 a shorter time step shoud be used.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Result of the propagation, using the same
 structure as <a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesolve()</span></code></a>.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.solver.Result" title="(in QuTiP: Quantum Toolbox in Python v4.5)">qutip.solver.Result</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="krotov.objectives.Objective.reset_symbol_counters">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">reset_symbol_counters</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.reset_symbol_counters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.reset_symbol_counters" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.reset_symbol_counters">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_symbol_counters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.reset_symbol_counters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.reset_symbol_counters" title="Link to this definition">¶</a></dt>
 <dd><p>Reset the internal symbol counters used for printing objectives.</p>
 <p>See <a class="reference internal" href="#krotov.objectives.Objective.summarize" title="krotov.objectives.Objective.summarize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">summarize()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="krotov.objectives.Objective.summarize">
-<code class="sig-name descname"><span class="pre">summarize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_symbol_counters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.summarize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.summarize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.Objective.summarize">
+<span class="sig-name descname"><span class="pre">summarize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_symbol_counters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#Objective.summarize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.Objective.summarize" title="Link to this definition">¶</a></dt>
 <dd><p>Return a one-line summary of the objective as a string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If False, only use ascii symbols in the output</p></li>
 <li><p><strong>reset_symbol_counters</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, reset the internal object
@@ -428,7 +433,7 @@ or target states (density matrices)</p></li>
 <li><p>‘u’ for (callable) control functions.</p></li>
 </ul>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmap</span><span class="p">,</span> <span class="n">identity</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmap</span><span class="p">,</span> <span class="n">identity</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -471,11 +476,11 @@ or target states (density matrices)</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.objectives.gate_objectives">
-<code class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></code><code class="sig-name descname"><span class="pre">gate_objectives</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_invariants</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liouville_states_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#gate_objectives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.gate_objectives" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.gate_objectives">
+<span class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></span><span class="sig-name descname"><span class="pre">gate_objectives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_invariants</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liouville_states_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#gate_objectives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.gate_objectives" title="Link to this definition">¶</a></dt>
 <dd><p>Construct a list of objectives for optimizing towards a quantum gate</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis_states</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a><em>]</em>) – A list of <span class="math notranslate nohighlight">\(n\)</span> canonical basis states</p></li>
 <li><p><strong>gate</strong> – The gate to optimize for, as a <span class="math notranslate nohighlight">\(n \times n\)</span> matrix-like object
@@ -485,18 +490,18 @@ Alternatively, <cite>gate</cite> may be the string ‘perfect_entangler’ or
 perfect entangler.</p></li>
 <li><p><strong>H</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://qutip.org/docs/4.5/apidoc/classes.html#qutip.Qobj" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><em>qutip.Qobj</em></a>) – The Hamiltonian (or Liouvillian) for the time
 evolution, in nested-list format.</p></li>
-<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – A list of collapse (Lindblad) operators, or None
+<li><p><strong>c_ops</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> or </em><em>None</em>) – A list of collapse (Lindblad) operators, or None
 for unitary dynamics or if <cite>H</cite> is a Liouvillian (preferred!)</p></li>
 <li><p><strong>local_invariants</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If True, initialize the objectives for an
 optimization towards a two-qubit gate that is “locally equivalent”
 to <cite>gate</cite>. That is, the result of the optimization should implement
 <cite>gate</cite> up to single-qubit operations.</p></li>
-<li><p><strong>liouville_states_set</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – If not None, one of “full”,
+<li><p><strong>liouville_states_set</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – If not None, one of “full”,
 “3states”, “d+1”. This sets the objectives for a gate
 optimization in Liouville space, using the states defined in
 Goerz et al. New J. Phys. 16, 055012 (2014). See Examples for
 details.</p></li>
-<li><p><strong>weights</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – If given as a list, weights for the different
+<li><p><strong>weights</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – If given as a list, weights for the different
 objectives. These will be added as a custom attribute to the
 respective <a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">Objective</span></code></a>, and may be used by a particular
 functional (<cite>chi_constructor</cite>). The intended use case is for the
@@ -509,7 +514,7 @@ of values, normalize the weights so that they sum to <span class="math notransla
 number of objectives. IF False, the weights will be used unchanged.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><p>The objectives that define the optimization towards
 the gate. For a “normal” gate with a basis in Hilbert space, the
 objectives will have the <cite>basis_states</cite> as each
@@ -525,10 +530,10 @@ perfect-entanglers optimization, and <cite>gate</cite> for the local-invariants
 optimization.</p>
 </p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective">Objective</a>]</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><strong>ValueError</strong></a> – If <cite>gate</cite>, <cite>basis_states</cite>, and <cite>local_invariants</cite> are
     incompatible, or <cite>gate</cite> is invalid (not a recognized string)</p>
 </dd>
@@ -542,8 +547,8 @@ larger Hilbert space.</p>
 <p class="rubric">Examples</p>
 <ul>
 <li><p>A single-qubit gate:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">bra</span><span class="p">,</span> <span class="n">tensor</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmay</span><span class="p">,</span> <span class="n">sigmam</span><span class="p">,</span> <span class="n">identity</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">ket</span><span class="p">,</span> <span class="n">bra</span><span class="p">,</span> <span class="n">tensor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">sigmaz</span><span class="p">,</span> <span class="n">sigmax</span><span class="p">,</span> <span class="n">sigmay</span><span class="p">,</span> <span class="n">sigmam</span><span class="p">,</span> <span class="n">identity</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="n">ket</span><span class="p">([</span><span class="mi">1</span><span class="p">])]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gate</span> <span class="o">=</span> <span class="n">sigmay</span><span class="p">()</span>  <span class="c1"># = -i|0⟩⟨1| + i|1⟩⟨0|</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="n">sigmaz</span><span class="p">(),[</span><span class="n">sigmax</span><span class="p">(),</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">]]</span>
@@ -571,7 +576,7 @@ larger Hilbert space.</p>
 <span class="gp">... </span>    <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">sigmax</span><span class="p">(),</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="n">tensor</span><span class="p">(</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sigmax</span><span class="p">()),</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">objectives</span> <span class="o">=</span> <span class="n">gate_objectives</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="s1">&#39;PE&#39;</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weylchamber</span> <span class="kn">import</span> <span class="n">bell_basis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">weylchamber</span><span class="w"> </span><span class="kn">import</span> <span class="n">bell_basis</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">assert</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">Objective</span><span class="p">(</span>
 <span class="gp">... </span>       <span class="n">initial_state</span><span class="o">=</span><span class="n">bell_basis</span><span class="p">(</span><span class="n">basis</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span>
@@ -698,8 +703,8 @@ of the Hilbert space basis:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.objectives.ensemble_objectives">
-<code class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></code><code class="sig-name descname"><span class="pre">ensemble_objectives</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_original_objectives</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#ensemble_objectives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.ensemble_objectives" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.ensemble_objectives">
+<span class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></span><span class="sig-name descname"><span class="pre">ensemble_objectives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_original_objectives</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#ensemble_objectives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.ensemble_objectives" title="Link to this definition">¶</a></dt>
 <dd><p>Extend <cite>objectives</cite> for an “ensemble optimization”</p>
 <p>This creates a list of objectives for an optimization for robustness with
 respect to variations in some parameter of the Hamiltonian. The trick is to
@@ -708,7 +713,7 @@ simply optimize over the average of multiple copies of the system
 Goerz, Halperin, Aytac, Koch, Whaley. Phys. Rev. A 90, 032329 (2014)
 for details.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>objectives</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective"><em>Objective</em></a><em>]</em>) – The <span class="math notranslate nohighlight">\(n\)</span> original objectives</p></li>
 <li><p><strong>Hs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – List of <span class="math notranslate nohighlight">\(m\)</span> variations of the original
@@ -719,7 +724,7 @@ contains the original Hamiltonian (which is often more
 straightforward)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>List of <span class="math notranslate nohighlight">\(n (m+1)\)</span> new objectives that consists of the
 original objectives, plus one copy of the original objectives per
 element of <cite>Hs</cite> where the <cite>H</cite> attribute of each objectives is
@@ -727,15 +732,15 @@ replaced by that element. Alternatively, for
 <code class="docutils literal notranslate"><span class="pre">keep_original_objectives=False</span></code>, list of <span class="math notranslate nohighlight">\(n m\)</span> new objectives
 without the original objectives.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>[<a class="reference internal" href="#krotov.objectives.Objective" title="krotov.objectives.Objective">Objective</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.objectives.liouvillian">
-<code class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></code><code class="sig-name descname"><span class="pre">liouvillian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#liouvillian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.liouvillian" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.liouvillian">
+<span class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></span><span class="sig-name descname"><span class="pre">liouvillian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_ops</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/objectives.html#liouvillian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.objectives.liouvillian" title="Link to this definition">¶</a></dt>
 <dd><p>Convert Hamiltonian and Lindblad operators into a Liouvillian.</p>
 <p>This is like <a class="reference external" href="https://qutip.org/docs/4.5/apidoc/functions.html#qutip.superoperator.liouvillian" title="(in QuTiP: Quantum Toolbox in Python v4.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">qutip.superoperator.liouvillian()</span></code></a>, but <cite>H</cite> may be a
 time-dependent Hamiltonian in nested-list format. <cite>H</cite> is assumed to contain
@@ -744,8 +749,8 @@ time-dependent.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="krotov.objectives.FIX_QUTIP_932">
-<code class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></code><code class="sig-name descname"><span class="pre">FIX_QUTIP_932</span></code><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#krotov.objectives.FIX_QUTIP_932" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.objectives.FIX_QUTIP_932">
+<span class="sig-prename descclassname"><span class="pre">krotov.objectives.</span></span><span class="sig-name descname"><span class="pre">FIX_QUTIP_932</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#krotov.objectives.FIX_QUTIP_932" title="Link to this definition">¶</a></dt>
 <dd><p>Workaround for <a class="reference external" href="https://github.com/qutip/qutip/issues/932">QuTiP issue 932</a>.</p>
 <p>If True, in <a class="reference internal" href="#krotov.objectives.Objective.mesolve" title="krotov.objectives.Objective.mesolve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Objective.mesolve()</span></code></a>, replace any array controls with an
 equivalent function. This results in a signficant slowdown of the propagation,
@@ -753,8 +758,8 @@ as it circumvents the use of Cython. Defaults to False on Linux, and True on
 any non-Linux system.</p>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -767,8 +772,8 @@ any non-Linux system.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

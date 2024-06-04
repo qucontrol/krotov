@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>krotov.info_hooks module &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <title>krotov.info_hooks module &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2624feb1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,7 +46,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -50,7 +56,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -73,7 +79,12 @@
 <li class="toctree-l2"><a class="reference internal" href="krotov.functionals.html">krotov.functionals module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">krotov.info_hooks module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.info_hooks.chain"><code class="docutils literal notranslate"><span class="pre">chain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.info_hooks.print_debug_information"><code class="docutils literal notranslate"><span class="pre">print_debug_information()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#krotov.info_hooks.print_table"><code class="docutils literal notranslate"><span class="pre">print_table()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="krotov.mu.html">krotov.mu module</a></li>
@@ -153,17 +164,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-krotov.info_hooks">
-<span id="krotov-info-hooks-module"></span><h1>krotov.info_hooks module<a class="headerlink" href="#module-krotov.info_hooks" title="Permalink to this headline">¶</a></h1>
+  <section id="module-krotov.info_hooks">
+<span id="krotov-info-hooks-module"></span><h1>krotov.info_hooks module<a class="headerlink" href="#module-krotov.info_hooks" title="Link to this heading">¶</a></h1>
 <p>Routines that can be passed as <cite>info_hook</cite> to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a></p>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
 <p>Functions:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#krotov.info_hooks.chain" title="krotov.info_hooks.chain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chain</span></code></a></p></td>
 <td><p>Chain multiple <cite>info_hook</cite> or <cite>modify_params_after_iter</cite> callables together.</p></td>
@@ -177,16 +184,16 @@
 </tbody>
 </table>
 <p><code class="docutils literal notranslate"><span class="pre">__all__</span></code>: <a class="reference internal" href="#krotov.info_hooks.chain" title="krotov.info_hooks.chain"><code class="xref py py-func docutils literal notranslate"><span class="pre">chain</span></code></a>, <a class="reference internal" href="#krotov.info_hooks.print_debug_information" title="krotov.info_hooks.print_debug_information"><code class="xref py py-func docutils literal notranslate"><span class="pre">print_debug_information</span></code></a>, <a class="reference internal" href="#krotov.info_hooks.print_table" title="krotov.info_hooks.print_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">print_table</span></code></a></p>
-</div>
-<div class="section" id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt id="krotov.info_hooks.chain">
-<code class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></code><code class="sig-name descname"><span class="pre">chain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">hooks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.chain" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.info_hooks.chain">
+<span class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></span><span class="sig-name descname"><span class="pre">chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">hooks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.chain" title="Link to this definition">¶</a></dt>
 <dd><p>Chain multiple <cite>info_hook</cite> or <cite>modify_params_after_iter</cite> callables
 together.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">F_re</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;tau_vals&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    F = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">F_re</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">info_hook</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="n">print_debug_information</span><span class="p">,</span> <span class="n">print_fidelity</span><span class="p">)</span>
@@ -201,14 +208,14 @@ chain.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.info_hooks.print_debug_information">
-<code class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></code><code class="sig-name descname"><span class="pre">print_debug_information</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">objectives</span></em>, <em class="sig-param"><span class="pre">adjoint_objectives</span></em>, <em class="sig-param"><span class="pre">backward_states</span></em>, <em class="sig-param"><span class="pre">forward_states</span></em>, <em class="sig-param"><span class="pre">forward_states0</span></em>, <em class="sig-param"><span class="pre">guess_pulses</span></em>, <em class="sig-param"><span class="pre">optimized_pulses</span></em>, <em class="sig-param"><span class="pre">g_a_integrals</span></em>, <em class="sig-param"><span class="pre">lambda_vals</span></em>, <em class="sig-param"><span class="pre">shape_arrays</span></em>, <em class="sig-param"><span class="pre">fw_states_T</span></em>, <em class="sig-param"><span class="pre">tlist</span></em>, <em class="sig-param"><span class="pre">tau_vals</span></em>, <em class="sig-param"><span class="pre">start_time</span></em>, <em class="sig-param"><span class="pre">stop_time</span></em>, <em class="sig-param"><span class="pre">iteration</span></em>, <em class="sig-param"><span class="pre">info_vals</span></em>, <em class="sig-param"><span class="pre">shared_data</span></em>, <em class="sig-param"><span class="pre">propagator</span></em>, <em class="sig-param"><span class="pre">chi_constructor</span></em>, <em class="sig-param"><span class="pre">mu</span></em>, <em class="sig-param"><span class="pre">sigma</span></em>, <em class="sig-param"><span class="pre">iter_start</span></em>, <em class="sig-param"><span class="pre">iter_stop</span></em>, <em class="sig-param"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_debug_information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.print_debug_information" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.info_hooks.print_debug_information">
+<span class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></span><span class="sig-name descname"><span class="pre">print_debug_information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjoint_objectives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backward_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_states0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guess_pulses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimized_pulses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_a_integrals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fw_states_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iteration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shared_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">propagator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi_constructor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter_stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_debug_information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.print_debug_information" title="Link to this definition">¶</a></dt>
 <dd><p>Print full debug information about the current Krotov iteration.</p>
 <p>This routine is intended to be passed to <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> as
 <cite>info_hook</cite>, and it exemplifies the full signature of a routine suitable
 for this purpose.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
+<dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>objectives</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><em>Objective</em></a><em>]</em>) – list of the objectives</p></li>
 <li><p><strong>adjoint_objectives</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference internal" href="krotov.objectives.html#krotov.objectives.Objective" title="krotov.objectives.Objective"><em>Objective</em></a><em>]</em>) – list of the adjoint objectives</p></li>
@@ -220,9 +227,9 @@ the optimized pulses. None otherwise.</p></li>
 <li><p><strong>forward_states0</strong> – If available (second order only), for each objective,
 an array-like object containing the forward-propagated states under
 the guess pulses. None otherwise.</p></li>
-<li><p><strong>guess_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a><em>]</em>) – list of guess pulses</p></li>
-<li><p><strong>optimized_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a><em>]</em>) – list of optimized pulses</p></li>
-<li><p><strong>g_a_integrals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – array of values
+<li><p><strong>guess_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a><em>]</em>) – list of guess pulses</p></li>
+<li><p><strong>optimized_pulses</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a><em>]</em>) – list of optimized pulses</p></li>
+<li><p><strong>g_a_integrals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – array of values
 <span class="math notranslate nohighlight">\(\int_0^T g_a(t) \dd t = \int_0^T \frac{\lambda_a}{S(t)}
 \Abs{\Delta \epsilon(t)}^2 \dd t\)</span>, for each pulse <span class="math notranslate nohighlight">\(\epsilon(t)\)</span>.
 The pulse updates <span class="math notranslate nohighlight">\(\Delta \epsilon(t)\)</span> are the differences of the
@@ -236,14 +243,14 @@ up in <span class="math notranslate nohighlight">\(\int_0^T g_a(t) \dd t\)</span
 is increasing or decreasing between iterations gives an indication
 whether the optimization is “speeding up” or “slowing down”, and
 thus whether convergence is reached (negligible pulse updates).</p></li>
-<li><p><strong>lambda_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – for each pulse, the value of the
+<li><p><strong>lambda_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – for each pulse, the value of the
 <span class="math notranslate nohighlight">\(\lambda_a\)</span> parameter</p></li>
-<li><p><strong>shape_arrays</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a><em>]</em>) – for each pulse, the array of
+<li><p><strong>shape_arrays</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a><em>]</em>) – for each pulse, the array of
 update-shape values <span class="math notranslate nohighlight">\(S(t)\)</span></p></li>
 <li><p><strong>fw_states_T</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – for each objective, the forward-propagated state</p></li>
-<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – array of time grid values on which the states
+<li><p><strong>tlist</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – array of time grid values on which the states
 are defined</p></li>
-<li><p><strong>tau_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – for each objective, the complex overlap for
+<li><p><strong>tau_vals</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – for each objective, the complex overlap for
 the target state with the forward-propagated state, or None if no
 target state is defined.</p></li>
 <li><p><strong>start_time</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – The time at which the iteration started, in epoch
@@ -257,12 +264,12 @@ previous iterations</p></li>
 <li><p><strong>shared_data</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Dict of data shared between any
 <cite>modify_params_after_iter</cite> and any <cite>info_hook</cite> functions chained
 together via <a class="reference internal" href="#krotov.info_hooks.chain" title="krotov.info_hooks.chain"><code class="xref py py-func docutils literal notranslate"><span class="pre">chain()</span></code></a>.</p></li>
-<li><p><strong>propagator</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#callable" title="(in Python v3.7)"><em>callable</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.7/library/functions.html#callable" title="(in Python v3.7)"><em>callable</em></a><em>]</em>) – The <cite>propagator</cite> function(s)
+<li><p><strong>propagator</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><em>callable</em><em>]</em>) – The <cite>propagator</cite> function(s)
 used by <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p></li>
-<li><p><strong>chi_constructor</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#callable" title="(in Python v3.7)"><em>callable</em></a>) – The <cite>chi_constructor</cite> function
+<li><p><strong>chi_constructor</strong> (<em>callable</em>) – The <cite>chi_constructor</cite> function
 used by <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p></li>
-<li><p><strong>mu</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#callable" title="(in Python v3.7)"><em>callable</em></a>) – The <cite>mu</cite> function used by <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p></li>
-<li><p><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference internal" href="krotov.second_order.html#krotov.second_order.Sigma" title="krotov.second_order.Sigma"><em>krotov.second_order.Sigma</em></a>) – The argument passed to
+<li><p><strong>mu</strong> (<em>callable</em>) – The <cite>mu</cite> function used by <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a>.</p></li>
+<li><p><strong>sigma</strong> (<em>None</em><em> or </em><a class="reference internal" href="krotov.second_order.html#krotov.second_order.Sigma" title="krotov.second_order.Sigma"><em>krotov.second_order.Sigma</em></a>) – The argument passed to
 <a class="reference internal" href="krotov.optimize.html#krotov.optimize.optimize_pulses" title="krotov.optimize.optimize_pulses"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_pulses()</span></code></a> as <cite>sigma</cite>.</p></li>
 <li><p><strong>iter_start</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The formal iteration number at which the optimization
 started</p></li>
@@ -282,7 +289,7 @@ the <cite>info_hook</cite> only allows for keyword arguments, it is usually much
 simpler to use Python’s variable keyword arguments syntax
 (<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>). For example, consider the following <cite>info_hook</cite> that
 prints (and stores) the value of the real-part gate fidelity:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_fidelity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">F_re</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;tau_vals&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    F = </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">F_re</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">F_re</span>
@@ -292,8 +299,8 @@ prints (and stores) the value of the real-part gate fidelity:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="krotov.info_hooks.print_table">
-<code class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></code><code class="sig-name descname"><span class="pre">print_table</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">J_T</span></em>, <em class="sig-param"><span class="pre">show_g_a_int_per_pulse=False</span></em>, <em class="sig-param"><span class="pre">J_T_prev=None</span></em>, <em class="sig-param"><span class="pre">unicode=True</span></em>, <em class="sig-param"><span class="pre">col_formats=('%d'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%.2e'</span></em>, <em class="sig-param"><span class="pre">'%d')</span></em>, <em class="sig-param"><span class="pre">col_headers=None</span></em>, <em class="sig-param"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.print_table" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="krotov.info_hooks.print_table">
+<span class="sig-prename descclassname"><span class="pre">krotov.info_hooks.</span></span><span class="sig-name descname"><span class="pre">print_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_g_a_int_per_pulse=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J_T_prev=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unicode=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_formats=('%d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'%.2e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'%.2e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'%.2e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'%.2e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'%.2e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'%.2e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'%d')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_headers=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/krotov/info_hooks.html#print_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#krotov.info_hooks.print_table" title="Link to this definition">¶</a></dt>
 <dd><p>Print a tabular overview of the functional values in the iteration.</p>
 <p>An example output is:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">iter.      J_T    ∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs</span>
@@ -355,7 +362,7 @@ serious sign of trouble.  It is often associated with sharp discontinuous
 spikes in the optimized pulses, or a dramatic increase in the pulse
 amplitude.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>J_T</strong> (<em>callable</em>) – A function that extracts the value of the final time
 functional from the keyword-arguments passed to the <cite>info_hook</cite>.</p></li>
@@ -364,7 +371,7 @@ value of <span class="math notranslate nohighlight">\(\int_0^T g_a(\epsilon_i(t)
 \frac{\lambda_{a, i}}{S_i(t)} \Abs{\Delta \epsilon_i(t)}^2 \dd t\)</span>
 for every pulse <span class="math notranslate nohighlight">\(\epsilon_i(t)\)</span>. Otherwise, only print the sum over
 those integrals for all pulses.</p></li>
-<li><p><strong>J_T_prev</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><em>callable</em>) – A function that extracts the value of the
+<li><p><strong>J_T_prev</strong> (<em>None</em><em> or </em><em>callable</em>) – A function that extracts the value of the
 final time functional <em>from the previous iteration</em>. If None, use
 the last values from the <cite>info_vals</cite> passed to the <cite>info_hook</cite>.</p></li>
 <li><p><strong>unicode</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Whether to use unicode symbols for the column headers.
@@ -375,10 +382,10 @@ that cause the headers not to line up as intended. No effect if
 column of values in the table (see items 1-8 above). These must
 each format a single value (an integer for the first and last
 column, and a float for all other columns).</p></li>
-<li><p><strong>col_headers</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – A tuple of exactly 8 strings that will be
+<li><p><strong>col_headers</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – A tuple of exactly 8 strings that will be
 used for column headers (see items 1-8 above). If None, default
 values depending on <cite>unicode</cite> will be used. The third element
-(“<code class="docutils literal notranslate"><span class="pre">lbl</span></code>”) of the tuple must support <code class="docutils literal notranslate"><span class="pre">lbl.format(l=l)</span></code> for an
+(”<code class="docutils literal notranslate"><span class="pre">lbl</span></code>”) of the tuple must support <code class="docutils literal notranslate"><span class="pre">lbl.format(l=l)</span></code> for an
 integer <code class="docutils literal notranslate"><span class="pre">l</span></code> (the one-based index of the control; since there will
 be one
 column for each control).</p></li>
@@ -389,15 +396,15 @@ column for each control).</p></li>
 <p>The widths of the columns are automatically determined both from the length
 of the column headers and the length of the formatted values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/exceptions.html#ValueError" title="(in Python v3.7)"><strong>ValueError</strong></a> – If <cite>col_formats</cite> and/or <cite>col_headers</cite> are of the wrong
     length, type, or invalid format.</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -410,8 +417,8 @@ of the column headers and the length of the formatted values.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Krotov Python Package &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <title>Krotov Python Package &mdash; Krotov 1.3.0+dev (341cb5c) documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" href="_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/clipboard.min.js"></script>
-        <script src="_static/copybutton.js"></script>
-        <script src="_static/docs-versions-menu.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2624feb1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -38,7 +44,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -48,7 +54,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Krotov Python Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a></li>
@@ -131,8 +137,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="krotov-python-package">
-<h1>Krotov Python Package<a class="headerlink" href="#krotov-python-package" title="Permalink to this headline">¶</a></h1>
+  <section id="krotov-python-package">
+<h1>Krotov Python Package<a class="headerlink" href="#krotov-python-package" title="Link to this heading">¶</a></h1>
 <a class="reference external image-reference" href="https://github.com/qucontrol/krotov"><img alt="Source code on Github" src="https://img.shields.io/badge/github-qucontrol/krotov-blue.svg" /></a>
 <a class="reference external image-reference" href="https://qucontrol.github.io/krotov"><img alt="Documentation" src="https://img.shields.io/badge/docs-gh--pages-blue.svg" /></a>
 <a class="reference external image-reference" href="https://pypi.python.org/pypi/krotov"><img alt="Krotov on the Python Package Index" src="https://img.shields.io/pypi/v/krotov.svg" /></a>
@@ -147,8 +153,8 @@
 <p>The <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package is built on top of <a class="reference external" href="http://qutip.org">QuTiP</a>.</p>
 <p>Development happens on <a class="reference external" href="https://github.com/qucontrol/krotov">Github</a>. You can read the full documentation <a class="reference external" href="https://qucontrol.github.io/krotov">online</a>.</p>
 <p>If you use the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package in your research, please <a class="reference internal" href="#citingkrotov"><span class="std std-ref">cite it</span></a>.</p>
-<div class="section" id="purpose">
-<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h2>
 <p>Optimal control is a cornerstone of quantum technology: relying not
 just on a passive understanding of quantum mechanics, but on the <em>active</em>
 utilization of the quantum properties of matter. Quantum optimal control asks
@@ -179,9 +185,9 @@ against which to test other implementations.</p></li>
 <li><p>Enable the more widespread use of Krotov’s method, for example in the design
 of experiments.</p></li>
 </ul>
-</div>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <p>The Krotov package is available for Python versions &gt;= 3.7. Its main dependency is <a class="reference external" href="http://qutip.org">QuTiP</a>
 (apart from the <a class="reference external" href="https://www.scipy.org">core packages of the Python scientific ecosystem</a>).
 Thus, you should consider <a class="reference external" href="http://qutip.org/docs/latest/installation.html">QuTiP’s installation instructions</a>.</p>
@@ -191,9 +197,9 @@ Most packages in the Python scientific ecosystem are now available as
 that do not provide compiled whels, and if you do not have the necessary
 compilers installed (Windows, macOS), the <a class="reference external" href="https://conda.io/docs/index.html">conda</a> package manager provides a
 good solution.</p>
-</div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>To install the latest released version of <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> into your current (conda)
 environment, run this command in your terminal:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>krotov
@@ -206,13 +212,13 @@ you through the process.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/qucontrol/krotov.git@master#egg<span class="o">=</span>krotov
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <p>To use Krotov’s method for quantum optimal control in a Python script or
 <a class="reference external" href="https://jupyter.org">Jupyter notebook</a>, start with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">krotov</span>
-<span class="kn">import</span> <span class="nn">qutip</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">krotov</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">qutip</span>
 </pre></div>
 </div>
 <p>Then,</p>
@@ -223,9 +229,9 @@ you through the process.</p>
 number of control fields over all the objectives.</p></li>
 </ol>
 <p>See <a class="reference internal" href="08_qutip_usage.html#using-krotov-with-qutip"><span class="std std-ref">Using Krotov with QuTiP</span></a> and <a class="reference internal" href="09_examples.html#krotov-example-notebooks"><span class="std std-ref">Examples</span></a> for details.</p>
-</div>
-<div class="section" id="citing-the-krotov-package">
-<span id="citingkrotov"></span><h2>Citing the Krotov Package<a class="headerlink" href="#citing-the-krotov-package" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="citing-the-krotov-package">
+<span id="citingkrotov"></span><h2>Citing the Krotov Package<a class="headerlink" href="#citing-the-krotov-package" title="Link to this heading">¶</a></h2>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>Please cite the <a class="reference internal" href="API/krotov.html#module-krotov" title="krotov"><code class="xref py py-mod docutils literal notranslate"><span class="pre">krotov</span></code></a> package as</p>
@@ -234,12 +240,12 @@ number of control fields over all the objectives.</p></li>
 </ul>
 </div>
 <p>You can also print this from <code class="docutils literal notranslate"><span class="pre">krotov.__citation__</span></code>:</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">__citation__</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">__citation__</span><span class="p">)</span>
 <span class="go">M. H. Goerz et al., Krotov: A Python implementation of Krotov&#39;s method for quantum optimal control, SciPost Phys. 7, 080 (2019)</span>
 </pre></div>
 </div>
 <p>The corresponding BibTeX entry is available in <code class="docutils literal notranslate"><span class="pre">krotov.__bibtex__</span></code>:</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">__bibtex__</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">krotov</span><span class="o">.</span><span class="n">__bibtex__</span><span class="p">)</span>
 <span class="go">@article{GoerzSPP2019,</span>
 <span class="go">    author = {Michael H. Goerz and Daniel Basilewitsch and Fernando Gago-Encinas and Matthias G. Krauss and Karl P. Horn and Daniel M. Reich and Christiane P. Koch},</span>
 <span class="go">    title = {Krotov: A {Python} implementation of {Krotov&#39;s} method for quantum optimal control},</span>
@@ -251,8 +257,8 @@ number of control fields over all the objectives.</p></li>
 <span class="go">}</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -265,8 +271,8 @@ number of control fields over all the objectives.</p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+    <p>&#169; Copyright 2025, Michael Goerz et al..
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 
