@@ -181,7 +181,9 @@ def run_tests():
             print("Fix the tests and ammend the release commit.")
             print("Then continue.\n")
             click.confirm("Continue?", default=True, abort=True)
-            if not click.confirm("Retry? If 'no', wil continue without testing", default=True):
+            if not click.confirm(
+                "Retry? If 'no', wi.l continue without testing", default=True
+            ):
                 break
         else:
             success = True
@@ -545,10 +547,23 @@ def push_release_commits():
 def make_and_push_tag(version):
     """Tag the current commit and push that tag to origin."""
     click.confirm(
-        "Push tag '%s' to origin?" % version, default=True, abort=True
+        f"Create and push tag 'v{version}'?", default=True, abort=False
     )
-    run(['git', 'tag', "-s", "v%s" % version], check=True)
-    run(['git', 'push', '--tags', 'origin'], check=True)
+    try:
+        if click.confirm(
+            "Do you want to sign your commit (needs GPG to be properly set up)?",
+            default=False,
+        ):
+            run(['git', 'tag', "-s", f"v{version}"], check=True)
+        else:
+            run(['git', 'tag', f"v{version}"], check=True)
+        run(['git', 'push', '--tags', 'origin'], check=True)
+    except CalledProcessError as exc_info:
+        click.confirm(
+            f"Creation of tag failed: {exc_info}.\n\nPlease create it manually after the release is complete.\n\nContinue?",
+            default=True,
+            abort=True,
+        )
 
 
 def make_next_dev_version_commit(version):

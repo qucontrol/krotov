@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 """Local pre-commit hooks"""
-import os
 import re
-import subprocess
 import sys
 from argparse import ArgumentParser, RawTextHelpFormatter
 

@@ -175,12 +175,18 @@ def test_objective_custom_target(objective_liouville):
         krotov.objectives._adjoint(obj.target, ignore_errors=False)
 
     res = obj.summarize()
-    expected = "ρ₀[2⊗2,2⊗2] to OrderedDict([('func', 'PE'), ('val', 1)… via [𝓛₀[[2⊗2,2⊗2],[2⊗2,2⊗2]], [𝓛₁[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₀[100]], [𝓛₂[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₁[100]]]"
-    assert res == expected
+    expected = [
+        "ρ₀[2⊗2,2⊗2] to OrderedDict([('func', 'PE'), ('val', 1)… via [𝓛₀[[2⊗2,2⊗2],[2⊗2,2⊗2]], [𝓛₁[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₀[100]], [𝓛₂[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₁[100]]]",
+        "ρ₀[2⊗2,2⊗2] to OrderedDict({'func': 'PE', 'val': 1}) via [𝓛₀[[2⊗2,2⊗2],[2⊗2,2⊗2]], [𝓛₁[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₀[100]], [𝓛₂[[2⊗2,2⊗2],[2⊗2,2⊗2]], a₁[100]]]",
+    ]
+    assert res in expected
 
     res = obj.summarize(use_unicode=False)
-    expected = "rho0[2*2,2*2] to OrderedDict([('func', 'PE'), ('val', ... via [Lv0[[2*2,2*2],[2*2,2*2]], [Lv1[[2*2,2*2],[2*2,2*2]], a0[100]], [Lv2[[2*2,2*2],[2*2,2*2]], a1[100]]]"
-    assert res == expected
+    expected = [
+        "rho0[2*2,2*2] to OrderedDict([('func', 'PE'), ('val', ... via [Lv0[[2*2,2*2],[2*2,2*2]], [Lv1[[2*2,2*2],[2*2,2*2]], a0[100]], [Lv2[[2*2,2*2],[2*2,2*2]], a1[100]]]",
+        "rho0[2*2,2*2] to OrderedDict({'func': 'PE', 'val': 1}) via [Lv0[[2*2,2*2],[2*2,2*2]], [Lv1[[2*2,2*2],[2*2,2*2]], a0[100]], [Lv2[[2*2,2*2],[2*2,2*2]], a1[100]]]",
+    ]
+    assert res in expected
     krotov.objectives.Objective.reset_symbol_counters()
 
 

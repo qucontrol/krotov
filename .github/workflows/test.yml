@@ -25,84 +25,84 @@ jobs:
       matrix:
         include:
           - title: Codestyle and Main Tests
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: |
               hatch run lint:black-check
               hatch run lint:isort-check
               hatch run cov -- $default_tests
             coverage: true
           - title: Oldest supported Python
-            os: ubuntu-22.04
-            python: 3.7
-            commands: hatch -e py37 run test -- $default_tests
+            os: ubuntu-24.04
+            python: "3.10"
+            commands: hatch -e py310 run test -- $default_tests
             coverage: false
           - title: Windows
             os: windows-latest
-            python: 3.8
+            python: "3.12"
             commands: hatch run test --  src tests docs\notebooks\01_example_simple_state_to_state.ipynb docs\notebooks\05_example_transmon_xgate.ipynb
             coverage: false
           - title: MacOS
             os: macos-latest
-            python: 3.8
+            python: "3.12"
             commands: hatch run cov --  $default_tests  docs/notebooks/01_example_simple_state_to_state.ipynb
             coverage: true
           - title: Notebook 1 (State-to-State)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov --  docs/notebooks/01_example_simple_state_to_state.ipynb
             coverage: true
           - title: Notebook 2 (RWA)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov --  docs/notebooks/02_example_lambda_system_rwa_complex_pulse.ipynb
             coverage: true
           - title: Notebook 3 (Non-Hermitian)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov --  docs/notebooks/03_example_lambda_system_rwa_non_hermitian.ipynb
             coverage: true
           - title: Notebook 4 (Density Matrix)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov -- docs/notebooks/04_example_dissipative_qubit_reset.ipynb
             coverage: true
           - title: Notebook 5 (Quantum Gate)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov -- docs/notebooks/05_example_transmon_xgate.ipynb
             coverage: true
           - title: Notebook 6 (3 States)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov -- docs/notebooks/06_example_3states.ipynb
             coverage: true
           - title: Notebook 7 (Perfect Entanglers)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov -- docs/notebooks/07_example_PE.ipynb
             coverage: true
           - title: Notebook 8 (Ensemble Optimization)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov -- docs/notebooks/08_example_ensemble.ipynb
             coverage: true
           - title: Notebook 9 (NumPy)
-            os: ubuntu-22.04
-            python: 3.8
+            os: ubuntu-24.04
+            python: "3.12"
             commands: hatch run cov -- docs/notebooks/09_example_numpy.ipynb
             coverage: true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         name: Install Python ${{ matrix.python }}
         with:
           python-version: ${{ matrix.python }}
 
       - name: Install required apt packages
         if: runner.os == 'Linux'
-        run: sudo apt-get install pandoc pandoc-citeproc liblapack-dev libblas-dev gfortran
+        run: sudo apt-get install pandoc liblapack-dev libblas-dev gfortran
 
       - name: Install Hatch
         uses: pypa/hatch@install
