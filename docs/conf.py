@@ -70,6 +70,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx_copybutton",
     "sphinxcontrib.bibtex",
+    "sphinxcontrib.jquery",
     "dollarmath",  # must be loaded after sphinx.ext.autodoc
 ]
 if os.getenv("SPELLCHECK"):
