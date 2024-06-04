@@ -21,10 +21,10 @@
      "n": "1"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:09.544235Z",
-     "iopub.status.busy": "2024-06-03T10:32:09.544062Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.077876Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.077317Z"
+     "iopub.execute_input": "2024-06-03T14:23:56.491044Z",
+     "iopub.status.busy": "2024-06-03T14:23:56.490913Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.496001Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.495645Z"
     }
    },
    "outputs": [
@@ -33,13 +33,13 @@
      "output_type": "stream",
      "text": [
       "Python implementation: CPython\n",
-      "Python version       : 3.8.16\n",
-      "IPython version      : 8.12.3\n",
+      "Python version       : 3.12.0\n",
+      "IPython version      : 8.25.0\n",
       "\n",
-      "krotov    : 1.3.0\n",
-      "scipy     : 1.10.1\n",
+      "numpy     : 1.26.4\n",
+      "krotov    : 1.3.0+dev\n",
       "matplotlib: 3.7.5\n",
-      "numpy     : 1.24.4\n",
+      "scipy     : 1.12.0\n",
       "\n"
      ]
     }
@@ -129,10 +129,10 @@
      "start_time": "2020-03-24T21:13:40.847535Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.107387Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.107103Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.111392Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.110906Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.519194Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.518953Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.522368Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.522085Z"
     }
    },
    "outputs": [],
@@ -164,10 +164,10 @@
      "start_time": "2020-03-24T21:13:40.865354Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.113342Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.113151Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.115611Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.115135Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.523800Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.523713Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.525491Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.525175Z"
     },
     "lines_to_next_cell": 2
    },
@@ -196,10 +196,10 @@
      "start_time": "2020-03-24T21:13:40.876732Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.117573Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.117415Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.119834Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.119351Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.527047Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.526938Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.528584Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.528326Z"
     }
    },
    "outputs": [],
@@ -223,10 +223,10 @@
      "start_time": "2020-03-24T21:13:40.883324Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.121782Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.121623Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.124415Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.123936Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.530097Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.530012Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.531903Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.531594Z"
     }
    },
    "outputs": [],
@@ -251,10 +251,10 @@
      "start_time": "2020-03-24T21:13:40.891777Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.126403Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.126212Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.131789Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.131306Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.533523Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.533391Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.536997Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.536700Z"
     }
    },
    "outputs": [
@@ -306,10 +306,10 @@
      "start_time": "2020-03-24T21:13:40.905293Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.133844Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.133654Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.136951Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.136474Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.538677Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.538564Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.540781Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.540487Z"
     }
    },
    "outputs": [],
@@ -341,10 +341,10 @@
      "start_time": "2020-03-24T21:13:40.917919Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.138951Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.138763Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.141562Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.141086Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.542211Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.542051Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.543896Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.543647Z"
     }
    },
    "outputs": [],
@@ -371,10 +371,10 @@
      "start_time": "2020-03-24T21:13:40.926588Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.143527Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.143369Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.146007Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.145531Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.545255Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.545135Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.546902Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.546662Z"
     }
    },
    "outputs": [],
@@ -400,10 +400,10 @@
      "start_time": "2020-03-24T21:13:40.933147Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.148001Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.147811Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.150343Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.149867Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.548325Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.548228Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.549880Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.549500Z"
     }
    },
    "outputs": [],
@@ -425,13 +425,24 @@
      "n": "12"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.152322Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.152132Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.223699Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.223236Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.551258Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.551171Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.582962Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.582650Z"
     }
    },
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/var/folders/mm/rr6dgkzj0l5_j_ntxcg_hlth0000gn/T/ipykernel_52079/3854291581.py:2: DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)\n",
+      "  return complex(state.conj().T @ (proj @ state)).real\n",
+      "/var/folders/mm/rr6dgkzj0l5_j_ntxcg_hlth0000gn/T/ipykernel_52079/3854291581.py:2: DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)\n",
+      "  return complex(state.conj().T @ (proj @ state)).real\n"
+     ]
+    }
+   ],
    "source": [
     "guess_dynamics = objectives[0].propagate(\n",
     "    tlist, propagator=expm, e_ops=[proj0, proj1], expect=expect\n",
@@ -452,10 +463,10 @@
      "n": "13"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.225618Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.225388Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.228433Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.227969Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.584562Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.584425Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.586642Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.586302Z"
     }
    },
    "outputs": [],
@@ -484,10 +495,10 @@
      "n": "14"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.230359Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.230203Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.377278Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.376788Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.588919Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.588769Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.788571Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.787424Z"
     }
    },
    "outputs": [
@@ -526,10 +537,10 @@
      "start_time": "2020-03-24T21:13:41.397827Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.379362Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.379205Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.382230Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.381780Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.796425Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.795886Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.803552Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.802616Z"
     }
    },
    "outputs": [],
@@ -550,10 +561,10 @@
      "start_time": "2020-03-24T21:13:41.406924Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.384142Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.383964Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.386559Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.386109Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.811656Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.811251Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.823075Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.817756Z"
     }
    },
    "outputs": [],
@@ -586,10 +597,10 @@
      "start_time": "2020-03-24T21:13:41.415715Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.388498Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.388350Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.391084Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.390634Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.829078Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.828463Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.834886Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.832323Z"
     }
    },
    "outputs": [],
@@ -617,10 +628,10 @@
      "start_time": "2020-03-24T21:13:41.427434Z"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.393128Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.392908Z",
-     "iopub.status.idle": "2024-06-03T10:32:10.395372Z",
-     "shell.execute_reply": "2024-06-03T10:32:10.394924Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.839276Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.838954Z",
+     "iopub.status.idle": "2024-06-03T14:23:57.848829Z",
+     "shell.execute_reply": "2024-06-03T14:23:57.848176Z"
     }
    },
    "outputs": [],
@@ -658,10 +669,10 @@
      "n": "15"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:10.397329Z",
-     "iopub.status.busy": "2024-06-03T10:32:10.397181Z",
-     "iopub.status.idle": "2024-06-03T10:32:11.392602Z",
-     "shell.execute_reply": "2024-06-03T10:32:11.392046Z"
+     "iopub.execute_input": "2024-06-03T14:23:57.858243Z",
+     "iopub.status.busy": "2024-06-03T14:23:57.854303Z",
+     "iopub.status.idle": "2024-06-03T14:23:58.390263Z",
+     "shell.execute_reply": "2024-06-03T14:23:58.389983Z"
     }
    },
    "outputs": [
@@ -699,6 +710,14 @@
      "output_type": "stream",
      "text": [
       "4     7.37e-01    3.84e-02   7.76e-01  -8.52e-02  -4.68e-02     0\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/var/folders/mm/rr6dgkzj0l5_j_ntxcg_hlth0000gn/T/ipykernel_52079/124890641.py:2: DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)\n",
+      "  return complex(psi1.conj().T @ psi2)\n"
      ]
     },
     {
@@ -774,10 +793,10 @@
      "n": "16"
     },
     "execution": {
-     "iopub.execute_input": "2024-06-03T10:32:11.394706Z",
-     "iopub.status.busy": "2024-06-03T10:32:11.394522Z",
-     "iopub.status.idle": "2024-06-03T10:32:11.398301Z",
-     "shell.execute_reply": "2024-06-03T10:32:11.397920Z"
+     "iopub.execute_input": "2024-06-03T14:23:58.391772Z",
+     "iopub.status.busy": "2024-06-03T14:23:58.391640Z",
+     "iopub.status.idle": "2024-06-03T14:23:58.393703Z",
+     "shell.execute_reply": "2024-06-03T14:23:58.393450Z"
     }
    },
    "outputs": [
@@ -786,11 +805,11 @@
       "text/plain": [
        "Krotov Optimization Result\n",
        "--------------------------\n",
-       "- Started at 2024-06-03 12:32:10\n",
+       "- Started at 2024-06-03 10:23:57\n",
        "- Number of objectives: 1\n",
        "- Number of iterations: 10\n",
        "- Reason for termination: Reached 10 iterations\n",
-       "- Ended at 2024-06-03 12:32:11 (0:00:01)"
+       "- Ended at 2024-06-03 10:23:58 (0:00:01)"
       ]
      },
      "execution_count": 19,
@@ -820,7 +839,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.8.16"
+   "version": "3.12.0"
   },
   "toc": {
    "base_numbering": 1,

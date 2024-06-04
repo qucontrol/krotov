@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ensemble Optimization for Robust Pulses &mdash; Krotov 1.3.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <title>Ensemble Optimization for Robust Pulses &mdash; Krotov 1.3.0+dev (bd14c16) documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
       <link rel="stylesheet" href="../_static/mycss.css" type="text/css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/docs-versions-menu.js"></script>
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=21dc01d9"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/docs-versions-menu.js?v=3d6a1aea"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"extensions": ["tex2jax.js"], "jax": ["input/TeX", "output/SVG"], "TeX": {"extensions": ["AMSmath.js", "AMSsymbols.js"], "Macros": {"tr": ["{\\operatorname{tr}}", 0], "diag": ["{\\operatorname{diag}}", 0], "abs": ["{\\operatorname{abs}}", 0], "pop": ["{\\operatorname{pop}}", 0], "ee": ["{\\text{e}}", 0], "ii": ["{\\text{i}}", 0], "aux": ["{\\text{aux}}", 0], "opt": ["{\\text{opt}}", 0], "tgt": ["{\\text{tgt}}", 0], "init": ["{\\text{init}}", 0], "lab": ["{\\text{lab}}", 0], "rwa": ["{\\text{rwa}}", 0], "bra": ["{\\langle#1\\vert}", 1], "ket": ["{\\vert#1\\rangle}", 1], "Bra": ["{\\left\\langle#1\\right\\vert}", 1], "Braket": ["{\\left\\langle #1\\vphantom{#2} \\mid #2\\vphantom{#1}\\right\\rangle}", 2], "ketbra": ["{\\vert#1\\rangle\\!\\langle#2\\vert}", 2], "Ket": ["{\\left\\vert#1\\right\\rangle}", 1], "mat": ["{\\mathbf{#1}}", 1], "op": ["{\\hat{#1}}", 1], "Op": ["{\\hat{#1}}", 1], "dd": ["{\\,\\text{d}}", 0], "daggered": ["{^{\\dagger}}", 0], "transposed": ["{^{\\text{T}}}", 0], "Liouville": ["{\\mathcal{L}}", 0], "DynMap": ["{\\mathcal{E}}", 0], "identity": ["{\\mathbf{1}}", 0], "Norm": ["{\\left\\lVert#1\\right\\rVert}", 1], "norm": ["{\\lVert#1\\rVert}", 1], "Abs": ["{\\left\\vert#1\\right\\vert}", 1], "avg": ["{\\langle#1\\rangle}", 1], "Avg": ["{\\left\\langle#1\\right\\rangle}", 1], "AbsSq": ["{\\left\\vert#1\\right\\vert^2}", 1], "Re": ["{\\operatorname{Re}}", 0], "Im": ["{\\operatorname{Im}}", 0], "Real": ["{\\mathbb{R}}", 0], "Complex": ["{\\mathbb{C}}", 0], "Integer": ["{\\mathbb{N}}", 0]}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -48,7 +47,7 @@
             Krotov
           </a>
               <div class="version">
-                1.3.0
+                1.3.0+dev
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -58,7 +57,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../01_overview.html">Krotov Python Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_contributing.html">Contributing</a></li>
@@ -156,9 +155,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/v1.3.0/docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/v1.3.0?filepath=docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
-<div class="section" id="Ensemble-Optimization-for-Robust-Pulses">
-<h1>Ensemble Optimization for Robust Pulses<a class="headerlink" href="#Ensemble-Optimization-for-Robust-Pulses" title="Permalink to this headline">¶</a></h1>
+  <p><span class="raw-html"><a href="http://nbviewer.jupyter.org/github/qucontrol/krotov/blob/bd14c16e4fd8eab38d0d105fbf9b695b4dddea7d//home/runner/work/krotov/krotov/docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Render on nbviewer" src="https://img.shields.io/badge/render%20on-nbviewer-orange.svg" style="vertical-align:text-bottom"></a>&nbsp;<a href="https://mybinder.org/v2/gh/qucontrol/krotov/bd14c16e4fd8eab38d0d105fbf9b695b4dddea7d?filepath=/home/runner/work/krotov/krotov/docs/notebooks/08_example_ensemble.ipynb" target="_blank"><img alt="Launch Binder" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span></p>
+<section id="Ensemble-Optimization-for-Robust-Pulses">
+<h1>Ensemble Optimization for Robust Pulses<a class="headerlink" href="#Ensemble-Optimization-for-Robust-Pulses" title="Link to this heading">¶</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -186,25 +185,24 @@
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Python implementation: CPython
-Python version       : 3.8.16
-IPython version      : 8.12.3
+Python version       : 3.12.0
+IPython version      : 8.25.0
 
-krotov    : 1.3.0
-numpy     : 1.24.4
-sys       : 3.8.16 (default, May 26 2024, 19:41:26)
-[GCC 12.2.0]
 matplotlib: 3.7.5
-scipy     : 1.10.1
+krotov    : 1.3.0+dev
+numpy     : 1.26.4
+scipy     : 1.12.0
+sys       : 3.12.0 (main, Jun  3 2024, 09:08:56) [Clang 15.0.0 (clang-1500.3.9.4)]
 qutip     : 4.7.6
 
 </pre></div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\newcommand{tr}[0]{\operatorname{tr}} \newcommand{diag}[0]{\operatorname{diag}} \newcommand{abs}[0]{\operatorname{abs}} \newcommand{pop}[0]{\operatorname{pop}} \newcommand{aux}[0]{\text{aux}} \newcommand{opt}[0]{\text{opt}} \newcommand{tgt}[0]{\text{tgt}} \newcommand{init}[0]{\text{init}} \newcommand{lab}[0]{\text{lab}} \newcommand{rwa}[0]{\text{rwa}} \newcommand{bra}[1]{\langle#1\vert} \newcommand{ket}[1]{\vert#1\rangle} \newcommand{Bra}[1]{\left\langle#1\right\vert} \newcommand{Ket}[1]{\left\vert#1\right\rangle} \newcommand{Braket}[2]{\left\langle #1\vphantom{#2}\mid{#2}\vphantom{#1}\right\rangle} \newcommand{ketbra}[2]{\vert#1\rangle\!\langle#2\vert} \newcommand{op}[1]{\hat{#1}} \newcommand{Op}[1]{\hat{#1}} \newcommand{dd}[0]{\,\text{d}} \newcommand{Liouville}[0]{\mathcal{L}} \newcommand{DynMap}[0]{\mathcal{E}} \newcommand{identity}[0]{\mathbf{1}} \newcommand{Norm}[1]{\lVert#1\rVert} \newcommand{Abs}[1]{\left\vert#1\right\vert} \newcommand{avg}[1]{\langle#1\rangle} \newcommand{Avg}[1]{\left\langle#1\right\rangle} \newcommand{AbsSq}[1]{\left\vert#1\right\vert^2} \newcommand{Re}[0]{\operatorname{Re}} \newcommand{Im}[0]{\operatorname{Im}} \newcommand{toP}[0]{\omega_{12}} \newcommand{toS}[0]{\omega_{23}}\)</span></p>
 <p>This example revisits the <a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html"><span class="doc">Optimization of a State-to-State Transfer in a Lambda System in the RWA</span></a>, attempting to make the control pulses robustness with respect to variations in the pulse amplitude, through “ensemble optimization”.</p>
-<div class="section" id="Control-objectives-for-population-transfer-in-the-Lambda-system">
-<h2>Control objectives for population transfer in the Lambda system<a class="headerlink" href="#Control-objectives-for-population-transfer-in-the-Lambda-system" title="Permalink to this headline">¶</a></h2>
+<section id="Control-objectives-for-population-transfer-in-the-Lambda-system">
+<h2>Control objectives for population transfer in the Lambda system<a class="headerlink" href="#Control-objectives-for-population-transfer-in-the-Lambda-system" title="Link to this heading">¶</a></h2>
 <p>As in the original example, we define the Hamiltonian for a Lambda system in the rotating wave approximation, like this:</p>
-<p><img alt="Lambda system considered in this notebook" src="../_images/energylevels.png" /></p>
+<img alt="Lambda system considered in this notebook" src="../_images/energylevels.png" />
 <p>We set up the control fields and the Hamiltonian exactly as before:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -325,9 +323,9 @@ qutip     : 4.7.6
 [Objective[|Ψ₀(3)⟩ to |Ψ₁(3)⟩ via [H₀[3,3], [H₁[3,3], u₁(t)], [H₂[3,3], u₂(t)], [H₃[3,3], u₃(t)], [H₄[3,3], u₄(t)]]]]
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Robustness-to-amplitude-fluctuations">
-<h2>Robustness to amplitude fluctuations<a class="headerlink" href="#Robustness-to-amplitude-fluctuations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Robustness-to-amplitude-fluctuations">
+<h2>Robustness to amplitude fluctuations<a class="headerlink" href="#Robustness-to-amplitude-fluctuations" title="Link to this heading">¶</a></h2>
 <p>A potential source of error is fluctuations in the pulse amplitude between different runs of the experiment. To account for this, the <code class="docutils literal notranslate"><span class="pre">hamiltonian</span></code> function above include a parameter <code class="docutils literal notranslate"><span class="pre">mu</span></code> that scales the pulse amplitudes by the given factor.</p>
 <p>We can analyze the result of the <a class="reference internal" href="02_example_lambda_system_rwa_complex_pulse.html"><span class="doc">Optimization of a State-to-State Transfer in a Lambda System in the RWA</span></a> with respect to such fluctuations. We load the earlier optimization result from disk, and verify that the optimized controls produce the <span class="math notranslate nohighlight">\(\ket{1} \rightarrow \ket{3}\)</span> transition as desired.</p>
 <div class="nbinput nblast docutils container">
@@ -476,29 +474,18 @@ qutip     : 4.7.6
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmtt10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmb10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;cmss10&#39;] not found. Falling back to DejaVu Sans.
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;DejaVu Sans Display&#39;] not found. Falling back to DejaVu Sans.
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_example_ensemble_27_1.png" src="../_images/notebooks_08_example_ensemble_27_1.png" />
+<img alt="../_images/notebooks_08_example_ensemble_27_0.png" src="../_images/notebooks_08_example_ensemble_27_0.png" />
 </div>
 </div>
 <p>The plot shows that as the pulse amplitude deviates from the optimal value, the error rises quickly: our previous optimization result is not robust.</p>
 <p>The highlighted region of ±10% is our “region of interest” within which we would like the control to be robust by applying optimal control.</p>
-</div>
-<div class="section" id="Setting-the-ensemble-objectives">
-<h2>Setting the ensemble objectives<a class="headerlink" href="#Setting-the-ensemble-objectives" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Setting-the-ensemble-objectives">
+<h2>Setting the ensemble objectives<a class="headerlink" href="#Setting-the-ensemble-objectives" title="Link to this heading">¶</a></h2>
 <p>They central idea of optimizing for robustness is to take multiple copies of the Hamiltonian, sampling over the space of variations to which would like to be robust, and optimize over the average of this ensemble.</p>
 <p>Here, we sample 5 values of <span class="math notranslate nohighlight">\(\mu\)</span> (including the unperturbed <span class="math notranslate nohighlight">\(\mu=1\)</span>) in the region of interest, <span class="math notranslate nohighlight">\(\mu \in [0.9, 1.1]\)</span>.</p>
 <div class="nbinput nblast docutils container">
@@ -544,9 +531,9 @@ WARNING:matplotlib.font_manager:findfont: Font family [&#39;DejaVu Sans Display&
 </pre></div></div>
 </div>
 <p>It is important that all five objectives reference the same four control pulses, as is the case here.</p>
-</div>
-<div class="section" id="Optimize">
-<h2>Optimize<a class="headerlink" href="#Optimize" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Optimize">
+<h2>Optimize<a class="headerlink" href="#Optimize" title="Link to this heading">¶</a></h2>
 <p>We use the same update shape <span class="math notranslate nohighlight">\(S(t)\)</span> and <span class="math notranslate nohighlight">\(\lambda_a\)</span> value as in the original optimization:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -828,8 +815,8 @@ Stokes pulse amplitude and phase:
 <img alt="../_images/notebooks_08_example_ensemble_54_0.png" src="../_images/notebooks_08_example_ensemble_54_0.png" />
 </div>
 </div>
-<div class="section" id="Robustness-analysis">
-<h3>Robustness analysis<a class="headerlink" href="#Robustness-analysis" title="Permalink to this headline">¶</a></h3>
+<section id="Robustness-analysis">
+<h3>Robustness analysis<a class="headerlink" href="#Robustness-analysis" title="Link to this heading">¶</a></h3>
 <p>When comparing the robustness of the “robust” optimized pulse to that obtained from the original optimization for the unperturbed Hamiltonian, we should make sure that we have converged to a comparable error: We would like to avoid the suspicion that the ensemble error is below our threshold only because the error for <span class="math notranslate nohighlight">\(\mu = 1\)</span> is so much lower. Therefore, we continue the original unperturbed optimization for a few more iterations, until we reach the same error
 <span class="math notranslate nohighlight">\(\approx 1.13 \times 10^{-4}\)</span> that we found as the result of the ensemble optimization, looking at <span class="math notranslate nohighlight">\(\mu=1\)</span> only:</p>
 <div class="nbinput docutils container">
@@ -878,10 +865,10 @@ J_T(μ=1) = 2.66e-03
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 iter.      J_T  ∫gₐ(ϵ₁)dt  ∫gₐ(ϵ₂)dt  ∫gₐ(ϵ₃)dt  ∫gₐ(ϵ₄)dt   ∑∫gₐ(t)dt          J       ΔJ_T         ΔJ  secs
-0     5.90e-04   0.00e+00   0.00e+00   0.00e+00   0.00e+00    0.00e+00   5.90e-04        n/a        n/a     1
-13    3.24e-04   6.29e-05   9.90e-06   5.10e-05   9.21e-06    1.33e-04   4.57e-04  -2.66e-04  -1.33e-04     2
-14    1.83e-04   3.16e-05   7.05e-06   2.56e-05   6.48e-06    7.08e-05   2.53e-04  -1.42e-04  -7.08e-05     2
-15    1.06e-04   1.60e-05   5.02e-06   1.29e-05   4.56e-06    3.85e-05   1.44e-04  -7.70e-05  -3.85e-05     2
+0     5.90e-04   0.00e+00   0.00e+00   0.00e+00   0.00e+00    0.00e+00   5.90e-04        n/a        n/a     0
+13    3.24e-04   6.29e-05   9.90e-06   5.10e-05   9.21e-06    1.33e-04   4.57e-04  -2.66e-04  -1.33e-04     1
+14    1.83e-04   3.16e-05   7.05e-06   2.56e-05   6.48e-06    7.08e-05   2.53e-04  -1.42e-04  -7.08e-05     1
+15    1.06e-04   1.60e-05   5.02e-06   1.29e-05   4.56e-06    3.85e-05   1.44e-04  -7.70e-05  -3.85e-05     1
 </pre></div></div>
 </div>
 <p>Now, we can compare the robustness of the optimized pulses from the original unperturbed optimization (label “-1”), the continued unperturbed optimization (label “0”), and the ensemble optimization (label “1”):</p>
@@ -931,9 +918,9 @@ iter.      J_T  ∫gₐ(ϵ₁)dt  ∫gₐ(ϵ₂)dt  ∫gₐ(ϵ₃)dt  ∫gₐ(ϵ
 </div>
 </div>
 <p>We see that without the ensemble optimization, we only lower the error for exactly <span class="math notranslate nohighlight">\(\mu = 1\)</span>: the more we converge, the less robust the result. In contrast, the ensemble optimization results in considerably lower errors (order of magnitude!) throughout the highlighted “region of interest” and beyond.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -947,7 +934,7 @@ iter.      J_T  ∫gₐ(ϵ₁)dt  ∫gₐ(ϵ₂)dt  ∫gₐ(ϵ₃)dt  ∫gₐ(ϵ
 
   <div role="contentinfo">
     <p>&#169; Copyright 2024, Michael Goerz et al..
-      <span class="lastupdated">Last updated on Jun 03, 2024.
+      <span class="lastupdated">Last updated on Jun 04, 2024.
       </span></p>
   </div>
 
