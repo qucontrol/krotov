@@ -255,22 +255,21 @@ class DensityMatrixODEPropagator(Propagator):
             unstack_columns(self._y),
             dims=state.dims,
             isherm=True,
-            dtype="csr",
         )
 
     @staticmethod
     def _rhs(t, rho, L_list):
         # _rhs being a staticmethod enables the propagator to be pickled (for
         # parallelization)
-        out = np.zeros(rho.shape[0], dtype=complex)
         L = L_list[0][0]
         L_coeff = L_list[0][1]
-        out = L_coeff * L @ rho
+        rho = qutip.data.Dense(rho, copy=False)
+        out = qutip.data.matmul(L, rho, scale=L_coeff)
         for n in range(1, len(L_list)):
             L = L_list[n][0]
             L_coeff = L_list[n][1]
-            out = L_coeff * L @ rho
-        return out
+            out += qutip.data.matmul(L, rho, scale=L_coeff)
+        return out.as_ndarray()
 
     def _initialize(self, L, rho, dt, c_ops, backwards):
         self._initialize_data(L, rho, dt, c_ops, backwards)
@@ -304,7 +303,7 @@ class DensityMatrixODEPropagator(Propagator):
         self._control_indices = control_indices
 
         if rho.type == 'oper':
-            self._y = unstack_columns(rho.full()).ravel('F')  # initial state
+            self._y = stack_columns(rho.full()).ravel('F')  # initial state
         else:
             raise ValueError("rho must be a density matrix")
 
