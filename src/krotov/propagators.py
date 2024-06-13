@@ -62,6 +62,7 @@ general, any stateful `propagator` should be an instance of
 
 .. _Cython: https://cython.org
 """
+
 from abc import ABC, abstractmethod
 
 import numpy as np
@@ -69,6 +70,7 @@ import qutip
 import scipy
 import threadpoolctl
 from packaging.version import parse as parse_version
+
 if parse_version(qutip.__version__) < parse_version("5"):
     is_qutip5 = False
     from qutip.cy.spconvert import dense2D_to_fastcsr_fmode
@@ -262,7 +264,7 @@ class DensityMatrixODEPropagator(Propagator):
                 unstack_columns(self._y),
                 dims=state.dims,
                 isherm=True,
-                dtype="csr"
+                dtype="csr",
             )
         else:
             return qutip.Qobj(
@@ -303,7 +305,7 @@ class DensityMatrixODEPropagator(Propagator):
         if not (c_ops is None or len(c_ops) == 0):
             # in principle, we could convert c_ops to a Lindbladian, here
             raise NotImplementedError("c_ops not implemented")
-        for (i, spec) in enumerate(L):
+        for i, spec in enumerate(L):
             if isinstance(spec, qutip.Qobj):
                 l_op = spec
                 l_coeff = 1
@@ -323,10 +325,12 @@ class DensityMatrixODEPropagator(Propagator):
                 )
         self._L_list = L_list
         self._control_indices = control_indices
-        
+
         if rho.type == 'oper':
             if is_qutip5:
-                self._y = unstack_columns(rho.full()).ravel('F')  # initial state
+                self._y = unstack_columns(rho.full()).ravel(
+                    'F'
+                )  # initial state
             else:
                 self._y = mat2vec(rho.full()).ravel('F')  # initial state
         else:

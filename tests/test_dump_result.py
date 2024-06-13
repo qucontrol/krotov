@@ -1,4 +1,5 @@
 """Test the dump_result convergence routine"""
+
 import copy
 import os
 
@@ -7,10 +8,12 @@ import pytest
 
 import qutip
 from packaging.version import parse as parse_version
+
 if parse_version(qutip.__version__) < parse_version("5"):
     oct_result_name = "oct_result_qutip4.dump"
 else:
     oct_result_name = "oct_result_qutip5.dump"
+
 
 def incl_range(a, b, step=1):
     e = 1 if step > 0 else -1

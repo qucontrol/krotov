@@ -7,6 +7,7 @@ optimization functional (:mod:`krotov.functionals`). For the same physical
 objective, there are usually several different functionals whose minimization
 achieve that objective.
 """
+
 import copy
 import itertools
 import sys
@@ -16,6 +17,7 @@ from functools import partial
 import numpy as np
 import qutip
 from packaging.version import parse as parse_version
+
 if parse_version(qutip.__version__) < parse_version("5"):
     is_qutip5 = False
 else:
@@ -332,7 +334,7 @@ class Objective:
             c_ops=c_ops,
             e_ops=e_ops,
             args=args,
-            **kwargs
+            **kwargs,
         )
 
     def propagate(
@@ -412,7 +414,7 @@ class Objective:
             if len(e_ops) == 0:
                 result.states.append(state)
             else:
-                for (i, oper) in enumerate(e_ops):
+                for i, oper in enumerate(e_ops):
                     result.expect[i].append(expect(oper, state))
         controls = extract_controls([self])
         pulses_mapping = extract_controls_mapping([self], controls)
@@ -441,7 +443,7 @@ class Objective:
                 if len(e_ops) == 0:
                     result.states.append(state)
                 else:
-                    for (i, oper) in enumerate(e_ops):
+                    for i, oper in enumerate(e_ops):
                         result.expect[i].append(expect(oper, state))
         if not is_qutip5:
             result.expect = [np.array(a) for a in result.expect]
@@ -662,7 +664,7 @@ def _plug_in_array_controls_as_func(H, controls, mapping, tlist):
     H = _nested_list_shallow_copy(H)
     T = tlist[-1]
     nt = len(tlist)
-    for (control, control_mapping) in zip(controls, mapping):
+    for control, control_mapping in zip(controls, mapping):
         if isinstance(control, np.ndarray):
             for i in control_mapping:
                 # Use the same formula that QuTiP normally passes to Cython for
@@ -975,8 +977,8 @@ def gate_objectives(
     # complexity (and make the repr of an Objective look nicer) by identifying
     # this and setting the mapped_basis_states to the identical objects as the
     # original basis_states
-    for (i, state) in enumerate(mapped_basis_states):
-        for (j, basis_state) in enumerate(basis_states):
+    for i, state in enumerate(mapped_basis_states):
+        for j, basis_state in enumerate(basis_states):
             if state == basis_state:
                 mapped_basis_states[i] = basis_state
     if liouville_states_set is None:
@@ -1037,7 +1039,7 @@ def gate_objectives(
         if normalize_weights:
             N = len(objectives)
             weights = N * np.array(weights) / np.sum(weights)
-        for (i, weight) in _reversed_enumerate(weights):
+        for i, weight in _reversed_enumerate(weights):
             weight = float(weight)
             if weight < 0:
                 raise ValueError("weights must be greater than zero")
