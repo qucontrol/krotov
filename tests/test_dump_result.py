@@ -6,13 +6,8 @@ import os
 import krotov
 import pytest
 
-import qutip
-from packaging.version import parse as parse_version
 
-if parse_version(qutip.__version__) < parse_version("5"):
-    oct_result_name = "oct_result_qutip4.dump"
-else:
-    oct_result_name = "oct_result_qutip5.dump"
+oct_result_name = "oct_result.dump"
 
 
 def incl_range(a, b, step=1):

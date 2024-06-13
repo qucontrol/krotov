@@ -16,12 +16,6 @@ from functools import partial
 
 import numpy as np
 import qutip
-from packaging.version import parse as parse_version
-
-if parse_version(qutip.__version__) < parse_version("5"):
-    is_qutip5 = False
-else:
-    is_qutip5 = True
 from qutip.solver import Options as QutipSolverOptions
 from qutip.solver import Result as QutipSolverResult
 
@@ -382,15 +376,13 @@ class Objective:
             e_ops = []
         if args is None:
             args = {}
-        if is_qutip5:
-            result_options = {
-                "store_final_state": False,
-                "store_states": None,
-                "normalize_output": False,
-            }
-            result = QutipSolverResult(e_ops=e_ops, options=result_options)
-        else:
-            result = QutipSolverResult()
+        result_options = {
+            "store_final_state": False,
+            "store_states": None,
+            "normalize_output": False,
+        }
+        result = QutipSolverResult(e_ops=e_ops, options=result_options)
+
         try:
             result.solver = propagator.__name__
         except AttributeError:
@@ -401,21 +393,7 @@ class Objective:
         state = rho0
         if state is None:
             state = self.initial_state
-        if is_qutip5:
-            result.add(tlist[0], state)
-        else:
-            result.times = np.array(tlist)
-            result.states = []
-            result.expect = []
-            result.num_expect = len(e_ops)
-            result.num_collapse = len(c_ops)
-            for _ in e_ops:
-                result.expect.append([])
-            if len(e_ops) == 0:
-                result.states.append(state)
-            else:
-                for i, oper in enumerate(e_ops):
-                    result.expect[i].append(expect(oper, state))
+        result.add(tlist[0], state)
         controls = extract_controls([self])
         pulses_mapping = extract_controls_mapping([self], controls)
         mapping = pulses_mapping[0]  # "first objective" (dummy structure)
@@ -437,16 +415,7 @@ class Objective:
                 c_ops_at_t,
                 initialize=True,  # initialize=(time_index == 0)
             )
-            if is_qutip5:
-                result.add(tlist[time_index + 1], state)
-            else:
-                if len(e_ops) == 0:
-                    result.states.append(state)
-                else:
-                    for i, oper in enumerate(e_ops):
-                        result.expect[i].append(expect(oper, state))
-        if not is_qutip5:
-            result.expect = [np.array(a) for a in result.expect]
+            result.add(tlist[time_index + 1], state)
         return result
 
     @classmethod
