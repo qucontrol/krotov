@@ -7,6 +7,7 @@ optimization functional (:mod:`krotov.functionals`). For the same physical
 objective, there are usually several different functionals whose minimization
 achieve that objective.
 """
+
 import copy
 import itertools
 import sys
@@ -15,11 +16,6 @@ from functools import partial
 
 import numpy as np
 import qutip
-from packaging.version import parse as parse_version
-if parse_version(qutip.__version__) < parse_version("5"):
-    is_qutip5 = False
-else:
-    is_qutip5 = True
 from qutip.solver import Options as QutipSolverOptions
 from qutip.solver import Result as QutipSolverResult
 
@@ -332,7 +328,7 @@ class Objective:
             c_ops=c_ops,
             e_ops=e_ops,
             args=args,
-            **kwargs
+            **kwargs,
         )
 
     def propagate(
@@ -380,15 +376,13 @@ class Objective:
             e_ops = []
         if args is None:
             args = {}
-        if is_qutip5:
-            result_options = {
-                "store_final_state": False,
-                "store_states": None,
-                "normalize_output": False,
-            }
-            result = QutipSolverResult(e_ops=e_ops, options=result_options)
-        else:
-            result = QutipSolverResult()
+        result_options = {
+            "store_final_state": False,
+            "store_states": None,
+            "normalize_output": False,
+        }
+        result = QutipSolverResult(e_ops=e_ops, options=result_options)
+
         try:
             result.solver = propagator.__name__
         except AttributeError:
@@ -399,21 +393,7 @@ class Objective:
         state = rho0
         if state is None:
             state = self.initial_state
-        if is_qutip5:
-            result.add(tlist[0], state)
-        else:
-            result.times = np.array(tlist)
-            result.states = []
-            result.expect = []
-            result.num_expect = len(e_ops)
-            result.num_collapse = len(c_ops)
-            for _ in e_ops:
-                result.expect.append([])
-            if len(e_ops) == 0:
-                result.states.append(state)
-            else:
-                for (i, oper) in enumerate(e_ops):
-                    result.expect[i].append(expect(oper, state))
+        result.add(tlist[0], state)
         controls = extract_controls([self])
         pulses_mapping = extract_controls_mapping([self], controls)
         mapping = pulses_mapping[0]  # "first objective" (dummy structure)
@@ -435,16 +415,7 @@ class Objective:
                 c_ops_at_t,
                 initialize=True,  # initialize=(time_index == 0)
             )
-            if is_qutip5:
-                result.add(tlist[time_index + 1], state)
-            else:
-                if len(e_ops) == 0:
-                    result.states.append(state)
-                else:
-                    for (i, oper) in enumerate(e_ops):
-                        result.expect[i].append(expect(oper, state))
-        if not is_qutip5:
-            result.expect = [np.array(a) for a in result.expect]
+            result.add(tlist[time_index + 1], state)
         return result
 
     @classmethod
@@ -662,7 +633,7 @@ def _plug_in_array_controls_as_func(H, controls, mapping, tlist):
     H = _nested_list_shallow_copy(H)
     T = tlist[-1]
     nt = len(tlist)
-    for (control, control_mapping) in zip(controls, mapping):
+    for control, control_mapping in zip(controls, mapping):
         if isinstance(control, np.ndarray):
             for i in control_mapping:
                 # Use the same formula that QuTiP normally passes to Cython for
@@ -975,8 +946,8 @@ def gate_objectives(
     # complexity (and make the repr of an Objective look nicer) by identifying
     # this and setting the mapped_basis_states to the identical objects as the
     # original basis_states
-    for (i, state) in enumerate(mapped_basis_states):
-        for (j, basis_state) in enumerate(basis_states):
+    for i, state in enumerate(mapped_basis_states):
+        for j, basis_state in enumerate(basis_states):
             if state == basis_state:
                 mapped_basis_states[i] = basis_state
     if liouville_states_set is None:
@@ -1037,7 +1008,7 @@ def gate_objectives(
         if normalize_weights:
             N = len(objectives)
             weights = N * np.array(weights) / np.sum(weights)
-        for (i, weight) in _reversed_enumerate(weights):
+        for i, weight in _reversed_enumerate(weights):
             weight = float(weight)
             if weight < 0:
                 raise ValueError("weights must be greater than zero")

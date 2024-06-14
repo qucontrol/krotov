@@ -6,8 +6,7 @@ from functools import partial
 
 import numpy as np
 import threadpoolctl
-from qutip import Qobj
-from qutip import serial_map
+from qutip import Qobj, serial_map
 
 from .conversions import (
     control_onto_interval,
@@ -451,8 +450,8 @@ def optimize_pulses(
             if second_order:
                 σ = sigma(tlist[time_index] + 0.5 * dt)
             # pulse update
-            for (i_pulse, guess_pulse) in enumerate(guess_pulses):
-                for (i_obj, objective) in enumerate(objectives):
+            for i_pulse, guess_pulse in enumerate(guess_pulses):
+                for i_obj, objective in enumerate(objectives):
                     χ = backward_states[i_obj][time_index]
                     μ = mu(
                         objectives,
@@ -718,7 +717,7 @@ def _restore_from_previous_result(result, objectives, tlist, store_all_pulses):
             "When continuing from a previous Result, the number of "
             "objectives must be the same"
         )
-    for (a, b) in zip(objectives, result.objectives):
+    for a, b in zip(objectives, result.objectives):
         if a != b:
             raise ValueError(
                 "When continuing from a previous Result, the objectives must "
