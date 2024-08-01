@@ -40,7 +40,7 @@ def dumpfile_unfinalized(request, tmpdir, caplog):
     testdir = os.path.splitext(request.module.__file__)[0]
     with caplog.at_level(logging.WARNING):
         result = Result.load(os.path.join(testdir, 'oct_result.dump'))
-    assert len(result.optimized_controls) == 1
+    assert len(result.optimized_controls) == 4
     result.optimized_controls[0] = np.concatenate(
         (result.optimized_controls[0][0:-2], [0.0])
     )
@@ -65,7 +65,7 @@ def dumpfile_broken(request, tmpdir, caplog):
     testdir = os.path.splitext(request.module.__file__)[0]
     with caplog.at_level(logging.WARNING):
         result = Result.load(os.path.join(testdir, 'oct_result.dump'))
-    assert len(result.optimized_controls) == 1
+    assert len(result.optimized_controls) == 4
     result.optimized_controls[0] = np.array([0.0, 0.0])
     dumpfile = str(tmpdir.join('oct_result_broken.dump'))
     result.dump(dumpfile)
